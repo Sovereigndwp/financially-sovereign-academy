@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 9: Consumer Protection | Financially Sovereign Academy</title>
+    <meta name="description" content="Protect yourself from scams, predatory lenders, and financial traps. Learn to spot and avoid fraud.">
+    <link rel="stylesheet" href="../css/fsa-theme.css">
+    <link rel="stylesheet" href="../css/interactive-components.css">
+    <style>
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .module-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: var(--fsa-gradient-card);
+            border: 3px solid var(--fsa-green);
+            border-radius: var(--radius-xl);
+        }
+
+        .module-header h1 {
+            font-size: var(--font-size-4xl);
+            color: var(--fsa-green);
+            margin-bottom: 1rem;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: var(--font-size-3xl);
+            color: var(--fsa-green);
+            margin-bottom: 1.5rem;
+            border-bottom: 3px solid var(--fsa-border-medium);
+            padding-bottom: 0.5rem;
+        }
+
+        .content-block {
+            background: var(--fsa-bg-card);
+            border: 2px solid var(--fsa-border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .content-block h3 {
+            color: var(--fsa-green-light);
+            font-size: var(--font-size-xl);
+            margin-bottom: 1rem;
+        }
+
+        .scam-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .scam-card {
+            background: var(--fsa-bg-dark);
+            border: 2px solid var(--fsa-error);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+        }
+
+        .scam-title {
+            color: var(--fsa-error);
+            font-size: var(--font-size-xl);
+            font-weight: var(--font-weight-bold);
+            margin-bottom: 1rem;
+        }
+
+        .protection-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .protection-card {
+            background: var(--fsa-bg-dark);
+            border: 2px solid var(--fsa-green);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+        }
+
+        .protection-title {
+            color: var(--fsa-green);
+            font-size: var(--font-size-xl);
+            font-weight: var(--font-weight-bold);
+            margin-bottom: 1rem;
+        }
+
+        .scenario-container {
+            background: var(--fsa-bg-card);
+            border: 2px solid var(--fsa-border-medium);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .scenario-choices {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .scenario-outcome {
+            background: var(--fsa-bg-dark);
+            border: 2px solid var(--fsa-green);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .scenario-outcome.hidden {
+            display: none;
+        }
+
+        .scam-detector {
+            background: var(--fsa-bg-secondary);
+            border: 2px solid var(--fsa-border-medium);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .scam-scenario {
+            background: var(--fsa-bg-dark);
+            border: 2px solid var(--fsa-border-medium);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .scam-scenario-text {
+            font-style: italic;
+            margin-bottom: 1rem;
+            color: var(--fsa-text-secondary);
+        }
+
+        .scam-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .scam-result {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: var(--radius-md);
+        }
+
+        .scam-result.scam {
+            background: rgba(239, 68, 68, 0.2);
+            border: 2px solid var(--fsa-error);
+        }
+
+        .scam-result.legit {
+            background: rgba(16, 185, 129, 0.2);
+            border: 2px solid var(--fsa-success);
+        }
+
+        .scam-result.hidden {
+            display: none;
+        }
+
+        .quiz {
+            background: var(--fsa-bg-card);
+            border: 2px solid var(--fsa-border-medium);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .quiz-question {
+            font-size: var(--font-size-xl);
+            color: var(--fsa-green);
+            margin-bottom: 1.5rem;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .quiz-option {
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid var(--fsa-border-medium);
+            border-radius: var(--radius-md);
+            padding: 1rem;
+            cursor: pointer;
+            transition: all var(--transition-base);
+        }
+
+        .quiz-option:hover {
+            border-color: var(--fsa-green);
+        }
+
+        .quiz-option.correct {
+            background: rgba(16, 185, 129, 0.2);
+            border-color: var(--fsa-success);
+        }
+
+        .quiz-option.incorrect {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: var(--fsa-error);
+        }
+
+        .quiz-feedback {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: var(--radius-md);
+        }
+
+        .quiz-feedback.correct {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--fsa-success);
+        }
+
+        .quiz-feedback.incorrect {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--fsa-error);
+        }
+
+        @media (max-width: 768px) {
+            .scam-grid, .protection-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="module-header">
+            <h1>Module 9: Consumer Protection</h1>
+            <p class="subtitle">Avoid scams, predatory lenders, and financial traps</p>
+        </div>
+
+        <section class="section">
+            <h2 class="section-title">Common Financial Scams</h2>
+            
+            <div class="content-block">
+                <h3>The Golden Rule of Scams</h3>
+                <p><strong>If it sounds too good to be true, it is.</strong></p>
+                <p>Scammers exploit desperation, greed, and lack of financial knowledge. They promise easy money, guaranteed returns, or solve all your problems quickly.</p>
+                <p><strong>Reality:</strong> Building wealth is slow and boring. Get-rich-quick schemes are designed to make the scammer rich, not you.</p>
+            </div>
+
+            <div class="scam-grid">
+                <div class="scam-card">
+                    <div class="scam-title">🚨 Payday Loans</div>
+                    <p><strong>The pitch:</strong> "Get $500 now, pay back next payday!"</p>
+                    <p><strong>The reality:</strong> 300-400% APR. If you can't pay back on time, you're trapped in a debt cycle.</p>
+                    <p><strong>Example:</strong> Borrow $500, owe $575 in 2 weeks. Can't pay? Borrow again. Now you owe $1,200 in a month.</p>
+                    <p><strong>Avoid:</strong> NEVER use payday loans. Borrow from family, sell stuff, or negotiate bills instead.</p>
+                </div>
+
+                <div class="scam-card">
+                    <div class="scam-title">🚨 Multi-Level Marketing (MLMs)</div>
+                    <p><strong>The pitch:</strong> "Be your own boss! Unlimited income potential!"</p>
+                    <p><strong>The reality:</strong> 99% of people lose money. You make money by recruiting, not selling products.</p>
+                    <p><strong>Red flags:</strong> Starter kits, recruitment bonuses, income claims</p>
+                    <p><strong>Examples:</strong> Herbalife, Amway, LuLaRoe, Mary Kay</p>
+                </div>
+
+                <div class="scam-card">
+                    <div class="scam-title">🚨 "Investment" Opportunities</div>
+                    <p><strong>The pitch:</strong> "Guaranteed 30% returns! No risk!"</p>
+                    <p><strong>The reality:</strong> Ponzi scheme. Early investors paid with new investor money until it collapses.</p>
+                    <p><strong>Red flags:</strong> Guaranteed returns, pressure to recruit, complex explanations, unregistered with SEC</p>
+                    <p><strong>Example:</strong> Bernie Madoff ($65 billion fraud)</p>
+                </div>
+
+                <div class="scam-card">
+                    <div class="scam-title">🚨 Credit Repair Scams</div>
+                    <p><strong>The pitch:</strong> "We'll fix your credit score in 30 days!"</p>
+                    <p><strong>The reality:</strong> They charge $1,000+ to do what you can do for free (dispute errors). Can't remove accurate negative info.</p>
+                    <p><strong>Truth:</strong> Only time and good behavior fix credit. Check your free annual credit report yourself.</p>
+                </div>
+
+                <div class="scam-card">
+                    <div class="scam-title">🚨 IRS/Government Impersonators</div>
+                    <p><strong>The pitch:</strong> "You owe back taxes. Pay now or face arrest."</p>
+                    <p><strong>The reality:</strong> IRS NEVER calls and demands immediate payment via gift cards or wire transfer.</p>
+                    <p><strong>Red flags:</strong> Threats of arrest, demands for gift cards, caller ID spoofing</p>
+                    <p><strong>Truth:</strong> IRS sends letters first. Hang up and call IRS directly.</p>
+                </div>
+
+                <div class="scam-card">
+                    <div class="scam-title">🚨 Crypto Scams</div>
+                    <p><strong>The pitch:</strong> "Send 1 Bitcoin, get 2 back!" or "New coin guaranteed to 100x!"</p>
+                    <p><strong>The reality:</strong> Pump-and-dump schemes, fake exchanges, rug pulls</p>
+                    <p><strong>Red flags:</strong> Celebrity endorsements (usually fake), guaranteed returns, "limited time"</p>
+                    <p><strong>Safe approach:</strong> Only buy Bitcoin/Ethereum from regulated exchanges. If a coin promises guaranteed gains, it's a scam.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Scam Detector: Test Your Skills</h2>
+            
+            <div class="scam-detector">
+                <h3 style="font-size: var(--font-size-2xl); color: var(--fsa-green); margin-bottom: 1.5rem; text-align: center;">Is This a Scam?</h3>
+                
+                <div class="scam-scenario">
+                    <div class="scam-scenario-text">"You've won a $5,000 gift card! Click this link and enter your credit card info to claim your prize (small processing fee required)."</div>
+                    <div class="scam-buttons">
+                        <button class="btn btn-secondary" onclick="checkScam(1, 'scam')">Scam</button>
+                        <button class="btn btn-secondary" onclick="checkScam(1, 'legit')">Legit</button>
+                    </div>
+                    <div class="scam-result hidden" id="result-1"></div>
+                </div>
+
+                <div class="scam-scenario">
+                    <div class="scam-scenario-text">"Your bank account has been compromised. Call this number immediately to verify your account details."</div>
+                    <div class="scam-buttons">
+                        <button class="btn btn-secondary" onclick="checkScam(2, 'scam')">Scam</button>
+                        <button class="btn btn-secondary" onclick="checkScam(2, 'legit')">Legit</button>
+                    </div>
+                    <div class="scam-result hidden" id="result-2"></div>
+                </div>
+
+                <div class="scam-scenario">
+                    <div class="scam-scenario-text">"Join our team! $199 starter kit. Make unlimited income selling weight loss shakes!"</div>
+                    <div class="scam-buttons">
+                        <button class="btn btn-secondary" onclick="checkScam(3, 'scam')">Scam</button>
+                        <button class="btn btn-secondary" onclick="checkScam(3, 'legit')">Legit</button>
+                    </div>
+                    <div class="scam-result hidden" id="result-3"></div>
+                </div>
+
+                <div class="scam-scenario">
+                    <div class="scam-scenario-text">"Vanguard Total Stock Market Index Fund (VTI) - 0.03% expense ratio. Historical average return: 10% annually over long term. Past performance doesn't guarantee future results."</div>
+                    <div class="scam-buttons">
+                        <button class="btn btn-secondary" onclick="checkScam(4, 'scam')">Scam</button>
+                        <button class="btn btn-secondary" onclick="checkScam(4, 'legit')">Legit</button>
+                    </div>
+                    <div class="scam-result hidden" id="result-4"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">How to Protect Yourself</h2>
+            
+            <div class="protection-grid">
+                <div class="protection-card">
+                    <div class="protection-title">✅ Freeze Your Credit</div>
+                    <p>Free at all 3 bureaus (Experian, Equifax, TransUnion)</p>
+                    <p><strong>Why:</strong> Prevents identity thieves from opening accounts in your name</p>
+                    <p><strong>How:</strong> Create account at each bureau, freeze online in 5 minutes</p>
+                    <p><strong>Cost:</strong> Free. Unfreeze temporarily when you need to apply for credit.</p>
+                </div>
+
+                <div class="protection-card">
+                    <div class="protection-title">✅ Monitor Your Credit</div>
+                    <p>Check your credit report at AnnualCreditReport.com (official, free)</p>
+                    <p><strong>How often:</strong> Once every 4 months (rotate between 3 bureaus)</p>
+                    <p><strong>Look for:</strong> Accounts you didn't open, inquiries you didn't make, incorrect balances</p>
+                    <p><strong>Dispute errors:</strong> File dispute with bureau online (free)</p>
+                </div>
+
+                <div class="protection-card">
+                    <div class="protection-title">✅ Use Strong Passwords</div>
+                    <p>Unique password for EVERY financial account</p>
+                    <p><strong>Tools:</strong> Password manager (1Password, Bitwarden)</p>
+                    <p><strong>Enable 2FA:</strong> Two-factor authentication on banks, brokerages, crypto exchanges</p>
+                    <p><strong>Never:</strong> Reuse passwords. If one site is hacked, all your accounts are compromised.</p>
+                </div>
+
+                <div class="protection-card">
+                    <div class="protection-title">✅ Verify Before You Trust</div>
+                    <p>Someone calls claiming to be from your bank?</p>
+                    <p><strong>Do this:</strong> Hang up. Call the number on the back of your card.</p>
+                    <p><strong>Email from "bank":</strong> Don't click links. Go directly to bank website.</p>
+                    <p><strong>Investment opportunity:</strong> Check SEC.gov to verify registration</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Your Rights as a Consumer</h2>
+            
+            <div class="content-block">
+                <h3>Fair Credit Reporting Act (FCRA)</h3>
+                <p><strong>You have the right to:</strong></p>
+                <ul>
+                    <li>Free credit report every 12 months from each bureau</li>
+                    <li>Dispute inaccurate information (bureau must investigate within 30 days)</li>
+                    <li>Know who accessed your credit report in past 2 years</li>
+                    <li>Sue for damages if credit bureau violates your rights</li>
+                </ul>
+            </div>
+
+            <div class="content-block">
+                <h3>Fair Debt Collection Practices Act (FDCPA)</h3>
+                <p><strong>Debt collectors CANNOT:</strong></p>
+                <ul>
+                    <li>Call before 8am or after 9pm</li>
+                    <li>Harass, threaten, or use profanity</li>
+                    <li>Contact you at work if you tell them not to</li>
+                    <li>Contact your employer (except to verify employment)</li>
+                    <li>Threaten arrest (only court can do this for unpaid debts)</li>
+                </ul>
+                <p><strong>What to do:</strong> Request written validation of debt. Send cease-and-desist letter. Report violations to FTC.</p>
+            </div>
+
+            <div class="content-block">
+                <h3>Where to Report Fraud</h3>
+                <p><strong>FTC (Federal Trade Commission):</strong> ReportFraud.FTC.gov - File complaint for scams, identity theft</p>
+                <p><strong>CFPB (Consumer Financial Protection Bureau):</strong> ConsumerFinance.gov/complaint - Banks, lenders, credit bureaus</p>
+                <p><strong>SEC (Securities and Exchange Commission):</strong> SEC.gov/complaint - Investment fraud</p>
+                <p><strong>IC3 (Internet Crime Complaint Center):</strong> IC3.gov - Online scams, phishing</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Scenario: Identity Theft</h2>
+            
+            <div class="scenario-container">
+                <h3 style="color: var(--fsa-green); margin-bottom: 1rem;">You check your credit report and see 3 credit cards you didn't open</h3>
+                <p>Total fraudulent charges: $15,000. Your identity has been stolen.</p>
+                
+                <div class="scenario-choices">
+                    <button class="btn btn-secondary" onclick="showOutcome('ignore')">Ignore it and hope it goes away</button>
+                    <button class="btn btn-secondary" onclick="showOutcome('pay')">Pay the debt to avoid hurting credit</button>
+                    <button class="btn btn-secondary" onclick="showOutcome('report')">File police report & dispute with bureaus</button>
+                </div>
+
+                <div class="scenario-outcome hidden" id="outcome-ignore">
+                    <h4 style="color: var(--fsa-error); margin-bottom: 1rem;">Outcome: Ignore</h4>
+                    <p><strong>What happened:</strong> Debt grows with interest and late fees. Collection agencies start calling. Credit score tanks.</p>
+                    <p><strong>6 months later:</strong> You're denied for apartment, car loan, job (credit check). Collections threaten lawsuit.</p>
+                    <p><strong>The damage:</strong> $15K debt + $5K in fees + destroyed credit + years to fix</p>
+                    <p><strong>Lesson:</strong> Ignoring fraud makes you liable. Act immediately or consequences multiply.</p>
+                </div>
+
+                <div class="scenario-outcome hidden" id="outcome-pay">
+                    <h4 style="color: var(--fsa-error); margin-bottom: 1rem;">Outcome: Pay Debt</h4>
+                    <p><strong>What happened:</strong> You pay $15,000 you don't owe because you're scared of credit damage.</p>
+                    <p><strong>The problem:</strong> By paying, you ADMITTED liability. You can't dispute later. The fraudster wins.</p>
+                    <p><strong>The reality:</strong> You're not responsible for fraudulent charges IF you report them properly and on time.</p>
+                    <p><strong>Lesson:</strong> NEVER pay fraudulent debt. You have rights. Use them.</p>
+                </div>
+
+                <div class="scenario-outcome hidden" id="outcome-report">
+                    <h4 style="color: var(--fsa-success); margin-bottom: 1rem;">Outcome: Report & Dispute</h4>
+                    <p><strong>What you did:</strong></p>
+                    <ol>
+                        <li>Filed police report for identity theft</li>
+                        <li>Reported to FTC at IdentityTheft.gov</li>
+                        <li>Froze credit at all 3 bureaus</li>
+                        <li>Disputed fraudulent accounts with credit bureaus (sent police report as evidence)</li>
+                        <li>Contacted banks/credit card companies (fraud departments)</li>
+                    </ol>
+                    <p><strong>Result:</strong> Banks investigate, confirm fraud, close accounts. You owe $0. Fraudulent accounts removed from credit report.</p>
+                    <p><strong>Time investment:</strong> 5-10 hours of paperwork</p>
+                    <p><strong>Cost:</strong> $0 (vs $15,000 if you paid)</p>
+                    <p><strong>Lesson:</strong> You have legal protections. Use them immediately. Document everything.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Check Your Understanding</h2>
+            
+            <div class="quiz">
+                <div class="quiz-question">1. What's a major red flag for financial scams?</div>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="checkAnswer(1, 'a', true)">A) Guaranteed high returns with no risk</button>
+                    <button class="quiz-option" onclick="checkAnswer(1, 'b', false)">B) Registered with the SEC</button>
+                    <button class="quiz-option" onclick="checkAnswer(1, 'c', false)">C) Transparent fee structure</button>
+                </div>
+                <div class="quiz-feedback hidden" id="feedback-1"></div>
+            </div>
+
+            <div class="quiz">
+                <div class="quiz-question">2. What should you do if you discover fraudulent accounts on your credit report?</div>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="checkAnswer(2, 'a', false)">A) Pay the debt to protect your credit</button>
+                    <button class="quiz-option" onclick="checkAnswer(2, 'b', true)">B) File police report and dispute with credit bureaus</button>
+                    <button class="quiz-option" onclick="checkAnswer(2, 'c', false)">C) Wait and see if it goes away</button>
+                </div>
+                <div class="quiz-feedback hidden" id="feedback-2"></div>
+            </div>
+
+            <div class="quiz">
+                <div class="quiz-question">3. How can you protect yourself from identity theft?</div>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="checkAnswer(3, 'a', false)">A) Pay for credit monitoring services</button>
+                    <button class="quiz-option" onclick="checkAnswer(3, 'b', true)">B) Freeze your credit for free at all 3 bureaus</button>
+                    <button class="quiz-option" onclick="checkAnswer(3, 'c', false)">C) Check your credit once every 5 years</button>
+                </div>
+                <div class="quiz-feedback hidden" id="feedback-3"></div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="card" style="text-align: center;">
+                <h3 class="card-title">Module 9 Complete! 🎉</h3>
+                <p class="card-description">You can now spot scams and protect yourself from financial predators.</p>
+                <div style="margin-top: 2rem;">
+                    <button class="btn btn-primary" onclick="completeModule()">Mark Complete & Continue to Module 10</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="../js/module-progress.js"></script>
+    <script src="../js/progress-manager.js"></script>
+    <script>
+        const progressManager = new FSAProgressManager();
+        progressManager.init();
+        progressManager.setModuleVisited(9);
+
+        function checkScam(scenarioNum, answer) {
+            const correctAnswers = {
+                1: 'scam',
+                2: 'scam',
+                3: 'scam',
+                4: 'legit'
+            };
+
+            const explanations = {
+                1: 'SCAM: You never won anything. "Small fee" to claim a prize is a classic scam. They steal your credit card info.',
+                2: 'SCAM: Banks never ask you to call a number from an unsolicited message. Always call the number on your card directly.',
+                3: 'SCAM: This is an MLM. "Starter kit" + "unlimited income" = you lose money. 99% of MLM participants lose money.',
+                4: 'LEGIT: Vanguard is a legitimate, SEC-registered investment company. Key indicators: Low fees (0.03%), disclaims past performance doesn\'t guarantee future results (required by law), no promises of guaranteed returns.'
+            };
+
+            const isCorrect = correctAnswers[scenarioNum] === answer;
+            const resultDiv = document.getElementById(`result-${scenarioNum}`);
+            
+            resultDiv.classList.remove('hidden', 'scam', 'legit');
+            resultDiv.classList.add(correctAnswers[scenarioNum]);
+            
+            if (isCorrect) {
+                resultDiv.innerHTML = `<strong>✓ Correct!</strong><br>${explanations[scenarioNum]}`;
+            } else {
+                resultDiv.innerHTML = `<strong>✗ Wrong.</strong><br>${explanations[scenarioNum]}`;
+            }
+        }
+
+        function showOutcome(outcome) {
+            const outcomes = ['ignore', 'pay', 'report'];
+            outcomes.forEach(o => {
+                document.getElementById(`outcome-${o}`).classList.add('hidden');
+            });
+            document.getElementById(`outcome-${outcome}`).classList.remove('hidden');
+        }
+
+        function checkAnswer(questionNum, answer, isCorrect) {
+            const feedback = document.getElementById(`feedback-${questionNum}`);
+            const options = feedback.parentElement.querySelectorAll('.quiz-option');
+            
+            options.forEach(opt => opt.style.pointerEvents = 'none');
+            event.target.classList.add(isCorrect ? 'correct' : 'incorrect');
+            
+            feedback.classList.remove('hidden');
+            feedback.classList.add(isCorrect ? 'correct' : 'incorrect');
+            
+            if (isCorrect) {
+                feedback.textContent = '✓ Correct!';
+            } else {
+                feedback.textContent = '✗ Not quite. Review the content above.';
+                setTimeout(() => {
+                    options.forEach(opt => opt.style.pointerEvents = 'auto');
+                    event.target.classList.remove('incorrect');
+                    feedback.classList.add('hidden');
+                }, 2000);
+            }
+        }
+
+        function completeModule() {
+            progressManager.setModuleComplete(9, { timeSpent: 0, score: 100 });
+            alert('Module 9 complete! Next: Module 10 - Financial Master Plan (Final Module).');
+            window.location.href = '../index.html';
+        }
+    </script>
+</body>
+</html>
