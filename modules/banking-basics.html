@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 3: Banking Without Getting Robbed | Financially Sovereign Academy</title>
+    <meta name="description" content="Understand banking fees, FDIC insurance, and how to avoid common banking traps. Learn about counterparty risk.">
+    <link rel="stylesheet" href="../css/fsa-theme.css">
+    <link rel="stylesheet" href="../css/interactive-components.css">
+    <style>
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .module-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: var(--fsa-gradient-card);
+            border: 3px solid var(--fsa-green);
+            border-radius: var(--radius-xl);
+        }
+
+        .module-header h1 {
+            font-size: var(--font-size-4xl);
+            color: var(--fsa-green);
+            margin-bottom: 1rem;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: var(--font-size-3xl);
+            color: var(--fsa-green);
+            margin-bottom: 1.5rem;
+            border-bottom: 3px solid var(--fsa-border-medium);
+            padding-bottom: 0.5rem;
+        }
+
+        .content-block {
+            background: var(--fsa-bg-card);
+            border: 2px solid var(--fsa-border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .content-block h3 {
+            color: var(--fsa-green-light);
+            font-size: var(--font-size-xl);
+            margin-bottom: 1rem;
+        }
+
+        .fee-list {
+            background: var(--fsa-bg-dark);
+            border: 2px solid var(--fsa-border-medium);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .fee-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--fsa-border-subtle);
+        }
+
+        .fee-item:last-child {
+            border-bottom: none;
+        }
+
+        .fee-name {
+            color: var(--fsa-text-primary);
+        }
+
+        .fee-amount {
+            color: var(--fsa-error);
+            font-weight: var(--font-weight-bold);
+            font-family: var(--font-family-mono);
+        }
+
+        .calculator {
+            background: var(--fsa-bg-secondary);
+            border: 2px solid var(--fsa-border-medium);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .fee-result {
+            background: var(--fsa-bg-dark);
+            border: 2px solid var(--fsa-border-medium);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .result-annual {
+            font-size: var(--font-size-4xl);
+            font-weight: var(--font-weight-extrabold);
+            color: var(--fsa-error);
+            font-family: var(--font-family-mono);
+            margin: 1rem 0;
+        }
+
+        .scenario {
+            background: var(--fsa-bg-card);
+            border: 2px solid var(--fsa-border-medium);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .scenario-text {
+            font-size: var(--font-size-lg);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .scenario-choices {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .scenario-choice {
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid var(--fsa-border-medium);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all var(--transition-base);
+            text-align: left;
+        }
+
+        .scenario-choice:hover {
+            border-color: var(--fsa-green);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .choice-title {
+            font-weight: var(--font-weight-bold);
+            font-size: var(--font-size-lg);
+            margin-bottom: 0.5rem;
+            color: var(--fsa-green);
+        }
+
+        .outcome {
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            margin-top: 2rem;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .outcome.success {
+            background: rgba(16, 185, 129, 0.1);
+            border: 2px solid var(--fsa-success);
+        }
+
+        .outcome.warning {
+            background: rgba(245, 158, 11, 0.1);
+            border: 2px solid var(--fsa-warning);
+        }
+
+        .outcome.failure {
+            background: rgba(239, 68, 68, 0.1);
+            border: 2px solid var(--fsa-error);
+        }
+
+        .outcome-title {
+            font-size: var(--font-size-2xl);
+            font-weight: var(--font-weight-bold);
+            margin-bottom: 1rem;
+        }
+
+        .outcome.success .outcome-title {
+            color: var(--fsa-success);
+        }
+
+        .outcome.warning .outcome-title {
+            color: var(--fsa-warning);
+        }
+
+        .outcome.failure .outcome-title {
+            color: var(--fsa-error);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--fsa-border-subtle);
+        }
+
+        .comparison-table th {
+            color: var(--fsa-green);
+            font-weight: var(--font-weight-bold);
+        }
+
+        .comparison-table td {
+            color: var(--fsa-text-primary);
+        }
+
+        .quiz {
+            background: var(--fsa-bg-card);
+            border: 2px solid var(--fsa-border-medium);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .quiz-question {
+            font-size: var(--font-size-xl);
+            color: var(--fsa-green);
+            margin-bottom: 1.5rem;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .quiz-option {
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid var(--fsa-border-medium);
+            border-radius: var(--radius-md);
+            padding: 1rem;
+            cursor: pointer;
+            transition: all var(--transition-base);
+        }
+
+        .quiz-option:hover {
+            border-color: var(--fsa-green);
+        }
+
+        .quiz-option.correct {
+            background: rgba(16, 185, 129, 0.2);
+            border-color: var(--fsa-success);
+        }
+
+        .quiz-option.incorrect {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: var(--fsa-error);
+        }
+
+        .quiz-feedback {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: var(--radius-md);
+        }
+
+        .quiz-feedback.correct {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--fsa-success);
+        }
+
+        .quiz-feedback.incorrect {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--fsa-error);
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="module-header">
+            <h1>Module 3: Banking Without Getting Robbed</h1>
+            <p class="subtitle">Navigate checking accounts, savings accounts, and hidden fees like a pro</p>
+        </div>
+
+        <!-- Section 1: The Hidden Cost of Banking -->
+        <section class="section">
+            <h2 class="section-title">The Hidden Cost of Banking</h2>
+            
+            <div class="content-block">
+                <h3>Banks Are Not Your Friend</h3>
+                <p>Let's be clear: banks are businesses. They make money off you.</p>
+                <p>They make money from:</p>
+                <ul>
+                    <li>Lending your deposits to others (they pay you 0.5%, charge borrowers 7%)</li>
+                    <li>Fees (overdraft, ATM, monthly maintenance, minimum balance)</li>
+                    <li>Selling your data to marketers</li>
+                </ul>
+                <p>The average American pays <strong>$329/year</strong> in bank fees. That's $329 you could have saved or invested.</p>
+            </div>
+
+            <div class="content-block">
+                <h3>Common Bank Fees</h3>
+                <div class="fee-list">
+                    <div class="fee-item">
+                        <span class="fee-name">Monthly maintenance fee</span>
+                        <span class="fee-amount">$12-15/month</span>
+                    </div>
+                    <div class="fee-item">
+                        <span class="fee-name">Overdraft fee</span>
+                        <span class="fee-amount">$35 per transaction</span>
+                    </div>
+                    <div class="fee-item">
+                        <span class="fee-name">Out-of-network ATM fee</span>
+                        <span class="fee-amount">$3-5 per withdrawal</span>
+                    </div>
+                    <div class="fee-item">
+                        <span class="fee-name">Paper statement fee</span>
+                        <span class="fee-amount">$5-10/month</span>
+                    </div>
+                    <div class="fee-item">
+                        <span class="fee-name">Minimum balance fee</span>
+                        <span class="fee-amount">$12-15/month</span>
+                    </div>
+                    <div class="fee-item">
+                        <span class="fee-name">Wire transfer fee</span>
+                        <span class="fee-amount">$15-30 per transfer</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="calculator">
+                <h3 style="font-size: var(--font-size-2xl); color: var(--fsa-green); margin-bottom: 1.5rem; text-align: center;">Banking Fee Calculator</h3>
+                
+                <div class="form-group">
+                    <label class="form-label" for="monthly-fee">Monthly Maintenance Fee</label>
+                    <input type="number" id="monthly-fee" class="form-input" placeholder="e.g., 12" min="0" step="1" value="0">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="overdraft-count">Overdraft Fees per Year</label>
+                    <input type="number" id="overdraft-count" class="form-input" placeholder="e.g., 3" min="0" step="1" value="0">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="atm-count">Out-of-Network ATM Uses per Month</label>
+                    <input type="number" id="atm-count" class="form-input" placeholder="e.g., 4" min="0" step="1" value="0">
+                </div>
+
+                <button class="btn btn-primary" onclick="calculateFees()">Calculate Annual Cost</button>
+
+                <div class="fee-result hidden" id="fee-result">
+                    <div style="font-size: var(--font-size-sm); color: var(--fsa-text-dim); text-transform: uppercase; letter-spacing: 1px;">You're Paying</div>
+                    <div class="result-annual" id="annual-cost">$0</div>
+                    <div style="font-size: var(--font-size-base); color: var(--fsa-text-secondary); margin-top: 1rem;" id="fee-message"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Checking vs Savings -->
+        <section class="section">
+            <h2 class="section-title">Checking vs Savings: What's the Difference?</h2>
+            
+            <div class="content-block">
+                <h3>Checking Account</h3>
+                <p><strong>Purpose:</strong> Daily transactions - paying bills, buying stuff, withdrawing cash</p>
+                <p><strong>Interest:</strong> Usually 0% (you get nothing)</p>
+                <p><strong>Access:</strong> Unlimited transactions with debit card, checks, online transfers</p>
+                <p><strong>Best for:</strong> Money you'll spend this month</p>
+            </div>
+
+            <div class="content-block">
+                <h3>Savings Account</h3>
+                <p><strong>Purpose:</strong> Storing money for later - emergency fund, short-term goals</p>
+                <p><strong>Interest:</strong> 0.5-5% depending on the bank (high-yield savings accounts pay more)</p>
+                <p><strong>Access:</strong> Limited transactions (usually 6 withdrawals per month)</p>
+                <p><strong>Best for:</strong> Money you don't plan to touch for 3+ months</p>
+            </div>
+
+            <div class="highlight highlight-tip">
+                <strong>💡 Smart Strategy:</strong> Keep 1 month of expenses in checking. Everything else goes to high-yield savings or emergency fund.
+            </div>
+        </section>
+
+        <!-- Section 3: FDIC Insurance -->
+        <section class="section">
+            <h2 class="section-title">FDIC Insurance: Your Safety Net</h2>
+            
+            <div class="content-block">
+                <h3>What is FDIC Insurance?</h3>
+                <p>FDIC = Federal Deposit Insurance Corporation</p>
+                <p>If your bank fails, the FDIC guarantees you'll get your money back - up to <strong>$250,000 per depositor, per bank.</strong></p>
+                <p>This is why savings accounts are "safe" - even if the bank collapses, your money is protected (up to the limit).</p>
+            </div>
+
+            <div class="content-block">
+                <h3>Important Limits</h3>
+                <p><strong>$250,000 per depositor, per bank.</strong></p>
+                <p>If you have $300,000, you need to split it across multiple banks to stay fully insured.</p>
+                <p><strong>Joint accounts:</strong> $250,000 per owner, so a joint account with 2 people = $500,000 coverage</p>
+            </div>
+
+            <div class="content-block">
+                <h3>Not FDIC Insured</h3>
+                <ul>
+                    <li>Stocks</li>
+                    <li>Bonds</li>
+                    <li>Mutual funds</li>
+                    <li>Crypto</li>
+                    <li>Gold</li>
+                </ul>
+                <p>These can lose value. That's the trade-off for potential higher returns.</p>
+            </div>
+        </section>
+
+        <!-- Section 4: Interactive Scenario -->
+        <section class="section">
+            <h2 class="section-title">Scenario: The Frozen Account</h2>
+            
+            <div class="scenario" id="scenario-container">
+                <div id="scenario-intro">
+                    <p class="scenario-text">
+                        <strong>It's Friday morning.</strong> You try to buy coffee. Card declined.
+                    </p>
+                    <p class="scenario-text">
+                        Weird. You had $800 in checking yesterday. Try again. Declined.
+                    </p>
+                    <p class="scenario-text">
+                        Check your phone. Email from your bank: <em>"Your account has been temporarily restricted due to suspicious activity. Please contact us immediately."</em>
+                    </p>
+                    <p class="scenario-text">
+                        You call. Wait on hold for 45 minutes.
+                    </p>
+                    <div class="dialogue">
+                        <span class="dialogue-speaker">Bank Rep:</span>
+                        "Yes, we flagged a transaction as potentially fraudulent. For your protection, we've frozen your account. We need you to come into a branch with two forms of ID to verify your identity. This can take 3-5 business days to resolve."
+                    </div>
+                    <p class="scenario-text">
+                        <strong>It's Friday. Rent is due Monday. You have $0 access to your money.</strong>
+                    </p>
+                    <p class="scenario-text">
+                        What's your backup plan?
+                    </p>
+
+                    <div class="scenario-choices">
+                        <button class="scenario-choice" onclick="showOutcome('no-backup')">
+                            <div class="choice-title">No Backup - All Money in One Bank</div>
+                            <div class="choice-desc">"Why would I need more than one bank account?"</div>
+                        </button>
+                        <button class="scenario-choice" onclick="showOutcome('credit-card')">
+                            <div class="choice-title">Credit Card as Backup</div>
+                            <div class="choice-desc">"I'll just use my credit card until this is sorted out."</div>
+                        </button>
+                        <button class="scenario-choice" onclick="showOutcome('second-bank')">
+                            <div class="choice-title">Second Bank Account + Cash</div>
+                            <div class="choice-desc">"I keep $500 in a different bank and $200 cash at home."</div>
+                        </button>
+                    </div>
+                </div>
+
+                <div id="outcome-no-backup" class="outcome failure hidden">
+                    <h3 class="outcome-title">Outcome: Complete Lockout</h3>
+                    <p><strong>Friday afternoon:</strong> Borrow $100 from a friend for groceries. Embarrassing.</p>
+                    <p><strong>Saturday:</strong> Landlord texts asking about rent. You explain. They're not happy.</p>
+                    <p><strong>Monday:</strong> Still locked out. Landlord charges $50 late fee.</p>
+                    <p><strong>Tuesday:</strong> Finally resolve the issue after visiting branch. False alarm - they flagged your Venmo payment as "suspicious."</p>
+                    <p><strong>Wednesday:</strong> Pay rent + late fee. Total damage: $50 late fee + stress + damaged reputation with landlord.</p>
+                    <div class="dialogue">
+                        <span class="dialogue-speaker">What Happened:</span>
+                        Single point of failure. When your only bank freezes your account, you're completely locked out of your money.
+                    </div>
+                    <p><strong>Lesson:</strong> Never keep all your money in one place. Banks can and do freeze accounts, often incorrectly.</p>
+                    <button class="btn btn-secondary" onclick="resetScenario()">Try Again</button>
+                </div>
+
+                <div id="outcome-credit-card" class="outcome warning hidden">
+                    <h3 class="outcome-title">Outcome: Surviving on Credit</h3>
+                    <p><strong>Weekend:</strong> Put everything on credit card. Groceries, gas, going out. $300 charged.</p>
+                    <p><strong>Monday:</strong> Pay rent with credit card ($25 convenience fee).</p>
+                    <p><strong>Tuesday:</strong> Account unfrozen. Transfer money to pay off credit card immediately.</p>
+                    <p><strong>Total damage:</strong> $25 convenience fee + the stress of going into debt temporarily.</p>
+                    <div class="dialogue">
+                        <span class="dialogue-speaker">What Happened:</span>
+                        Better than nothing, but you paid fees and temporarily went into debt. Plus, not all bills accept credit cards.
+                    </div>
+                    <p><strong>Lesson:</strong> Credit cards are a backup, but not ideal. You need actual cash access.</p>
+                    <button class="btn btn-secondary" onclick="resetScenario()">Try Again</button>
+                </div>
+
+                <div id="outcome-second-bank" class="outcome success hidden">
+                    <h3 class="outcome-title">Outcome: Minor Inconvenience</h3>
+                    <p><strong>Friday:</strong> Transfer $800 from your second bank to cover rent. No problem.</p>
+                    <p><strong>Weekend:</strong> Use cash and second debit card. Life continues normally.</p>
+                    <p><strong>Tuesday:</strong> Resolve the issue with primary bank. Move money back.</p>
+                    <p><strong>Total damage:</strong> 45 minutes on hold. That's it.</p>
+                    <div class="dialogue">
+                        <span class="dialogue-speaker">How It Feels:</span>
+                        "Annoying, but I was prepared. No panic. No late fees. No stress."
+                    </div>
+                    <p><strong>Lesson:</strong> Geographic diversification applies to banks too. Keep accounts at 2 different banks + some cash at home.</p>
+                    <button class="btn btn-secondary" onclick="resetScenario()">Try Again</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: How to Choose a Bank -->
+        <section class="section">
+            <h2 class="section-title">How to Choose a Bank</h2>
+            
+            <div class="content-block">
+                <h3>Traditional Banks vs Online Banks vs Credit Unions</h3>
+                
+                <table class="comparison-table">
+                    <tr>
+                        <th>Type</th>
+                        <th>Pros</th>
+                        <th>Cons</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Traditional Banks</strong><br>(Chase, Wells Fargo, BofA)</td>
+                        <td>Physical branches, ATMs everywhere</td>
+                        <td>Low interest rates, high fees, terrible customer service</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Online Banks</strong><br>(Ally, Marcus, Discover)</td>
+                        <td>High interest (4-5%), no fees, great apps</td>
+                        <td>No physical branches, transfers take 1-2 days</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Credit Unions</strong><br>(Local, member-owned)</td>
+                        <td>Lower fees, better rates, community-focused</td>
+                        <td>Fewer ATMs, older technology</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="content-block">
+                <h3>Red Flags to Avoid</h3>
+                <ul>
+                    <li><strong>Monthly maintenance fees</strong> unless easily waived</li>
+                    <li><strong>Minimum balance requirements</strong> over $500</li>
+                    <li><strong>Overdraft fees</strong> over $30 (or no opt-out)</li>
+                    <li><strong>No FDIC insurance</strong> (rare but check)</li>
+                    <li><strong>Hidden fees</strong> buried in fine print</li>
+                </ul>
+            </div>
+
+            <div class="content-block">
+                <h3>Smart Banking Setup</h3>
+                <p><strong>Primary checking:</strong> Online bank (no fees, good app) or local credit union</p>
+                <p><strong>High-yield savings:</strong> Online bank paying 4-5% (Marcus, Ally, Discover)</p>
+                <p><strong>Backup checking:</strong> Different bank, keep $500-1000</p>
+                <p><strong>Cash:</strong> $200-500 at home in a safe place</p>
+            </div>
+        </section>
+
+        <!-- Section 6: Comprehension Quiz -->
+        <section class="section">
+            <h2 class="section-title">Check Your Understanding</h2>
+            
+            <div class="quiz">
+                <div class="quiz-question">1. What does FDIC insurance cover?</div>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="checkAnswer(1, 'a', false)">A) Protects against investment losses</button>
+                    <button class="quiz-option" onclick="checkAnswer(1, 'b', true)">B) Guarantees up to $250,000 per depositor per bank if bank fails</button>
+                    <button class="quiz-option" onclick="checkAnswer(1, 'c', false)">C) Covers all your money no matter how much</button>
+                </div>
+                <div class="quiz-feedback hidden" id="feedback-1"></div>
+            </div>
+
+            <div class="quiz">
+                <div class="quiz-question">2. Why keep money in multiple banks?</div>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="checkAnswer(2, 'a', false)">A) To get more FDIC insurance</button>
+                    <button class="quiz-option" onclick="checkAnswer(2, 'b', true)">B) Protection if one bank freezes your account</button>
+                    <button class="quiz-option" onclick="checkAnswer(2, 'c', false)">C) Banks pay you to have multiple accounts</button>
+                </div>
+                <div class="quiz-feedback hidden" id="feedback-2"></div>
+            </div>
+
+            <div class="quiz">
+                <div class="quiz-question">3. What's the main benefit of online banks?</div>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="checkAnswer(3, 'a', true)">A) Higher interest rates and lower fees</button>
+                    <button class="quiz-option" onclick="checkAnswer(3, 'b', false)">B) Physical branches everywhere</button>
+                    <button class="quiz-option" onclick="checkAnswer(3, 'c', false)">C) Faster check deposits</button>
+                </div>
+                <div class="quiz-feedback hidden" id="feedback-3"></div>
+            </div>
+        </section>
+
+        <!-- Module Complete -->
+        <section class="section">
+            <div class="card" style="text-align: center;">
+                <h3 class="card-title">Module 3 Complete! 🎉</h3>
+                <p class="card-description">You understand banking basics and how to avoid common traps.</p>
+                <div style="margin-top: 2rem;">
+                    <button class="btn btn-primary" onclick="completeModule()">Mark Complete & Continue to Module 4</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="../js/module-progress.js"></script>
+    <script src="../js/progress-manager.js"></script>
+    <script>
+        const progressManager = new FSAProgressManager();
+        progressManager.init();
+        progressManager.setModuleVisited(3);
+
+        function calculateFees() {
+            const monthlyFee = parseFloat(document.getElementById('monthly-fee').value) || 0;
+            const overdraftCount = parseFloat(document.getElementById('overdraft-count').value) || 0;
+            const atmCount = parseFloat(document.getElementById('atm-count').value) || 0;
+
+            const annualCost = (monthlyFee * 12) + (overdraftCount * 35) + (atmCount * 12 * 4);
+
+            const resultDiv = document.getElementById('fee-result');
+            const costDiv = document.getElementById('annual-cost');
+            const messageDiv = document.getElementById('fee-message');
+
+            resultDiv.classList.remove('hidden');
+            costDiv.textContent = `$${annualCost.toLocaleString()}`;
+
+            if (annualCost === 0) {
+                messageDiv.textContent = '✓ Great! You\'re not paying any fees.';
+            } else if (annualCost < 100) {
+                messageDiv.textContent = 'Not terrible, but you could eliminate these fees with a better bank.';
+            } else if (annualCost < 300) {
+                messageDiv.textContent = 'You\'re paying too much. Time to switch banks.';
+            } else {
+                messageDiv.textContent = 'This is robbery! You could save hundreds by switching to a no-fee bank.';
+            }
+        }
+
+        function showOutcome(choice) {
+            document.getElementById('scenario-intro').classList.add('hidden');
+            document.getElementById('outcome-no-backup').classList.add('hidden');
+            document.getElementById('outcome-credit-card').classList.add('hidden');
+            document.getElementById('outcome-second-bank').classList.add('hidden');
+
+            document.getElementById(`outcome-${choice}`).classList.remove('hidden');
+        }
+
+        function resetScenario() {
+            document.getElementById('scenario-intro').classList.remove('hidden');
+            document.getElementById('outcome-no-backup').classList.add('hidden');
+            document.getElementById('outcome-credit-card').classList.add('hidden');
+            document.getElementById('outcome-second-bank').classList.add('hidden');
+        }
+
+        function checkAnswer(questionNum, answer, isCorrect) {
+            const feedback = document.getElementById(`feedback-${questionNum}`);
+            const options = feedback.parentElement.querySelectorAll('.quiz-option');
+            
+            options.forEach(opt => opt.style.pointerEvents = 'none');
+            event.target.classList.add(isCorrect ? 'correct' : 'incorrect');
+            
+            feedback.classList.remove('hidden');
+            feedback.classList.add(isCorrect ? 'correct' : 'incorrect');
+            
+            if (isCorrect) {
+                feedback.textContent = '✓ Correct! Great job.';
+            } else {
+                feedback.textContent = '✗ Not quite. Review the content above.';
+                setTimeout(() => {
+                    options.forEach(opt => opt.style.pointerEvents = 'auto');
+                    event.target.classList.remove('incorrect');
+                    feedback.classList.add('hidden');
+                }, 2000);
+            }
+        }
+
+        function completeModule() {
+            progressManager.setModuleComplete(3, { timeSpent: 0, score: 100 });
+            alert('Module 3 complete! Next up: Module 4 - Credit Scores Decoded.');
+            window.location.href = '../index.html';
+        }
+    </script>
+</body>
+</html>
