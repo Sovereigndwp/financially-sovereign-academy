@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 7: Investing Fundamentals | Financially Sovereign Academy</title>
+    <meta name="description" content="Learn the basics of investing, compound interest, index funds, and building wealth that outpaces inflation.">
+    <link rel="stylesheet" href="../css/fsa-theme.css">
+    <link rel="stylesheet" href="../css/interactive-components.css">
+    <style>
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .module-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: var(--fsa-gradient-card);
+            border: 3px solid var(--fsa-green);
+            border-radius: var(--radius-xl);
+        }
+
+        .module-header h1 {
+            font-size: var(--font-size-4xl);
+            color: var(--fsa-green);
+            margin-bottom: 1rem;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: var(--font-size-3xl);
+            color: var(--fsa-green);
+            margin-bottom: 1.5rem;
+            border-bottom: 3px solid var(--fsa-border-medium);
+            padding-bottom: 0.5rem;
+        }
+
+        .content-block {
+            background: var(--fsa-bg-card);
+            border: 2px solid var(--fsa-border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .content-block h3 {
+            color: var(--fsa-green-light);
+            font-size: var(--font-size-xl);
+            margin-bottom: 1rem;
+        }
+
+        .calculator {
+            background: var(--fsa-bg-secondary);
+            border: 2px solid var(--fsa-border-medium);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .result-display {
+            background: var(--fsa-bg-dark);
+            border: 2px solid var(--fsa-green);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-top: 1.5rem;
+            text-align: center;
+        }
+
+        .result-display.hidden {
+            display: none;
+        }
+
+        .result-main {
+            font-size: var(--font-size-4xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--fsa-green);
+            font-family: var(--font-family-mono);
+            margin: 1rem 0;
+        }
+
+        .result-breakdown {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .result-item {
+            background: rgba(16, 185, 129, 0.1);
+            padding: 1rem;
+            border-radius: var(--radius-md);
+        }
+
+        .result-label {
+            font-size: var(--font-size-sm);
+            color: var(--fsa-text-dim);
+            margin-bottom: 0.5rem;
+        }
+
+        .result-value {
+            font-size: var(--font-size-xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--fsa-text-primary);
+            font-family: var(--font-family-mono);
+        }
+
+        .comparison-table {
+            background: var(--fsa-bg-dark);
+            border: 2px solid var(--fsa-border-medium);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            overflow-x: auto;
+        }
+
+        .comparison-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 1rem;
+            padding: 1rem;
+            border-bottom: 1px solid var(--fsa-border-subtle);
+        }
+
+        .comparison-row.header {
+            font-weight: var(--font-weight-bold);
+            color: var(--fsa-green);
+        }
+
+        .scenario-container {
+            background: var(--fsa-bg-card);
+            border: 2px solid var(--fsa-border-medium);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .scenario-choices {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .scenario-outcome {
+            background: var(--fsa-bg-dark);
+            border: 2px solid var(--fsa-green);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .scenario-outcome.hidden {
+            display: none;
+        }
+
+        .quiz {
+            background: var(--fsa-bg-card);
+            border: 2px solid var(--fsa-border-medium);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .quiz-question {
+            font-size: var(--font-size-xl);
+            color: var(--fsa-green);
+            margin-bottom: 1.5rem;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .quiz-option {
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid var(--fsa-border-medium);
+            border-radius: var(--radius-md);
+            padding: 1rem;
+            cursor: pointer;
+            transition: all var(--transition-base);
+        }
+
+        .quiz-option:hover {
+            border-color: var(--fsa-green);
+        }
+
+        .quiz-option.correct {
+            background: rgba(16, 185, 129, 0.2);
+            border-color: var(--fsa-success);
+        }
+
+        .quiz-option.incorrect {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: var(--fsa-error);
+        }
+
+        .quiz-feedback {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: var(--radius-md);
+        }
+
+        .quiz-feedback.correct {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--fsa-success);
+        }
+
+        .quiz-feedback.incorrect {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--fsa-error);
+        }
+
+        @media (max-width: 768px) {
+            .comparison-row {
+                grid-template-columns: 1fr;
+            }
+            .result-breakdown {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="module-header">
+            <h1>Module 7: Investing Fundamentals</h1>
+            <p class="subtitle">Build wealth that outpaces inflation</p>
+        </div>
+
+        <section class="section">
+            <h2 class="section-title">Why You Must Invest</h2>
+            
+            <div class="content-block">
+                <h3>Inflation is Stealing Your Money</h3>
+                <p><strong>Reality:</strong> Cash loses purchasing power every year due to inflation</p>
+                <p><strong>Example:</strong> $10,000 in 2014 → $7,500 purchasing power in 2024 (3% avg inflation)</p>
+                <p>Saving alone isn't enough. You need your money to grow faster than inflation.</p>
+            </div>
+
+            <div class="content-block">
+                <h3>The Power of Compound Interest</h3>
+                <p><strong>Einstein allegedly said:</strong> "Compound interest is the 8th wonder of the world"</p>
+                <p><strong>How it works:</strong> You earn returns on your principal PLUS returns on your previous returns</p>
+                <p><strong>Example:</strong></p>
+                <ul>
+                    <li>Year 1: $1,000 @ 10% = $1,100</li>
+                    <li>Year 2: $1,100 @ 10% = $1,210 (you earned $110, not $100)</li>
+                    <li>Year 30: $17,449 (growth accelerates over time)</li>
+                </ul>
+            </div>
+
+            <div class="highlight highlight-tip">
+                <strong>💡 Key Insight:</strong> Time in the market beats timing the market. Start early, invest consistently, let compound interest work.
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Compound Interest Calculator</h2>
+            
+            <div class="calculator">
+                <h3 style="font-size: var(--font-size-2xl); color: var(--fsa-green); margin-bottom: 1.5rem; text-align: center;">See Your Money Grow</h3>
+                
+                <div class="form-group">
+                    <label class="form-label" for="initial-investment">Initial Investment</label>
+                    <input type="number" id="initial-investment" class="form-input" placeholder="e.g., 5000" value="5000">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="monthly-contribution">Monthly Contribution</label>
+                    <input type="number" id="monthly-contribution" class="form-input" placeholder="e.g., 500" value="500">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="years">Years to Invest</label>
+                    <input type="number" id="years" class="form-input" placeholder="e.g., 30" value="30">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="return-rate">Expected Annual Return (%)</label>
+                    <input type="number" id="return-rate" class="form-input" placeholder="e.g., 10" value="10" step="0.1">
+                    <span class="form-help">S&P 500 historical average: ~10%</span>
+                </div>
+
+                <button class="btn btn-primary" onclick="calculateCompound()">Calculate Future Value</button>
+
+                <div class="result-display hidden" id="compound-result">
+                    <div class="result-label">Your investment will grow to:</div>
+                    <div class="result-main" id="future-value">$1,144,818</div>
+                    
+                    <div class="result-breakdown">
+                        <div class="result-item">
+                            <div class="result-label">Total Invested</div>
+                            <div class="result-value" id="total-invested">$185,000</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label">Total Gains</div>
+                            <div class="result-value" id="total-gains">$959,818</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Investment Vehicles: Where to Put Your Money</h2>
+            
+            <div class="content-block">
+                <h3>Index Funds (Recommended for Most People)</h3>
+                <p><strong>What:</strong> A fund that tracks a market index (like S&P 500)</p>
+                <p><strong>Why:</strong> Low fees (0.03-0.20%), automatic diversification, consistent returns</p>
+                <p><strong>Example:</strong> VTI (Total Stock Market), VOO (S&P 500)</p>
+                <p><strong>Historical performance:</strong> S&P 500 averaged 10% annually over 50+ years</p>
+            </div>
+
+            <div class="content-block">
+                <h3>401(k) / IRA (Tax-Advantaged Accounts)</h3>
+                <p><strong>401(k):</strong> Employer-sponsored. Contributions reduce taxable income. Many offer employer match (free money)</p>
+                <p><strong>Traditional IRA:</strong> Tax deduction now, pay taxes in retirement</p>
+                <p><strong>Roth IRA:</strong> No tax deduction now, tax-free growth and withdrawals in retirement</p>
+                <p><strong>Max contributions (2024):</strong> $23,000 (401k), $7,000 (IRA)</p>
+            </div>
+
+            <div class="content-block">
+                <h3>Individual Stocks (High Risk)</h3>
+                <p><strong>What:</strong> Buying shares of specific companies</p>
+                <p><strong>Risk:</strong> Company can fail, stock can crash</p>
+                <p><strong>When it makes sense:</strong> If you're knowledgeable and willing to research. Still, most should stick to index funds</p>
+                <p><strong>Example:</strong> Apple, Microsoft, Tesla</p>
+            </div>
+
+            <div class="content-block">
+                <h3>Bonds (Lower Risk, Lower Return)</h3>
+                <p><strong>What:</strong> Lending money to government or corporations</p>
+                <p><strong>Return:</strong> 3-6% typically</p>
+                <p><strong>When to use:</strong> As you get older and want stability. 60/40 stocks/bonds is common for retirees</p>
+            </div>
+
+            <div class="content-block">
+                <h3>Bitcoin & Crypto (Emerging Asset Class)</h3>
+                <p><strong>What:</strong> Decentralized digital currency</p>
+                <p><strong>Risk:</strong> High volatility, regulatory uncertainty</p>
+                <p><strong>Potential:</strong> Hedge against inflation, uncorrelated to stocks</p>
+                <p><strong>Allocation:</strong> 1-5% of portfolio if you understand the tech and risk</p>
+                <p><strong>Learn more:</strong> <a href="https://bitcoin-sovereign-academy.vercel.app" style="color: var(--fsa-green);">Bitcoin Sovereign Academy</a></p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Asset Allocation: How to Diversify</h2>
+            
+            <div class="content-block">
+                <h3>The 100 - Age Rule (Simple Approach)</h3>
+                <p><strong>Formula:</strong> % in stocks = 100 - your age</p>
+                <p><strong>Example:</strong></p>
+                <ul>
+                    <li>Age 30: 70% stocks, 30% bonds</li>
+                    <li>Age 50: 50% stocks, 50% bonds</li>
+                </ul>
+                <p><strong>Why:</strong> Stocks are volatile but grow over time. Bonds are stable. Younger people have time to recover from crashes.</p>
+            </div>
+
+            <div class="content-block">
+                <h3>Three-Fund Portfolio (Bogleheads Method)</h3>
+                <p>Popular among smart investors for simplicity and performance:</p>
+                <ul>
+                    <li><strong>60% U.S. Stock Market:</strong> VTI or VTSAX</li>
+                    <li><strong>30% International Stocks:</strong> VXUS or VTIAX</li>
+                    <li><strong>10% Bonds:</strong> BND or VBTLX</li>
+                </ul>
+                <p>Rebalance once per year. That's it.</p>
+            </div>
+
+            <div class="comparison-table">
+                <div class="comparison-row header">
+                    <span>Investment</span>
+                    <span>Risk</span>
+                    <span>Avg Return</span>
+                    <span>Best For</span>
+                </div>
+                <div class="comparison-row">
+                    <span>Index Funds (Stocks)</span>
+                    <span>Medium</span>
+                    <span>10%/year</span>
+                    <span>Long-term growth</span>
+                </div>
+                <div class="comparison-row">
+                    <span>Bonds</span>
+                    <span>Low</span>
+                    <span>4%/year</span>
+                    <span>Stability</span>
+                </div>
+                <div class="comparison-row">
+                    <span>Individual Stocks</span>
+                    <span>High</span>
+                    <span>Varies</span>
+                    <span>Speculation</span>
+                </div>
+                <div class="comparison-row">
+                    <span>Bitcoin</span>
+                    <span>Very High</span>
+                    <span>Varies</span>
+                    <span>Inflation hedge</span>
+                </div>
+                <div class="comparison-row">
+                    <span>Savings Account</span>
+                    <span>None</span>
+                    <span>0.5%/year</span>
+                    <span>Emergency fund</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Investment Mistakes to Avoid</h2>
+            
+            <div class="content-block">
+                <h3>1. Panic Selling During Crashes</h3>
+                <p><strong>The mistake:</strong> Market drops 20%, you sell everything, lock in losses</p>
+                <p><strong>The reality:</strong> Markets always recover. Every crash in history has been followed by new highs</p>
+                <p><strong>What to do:</strong> Hold and keep buying. Crashes are sales on stocks</p>
+            </div>
+
+            <div class="content-block">
+                <h3>2. High-Fee Funds</h3>
+                <p><strong>The mistake:</strong> Paying 1-2% annual fees on actively managed funds</p>
+                <p><strong>The reality:</strong> 1% fee over 30 years = ~$200K less in retirement on a $500K portfolio</p>
+                <p><strong>What to do:</strong> Choose index funds with <0.20% expense ratios</p>
+            </div>
+
+            <div class="content-block">
+                <h3>3. Trying to Time the Market</h3>
+                <p><strong>The mistake:</strong> Waiting for the "perfect" time to invest</p>
+                <p><strong>The reality:</strong> Time in market > timing the market. Even pros can't predict tops and bottoms</p>
+                <p><strong>What to do:</strong> Dollar-cost averaging. Invest consistently regardless of price</p>
+            </div>
+
+            <div class="content-block">
+                <h3>4. Not Starting Early</h3>
+                <p><strong>The mistake:</strong> "I'll start investing when I make more money"</p>
+                <p><strong>The reality:</strong> Starting at 25 with $200/month beats starting at 35 with $500/month (due to compound interest)</p>
+                <p><strong>What to do:</strong> Start with ANY amount now. Even $50/month matters</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Scenario: Market Crash</h2>
+            
+            <div class="scenario-container">
+                <h3 style="color: var(--fsa-green); margin-bottom: 1rem;">The stock market crashes 30%</h3>
+                <p>You've been investing $500/month in index funds. Your portfolio was $50,000 and is now $35,000.</p>
+                
+                <div class="scenario-choices">
+                    <button class="btn btn-secondary" onclick="showOutcome('sell')">Sell everything to "stop the bleeding"</button>
+                    <button class="btn btn-secondary" onclick="showOutcome('hold')">Hold and do nothing</button>
+                    <button class="btn btn-secondary" onclick="showOutcome('buy')">Keep buying $500/month</button>
+                </div>
+
+                <div class="scenario-outcome hidden" id="outcome-sell">
+                    <h4 style="color: var(--fsa-error); margin-bottom: 1rem;">Outcome: Panic Sell</h4>
+                    <p><strong>What happened:</strong> You locked in a $15,000 loss. The market recovered 40% over the next 18 months. You missed the rebound.</p>
+                    <p><strong>The damage:</strong> Your $50K would have been $70K if you held. Instead you have $35K in cash losing value to inflation.</p>
+                    <p><strong>Psychology:</strong> Panic selling feels safe but guarantees losses. Pain of regret is worse than pain of temporary loss.</p>
+                    <p><strong>Lesson:</strong> Never sell in a crash unless you need the money immediately (which is why you have an emergency fund).</p>
+                </div>
+
+                <div class="scenario-outcome hidden" id="outcome-hold">
+                    <h4 style="color: var(--fsa-warning); margin-bottom: 1rem;">Outcome: Hold</h4>
+                    <p><strong>What happened:</strong> You held your $35K. Market recovered 40% over 18 months. Your portfolio is now $49K.</p>
+                    <p><strong>Result:</strong> You're almost back to even. No catastrophic losses, but you didn't capitalize on the discount.</p>
+                    <p><strong>Psychology:</strong> Holding is better than panic selling, but you missed the opportunity to buy low.</p>
+                    <p><strong>Lesson:</strong> Holding works, but continuing to buy during crashes accelerates wealth building.</p>
+                </div>
+
+                <div class="scenario-outcome hidden" id="outcome-buy">
+                    <h4 style="color: var(--fsa-success); margin-bottom: 1rem;">Outcome: Keep Buying</h4>
+                    <p><strong>What happened:</strong> You kept buying $500/month for 18 months ($9K total). You bought shares at a 30% discount.</p>
+                    <p><strong>Result:</strong> Original $35K + new $9K = $44K invested. After 40% recovery, portfolio is now $61,600.</p>
+                    <p><strong>The math:</strong> You turned a crash into an opportunity. You're now ahead of where you started ($61.6K vs $50K).</p>
+                    <p><strong>Psychology:</strong> This requires discipline and long-term thinking. Crashes are sales on wealth.</p>
+                    <p><strong>Lesson:</strong> Dollar-cost averaging through crashes is how wealth is built. The best returns come from buying when everyone else is scared.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Check Your Understanding</h2>
+            
+            <div class="quiz">
+                <div class="quiz-question">1. What's the most important factor for investment success?</div>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="checkAnswer(1, 'a', false)">A) Picking the best stocks</button>
+                    <button class="quiz-option" onclick="checkAnswer(1, 'b', true)">B) Time in the market and consistency</button>
+                    <button class="quiz-option" onclick="checkAnswer(1, 'c', false)">C) Timing market crashes perfectly</button>
+                </div>
+                <div class="quiz-feedback hidden" id="feedback-1"></div>
+            </div>
+
+            <div class="quiz">
+                <div class="quiz-question">2. What should you do when the market crashes?</div>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="checkAnswer(2, 'a', false)">A) Sell everything to avoid more losses</button>
+                    <button class="quiz-option" onclick="checkAnswer(2, 'b', true)">B) Keep investing at discounted prices</button>
+                    <button class="quiz-option" onclick="checkAnswer(2, 'c', false)">C) Wait for the market to recover before investing</button>
+                </div>
+                <div class="quiz-feedback hidden" id="feedback-2"></div>
+            </div>
+
+            <div class="quiz">
+                <div class="quiz-question">3. What's the recommended investment for most people?</div>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="checkAnswer(3, 'a', true)">A) Low-cost index funds</button>
+                    <button class="quiz-option" onclick="checkAnswer(3, 'b', false)">B) Individual stocks only</button>
+                    <button class="quiz-option" onclick="checkAnswer(3, 'c', false)">C) High-fee actively managed funds</button>
+                </div>
+                <div class="quiz-feedback hidden" id="feedback-3"></div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="card" style="text-align: center;">
+                <h3 class="card-title">Module 7 Complete! 🎉</h3>
+                <p class="card-description">You now understand how to build wealth through investing.</p>
+                <div style="margin-top: 2rem;">
+                    <button class="btn btn-primary" onclick="completeModule()">Mark Complete & Continue to Module 8</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="../js/module-progress.js"></script>
+    <script src="../js/progress-manager.js"></script>
+    <script>
+        const progressManager = new FSAProgressManager();
+        progressManager.init();
+        progressManager.setModuleVisited(7);
+
+        function calculateCompound() {
+            const initial = parseFloat(document.getElementById('initial-investment').value) || 0;
+            const monthly = parseFloat(document.getElementById('monthly-contribution').value) || 0;
+            const years = parseInt(document.getElementById('years').value) || 0;
+            const rate = parseFloat(document.getElementById('return-rate').value) || 0;
+
+            if (years === 0 || rate === 0) {
+                alert('Please enter valid values for years and return rate');
+                return;
+            }
+
+            const monthlyRate = rate / 100 / 12;
+            const months = years * 12;
+
+            // Future value of initial investment
+            const futureInitial = initial * Math.pow(1 + monthlyRate, months);
+
+            // Future value of monthly contributions (annuity formula)
+            const futureMonthly = monthly * ((Math.pow(1 + monthlyRate, months) - 1) / monthlyRate);
+
+            const futureValue = futureInitial + futureMonthly;
+            const totalInvested = initial + (monthly * months);
+            const totalGains = futureValue - totalInvested;
+
+            // Display results
+            document.getElementById('compound-result').classList.remove('hidden');
+            document.getElementById('future-value').textContent = `$${Math.round(futureValue).toLocaleString()}`;
+            document.getElementById('total-invested').textContent = `$${Math.round(totalInvested).toLocaleString()}`;
+            document.getElementById('total-gains').textContent = `$${Math.round(totalGains).toLocaleString()}`;
+        }
+
+        function showOutcome(outcome) {
+            const outcomes = ['sell', 'hold', 'buy'];
+            outcomes.forEach(o => {
+                document.getElementById(`outcome-${o}`).classList.add('hidden');
+            });
+            document.getElementById(`outcome-${outcome}`).classList.remove('hidden');
+        }
+
+        function checkAnswer(questionNum, answer, isCorrect) {
+            const feedback = document.getElementById(`feedback-${questionNum}`);
+            const options = feedback.parentElement.querySelectorAll('.quiz-option');
+            
+            options.forEach(opt => opt.style.pointerEvents = 'none');
+            event.target.classList.add(isCorrect ? 'correct' : 'incorrect');
+            
+            feedback.classList.remove('hidden');
+            feedback.classList.add(isCorrect ? 'correct' : 'incorrect');
+            
+            if (isCorrect) {
+                feedback.textContent = '✓ Correct!';
+            } else {
+                feedback.textContent = '✗ Not quite. Review the content above.';
+                setTimeout(() => {
+                    options.forEach(opt => opt.style.pointerEvents = 'auto');
+                    event.target.classList.remove('incorrect');
+                    feedback.classList.add('hidden');
+                }, 2000);
+            }
+        }
+
+        function completeModule() {
+            progressManager.setModuleComplete(7, { timeSpent: 0, score: 100 });
+            alert('Module 7 complete! Next: Module 8 - Risk & Insurance.');
+            window.location.href = '../index.html';
+        }
+    </script>
+</body>
+</html>
