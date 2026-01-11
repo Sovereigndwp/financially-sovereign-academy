@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 4: Credit Scores Decoded | Financially Sovereign Academy</title>
+    <meta name="description" content="Understand credit scores, how they're calculated, and how to improve yours. Interactive credit score simulator.">
+    <link rel="stylesheet" href="../css/fsa-theme.css">
+    <link rel="stylesheet" href="../css/interactive-components.css">
+    <style>
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .module-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: var(--fsa-gradient-card);
+            border: 3px solid var(--fsa-green);
+            border-radius: var(--radius-xl);
+        }
+
+        .module-header h1 {
+            font-size: var(--font-size-4xl);
+            color: var(--fsa-green);
+            margin-bottom: 1rem;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: var(--font-size-3xl);
+            color: var(--fsa-green);
+            margin-bottom: 1.5rem;
+            border-bottom: 3px solid var(--fsa-border-medium);
+            padding-bottom: 0.5rem;
+        }
+
+        .content-block {
+            background: var(--fsa-bg-card);
+            border: 2px solid var(--fsa-border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .content-block h3 {
+            color: var(--fsa-green-light);
+            font-size: var(--font-size-xl);
+            margin-bottom: 1rem;
+        }
+
+        .score-range {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: var(--radius-md);
+            font-weight: var(--font-weight-semibold);
+        }
+
+        .score-excellent { background: rgba(16, 185, 129, 0.2); color: var(--fsa-success); }
+        .score-good { background: rgba(52, 211, 153, 0.2); color: #6ee7b7; }
+        .score-fair { background: rgba(245, 158, 11, 0.2); color: var(--fsa-warning); }
+        .score-poor { background: rgba(239, 68, 68, 0.2); color: var(--fsa-error); }
+
+        .calculator {
+            background: var(--fsa-bg-secondary);
+            border: 2px solid var(--fsa-border-medium);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .score-result {
+            background: var(--fsa-bg-dark);
+            border: 2px solid var(--fsa-border-medium);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .result-score {
+            font-size: var(--font-size-5xl);
+            font-weight: var(--font-weight-extrabold);
+            font-family: var(--font-family-mono);
+            margin: 1rem 0;
+        }
+
+        .factors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .factor-card {
+            background: var(--fsa-bg-dark);
+            border: 2px solid var(--fsa-border-medium);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .factor-percentage {
+            font-size: var(--font-size-3xl);
+            font-weight: var(--font-weight-extrabold);
+            color: var(--fsa-green);
+            margin: 0.5rem 0;
+        }
+
+        .factor-name {
+            font-size: var(--font-size-sm);
+            color: var(--fsa-text-secondary);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .quiz {
+            background: var(--fsa-bg-card);
+            border: 2px solid var(--fsa-border-medium);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .quiz-question {
+            font-size: var(--font-size-xl);
+            color: var(--fsa-green);
+            margin-bottom: 1.5rem;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .quiz-option {
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid var(--fsa-border-medium);
+            border-radius: var(--radius-md);
+            padding: 1rem;
+            cursor: pointer;
+            transition: all var(--transition-base);
+        }
+
+        .quiz-option:hover {
+            border-color: var(--fsa-green);
+        }
+
+        .quiz-option.correct {
+            background: rgba(16, 185, 129, 0.2);
+            border-color: var(--fsa-success);
+        }
+
+        .quiz-option.incorrect {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: var(--fsa-error);
+        }
+
+        .quiz-feedback {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: var(--radius-md);
+        }
+
+        .quiz-feedback.correct {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--fsa-success);
+        }
+
+        .quiz-feedback.incorrect {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--fsa-error);
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="module-header">
+            <h1>Module 4: Credit Scores Decoded</h1>
+            <p class="subtitle">Understand, build, and maintain a strong credit score</p>
+        </div>
+
+        <section class="section">
+            <h2 class="section-title">What is a Credit Score?</h2>
+            
+            <div class="content-block">
+                <h3>The 3-Digit Number That Controls Your Life</h3>
+                <p>Your credit score is a number between 300-850 that tells lenders how risky you are to lend money to.</p>
+                <p><strong>Why it matters:</strong></p>
+                <ul>
+                    <li>Getting approved for credit cards, car loans, mortgages</li>
+                    <li>Your interest rates (good score = lower rates, save thousands)</li>
+                    <li>Renting an apartment (landlords check it)</li>
+                    <li>Sometimes job applications (employers can check it)</li>
+                    <li>Insurance rates (yes, really)</li>
+                </ul>
+                <p>A 760 credit score vs a 620 can mean <strong>$100,000+ difference</strong> in interest on a 30-year mortgage.</p>
+            </div>
+
+            <div class="content-block">
+                <h3>Credit Score Ranges</h3>
+                <div class="score-range score-excellent">
+                    <span>800-850: Exceptional</span>
+                    <span>Best rates, instant approvals</span>
+                </div>
+                <div class="score-range score-excellent">
+                    <span>740-799: Very Good</span>
+                    <span>Great rates, easy approvals</span>
+                </div>
+                <div class="score-range score-good">
+                    <span>670-739: Good</span>
+                    <span>Above average, decent rates</span>
+                </div>
+                <div class="score-range score-fair">
+                    <span>580-669: Fair</span>
+                    <span>Higher rates, some rejections</span>
+                </div>
+                <div class="score-range score-poor">
+                    <span>300-579: Poor</span>
+                    <span>Very high rates or denied</span>
+                </div>
+            </div>
+
+            <div class="highlight highlight-tip">
+                <strong>💡 Key Insight:</strong> You don't need perfect credit. Anything above 740 gets you the best rates on most loans.
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">How Credit Scores Are Calculated</h2>
+            
+            <div class="content-block">
+                <h3>The 5 Factors (FICO Score)</h3>
+                <div class="factors-grid">
+                    <div class="factor-card">
+                        <div class="factor-percentage">35%</div>
+                        <div class="factor-name">Payment History</div>
+                    </div>
+                    <div class="factor-card">
+                        <div class="factor-percentage">30%</div>
+                        <div class="factor-name">Amounts Owed</div>
+                    </div>
+                    <div class="factor-card">
+                        <div class="factor-percentage">15%</div>
+                        <div class="factor-name">Length of History</div>
+                    </div>
+                    <div class="factor-card">
+                        <div class="factor-percentage">10%</div>
+                        <div class="factor-name">New Credit</div>
+                    </div>
+                    <div class="factor-card">
+                        <div class="factor-percentage">10%</div>
+                        <div class="factor-name">Credit Mix</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>1. Payment History (35%) - Most Important</h3>
+                <p><strong>What it is:</strong> Do you pay your bills on time?</p>
+                <p><strong>Impact:</strong> One late payment can drop your score 50-100 points.</p>
+                <p><strong>How to win:</strong> Pay everything on time, every time. Set up autopay. Even $5 missed can hurt you.</p>
+            </div>
+
+            <div class="content-block">
+                <h3>2. Amounts Owed / Credit Utilization (30%)</h3>
+                <p><strong>What it is:</strong> How much of your available credit are you using?</p>
+                <p><strong>The rule:</strong> Keep utilization under 30%. Under 10% is even better.</p>
+                <p><strong>Example:</strong> If your credit limit is $10,000, keep your balance under $3,000 (ideally under $1,000).</p>
+                <p><strong>Pro tip:</strong> Pay off your credit card <em>before</em> the statement date to keep reported utilization low.</p>
+            </div>
+
+            <div class="content-block">
+                <h3>3. Length of Credit History (15%)</h3>
+                <p><strong>What it is:</strong> How long have you had credit accounts?</p>
+                <p><strong>Impact:</strong> Longer is better. Average age of accounts matters.</p>
+                <p><strong>Don't do this:</strong> Closing old credit cards (it shortens your history)</p>
+                <p><strong>Do this:</strong> Keep your oldest card open, even if you don't use it much.</p>
+            </div>
+
+            <div class="content-block">
+                <h3>4. New Credit (10%)</h3>
+                <p><strong>What it is:</strong> How many new accounts have you opened recently?</p>
+                <p><strong>Impact:</strong> Opening multiple accounts in a short time looks desperate.</p>
+                <p><strong>Hard inquiries:</strong> Each credit application creates a hard inquiry (drops score 5-10 points for a few months)</p>
+                <p><strong>Exception:</strong> Rate shopping for mortgages/auto loans within 14-45 days counts as one inquiry.</p>
+            </div>
+
+            <div class="content-block">
+                <h3>5. Credit Mix (10%)</h3>
+                <p><strong>What it is:</strong> Do you have different types of credit? (credit cards, auto loan, mortgage, etc.)</p>
+                <p><strong>Impact:</strong> Minor factor. Don't take out loans just to improve this.</p>
+                <p><strong>Natural approach:</strong> It'll improve over time as you make major purchases.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Credit Score Simulator</h2>
+            
+            <div class="calculator">
+                <h3 style="font-size: var(--font-size-2xl); color: var(--fsa-green); margin-bottom: 1.5rem; text-align: center;">Estimate Your Credit Impact</h3>
+                
+                <div class="form-group">
+                    <label class="form-label" for="current-score">Current Credit Score</label>
+                    <input type="number" id="current-score" class="form-input" placeholder="e.g., 680" min="300" max="850" step="10">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="late-payments">Late Payments in Past 2 Years</label>
+                    <input type="number" id="late-payments" class="form-input" placeholder="e.g., 0" min="0" max="10" step="1" value="0">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="utilization">Credit Utilization %</label>
+                    <input type="number" id="utilization" class="form-input" placeholder="e.g., 25" min="0" max="100" step="5">
+                    <span class="form-help">Total balance ÷ total credit limit × 100</span>
+                </div>
+
+                <button class="btn btn-primary" onclick="simulateScore()">Estimate Impact</button>
+
+                <div class="score-result hidden" id="score-result">
+                    <div style="font-size: var(--font-size-sm); color: var(--fsa-text-dim); text-transform: uppercase; letter-spacing: 1px;">Estimated Score</div>
+                    <div class="result-score" id="estimated-score">720</div>
+                    <div style="font-size: var(--font-size-base); color: var(--fsa-text-secondary); margin-top: 1rem;" id="score-advice"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">How to Check Your Credit Score</h2>
+            
+            <div class="content-block">
+                <h3>Free Ways to Check</h3>
+                <p><strong>AnnualCreditReport.com</strong> - Free credit report from all 3 bureaus once/year (official government site)</p>
+                <p><strong>Credit Karma</strong> - Free scores (TransUnion + Equifax) updated weekly</p>
+                <p><strong>Your bank/credit card</strong> - Many now offer free FICO scores</p>
+            </div>
+
+            <div class="content-block">
+                <h3>The 3 Credit Bureaus</h3>
+                <ul>
+                    <li><strong>Equifax</strong></li>
+                    <li><strong>Experian</strong></li>
+                    <li><strong>TransUnion</strong></li>
+                </ul>
+                <p>Each may have slightly different information. Check all three annually for errors.</p>
+            </div>
+
+            <div class="content-block">
+                <h3>Dispute Errors</h3>
+                <p>Found a mistake? You can dispute it for free:</p>
+                <ol>
+                    <li>Contact the credit bureau online</li>
+                    <li>Provide evidence the information is wrong</li>
+                    <li>They have 30 days to investigate</li>
+                    <li>If validated, it gets removed</li>
+                </ol>
+                <p><strong>Common errors:</strong> Accounts that aren't yours, incorrect late payments, already-paid collections</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Common Myths About Credit Scores</h2>
+            
+            <div class="content-block">
+                <h3>Myth #1: "Checking my credit hurts my score"</h3>
+                <p><strong>False.</strong> Checking your own credit is a "soft inquiry" and doesn't affect your score.</p>
+                <p>Only hard inquiries (from lenders when you apply for credit) affect your score.</p>
+            </div>
+
+            <div class="content-block">
+                <h3>Myth #2: "Closing credit cards improves my score"</h3>
+                <p><strong>False.</strong> Closing cards reduces your available credit (increases utilization) and shortens your credit history. Both hurt your score.</p>
+            </div>
+
+            <div class="content-block">
+                <h3>Myth #3: "I need to carry a balance to build credit"</h3>
+                <p><strong>False.</strong> You don't need to pay interest to build credit. Just use your card and pay it off in full every month.</p>
+            </div>
+
+            <div class="content-block">
+                <h3>Myth #4: "Income affects my credit score"</h3>
+                <p><strong>False.</strong> Your salary, savings, and net worth don't affect your credit score. Only your borrowing behavior.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">How to Build Credit From Zero</h2>
+            
+            <div class="content-block">
+                <h3>Starting With No Credit History</h3>
+                <p><strong>Option 1: Secured Credit Card</strong></p>
+                <p>Put down $200-500 as collateral. Use it like a normal card. Pay in full each month. After 6-12 months, upgrade to unsecured.</p>
+                
+                <p><strong>Option 2: Credit Builder Loan</strong></p>
+                <p>Some credit unions offer these. You "borrow" money that gets held in savings. As you pay it back, it builds credit.</p>
+                
+                <p><strong>Option 3: Become an Authorized User</strong></p>
+                <p>If a family member has good credit, ask to be added as an authorized user. Their history can help yours.</p>
+            </div>
+
+            <div class="content-block">
+                <h3>Timeline: Building Good Credit</h3>
+                <p><strong>6 months:</strong> Enough history to get a basic credit score</p>
+                <p><strong>12 months:</strong> Can qualify for better credit cards and small loans</p>
+                <p><strong>24 months:</strong> Good credit score (700+) if you've done everything right</p>
+                <p><strong>7 years:</strong> Most negative marks fall off your report</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Check Your Understanding</h2>
+            
+            <div class="quiz">
+                <div class="quiz-question">1. What's the biggest factor in your credit score?</div>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="checkAnswer(1, 'a', true)">A) Payment history (35%)</button>
+                    <button class="quiz-option" onclick="checkAnswer(1, 'b', false)">B) Credit utilization (30%)</button>
+                    <button class="quiz-option" onclick="checkAnswer(1, 'c', false)">C) Length of credit history (15%)</button>
+                </div>
+                <div class="quiz-feedback hidden" id="feedback-1"></div>
+            </div>
+
+            <div class="quiz">
+                <div class="quiz-question">2. What's the ideal credit utilization percentage?</div>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="checkAnswer(2, 'a', false)">A) Under 50%</button>
+                    <button class="quiz-option" onclick="checkAnswer(2, 'b', true)">B) Under 30% (ideally under 10%)</button>
+                    <button class="quiz-option" onclick="checkAnswer(2, 'c', false)">C) Under 75%</button>
+                </div>
+                <div class="quiz-feedback hidden" id="feedback-2"></div>
+            </div>
+
+            <div class="quiz">
+                <div class="quiz-question">3. Does checking your own credit score hurt it?</div>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="checkAnswer(3, 'a', false)">A) Yes, it's a hard inquiry</button>
+                    <button class="quiz-option" onclick="checkAnswer(3, 'b', true)">B) No, soft inquiries don't affect your score</button>
+                    <button class="quiz-option" onclick="checkAnswer(3, 'c', false)">C) Yes, but only if you check more than once per year</button>
+                </div>
+                <div class="quiz-feedback hidden" id="feedback-3"></div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="card" style="text-align: center;">
+                <h3 class="card-title">Module 4 Complete! 🎉</h3>
+                <p class="card-description">You understand credit scores and how to build excellent credit.</p>
+                <div style="margin-top: 2rem;">
+                    <button class="btn btn-primary" onclick="completeModule()">Mark Complete & Continue to Module 5</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="../js/module-progress.js"></script>
+    <script src="../js/progress-manager.js"></script>
+    <script>
+        const progressManager = new FSAProgressManager();
+        progressManager.init();
+        progressManager.setModuleVisited(4);
+
+        function simulateScore() {
+            const currentScore = parseFloat(document.getElementById('current-score').value) || 0;
+            const latePayments = parseFloat(document.getElementById('late-payments').value) || 0;
+            const utilization = parseFloat(document.getElementById('utilization').value) || 0;
+
+            if (currentScore === 0) {
+                alert('Please enter your current credit score');
+                return;
+            }
+
+            let estimatedScore = currentScore;
+
+            // Late payments impact (each can drop 50-100 points)
+            estimatedScore -= (latePayments * 60);
+
+            // Utilization impact
+            if (utilization > 30) {
+                estimatedScore -= Math.min((utilization - 30) * 2, 100);
+            }
+
+            // Cap between 300-850
+            estimatedScore = Math.max(300, Math.min(850, Math.round(estimatedScore)));
+
+            const resultDiv = document.getElementById('score-result');
+            const scoreDiv = document.getElementById('estimated-score');
+            const adviceDiv = document.getElementById('score-advice');
+
+            resultDiv.classList.remove('hidden');
+            scoreDiv.textContent = estimatedScore;
+
+            if (latePayments > 0) {
+                scoreDiv.style.color = 'var(--fsa-error)';
+                adviceDiv.textContent = `Late payments are killing your score. Focus on paying everything on time from now on.`;
+            } else if (utilization > 30) {
+                scoreDiv.style.color = 'var(--fsa-warning)';
+                adviceDiv.textContent = `High utilization is hurting you. Pay down balances to under 30% of your limit.`;
+            } else {
+                scoreDiv.style.color = 'var(--fsa-success)';
+                adviceDiv.textContent = `Good fundamentals! Keep paying on time and keeping utilization low.`;
+            }
+        }
+
+        function checkAnswer(questionNum, answer, isCorrect) {
+            const feedback = document.getElementById(`feedback-${questionNum}`);
+            const options = feedback.parentElement.querySelectorAll('.quiz-option');
+            
+            options.forEach(opt => opt.style.pointerEvents = 'none');
+            event.target.classList.add(isCorrect ? 'correct' : 'incorrect');
+            
+            feedback.classList.remove('hidden');
+            feedback.classList.add(isCorrect ? 'correct' : 'incorrect');
+            
+            if (isCorrect) {
+                feedback.textContent = '✓ Correct!';
+            } else {
+                feedback.textContent = '✗ Not quite. Review the content above.';
+                setTimeout(() => {
+                    options.forEach(opt => opt.style.pointerEvents = 'auto');
+                    event.target.classList.remove('incorrect');
+                    feedback.classList.add('hidden');
+                }, 2000);
+            }
+        }
+
+        function completeModule() {
+            progressManager.setModuleComplete(4, { timeSpent: 0, score: 100 });
+            alert('Module 4 complete! Next: Module 5 - Debt Strategy.');
+            window.location.href = '../index.html';
+        }
+    </script>
+</body>
+</html>
