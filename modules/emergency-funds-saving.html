@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 2: Emergency Funds & Saving | Financially Sovereign Academy</title>
+    <meta name="description" content="Learn why emergency funds matter and how to build yours. Interactive calculator and real-world scenarios.">
+    <link rel="stylesheet" href="../css/fsa-theme.css">
+    <link rel="stylesheet" href="../css/interactive-components.css">
+    <style>
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .module-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: var(--fsa-gradient-card);
+            border: 3px solid var(--fsa-green);
+            border-radius: var(--radius-xl);
+        }
+
+        .module-header h1 {
+            font-size: var(--font-size-4xl);
+            color: var(--fsa-green);
+            margin-bottom: 1rem;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: var(--font-size-3xl);
+            color: var(--fsa-green);
+            margin-bottom: 1.5rem;
+            border-bottom: 3px solid var(--fsa-border-medium);
+            padding-bottom: 0.5rem;
+        }
+
+        .content-block {
+            background: var(--fsa-bg-card);
+            border: 2px solid var(--fsa-border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .content-block h3 {
+            color: var(--fsa-green-light);
+            font-size: var(--font-size-xl);
+            margin-bottom: 1rem;
+        }
+
+        .calculator {
+            background: var(--fsa-bg-secondary);
+            border: 2px solid var(--fsa-border-medium);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .calculator-results {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .result-box {
+            background: var(--fsa-bg-dark);
+            border: 2px solid var(--fsa-border-medium);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .result-label {
+            font-size: var(--font-size-sm);
+            color: var(--fsa-text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-value {
+            font-size: var(--font-size-3xl);
+            font-weight: var(--font-weight-extrabold);
+            color: var(--fsa-green);
+            font-family: var(--font-family-mono);
+        }
+
+        .result-desc {
+            font-size: var(--font-size-sm);
+            color: var(--fsa-text-secondary);
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+
+        .scenario {
+            background: var(--fsa-bg-card);
+            border: 2px solid var(--fsa-border-medium);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .scenario-text {
+            font-size: var(--font-size-lg);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .scenario-choices {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .scenario-choice {
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid var(--fsa-border-medium);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all var(--transition-base);
+            text-align: left;
+        }
+
+        .scenario-choice:hover {
+            border-color: var(--fsa-green);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .choice-title {
+            font-weight: var(--font-weight-bold);
+            font-size: var(--font-size-lg);
+            margin-bottom: 0.5rem;
+            color: var(--fsa-green);
+        }
+
+        .outcome {
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            margin-top: 2rem;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .outcome.success {
+            background: rgba(16, 185, 129, 0.1);
+            border: 2px solid var(--fsa-success);
+        }
+
+        .outcome.failure {
+            background: rgba(239, 68, 68, 0.1);
+            border: 2px solid var(--fsa-error);
+        }
+
+        .outcome-title {
+            font-size: var(--font-size-2xl);
+            font-weight: var(--font-weight-bold);
+            margin-bottom: 1rem;
+        }
+
+        .outcome.success .outcome-title {
+            color: var(--fsa-success);
+        }
+
+        .outcome.failure .outcome-title {
+            color: var(--fsa-error);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .quiz {
+            background: var(--fsa-bg-card);
+            border: 2px solid var(--fsa-border-medium);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .quiz-question {
+            font-size: var(--font-size-xl);
+            color: var(--fsa-green);
+            margin-bottom: 1.5rem;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .quiz-option {
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid var(--fsa-border-medium);
+            border-radius: var(--radius-md);
+            padding: 1rem;
+            cursor: pointer;
+            transition: all var(--transition-base);
+        }
+
+        .quiz-option:hover {
+            border-color: var(--fsa-green);
+        }
+
+        .quiz-option.correct {
+            background: rgba(16, 185, 129, 0.2);
+            border-color: var(--fsa-success);
+        }
+
+        .quiz-option.incorrect {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: var(--fsa-error);
+        }
+
+        .quiz-feedback {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: var(--radius-md);
+        }
+
+        .quiz-feedback.correct {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--fsa-success);
+        }
+
+        .quiz-feedback.incorrect {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--fsa-error);
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="module-header">
+            <h1>Module 2: Emergency Funds & Saving</h1>
+            <p class="subtitle">Build financial resilience: protect yourself from life's surprises</p>
+        </div>
+
+        <!-- Section 1: Why Emergency Funds Matter -->
+        <section class="section">
+            <h2 class="section-title">Why Emergency Funds Matter</h2>
+            
+            <div class="content-block">
+                <h3>The Problem Nobody Talks About</h3>
+                <p>You're doing great. Saving money. Paying bills on time. Then your car breaks down. $800 repair.</p>
+                <p>Or your laptop dies. $1,200.</p>
+                <p>Or you lose your job. Now what?</p>
+                <p><strong>Most Americans can't cover a $400 emergency without going into debt.</strong> That's not because they're bad with money. It's because they never built an emergency fund.</p>
+            </div>
+
+            <div class="content-block">
+                <h3>Real Stories</h3>
+                <p><strong>Jessica, 29:</strong> "I had $3,000 saved up. Then my transmission failed. $2,800 repair. I paid cash and didn't stress for a second. That's when I realized—this is what financial peace feels like."</p>
+                <p><strong>Marcus, 34:</strong> "Got laid off with zero savings. Had to put groceries on credit cards while job hunting. Took 2 years to pay off that debt. Never again."</p>
+                <p>The difference? One emergency fund.</p>
+            </div>
+
+            <div class="highlight highlight-tip">
+                <strong>💡 Key Insight:</strong> An emergency fund isn't optional. It's the foundation of financial security.
+            </div>
+        </section>
+
+        <!-- Section 2: How Much Do You Need? -->
+        <section class="section">
+            <h2 class="section-title">How Much Do You Need?</h2>
+            
+            <div class="content-block">
+                <h3>The Standard Advice</h3>
+                <p><strong>3-6 months of expenses</strong> is the classic recommendation.</p>
+                <p>But that's intimidating. If your expenses are $3,000/month, that's $9,000-$18,000. Most people give up before they start.</p>
+            </div>
+
+            <div class="content-block">
+                <h3>The Better Way to Think About It</h3>
+                <p><strong>Stage 1: $1,000</strong> - Covers most minor emergencies (car repair, ER visit, appliance breaks)</p>
+                <p><strong>Stage 2: 1 month of expenses</strong> - Covers rent/mortgage + bills if income drops</p>
+                <p><strong>Stage 3: 3 months of expenses</strong> - Gives you breathing room to find a new job</p>
+                <p><strong>Stage 4: 6+ months of expenses</strong> - True peace of mind</p>
+                <p>Start with $1,000. Then build from there. Progress beats perfection.</p>
+            </div>
+
+            <div class="calculator">
+                <h3 style="font-size: var(--font-size-2xl); color: var(--fsa-green); margin-bottom: 1.5rem; text-align: center;">Emergency Fund Calculator</h3>
+                
+                <div class="form-group">
+                    <label class="form-label" for="monthly-expenses">Total Monthly Expenses</label>
+                    <input type="number" id="monthly-expenses" class="form-input" placeholder="e.g., 3000" min="0" step="100">
+                    <span class="form-help">Rent + bills + food + everything you spend each month</span>
+                </div>
+
+                <button class="btn btn-primary" onclick="calculateEmergencyFund()">Calculate My Target</button>
+
+                <div class="calculator-results hidden" id="calculator-results">
+                    <div class="result-box">
+                        <div class="result-label">Stage 1</div>
+                        <div class="result-value" id="stage1">$1,000</div>
+                        <div class="result-desc">Minor emergencies</div>
+                    </div>
+                    <div class="result-box">
+                        <div class="result-label">Stage 2</div>
+                        <div class="result-value" id="stage2">$0</div>
+                        <div class="result-desc">1 month covered</div>
+                    </div>
+                    <div class="result-box">
+                        <div class="result-label">Stage 3</div>
+                        <div class="result-value" id="stage3">$0</div>
+                        <div class="result-desc">3 months covered</div>
+                    </div>
+                    <div class="result-box">
+                        <div class="result-label">Stage 4</div>
+                        <div class="result-value" id="stage4">$0</div>
+                        <div class="result-desc">6 months covered</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Where to Keep It -->
+        <section class="section">
+            <h2 class="section-title">Where to Keep Your Emergency Fund</h2>
+            
+            <div class="content-block">
+                <h3>Three Requirements</h3>
+                <ol>
+                    <li><strong>Liquid</strong> - You can access it within 24-48 hours</li>
+                    <li><strong>Safe</strong> - FDIC insured or equivalent (not stocks, not crypto)</li>
+                    <li><strong>Separate</strong> - Not in your checking account where you'll spend it</li>
+                </ol>
+            </div>
+
+            <div class="content-block">
+                <h3>Best Options</h3>
+                <p><strong>1. High-Yield Savings Account (HYSA)</strong></p>
+                <p>Online banks like Marcus, Ally, or Discover offer 4-5% interest. FDIC insured. Easy to transfer to checking when needed.</p>
+                
+                <p><strong>2. Money Market Account</strong></p>
+                <p>Similar to HYSA but might include check-writing. Slightly more flexible.</p>
+                
+                <p><strong>Bad Options:</strong></p>
+                <ul>
+                    <li>Your checking account (too easy to spend)</li>
+                    <li>Stocks (can drop 30% right when you need it)</li>
+                    <li>Crypto (even more volatile)</li>
+                    <li>Under your mattress (loses value to inflation)</li>
+                </ul>
+            </div>
+
+            <div class="content-block">
+                <h3>What About Inflation?</h3>
+                <p>Yes, savings accounts lose purchasing power to inflation (~3-4% per year).</p>
+                <p>But that's the <strong>cost of insurance</strong>. Your emergency fund isn't an investment. It's protection.</p>
+                <p>Once you hit 6 months of expenses, <em>then</em> you can explore other options like I-Bonds, gold, or Bitcoin for additional savings. But not before.</p>
+            </div>
+        </section>
+
+        <!-- Section 4: Interactive Scenario -->
+        <section class="section">
+            <h2 class="section-title">Scenario: The Unexpected Repair</h2>
+            
+            <div class="scenario" id="scenario-container">
+                <div id="scenario-intro">
+                    <p class="scenario-text">
+                        <strong>It's Tuesday morning.</strong> You're driving to work when you hear a horrible grinding noise. Pull over. Check the engine. Smoke.
+                    </p>
+                    <p class="scenario-text">
+                        Tow to the mechanic. Bad news: transmission is shot.
+                    </p>
+                    <div class="dialogue">
+                        <span class="dialogue-speaker">Mechanic:</span>
+                        "Transmission rebuild is $2,500. Or we can source a used one for $1,800 plus labor. Either way, you're looking at about $2,200 minimum."
+                    </div>
+                    <p class="scenario-text">
+                        You check your accounts:
+                    </p>
+                    <ul style="margin-left: 2rem; color: var(--fsa-text-primary);">
+                        <li>Checking account: $450</li>
+                        <li>Credit card available: $3,000 (18.9% APR)</li>
+                        <li>Emergency fund: ???</li>
+                    </ul>
+                    <p class="scenario-text">
+                        <strong>What's your situation?</strong>
+                    </p>
+
+                    <div class="scenario-choices">
+                        <button class="scenario-choice" onclick="showOutcome('no-fund')">
+                            <div class="choice-title">No Emergency Fund ($0 saved)</div>
+                            <div class="choice-desc">Never got around to it. "I'll start next month..."</div>
+                        </button>
+                        <button class="scenario-choice" onclick="showOutcome('some-fund')">
+                            <div class="choice-title">Baby Emergency Fund ($1,000 saved)</div>
+                            <div class="choice-desc">Started saving a few months ago. Made it to Stage 1.</div>
+                        </button>
+                        <button class="scenario-choice" onclick="showOutcome('full-fund')">
+                            <div class="choice-title">Full Emergency Fund ($9,000 saved)</div>
+                            <div class="choice-desc">3 months of expenses saved. Took 18 months but you did it.</div>
+                        </button>
+                    </div>
+                </div>
+
+                <div id="outcome-no-fund" class="outcome failure hidden">
+                    <h3 class="outcome-title">Outcome: The Debt Spiral</h3>
+                    <p><strong>Day 1:</strong> Put $2,200 on credit card. "I'll pay it off quickly," you think.</p>
+                    <p><strong>Month 1:</strong> Minimum payment: $66. Interest charges: $35. You pay $100. Balance: $2,135.</p>
+                    <p><strong>Month 6:</strong> Made $600 in payments, but balance is still $1,820 due to 18.9% interest.</p>
+                    <p><strong>Month 12:</strong> Still owe $1,460. You've paid $1,200 total—$540 went to interest alone.</p>
+                    <p><strong>Total cost to pay off:</strong> $2,850 over 32 months.</p>
+                    <div class="dialogue">
+                        <span class="dialogue-speaker">The Real Cost:</span>
+                        A $2,200 repair became a $2,850 debt that stressed you out for 3 years.
+                    </div>
+                    <p><strong>Lesson:</strong> No emergency fund means paying hundreds in interest and years of stress.</p>
+                    <button class="btn btn-secondary" onclick="resetScenario()">Try Again</button>
+                </div>
+
+                <div id="outcome-some-fund" class="outcome failure hidden">
+                    <h3 class="outcome-title">Outcome: Better, But Not There Yet</h3>
+                    <p><strong>You have $1,000 saved.</strong> Use it all for the repair.</p>
+                    <p>Still need $1,200 more. Put it on the credit card.</p>
+                    <p><strong>Month 6:</strong> Paid off the $1,200 credit card. Cost you $1,320 total (paid $120 in interest).</p>
+                    <p><strong>Emergency fund balance:</strong> Back to $0. Starting over.</p>
+                    <div class="dialogue">
+                        <span class="dialogue-speaker">What Happened:</span>
+                        Your $1,000 helped, but it wasn't enough. You still went into debt and wiped out your emergency fund.
+                    </div>
+                    <p><strong>Lesson:</strong> Stage 1 ($1,000) is a start, but life costs more. Keep building to Stage 3 (3 months).</p>
+                    <button class="btn btn-secondary" onclick="resetScenario()">Try Again</button>
+                </div>
+
+                <div id="outcome-full-fund" class="outcome success hidden">
+                    <h3 class="outcome-title">Outcome: This is What Insurance Feels Like</h3>
+                    <p><strong>Day 1:</strong> Transfer $2,200 from emergency fund to checking. Pay the mechanic in full.</p>
+                    <p><strong>Stress level:</strong> Zero. Annoying? Yes. Financial disaster? No.</p>
+                    <p><strong>Emergency fund balance:</strong> $6,800 remaining (still have 2+ months covered).</p>
+                    <p><strong>Total cost:</strong> $2,200. No interest. No debt. No sleepless nights.</p>
+                    <p><strong>Next 4 months:</strong> Rebuild the $2,200 by saving $550/month. Back to full 3-month fund.</p>
+                    <div class="dialogue">
+                        <span class="dialogue-speaker">How It Feels:</span>
+                        "That sucked, but it didn't wreck me. I handled it. This is why I saved."
+                    </div>
+                    <p><strong>Lesson:</strong> A fully funded emergency fund turns disasters into inconveniences.</p>
+                    <button class="btn btn-secondary" onclick="resetScenario()">Try Again</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: How to Build It -->
+        <section class="section">
+            <h2 class="section-title">How to Actually Build Your Emergency Fund</h2>
+            
+            <div class="content-block">
+                <h3>Step 1: Automate It</h3>
+                <p>Set up automatic transfer on payday. Even $50/month. You won't miss it after 2 weeks.</p>
+                <p>Saving $50/month = $600/year. Saving $200/month = $2,400/year.</p>
+            </div>
+
+            <div class="content-block">
+                <h3>Step 2: Find the Money</h3>
+                <p>Before you say "I can't afford it," try this:</p>
+                <ul>
+                    <li>Cancel 2 subscriptions you forgot about: $20/month</li>
+                    <li>Cook 2 more dinners per week instead of takeout: $60/month</li>
+                    <li>Make coffee at home 3 days a week: $15/month</li>
+                    <li>Skip one weekend out per month: $50/month</li>
+                </ul>
+                <p><strong>Total: $145/month</strong> without changing your life dramatically.</p>
+            </div>
+
+            <div class="content-block">
+                <h3>Step 3: Use Windfalls</h3>
+                <p>Got a tax refund? Bonus? Birthday money? Put 50-100% straight into emergency fund.</p>
+                <p>A $1,000 tax refund gets you to Stage 1 immediately.</p>
+            </div>
+
+            <div class="content-block">
+                <h3>Step 4: Don't Touch It (Unless It's an Emergency)</h3>
+                <p><strong>Real emergency:</strong> Car broke, lost job, medical bill, home repair you can't delay</p>
+                <p><strong>Not an emergency:</strong> Sale on shoes, vacation, new phone</p>
+                <p>If you're tempted to raid it, ask: "Would I borrow money for this?" If not, it's not an emergency.</p>
+            </div>
+        </section>
+
+        <!-- Section 6: Comprehension Quiz -->
+        <section class="section">
+            <h2 class="section-title">Check Your Understanding</h2>
+            
+            <div class="quiz">
+                <div class="quiz-question">1. What's the first target for an emergency fund?</div>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="checkAnswer(1, 'a', false)">A) 6 months of expenses</button>
+                    <button class="quiz-option" onclick="checkAnswer(1, 'b', true)">B) $1,000</button>
+                    <button class="quiz-option" onclick="checkAnswer(1, 'c', false)">C) $10,000</button>
+                </div>
+                <div class="quiz-feedback hidden" id="feedback-1"></div>
+            </div>
+
+            <div class="quiz">
+                <div class="quiz-question">2. Where should you keep your emergency fund?</div>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="checkAnswer(2, 'a', false)">A) Stock market for better returns</button>
+                    <button class="quiz-option" onclick="checkAnswer(2, 'b', true)">B) High-yield savings account (liquid and safe)</button>
+                    <button class="quiz-option" onclick="checkAnswer(2, 'c', false)">C) Checking account</button>
+                </div>
+                <div class="quiz-feedback hidden" id="feedback-2"></div>
+            </div>
+
+            <div class="quiz">
+                <div class="quiz-question">3. Why is losing purchasing power to inflation acceptable for an emergency fund?</div>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="checkAnswer(3, 'a', false)">A) It's not acceptable, should invest it</button>
+                    <button class="quiz-option" onclick="checkAnswer(3, 'b', true)">B) It's the cost of insurance—safety is worth it</button>
+                    <button class="quiz-option" onclick="checkAnswer(3, 'c', false)">C) High-yield savings beats inflation</button>
+                </div>
+                <div class="quiz-feedback hidden" id="feedback-3"></div>
+            </div>
+        </section>
+
+        <!-- Module Complete -->
+        <section class="section">
+            <div class="card" style="text-align: center;">
+                <h3 class="card-title">Module 2 Complete! 🎉</h3>
+                <p class="card-description">You understand emergency funds and how to build financial resilience.</p>
+                <div style="margin-top: 2rem;">
+                    <button class="btn btn-primary" onclick="completeModule()">Mark Complete & Continue to Module 3</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="../js/module-progress.js"></script>
+    <script src="../js/progress-manager.js"></script>
+    <script>
+        const progressManager = new FSAProgressManager();
+        progressManager.init();
+        progressManager.setModuleVisited(2);
+
+        function calculateEmergencyFund() {
+            const expenses = parseFloat(document.getElementById('monthly-expenses').value) || 0;
+
+            if (expenses === 0) {
+                alert('Please enter your monthly expenses');
+                return;
+            }
+
+            const results = document.getElementById('calculator-results');
+            results.classList.remove('hidden');
+
+            document.getElementById('stage1').textContent = '$1,000';
+            document.getElementById('stage2').textContent = `$${expenses.toLocaleString()}`;
+            document.getElementById('stage3').textContent = `$${(expenses * 3).toLocaleString()}`;
+            document.getElementById('stage4').textContent = `$${(expenses * 6).toLocaleString()}`;
+        }
+
+        function showOutcome(choice) {
+            document.getElementById('scenario-intro').classList.add('hidden');
+            document.getElementById('outcome-no-fund').classList.add('hidden');
+            document.getElementById('outcome-some-fund').classList.add('hidden');
+            document.getElementById('outcome-full-fund').classList.add('hidden');
+
+            document.getElementById(`outcome-${choice}`).classList.remove('hidden');
+        }
+
+        function resetScenario() {
+            document.getElementById('scenario-intro').classList.remove('hidden');
+            document.getElementById('outcome-no-fund').classList.add('hidden');
+            document.getElementById('outcome-some-fund').classList.add('hidden');
+            document.getElementById('outcome-full-fund').classList.add('hidden');
+        }
+
+        function checkAnswer(questionNum, answer, isCorrect) {
+            const feedback = document.getElementById(`feedback-${questionNum}`);
+            const options = feedback.parentElement.querySelectorAll('.quiz-option');
+            
+            options.forEach(opt => opt.style.pointerEvents = 'none');
+            event.target.classList.add(isCorrect ? 'correct' : 'incorrect');
+            
+            feedback.classList.remove('hidden');
+            feedback.classList.add(isCorrect ? 'correct' : 'incorrect');
+            
+            if (isCorrect) {
+                feedback.textContent = '✓ Correct! Great job.';
+            } else {
+                feedback.textContent = '✗ Not quite. Review the content above.';
+                setTimeout(() => {
+                    options.forEach(opt => opt.style.pointerEvents = 'auto');
+                    event.target.classList.remove('incorrect');
+                    feedback.classList.add('hidden');
+                }, 2000);
+            }
+        }
+
+        function completeModule() {
+            progressManager.setModuleComplete(2, { timeSpent: 0, score: 100 });
+            alert('Module 2 complete! Moving on to Module 3: Banking Without Getting Robbed.');
+            window.location.href = '../index.html';
+        }
+    </script>
+</body>
+</html>
