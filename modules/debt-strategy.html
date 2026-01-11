@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 5: Debt Strategy | Financially Sovereign Academy</title>
+    <meta name="description" content="Learn smart debt payoff strategies. Avalanche vs snowball method calculator and when to pay off vs invest.">
+    <link rel="stylesheet" href="../css/fsa-theme.css">
+    <link rel="stylesheet" href="../css/interactive-components.css">
+    <style>
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .module-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: var(--fsa-gradient-card);
+            border: 3px solid var(--fsa-green);
+            border-radius: var(--radius-xl);
+        }
+
+        .module-header h1 {
+            font-size: var(--font-size-4xl);
+            color: var(--fsa-green);
+            margin-bottom: 1rem;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: var(--font-size-3xl);
+            color: var(--fsa-green);
+            margin-bottom: 1.5rem;
+            border-bottom: 3px solid var(--fsa-border-medium);
+            padding-bottom: 0.5rem;
+        }
+
+        .content-block {
+            background: var(--fsa-bg-card);
+            border: 2px solid var(--fsa-border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .content-block h3 {
+            color: var(--fsa-green-light);
+            font-size: var(--font-size-xl);
+            margin-bottom: 1rem;
+        }
+
+        .calculator {
+            background: var(--fsa-bg-secondary);
+            border: 2px solid var(--fsa-border-medium);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .debt-inputs {
+            background: var(--fsa-bg-dark);
+            border: 2px solid var(--fsa-border-medium);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .debt-input-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr auto;
+            gap: 0.5rem;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .comparison-result {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .method-card {
+            background: var(--fsa-bg-dark);
+            border: 2px solid var(--fsa-border-medium);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+        }
+
+        .method-name {
+            font-size: var(--font-size-xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--fsa-green);
+            margin-bottom: 1rem;
+        }
+
+        .method-stat {
+            margin: 0.75rem 0;
+        }
+
+        .method-label {
+            font-size: var(--font-size-sm);
+            color: var(--fsa-text-dim);
+        }
+
+        .method-value {
+            font-size: var(--font-size-2xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--fsa-text-primary);
+            font-family: var(--font-family-mono);
+        }
+
+        .winner {
+            border-color: var(--fsa-green);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .quiz {
+            background: var(--fsa-bg-card);
+            border: 2px solid var(--fsa-border-medium);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .quiz-question {
+            font-size: var(--font-size-xl);
+            color: var(--fsa-green);
+            margin-bottom: 1.5rem;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .quiz-option {
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid var(--fsa-border-medium);
+            border-radius: var(--radius-md);
+            padding: 1rem;
+            cursor: pointer;
+            transition: all var(--transition-base);
+        }
+
+        .quiz-option:hover {
+            border-color: var(--fsa-green);
+        }
+
+        .quiz-option.correct {
+            background: rgba(16, 185, 129, 0.2);
+            border-color: var(--fsa-success);
+        }
+
+        .quiz-option.incorrect {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: var(--fsa-error);
+        }
+
+        .quiz-feedback {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: var(--radius-md);
+        }
+
+        .quiz-feedback.correct {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--fsa-success);
+        }
+
+        .quiz-feedback.incorrect {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--fsa-error);
+        }
+
+        @media (max-width: 768px) {
+            .comparison-result {
+                grid-template-columns: 1fr;
+            }
+            .debt-input-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="module-header">
+            <h1>Module 5: Debt Strategy</h1>
+            <p class="subtitle">Smart strategies to eliminate debt and build wealth</p>
+        </div>
+
+        <section class="section">
+            <h2 class="section-title">Good Debt vs Bad Debt</h2>
+            
+            <div class="content-block">
+                <h3>The Truth: Most Debt is Bad Debt</h3>
+                <p>Financial gurus love to talk about "good debt" and "bad debt."</p>
+                <p>Here's the simple version:</p>
+                <p><strong>Bad Debt:</strong> Borrowed money for things that lose value or don't generate income</p>
+                <ul>
+                    <li>Credit cards (18-25% interest)</li>
+                    <li>Car loans on depreciating vehicles</li>
+                    <li>Personal loans for vacations or stuff</li>
+                    <li>Payday loans (300%+ interest - never, ever use these)</li>
+                </ul>
+                
+                <p><strong>Maybe-OK Debt:</strong> Low interest, for assets that may appreciate</p>
+                <ul>
+                    <li>Mortgage (3-7% interest, house might appreciate)</li>
+                    <li>Student loans (if degree = higher income)</li>
+                    <li>Business loans (if business is profitable)</li>
+                </ul>
+            </div>
+
+            <div class="content-block">
+                <h3>The Interest Rate Test</h3>
+                <p><strong>Above 10% interest:</strong> Pay it off aggressively. This is expensive.</p>
+                <p><strong>7-10% interest:</strong> Pay it off steadily while building savings.</p>
+                <p><strong>Below 5% interest:</strong> Minimum payments while investing extra might make sense.</p>
+                <p><strong>Below 3% interest:</strong> Minimum payments. Inflation is eroding this debt.</p>
+            </div>
+
+            <div class="highlight highlight-tip">
+                <strong>💡 Key Insight:</strong> The psychological benefit of being debt-free often outweighs mathematical optimization. Peace of mind is valuable.
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Debt Payoff Methods: Avalanche vs Snowball</h2>
+            
+            <div class="content-block">
+                <h3>Debt Avalanche (Math Winner)</h3>
+                <p><strong>Strategy:</strong> Pay off highest interest rate debt first</p>
+                <p><strong>Why:</strong> Saves the most money on interest</p>
+                <p><strong>Best for:</strong> People motivated by numbers and optimization</p>
+                <p><strong>Example:</strong></p>
+                <ul>
+                    <li>Credit Card A: $5,000 at 22% → Pay this first</li>
+                    <li>Credit Card B: $3,000 at 18%</li>
+                    <li>Car Loan: $10,000 at 5% → Pay this last</li>
+                </ul>
+            </div>
+
+            <div class="content-block">
+                <h3>Debt Snowball (Psychology Winner)</h3>
+                <p><strong>Strategy:</strong> Pay off smallest balance first</p>
+                <p><strong>Why:</strong> Quick wins build momentum and motivation</p>
+                <p><strong>Best for:</strong> People who need psychological wins to stay motivated</p>
+                <p><strong>Example:</strong></p>
+                <ul>
+                    <li>Credit Card B: $3,000 at 18% → Pay this first (smallest balance)</li>
+                    <li>Credit Card A: $5,000 at 22%</li>
+                    <li>Car Loan: $10,000 at 5% → Pay this last</li>
+                </ul>
+            </div>
+
+            <div class="content-block">
+                <h3>Which One Should You Use?</h3>
+                <p><strong>Use Avalanche if:</strong> You're disciplined, motivated by saving money, and can stay focused on a 3+ year payoff plan</p>
+                <p><strong>Use Snowball if:</strong> You need quick wins to stay motivated, have struggled with debt before, or feel overwhelmed</p>
+                <p><strong>The real answer:</strong> The best method is the one you'll actually stick to. Snowball costs more in interest but has higher completion rates.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Debt Payoff Calculator</h2>
+            
+            <div class="calculator">
+                <h3 style="font-size: var(--font-size-2xl); color: var(--fsa-green); margin-bottom: 1.5rem; text-align: center;">Compare Avalanche vs Snowball</h3>
+                
+                <p style="text-align: center; color: var(--fsa-text-secondary); margin-bottom: 1.5rem;">Enter your debts below (simplified example with 3 debts)</p>
+
+                <div class="debt-inputs">
+                    <div class="debt-input-row">
+                        <input type="text" class="form-input" id="debt1-name" placeholder="Debt 1 Name" value="Credit Card A">
+                        <input type="number" class="form-input" id="debt1-balance" placeholder="Balance" value="5000">
+                        <input type="number" class="form-input" id="debt1-rate" placeholder="Rate %" value="22">
+                    </div>
+                    <div class="debt-input-row">
+                        <input type="text" class="form-input" id="debt2-name" placeholder="Debt 2 Name" value="Credit Card B">
+                        <input type="number" class="form-input" id="debt2-balance" placeholder="Balance" value="3000">
+                        <input type="number" class="form-input" id="debt2-rate" placeholder="Rate %" value="18">
+                    </div>
+                    <div class="debt-input-row">
+                        <input type="text" class="form-input" id="debt3-name" placeholder="Debt 3 Name" value="Car Loan">
+                        <input type="number" class="form-input" id="debt3-balance" placeholder="Balance" value="10000">
+                        <input type="number" class="form-input" id="debt3-rate" placeholder="Rate %" value="5">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="monthly-payment">Total Monthly Payment (beyond minimums)</label>
+                    <input type="number" id="monthly-payment" class="form-input" placeholder="e.g., 500" value="500">
+                    <span class="form-help">How much can you put toward debt each month?</span>
+                </div>
+
+                <button class="btn btn-primary" onclick="compareStrategies()">Compare Strategies</button>
+
+                <div class="comparison-result hidden" id="comparison-result">
+                    <div class="method-card" id="avalanche-card">
+                        <div class="method-name">🏔️ Avalanche (Highest Interest First)</div>
+                        <div class="method-stat">
+                            <div class="method-label">Time to Debt Freedom</div>
+                            <div class="method-value" id="avalanche-months">--</div>
+                        </div>
+                        <div class="method-stat">
+                            <div class="method-label">Total Interest Paid</div>
+                            <div class="method-value" id="avalanche-interest">$--</div>
+                        </div>
+                    </div>
+
+                    <div class="method-card" id="snowball-card">
+                        <div class="method-name">⚪ Snowball (Smallest Balance First)</div>
+                        <div class="method-stat">
+                            <div class="method-label">Time to Debt Freedom</div>
+                            <div class="method-value" id="snowball-months">--</div>
+                        </div>
+                        <div class="method-stat">
+                            <div class="method-label">Total Interest Paid</div>
+                            <div class="method-value" id="snowball-interest">$--</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">When to Pay Off Debt vs Invest</h2>
+            
+            <div class="content-block">
+                <h3>The Decision Framework</h3>
+                <p><strong>Always pay off first:</strong></p>
+                <ul>
+                    <li>Payday loans (300%+ interest)</li>
+                    <li>Credit cards (18-25% interest)</li>
+                    <li>High-interest personal loans (10%+ interest)</li>
+                </ul>
+                <p>No investment consistently beats 18-25% returns. Pay these off aggressively.</p>
+            </div>
+
+            <div class="content-block">
+                <h3>The Gray Zone (5-10% Interest)</h3>
+                <p>Here's where it gets nuanced. Consider:</p>
+                <ul>
+                    <li><strong>Math says:</strong> If you can earn 10% in index funds and your debt is 7%, invest the difference</li>
+                    <li><strong>Reality says:</strong> Stock market isn't guaranteed. Debt payoff is a guaranteed "return"</li>
+                    <li><strong>Compromise:</strong> Split 50/50 - pay extra on debt while building investments</li>
+                </ul>
+            </div>
+
+            <div class="content-block">
+                <h3>Low Interest Debt (Under 5%)</h3>
+                <p>Examples: Some mortgages, federal student loans, 0% promotional financing</p>
+                <p><strong>Strategy:</strong> Make minimum payments, invest the rest</p>
+                <p><strong>Why:</strong> Inflation erodes this debt. 3% debt during 4% inflation means you're making money by having debt.</p>
+                <p><strong>Caveat:</strong> Only if you actually invest the difference. If you'll spend it, pay off the debt.</p>
+            </div>
+
+            <div class="content-block">
+                <h3>The Priority Order</h3>
+                <ol>
+                    <li>Build $1,000 emergency fund</li>
+                    <li>Get employer 401(k) match (free money)</li>
+                    <li>Pay off high-interest debt (>10%)</li>
+                    <li>Build 3-6 month emergency fund</li>
+                    <li>Pay off medium-interest debt (5-10%) or invest (your choice)</li>
+                    <li>Invest heavily while making minimums on low-interest debt (<5%)</li>
+                </ol>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Debt Consolidation: When It Helps (and When It Hurts)</h2>
+            
+            <div class="content-block">
+                <h3>What is Debt Consolidation?</h3>
+                <p>Taking out one new loan to pay off multiple debts. Goal: Lower interest rate or simpler payments.</p>
+            </div>
+
+            <div class="content-block">
+                <h3>When It Helps</h3>
+                <ul>
+                    <li>You can get a significantly lower interest rate (5%+ lower)</li>
+                    <li>You have multiple high-interest debts</li>
+                    <li>You need to simplify to one payment</li>
+                    <li>You won't rack up new debt on cleared cards</li>
+                </ul>
+                <p><strong>Good example:</strong> Consolidating $20,000 in credit card debt (22% APR) into a personal loan (10% APR)</p>
+            </div>
+
+            <div class="content-block">
+                <h3>When It Hurts</h3>
+                <ul>
+                    <li>You pay off cards then immediately use them again (now you have MORE debt)</li>
+                    <li>Consolidation loan has hidden fees that negate savings</li>
+                    <li>You extend the term so much that you pay more total interest</li>
+                    <li>You consolidate low-interest debt into high-interest debt</li>
+                </ul>
+                <p><strong>Bad example:</strong> Taking a home equity loan (risking your house) to pay off unsecured credit cards</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Check Your Understanding</h2>
+            
+            <div class="quiz">
+                <div class="quiz-question">1. Which debt payoff method saves the most money in interest?</div>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="checkAnswer(1, 'a', true)">A) Avalanche (highest interest first)</button>
+                    <button class="quiz-option" onclick="checkAnswer(1, 'b', false)">B) Snowball (smallest balance first)</button>
+                    <button class="quiz-option" onclick="checkAnswer(1, 'c', false)">C) They're the same</button>
+                </div>
+                <div class="quiz-feedback hidden" id="feedback-1"></div>
+            </div>
+
+            <div class="quiz">
+                <div class="quiz-question">2. When should you pay off debt instead of investing?</div>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="checkAnswer(2, 'a', false)">A) Always pay off debt first</button>
+                    <button class="quiz-option" onclick="checkAnswer(2, 'b', true)">B) When debt interest rate is above 10%</button>
+                    <button class="quiz-option" onclick="checkAnswer(2, 'c', false)">C) Never, always invest</button>
+                </div>
+                <div class="quiz-feedback hidden" id="feedback-2"></div>
+            </div>
+
+            <div class="quiz">
+                <div class="quiz-question">3. Why might someone choose snowball over avalanche?</div>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="checkAnswer(3, 'a', false)">A) It saves more money</button>
+                    <button class="quiz-option" onclick="checkAnswer(3, 'b', true)">B) Quick wins provide psychological motivation</button>
+                    <button class="quiz-option" onclick="checkAnswer(3, 'c', false)">C) It's faster</button>
+                </div>
+                <div class="quiz-feedback hidden" id="feedback-3"></div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="card" style="text-align: center;">
+                <h3 class="card-title">Module 5 Complete! 🎉</h3>
+                <p class="card-description">You have a smart strategy to eliminate debt and build wealth.</p>
+                <div style="margin-top: 2rem;">
+                    <button class="btn btn-primary" onclick="completeModule()">Mark Complete & Continue to Module 6</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="../js/module-progress.js"></script>
+    <script src="../js/progress-manager.js"></script>
+    <script>
+        const progressManager = new FSAProgressManager();
+        progressManager.init();
+        progressManager.setModuleVisited(5);
+
+        function compareStrategies() {
+            // Get debt data
+            const debts = [
+                {
+                    name: document.getElementById('debt1-name').value,
+                    balance: parseFloat(document.getElementById('debt1-balance').value) || 0,
+                    rate: parseFloat(document.getElementById('debt1-rate').value) || 0
+                },
+                {
+                    name: document.getElementById('debt2-name').value,
+                    balance: parseFloat(document.getElementById('debt2-balance').value) || 0,
+                    rate: parseFloat(document.getElementById('debt2-rate').value) || 0
+                },
+                {
+                    name: document.getElementById('debt3-name').value,
+                    balance: parseFloat(document.getElementById('debt3-balance').value) || 0,
+                    rate: parseFloat(document.getElementById('debt3-rate').value) || 0
+                }
+            ].filter(d => d.balance > 0);
+
+            const monthlyPayment = parseFloat(document.getElementById('monthly-payment').value) || 0;
+
+            if (debts.length === 0 || monthlyPayment === 0) {
+                alert('Please enter at least one debt and a monthly payment amount');
+                return;
+            }
+
+            // Simplified simulation (assumes minimum payment is 2% of balance or $25, whichever is higher)
+            const avalancheResult = simulateAvalanche(debts, monthlyPayment);
+            const snowballResult = simulateSnowball(debts, monthlyPayment);
+
+            // Display results
+            document.getElementById('comparison-result').classList.remove('hidden');
+            
+            document.getElementById('avalanche-months').textContent = `${avalancheResult.months} months`;
+            document.getElementById('avalanche-interest').textContent = `$${avalancheResult.interest.toLocaleString()}`;
+            
+            document.getElementById('snowball-months').textContent = `${snowballResult.months} months`;
+            document.getElementById('snowball-interest').textContent = `$${snowballResult.interest.toLocaleString()}`;
+
+            // Highlight winner
+            const avalancheCard = document.getElementById('avalanche-card');
+            const snowballCard = document.getElementById('snowball-card');
+            
+            avalancheCard.classList.remove('winner');
+            snowballCard.classList.remove('winner');
+            
+            if (avalancheResult.interest < snowballResult.interest) {
+                avalancheCard.classList.add('winner');
+            }
+        }
+
+        function simulateAvalanche(debts, payment) {
+            // Sort by interest rate (highest first)
+            debts = debts.map(d => ({...d})).sort((a, b) => b.rate - a.rate);
+            return simulatePayoff(debts, payment);
+        }
+
+        function simulateSnowball(debts, payment) {
+            // Sort by balance (smallest first)
+            debts = debts.map(d => ({...d})).sort((a, b) => a.balance - b.balance);
+            return simulatePayoff(debts, payment);
+        }
+
+        function simulatePayoff(debts, payment) {
+            let months = 0;
+            let totalInterest = 0;
+            let remainingDebts = debts.map(d => ({...d}));
+
+            while (remainingDebts.some(d => d.balance > 0) && months < 600) {
+                months++;
+                let remainingPayment = payment;
+
+                // Apply interest to all debts
+                remainingDebts.forEach(debt => {
+                    if (debt.balance > 0) {
+                        const monthlyRate = debt.rate / 100 / 12;
+                        const interest = debt.balance * monthlyRate;
+                        debt.balance += interest;
+                        totalInterest += interest;
+                    }
+                });
+
+                // Pay off debts in order
+                for (let debt of remainingDebts) {
+                    if (debt.balance > 0 && remainingPayment > 0) {
+                        const paymentAmount = Math.min(debt.balance, remainingPayment);
+                        debt.balance -= paymentAmount;
+                        remainingPayment -= paymentAmount;
+                    }
+                }
+            }
+
+            return {
+                months: months,
+                interest: Math.round(totalInterest)
+            };
+        }
+
+        function checkAnswer(questionNum, answer, isCorrect) {
+            const feedback = document.getElementById(`feedback-${questionNum}`);
+            const options = feedback.parentElement.querySelectorAll('.quiz-option');
+            
+            options.forEach(opt => opt.style.pointerEvents = 'none');
+            event.target.classList.add(isCorrect ? 'correct' : 'incorrect');
+            
+            feedback.classList.remove('hidden');
+            feedback.classList.add(isCorrect ? 'correct' : 'incorrect');
+            
+            if (isCorrect) {
+                feedback.textContent = '✓ Correct!';
+            } else {
+                feedback.textContent = '✗ Not quite. Review the content above.';
+                setTimeout(() => {
+                    options.forEach(opt => opt.style.pointerEvents = 'auto');
+                    event.target.classList.remove('incorrect');
+                    feedback.classList.add('hidden');
+                }, 2000);
+            }
+        }
+
+        function completeModule() {
+            progressManager.setModuleComplete(5, { timeSpent: 0, score: 100 });
+            alert('Module 5 complete! Halfway there! Next: Module 6 - Taxes & Paychecks.');
+            window.location.href = '../index.html';
+        }
+    </script>
+</body>
+</html>
