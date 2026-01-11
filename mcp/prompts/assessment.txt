@@ -1,0 +1,73 @@
+Create the learning path assessment for Financially Sovereign Academy:
+
+PURPOSE: Quickly determine user's situation and recommend personalized module sequence
+
+QUESTIONS (5 total):
+
+1. "What's your primary financial goal right now?"
+   - Get out of debt
+   - Build emergency fund  
+   - Start investing
+   - Understand money basics
+   - Plan for retirement
+   - Increase income
+
+2. "What's your current financial situation?"
+   - Significant debt (>$10k)
+   - Living paycheck to paycheck
+   - Small savings, no debt
+   - Comfortable, want to optimize
+   - Building wealth, need advanced strategies
+
+3. "How would you describe your financial knowledge?"
+   - Complete beginner
+   - Know basics, need structure
+   - Intermediate, have gaps
+   - Advanced, want specific topics
+
+4. "What's your biggest financial worry?"
+   - Not enough income
+   - Too much debt
+   - No emergency fund
+   - Not investing enough
+   - Getting scammed
+   - Taxes and complexity
+   - Not sure where to start
+
+5. "How much time can you dedicate weekly?"
+   - 30 minutes
+   - 1-2 hours
+   - 3-5 hours
+   - Self-paced, no rush
+
+LOGIC:
+Based on answers, recommend one of 5 personas:
+- The Debt-Burdened (prioritize Module 5, then 1, 2)
+- The Fresh Graduate (prioritize Modules 1, 6, 2)
+- The Mid-Career Earner (prioritize Modules 7, 8, 10)
+- The Pre-Retiree (prioritize Modules 10, 7, 8)
+- The Entrepreneur (prioritize Modules 1, 6, 5)
+
+OUTPUT:
+- Recommended persona name
+- Suggested module sequence
+- Reason for recommendation
+- Estimated completion time
+- CTA: "Start Module X →"
+
+DESIGN:
+- Progress indicator (Question X of 5)
+- One question per screen
+- Large, clear answer options
+- Back button to change answers
+- Friendly, conversational tone
+- Mobile-optimized
+
+TECHNICAL:
+- Standalone HTML file
+- Store results in localStorage
+- Pass persona to landing page
+- No server required
+- Accessible forms
+
+OUTPUT: Complete assessment HTML file saved as assessment.html

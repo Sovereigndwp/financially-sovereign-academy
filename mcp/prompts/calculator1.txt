@@ -1,0 +1,52 @@
+Create an interactive calculator for Financially Sovereign Academy:
+
+CALCULATOR: budget-calculator
+CONTEXT: Used in Module 1: Money Mindset & Cash Flow Mastery
+
+REQUIREMENTS:
+
+1. **Functionality**:
+   - Real-time calculations as user types
+   - Visual output (charts, graphs, or progress bars)
+   - Shareable results (URL parameters or screenshot)
+   - Mobile-friendly inputs
+   - Input validation with helpful errors
+   
+2. **User Experience**:
+   - Clear labels and tooltips
+   - Sensible defaults
+   - "Reset" and "Recalculate" buttons
+   - Example scenarios users can load
+   - Explanation of calculations (transparency)
+
+3. **Output**:
+   - Numerical results prominently displayed
+   - Visual representation (Chart.js or pure CSS)
+   - Interpretation help ("What this means for you")
+   - Next action recommendations
+   
+4. **Technical**:
+   - Standalone HTML file
+   - Vanilla JavaScript (no frameworks)
+   - Chart.js for visualizations (CDN)
+   - Mobile-responsive
+   - LocalStorage to save inputs
+   
+5. **Design**:
+   - FSA color palette (green/blue)
+   - Clean, professional calculator aesthetic
+   - Clear visual hierarchy
+   - Accessible form inputs
+
+OUTPUT: Complete calculator HTML file saved as calculators/budget-calculator.html
+
+Include these specific features based on calculator type:
+
+- Income section (monthly/annual toggle)
+- Expense categories (housing, food, transport, utilities, etc.)
+- Auto-calculate totals
+- "Surplus/Deficit" indicator
+- 50/30/20 rule comparison
+- Pie chart of spending breakdown
+- "Pay yourself first" savings recommendation
+- Export to CSV

@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Master Money. Master Life. | Financially Sovereign Academy</title>
+    <meta name="description" content="Learn the 10 financial fundamentals that change everything. Interactive, personalized, and 100% free.">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a1f1a;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+        
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+        
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, #0a4d3c 0%, #1a5f52 100%);
+            padding: 4rem 2rem;
+        }
+        
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            background: linear-gradient(135deg, #10b981, #34d399);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+        }
+        
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 2vw, 1.5rem);
+            color: #9ca3af;
+            max-width: 800px;
+            margin-bottom: 3rem;
+        }
+        
+        .cta-primary {
+            padding: 1.25rem 3rem;
+            font-size: 1.25rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 0.75rem;
+            background: linear-gradient(135deg, #10b981, #34d399);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .cta-primary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(16, 185, 129, 0.4);
+        }
+        
+        .trust-signal {
+            margin-top: 1.5rem;
+            color: #6ee7b7;
+            font-size: 0.95rem;
+        }
+        
+        /* Value Props */
+        .value-props {
+            padding: 4rem 2rem;
+            background: #0f2922;
+        }
+        
+        .props-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .prop-card {
+            background: rgba(16, 185, 129, 0.1);
+            border: 2px solid rgba(16, 185, 129, 0.2);
+            border-radius: 1rem;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .prop-icon { font-size: 3rem; margin-bottom: 1rem; }
+        .prop-title { font-size: 1.3rem; color: #10b981; margin-bottom: 0.75rem; }
+        .prop-desc { color: #9ca3af; }
+        
+        /* Modules Grid */
+        .modules-section {
+            padding: 4rem 2rem;
+            background: #0a1f1a;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            color: #10b981;
+            margin-bottom: 1rem;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            color: #9ca3af;
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+        }
+        
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .module-card {
+            background: #1a3a2e;
+            border: 2px solid rgba(16, 185, 129, 0.3);
+            border-radius: 1rem;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .module-card:hover {
+            border-color: #10b981;
+            transform: translateY(-4px);
+        }
+        
+        .module-number { color: #10b981; font-size: 0.9rem; font-weight: 600; margin-bottom: 0.5rem; }
+        .module-title { font-size: 1.4rem; color: #fff; margin-bottom: 0.5rem; }
+        .module-duration { color: #6ee7b7; font-size: 0.9rem; margin-bottom: 0.75rem; }
+        .module-desc { color: #9ca3af; }
+        
+        /* FAQ */
+        .faq-section {
+            padding: 4rem 2rem;
+            background: #0f2922;
+        }
+        
+        .faq-grid {
+            max-width: 800px;
+            margin: 3rem auto 0;
+        }
+        
+        .faq-item {
+            background: #1a3a2e;
+            border-left: 4px solid #10b981;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .faq-question { font-size: 1.2rem; color: #10b981; margin-bottom: 0.75rem; font-weight: 600; }
+        .faq-answer { color: #e0e0e0; }
+        
+        /* CTA Footer */
+        .cta-footer {
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, #0a4d3c 0%, #1a5f52 100%);
+            text-align: center;
+        }
+        
+        .cta-footer h2 {
+            font-size: 2.5rem;
+            color: #10b981;
+            margin-bottom: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .modules-grid { grid-template-columns: 1fr; }
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+            * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Take Control of Your Financial Future</h1>
+        <p class="hero-subtitle">
+            Learn what financial advisors charge 1-2% annually to know. Keep the fees. Gain the knowledge.
+        </p>
+        <a href="assessment.html" class="cta-primary">Start Learning Free →</a>
+        <p class="trust-signal">✨ No credit card. No signup required.</p>
+    </section>
+    
+    <!-- Value Props -->
+    <section class="value-props">
+        <div class="container">
+            <div class="props-grid">
+                <div class="prop-card">
+                    <div class="prop-icon">⚡</div>
+                    <div class="prop-title">Interactive, Not Lectures</div>
+                    <div class="prop-desc">20-minute modules with calculators, simulations, and real scenarios</div>
+                </div>
+                <div class="prop-card">
+                    <div class="prop-icon">🎯</div>
+                    <div class="prop-title">Personalized Learning</div>
+                    <div class="prop-desc">2-minute assessment creates your custom path</div>
+                </div>
+                <div class="prop-card">
+                    <div class="prop-icon">🛡️</div>
+                    <div class="prop-title">Honest About Trade-offs</div>
+                    <div class="prop-desc">No hidden agendas. Pros and cons of everything.</div>
+                </div>
+                <div class="prop-card">
+                    <div class="prop-icon">🧠</div>
+                    <div class="prop-title">Real Scenarios</div>
+                    <div class="prop-desc">Learn from Sarah's $3,200 budget, not abstract theory</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Modules Grid -->
+    <section class="modules-section">
+        <div class="container">
+            <h2 class="section-title">Master These 10 Fundamentals</h2>
+            <p class="section-subtitle">Everything you need to become financially sovereign</p>
+            
+            <div class="modules-grid">
+                <div class="module-card">
+                    <div class="module-number">Module 1</div>
+                    <div class="module-title">Money Mindset & Cash Flow</div>
+                    <div class="module-duration">20-30 min</div>
+                    <div class="module-desc">Understand your relationship with money and take control of your cash flow</div>
+                </div>
+                
+                <div class="module-card">
+                    <div class="module-number">Module 2</div>
+                    <div class="module-title">Emergency Funds & Saving</div>
+                    <div class="module-duration">25 min</div>
+                    <div class="module-desc">Build a financial security buffer that protects you from life's surprises</div>
+                </div>
+                
+                <div class="module-card">
+                    <div class="module-number">Module 3</div>
+                    <div class="module-title">Banking Without Getting Robbed</div>
+                    <div class="module-duration">20 min</div>
+                    <div class="module-desc">Use banks strategically and understand how the system really works</div>
+                </div>
+                
+                <div class="module-card">
+                    <div class="module-number">Module 4</div>
+                    <div class="module-title">Credit Scores Decoded</div>
+                    <div class="module-duration">25 min</div>
+                    <div class="module-desc">Build and maintain excellent credit strategically</div>
+                </div>
+                
+                <div class="module-card">
+                    <div class="module-number">Module 5</div>
+                    <div class="module-title">Debt Strategy</div>
+                    <div class="module-duration">30 min</div>
+                    <div class="module-desc">Understand the true cost of debt and when to use it strategically</div>
+                </div>
+                
+                <div class="module-card">
+                    <div class="module-number">Module 6</div>
+                    <div class="module-title">Taxes & Paychecks Demystified</div>
+                    <div class="module-duration">25 min</div>
+                    <div class="module-desc">Understand the tax system and maximize your take-home pay</div>
+                </div>
+                
+                <div class="module-card">
+                    <div class="module-number">Module 7</div>
+                    <div class="module-title">Investing for Humans</div>
+                    <div class="module-duration">35 min</div>
+                    <div class="module-desc">Build long-term wealth through compound growth</div>
+                </div>
+                
+                <div class="module-card">
+                    <div class="module-number">Module 8</div>
+                    <div class="module-title">Protect What You've Built</div>
+                    <div class="module-duration">25 min</div>
+                    <div class="module-desc">Risk management and insurance without over-insuring</div>
+                </div>
+                
+                <div class="module-card">
+                    <div class="module-number">Module 9</div>
+                    <div class="module-title">Don't Get Scammed</div>
+                    <div class="module-duration">20 min</div>
+                    <div class="module-desc">Make smart decisions and avoid predatory practices</div>
+                </div>
+                
+                <div class="module-card">
+                    <div class="module-number">Module 10</div>
+                    <div class="module-title">Your Financial Master Plan</div>
+                    <div class="module-duration">30 min</div>
+                    <div class="module-desc">Integrate everything into a coherent life plan</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <div class="faq-question">Is this really free?</div>
+                    <div class="faq-answer">Yes. All 10 core modules are 100% free forever. No credit card required.</div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">Do I need financial background?</div>
+                    <div class="faq-answer">No. Designed for complete beginners. We explain everything in plain English.</div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">How long does it take?</div>
+                    <div class="faq-answer">Most complete all 10 modules in 4-6 hours over 2-3 weeks. Go at your own pace.</div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">Is this about Bitcoin?</div>
+                    <div class="faq-answer">No. This is universal financial literacy. Bitcoin is mentioned as one tool among many where relevant. Check out Bitcoin Sovereign Academy if you want Bitcoin-specific learning.</div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">What's the catch?</div>
+                    <div class="faq-answer">No catch. Financial literacy should be accessible to everyone. We believe in empowering people with knowledge.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Footer -->
+    <section class="cta-footer">
+        <div class="container">
+            <h2>Ready to Become Financially Sovereign?</h2>
+            <a href="assessment.html" class="cta-primary">Start Your Journey →</a>
+        </div>
+    </section>
+</body>
+</html>

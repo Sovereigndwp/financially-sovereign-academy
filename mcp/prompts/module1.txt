@@ -1,0 +1,56 @@
+Create a complete interactive HTML module for Financially Sovereign Academy:
+
+MODULE: Money Mindset & Cash Flow Mastery
+DURATION: 20-30 min
+GOAL: Understand your relationship with money and take control of your cash flow
+
+TOPICS TO COVER:
+1. money story
+2. income vs expenses
+3. budgeting
+4. pay yourself first
+
+REQUIREMENTS:
+
+1. **Structure**:
+   - Hero section with module icon and overview
+   - Entry assessment (3 questions to gauge existing knowledge)
+   - Core content sections (one per topic)
+   - Interactive calculator integration points
+   - 3 real-world scenarios (Sarah's $3,200/month budget, Irregular gig income, Cutting $500/month painlessly)
+   - Comprehension quiz (7 questions, scenario-based)
+   - Action plan (3 concrete next steps)
+   
+2. **Writing Style**:
+   - 10th grade reading level (Flesch-Kincaid)
+   - Conversational but authoritative
+   - Zero jargon (or explain immediately)
+   - Short paragraphs (3-4 sentences max)
+   - Concrete examples, not abstract theory
+   - Honest about complexity and trade-offs
+
+3. **Bitcoin Integration** (subtle):
+   Very brief mention (1 sentence max). Example: "Some people budget in Bitcoin to avoid inflation." Do not elaborate.
+
+4. **Interactive Elements**:
+   - Placeholder divs for calculators: budget-calculator, cash-flow-simulator
+   - Expandable scenario cards
+   - Progress indicators
+   - Knowledge check buttons
+   - Next module CTA
+
+5. **Design**:
+   - Use FSA design tokens (green/blue palette, not orange)
+   - Mobile-first responsive
+   - Accessible (WCAG AA)
+   - Clean, professional financial literacy aesthetic
+   - Visual hierarchy with clear headings
+
+6. **Technical**:
+   - Standalone HTML file
+   - Inline CSS (using design tokens)
+   - Vanilla JavaScript for interactions
+   - LocalStorage for progress tracking
+   - No external dependencies
+
+OUTPUT: Complete, production-ready HTML file that can be saved as modules/money-mindset-cash-flow.html

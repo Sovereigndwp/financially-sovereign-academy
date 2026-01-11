@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Your Path | Financially Sovereign Academy</title>
+    <meta name="description" content="Get your personalized financial literacy path in 2 minutes. No signup required.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0a4d3c 0%, #1a5f52 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #10b981, #34d399);
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+
+        /* Question Card */
+        .question-card {
+            background: #1a3a2e;
+            border: 2px solid rgba(16, 185, 129, 0.3);
+            border-radius: 1rem;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            animation: fadeIn 0.6s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .question-number {
+            color: #10b981;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .question-title {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .question-subtitle {
+            color: #9ca3af;
+            margin-bottom: 2rem;
+            font-size: 1rem;
+        }
+
+        /* Option Cards */
+        .options-grid {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .option-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .option-card:hover {
+            border-color: #10b981;
+            background: rgba(16, 185, 129, 0.1);
+            transform: translateX(8px);
+        }
+
+        .option-card.selected {
+            border-color: #10b981;
+            background: rgba(16, 185, 129, 0.15);
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+        }
+
+        .option-emoji {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .option-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        .option-desc {
+            color: #9ca3af;
+            font-size: 0.95rem;
+        }
+
+        /* Navigation Buttons */
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex: 1;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: #e0e0e0;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #10b981, #34d399);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Results Screen */
+        .results-screen {
+            display: none;
+            text-align: center;
+            animation: fadeIn 0.6s ease;
+        }
+
+        .results-icon {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+        }
+
+        .results-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #10b981, #34d399);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .results-subtitle {
+            font-size: 1.2rem;
+            color: #9ca3af;
+            margin-bottom: 2rem;
+        }
+
+        .persona-card {
+            background: #1a3a2e;
+            border: 2px solid #10b981;
+            border-radius: 1rem;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .persona-name {
+            font-size: 1.8rem;
+            color: #10b981;
+            margin-bottom: 1rem;
+        }
+
+        .persona-desc {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #e0e0e0;
+            margin-bottom: 1.5rem;
+        }
+
+        .module-sequence {
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .module-sequence h4 {
+            color: #10b981;
+            margin-bottom: 1rem;
+        }
+
+        .module-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .module-list li {
+            padding: 0.5rem 0;
+            color: #e0e0e0;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .module-list li::before {
+            content: '→';
+            color: #10b981;
+            font-weight: bold;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Progress Bar -->
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+        </div>
+
+        <!-- Question Screens (dynamically populated) -->
+        <div id="questionContainer"></div>
+
+        <!-- Results Screen -->
+        <div class="results-screen" id="resultsScreen">
+            <div class="results-icon">🎯</div>
+            <h1 class="results-title" id="resultsTitle">Your Path Awaits!</h1>
+            <p class="results-subtitle">Based on your answers, we recommend:</p>
+            
+            <div class="persona-card">
+                <div class="persona-name" id="personaName"></div>
+                <div class="persona-desc" id="personaDesc"></div>
+                
+                <div class="module-sequence">
+                    <h4>Your Learning Sequence</h4>
+                    <ul class="module-list" id="moduleList"></ul>
+                </div>
+            </div>
+
+            <div class="nav-buttons">
+                <button class="btn btn-secondary" onclick="window.location.href='/'">
+                    Explore All Modules
+                </button>
+                <button class="btn btn-primary" onclick="startPath()">
+                    Start My Path →
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Assessment Questions (Socratic method from BSA)
+        const questions = [
+            {
+                id: 'goal',
+                number: 'Question 1 of 5',
+                title: 'What\'s your primary financial goal right now?',
+                subtitle: 'Be honest - there\'s no wrong answer',
+                options: [
+                    { value: 'debt', emoji: '💳', title: 'Get out of debt', desc: 'I have credit card or loan debt I want to eliminate' },
+                    { value: 'emergency', emoji: '🛡️', title: 'Build emergency fund', desc: 'I need a financial safety buffer' },
+                    { value: 'invest', emoji: '📈', title: 'Start investing', desc: 'I want to grow my wealth long-term' },
+                    { value: 'basics', emoji: '📚', title: 'Understand money basics', desc: 'I need to learn financial fundamentals' },
+                    { value: 'retire', emoji: '🏖️', title: 'Plan for retirement', desc: 'I\'m thinking about my financial future' },
+                    { value: 'income', emoji: '💼', title: 'Increase income', desc: 'I need to earn more money' }
+                ]
+            },
+            {
+                id: 'situation',
+                number: 'Question 2 of 5',
+                title: 'What\'s your current financial situation?',
+                subtitle: 'This helps us calibrate the content to your reality',
+                options: [
+                    { value: 'debt-heavy', emoji: '⚠️', title: 'Significant debt (>$10k)', desc: 'Dealing with substantial debt burden' },
+                    { value: 'paycheck', emoji: '📅', title: 'Living paycheck to paycheck', desc: 'Making ends meet but no savings' },
+                    { value: 'small-savings', emoji: '🌱', title: 'Small savings, no debt', desc: 'Starting to build financial cushion' },
+                    { value: 'comfortable', emoji: '✅', title: 'Comfortable, want to optimize', desc: 'Doing okay but can improve' },
+                    { value: 'wealth-building', emoji: '🚀', title: 'Building wealth actively', desc: 'Already on strong financial path' }
+                ]
+            },
+            {
+                id: 'knowledge',
+                number: 'Question 3 of 5',
+                title: 'How would you describe your financial knowledge?',
+                subtitle: 'We\'ll adjust the complexity accordingly',
+                options: [
+                    { value: 'beginner', emoji: '🌱', title: 'Complete beginner', desc: 'Never learned this stuff formally' },
+                    { value: 'basics', emoji: '📖', title: 'Know basics, need structure', desc: 'Understand some concepts, need guidance' },
+                    { value: 'intermediate', emoji: '⚡', title: 'Intermediate, have gaps', desc: 'Know quite a bit but missing pieces' },
+                    { value: 'advanced', emoji: '🎓', title: 'Advanced, want mastery', desc: 'Solid foundation, want to level up' }
+                ]
+            },
+            {
+                id: 'worry',
+                number: 'Question 4 of 5',
+                title: 'What\'s your biggest financial worry?',
+                subtitle: 'What keeps you up at night?',
+                options: [
+                    { value: 'income', emoji: '💵', title: 'Not enough income', desc: 'I don\'t earn enough money' },
+                    { value: 'debt', emoji: '📊', title: 'Too much debt', desc: 'Debt is weighing me down' },
+                    { value: 'no-buffer', emoji: '🚨', title: 'No emergency fund', desc: 'One crisis away from disaster' },
+                    { value: 'not-investing', emoji: '⏰', title: 'Not investing enough', desc: 'Time is slipping away' },
+                    { value: 'scams', emoji: '🎯', title: 'Getting scammed', desc: 'Worried about bad financial decisions' },
+                    { value: 'taxes', emoji: '📋', title: 'Taxes and complexity', desc: 'System feels overwhelming' },
+                    { value: 'confused', emoji: '🤔', title: 'Not sure where to start', desc: 'Everything feels confusing' }
+                ]
+            },
+            {
+                id: 'time',
+                number: 'Question 5 of 5',
+                title: 'How much time can you dedicate weekly?',
+                subtitle: 'We\'ll pace the content to fit your schedule',
+                options: [
+                    { value: '30min', emoji: '⏱️', title: '30 minutes', desc: 'Quick wins, bite-sized learning' },
+                    { value: '1-2hr', emoji: '⏰', title: '1-2 hours', desc: 'Steady progress, consistent growth' },
+                    { value: '3-5hr', emoji: '📚', title: '3-5 hours', desc: 'Deep dives, rapid transformation' },
+                    { value: 'self-paced', emoji: '🎯', title: 'Self-paced, no rush', desc: 'I\'ll go at my own speed' }
+                ]
+            }
+        ];
+
+        // Persona definitions
+        const personas = {
+            'debt-burdened': {
+                name: 'The Debt Eliminator',
+                desc: 'You\'re focused on breaking free from debt. We\'ll teach you proven strategies to pay down debt strategically, then build wealth.',
+                sequence: ['Module 5: Debt Strategy', 'Module 1: Cash Flow', 'Module 2: Emergency Funds', 'Module 4: Credit Scores', 'Module 7: Investing'],
+                startModule: 'modules/debt-strategy.html'
+            },
+            'fresh-grad': {
+                name: 'The Fresh Start',
+                desc: 'You\'re early in your financial journey. We\'ll build strong fundamentals from the ground up.',
+                sequence: ['Module 1: Cash Flow', 'Module 6: Taxes', 'Module 2: Emergency Funds', 'Module 3: Banking', 'Module 7: Investing'],
+                startModule: 'modules/money-mindset-cash-flow.html'
+            },
+            'mid-career': {
+                name: 'The Wealth Builder',
+                desc: 'You\'re earning well and ready to optimize. We\'ll focus on investment, protection, and long-term planning.',
+                sequence: ['Module 7: Investing', 'Module 2: Emergency Funds', 'Module 8: Insurance', 'Module 10: Master Plan', 'Module 6: Taxes'],
+                startModule: 'modules/investing-fundamentals.html'
+            },
+            'pre-retiree': {
+                name: 'The Strategic Planner',
+                desc: 'You\'re thinking long-term. We\'ll help you integrate everything into a coherent financial plan.',
+                sequence: ['Module 10: Master Plan', 'Module 7: Investing', 'Module 8: Insurance', 'Module 6: Taxes', 'Module 2: Emergency Funds'],
+                startModule: 'modules/financial-master-plan.html'
+            },
+            'entrepreneur': {
+                name: 'The Financial Sovereign',
+                desc: 'You value independence and control. We\'ll teach you to manage money like a business owner.',
+                sequence: ['Module 1: Cash Flow', 'Module 6: Taxes', 'Module 5: Debt Strategy', 'Module 2: Emergency Funds', 'Module 7: Investing'],
+                startModule: 'modules/money-mindset-cash-flow.html'
+            }
+        };
+
+        // State
+        let currentQuestion = 0;
+        let answers = {};
+
+        // Initialize
+        renderQuestion();
+
+        function renderQuestion() {
+            const q = questions[currentQuestion];
+            const container = document.getElementById('questionContainer');
+            
+            container.innerHTML = `
+                <div class="question-card">
+                    <div class="question-number">${q.number}</div>
+                    <h2 class="question-title">${q.title}</h2>
+                    <p class="question-subtitle">${q.subtitle}</p>
+                    
+                    <div class="options-grid">
+                        ${q.options.map(opt => `
+                            <div class="option-card" onclick="selectOption('${q.id}', '${opt.value}')">
+                                <div class="option-emoji">${opt.emoji}</div>
+                                <div>
+                                    <div class="option-title">${opt.title}</div>
+                                    <div class="option-desc">${opt.desc}</div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    <div class="nav-buttons">
+                        ${currentQuestion > 0 ? `
+                            <button class="btn btn-secondary" onclick="previousQuestion()">
+                                ← Back
+                            </button>
+                        ` : ''}
+                        <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()" disabled>
+                            ${currentQuestion < questions.length - 1 ? 'Next →' : 'See Results →'}
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            // Update progress bar
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+            
+            // Restore previous selection if exists
+            if (answers[q.id]) {
+                const cards = document.querySelectorAll('.option-card');
+                cards.forEach(card => {
+                    if (card.onclick.toString().includes(answers[q.id])) {
+                        card.classList.add('selected');
+                    }
+                });
+                document.getElementById('nextBtn').disabled = false;
+            }
+        }
+
+        function selectOption(questionId, value) {
+            answers[questionId] = value;
+            
+            // Visual feedback
+            document.querySelectorAll('.option-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            event.target.closest('.option-card').classList.add('selected');
+            
+            // Enable next button
+            document.getElementById('nextBtn').disabled = false;
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                renderQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function previousQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                renderQuestion();
+            }
+        }
+
+        function showResults() {
+            // Determine persona based on answers (simplified scoring logic)
+            let persona = 'fresh-grad'; // default
+            
+            if (answers.goal === 'debt' || answers.situation === 'debt-heavy' || answers.worry === 'debt') {
+                persona = 'debt-burdened';
+            } else if (answers.goal === 'invest' && (answers.situation === 'comfortable' || answers.situation === 'wealth-building')) {
+                persona = 'mid-career';
+            } else if (answers.goal === 'retire' || answers.knowledge === 'advanced') {
+                persona = 'pre-retiree';
+            } else if (answers.goal === 'income' || answers.situation === 'paycheck') {
+                persona = 'entrepreneur';
+            }
+            
+            const personaData = personas[persona];
+            
+            // Save to localStorage
+            localStorage.setItem('fsa-persona', persona);
+            localStorage.setItem('fsa-assessment-complete', 'true');
+            localStorage.setItem('fsa-answers', JSON.stringify(answers));
+            
+            // Hide questions, show results
+            document.getElementById('questionContainer').style.display = 'none';
+            document.getElementById('resultsScreen').style.display = 'block';
+            
+            // Populate results
+            document.getElementById('personaName').textContent = personaData.name;
+            document.getElementById('personaDesc').textContent = personaData.desc;
+            
+            const moduleList = document.getElementById('moduleList');
+            moduleList.innerHTML = personaData.sequence.map(m => `<li>${m}</li>`).join('');
+        }
+
+        function startPath() {
+            const persona = localStorage.getItem('fsa-persona');
+            const personaData = personas[persona];
+            window.location.href = personaData.startModule;
+        }
+    </script>
+</body>
+</html>

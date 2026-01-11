@@ -1,0 +1,78 @@
+Create the landing page for Financially Sovereign Academy:
+
+TAGLINE: "Master money. Master life."
+
+SECTIONS:
+
+1. **Hero Section**:
+   - Headline: "Take Control of Your Financial Future"
+   - Subheadline: "Learn what financial advisors charge 1-2% annually to know. Keep the fees. Gain the knowledge."
+   - Primary CTA: "Start Learning Free →" (links to assessment)
+   - Secondary CTA: "Browse Modules"
+   - Trust signal: "No credit card. No signup required to start."
+   - Visual: Abstract financial freedom illustration
+
+2. **Value Proposition**:
+   - "Learn the 10 fundamentals that change everything"
+   - "Interactive, not lectures"
+   - "Real scenarios, not theory"
+   - "Honest about trade-offs"
+   
+3. **10 Modules Grid**:
+   Display all 10 modules with:
+   - Module number and icon
+   - Title and duration
+   - One-sentence description
+   - Difficulty indicator
+   - "Start Module" button
+   - Lock icon for modules after Module 1 (unlock via progress)
+
+4. **How It Works**:
+   - Step 1: "Take 5-minute assessment" 
+   - Step 2: "Get personalized learning path"
+   - Step 3: "Complete interactive modules"
+   - Step 4: "Master your finances"
+   
+5. **Interactive Tools Showcase**:
+   Preview of calculators with screenshots/animations:
+   - Budget Calculator
+   - Debt Payoff Calculator
+   - Compound Growth Visualizer
+   - Credit Score Simulator
+   CTA: "Try the calculators →"
+
+6. **Social Proof** (placeholders for now):
+   - "Over X learners have taken control"
+   - Testimonial 1: "Finally understand money"
+   - Testimonial 2: "Paid off $15k in debt using these principles"
+   - Testimonial 3: "Built $10k emergency fund in 10 months"
+
+7. **FAQ Section**:
+   - "Is this really free?" → "Core 10 modules are 100% free. Advanced topics are premium."
+   - "Do I need financial background?" → "No. Designed for complete beginners."
+   - "How long does it take?" → "Most complete all 10 modules in 4-6 hours over 2-3 weeks."
+   - "Is this about Bitcoin?" → "No. This is universal financial literacy. Bitcoin is mentioned as one tool among many where relevant."
+   - "What's the catch?" → "No catch. Financial literacy should be accessible to everyone."
+
+8. **CTA Footer**:
+   - "Ready to become financially sovereign?"
+   - Large CTA: "Start Your Journey"
+   - Links to Module 1 and Assessment
+
+DESIGN:
+- Professional, trustworthy aesthetic
+- Green/blue color palette (not orange)
+- Clean, modern, minimalist
+- Mobile-first responsive
+- Fast loading
+- Accessible (WCAG AA)
+
+TECHNICAL:
+- Single HTML file with inline CSS
+- Smooth scroll navigation
+- Lazy load images
+- Vanilla JavaScript for interactions
+- SEO optimized (meta tags, semantic HTML)
+- Open Graph tags
+
+OUTPUT: Complete landing page HTML file saved as index.html
