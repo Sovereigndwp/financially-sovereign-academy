@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Freedom Timeline | Financially Sovereign Academy</title>
+    <meta name="description" content="Calculate when you can achieve financial freedom and retire early with interactive timeline visualization.">
+    <link rel="stylesheet" href="../css/fsa-theme.css">
+    <style>
+        body {
+            background: var(--fsa-bg-dark, #0a1f1a);
+            color: var(--fsa-text-primary, #e0e0e0);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            color: var(--fsa-green, #10b981);
+            margin-bottom: 0.5rem;
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 1024px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .input-panel {
+            background: var(--fsa-bg-card, #1a3a2e);
+            border: 2px solid var(--fsa-border-medium, #2a5a4e);
+            border-radius: 1rem;
+            padding: 2rem;
+            height: fit-content;
+            position: sticky;
+            top: 2rem;
+        }
+
+        @media (max-width: 1024px) {
+            .input-panel {
+                position: relative;
+                top: 0;
+            }
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: var(--fsa-green, #10b981);
+            margin-bottom: 0.75rem;
+            font-size: 0.95rem;
+        }
+
+        .slider {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: var(--fsa-bg-dark, #0a1f1a);
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--fsa-green, #10b981);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .slider::-webkit-slider-thumb:hover {
+            transform: scale(1.15);
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.6);
+        }
+
+        .slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--fsa-green, #10b981);
+            cursor: pointer;
+            border: none;
+        }
+
+        .value-display {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--fsa-text-primary, #e0e0e0);
+            font-family: 'Courier New', monospace;
+        }
+
+        .results-panel {
+            background: var(--fsa-bg-secondary, #0f2922);
+            border: 2px solid var(--fsa-border-medium, #2a5a4e);
+            border-radius: 1rem;
+            padding: 2rem;
+        }
+
+        .freedom-date-card {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.05));
+            border: 3px solid var(--fsa-green, #10b981);
+            border-radius: 1rem;
+            padding: 2.5rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            box-shadow: 0 0 30px rgba(16, 185, 129, 0.3);
+        }
+
+        .freedom-label {
+            font-size: 1rem;
+            color: var(--fsa-text-secondary, #9ca3af);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+
+        .freedom-date {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: var(--fsa-green, #10b981);
+            font-family: 'Courier New', monospace;
+            margin: 0.5rem 0;
+        }
+
+        .freedom-years {
+            font-size: 1.5rem;
+            color: var(--fsa-text-secondary, #9ca3af);
+            margin-top: 0.5rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid var(--fsa-border-subtle, #1a3a2e);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--fsa-text-dim, #6b7280);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--fsa-green, #10b981);
+            font-family: 'Courier New', monospace;
+            margin-top: 0.5rem;
+        }
+
+        .timeline {
+            background: var(--fsa-bg-dark, #0a1f1a);
+            border: 2px solid var(--fsa-border-subtle, #1a3a2e);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .timeline-bar {
+            position: relative;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+            overflow: hidden;
+        }
+
+        .timeline-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--fsa-green, #10b981), var(--fsa-green-light, #34d399));
+            transition: width 1s ease;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 1rem;
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .milestones {
+            position: relative;
+            padding: 1rem 0;
+        }
+
+        .milestone {
+            position: absolute;
+            transform: translateX(-50%);
+        }
+
+        .milestone-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--fsa-green, #10b981);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.5);
+            margin-bottom: 0.5rem;
+        }
+
+        .milestone-label {
+            font-size: 0.75rem;
+            color: var(--fsa-text-secondary, #9ca3af);
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .projection-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 2rem;
+        }
+
+        .projection-table th {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--fsa-green, #10b981);
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid var(--fsa-border-medium, #2a5a4e);
+        }
+
+        .projection-table td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--fsa-border-subtle, #1a3a2e);
+            font-family: 'Courier New', monospace;
+        }
+
+        .projection-table tr:hover {
+            background: rgba(16, 185, 129, 0.05);
+        }
+
+        .projection-table .highlight {
+            background: rgba(16, 185, 129, 0.2);
+            font-weight: 700;
+        }
+
+        .info-box {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid var(--fsa-green, #10b981);
+            border-radius: 0.5rem;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .info-box-title {
+            font-weight: 700;
+            color: var(--fsa-green, #10b981);
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 Financial Freedom Timeline</h1>
+            <p>Calculate your path to financial independence and early retirement</p>
+        </div>
+
+        <div class="main-grid">
+            <!-- Input Panel -->
+            <div class="input-panel">
+                <h2 style="color: var(--fsa-green, #10b981); margin-bottom: 1.5rem; font-size: 1.3rem;">Your Numbers</h2>
+                
+                <div class="form-group">
+                    <div class="form-label">
+                        <span>Current Age</span>
+                        <span class="value-display" id="age-display">30</span>
+                    </div>
+                    <input type="range" id="age" class="slider" min="18" max="65" value="30">
+                </div>
+
+                <div class="form-group">
+                    <div class="form-label">
+                        <span>Current Savings</span>
+                        <span class="value-display" id="savings-display">$50,000</span>
+                    </div>
+                    <input type="range" id="savings" class="slider" min="0" max="500000" step="5000" value="50000">
+                </div>
+
+                <div class="form-group">
+                    <div class="form-label">
+                        <span>Annual Income</span>
+                        <span class="value-display" id="income-display">$75,000</span>
+                    </div>
+                    <input type="range" id="income" class="slider" min="20000" max="300000" step="5000" value="75000">
+                </div>
+
+                <div class="form-group">
+                    <div class="form-label">
+                        <span>Annual Expenses</span>
+                        <span class="value-display" id="expenses-display">$50,000</span>
+                    </div>
+                    <input type="range" id="expenses" class="slider" min="20000" max="200000" step="5000" value="50000">
+                </div>
+
+                <div class="form-group">
+                    <div class="form-label">
+                        <span>Expected Return (nominal)</span>
+                        <span class="value-display" id="return-display">7.0%</span>
+                    </div>
+                    <input type="range" id="return" class="slider" min="0" max="15" step="0.5" value="7">
+                </div>
+
+                <div class="form-group">
+                    <div class="form-label">
+                        <span>Inflation</span>
+                        <span class="value-display" id="inflation-display">3.0%</span>
+                    </div>
+                    <input type="range" id="inflation" class="slider" min="0" max="8" step="0.1" value="3">
+                </div>
+
+                <div class="form-group">
+                    <div class="form-label">
+                        <span>Safe Withdrawal Rate (SWR)</span>
+                        <span class="value-display" id="swr-display">4.0%</span>
+                    </div>
+                    <input type="range" id="swr" class="slider" min="3" max="5" step="0.1" value="4">
+                </div>
+
+                <div class="info-box">
+                    <div class="info-box-title">🔍 The 25x Rule</div>
+                    <div style="font-size: 0.9rem; color: var(--fsa-text-secondary, #9ca3af);">
+                        Financial freedom ≈ annual expenses divided by your SWR. The popular 4% rule implies ~25× expenses. Adjust SWR above to be more conservative or aggressive.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Panel -->
+            <div class="results-panel">
+                <div class="freedom-date-card">
+                    <div class="freedom-label">You'll Achieve Financial Freedom In</div>
+                    <div class="freedom-date" id="freedom-year">2035</div>
+                    <div class="freedom-years" id="years-to-freedom">12 years from now</div>
+                    <div style="margin-top: 1.5rem; font-size: 0.95rem; color: var(--fsa-text-secondary, #9ca3af);">
+                        You'll be <strong id="freedom-age" style="color: var(--fsa-green, #10b981);">42</strong> years old
+                    </div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">Freedom Number</div>
+                        <div class="stat-value" id="freedom-number">$1,250,000</div>
+                        <div style="font-size: 0.75rem; color: var(--fsa-text-dim, #6b7280); margin-top: 0.5rem;">
+                            25x annual expenses
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-label">Savings Rate</div>
+                        <div class="stat-value" id="savings-rate">33%</div>
+                        <div style="font-size: 0.75rem; color: var(--fsa-text-dim, #6b7280); margin-top: 0.5rem;">
+                            of income saved
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-label">Annual Savings</div>
+                        <div class="stat-value" id="annual-savings">$25,000</div>
+                        <div style="font-size: 0.75rem; color: var(--fsa-text-dim, #6b7280); margin-top: 0.5rem;">
+                            per year
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline">
+                    <h3 style="color: var(--fsa-green, #10b981); margin-bottom: 1.5rem;">Your Journey</h3>
+                    
+                    <div class="timeline-bar">
+                        <div class="timeline-progress" id="progress-bar">
+                            <span id="progress-text"></span>
+                        </div>
+                    </div>
+
+                    <div class="info-box">
+                        <div class="info-box-title">💡 Accelerate Your Timeline</div>
+                        <div id="optimization-tips" style="font-size: 0.9rem; color: var(--fsa-text-secondary, #9ca3af);"></div>
+                    </div>
+                </div>
+
+                <table class="projection-table">
+                    <thead>
+                        <tr>
+                            <th>Year</th>
+                            <th>Age</th>
+                            <th>Balance</th>
+                            <th>Annual Growth</th>
+                            <th>Milestone</th>
+                        </tr>
+                    </thead>
+                    <tbody id="projection-body"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Update displays in real-time
+        const sliders = {
+            age: { elem: 'age', display: 'age-display', format: v => v },
+            savings: { elem: 'savings', display: 'savings-display', format: v => '$' + parseInt(v).toLocaleString() },
+            income: { elem: 'income', display: 'income-display', format: v => '$' + parseInt(v).toLocaleString() },
+            expenses: { elem: 'expenses', display: 'expenses-display', format: v => '$' + parseInt(v).toLocaleString() },
+            return: { elem: 'return', display: 'return-display', format: v => parseFloat(v).toFixed(1) + '%' },
+            inflation: { elem: 'inflation', display: 'inflation-display', format: v => parseFloat(v).toFixed(1) + '%' },
+            swr: { elem: 'swr', display: 'swr-display', format: v => parseFloat(v).toFixed(1) + '%' }
+        };
+
+        Object.entries(sliders).forEach(([key, config]) => {
+            const slider = document.getElementById(config.elem);
+            slider.addEventListener('input', (e) => {
+                document.getElementById(config.display).textContent = config.format(e.target.value);
+                calculate();
+            });
+        });
+
+        function calculate() {
+            const age = parseInt(document.getElementById('age').value);
+            const savings = parseFloat(document.getElementById('savings').value);
+            const income = parseFloat(document.getElementById('income').value);
+            const expenses = parseFloat(document.getElementById('expenses').value);
+            const returnRateNominal = parseFloat(document.getElementById('return').value) / 100;
+            const inflation = parseFloat(document.getElementById('inflation').value) / 100;
+            const swr = parseFloat(document.getElementById('swr').value) / 100;
+            const returnRate = ((1 + returnRateNominal) / (1 + inflation)) - 1; // real return
+
+            // Calculate freedom number using SWR
+            const freedomNumber = expenses / swr;
+            document.getElementById('freedom-number').textContent = '$' + Math.round(freedomNumber).toLocaleString();
+
+            // Calculate savings rate
+            const annualSavings = income - expenses;
+            const savingsRate = (annualSavings / income) * 100;
+            document.getElementById('savings-rate').textContent = Math.round(savingsRate) + '%';
+            document.getElementById('annual-savings').textContent = '$' + Math.round(annualSavings).toLocaleString();
+
+            // Simulate years to freedom
+            let currentSavings = savings;
+            let year = 0;
+            const projections = [];
+            const currentYear = new Date().getFullYear();
+
+            while (currentSavings < freedomNumber && year < 50) {
+                const growth = currentSavings * returnRate;
+                currentSavings += growth + annualSavings;
+                year++;
+
+                if (year <= 30 || year % 5 === 0) {
+                    projections.push({
+                        year: currentYear + year,
+                        age: age + year,
+                        balance: currentSavings,
+                        growth: growth + annualSavings,
+                        isFreedom: currentSavings >= freedomNumber && projections.length === 0
+                    });
+                }
+
+                if (currentSavings >= freedomNumber) break;
+            }
+
+            // Update freedom date
+            const freedomYear = currentYear + year;
+            const freedomAge = age + year;
+            document.getElementById('freedom-year').textContent = freedomYear;
+            document.getElementById('years-to-freedom').textContent = year + (year === 1 ? ' year' : ' years') + ' from now';
+            document.getElementById('freedom-age').textContent = freedomAge;
+
+            // Update progress bar
+            const progressPercent = Math.min((savings / freedomNumber) * 100, 100);
+            document.getElementById('progress-bar').style.width = progressPercent + '%';
+            document.getElementById('progress-text').textContent = Math.round(progressPercent) + '% Complete (real terms)';
+
+            // Generate optimization tips
+            generateTips(savingsRate, year);
+
+            // Build projection table
+            buildProjectionTable(projections, freedomNumber);
+        }
+
+        function generateTips(savingsRate, years) {
+            const tips = [];
+            
+            if (savingsRate < 20) {
+                tips.push('• Increase your savings rate to 20%+ to dramatically accelerate your timeline');
+            }
+            if (years > 15) {
+                tips.push(`• Cutting expenses by 10% could save you ~${Math.round(years * 0.15)} years`);
+                tips.push('• Consider side income to boost annual savings');
+            }
+            if (savingsRate >= 50) {
+                tips.push('• Amazing! You're on the extreme savings path (50%+ rate)');
+            }
+
+            document.getElementById('optimization-tips').innerHTML = tips.join('<br>');
+        }
+
+        function buildProjectionTable(projections, freedomNumber) {
+            const tbody = document.getElementById('projection-body');
+            tbody.innerHTML = '';
+
+            projections.forEach(proj => {
+                const row = tbody.insertRow();
+                const isCloseToFreedom = proj.balance >= freedomNumber * 0.95;
+                const isFreedom = proj.balance >= freedomNumber;
+                
+                if (isFreedom) {
+                    row.className = 'highlight';
+                }
+
+                row.insertCell(0).textContent = proj.year;
+                row.insertCell(1).textContent = proj.age;
+                row.insertCell(2).textContent = '$' + Math.round(proj.balance).toLocaleString();
+                row.insertCell(3).textContent = '$' + Math.round(proj.growth).toLocaleString();
+                
+                let milestone = '';
+                if (isFreedom && !tbody.querySelector('.highlight:not(:last-child)')) {
+                    milestone = '🎉 FINANCIAL FREEDOM!';
+                } else if (proj.balance >= freedomNumber * 0.5 && proj.balance < freedomNumber * 0.6) {
+                    milestone = '🥉 Halfway There';
+                } else if (proj.balance >= freedomNumber * 0.75 && proj.balance < freedomNumber * 0.8) {
+                    milestone = '🥈 75% Complete';
+                } else if (isCloseToFreedom && !isFreedom) {
+                    milestone = '🥇 Almost There!';
+                }
+                row.insertCell(4).textContent = milestone;
+            });
+        }
+
+        // Initialize on load
+        window.addEventListener('load', calculate);
+    </script>
+</body>
+</html>

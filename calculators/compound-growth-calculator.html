@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compound Growth Calculator | Financially Sovereign Academy</title>
+    <meta name="description" content="Interactive compound interest calculator with DCA, inflation adjustment, and Bitcoin comparison.">
+    <link rel="stylesheet" href="../css/fsa-theme.css">
+    <style>
+        body {
+            background: var(--fsa-bg-dark);
+            color: var(--fsa-text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+
+        .calculator-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            color: var(--fsa-green, #10b981);
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            color: var(--fsa-text-secondary, #9ca3af);
+            font-size: 1.1rem;
+        }
+
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .calculator-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .input-panel {
+            background: var(--fsa-bg-card, #1a3a2e);
+            border: 2px solid var(--fsa-border-medium, #2a5a4e);
+            border-radius: 1rem;
+            padding: 2rem;
+        }
+
+        .results-panel {
+            background: var(--fsa-bg-secondary, #0f2922);
+            border: 2px solid var(--fsa-border-medium, #2a5a4e);
+            border-radius: 1rem;
+            padding: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            color: var(--fsa-green, #10b981);
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .slider-container {
+            margin-top: 1rem;
+        }
+
+        .slider {
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: var(--fsa-bg-dark, #0a1f1a);
+            outline: none;
+            -webkit-appearance: none;
+            cursor: pointer;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--fsa-green, #10b981);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .slider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+        }
+
+        .slider::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--fsa-green, #10b981);
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+
+        .slider-value {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 0.5rem;
+        }
+
+        .value-display {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--fsa-green, #10b981);
+            font-family: 'Courier New', monospace;
+        }
+
+        .value-range {
+            font-size: 0.85rem;
+            color: var(--fsa-text-dim, #6b7280);
+        }
+
+        .checkbox-group {
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 0.5rem;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            cursor: pointer;
+            font-size: 0.95rem;
+            padding: 0.5rem 0;
+        }
+
+        .checkbox-label input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: var(--fsa-green, #10b981);
+        }
+
+        .result-card {
+            background: var(--fsa-bg-dark, #0a1f1a);
+            border: 2px solid var(--fsa-border-subtle, #1a3a2e);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .result-label {
+            font-size: 0.85rem;
+            color: var(--fsa-text-dim, #6b7280);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--fsa-green, #10b981);
+            font-family: 'Courier New', monospace;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-value.large {
+            font-size: 3rem;
+        }
+
+        .result-description {
+            font-size: 0.9rem;
+            color: var(--fsa-text-secondary, #9ca3af);
+            font-style: italic;
+        }
+
+        .chart-container {
+            background: var(--fsa-bg-dark, #0a1f1a);
+            border: 2px solid var(--fsa-border-subtle, #1a3a2e);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            height: 300px;
+        }
+
+        .breakdown-list {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+
+        .breakdown-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 1rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .breakdown-label {
+            color: var(--fsa-text-secondary, #9ca3af);
+        }
+
+        .breakdown-value {
+            color: var(--fsa-green, #10b981);
+            font-weight: 600;
+            font-family: 'Courier New', monospace;
+        }
+
+        .milestone-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: rgba(16, 185, 129, 0.1);
+            border: 2px solid var(--fsa-green, #10b981);
+            border-radius: 2rem;
+            color: var(--fsa-green, #10b981);
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin: 0.5rem 0.25rem;
+        }
+
+        .achievement-unlock {
+            animation: achievementPop 0.5s ease;
+        }
+
+        @keyframes achievementPop {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .comparison-card {
+            background: var(--fsa-bg-dark, #0a1f1a);
+            border: 2px solid var(--fsa-border-subtle, #1a3a2e);
+            border-radius: 0.75rem;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .comparison-card.winner {
+            border-color: var(--fsa-green, #10b981);
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+        }
+
+        .comparison-title {
+            font-size: 0.85rem;
+            color: var(--fsa-text-dim, #6b7280);
+            margin-bottom: 0.5rem;
+        }
+
+        .comparison-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--fsa-green, #10b981);
+            font-family: 'Courier New', monospace;
+        }
+
+        .btn {
+            background: var(--fsa-green, #10b981);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .btn:hover {
+            background: var(--fsa-green-light, #34d399);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        .visual-bar {
+            position: relative;
+            height: 40px;
+            background: var(--fsa-bg-dark, #0a1f1a);
+            border-radius: 0.5rem;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .visual-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--fsa-green, #10b981), var(--fsa-green-light, #34d399));
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 1rem;
+            color: white;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator-container">
+        <div class="header">
+            <h1>💰 Compound Growth Calculator</h1>
+            <p>See how your money grows over time with compound interest</p>
+        </div>
+
+        <div class="calculator-grid">
+            <!-- Input Panel -->
+            <div class="input-panel">
+                <h2 style="color: var(--fsa-green, #10b981); margin-bottom: 1.5rem;">Your Investment Plan</h2>
+                
+                <div class="form-group">
+                    <label class="form-label">Starting Amount</label>
+                    <div class="slider-container">
+                        <input type="range" id="principal" class="slider" 
+                               min="0" max="100000" step="1000" value="10000">
+                        <div class="slider-value">
+                            <span class="value-display" id="principal-display">$10,000</span>
+                            <span class="value-range">$0 - $100,000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Monthly Contribution</label>
+                    <div class="slider-container">
+                        <input type="range" id="monthly" class="slider" 
+                               min="0" max="2000" step="50" value="500">
+                        <div class="slider-value">
+                            <span class="value-display" id="monthly-display">$500</span>
+                            <span class="value-range">$0 - $2,000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Annual Contribution Increase</label>
+                    <div class="slider-container">
+                        <input type="range" id="contrib-increase" class="slider" 
+                               min="0" max="15" step="0.5" value="3">
+                        <div class="slider-value">
+                            <span class="value-display" id="contrib-increase-display">3.0%/yr</span>
+                            <span class="value-range">0% - 15% per year</span>
+                        </div>
+                    </div>
+                    <div style="color: var(--fsa-text-dim, #6b7280); font-size: 0.85rem; margin-top: 0.25rem;">Assumes you raise contributions annually (e.g., with raises).</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Annual Return Rate</label>
+                    <div class="slider-container">
+                        <input type="range" id="rate" class="slider" 
+                               min="0" max="20" step="0.5" value="7">
+                        <div class="slider-value">
+                            <span class="value-display" id="rate-display">7.0%</span>
+                            <span class="value-range">0% - 20%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Time Period (Years)</label>
+                    <div class="slider-container">
+                        <input type="range" id="years" class="slider" 
+                               min="1" max="40" step="1" value="20">
+                        <div class="slider-value">
+                            <span class="value-display" id="years-display">20 years</span>
+                            <span class="value-range">1 - 40 years</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="adjust-inflation">
+                        <span>Adjust for inflation (3% annually)</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="show-bitcoin">
+                        <span>Compare with Bitcoin DCA</span>
+                    </label>
+                </div>
+
+                <button class="btn" onclick="calculate()">Calculate Growth</button>
+                <button class="btn" style="margin-top: 0.5rem; background: transparent; color: var(--fsa-green, #10b981); border: 2px solid var(--fsa-green, #10b981);" onclick="shareScenario()">Copy link to this scenario</button>
+            </div>
+
+            <!-- Results Panel -->
+            <div class="results-panel">
+                <h2 style="color: var(--fsa-green, #10b981); margin-bottom: 1.5rem;">Your Results</h2>
+                
+                <div class="result-card">
+                    <div class="result-label">Future Value</div>
+                    <div class="result-value large" id="future-value">$0</div>
+                    <div class="result-description" id="real-value-text"></div>
+                </div>
+
+                <div class="visual-bar">
+                    <div class="visual-bar-fill" id="contribution-bar" style="width: 0%">
+                        <span id="contribution-percent"></span>
+                    </div>
+                </div>
+
+                <ul class="breakdown-list">
+                    <li class="breakdown-item">
+                        <span class="breakdown-label">Total Invested</span>
+                        <span class="breakdown-value" id="total-invested">$0</span>
+                    </li>
+                    <li class="breakdown-item">
+                        <span class="breakdown-label">Interest Earned</span>
+                        <span class="breakdown-value" id="interest-earned">$0</span>
+                    </li>
+                    <li class="breakdown-item">
+                        <span class="breakdown-label">Growth Multiple</span>
+                        <span class="breakdown-value" id="growth-multiple">0.0x</span>
+                    </li>
+                </ul>
+
+                <div id="milestones" style="margin-top: 2rem;">
+                    <h3 style="color: var(--fsa-text-secondary, #9ca3af); font-size: 1rem; margin-bottom: 1rem;">🎯 Milestones Achieved</h3>
+                    <div id="milestone-badges"></div>
+                </div>
+
+                <div id="comparison-section" class="comparison-grid" style="display: none;">
+                    <div class="comparison-card">
+                        <div class="comparison-title">Traditional Savings</div>
+                        <div class="comparison-value" id="savings-value">$0</div>
+                    </div>
+                    <div class="comparison-card">
+                        <div class="comparison-title">Index Fund (S&P 500)</div>
+                        <div class="comparison-value" id="index-value">$0</div>
+                    </div>
+                    <div class="comparison-card" id="bitcoin-card" style="display: none;">
+                        <div class="comparison-title">Bitcoin DCA</div>
+                        <div class="comparison-value" id="bitcoin-value">$0</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="growth-chart"></canvas>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script>
+        let growthChart = null;
+
+        // Update display values in real-time
+        document.getElementById('principal').addEventListener('input', (e) => {
+            document.getElementById('principal-display').textContent = '$' + parseInt(e.target.value).toLocaleString();
+        });
+
+        document.getElementById('monthly').addEventListener('input', (e) => {
+            document.getElementById('monthly-display').textContent = '$' + parseInt(e.target.value).toLocaleString();
+        });
+
+        document.getElementById('rate').addEventListener('input', (e) => {
+            document.getElementById('rate-display').textContent = parseFloat(e.target.value).toFixed(1) + '%';
+        });
+
+        document.getElementById('years').addEventListener('input', (e) => {
+            const years = parseInt(e.target.value);
+            document.getElementById('years-display').textContent = years + (years === 1 ? ' year' : ' years');
+        });
+
+        const contribIncrease = document.getElementById('contrib-increase');
+        contribIncrease.addEventListener('input', (e) => {
+            document.getElementById('contrib-increase-display').textContent = parseFloat(e.target.value).toFixed(1) + '%/yr';
+        });
+
+        // Auto-calculate on any change
+        document.querySelectorAll('.slider, input[type="checkbox"]').forEach(elem => {
+            elem.addEventListener('input', calculate);
+            elem.addEventListener('change', calculate);
+        });
+
+        function calculate() {
+            const principal = parseFloat(document.getElementById('principal').value);
+            const monthly = parseFloat(document.getElementById('monthly').value);
+            const annualRate = parseFloat(document.getElementById('rate').value) / 100;
+            const years = parseInt(document.getElementById('years').value);
+            const adjustInflation = document.getElementById('adjust-inflation').checked;
+            const showBitcoin = document.getElementById('show-bitcoin').checked;
+            const annualIncrease = parseFloat(document.getElementById('contrib-increase').value) / 100;
+
+            const monthlyRate = annualRate / 12;
+            const months = years * 12;
+
+            // Calculate future value with monthly contributions and annual step-up
+            let futureValue = principal;
+            let totalInvested = principal;
+            const monthlyValues = [principal];
+            let currentMonthly = monthly;
+            
+            for (let month = 1; month <= months; month++) {
+                futureValue = futureValue * (1 + monthlyRate) + currentMonthly;
+                totalInvested += currentMonthly;
+                monthlyValues.push(futureValue);
+                if (month % 12 === 0 && annualIncrease > 0) {
+                    currentMonthly = currentMonthly * (1 + annualIncrease);
+                }
+            }
+
+            const interestEarned = futureValue - totalInvested;
+            const growthMultiple = futureValue / totalInvested;
+
+            // Inflation adjustment
+            const inflationRate = 0.03;
+            const realValue = adjustInflation ? futureValue / Math.pow(1 + inflationRate, years) : futureValue;
+
+            // Update display
+            document.getElementById('future-value').textContent = '$' + Math.round(futureValue).toLocaleString();
+            document.getElementById('total-invested').textContent = '$' + Math.round(totalInvested).toLocaleString();
+            document.getElementById('interest-earned').textContent = '$' + Math.round(interestEarned).toLocaleString();
+            document.getElementById('growth-multiple').textContent = growthMultiple.toFixed(2) + 'x';
+
+            if (adjustInflation) {
+                document.getElementById('real-value-text').textContent = 
+                    `≈ $${Math.round(realValue).toLocaleString()} in today's dollars`;
+            } else {
+                document.getElementById('real-value-text').textContent = '';
+            }
+
+            // Visual bar
+            const contributionPercent = (totalInvested / futureValue) * 100;
+            document.getElementById('contribution-bar').style.width = contributionPercent + '%';
+            document.getElementById('contribution-percent').textContent = Math.round(contributionPercent) + '% invested';
+
+            // Milestones
+            updateMilestones(futureValue);
+
+            // Comparison
+            if (showBitcoin) {
+                showComparison(principal, monthly, years);
+            }
+
+            // Chart
+            updateChart(monthlyValues, years);
+        }
+
+        function updateMilestones(value) {
+            const milestones = [
+                { threshold: 10000, label: '10K Club', emoji: '🥉' },
+                { threshold: 50000, label: '50K Milestone', emoji: '🥈' },
+                { threshold: 100000, label: '100K Achieved!', emoji: '🥇' },
+                { threshold: 250000, label: 'Quarter Million', emoji: '💎' },
+                { threshold: 500000, label: 'Half Millionaire', emoji: '🚀' },
+                { threshold: 1000000, label: 'MILLIONAIRE!', emoji: '👑' }
+            ];
+
+            const badgesHTML = milestones
+                .filter(m => value >= m.threshold)
+                .map(m => `<span class="milestone-badge achievement-unlock">${m.emoji} ${m.label}</span>`)
+                .join('');
+
+            document.getElementById('milestone-badges').innerHTML = badgesHTML || 
+                '<span style="color: var(--fsa-text-dim, #6b7280);">Keep going to unlock milestones!</span>';
+        }
+
+        function showComparison(principal, monthly, years) {
+            document.getElementById('comparison-section').style.display = 'grid';
+            
+            // Traditional savings (0.5% rate)
+            const savingsValue = calculateFV(principal, monthly, 0.005, years);
+            document.getElementById('savings-value').textContent = '$' + Math.round(savingsValue).toLocaleString();
+
+            // S&P 500 (10% average)
+            const indexValue = calculateFV(principal, monthly, 0.10, years);
+            document.getElementById('index-value').textContent = '$' + Math.round(indexValue).toLocaleString();
+
+            // Bitcoin (historical 100%+ but use 30% conservatively)
+            if (document.getElementById('show-bitcoin').checked) {
+                document.getElementById('bitcoin-card').style.display = 'block';
+                const bitcoinValue = calculateFV(principal, monthly, 0.30, years);
+                document.getElementById('bitcoin-value').textContent = '$' + Math.round(bitcoinValue).toLocaleString();
+                
+                // Highlight winner
+                document.querySelectorAll('.comparison-card').forEach(c => c.classList.remove('winner'));
+                document.getElementById('bitcoin-card').classList.add('winner');
+            } else {
+                document.getElementById('bitcoin-card').style.display = 'none';
+                document.querySelectorAll('.comparison-card').forEach(c => c.classList.remove('winner'));
+                document.querySelectorAll('.comparison-card')[1].classList.add('winner');
+            }
+        }
+
+        function calculateFV(principal, monthly, rate, years) {
+            const monthlyRate = rate / 12;
+            const months = years * 12;
+            let value = principal;
+            for (let i = 0; i < months; i++) {
+                value = value * (1 + monthlyRate) + monthly;
+            }
+            return value;
+        }
+
+        function updateChart(values, years) {
+            const labels = Array.from({length: values.length}, (_, i) => {
+                if (i === 0) return '0';
+                if (i % 12 === 0) return `${i/12}y`;
+                return '';
+            });
+
+            const ctx = document.getElementById('growth-chart').getContext('2d');
+            
+            if (growthChart) {
+                growthChart.destroy();
+            }
+
+            growthChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Portfolio Value',
+                        data: values,
+                        borderColor: '#10b981',
+                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: (context) => '$' + Math.round(context.parsed.y).toLocaleString()
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                            ticks: { color: '#9ca3af' }
+                        },
+                        y: {
+                            grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                            ticks: { 
+                                color: '#9ca3af',
+                                callback: (value) => '$' + (value/1000).toFixed(0) + 'K'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function shareScenario() {
+            const params = new URLSearchParams({
+                p: document.getElementById('principal').value,
+                m: document.getElementById('monthly').value,
+                r: document.getElementById('rate').value,
+                y: document.getElementById('years').value,
+                i: document.getElementById('adjust-inflation').checked ? 1 : 0,
+                b: document.getElementById('show-bitcoin').checked ? 1 : 0,
+                u: document.getElementById('contrib-increase').value
+            });
+            const url = location.origin + location.pathname + '#' + params.toString();
+            navigator.clipboard.writeText(url).then(() => {
+                alert('Shareable link copied to clipboard');
+            });
+        }
+
+        function loadFromHash() {
+            if (!location.hash) return;
+            const params = new URLSearchParams(location.hash.slice(1));
+            const setVal = (id, val) => { const el = document.getElementById(id); if (el) { el.value = val; el.dispatchEvent(new Event('input')); }};
+            setVal('principal', params.get('p'));
+            setVal('monthly', params.get('m'));
+            setVal('rate', params.get('r'));
+            setVal('years', params.get('y'));
+            if (params.get('i') !== null) document.getElementById('adjust-inflation').checked = params.get('i') === '1';
+            if (params.get('b') !== null) document.getElementById('show-bitcoin').checked = params.get('b') === '1';
+            setVal('contrib-increase', params.get('u'));
+        }
+
+        // Initialize on load
+        window.addEventListener('load', () => { loadFromHash(); calculate(); });
+    </script>
+</body>
+</html>

@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Net Worth Tracker | Financially Sovereign Academy</title>
+    <meta name="description" content="Calculate and track your net worth over time. Assets minus liabilities. Watch your wealth grow.">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        :root {
+            --fsa-green: #10b981;
+            --fsa-green-light: #34d399;
+            --fsa-bg-dark: #0a1f1a;
+            --fsa-bg-secondary: #0f2922;
+            --fsa-bg-card: #1a3a2e;
+            --fsa-text-primary: #e0e0e0;
+            --fsa-text-secondary: #9ca3af;
+            --fsa-border-subtle: rgba(16, 185, 129, 0.2);
+            --fsa-border-medium: rgba(16, 185, 129, 0.3);
+            --fsa-success: #10b981;
+            --fsa-warning: #f59e0b;
+            --fsa-error: #ef4444;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--fsa-bg-dark);
+            color: var(--fsa-text-primary);
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            color: var(--fsa-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            color: var(--fsa-text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--fsa-green);
+            text-decoration: none;
+            margin-bottom: 2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            transform: translateX(-4px);
+        }
+
+        .net-worth-display {
+            background: linear-gradient(135deg, #0a4d3c 0%, #1a5f52 100%);
+            border: 3px solid var(--fsa-green);
+            border-radius: var(--radius-xl);
+            padding: 3rem;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .net-worth-label {
+            font-size: 1rem;
+            color: var(--fsa-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+
+        .net-worth-value {
+            font-size: 4rem;
+            font-weight: 800;
+            font-family: 'Courier New', monospace;
+            margin-bottom: 1rem;
+        }
+
+        .net-worth-value.positive {
+            color: var(--fsa-success);
+        }
+
+        .net-worth-value.negative {
+            color: var(--fsa-error);
+        }
+
+        .net-worth-change {
+            font-size: 1.1rem;
+            color: var(--fsa-text-secondary);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: var(--fsa-bg-card);
+            border: 2px solid var(--fsa-border-medium);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            color: var(--fsa-green);
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            color: var(--fsa-text-primary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-input,
+        .form-select {
+            width: 100%;
+            padding: 0.75rem;
+            background: var(--fsa-bg-dark);
+            border: 2px solid var(--fsa-border-subtle);
+            border-radius: var(--radius-lg);
+            color: var(--fsa-text-primary);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: var(--fsa-green);
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: var(--radius-lg);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--fsa-green), var(--fsa-green-light));
+            color: white;
+            width: 100%;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+        }
+
+        .btn-secondary {
+            background: var(--fsa-bg-secondary);
+            color: var(--fsa-green);
+            border: 2px solid var(--fsa-border-medium);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--fsa-green);
+        }
+
+        .btn-danger {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--fsa-error);
+            border: 2px solid var(--fsa-error);
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+        }
+
+        .btn-danger:hover {
+            background: rgba(239, 68, 68, 0.3);
+        }
+
+        .item-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .item {
+            background: var(--fsa-bg-dark);
+            border: 2px solid var(--fsa-border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .item-name {
+            font-weight: 600;
+            color: var(--fsa-green-light);
+        }
+
+        .item-amount {
+            font-size: 1.1rem;
+            font-weight: 700;
+            font-family: 'Courier New', monospace;
+            margin-right: 0.75rem;
+        }
+
+        .total-row {
+            background: var(--fsa-bg-secondary);
+            border: 2px solid var(--fsa-green);
+            border-radius: var(--radius-lg);
+            padding: 1rem;
+            margin-top: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .total-label {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--fsa-green);
+        }
+
+        .total-amount {
+            font-size: 1.5rem;
+            font-weight: 800;
+            font-family: 'Courier New', monospace;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 400px;
+            margin-bottom: 2rem;
+        }
+
+        .snapshot-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .snapshot-item {
+            background: var(--fsa-bg-dark);
+            border: 2px solid var(--fsa-border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .snapshot-date {
+            font-weight: 600;
+            color: var(--fsa-green-light);
+        }
+
+        .snapshot-value {
+            font-size: 1.1rem;
+            font-weight: 700;
+            font-family: 'Courier New', monospace;
+        }
+
+        .snapshot-value.positive {
+            color: var(--fsa-success);
+        }
+
+        .snapshot-value.negative {
+            color: var(--fsa-error);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 2rem;
+            color: var(--fsa-text-secondary);
+        }
+
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .net-worth-value {
+                font-size: 2.5rem;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Scrollbar */
+        .item-list::-webkit-scrollbar,
+        .snapshot-list::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .item-list::-webkit-scrollbar-track,
+        .snapshot-list::-webkit-scrollbar-track {
+            background: var(--fsa-bg-dark);
+            border-radius: 4px;
+        }
+
+        .item-list::-webkit-scrollbar-thumb,
+        .snapshot-list::-webkit-scrollbar-thumb {
+            background: var(--fsa-border-medium);
+            border-radius: 4px;
+        }
+
+        .item-list::-webkit-scrollbar-thumb:hover,
+        .snapshot-list::-webkit-scrollbar-thumb:hover {
+            background: var(--fsa-green);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="./" class="back-link">
+            <span>←</span>
+            <span>Back to Calculators</span>
+        </a>
+
+        <div class="header">
+            <h1>📊 Net Worth Tracker</h1>
+            <p>Assets minus liabilities. Track your financial progress over time.</p>
+        </div>
+
+        <!-- Net Worth Display -->
+        <div class="net-worth-display">
+            <div class="net-worth-label">Your Net Worth</div>
+            <div class="net-worth-value positive" id="net-worth-value">$0</div>
+            <div class="net-worth-change" id="net-worth-change">Add assets and liabilities to calculate</div>
+        </div>
+
+        <div class="grid">
+            <!-- Assets -->
+            <div class="card">
+                <h2 class="card-title">💰 Assets</h2>
+                
+                <div class="form-group">
+                    <label class="form-label" for="asset-name">Asset Name</label>
+                    <input type="text" id="asset-name" class="form-input" placeholder="e.g., Checking Account">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="asset-amount">Amount</label>
+                    <input type="number" id="asset-amount" class="form-input" placeholder="e.g., 5000" min="0" step="0.01">
+                </div>
+
+                <button class="btn btn-primary" onclick="addAsset()">Add Asset</button>
+
+                <div class="item-list" id="asset-list" style="margin-top: 1.5rem;">
+                    <div class="empty-state">No assets yet</div>
+                </div>
+
+                <div class="total-row">
+                    <div class="total-label">Total Assets</div>
+                    <div class="total-amount" id="total-assets">$0</div>
+                </div>
+            </div>
+
+            <!-- Liabilities -->
+            <div class="card">
+                <h2 class="card-title">💳 Liabilities</h2>
+                
+                <div class="form-group">
+                    <label class="form-label" for="liability-name">Liability Name</label>
+                    <input type="text" id="liability-name" class="form-input" placeholder="e.g., Credit Card">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="liability-amount">Amount</label>
+                    <input type="number" id="liability-amount" class="form-input" placeholder="e.g., 2000" min="0" step="0.01">
+                </div>
+
+                <button class="btn btn-primary" onclick="addLiability()">Add Liability</button>
+
+                <div class="item-list" id="liability-list" style="margin-top: 1.5rem;">
+                    <div class="empty-state">No liabilities yet</div>
+                </div>
+
+                <div class="total-row">
+                    <div class="total-label">Total Liabilities</div>
+                    <div class="total-amount" id="total-liabilities">$0</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Snapshots and Trend -->
+        <div class="card" style="margin-bottom: 2rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                <h2 class="card-title" style="margin: 0;">Net Worth Trend</h2>
+                <button class="btn btn-secondary" onclick="saveSnapshot()">📸 Save Snapshot</button>
+            </div>
+            
+            <div class="chart-container">
+                <canvas id="trendChart"></canvas>
+            </div>
+        </div>
+
+        <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                <h2 class="card-title" style="margin: 0;">Snapshot History</h2>
+                <button class="btn btn-danger" onclick="clearAll()">Clear All</button>
+            </div>
+            
+            <div id="snapshot-list" class="snapshot-list">
+                <div class="empty-state">No snapshots yet. Save your first snapshot above.</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let assets = JSON.parse(localStorage.getItem('networth-assets')) || [];
+        let liabilities = JSON.parse(localStorage.getItem('networth-liabilities')) || [];
+        let snapshots = JSON.parse(localStorage.getItem('networth-snapshots')) || [];
+        let chart = null;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            renderAssets();
+            renderLiabilities();
+            renderSnapshots();
+            updateNetWorth();
+            updateChart();
+        });
+
+        function addAsset() {
+            const name = document.getElementById('asset-name').value.trim();
+            const amount = parseFloat(document.getElementById('asset-amount').value);
+
+            if (!name || !amount || amount <= 0) {
+                alert('Please enter valid asset name and amount');
+                return;
+            }
+
+            assets.push({ id: Date.now(), name, amount });
+            localStorage.setItem('networth-assets', JSON.stringify(assets));
+
+            document.getElementById('asset-name').value = '';
+            document.getElementById('asset-amount').value = '';
+
+            renderAssets();
+            updateNetWorth();
+        }
+
+        function deleteAsset(id) {
+            assets = assets.filter(a => a.id !== id);
+            localStorage.setItem('networth-assets', JSON.stringify(assets));
+            renderAssets();
+            updateNetWorth();
+        }
+
+        function addLiability() {
+            const name = document.getElementById('liability-name').value.trim();
+            const amount = parseFloat(document.getElementById('liability-amount').value);
+
+            if (!name || !amount || amount <= 0) {
+                alert('Please enter valid liability name and amount');
+                return;
+            }
+
+            liabilities.push({ id: Date.now(), name, amount });
+            localStorage.setItem('networth-liabilities', JSON.stringify(liabilities));
+
+            document.getElementById('liability-name').value = '';
+            document.getElementById('liability-amount').value = '';
+
+            renderLiabilities();
+            updateNetWorth();
+        }
+
+        function deleteLiability(id) {
+            liabilities = liabilities.filter(l => l.id !== id);
+            localStorage.setItem('networth-liabilities', JSON.stringify(liabilities));
+            renderLiabilities();
+            updateNetWorth();
+        }
+
+        function renderAssets() {
+            const list = document.getElementById('asset-list');
+            
+            if (assets.length === 0) {
+                list.innerHTML = '<div class="empty-state">No assets yet</div>';
+                return;
+            }
+
+            list.innerHTML = assets.map(a => `
+                <div class="item">
+                    <div class="item-name">${a.name}</div>
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <div class="item-amount">$${a.amount.toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0})}</div>
+                        <button class="btn btn-danger" onclick="deleteAsset(${a.id})">×</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderLiabilities() {
+            const list = document.getElementById('liability-list');
+            
+            if (liabilities.length === 0) {
+                list.innerHTML = '<div class="empty-state">No liabilities yet</div>';
+                return;
+            }
+
+            list.innerHTML = liabilities.map(l => `
+                <div class="item">
+                    <div class="item-name">${l.name}</div>
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <div class="item-amount">$${l.amount.toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0})}</div>
+                        <button class="btn btn-danger" onclick="deleteLiability(${l.id})">×</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function updateNetWorth() {
+            const totalAssets = assets.reduce((sum, a) => sum + a.amount, 0);
+            const totalLiabilities = liabilities.reduce((sum, l) => sum + l.amount, 0);
+            const netWorth = totalAssets - totalLiabilities;
+
+            document.getElementById('total-assets').textContent = `$${totalAssets.toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0})}`;
+            document.getElementById('total-liabilities').textContent = `$${totalLiabilities.toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0})}`;
+
+            const netWorthEl = document.getElementById('net-worth-value');
+            const changeEl = document.getElementById('net-worth-change');
+            
+            netWorthEl.textContent = `${netWorth >= 0 ? '' : '-'}$${Math.abs(netWorth).toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0})}`;
+            netWorthEl.className = 'net-worth-value ' + (netWorth >= 0 ? 'positive' : 'negative');
+
+            if (snapshots.length > 0) {
+                const lastSnapshot = snapshots[snapshots.length - 1];
+                const change = netWorth - lastSnapshot.value;
+                const changePercent = lastSnapshot.value !== 0 ? ((change / Math.abs(lastSnapshot.value)) * 100).toFixed(1) : 0;
+                
+                if (change > 0) {
+                    changeEl.textContent = `Up $${change.toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0})} (+${changePercent}%) since last snapshot`;
+                    changeEl.style.color = 'var(--fsa-success)';
+                } else if (change < 0) {
+                    changeEl.textContent = `Down $${Math.abs(change).toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0})} (${changePercent}%) since last snapshot`;
+                    changeEl.style.color = 'var(--fsa-error)';
+                } else {
+                    changeEl.textContent = 'No change since last snapshot';
+                    changeEl.style.color = 'var(--fsa-text-secondary)';
+                }
+            } else {
+                changeEl.textContent = 'Save a snapshot to track progress';
+                changeEl.style.color = 'var(--fsa-text-secondary)';
+            }
+        }
+
+        function saveSnapshot() {
+            const totalAssets = assets.reduce((sum, a) => sum + a.amount, 0);
+            const totalLiabilities = liabilities.reduce((sum, l) => sum + l.amount, 0);
+            const netWorth = totalAssets - totalLiabilities;
+
+            if (totalAssets === 0 && totalLiabilities === 0) {
+                alert('Add assets or liabilities before saving a snapshot');
+                return;
+            }
+
+            const snapshot = {
+                date: new Date().toISOString(),
+                value: netWorth,
+                assets: totalAssets,
+                liabilities: totalLiabilities
+            };
+
+            snapshots.push(snapshot);
+            localStorage.setItem('networth-snapshots', JSON.stringify(snapshots));
+
+            renderSnapshots();
+            updateChart();
+            updateNetWorth();
+        }
+
+        function renderSnapshots() {
+            const list = document.getElementById('snapshot-list');
+            
+            if (snapshots.length === 0) {
+                list.innerHTML = '<div class="empty-state">No snapshots yet. Save your first snapshot above.</div>';
+                return;
+            }
+
+            list.innerHTML = snapshots.slice().reverse().map((s, index) => {
+                const date = new Date(s.date).toLocaleDateString();
+                const valueClass = s.value >= 0 ? 'positive' : 'negative';
+                
+                return `
+                    <div class="snapshot-item">
+                        <div>
+                            <div class="snapshot-date">${date}</div>
+                            <div style="font-size: 0.85rem; color: var(--fsa-text-secondary); margin-top: 0.25rem;">
+                                Assets: $${s.assets.toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0})} | 
+                                Liabilities: $${s.liabilities.toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0})}
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <div class="snapshot-value ${valueClass}">
+                                ${s.value >= 0 ? '' : '-'}$${Math.abs(s.value).toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0})}
+                            </div>
+                            <button class="btn btn-danger" onclick="deleteSnapshot(${snapshots.length - 1 - index})">×</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function deleteSnapshot(index) {
+            if (confirm('Delete this snapshot?')) {
+                snapshots.splice(index, 1);
+                localStorage.setItem('networth-snapshots', JSON.stringify(snapshots));
+                renderSnapshots();
+                updateChart();
+                updateNetWorth();
+            }
+        }
+
+        function updateChart() {
+            const ctx = document.getElementById('trendChart');
+            
+            if (chart) {
+                chart.destroy();
+            }
+
+            if (snapshots.length === 0) {
+                ctx.getContext('2d').clearRect(0, 0, ctx.width, ctx.height);
+                return;
+            }
+
+            const labels = snapshots.map(s => new Date(s.date).toLocaleDateString());
+            const data = snapshots.map(s => s.value);
+
+            chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Net Worth',
+                        data: data,
+                        borderColor: '#10b981',
+                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4,
+                        pointRadius: 6,
+                        pointHoverRadius: 8,
+                        pointBackgroundColor: '#10b981',
+                        pointBorderColor: '#e0e0e0',
+                        pointBorderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const value = context.parsed.y;
+                                    return `Net Worth: ${value >= 0 ? '' : '-'}$${Math.abs(value).toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0})}`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            ticks: {
+                                color: '#e0e0e0',
+                                callback: function(value) {
+                                    return '$' + value.toLocaleString();
+                                }
+                            },
+                            grid: {
+                                color: 'rgba(16, 185, 129, 0.1)'
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                color: '#e0e0e0'
+                            },
+                            grid: {
+                                color: 'rgba(16, 185, 129, 0.1)'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function clearAll() {
+            if (confirm('Clear all data (assets, liabilities, and snapshots)? This cannot be undone.')) {
+                assets = [];
+                liabilities = [];
+                snapshots = [];
+                localStorage.setItem('networth-assets', JSON.stringify(assets));
+                localStorage.setItem('networth-liabilities', JSON.stringify(liabilities));
+                localStorage.setItem('networth-snapshots', JSON.stringify(snapshots));
+                
+                renderAssets();
+                renderLiabilities();
+                renderSnapshots();
+                updateNetWorth();
+                updateChart();
+            }
+        }
+    </script>
+</body>
+</html>

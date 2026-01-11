@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Calculators | Financially Sovereign Academy</title>
+    <meta name="description" content="Interactive financial calculators for compound growth, debt payoff, and financial freedom planning.">
+    <link rel="stylesheet" href="../css/fsa-theme.css">
+    <style>
+        body {
+            background: var(--fsa-bg-dark, #0a1f1a);
+            color: var(--fsa-text-primary, #e0e0e0);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            color: var(--fsa-green, #10b981);
+            margin-bottom: 1rem;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            color: var(--fsa-text-secondary, #9ca3af);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .calc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .calc-card {
+            background: var(--fsa-bg-card, #1a3a2e);
+            border: 2px solid var(--fsa-border-medium, #2a5a4e);
+            border-radius: 1rem;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .calc-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--fsa-green, #10b981), var(--fsa-green-light, #34d399));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .calc-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--fsa-green, #10b981);
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+        }
+
+        .calc-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .calc-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .calc-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--fsa-green, #10b981);
+            margin-bottom: 0.75rem;
+        }
+
+        .calc-description {
+            color: var(--fsa-text-secondary, #9ca3af);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .calc-features {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .calc-features li {
+            color: var(--fsa-text-dim, #6b7280);
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .calc-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--fsa-green, #10b981);
+            font-weight: 700;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(16, 185, 129, 0.05));
+            border: 2px solid var(--fsa-green, #10b981);
+            border-radius: 1rem;
+            padding: 3rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .cta-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--fsa-green, #10b981);
+            margin-bottom: 1rem;
+        }
+
+        .cta-text {
+            font-size: 1.1rem;
+            color: var(--fsa-text-secondary, #9ca3af);
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--fsa-green, #10b981);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .btn:hover {
+            background: var(--fsa-green-light, #34d399);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        .back-link {
+            display: inline-block;
+            color: var(--fsa-green, #10b981);
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            transition: all 0.2s;
+        }
+
+        .back-link:hover {
+            transform: translateX(-5px);
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--fsa-green, #10b981);
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link">← Back to Home</a>
+
+        <div class="header">
+            <h1>🧮 Financial Calculators</h1>
+            <p>Interactive tools to plan your financial future with confidence</p>
+        </div>
+
+        <div class="calc-grid">
+            <!-- Compound Growth Calculator -->
+            <a href="compound-growth-calculator.html" class="calc-card">
+                <div class="calc-icon">💰</div>
+                <div class="calc-title">Compound Growth Calculator</div>
+                <div class="calc-description">
+                    See how your money grows over time with compound interest, monthly contributions, and inflation adjustment.
+                </div>
+                <ul class="calc-features">
+                    <li>Real-time visual charts</li>
+                    <li>Bitcoin DCA comparison</li>
+                    <li>Inflation adjustment</li>
+                    <li>Milestone achievement badges</li>
+                </ul>
+                <div class="badge">Most Popular</div>
+            </a>
+
+            <!-- Debt Payoff Calculator -->
+            <a href="debt-payoff-calculator.html" class="calc-card">
+                <div class="calc-icon">⚖️</div>
+                <div class="calc-title">Debt Payoff Calculator</div>
+                <div class="calc-description">
+                    Compare avalanche vs snowball strategies and discover your fastest path to becoming debt-free.
+                </div>
+                <ul class="calc-features">
+                    <li>Avalanche vs Snowball comparison</li>
+                    <li>Visual payoff timeline</li>
+                    <li>Interest savings calculator</li>
+                    <li>Smart recommendations</li>
+                </ul>
+                <div class="badge">Best for Debt</div>
+            </a>
+
+            <!-- Financial Freedom Timeline -->
+            <a href="financial-freedom-timeline.html" class="calc-card">
+                <div class="calc-icon">🎯</div>
+                <div class="calc-title">Financial Freedom Timeline</div>
+                <div class="calc-description">
+                    Calculate when you can achieve financial independence and retire early with the 25x rule.
+                </div>
+                <ul class="calc-features">
+                    <li>Financial freedom date calculator</li>
+                    <li>25x rule analysis</li>
+                    <li>Year-by-year projections</li>
+                    <li>Optimization recommendations</li>
+                </ul>
+                <div class="badge">FIRE Planning</div>
+            </a>
+
+            <!-- Budget Tracker -->
+            <a href="budget-tracker.html" class="calc-card">
+                <div class="calc-icon">💸</div>
+                <div class="calc-title">Budget Tracker</div>
+                <div class="calc-description">
+                    Track income and expenses by category. Visualize spending patterns and identify where your money goes.
+                </div>
+                <ul class="calc-features">
+                    <li>Category-based tracking</li>
+                    <li>Visual spending breakdown</li>
+                    <li>Export to CSV</li>
+                    <li>Real-time cash flow analysis</li>
+                </ul>
+                <div class="badge">Daily Tracking</div>
+            </a>
+
+            <!-- Net Worth Tracker -->
+            <a href="net-worth-tracker.html" class="calc-card">
+                <div class="calc-icon">📊</div>
+                <div class="calc-title">Net Worth Tracker</div>
+                <div class="calc-description">
+                    Calculate and track your net worth over time. Assets minus liabilities with historical snapshots.
+                </div>
+                <ul class="calc-features">
+                    <li>Assets & liabilities tracking</li>
+                    <li>Historical snapshots</li>
+                    <li>Trend visualization</li>
+                    <li>Progress monitoring</li>
+                </ul>
+                <div class="badge">Wealth Building</div>
+            </a>
+        </div>
+
+        <div class="cta-section">
+            <div class="cta-title">Ready to Master Your Finances?</div>
+            <div class="cta-text">
+                These calculators are just the beginning. Join our free course to learn the complete system for achieving financial sovereignty.
+            </div>
+            <a href="../assessment.html" class="btn">Start Your Free Assessment</a>
+        </div>
+
+        <div style="text-align: center; margin-top: 4rem; color: var(--fsa-text-dim, #6b7280); font-size: 0.9rem;">
+            <p><strong style="color: var(--fsa-green, #10b981);">💡 Pro Tip:</strong> Use these calculators together for a complete financial picture.</p>
+            <p style="margin-top: 1rem;">
+                Start with the Compound Growth Calculator to see your investment potential,<br>
+                then use the Debt Payoff Calculator to eliminate high-interest debt,<br>
+                finally check your Financial Freedom Timeline to set your target date.
+            </p>
+        </div>
+    </div>
+</body>
+</html>

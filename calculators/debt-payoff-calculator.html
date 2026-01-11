@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debt Payoff Calculator | Financially Sovereign Academy</title>
+    <meta name="description" content="Compare debt avalanche vs snowball strategies with visual timelines and interest savings.">
+    <link rel="stylesheet" href="../css/fsa-theme.css">
+    <style>
+        body {
+            background: var(--fsa-bg-dark, #0a1f1a);
+            color: var(--fsa-text-primary, #e0e0e0);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+
+        .calculator-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            color: var(--fsa-green, #10b981);
+            margin-bottom: 0.5rem;
+        }
+
+        .debt-input-section {
+            background: var(--fsa-bg-card, #1a3a2e);
+            border: 2px solid var(--fsa-border-medium, #2a5a4e);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .debt-item {
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid var(--fsa-border-subtle, #1a3a2e);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .debt-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .debt-name-input {
+            background: var(--fsa-bg-dark, #0a1f1a);
+            border: 2px solid var(--fsa-border-medium, #2a5a4e);
+            color: var(--fsa-green, #10b981);
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            width: 60%;
+        }
+
+        .remove-debt-btn {
+            background: var(--fsa-error, #ef4444);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .remove-debt-btn:hover {
+            background: #dc2626;
+            transform: scale(1.05);
+        }
+
+        .debt-inputs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .input-label {
+            font-size: 0.9rem;
+            color: var(--fsa-text-secondary, #9ca3af);
+            font-weight: 600;
+        }
+
+        .input-field {
+            background: var(--fsa-bg-dark, #0a1f1a);
+            border: 2px solid var(--fsa-border-medium, #2a5a4e);
+            color: var(--fsa-text-primary, #e0e0e0);
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-family: 'Courier New', monospace;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--fsa-green, #10b981);
+        }
+
+        .add-debt-btn {
+            background: var(--fsa-green, #10b981);
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            margin-top: 1rem;
+            transition: all 0.2s;
+        }
+
+        .add-debt-btn:hover {
+            background: var(--fsa-green-light, #34d399);
+            transform: translateY(-2px);
+        }
+
+        .payment-section {
+            background: var(--fsa-bg-secondary, #0f2922);
+            border: 2px solid var(--fsa-border-medium, #2a5a4e);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .slider-group {
+            margin: 2rem 0;
+        }
+
+        .slider {
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: var(--fsa-bg-dark, #0a1f1a);
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--fsa-green, #10b981);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .slider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.6);
+        }
+
+        .slider::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--fsa-green, #10b981);
+            cursor: pointer;
+            border: none;
+        }
+
+        .slider-display {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.75rem;
+        }
+
+        .slider-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--fsa-green, #10b981);
+            font-family: 'Courier New', monospace;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .strategy-card {
+            background: var(--fsa-bg-card, #1a3a2e);
+            border: 3px solid var(--fsa-border-medium, #2a5a4e);
+            border-radius: 1rem;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+
+        .strategy-card.recommended {
+            border-color: var(--fsa-green, #10b981);
+            box-shadow: 0 0 30px rgba(16, 185, 129, 0.4);
+        }
+
+        .strategy-title {
+            font-size: 1.8rem;
+            color: var(--fsa-green, #10b981);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .strategy-stat {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--fsa-text-dim, #6b7280);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--fsa-green, #10b981);
+            font-family: 'Courier New', monospace;
+            margin-top: 0.5rem;
+        }
+
+        .payoff-timeline {
+            margin-top: 2rem;
+        }
+
+        .timeline-bar {
+            position: relative;
+            height: 50px;
+            background: var(--fsa-bg-dark, #0a1f1a);
+            border-radius: 0.5rem;
+            overflow: hidden;
+            margin: 0.5rem 0;
+        }
+
+        .timeline-segment {
+            height: 100%;
+            float: left;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 0.85rem;
+            border-right: 2px solid rgba(0, 0, 0, 0.3);
+            transition: all 0.5s ease;
+        }
+
+        .savings-badge {
+            display: inline-block;
+            background: rgba(16, 185, 129, 0.2);
+            border: 2px solid var(--fsa-green, #10b981);
+            color: var(--fsa-green, #10b981);
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            margin: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .btn-calculate {
+            background: var(--fsa-green, #10b981);
+            color: white;
+            border: none;
+            padding: 1.25rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.2s;
+            margin-top: 1rem;
+        }
+
+        .btn-calculate:hover {
+            background: var(--fsa-green-light, #34d399);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+        }
+
+        .recommendation-box {
+            background: rgba(16, 185, 129, 0.1);
+            border: 2px solid var(--fsa-green, #10b981);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            text-align: center;
+        }
+
+        .recommendation-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--fsa-green, #10b981);
+            margin-bottom: 0.5rem;
+        }
+
+        .recommendation-text {
+            color: var(--fsa-text-secondary, #9ca3af);
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator-container">
+        <div class="header">
+            <h1>⚖️ Debt Payoff Calculator</h1>
+            <p>Compare Avalanche vs Snowball strategies and find your fastest path to freedom</p>
+        </div>
+
+        <div class="debt-input-section">
+            <h2 style="color: var(--fsa-green, #10b981); margin-bottom: 1.5rem;">📋 Your Debts</h2>
+            <div id="debts-container"></div>
+            <button class="add-debt-btn" onclick="addDebt()">+ Add Another Debt</button>
+        </div>
+
+        <div class="payment-section">
+            <h2 style="color: var(--fsa-green, #10b981); margin-bottom: 1.5rem;">💰 Payment Plan</h2>
+            <div class="slider-group">
+                <label style="color: var(--fsa-text-secondary, #9ca3af); font-weight: 600; margin-bottom: 0.5rem; display: block;">
+                    How much can you pay toward debt each month?
+                </label>
+                <input type="range" id="monthly-payment" class="slider" min="100" max="3000" step="50" value="500">
+                <div class="slider-display">
+                    <span class="slider-value" id="payment-display">$500</span>
+                    <span style="color: var(--fsa-text-dim, #6b7280);">$100 - $3,000</span>
+                </div>
+            </div>
+
+            <div class="slider-group" style="margin-top: 1rem;">
+                <label style="color: var(--fsa-text-secondary, #9ca3af); font-weight: 600; margin-bottom: 0.5rem; display: block;">
+                    One-time extra payment (windfall)
+                </label>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <input type="number" id="windfall-amount" class="input-field" placeholder="$0" value="0">
+                    <input type="number" id="windfall-month" class="input-field" placeholder="Month (e.g., 6)" value="6">
+                </div>
+                <div style="color: var(--fsa-text-dim, #6b7280); font-size: 0.85rem; margin-top: 0.5rem;">Simulate a tax refund/bonus applied in a future month.</div>
+            </div>
+
+            <button class="btn-calculate" onclick="calculatePayoff()">Calculate Payoff Strategies</button>
+        </div>
+
+        <div id="results-section" style="display: none;">
+            <div class="comparison-grid">
+                <!-- Avalanche Strategy -->
+                <div class="strategy-card" id="avalanche-card">
+                    <div class="strategy-title">🏔️ Avalanche Strategy</div>
+                    <p style="text-align: center; color: var(--fsa-text-secondary, #9ca3af); margin-bottom: 1.5rem;">
+                        Highest interest rate first (saves most money)
+                    </p>
+                    
+                    <div class="strategy-stat">
+                        <div class="stat-label">Debt-Free Date</div>
+                        <div class="stat-value" id="avalanche-date">--</div>
+                    </div>
+                    
+                    <div class="strategy-stat">
+                        <div class="stat-label">Time to Freedom</div>
+                        <div class="stat-value" id="avalanche-months">-- months</div>
+                    </div>
+                    
+                    <div class="strategy-stat">
+                        <div class="stat-label">Total Interest Paid</div>
+                        <div class="stat-value" id="avalanche-interest">$--</div>
+                    </div>
+
+                    <div class="payoff-timeline" id="avalanche-timeline"></div>
+                </div>
+
+                <!-- Snowball Strategy -->
+                <div class="strategy-card" id="snowball-card">
+                    <div class="strategy-title">⚪ Snowball Strategy</div>
+                    <p style="text-align: center; color: var(--fsa-text-secondary, #9ca3af); margin-bottom: 1.5rem;">
+                        Smallest balance first (quick wins for motivation)
+                    </p>
+                    
+                    <div class="strategy-stat">
+                        <div class="stat-label">Debt-Free Date</div>
+                        <div class="stat-value" id="snowball-date">--</div>
+                    </div>
+                    
+                    <div class="strategy-stat">
+                        <div class="stat-label">Time to Freedom</div>
+                        <div class="stat-value" id="snowball-months">-- months</div>
+                    </div>
+                    
+                    <div class="strategy-stat">
+                        <div class="stat-label">Total Interest Paid</div>
+                        <div class="stat-value" id="snowball-interest">$--</div>
+                    </div>
+
+                    <div class="payoff-timeline" id="snowball-timeline"></div>
+                </div>
+            </div>
+
+            <div class="recommendation-box" id="recommendation">
+                <div class="recommendation-title">💡 Recommendation</div>
+                <div class="recommendation-text" id="recommendation-text"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let debtCounter = 0;
+        let debts = [];
+
+        // Initialize with 2 example debts
+        function init() {
+            addDebt('Credit Card', 5000, 19.99, 150);
+            addDebt('Car Loan', 12000, 6.5, 350);
+            
+            document.getElementById('monthly-payment').addEventListener('input', function(e) {
+                document.getElementById('payment-display').textContent = '$' + parseInt(e.target.value).toLocaleString();
+            });
+        }
+
+        function addDebt(name = '', balance = 0, rate = 0, minimum = 0) {
+            debtCounter++;
+            const container = document.getElementById('debts-container');
+            
+            const debtDiv = document.createElement('div');
+            debtDiv.className = 'debt-item';
+            debtDiv.id = `debt-${debtCounter}`;
+            
+            debtDiv.innerHTML = `
+                <div class="debt-header">
+                    <input type="text" class="debt-name-input" placeholder="Debt Name" value="${name}" id="name-${debtCounter}">
+                    <button class="remove-debt-btn" onclick="removeDebt(${debtCounter})">Remove</button>
+                </div>
+                <div class="debt-inputs-grid">
+                    <div class="input-group">
+                        <label class="input-label">Balance</label>
+                        <input type="number" class="input-field" placeholder="5000" value="${balance || ''}" id="balance-${debtCounter}">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">Interest Rate (%)</label>
+                        <input type="number" class="input-field" placeholder="18.99" step="0.01" value="${rate || ''}" id="rate-${debtCounter}">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">Minimum Payment</label>
+                        <input type="number" class="input-field" placeholder="150" value="${minimum || ''}" id="minimum-${debtCounter}">
+                    </div>
+                </div>
+            `;
+            
+            container.appendChild(debtDiv);
+        }
+
+        function removeDebt(id) {
+            const debtElem = document.getElementById(`debt-${id}`);
+            if (debtElem) {
+                debtElem.remove();
+            }
+        }
+
+        function getDebts() {
+            debts = [];
+            const debtItems = document.querySelectorAll('.debt-item');
+            
+            debtItems.forEach((item, index) => {
+                const id = item.id.split('-')[1];
+                const name = document.getElementById(`name-${id}`).value;
+                const balance = parseFloat(document.getElementById(`balance-${id}`).value) || 0;
+                const rate = parseFloat(document.getElementById(`rate-${id}`).value) || 0;
+                const minimum = parseFloat(document.getElementById(`minimum-${id}`).value) || 0;
+                
+                if (balance > 0) {
+                    debts.push({ name, balance, rate, minimum, id });
+                }
+            });
+            
+            return debts;
+        }
+
+        function calculatePayoff() {
+            const debtsList = getDebts();
+            const monthlyPayment = parseFloat(document.getElementById('monthly-payment').value);
+            const windfallAmount = Math.max(parseFloat(document.getElementById('windfall-amount').value) || 0, 0);
+            const windfallMonth = Math.max(parseInt(document.getElementById('windfall-month').value) || 0, 0);
+            
+            if (debtsList.length === 0) {
+                alert('Please add at least one debt');
+                return;
+            }
+            
+            const totalMinimums = debtsList.reduce((sum, d) => sum + d.minimum, 0);
+            if (monthlyPayment < totalMinimums) {
+                alert(`Your monthly payment ($${monthlyPayment}) must be at least the sum of minimum payments ($${totalMinimums.toFixed(2)})`);
+                return;
+            }
+            
+            // Calculate both strategies
+            const options = { windfallAmount, windfallMonth };
+            const avalanche = simulatePayoff(JSON.parse(JSON.stringify(debtsList)), monthlyPayment, 'avalanche', options);
+            const snowball = simulatePayoff(JSON.parse(JSON.stringify(debtsList)), monthlyPayment, 'snowball', options);
+            
+            // Display results
+            displayResults(avalanche, snowball);
+        }
+
+        function simulatePayoff(debtsList, monthlyPayment, strategy, options = {}) {
+            // Sort debts based on strategy
+            if (strategy === 'avalanche') {
+                debtsList.sort((a, b) => b.rate - a.rate);
+            } else {
+                debtsList.sort((a, b) => a.balance - b.balance);
+            }
+            
+            let month = 0;
+            let totalInterest = 0;
+            const payoffOrder = [];
+            const windfallAmount = options.windfallAmount || 0;
+            const windfallMonth = options.windfallMonth || 0;
+            
+            while (debtsList.length > 0 && month < 600) { // Max 50 years
+                month++;
+                let remainingPayment = monthlyPayment;
+                
+                // Apply windfall in designated month
+                if (windfallAmount > 0 && month === windfallMonth) {
+                    remainingPayment += windfallAmount;
+                }
+                
+                // Apply minimum payments to all debts
+                for (let debt of debtsList) {
+                    const monthlyRate = debt.rate / 100 / 12;
+                    const interest = debt.balance * monthlyRate;
+                    totalInterest += interest;
+                    
+                    const payment = Math.min(debt.minimum, debt.balance + interest, remainingPayment);
+                    debt.balance = debt.balance + interest - payment;
+                    remainingPayment -= payment;
+                    
+                    if (debt.balance <= 0) {
+                        payoffOrder.push({ name: debt.name, month });
+                        debt.balance = 0;
+                    }
+                }
+                
+                // Apply extra payment to first debt
+                if (remainingPayment > 0 && debtsList.length > 0) {
+                    const firstDebt = debtsList[0];
+                    const extraPayment = Math.min(remainingPayment, firstDebt.balance);
+                    firstDebt.balance -= extraPayment;
+                    remainingPayment -= extraPayment;
+                    
+                    if (firstDebt.balance <= 0) {
+                        if (!payoffOrder.find(p => p.name === firstDebt.name)) {
+                            payoffOrder.push({ name: firstDebt.name, month });
+                        }
+                        firstDebt.balance = 0;
+                    }
+                }
+                
+                // Remove paid-off debts
+                debtsList = debtsList.filter(d => d.balance > 0);
+            }
+            
+            return { months: month, totalInterest, payoffOrder };
+        }
+
+        function displayResults(avalanche, snowball) {
+            document.getElementById('results-section').style.display = 'block';
+            
+            // Avalanche results
+            const avalancheDate = getDebtFreeDate(avalanche.months);
+            document.getElementById('avalanche-date').textContent = avalancheDate;
+            document.getElementById('avalanche-months').textContent = `${avalanche.months} months`;
+            document.getElementById('avalanche-interest').textContent = `$${Math.round(avalanche.totalInterest).toLocaleString()}`;
+            
+            // Snowball results
+            const snowballDate = getDebtFreeDate(snowball.months);
+            document.getElementById('snowball-date').textContent = snowballDate;
+            document.getElementById('snowball-months').textContent = `${snowball.months} months`;
+            document.getElementById('snowball-interest').textContent = `$${Math.round(snowball.totalInterest).toLocaleString()}`;
+            
+            // Highlight recommended strategy
+            const interestDiff = snowball.totalInterest - avalanche.totalInterest;
+            const monthsDiff = snowball.months - avalanche.months;
+            
+            document.getElementById('avalanche-card').classList.remove('recommended');
+            document.getElementById('snowball-card').classList.remove('recommended');
+            
+            if (Math.abs(interestDiff) < 500 && Math.abs(monthsDiff) <= 3) {
+                // Very similar - recommend snowball for motivation
+                document.getElementById('snowball-card').classList.add('recommended');
+                document.getElementById('recommendation-text').innerHTML = `
+                    Both strategies are very similar (difference: $${Math.round(Math.abs(interestDiff)).toLocaleString()}, ${Math.abs(monthsDiff)} months).<br>
+                    <strong>Snowball is recommended</strong> for quick wins and motivation!
+                `;
+            } else if (interestDiff > 1000 || monthsDiff > 6) {
+                // Avalanche saves significantly more
+                document.getElementById('avalanche-card').classList.add('recommended');
+                document.getElementById('recommendation-text').innerHTML = `
+                    <strong>Avalanche is recommended</strong> - saves you <strong>$${Math.round(interestDiff).toLocaleString()}</strong> 
+                    and ${monthsDiff} months vs Snowball!
+                `;
+            } else {
+                // Modest difference
+                document.getElementById('avalanche-card').classList.add('recommended');
+                document.getElementById('recommendation-text').innerHTML = `
+                    <strong>Avalanche is recommended</strong> - saves $${Math.round(interestDiff).toLocaleString()} in interest.<br>
+                    But if you need quick wins for motivation, Snowball works too!
+                `;
+            }
+            
+            // Draw timelines
+            drawTimeline('avalanche-timeline', avalanche.payoffOrder, avalanche.months);
+            drawTimeline('snowball-timeline', snowball.payoffOrder, snowball.months);
+            
+            // Scroll to results
+            document.getElementById('results-section').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function getDebtFreeDate(months) {
+            const now = new Date();
+            const futureDate = new Date(now.setMonth(now.getMonth() + months));
+            return futureDate.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+        }
+
+        function drawTimeline(containerId, payoffOrder, totalMonths) {
+            const container = document.getElementById(containerId);
+            const colors = ['#10b981', '#34d399', '#6ee7b7', '#a7f3d0'];
+            
+            let html = '<div style="font-size: 0.85rem; color: var(--fsa-text-dim, #6b7280); margin-bottom: 0.5rem;">Payoff Order:</div>';
+            html += '<div class="timeline-bar">';
+            
+            payoffOrder.forEach((item, index) => {
+                const prevMonth = index > 0 ? payoffOrder[index - 1].month : 0;
+                const width = ((item.month - prevMonth) / totalMonths) * 100;
+                const color = colors[index % colors.length];
+                html += `<div class="timeline-segment" style="width: ${width}%; background: ${color};" title="${item.name}">${item.name}</div>`;
+            });
+            
+            html += '</div>';
+            container.innerHTML = html;
+        }
+
+        // Initialize on load
+        window.addEventListener('load', init);
+    </script>
+</body>
+</html>
