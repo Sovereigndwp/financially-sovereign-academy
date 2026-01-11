@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 8: Risk & Insurance | Financially Sovereign Academy</title>
+    <meta name="description" content="Protect yourself from financial catastrophe. Learn which insurance you need and which is a waste of money.">
+    <link rel="stylesheet" href="../css/fsa-theme.css">
+    <link rel="stylesheet" href="../css/interactive-components.css">
+    <style>
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .module-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: var(--fsa-gradient-card);
+            border: 3px solid var(--fsa-green);
+            border-radius: var(--radius-xl);
+        }
+
+        .module-header h1 {
+            font-size: var(--font-size-4xl);
+            color: var(--fsa-green);
+            margin-bottom: 1rem;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: var(--font-size-3xl);
+            color: var(--fsa-green);
+            margin-bottom: 1.5rem;
+            border-bottom: 3px solid var(--fsa-border-medium);
+            padding-bottom: 0.5rem;
+        }
+
+        .content-block {
+            background: var(--fsa-bg-card);
+            border: 2px solid var(--fsa-border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .content-block h3 {
+            color: var(--fsa-green-light);
+            font-size: var(--font-size-xl);
+            margin-bottom: 1rem;
+        }
+
+        .calculator {
+            background: var(--fsa-bg-secondary);
+            border: 2px solid var(--fsa-border-medium);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .result-display {
+            background: var(--fsa-bg-dark);
+            border: 2px solid var(--fsa-green);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .result-display.hidden {
+            display: none;
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--fsa-border-subtle);
+        }
+
+        .result-item.total {
+            border-top: 3px solid var(--fsa-green);
+            border-bottom: none;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            font-size: var(--font-size-xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--fsa-green);
+        }
+
+        .insurance-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .insurance-card {
+            background: var(--fsa-bg-dark);
+            border: 2px solid var(--fsa-border-medium);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            transition: all var(--transition-base);
+        }
+
+        .insurance-card.essential {
+            border-color: var(--fsa-green);
+        }
+
+        .insurance-card.optional {
+            border-color: var(--fsa-warning);
+        }
+
+        .insurance-card.avoid {
+            border-color: var(--fsa-error);
+        }
+
+        .insurance-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: var(--radius-md);
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-bold);
+            margin-bottom: 1rem;
+        }
+
+        .badge-essential {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--fsa-green);
+        }
+
+        .badge-optional {
+            background: rgba(251, 191, 36, 0.2);
+            color: var(--fsa-warning);
+        }
+
+        .badge-avoid {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--fsa-error);
+        }
+
+        .scenario-container {
+            background: var(--fsa-bg-card);
+            border: 2px solid var(--fsa-border-medium);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .scenario-choices {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .scenario-outcome {
+            background: var(--fsa-bg-dark);
+            border: 2px solid var(--fsa-green);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .scenario-outcome.hidden {
+            display: none;
+        }
+
+        .quiz {
+            background: var(--fsa-bg-card);
+            border: 2px solid var(--fsa-border-medium);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .quiz-question {
+            font-size: var(--font-size-xl);
+            color: var(--fsa-green);
+            margin-bottom: 1.5rem;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .quiz-option {
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid var(--fsa-border-medium);
+            border-radius: var(--radius-md);
+            padding: 1rem;
+            cursor: pointer;
+            transition: all var(--transition-base);
+        }
+
+        .quiz-option:hover {
+            border-color: var(--fsa-green);
+        }
+
+        .quiz-option.correct {
+            background: rgba(16, 185, 129, 0.2);
+            border-color: var(--fsa-success);
+        }
+
+        .quiz-option.incorrect {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: var(--fsa-error);
+        }
+
+        .quiz-feedback {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: var(--radius-md);
+        }
+
+        .quiz-feedback.correct {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--fsa-success);
+        }
+
+        .quiz-feedback.incorrect {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--fsa-error);
+        }
+
+        @media (max-width: 768px) {
+            .insurance-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="module-header">
+            <h1>Module 8: Risk & Insurance</h1>
+            <p class="subtitle">Protect yourself from financial catastrophe</p>
+        </div>
+
+        <section class="section">
+            <h2 class="section-title">Why Insurance Exists</h2>
+            
+            <div class="content-block">
+                <h3>The Purpose of Insurance</h3>
+                <p><strong>Insurance is for catastrophes, not convenience</strong></p>
+                <p>Insurance protects you from financial ruin. It's NOT for small, predictable expenses.</p>
+                <p><strong>Good use:</strong> Health insurance covering a $100,000 hospital bill</p>
+                <p><strong>Bad use:</strong> Extended warranty on a $400 TV</p>
+            </div>
+
+            <div class="content-block">
+                <h3>How Insurance Works</h3>
+                <p><strong>You pay premiums (monthly/yearly)</strong> → Insurance company pools risk across thousands of people → If disaster strikes, they pay your claim</p>
+                <p><strong>The insurance company always wins:</strong> They charge more in premiums than they pay out in claims. That's how they profit.</p>
+                <p><strong>Your goal:</strong> Only buy insurance for risks that would financially destroy you</p>
+            </div>
+
+            <div class="highlight highlight-warning">
+                <strong>⚠️ Reality Check:</strong> A $50,000 medical bill can bankrupt you. A $500 phone repair cannot. Insure the former, self-insure the latter.
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Essential Insurance: What You NEED</h2>
+            
+            <div class="insurance-grid">
+                <div class="insurance-card essential">
+                    <span class="insurance-badge badge-essential">ESSENTIAL</span>
+                    <h3>Health Insurance</h3>
+                    <p><strong>Why:</strong> Medical bills are the #1 cause of bankruptcy in the US</p>
+                    <p><strong>Cost:</strong> $300-800/month individual, $1,200-2,000/month family</p>
+                    <p><strong>What to do:</strong> High-deductible plan + HSA if healthy. PPO if you have chronic conditions.</p>
+                </div>
+
+                <div class="insurance-card essential">
+                    <span class="insurance-badge badge-essential">ESSENTIAL</span>
+                    <h3>Auto Insurance</h3>
+                    <p><strong>Why:</strong> Required by law. Liability protects you if you cause an accident</p>
+                    <p><strong>Cost:</strong> $100-200/month</p>
+                    <p><strong>What to do:</strong> Liability only if car is old (<$5K value). Full coverage if financing.</p>
+                </div>
+
+                <div class="insurance-card essential">
+                    <span class="insurance-badge badge-essential">ESSENTIAL (if you have dependents)</span>
+                    <h3>Term Life Insurance</h3>
+                    <p><strong>Why:</strong> Replaces your income if you die. Kids need to eat.</p>
+                    <p><strong>Cost:</strong> $30-100/month for $500K-$1M coverage</p>
+                    <p><strong>What to do:</strong> Buy 10-20x your annual salary. Term only, never whole life.</p>
+                </div>
+
+                <div class="insurance-card essential">
+                    <span class="insurance-badge badge-essential">ESSENTIAL (if you own)</span>
+                    <h3>Homeowners/Renters</h3>
+                    <p><strong>Why:</strong> Fire, theft, liability. Mortgage requires it.</p>
+                    <p><strong>Cost:</strong> $100-200/month (homeowners), $15-30/month (renters)</p>
+                    <p><strong>What to do:</strong> Required if you have mortgage. Get renters insurance always (it's cheap).</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Optional Insurance: Depends on Your Situation</h2>
+            
+            <div class="insurance-grid">
+                <div class="insurance-card optional">
+                    <span class="insurance-badge badge-optional">OPTIONAL</span>
+                    <h3>Disability Insurance</h3>
+                    <p><strong>Why:</strong> Replaces income if you can't work due to injury/illness</p>
+                    <p><strong>Who needs it:</strong> Primary earners, especially physical jobs</p>
+                    <p><strong>Cost:</strong> 1-3% of income</p>
+                    <p><strong>What to do:</strong> Check employer coverage first. Buy supplemental if risky job.</p>
+                </div>
+
+                <div class="insurance-card optional">
+                    <span class="insurance-badge badge-optional">OPTIONAL</span>
+                    <h3>Umbrella Policy</h3>
+                    <p><strong>Why:</strong> Extra liability coverage beyond auto/home (if you get sued)</p>
+                    <p><strong>Who needs it:</strong> High net worth ($500K+ assets)</p>
+                    <p><strong>Cost:</strong> $200-500/year for $1M coverage</p>
+                    <p><strong>What to do:</strong> Get if you have significant assets to protect.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Insurance to AVOID: Waste of Money</h2>
+            
+            <div class="insurance-grid">
+                <div class="insurance-card avoid">
+                    <span class="insurance-badge badge-avoid">AVOID</span>
+                    <h3>Extended Warranties</h3>
+                    <p><strong>Why it's bad:</strong> Products rarely break during warranty period. You're better off self-insuring.</p>
+                    <p><strong>Example:</strong> $200 warranty on $800 laptop. Just save the $200.</p>
+                </div>
+
+                <div class="insurance-card avoid">
+                    <span class="insurance-badge badge-avoid">AVOID</span>
+                    <h3>Credit Card Insurance</h3>
+                    <p><strong>Why it's bad:</strong> Pays minimums if you lose job. Expensive and limited benefit.</p>
+                    <p><strong>Better option:</strong> Emergency fund covers this.</p>
+                </div>
+
+                <div class="insurance-card avoid">
+                    <span class="insurance-badge badge-avoid">AVOID</span>
+                    <h3>Whole Life Insurance</h3>
+                    <p><strong>Why it's bad:</strong> 10x more expensive than term life. Investment returns suck (2-3%).</p>
+                    <p><strong>Better option:</strong> Buy term life, invest the difference in index funds.</p>
+                </div>
+
+                <div class="insurance-card avoid">
+                    <span class="insurance-badge badge-avoid">AVOID</span>
+                    <h3>Cancer/Disease-Specific Insurance</h3>
+                    <p><strong>Why it's bad:</strong> Only pays if you get that specific disease. Health insurance already covers this.</p>
+                    <p><strong>Scam factor:</strong> High premiums, narrow coverage.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Life Insurance Calculator</h2>
+            
+            <div class="calculator">
+                <h3 style="font-size: var(--font-size-2xl); color: var(--fsa-green); margin-bottom: 1.5rem; text-align: center;">How Much Life Insurance Do You Need?</h3>
+                
+                <p style="text-align: center; color: var(--fsa-text-secondary); margin-bottom: 1.5rem;">Only applies if you have dependents (kids, spouse who relies on your income)</p>
+
+                <div class="form-group">
+                    <label class="form-label" for="annual-income">Annual Income</label>
+                    <input type="number" id="annual-income" class="form-input" placeholder="e.g., 60000" value="60000">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="dependents">Number of Dependents</label>
+                    <input type="number" id="dependents" class="form-input" placeholder="e.g., 2" value="2">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="current-debt">Total Debt (mortgage, car, etc.)</label>
+                    <input type="number" id="current-debt" class="form-input" placeholder="e.g., 200000" value="200000">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="existing-coverage">Existing Life Insurance Coverage</label>
+                    <input type="number" id="existing-coverage" class="form-input" placeholder="e.g., 100000" value="0">
+                </div>
+
+                <button class="btn btn-primary" onclick="calculateLifeInsurance()">Calculate Coverage Needed</button>
+
+                <div class="result-display hidden" id="life-insurance-result">
+                    <div class="result-item">
+                        <span>Income replacement (10 years)</span>
+                        <span id="income-replacement">$600,000</span>
+                    </div>
+                    <div class="result-item">
+                        <span>Debt payoff</span>
+                        <span id="debt-payoff">$200,000</span>
+                    </div>
+                    <div class="result-item">
+                        <span>Education fund ($25K per child)</span>
+                        <span id="education-fund">$50,000</span>
+                    </div>
+                    <div class="result-item">
+                        <span>Existing coverage</span>
+                        <span id="existing">-$0</span>
+                    </div>
+                    <div class="result-item total">
+                        <span>Recommended Coverage</span>
+                        <span id="recommended-coverage">$850,000</span>
+                    </div>
+                    <p style="margin-top: 1rem; color: var(--fsa-text-secondary); font-size: var(--font-size-sm);">
+                        Estimated cost: <span id="estimated-cost">$50-80/month</span> for term life insurance
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Scenario: Medical Emergency Without Insurance</h2>
+            
+            <div class="scenario-container">
+                <h3 style="color: var(--fsa-green); margin-bottom: 1rem;">You have a medical emergency requiring surgery</h3>
+                <p>Total bill: $75,000. You're 28 and healthy, so you skipped health insurance to save money.</p>
+                
+                <div class="scenario-choices">
+                    <button class="btn btn-secondary" onclick="showOutcome('negotiate')">Negotiate with hospital</button>
+                    <button class="btn btn-secondary" onclick="showOutcome('payment-plan')">Set up payment plan</button>
+                    <button class="btn btn-secondary" onclick="showOutcome('bankruptcy')">File bankruptcy</button>
+                </div>
+
+                <div class="scenario-outcome hidden" id="outcome-negotiate">
+                    <h4 style="color: var(--fsa-warning); margin-bottom: 1rem;">Outcome: Negotiate</h4>
+                    <p><strong>What happened:</strong> Hospital offers 30% discount for cash payment. Bill is now $52,500.</p>
+                    <p><strong>The problem:</strong> You don't have $52,500. Even with discount, this is life-altering debt.</p>
+                    <p><strong>Impact:</strong> You drain emergency fund, max out credit cards, borrow from family. Takes 5+ years to recover financially.</p>
+                    <p><strong>Lesson:</strong> Negotiating helps but doesn't solve the core problem. One emergency shouldn't cost 5 years of financial progress.</p>
+                </div>
+
+                <div class="scenario-outcome hidden" id="outcome-payment-plan">
+                    <h4 style="color: var(--fsa-warning); margin-bottom: 1rem;">Outcome: Payment Plan</h4>
+                    <p><strong>What happened:</strong> Hospital offers $500/month payment plan (0% interest). Sounds manageable.</p>
+                    <p><strong>The math:</strong> $75,000 / $500 = 150 months = 12.5 YEARS of payments</p>
+                    <p><strong>Impact:</strong> For over a decade, $500/month goes to this bill instead of savings, investing, or living. Miss out on ~$100K in investment gains.</p>
+                    <p><strong>Lesson:</strong> Payment plans feel manageable monthly but steal your future wealth. Health insurance would have capped this at $5-8K (deductible + out-of-pocket max).</p>
+                </div>
+
+                <div class="scenario-outcome hidden" id="outcome-bankruptcy">
+                    <h4 style="color: var(--fsa-error); margin-bottom: 1rem;">Outcome: Bankruptcy</h4>
+                    <p><strong>What happened:</strong> You file Chapter 7 bankruptcy. Medical debt is discharged.</p>
+                    <p><strong>The consequences:</strong></p>
+                    <ul>
+                        <li>Bankruptcy stays on credit report for 10 years</li>
+                        <li>Can't get mortgage, car loan, or decent credit cards</li>
+                        <li>Some employers check credit (harder to get jobs)</li>
+                        <li>Higher insurance rates</li>
+                    </ul>
+                    <p><strong>Lesson:</strong> Medical bankruptcy destroys financial life for a decade. Health insurance costs $300-600/month. Bankruptcy costs 10 years. Do the math.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Check Your Understanding</h2>
+            
+            <div class="quiz">
+                <div class="quiz-question">1. What is insurance designed for?</div>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="checkAnswer(1, 'a', true)">A) Financial catastrophes that would ruin you</button>
+                    <button class="quiz-option" onclick="checkAnswer(1, 'b', false)">B) All expenses, big and small</button>
+                    <button class="quiz-option" onclick="checkAnswer(1, 'c', false)">C) Making money through investments</button>
+                </div>
+                <div class="quiz-feedback hidden" id="feedback-1"></div>
+            </div>
+
+            <div class="quiz">
+                <div class="quiz-question">2. Which type of life insurance should you buy?</div>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="checkAnswer(2, 'a', true)">A) Term life insurance</button>
+                    <button class="quiz-option" onclick="checkAnswer(2, 'b', false)">B) Whole life insurance</button>
+                    <button class="quiz-option" onclick="checkAnswer(2, 'c', false)">C) Universal life insurance</button>
+                </div>
+                <div class="quiz-feedback hidden" id="feedback-2"></div>
+            </div>
+
+            <div class="quiz">
+                <div class="quiz-question">3. Which insurance is generally a waste of money?</div>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="checkAnswer(3, 'a', false)">A) Health insurance</button>
+                    <button class="quiz-option" onclick="checkAnswer(3, 'b', true)">B) Extended warranties</button>
+                    <button class="quiz-option" onclick="checkAnswer(3, 'c', false)">C) Auto liability insurance</button>
+                </div>
+                <div class="quiz-feedback hidden" id="feedback-3"></div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="card" style="text-align: center;">
+                <h3 class="card-title">Module 8 Complete! 🎉</h3>
+                <p class="card-description">You now understand how to protect yourself from financial catastrophe.</p>
+                <div style="margin-top: 2rem;">
+                    <button class="btn btn-primary" onclick="completeModule()">Mark Complete & Continue to Module 9</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="../js/module-progress.js"></script>
+    <script src="../js/progress-manager.js"></script>
+    <script>
+        const progressManager = new FSAProgressManager();
+        progressManager.init();
+        progressManager.setModuleVisited(8);
+
+        function calculateLifeInsurance() {
+            const income = parseFloat(document.getElementById('annual-income').value) || 0;
+            const dependents = parseInt(document.getElementById('dependents').value) || 0;
+            const debt = parseFloat(document.getElementById('current-debt').value) || 0;
+            const existing = parseFloat(document.getElementById('existing-coverage').value) || 0;
+
+            if (income === 0) {
+                alert('Please enter your annual income');
+                return;
+            }
+
+            // Income replacement: 10 years of income
+            const incomeReplacement = income * 10;
+            
+            // Education fund: $25,000 per child
+            const educationFund = dependents * 25000;
+            
+            // Total need
+            const totalNeed = incomeReplacement + debt + educationFund - existing;
+            
+            // Round to nearest $50K
+            const recommended = Math.max(0, Math.round(totalNeed / 50000) * 50000);
+            
+            // Estimated cost (rough estimate: $0.05-0.08 per $1000 of coverage per month for healthy 30-year-old)
+            const estimatedCostLow = Math.round(recommended / 1000 * 0.05);
+            const estimatedCostHigh = Math.round(recommended / 1000 * 0.08);
+
+            // Display results
+            document.getElementById('life-insurance-result').classList.remove('hidden');
+            document.getElementById('income-replacement').textContent = `$${incomeReplacement.toLocaleString()}`;
+            document.getElementById('debt-payoff').textContent = `$${debt.toLocaleString()}`;
+            document.getElementById('education-fund').textContent = `$${educationFund.toLocaleString()}`;
+            document.getElementById('existing').textContent = `-$${existing.toLocaleString()}`;
+            document.getElementById('recommended-coverage').textContent = `$${recommended.toLocaleString()}`;
+            document.getElementById('estimated-cost').textContent = `$${estimatedCostLow}-${estimatedCostHigh}/month`;
+        }
+
+        function showOutcome(outcome) {
+            const outcomes = ['negotiate', 'payment-plan', 'bankruptcy'];
+            outcomes.forEach(o => {
+                document.getElementById(`outcome-${o}`).classList.add('hidden');
+            });
+            document.getElementById(`outcome-${outcome}`).classList.remove('hidden');
+        }
+
+        function checkAnswer(questionNum, answer, isCorrect) {
+            const feedback = document.getElementById(`feedback-${questionNum}`);
+            const options = feedback.parentElement.querySelectorAll('.quiz-option');
+            
+            options.forEach(opt => opt.style.pointerEvents = 'none');
+            event.target.classList.add(isCorrect ? 'correct' : 'incorrect');
+            
+            feedback.classList.remove('hidden');
+            feedback.classList.add(isCorrect ? 'correct' : 'incorrect');
+            
+            if (isCorrect) {
+                feedback.textContent = '✓ Correct!';
+            } else {
+                feedback.textContent = '✗ Not quite. Review the content above.';
+                setTimeout(() => {
+                    options.forEach(opt => opt.style.pointerEvents = 'auto');
+                    event.target.classList.remove('incorrect');
+                    feedback.classList.add('hidden');
+                }, 2000);
+            }
+        }
+
+        function completeModule() {
+            progressManager.setModuleComplete(8, { timeSpent: 0, score: 100 });
+            alert('Module 8 complete! Next: Module 9 - Consumer Protection.');
+            window.location.href = '../index.html';
+        }
+    </script>
+</body>
+</html>
