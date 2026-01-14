@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bitcoin vs Traditional Assets Comparison | FSA Calculators</title>
+    <meta name="description" content="Compare Bitcoin against traditional investments like stocks, bonds, and savings accounts over different time periods.">
+    <link rel="stylesheet" href="../css/fsa-theme.css">
+    <style>
+        body {
+            background: var(--fsa-bg-dark, #0a1f1a);
+            color: var(--fsa-text-primary, #e0e0e0);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            color: var(--fsa-green, #10b981);
+            margin-bottom: 1rem;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            color: var(--fsa-text-secondary, #9ca3af);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .input-section, .results-section {
+            background: var(--fsa-bg-card, #1a3a2e);
+            border: 2px solid var(--fsa-border-medium, #2a5a4e);
+            border-radius: 1rem;
+            padding: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--fsa-green, #10b981);
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--fsa-border-medium, #2a5a4e);
+            padding-bottom: 0.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--fsa-text-primary, #e0e0e0);
+            font-weight: 600;
+        }
+
+        .form-input, .form-select {
+            width: 100%;
+            padding: 0.75rem;
+            background: var(--fsa-bg-dark, #0a1f1a);
+            border: 2px solid var(--fsa-border-subtle, #1a4a3e);
+            border-radius: 0.5rem;
+            color: var(--fsa-text-primary, #e0e0e0);
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            border-color: var(--fsa-green, #10b981);
+        }
+
+        .form-help {
+            font-size: 0.85rem;
+            color: var(--fsa-text-dim, #6b7280);
+            margin-top: 0.25rem;
+        }
+
+        .btn {
+            background: var(--fsa-green, #10b981);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            width: 100%;
+        }
+
+        .btn:hover {
+            background: var(--fsa-green-light, #34d399);
+            transform: translateY(-2px);
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .result-card {
+            background: var(--fsa-bg-secondary, #0f2922);
+            border: 1px solid var(--fsa-border-subtle, #1a4a3e);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .result-title {
+            font-size: 0.9rem;
+            color: var(--fsa-text-secondary, #9ca3af);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .result-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-subtitle {
+            font-size: 0.85rem;
+            color: var(--fsa-text-dim, #6b7280);
+        }
+
+        .bitcoin-result { color: #f7931a; }
+        .stocks-result { color: #2196f3; }
+        .bonds-result { color: #ff9800; }
+        .savings-result { color: #9e9e9e; }
+
+        .chart-container {
+            background: var(--fsa-bg-secondary, #0f2922);
+            border: 1px solid var(--fsa-border-subtle, #1a4a3e);
+            border-radius: 0.75rem;
+            padding: 2rem;
+            margin: 2rem 0;
+            min-height: 300px;
+        }
+
+        .disclaimer {
+            background: rgba(239, 68, 68, 0.1);
+            border: 2px solid rgba(239, 68, 68, 0.3);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin: 3rem 0;
+            text-align: center;
+        }
+
+        .disclaimer h3 {
+            color: #ef4444;
+            margin-bottom: 1rem;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: var(--fsa-green, #10b981);
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            transition: all 0.2s;
+        }
+
+        .back-link:hover {
+            transform: translateX(-5px);
+        }
+
+        @media (max-width: 768px) {
+            .calculator-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← Back to Calculators</a>
+
+        <div class="header">
+            <h1>🏆 Bitcoin vs Traditional Assets Comparison</h1>
+            <p>Compare how Bitcoin has performed against traditional investments over various time periods. Educational tool only - not investment advice.</p>
+        </div>
+
+        <div class="calculator-grid">
+            <!-- Input Section -->
+            <div class="input-section">
+                <h2 class="section-title">Investment Parameters</h2>
+                
+                <div class="form-group">
+                    <label class="form-label" for="initial-investment">Initial Investment Amount</label>
+                    <input type="number" id="initial-investment" class="form-input" value="10000" min="100" step="100">
+                    <span class="form-help">How much would you have invested?</span>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="time-period">Time Period</label>
+                    <select id="time-period" class="form-select">
+                        <option value="1">1 Year</option>
+                        <option value="2">2 Years</option>
+                        <option value="3">3 Years</option>
+                        <option value="4" selected>4 Years</option>
+                        <option value="5">5 Years</option>
+                        <option value="10">10 Years (Projected)</option>
+                    </select>
+                    <span class="form-help">Looking back from today</span>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="dca-monthly">Monthly DCA Amount (Optional)</label>
+                    <input type="number" id="dca-monthly" class="form-input" value="0" min="0" step="50">
+                    <span class="form-help">Additional monthly investment (Dollar-Cost Averaging)</span>
+                </div>
+
+                <button class="btn" onclick="calculateComparison()">Calculate Comparison</button>
+            </div>
+
+            <!-- Results Section -->
+            <div class="results-section">
+                <h2 class="section-title">Investment Results</h2>
+                
+                <div class="results-grid" id="results-grid">
+                    <div class="result-card">
+                        <div class="result-title">Bitcoin</div>
+                        <div class="result-value bitcoin-result" id="bitcoin-value">$0</div>
+                        <div class="result-subtitle" id="bitcoin-return">0% return</div>
+                    </div>
+                    
+                    <div class="result-card">
+                        <div class="result-title">S&P 500</div>
+                        <div class="result-value stocks-result" id="stocks-value">$0</div>
+                        <div class="result-subtitle" id="stocks-return">0% return</div>
+                    </div>
+                    
+                    <div class="result-card">
+                        <div class="result-title">Bonds</div>
+                        <div class="result-value bonds-result" id="bonds-value">$0</div>
+                        <div class="result-subtitle" id="bonds-return">0% return</div>
+                    </div>
+                    
+                    <div class="result-card">
+                        <div class="result-title">Savings (2% APY)</div>
+                        <div class="result-value savings-result" id="savings-value">$0</div>
+                        <div class="result-subtitle" id="savings-return">0% return</div>
+                    </div>
+                </div>
+
+                <div id="winner-announcement" style="margin-top: 2rem; padding: 1rem; border-radius: 0.5rem; text-align: center; font-weight: bold; display: none;"></div>
+            </div>
+        </div>
+
+        <!-- Chart Placeholder -->
+        <div class="chart-container">
+            <h3 style="text-align: center; margin-bottom: 2rem; color: var(--fsa-green, #10b981);">Growth Comparison Chart</h3>
+            <div id="chart-placeholder" style="text-align: center; color: var(--fsa-text-dim, #6b7280); padding: 3rem;">
+                Click "Calculate Comparison" to see visual results
+            </div>
+        </div>
+
+        <!-- Educational Content -->
+        <div style="background: var(--fsa-bg-card, #1a3a2e); border: 2px solid var(--fsa-border-medium, #2a5a4e); border-radius: 1rem; padding: 2rem; margin: 3rem 0;">
+            <h3 style="color: var(--fsa-green, #10b981); margin-bottom: 1rem;">🎓 What This Means</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+                <div>
+                    <h4 style="color: #f7931a; margin-bottom: 0.5rem;">Bitcoin</h4>
+                    <p style="font-size: 0.9rem; color: var(--fsa-text-secondary, #9ca3af);">High volatility, high potential returns. Historically outperformed traditional assets but with significant risk.</p>
+                </div>
+                <div>
+                    <h4 style="color: #2196f3; margin-bottom: 0.5rem;">S&P 500</h4>
+                    <p style="font-size: 0.9rem; color: var(--fsa-text-secondary, #9ca3af);">Diversified stock index, ~10% historical annual returns with moderate volatility.</p>
+                </div>
+                <div>
+                    <h4 style="color: #ff9800; margin-bottom: 0.5rem;">Bonds</h4>
+                    <p style="font-size: 0.9rem; color: var(--fsa-text-secondary, #9ca3af);">Lower risk, lower returns. Historically ~4-6% annual returns with less volatility.</p>
+                </div>
+                <div>
+                    <h4 style="color: #9e9e9e; margin-bottom: 0.5rem;">Savings</h4>
+                    <p style="font-size: 0.9rem; color: var(--fsa-text-secondary, #9ca3af);">Lowest risk, lowest returns. Guaranteed but often doesn't beat inflation.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Integration with Bitcoin Sovereign Academy -->
+        <div style="background: linear-gradient(135deg, rgba(247, 147, 26, 0.1), rgba(247, 147, 26, 0.05)); border: 2px solid #f7931a; border-radius: 1rem; padding: 2rem; text-align: center; margin: 3rem 0;">
+            <h3 style="color: #f7931a; margin-bottom: 1rem;">🚀 Ready to Learn More About Bitcoin?</h3>
+            <p style="margin-bottom: 1.5rem; color: var(--fsa-text-secondary, #9ca3af);">This calculator shows historical performance, but do you understand <em>why</em> Bitcoin has outperformed? Learn the technology, economics, and strategy behind Bitcoin investing.</p>
+            <a href="https://bitcoinsovereign.academy" target="_blank" style="display: inline-block; background: #f7931a; color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; text-decoration: none; font-weight: 600; transition: all 0.2s;" onmouseover="this.style.background='#ff7b00'; this.style.transform='translateY(-2px)';" onmouseout="this.style.background='#f7931a'; this.style.transform='translateY(0)';">Continue to Bitcoin Sovereign Academy →</a>
+        </div>
+
+        <!-- Disclaimer -->
+        <div class="disclaimer">
+            <h3>⚠️ Important Disclaimer</h3>
+            <p style="margin-bottom: 1rem;">This calculator uses historical data and simplified projections for educational purposes only.</p>
+            <p style="margin-bottom: 1rem;"><strong>This is not financial advice.</strong> Past performance does not guarantee future results. Bitcoin and all investments carry risk of loss.</p>
+            <p style="font-size: 0.9rem;">Always do your own research and consult with qualified financial professionals before making investment decisions.</p>
+        </div>
+    </div>
+
+    <script>
+        // Simplified historical returns (annual averages)
+        const historicalReturns = {
+            bitcoin: { 1: 0.60, 2: 0.45, 3: 0.55, 4: 0.85, 5: 1.20, 10: 0.65 }, // Very volatile, these are rough estimates
+            stocks: { 1: 0.26, 2: 0.15, 3: 0.12, 4: 0.12, 5: 0.11, 10: 0.10 },
+            bonds: { 1: -0.10, 2: -0.05, 3: 0.01, 4: 0.02, 5: 0.03, 10: 0.04 },
+            savings: { 1: 0.02, 2: 0.02, 3: 0.02, 4: 0.02, 5: 0.02, 10: 0.02 }
+        };
+
+        function calculateComparison() {
+            const initialInvestment = parseFloat(document.getElementById('initial-investment').value);
+            const timePeriod = parseInt(document.getElementById('time-period').value);
+            const monthlyDCA = parseFloat(document.getElementById('dca-monthly').value);
+
+            if (initialInvestment <= 0) {
+                alert('Please enter a valid initial investment amount.');
+                return;
+            }
+
+            const results = {};
+            
+            // Calculate for each asset class
+            ['bitcoin', 'stocks', 'bonds', 'savings'].forEach(asset => {
+                const annualReturn = historicalReturns[asset][timePeriod];
+                
+                // Initial investment growth
+                const initialGrowth = initialInvestment * Math.pow(1 + annualReturn, timePeriod);
+                
+                // DCA growth (assuming monthly compounding)
+                let dcaGrowth = 0;
+                if (monthlyDCA > 0) {
+                    const monthlyReturn = Math.pow(1 + annualReturn, 1/12) - 1;
+                    const months = timePeriod * 12;
+                    
+                    for (let month = 1; month <= months; month++) {
+                        const monthsRemaining = months - month + 1;
+                        dcaGrowth += monthlyDCA * Math.pow(1 + monthlyReturn, monthsRemaining);
+                    }
+                }
+                
+                results[asset] = {
+                    value: initialGrowth + dcaGrowth,
+                    totalInvested: initialInvestment + (monthlyDCA * timePeriod * 12),
+                    return: annualReturn
+                };
+            });
+
+            displayResults(results, timePeriod);
+            createSimpleChart(results, timePeriod);
+        }
+
+        function displayResults(results, timePeriod) {
+            // Update result cards
+            Object.keys(results).forEach(asset => {
+                const value = results[asset].value;
+                const totalInvested = results[asset].totalInvested;
+                const totalReturn = ((value - totalInvested) / totalInvested) * 100;
+                
+                document.getElementById(`${asset === 'stocks' ? 'stocks' : asset}-value`).textContent = 
+                    formatCurrency(value);
+                document.getElementById(`${asset === 'stocks' ? 'stocks' : asset}-return`).textContent = 
+                    `${totalReturn.toFixed(1)}% total return`;
+            });
+
+            // Find and announce winner
+            const winner = Object.keys(results).reduce((a, b) => 
+                results[a].value > results[b].value ? a : b
+            );
+            
+            const winnerAnnouncement = document.getElementById('winner-announcement');
+            winnerAnnouncement.style.display = 'block';
+            winnerAnnouncement.innerHTML = `
+                🏆 <strong>${capitalizeFirst(winner)}</strong> would have given you the highest returns over ${timePeriod} year${timePeriod > 1 ? 's' : ''}!
+                <br><span style="font-size: 0.9rem; font-weight: normal;">
+                ${formatCurrency(results[winner].value)} vs initial ${formatCurrency(results[winner].totalInvested)}
+                </span>
+            `;
+            
+            // Color the announcement based on winner
+            const colors = { bitcoin: '#f7931a', stocks: '#2196f3', bonds: '#ff9800', savings: '#9e9e9e' };
+            winnerAnnouncement.style.backgroundColor = `${colors[winner]}20`;
+            winnerAnnouncement.style.border = `2px solid ${colors[winner]}`;
+            winnerAnnouncement.style.color = colors[winner];
+        }
+
+        function createSimpleChart(results, timePeriod) {
+            const chartContainer = document.getElementById('chart-placeholder');
+            
+            const chartHTML = `
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; text-align: center;">
+                    ${Object.keys(results).map(asset => {
+                        const value = results[asset].value;
+                        const maxValue = Math.max(...Object.values(results).map(r => r.value));
+                        const height = (value / maxValue) * 200;
+                        const colors = { bitcoin: '#f7931a', stocks: '#2196f3', bonds: '#ff9800', savings: '#9e9e9e' };
+                        
+                        return `
+                            <div>
+                                <div style="
+                                    height: ${height}px;
+                                    background: ${colors[asset]};
+                                    margin: 0 auto 1rem;
+                                    width: 40px;
+                                    border-radius: 4px 4px 0 0;
+                                    display: flex;
+                                    align-items: end;
+                                    justify-content: center;
+                                    color: white;
+                                    font-size: 0.7rem;
+                                    padding: 0.25rem;
+                                "></div>
+                                <div style="color: ${colors[asset]}; font-weight: 600; margin-bottom: 0.25rem;">
+                                    ${capitalizeFirst(asset === 'stocks' ? 'S&P 500' : asset)}
+                                </div>
+                                <div style="font-size: 0.8rem; color: var(--fsa-text-dim, #6b7280);">
+                                    ${formatCurrency(value)}
+                                </div>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+                <p style="margin-top: 2rem; font-size: 0.9rem; color: var(--fsa-text-dim, #6b7280); text-align: center;">
+                    Results based on ${timePeriod}-year historical performance (simplified)
+                </p>
+            `;
+            
+            chartContainer.innerHTML = chartHTML;
+        }
+
+        function formatCurrency(value) {
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }).format(value);
+        }
+
+        function capitalizeFirst(str) {
+            return str.charAt(0).toUpperCase() + str.slice(1);
+        }
+
+        // Initialize with default calculation
+        document.addEventListener('DOMContentLoaded', () => {
+            calculateComparison();
+        });
+    </script>
+</body>
+</html>
