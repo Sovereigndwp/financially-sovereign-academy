@@ -322,13 +322,242 @@
             font-weight: 600;
             font-size: 0.9rem;
         }
+
+        /* Modal Styles */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--fsa-bg-card, #1a3a2e);
+            border: 3px solid var(--fsa-green, #10b981);
+            border-radius: 1rem;
+            max-width: 700px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 2rem;
+            position: relative;
+            animation: modalSlideIn 0.3s ease;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: transparent;
+            border: none;
+            color: var(--fsa-text-secondary, #9ca3af);
+            font-size: 2rem;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0.5rem;
+            transition: all 0.2s;
+        }
+
+        .modal-close:hover {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--fsa-error, #ef4444);
+        }
+
+        .modal-title {
+            color: var(--fsa-green, #10b981);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            padding-right: 2rem;
+        }
+
+        .explainer-section {
+            background: rgba(0, 0, 0, 0.3);
+            border-left: 4px solid var(--fsa-green, #10b981);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0.5rem;
+        }
+
+        .explainer-section h3 {
+            color: var(--fsa-green-light, #34d399);
+            margin-bottom: 0.75rem;
+            font-size: 1.3rem;
+        }
+
+        .explainer-section p {
+            color: var(--fsa-text-primary, #e0e0e0);
+            line-height: 1.8;
+            margin-bottom: 0.5rem;
+        }
+
+        .example-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        @media (max-width: 600px) {
+            .example-comparison {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .example-card {
+            background: var(--fsa-bg-secondary, #0f2922);
+            border: 2px solid var(--fsa-border-medium, #2a5a4e);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .example-card.winner {
+            border-color: var(--fsa-green, #10b981);
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+        }
+
+        .example-card h4 {
+            color: var(--fsa-text-secondary, #9ca3af);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .example-card .amount {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--fsa-green, #10b981);
+            font-family: 'Courier New', monospace;
+            margin: 1rem 0;
+        }
+
+        .example-card.winner .amount {
+            color: var(--fsa-green-light, #34d399);
+        }
+
+        .example-card .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: rgba(16, 185, 129, 0.2);
+            border-radius: 1rem;
+            font-size: 0.85rem;
+            color: var(--fsa-green, #10b981);
+            margin-top: 0.5rem;
+        }
+
+        .learn-more-btn {
+            display: inline-block;
+            background: rgba(16, 185, 129, 0.15);
+            border: 2px solid var(--fsa-green, #10b981);
+            color: var(--fsa-green, #10b981);
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            margin-top: 0.5rem;
+        }
+
+        .learn-more-btn:hover {
+            background: var(--fsa-green, #10b981);
+            color: white;
+            transform: translateY(-2px);
+        }
     </style>
 </head>
 <body>
+    <!-- Educational Modal -->
+    <div class="modal-overlay" id="interestModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <h2 class="modal-title">📚 Simple vs. Compound Interest</h2>
+
+            <div class="explainer-section">
+                <h3>🔵 Simple Interest</h3>
+                <p><strong>You earn interest ONLY on your original investment.</strong></p>
+                <p>Formula: Principal × Rate × Time</p>
+                <p style="font-size: 0.95rem; color: var(--fsa-text-secondary);">Example: Invest $10,000 at 7% for 30 years = earn $700/year every year.</p>
+            </div>
+
+            <div class="explainer-section">
+                <h3>🟢 Compound Interest</h3>
+                <p><strong>You earn interest on your original investment PLUS all the interest you've already earned.</strong></p>
+                <p>Your money snowballs. Interest earns interest earns interest...</p>
+                <p style="font-size: 0.95rem; color: var(--fsa-text-secondary);">Example: Invest $10,000 at 7% for 30 years = earn more each year as the balance grows.</p>
+            </div>
+
+            <div style="text-align: center; margin: 2rem 0;">
+                <h3 style="color: var(--fsa-green); margin-bottom: 1.5rem;">Real Example: $10,000 invested at 7% for 30 years</h3>
+
+                <div class="example-comparison">
+                    <div class="example-card">
+                        <h4>Simple Interest</h4>
+                        <div class="amount">$31,000</div>
+                        <div class="badge">+$21,000 total gain</div>
+                        <p style="font-size: 0.85rem; color: var(--fsa-text-dim); margin-top: 1rem;">Same $700 every year</p>
+                    </div>
+
+                    <div class="example-card winner">
+                        <h4>Compound Interest 🏆</h4>
+                        <div class="amount">$76,123</div>
+                        <div class="badge">+$66,123 total gain</div>
+                        <p style="font-size: 0.85rem; color: var(--fsa-text-dim); margin-top: 1rem;">Growing amount each year</p>
+                    </div>
+                </div>
+
+                <div style="background: rgba(16, 185, 129, 0.1); border: 2px solid var(--fsa-green); border-radius: 0.75rem; padding: 1.5rem; margin-top: 2rem;">
+                    <p style="font-size: 1.25rem; font-weight: bold; color: var(--fsa-green); margin: 0;">
+                        💡 Compound interest earns you <strong>$45,123 MORE</strong> — that's 2.5x the money!
+                    </p>
+                    <p style="font-size: 0.95rem; color: var(--fsa-text-secondary); margin-top: 0.75rem; margin-bottom: 0;">
+                        This is why Einstein allegedly called compound interest "the eighth wonder of the world."
+                    </p>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 2rem;">
+                <button class="btn" onclick="closeModal()" style="max-width: 300px; margin: 0 auto;">Got it! Let's Calculate</button>
+            </div>
+        </div>
+    </div>
+
     <div class="calculator-container">
         <div class="header">
             <h1>💰 Compound Growth Calculator</h1>
             <p>See how your money grows over time with compound interest</p>
+            <button class="learn-more-btn" onclick="openModal()" style="margin-top: 1rem;">
+                📖 Learn: Simple vs. Compound Interest
+            </button>
         </div>
 
         <div class="calculator-grid">
@@ -707,6 +936,31 @@
             if (params.get('b') !== null) document.getElementById('show-bitcoin').checked = params.get('b') === '1';
             setVal('contrib-increase', params.get('u'));
         }
+
+        // Modal Functions
+        function openModal() {
+            document.getElementById('interestModal').classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        function closeModal() {
+            document.getElementById('interestModal').classList.remove('active');
+            document.body.style.overflow = ''; // Restore scrolling
+        }
+
+        // Close modal when clicking outside content
+        document.getElementById('interestModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
 
         // Initialize on load
         window.addEventListener('load', () => { loadFromHash(); calculate(); });
