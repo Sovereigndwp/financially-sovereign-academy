@@ -498,6 +498,74 @@
         </section>
 
         <section class="section">
+            <h2 class="section-title">Big Decisions Lab</h2>
+
+            <div class="content-block">
+                <h3>Some Money Decisions Are Worth Getting Right</h3>
+                <p>Rent vs buy. Cash vs financing. Lifestyle inflation. Negotiation. These aren't daily decisions—but they can cost (or save) you tens of thousands.</p>
+                <p><strong>Before you make big moves, run the numbers:</strong></p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin: 2rem 0;">
+                <!-- Big Decision 1: Rent vs Buy -->
+                <div style="padding: 1.5rem; background: rgba(16, 185, 129, 0.1); border: 2px solid #10b981; border-radius: 0.75rem;">
+                    <div style="font-size: 2rem; margin-bottom: 0.75rem;">🏠</div>
+                    <h4 style="color: #10b981; font-size: 1.25rem; font-weight: 700; margin-bottom: 0.75rem;">Rent vs Buy</h4>
+                    <p style="margin-bottom: 1rem; font-size: 0.95rem; color: rgba(255, 255, 255, 0.8);">Should you rent or buy? The math might surprise you.</p>
+                    <button
+                        onclick="PopupLabs.open('big-decision-rent-vs-buy')"
+                        style="background: linear-gradient(135deg, #10b981, #34d399); color: white; border: none; padding: 0.75rem 1.25rem; border-radius: 0.5rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease; width: 100%;"
+                        onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 20px rgba(16, 185, 129, 0.4)';"
+                        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                        Run the Numbers →
+                    </button>
+                </div>
+
+                <!-- Big Decision 2: Car Cash vs Loan -->
+                <div style="padding: 1.5rem; background: rgba(16, 185, 129, 0.1); border: 2px solid #10b981; border-radius: 0.75rem;">
+                    <div style="font-size: 2rem; margin-bottom: 0.75rem;">🚗</div>
+                    <h4 style="color: #10b981; font-size: 1.25rem; font-weight: 700; margin-bottom: 0.75rem;">Car: Cash vs Loan</h4>
+                    <p style="margin-bottom: 1rem; font-size: 0.95rem; color: rgba(255, 255, 255, 0.8);">When does it make sense to finance vs pay cash?</p>
+                    <button
+                        onclick="PopupLabs.open('big-decision-car-cash-vs-loan')"
+                        style="background: linear-gradient(135deg, #10b981, #34d399); color: white; border: none; padding: 0.75rem 1.25rem; border-radius: 0.5rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease; width: 100%;"
+                        onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 20px rgba(16, 185, 129, 0.4)';"
+                        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                        Compare Options →
+                    </button>
+                </div>
+
+                <!-- Big Decision 3: Lifestyle Inflation -->
+                <div style="padding: 1.5rem; background: rgba(245, 158, 11, 0.1); border: 2px solid #f59e0b; border-radius: 0.75rem;">
+                    <div style="font-size: 2rem; margin-bottom: 0.75rem;">📈</div>
+                    <h4 style="color: #f59e0b; font-size: 1.25rem; font-weight: 700; margin-bottom: 0.75rem;">Lifestyle Inflation Audit</h4>
+                    <p style="margin-bottom: 1rem; font-size: 0.95rem; color: rgba(255, 255, 255, 0.8);">Got a raise? Don't let it disappear into lifestyle creep.</p>
+                    <button
+                        onclick="PopupLabs.open('big-decision-lifestyle-inflation')"
+                        style="background: linear-gradient(135deg, #f59e0b, #fbbf24); color: white; border: none; padding: 0.75rem 1.25rem; border-radius: 0.5rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease; width: 100%;"
+                        onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 20px rgba(245, 158, 11, 0.4)';"
+                        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                        Audit Your Raise →
+                    </button>
+                </div>
+
+                <!-- Big Decision 4: Negotiation Basics -->
+                <div style="padding: 1.5rem; background: rgba(16, 185, 129, 0.1); border: 2px solid #10b981; border-radius: 0.75rem;">
+                    <div style="font-size: 2rem; margin-bottom: 0.75rem;">💼</div>
+                    <h4 style="color: #10b981; font-size: 1.25rem; font-weight: 700; margin-bottom: 0.75rem;">Negotiation Basics</h4>
+                    <p style="margin-bottom: 1rem; font-size: 0.95rem; color: rgba(255, 255, 255, 0.8);">Salary, bills, fees—learn when and how to negotiate.</p>
+                    <button
+                        onclick="PopupLabs.open('big-decision-negotiation-basics')"
+                        style="background: linear-gradient(135deg, #10b981, #34d399); color: white; border: none; padding: 0.75rem 1.25rem; border-radius: 0.5rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease; width: 100%;"
+                        onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 20px rgba(16, 185, 129, 0.4)';"
+                        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                        Learn to Negotiate →
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
             <h2 class="section-title">Common Mistakes to Avoid</h2>
             
             <div class="content-block">
@@ -627,6 +695,7 @@
         </section>
     </main>
 
+    <script src="../js/popups.js"></script>
     <script src="../js/module-progress.js"></script>
     <script src="../js/progress-manager.js"></script>
     <script src="../js/module-navigation.js"></script>

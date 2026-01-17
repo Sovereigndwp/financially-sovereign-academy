@@ -249,13 +249,50 @@ button, a, [role="button"], input[type="button"], input[type="submit"] {
     }
 }
 
+/* List Styling - Proper Indentation */
+ul, ol {
+    margin-left: 2rem;
+    margin-bottom: 1.5rem;
+    padding-left: 0.5rem;
+    line-height: var(--line-height-relaxed);
+}
+
+ul {
+    list-style-type: disc;
+}
+
+ol {
+    list-style-type: decimal;
+}
+
+li {
+    margin-bottom: 0.75rem;
+    color: var(--fsa-text-primary);
+    padding-left: 0.5rem;
+}
+
+/* Nested lists */
+ul ul, ol ol, ul ol, ol ul {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    margin-left: 1.5rem;
+}
+
+ul ul {
+    list-style-type: circle;
+}
+
+ul ul ul {
+    list-style-type: square;
+}
+
 /* Print Styles */
 @media print {
     body {
         background: white;
         color: black;
     }
-    
+
     .no-print {
         display: none !important;
     }

@@ -69,16 +69,17 @@
         
         /* Hero */
         .hero {
-            min-height: 100vh;
+            min-height: 85vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
             background: linear-gradient(135deg, #0a4d3c 0%, #1a5f52 100%);
-            padding: 4rem 2rem;
+            padding: 4rem 2rem 2rem;
+            position: relative;
         }
-        
+
         .hero h1 {
             font-size: clamp(2.5rem, 5vw, 4rem);
             background: linear-gradient(135deg, #10b981, #34d399);
@@ -88,12 +89,109 @@
             margin-bottom: 1.5rem;
             font-weight: 800;
         }
-        
+
         .hero-subtitle {
             font-size: clamp(1.2rem, 2vw, 1.5rem);
             color: #9ca3af;
             max-width: 800px;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .learning-paths {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 900px;
+            width: 100%;
+            margin: 2rem auto;
+        }
+
+        .path-card {
+            background: rgba(26, 58, 46, 0.6);
+            border: 2px solid rgba(16, 185, 129, 0.3);
+            border-radius: 1rem;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .path-card:hover {
+            border-color: #10b981;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(16, 185, 129, 0.3);
+        }
+
+        .path-card .path-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #10b981;
+            filter: drop-shadow(0 4px 8px rgba(16, 185, 129, 0.3));
+        }
+
+        .path-card .path-icon svg {
+            width: 48px;
+            height: 48px;
+            color: #10b981;
+        }
+
+        .path-card .path-title {
+            font-size: 1.5rem;
+            color: #10b981;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .path-card .path-description {
+            color: #9ca3af;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .path-card .path-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: rgba(16, 185, 129, 0.15);
+            border-radius: 2rem;
+            color: #34d399;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: auto;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        .scroll-indicator-text {
+            color: #6ee7b7;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .scroll-indicator-arrow {
+            font-size: 2rem;
+            color: #10b981;
         }
         
         .cta-primary {
@@ -142,10 +240,46 @@
             text-align: center;
         }
         
-        .prop-icon { font-size: 3rem; margin-bottom: 1rem; }
+        .prop-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #10b981;
+            filter: drop-shadow(0 4px 8px rgba(16, 185, 129, 0.3));
+        }
+
+        .prop-icon svg {
+            width: 48px;
+            height: 48px;
+            color: #10b981;
+        }
+
         .prop-title { font-size: 1.3rem; color: #10b981; margin-bottom: 0.75rem; }
         .prop-desc { color: #9ca3af; }
-        
+
+        /* SVG Icon Animations */
+        .icon {
+            transition: all 0.3s ease;
+        }
+
+        .icon-animate {
+            animation-play-state: running;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .icon-animate {
+                animation: none !important;
+            }
+        }
+
+        .path-card:hover .path-icon svg,
+        .prop-card:hover .prop-icon svg {
+            transform: scale(1.1);
+            filter: drop-shadow(0 6px 12px rgba(16, 185, 129, 0.5));
+        }
+
         /* Modules Grid */
         .modules-section {
             padding: 4rem 2rem;
@@ -258,11 +392,35 @@
         <p class="hero-subtitle">
             Learn what financial advisors charge 1-2% annually to know. Keep the fees. Gain the knowledge.
         </p>
-        <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; align-items: center;">
-            <a href="assessment.html" class="cta-primary">Start Learning Free →</a>
-            <a href="calculators/" class="cta-primary" style="background: linear-gradient(135deg, #059669, #10b981);">🧮 Try Our Calculators</a>
+
+        <!-- Two Clear Learning Paths -->
+        <div class="learning-paths">
+            <a href="assessment.html" class="path-card">
+                <div class="path-icon">📊</div>
+                <div class="path-title">Get Your Custom Path</div>
+                <div class="path-description">
+                    Take a 2-minute assessment to get a personalized learning path based on your specific financial situation
+                </div>
+                <div class="path-badge">Recommended for Beginners</div>
+            </a>
+
+            <a href="#modules" class="path-card" onclick="event.preventDefault(); document.querySelector('.modules-section').scrollIntoView({ behavior: 'smooth' });">
+                <div class="path-icon">📚</div>
+                <div class="path-title">Browse All 10 Modules</div>
+                <div class="path-description">
+                    Self-paced learning through all ten fundamentals, from money mindset to building your financial master plan
+                </div>
+                <div class="path-badge">Learn Everything</div>
+            </a>
         </div>
+
         <p class="trust-signal">✨ No credit card. No signup required.</p>
+
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator">
+            <div class="scroll-indicator-text">Explore all modules below</div>
+            <div class="scroll-indicator-arrow">↓</div>
+        </div>
     </section>
     
     <!-- Value Props -->
@@ -457,5 +615,32 @@
             <a href="assessment.html" class="cta-primary">Start Your Journey →</a>
         </div>
     </section>
+
+    <!-- Icon Library -->
+    <script src="js/icon-library.js"></script>
+    <script>
+        // Replace emojis with animated SVG icons
+        (function() {
+            if (window.IconLibrary) {
+                // Icon mapping
+                const iconMap = {
+                    '📊': 'chart',
+                    '📚': 'books',
+                    '⚡': 'lightning',
+                    '🎯': 'target',
+                    '🛡️': 'shield',
+                    '🧠': 'brain'
+                };
+
+                // Replace emojis in path cards and value props
+                document.querySelectorAll('.path-icon, .prop-icon').forEach(el => {
+                    const emoji = el.textContent.trim();
+                    if (iconMap[emoji]) {
+                        el.innerHTML = IconLibrary.get(iconMap[emoji], 48, true);
+                    }
+                });
+            }
+        })();
+    </script>
 </body>
 </html>

@@ -445,6 +445,20 @@
                         <span class="dialogue-speaker">Alex (frustrated):</span>
                         "I make decent money. Why do I feel broke all the time?"
                     </div>
+
+                    <!-- Interactive Lab: Sinking Fund Builder -->
+                    <div style="margin: 2rem 0; padding: 1.5rem; background: rgba(16, 185, 129, 0.1); border: 2px solid #10b981; border-radius: 0.75rem;">
+                        <p style="color: #10b981; font-weight: 600; margin-bottom: 0.75rem;">💡 Before we continue: "Random stuff" like car repairs isn't random if you plan for it...</p>
+                        <button
+                            onclick="PopupLabs.open('sinking-fund-builder')"
+                            style="background: linear-gradient(135deg, #10b981, #34d399); color: white; border: none; padding: 0.875rem 1.5rem; border-radius: 0.5rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease; width: 100%;"
+                            onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(16, 185, 129, 0.4)';"
+                            onmouseout="this.style.transform=''; this.style.boxShadow='';">
+                            Try the Sinking Fund Builder →
+                        </button>
+                        <p style="font-size: 0.85rem; color: #9ca3af; margin-top: 0.5rem; margin-bottom: 0;">2-minute interactive lab showing how to prevent "surprise" expenses</p>
+                    </div>
+
                     <p class="scenario-text">
                         <strong>What should Alex do?</strong>
                     </p>
@@ -690,5 +704,8 @@
             window.location.href = '../index.html';
         }
     </script>
+
+    <!-- Interactive Popup Lab System -->
+    <script src="../js/popups.js"></script>
 </body>
 </html>

@@ -1,0 +1,368 @@
+{
+  "popups": {
+    "sinking-fund-builder": {
+      "title": "🎯 Sinking Fund Builder",
+      "intro": "\"Random stuff\" isn't random if you plan for it. A sinking fund is money you set aside monthly for expenses you KNOW are coming—even if you don't know exactly when.",
+      "type": "scenario",
+      "scenario": "Pick three irregular expenses you know you'll face this year:",
+      "choices": [
+        {
+          "title": "Car insurance ($1,200/year) + Holiday gifts ($600) + Car maintenance ($800)",
+          "description": "Total: $2,600 spread across 12 months",
+          "outcomeTitle": "Your Monthly Sinking Fund",
+          "outcome": "You need to set aside <strong>$217/month</strong> to cover these three expenses. If you automate this into a separate savings account, you'll never feel the pain of a \"surprise\" bill.",
+          "lesson": "What breaks if you ignore this for 6 months? You'd owe $1,300 but have saved $0. That's when people reach for credit cards and pay 20% APR on expenses they saw coming.",
+          "outcomeType": ""
+        },
+        {
+          "title": "Renters insurance ($240/year) + Annual subscriptions ($300) + Pet vet checkup ($400)",
+          "description": "Total: $940 spread across 12 months",
+          "outcomeTitle": "Your Monthly Sinking Fund",
+          "outcome": "You need to set aside <strong>$78/month</strong>. That's less than $3 per day. If you skip this system, you'll scramble when these bills hit.",
+          "lesson": "What breaks if you ignore this for 6 months? You'd owe $470 but have saved $0. You'd either skip the vet visit (risking bigger bills later) or drain your emergency fund for non-emergencies.",
+          "outcomeType": "warning"
+        },
+        {
+          "title": "Property tax ($3,600/year) + HOA fees ($1,200/year) + Home repairs ($1,000)",
+          "description": "Total: $5,800 spread across 12 months",
+          "outcomeTitle": "Your Monthly Sinking Fund",
+          "outcome": "You need to set aside <strong>$483/month</strong>. This is not optional—these bills WILL arrive. Homeownership requires this level of planning or you'll be house-poor.",
+          "lesson": "What breaks if you ignore this for 6 months? You'd owe $2,900 but have saved $0. That's when people take out home equity loans at 8% to pay bills they knew were coming. Financial sovereignty means planning ahead.",
+          "outcomeType": ""
+        }
+      ]
+    },
+
+    "minimum-payment-trap": {
+      "title": "⚠️ The Minimum Payment Trap",
+      "intro": "Your credit score measures if you pay on time. But the <strong>minimum payment</strong> is designed to keep you in debt as long as possible while maximizing interest.",
+      "type": "calculator",
+      "inputs": [
+        {
+          "id": "balance",
+          "label": "Credit Card Balance",
+          "type": "range",
+          "min": 1000,
+          "max": 10000,
+          "default": 3000,
+          "step": 500,
+          "prefix": "$"
+        },
+        {
+          "id": "apr",
+          "label": "APR (Annual Percentage Rate)",
+          "type": "range",
+          "min": 10,
+          "max": 29.99,
+          "default": 19.99,
+          "step": 0.5,
+          "suffix": "%"
+        },
+        {
+          "id": "payment",
+          "label": "Monthly Payment",
+          "type": "range",
+          "min": 50,
+          "max": 500,
+          "default": 75,
+          "step": 25,
+          "prefix": "$"
+        }
+      ],
+      "buttonText": "Calculate Payoff Time",
+      "calculate": "function(inputs) { const balance = inputs.balance; const monthlyRate = inputs.apr / 100 / 12; const payment = inputs.payment; if (payment <= balance * monthlyRate) { return { metrics: [ { label: 'Months to Pay Off', value: '∞ Never', type: 'danger' }, { label: 'Total Interest', value: '∞ Forever', type: 'danger' } ], message: '🚨 <strong>YOU WILL NEVER PAY THIS OFF.</strong> Your payment ($' + payment + ') is less than the monthly interest ($' + (balance * monthlyRate).toFixed(2) + '). The balance will grow forever. This is the minimum payment trap.' }; } let remainingBalance = balance; let totalInterest = 0; let months = 0; while (remainingBalance > 0 && months < 600) { const interest = remainingBalance * monthlyRate; totalInterest += interest; remainingBalance += interest - payment; months++; if (remainingBalance < 0) remainingBalance = 0; } const totalPaid = balance + totalInterest; return { metrics: [ { label: 'Months to Pay Off', value: months + ' months (' + (months / 12).toFixed(1) + ' years)', type: months > 60 ? 'danger' : months > 24 ? 'warning' : '' }, { label: 'Total Interest Paid', value: '$' + totalInterest.toFixed(2), type: totalInterest > balance ? 'danger' : 'warning' }, { label: 'Total Amount Paid', value: '$' + totalPaid.toFixed(2), type: '' } ], message: totalInterest > balance ? '⚠️ You will pay more in <strong>interest</strong> ($' + totalInterest.toFixed(2) + ') than the original balance ($' + balance + '). This is how credit card companies make billions.' : 'Paying more than the minimum saves you thousands in interest.' }; }"
+    },
+
+    "apr-translator": {
+      "title": "📊 APR Translator: Why Interest Snowballs",
+      "intro": "APR (Annual Percentage Rate) is quoted per YEAR, but credit cards charge interest every MONTH. This is why minimum payments never work.",
+      "type": "calculator",
+      "inputs": [
+        {
+          "id": "apr",
+          "label": "Credit Card APR",
+          "type": "range",
+          "min": 10,
+          "max": 29.99,
+          "default": 19.99,
+          "step": 0.01,
+          "suffix": "%"
+        }
+      ],
+      "buttonText": "Show Monthly Rate",
+      "calculate": "function(inputs) { const apr = inputs.apr; const monthlyRate = apr / 12; const effectiveAPR = Math.pow(1 + monthlyRate / 100, 12) - 1; return { metrics: [ { label: 'Stated APR', value: apr.toFixed(2) + '%', type: '' }, { label: 'Monthly Interest Rate', value: monthlyRate.toFixed(3) + '%', type: 'warning' }, { label: 'Effective APR (with compounding)', value: (effectiveAPR * 100).toFixed(2) + '%', type: 'danger' } ], message: 'Every month, they charge ' + monthlyRate.toFixed(3) + '% on your balance. If you only pay the minimum, next month they charge interest on (balance + last month\\'s interest). This is <strong>compound interest working against you</strong>. The same force that builds wealth in investments destroys wealth in debt.' }; }"
+    },
+
+    "two-account-autopilot": {
+      "title": "🏦 Two-Account Autopilot System",
+      "intro": "Stop using willpower to manage money. Use systems. The two-account method makes it impossible to accidentally spend your bill money.",
+      "type": "checklist",
+      "items": [
+        "<strong>Account 1: Bills & Fixed Costs</strong> — Set up direct deposit to send your fixed monthly costs here (rent, utilities, subscriptions, insurance). Never touch this account for discretionary spending.",
+        "<strong>Account 2: Spending Money</strong> — This is what you have left. Set a weekly transfer limit (e.g., $150/week) from Bills to Spending. When Spending hits zero, you're done for the week.",
+        "<strong>Automated Savings Transfer</strong> — On payday, auto-transfer 10-20% to a separate savings account BEFORE money hits Bills. Pay yourself first.",
+        "<strong>Monthly Subscription Audit</strong> — Set a calendar reminder on the 1st of every month. Review all subscriptions linked to your Bills account. Cancel anything you haven't used in 60 days."
+      ],
+      "tip": "This system removes decision fatigue. You can't \"accidentally\" spend rent money on dinner because it's in a different account. Your brain stops seeing it as available."
+    },
+
+    "writeoffs-reality": {
+      "title": "💡 Write-Offs Are Not Free Money",
+      "intro": "TikTok financiers love saying \"write it off!\" as if it makes purchases free. Here's the truth.",
+      "type": "scenario",
+      "scenario": "You spend $1,000 on a business expense to \"write it off\" on your taxes. Your tax rate is 20%. What actually happens?",
+      "choices": [
+        {
+          "title": "I get $1,000 back from the IRS",
+          "description": "The write-off gives me all my money back",
+          "outcomeTitle": "❌ Incorrect",
+          "outcome": "No. A tax deduction reduces your <strong>taxable income</strong>, not your tax bill dollar-for-dollar. If you're in the 20% tax bracket, a $1,000 deduction saves you $200 in taxes. You still spent $800 of real money.",
+          "lesson": "You spent $1,000 to save $200. That's an $800 net loss. Write-offs are only worth it if you needed the expense anyway.",
+          "outcomeType": "warning"
+        },
+        {
+          "title": "I save $200 in taxes",
+          "description": "The deduction lowers my tax bill by 20% of $1,000",
+          "outcomeTitle": "✅ Correct",
+          "outcome": "Yes. A $1,000 deduction in the 20% tax bracket saves you $200. But you still spent $1,000. Your net cost is $800.",
+          "lesson": "Write-offs reduce the sting of necessary expenses. They don't make spending profitable. Never buy something just because it's \"deductible\"—you're still spending 70-90 cents on the dollar.",
+          "outcomeType": ""
+        },
+        {
+          "title": "I save $1,000 in taxes",
+          "description": "Write-offs reduce my tax bill by the full amount",
+          "outcomeTitle": "❌ Incorrect",
+          "outcome": "No. That would be a tax <strong>credit</strong>, not a deduction. Credits reduce your tax bill dollar-for-dollar (rare and valuable). Deductions reduce your <strong>taxable income</strong> by the amount, which saves you (deduction × tax rate).",
+          "lesson": "Mixing up credits and deductions costs people real money. Credits are better. Deductions just lower your effective cost of necessary expenses.",
+          "outcomeType": "warning"
+        }
+      ]
+    },
+
+    "capital-gains-basics": {
+      "title": "📈 Capital Gains in One Screen",
+      "intro": "When you sell an asset (stocks, crypto, real estate) for more than you paid, you owe taxes on the gain. Here's how it works.",
+      "type": "info",
+      "sections": [
+        {
+          "title": "Short-Term vs Long-Term",
+          "content": "<strong>Short-term:</strong> Held less than 1 year → taxed as ordinary income (10-37%). <strong>Long-term:</strong> Held more than 1 year → taxed at preferential rates (0%, 15%, or 20% depending on income). This is why investors say \"time in the market\" matters for taxes too."
+        },
+        {
+          "title": "Cost Basis",
+          "content": "Your <strong>cost basis</strong> is what you originally paid (including fees). Gain = Sale Price - Cost Basis. Example: Buy stock at $100, sell at $160 → $60 gain. If you held over a year, you pay 15% on the $60 (most earners) = $9 tax."
+        },
+        {
+          "title": "When Taxes Are Triggered",
+          "content": "You owe taxes when you <strong>sell (realize the gain)</strong>. If your stock goes from $100 to $200 but you don't sell, you owe $0. The IRS only cares about realized gains. This is why \"buy and hold\" defers taxes indefinitely."
+        }
+      ],
+      "example": "You buy 10 shares at $100 each ($1,000 total). 18 months later, you sell at $160 each ($1,600 total). Your gain is $600. Since you held over a year, it's long-term. At 15% long-term capital gains rate, you owe $90 in taxes. You keep $510 profit after taxes."
+    },
+
+    "bill-shock-simulator": {
+      "title": "🏥 Bill Shock: How Health Insurance Really Works",
+      "intro": "You have insurance. You get a $20,000 hospital bill. How much do you actually pay? It depends on deductible, coinsurance, and out-of-pocket max. Let's walk through it.",
+      "type": "calculator",
+      "inputs": [
+        {
+          "id": "premium",
+          "label": "Monthly Premium (what you pay every month)",
+          "type": "number",
+          "default": 350,
+          "min": 0
+        },
+        {
+          "id": "deductible",
+          "label": "Annual Deductible (you pay 100% until you hit this)",
+          "type": "number",
+          "default": 2000,
+          "min": 0
+        },
+        {
+          "id": "coinsurance",
+          "label": "Coinsurance % (you pay this % after deductible)",
+          "type": "range",
+          "min": 0,
+          "max": 50,
+          "default": 20,
+          "step": 5,
+          "suffix": "%"
+        },
+        {
+          "id": "oop",
+          "label": "Out-of-Pocket Max (most you'll pay in a year)",
+          "type": "number",
+          "default": 8000,
+          "min": 0
+        },
+        {
+          "id": "bill",
+          "label": "Medical Bill Amount",
+          "type": "number",
+          "default": 20000,
+          "min": 0
+        }
+      ],
+      "buttonText": "Calculate What You Pay",
+      "calculate": "function(inputs) { const deductible = inputs.deductible; const coinsurance = inputs.coinsurance / 100; const oopMax = inputs.oop; const bill = inputs.bill; let youPay = 0; let phase = ''; if (bill <= deductible) { youPay = bill; phase = 'Still in deductible phase. You pay 100%.'; } else { const afterDeductible = bill - deductible; const coinsurancePortion = afterDeductible * coinsurance; youPay = deductible + coinsurancePortion; phase = 'Deductible met. You pay ' + (coinsurance * 100) + '% of remaining costs.'; } if (youPay > oopMax) { youPay = oopMax; phase = 'Out-of-pocket max reached. Insurance pays 100% after this.'; } const annualCost = youPay + (inputs.premium * 12); return { metrics: [ { label: 'You Pay for This Bill', value: '$' + youPay.toFixed(2), type: youPay > 5000 ? 'danger' : 'warning' }, { label: 'Insurance Pays', value: '$' + (bill - youPay).toFixed(2), type: '' }, { label: 'Annual Cost (including premiums)', value: '$' + annualCost.toFixed(2), type: '' } ], message: phase + ' Remember: You also paid $' + (inputs.premium * 12).toFixed(2) + ' in premiums this year, whether you used insurance or not.' }; }"
+    },
+
+    "estate-planning-basics": {
+      "title": "📜 Estate Planning in Plain English",
+      "intro": "Estate planning isn't just for rich people. It's about making sure your wishes are followed if you can't speak for yourself. Here are the four documents that matter.",
+      "type": "info",
+      "sections": [
+        {
+          "title": "1. Will",
+          "content": "Legal document saying who gets your stuff when you die. Without one, the state decides for you (and it's expensive). Covers: who gets assets, who raises your kids if you have them, who's in charge (executor)."
+        },
+        {
+          "title": "2. Beneficiary Designations",
+          "content": "Retirement accounts, life insurance, and some bank accounts let you name beneficiaries directly. <strong>These override your will.</strong> If your will says \"everything to my spouse\" but your 401k beneficiary form says \"my ex,\" your ex gets the 401k. Update these when life changes."
+        },
+        {
+          "title": "3. Power of Attorney (Financial)",
+          "content": "Gives someone authority to manage your money if you're incapacitated (coma, dementia, etc.). Without it, your family has to go to court to access your accounts to pay your bills. Pick someone you trust completely."
+        },
+        {
+          "title": "4. Healthcare Proxy / Living Will",
+          "content": "Tells doctors what medical care you want if you can't communicate. Appoints someone to make decisions for you. Covers: life support, organ donation, end-of-life care. Prevents family fights when emotions are high."
+        }
+      ],
+      "example": "Quiz: Your beneficiary form says X, your will says Y. Which wins? <strong>Beneficiary form wins.</strong> Beneficiary designations are contracts that bypass probate (the court process for wills). Always check your beneficiaries after major life events: marriage, divorce, birth of a child, death of a beneficiary."
+    },
+
+    "custody-concepts": {
+      "title": "🔐 What Custody Means for Your Assets",
+      "intro": "Custody = who physically controls your money or assets. Most people don't realize they don't actually \"own\" their money—they have an IOU from a custodian.",
+      "type": "info",
+      "sections": [
+        {
+          "title": "Bank Account (Custodial)",
+          "content": "You deposit $10,000. The bank holds it. You own an <strong>IOU</strong> from the bank. The bank can freeze your account, charge fees, or (rarely) fail. FDIC insures up to $250k per account type. Trade-off: Convenience & insurance vs. counterparty risk."
+        },
+        {
+          "title": "Brokerage Account (Custodial)",
+          "content": "You \"own\" stocks, but the brokerage holds them in <strong>street name</strong> (their name, for your benefit). SIPC insures up to $500k if the brokerage fails. Trade-off: Easy to trade vs. you don't hold the actual certificates."
+        },
+        {
+          "title": "Retirement Account (Custodial + Restricted)",
+          "content": "401k/IRA = custodian holds it + IRS controls when you can access it (age 59½). Early withdrawal = taxes + 10% penalty. Trade-off: Tax benefits vs. restricted access until retirement."
+        },
+        {
+          "title": "Self-Custody (Bitcoin, Gold, Cash)",
+          "content": "You physically control the asset. Bitcoin = you hold the private keys. Gold = you hold the metal. Cash = you hold the bills. Trade-off: Total control & no counterparty risk vs. total responsibility (lose your keys = lose your Bitcoin, house fire = lose your cash)."
+        }
+      ],
+      "example": "Most people use custodial solutions for convenience and never think about it—until the bank freezes an account, a brokerage fails, or a government seizes assets. Financial sovereignty means understanding the trade-offs and choosing the right custody method for each type of asset."
+    },
+
+    "big-decision-rent-vs-buy": {
+      "title": "🏠 Rent vs. Buy Decision Frame",
+      "intro": "\"Renting is throwing money away\" is what people who sell houses say. Here's the actual trade-off.",
+      "type": "scenario",
+      "scenario": "You can afford a $300k house with 20% down ($60k). Monthly mortgage + property tax + insurance + maintenance = $2,200. Rent for a similar place = $1,800/month. What do you do?",
+      "choices": [
+        {
+          "title": "Buy the house",
+          "description": "Build equity, tax deduction, it's an investment",
+          "outcomeTitle": "Buying: What You're Really Signing Up For",
+          "outcome": "<strong>Cash flow:</strong> $2,200/month locked in for 30 years. <strong>Risk:</strong> House value can drop (2008), job loss means foreclosure. <strong>Flexibility:</strong> Selling costs 6-8% (realtor fees), takes months. <strong>Regret test:</strong> If you move in 3 years, you'll have paid $79k but only built ~$15k equity (rest = interest + fees). <strong>Exit cost:</strong> $18-24k to sell.",
+          "lesson": "Buying makes sense if you'll stay 5+ years, want stability, and can handle maintenance. It's not always the \"smart\" financial move—it depends on your life situation.",
+          "outcomeType": ""
+        },
+        {
+          "title": "Keep renting",
+          "description": "Save $400/month, stay flexible, invest the difference",
+          "outcomeTitle": "Renting: What You're Really Signing Up For",
+          "outcome": "<strong>Cash flow:</strong> $1,800/month, could increase yearly. <strong>Risk:</strong> Landlord can raise rent or sell. <strong>Flexibility:</strong> Move in 30 days notice. <strong>Investment option:</strong> $400/month invested at 7% for 5 years = $28,900. Plus you kept the $60k down payment invested = $84k. <strong>Exit cost:</strong> $0.",
+          "lesson": "Renting makes sense if you value flexibility, might relocate, or can beat the housing market's returns by investing. A house is a lifestyle choice wrapped in a financial decision.",
+          "outcomeType": ""
+        }
+      ]
+    },
+
+    "big-decision-car-cash-vs-loan": {
+      "title": "🚗 Car: Cash vs. Financing",
+      "intro": "Paying cash means you own it outright. Financing means you owe interest but keep your cash invested. Which is better depends on the interest rate and what else you'd do with the money.",
+      "type": "calculator",
+      "inputs": [
+        {
+          "id": "price",
+          "label": "Car Price",
+          "type": "number",
+          "default": 25000,
+          "min": 5000
+        },
+        {
+          "id": "rate",
+          "label": "Loan Interest Rate (APR)",
+          "type": "range",
+          "min": 1,
+          "max": 12,
+          "default": 5,
+          "step": 0.5,
+          "suffix": "%"
+        },
+        {
+          "id": "term",
+          "label": "Loan Term (years)",
+          "type": "select",
+          "options": [
+            {"value": 3, "label": "3 years"},
+            {"value": 4, "label": "4 years"},
+            {"value": 5, "label": "5 years"},
+            {"value": 6, "label": "6 years"}
+          ]
+        },
+        {
+          "id": "investReturn",
+          "label": "Investment Return if You Keep Cash (% per year)",
+          "type": "range",
+          "min": 0,
+          "max": 12,
+          "default": 7,
+          "step": 0.5,
+          "suffix": "%"
+        }
+      ],
+      "buttonText": "Compare Options",
+      "calculate": "function(inputs) { const price = inputs.price; const apr = inputs.rate / 100; const term = inputs.term; const investReturn = inputs.investReturn / 100; const monthlyRate = apr / 12; const months = term * 12; const payment = price * (monthlyRate * Math.pow(1 + monthlyRate, months)) / (Math.pow(1 + monthlyRate, months) - 1); const totalPaid = payment * months; const totalInterest = totalPaid - price; const cashInvested = price * Math.pow(1 + investReturn, term); const investmentGain = cashInvested - price; const netDifference = investmentGain - totalInterest; let recommendation = ''; if (netDifference > 0) { recommendation = '✅ <strong>Finance it.</strong> You\\'ll earn $' + Math.abs(netDifference).toFixed(2) + ' more by investing the cash and paying the loan interest.'; } else if (netDifference < 0) { recommendation = '💰 <strong>Pay cash.</strong> The loan costs you $' + Math.abs(netDifference).toFixed(2) + ' more than you\\'d earn investing.'; } else { recommendation = 'Neutral. The loan interest and investment returns roughly cancel out.'; } return { metrics: [ { label: 'Monthly Payment (financed)', value: '$' + payment.toFixed(2), type: '' }, { label: 'Total Interest Paid', value: '$' + totalInterest.toFixed(2), type: 'warning' }, { label: 'Investment Gain (if you keep cash)', value: '$' + investmentGain.toFixed(2), type: '' }, { label: 'Net Difference', value: '$' + Math.abs(netDifference).toFixed(2) + (netDifference > 0 ? ' gained' : ' lost'), type: netDifference > 0 ? '' : 'warning' } ], message: recommendation + ' <strong>Regret test:</strong> Can you afford the payment if you lose your job? If not, pay cash. <strong>Flexibility cost:</strong> Loans mean you can\\'t sell the car easily (have to pay off loan first).' }; }"
+    },
+
+    "big-decision-lifestyle-inflation": {
+      "title": "💸 Raise? Audit Your Lifestyle Inflation",
+      "intro": "You just got a $10,000 raise. Most people unconsciously increase spending to match. Here's how to catch it before it happens.",
+      "type": "checklist",
+      "items": [
+        "<strong>Automate the raise to savings FIRST.</strong> If you got a $10k raise ($833/month), set up an auto-transfer of $500-700/month to investments before you see it. Lifestyle creep only happens with money you see.",
+        "<strong>One upgrade rule:</strong> Pick ONE thing to improve with the raise (nicer apartment, better car, more travel). Not all three. Saying yes to everything means you're still broke, just at a higher income.",
+        "<strong>Three-month test:</strong> Wait 3 months before making any big purchases. If you still want it in 90 days, buy it. This kills 80% of impulse upgrades.",
+        "<strong>Calculate your new \"enough\" number:</strong> Old salary + raise = new salary. Subtract your actual needs. What's left? That's your decision space. Invest most of it, enjoy some of it."
+      ],
+      "tip": "People who go from $50k to $200k and still live paycheck-to-paycheck didn't fail at earning—they failed at this. The raise is your chance to lock in wealth. Don't waste it on a nicer prison."
+    },
+
+    "big-decision-negotiation-basics": {
+      "title": "🤝 Negotiation Basics: Salary & Big Purchases",
+      "intro": "Most people leave $5,000-$50,000 on the table in their lifetime because they don't negotiate. Here are the three rules that matter.",
+      "type": "info",
+      "sections": [
+        {
+          "title": "1. Never Give a Number First",
+          "content": "In salary negotiations: Let them make an offer. If they ask your expected salary, say \"I'm flexible depending on the total comp package. What range did you have in mind?\" Whoever speaks first loses leverage. In big purchases (car, house): Never tell them your max budget. Make them justify their price first."
+        },
+        {
+          "title": "2. Always Get It in Writing",
+          "content": "Verbal promises mean nothing. Salary negotiation? Get the offer letter with base salary, bonus structure, equity, benefits, start date in writing before you quit your current job. Big purchase? Get the final price, warranty terms, and delivery date in writing before you sign."
+        },
+        {
+          "title": "3. Be Willing to Walk Away",
+          "content": "The person who needs the deal less has all the power. Have a backup job offer, a backup car lot, a backup apartment. If you're desperate, they can smell it. Practice saying \"I'll have to pass\" out loud before the negotiation. If you can't imagine yourself walking away, you've already lost."
+        }
+      ],
+      "example": "<strong>Real scenario:</strong> Job offer is $70k. You say \"I was hoping for something closer to $80k given my experience with [specific skill they need].\" They counter $75k. You say \"Can you do $77k?\" They agree. You just made an extra $7k/year by asking one question. Over 10 years, that's $70,000 (not counting raises). Never skip negotiation."
+    }
+  }
+}

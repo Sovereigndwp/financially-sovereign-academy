@@ -403,6 +403,19 @@
                     <li>Owed taxes or got huge refund last year</li>
                 </ul>
             </div>
+
+            <!-- Interactive Lab: Write-offs Reality Check -->
+            <div style="margin: 2rem 0; padding: 1.5rem; background: rgba(245, 158, 11, 0.1); border: 2px solid #f59e0b; border-radius: 0.75rem;">
+                <p style="color: #f59e0b; font-weight: 600; margin-bottom: 0.75rem;">💡 TikTok says "write it off!" — but do you know what that actually means?</p>
+                <button
+                    onclick="PopupLabs.open('writeoffs-reality')"
+                    style="background: linear-gradient(135deg, #f59e0b, #fbbf24); color: white; border: none; padding: 0.875rem 1.5rem; border-radius: 0.5rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease; width: 100%;"
+                    onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(245, 158, 11, 0.4)';"
+                    onmouseout="this.style.transform=''; this.style.boxShadow='';">
+                    Write-Offs Are Not Free Money →
+                </button>
+                <p style="font-size: 0.85rem; color: #9ca3af; margin-top: 0.5rem; margin-bottom: 0;">Quick scenario showing the math of tax deductions vs credits</p>
+            </div>
         </section>
 
         <section class="section">
@@ -473,6 +486,19 @@
                     <p><strong>The strategy:</strong> Used IRS withholding calculator mid-year, adjusted W-4 accordingly</p>
                     <p><strong>Lesson:</strong> This is the ideal outcome. You used your money efficiently all year instead of giving IRS an interest-free loan.</p>
                 </div>
+            </div>
+
+            <!-- Interactive Lab: Capital Gains Basics -->
+            <div style="margin: 2rem 0; padding: 1.5rem; background: rgba(16, 185, 129, 0.1); border: 2px solid #10b981; border-radius: 0.75rem;">
+                <p style="color: #10b981; font-weight: 600; margin-bottom: 0.75rem;">📈 Beyond paychecks: What happens when you sell investments?</p>
+                <button
+                    onclick="PopupLabs.open('capital-gains-basics')"
+                    style="background: linear-gradient(135deg, #10b981, #34d399); color: white; border: none; padding: 0.875rem 1.5rem; border-radius: 0.5rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease; width: 100%;"
+                    onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(16, 185, 129, 0.4)';"
+                    onmouseout="this.style.transform=''; this.style.boxShadow='';">
+                    Capital Gains in One Screen →
+                </button>
+                <p style="font-size: 0.85rem; color: #9ca3af; margin-top: 0.5rem; margin-bottom: 0;">Short-term vs long-term, cost basis, and when taxes are triggered</p>
             </div>
         </section>
 
@@ -622,5 +648,8 @@
             window.location.href = '../index.html';
         }
     </script>
+
+    <!-- Interactive Popup Lab System -->
+    <script src="../js/popups.js"></script>
 </body>
 </html>
