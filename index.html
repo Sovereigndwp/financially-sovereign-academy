@@ -82,12 +82,20 @@
 
         .hero h1 {
             font-size: clamp(2.5rem, 5vw, 4rem);
-            background: linear-gradient(135deg, #10b981, #34d399);
+            background: linear-gradient(135deg, #10b981 0%, #06b6d4 50%, #3b82f6 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             margin-bottom: 1.5rem;
             font-weight: 800;
+            text-shadow: 0 0 40px rgba(16, 185, 129, 0.3);
+            animation: shimmer 3s ease-in-out infinite;
+            background-size: 200% auto;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { background-position: 0% center; }
+            50% { background-position: 100% center; }
         }
 
         .hero-subtitle {
@@ -107,7 +115,8 @@
         }
 
         .path-card {
-            background: rgba(26, 58, 46, 0.6);
+            background: linear-gradient(135deg, rgba(26, 58, 46, 0.95) 0%, rgba(15, 41, 34, 0.85) 100%);
+            backdrop-filter: blur(10px);
             border: 2px solid rgba(16, 185, 129, 0.3);
             border-radius: 1rem;
             padding: 2rem;
@@ -119,12 +128,53 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2),
+                        0 0 0 1px rgba(16, 185, 129, 0.1);
+        }
+
+        .path-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #10b981 0%, #06b6d4 50%, #3b82f6 100%);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .path-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 1rem;
+            padding: 2px;
+            background: linear-gradient(135deg, transparent 0%, rgba(16, 185, 129, 0.3) 100%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
         .path-card:hover {
             border-color: #10b981;
-            transform: translateY(-4px);
-            box-shadow: 0 8px 30px rgba(16, 185, 129, 0.3);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.4),
+                        0 0 0 6px rgba(16, 185, 129, 0.2),
+                        0 0 60px rgba(16, 185, 129, 0.3);
+        }
+
+        .path-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .path-card:hover::after {
+            opacity: 1;
         }
 
         .path-card .path-icon {
@@ -133,14 +183,28 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            color: #10b981;
-            filter: drop-shadow(0 4px 8px rgba(16, 185, 129, 0.3));
+            filter: drop-shadow(0 8px 16px rgba(16, 185, 129, 0.4));
+            transition: all 0.3s ease;
         }
 
         .path-card .path-icon svg {
-            width: 48px;
-            height: 48px;
-            color: #10b981;
+            width: 64px;
+            height: 64px;
+            transition: all 0.3s ease;
+        }
+
+        /* Colorful gradient icons */
+        .path-card .path-icon svg path,
+        .path-card .path-icon svg circle,
+        .path-card .path-icon svg rect {
+            fill: url(#icon-gradient-green-blue);
+            transition: all 0.3s ease;
+        }
+
+        .path-card:hover .path-icon {
+            filter: drop-shadow(0 12px 24px rgba(16, 185, 129, 0.6))
+                    drop-shadow(0 0 30px rgba(59, 130, 246, 0.4));
+            transform: scale(1.1) rotate(5deg);
         }
 
         .path-card .path-title {
@@ -200,17 +264,39 @@
             font-weight: 700;
             border: none;
             border-radius: 0.75rem;
-            background: linear-gradient(135deg, #10b981, #34d399);
+            background: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
             color: white;
             cursor: pointer;
             transition: all 0.3s ease;
             text-decoration: none;
             display: inline-block;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3);
         }
-        
+
+        .cta-primary::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .cta-primary:hover::before {
+            opacity: 1;
+        }
+
+        .cta-primary span {
+            position: relative;
+            z-index: 1;
+        }
+
         .cta-primary:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 30px rgba(16, 185, 129, 0.4);
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 16px 40px rgba(16, 185, 129, 0.5),
+                        0 0 60px rgba(6, 182, 212, 0.3);
         }
         
         .trust-signal {
@@ -233,11 +319,40 @@
         }
         
         .prop-card {
-            background: rgba(16, 185, 129, 0.1);
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(6, 182, 212, 0.1) 100%);
+            backdrop-filter: blur(10px);
             border: 2px solid rgba(16, 185, 129, 0.2);
             border-radius: 1rem;
             padding: 2rem;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .prop-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #10b981 0%, #06b6d4 50%, #3b82f6 100%);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .prop-card:hover {
+            transform: translateY(-4px);
+            border-color: #10b981;
+            box-shadow: 0 12px 32px rgba(16, 185, 129, 0.25),
+                        0 0 0 4px rgba(16, 185, 129, 0.1);
+        }
+
+        .prop-card:hover::before {
+            transform: scaleX(1);
         }
         
         .prop-icon {
@@ -246,14 +361,28 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            color: #10b981;
-            filter: drop-shadow(0 4px 8px rgba(16, 185, 129, 0.3));
+            filter: drop-shadow(0 6px 12px rgba(16, 185, 129, 0.4));
+            transition: all 0.3s ease;
         }
 
         .prop-icon svg {
-            width: 48px;
-            height: 48px;
-            color: #10b981;
+            width: 56px;
+            height: 56px;
+            transition: all 0.3s ease;
+        }
+
+        /* Colorful gradient icons for props */
+        .prop-icon svg path,
+        .prop-icon svg circle,
+        .prop-icon svg rect {
+            fill: url(#icon-gradient-cyan-blue);
+            transition: all 0.3s ease;
+        }
+
+        .prop-card:hover .prop-icon {
+            filter: drop-shadow(0 10px 20px rgba(6, 182, 212, 0.5))
+                    drop-shadow(0 0 25px rgba(59, 130, 246, 0.3));
+            transform: scale(1.15);
         }
 
         .prop-title { font-size: 1.3rem; color: #10b981; margin-bottom: 0.75rem; }
@@ -289,8 +418,12 @@
         .section-title {
             font-size: 2.5rem;
             text-align: center;
-            color: #10b981;
+            background: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin-bottom: 1rem;
+            font-weight: 700;
         }
         
         .section-subtitle {
@@ -307,7 +440,8 @@
         }
         
         .module-card {
-            background: #1a3a2e;
+            background: linear-gradient(135deg, rgba(26, 58, 46, 0.9) 0%, rgba(15, 41, 34, 0.8) 100%);
+            backdrop-filter: blur(8px);
             border: 2px solid rgba(16, 185, 129, 0.3);
             border-radius: 1rem;
             padding: 2rem;
@@ -316,11 +450,33 @@
             text-decoration: none;
             display: block;
             color: inherit;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2),
+                        0 0 0 1px rgba(16, 185, 129, 0.1);
         }
-        
+
+        .module-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 0;
+            background: linear-gradient(180deg, #10b981 0%, #06b6d4 50%, #3b82f6 100%);
+            transition: height 0.3s ease;
+        }
+
         .module-card:hover {
             border-color: #10b981;
-            transform: translateY(-4px);
+            transform: translateY(-6px) scale(1.01);
+            box-shadow: 0 16px 40px rgba(16, 185, 129, 0.3),
+                        0 0 0 4px rgba(16, 185, 129, 0.15),
+                        0 0 40px rgba(6, 182, 212, 0.2);
+        }
+
+        .module-card:hover::before {
+            height: 100%;
         }
         
         .module-number { color: #10b981; font-size: 0.9rem; font-weight: 600; margin-bottom: 0.5rem; }
@@ -374,6 +530,38 @@
     </style>
 </head>
 <body>
+    <!-- SVG Gradient Definitions for Colorful Icons -->
+    <svg width="0" height="0" style="position: absolute;">
+        <defs>
+            <!-- Green to Blue Gradient for Path Cards -->
+            <linearGradient id="icon-gradient-green-blue" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#10b981;stop-opacity:1" />
+                <stop offset="50%" style="stop-color:#06b6d4;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:1" />
+            </linearGradient>
+
+            <!-- Cyan to Blue Gradient for Value Props -->
+            <linearGradient id="icon-gradient-cyan-blue" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#06b6d4;stop-opacity:1" />
+                <stop offset="50%" style="stop-color:#3b82f6;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" />
+            </linearGradient>
+
+            <!-- Animated Gradient (optional for future use) -->
+            <linearGradient id="icon-gradient-animated" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#10b981;stop-opacity:1">
+                    <animate attributeName="stop-color" values="#10b981;#06b6d4;#3b82f6;#10b981" dur="4s" repeatCount="indefinite" />
+                </stop>
+                <stop offset="50%" style="stop-color:#06b6d4;stop-opacity:1">
+                    <animate attributeName="stop-color" values="#06b6d4;#3b82f6;#10b981;#06b6d4" dur="4s" repeatCount="indefinite" />
+                </stop>
+                <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:1">
+                    <animate attributeName="stop-color" values="#3b82f6;#10b981;#06b6d4;#3b82f6" dur="4s" repeatCount="indefinite" />
+                </stop>
+            </linearGradient>
+        </defs>
+    </svg>
+
     <!-- Navigation to Hub -->
     <a href="https://thesovereign.academy" style="position: fixed; top: 1.5rem; left: 1.5rem; color: #10b981; text-decoration: none; z-index: 10000; font-weight: 600; display: flex; align-items: center; gap: 0.5rem; background: rgba(26, 58, 46, 0.9); padding: 0.75rem 1.25rem; border-radius: 0.5rem; border: 2px solid rgba(16, 185, 129, 0.3); backdrop-filter: blur(10px); transition: all 0.3s ease;" onmouseover="this.style.borderColor='#10b981'; this.style.transform='translateX(-4px)';" onmouseout="this.style.borderColor='rgba(16, 185, 129, 0.3)'; this.style.transform='translateX(0)';">
         <span style="font-size: 1.2rem;">←</span>
@@ -632,11 +820,19 @@
                     '🧠': 'brain'
                 };
 
-                // Replace emojis in path cards and value props
-                document.querySelectorAll('.path-icon, .prop-icon').forEach(el => {
+                // Replace emojis in path cards (larger icons)
+                document.querySelectorAll('.path-icon').forEach(el => {
                     const emoji = el.textContent.trim();
                     if (iconMap[emoji]) {
-                        el.innerHTML = IconLibrary.get(iconMap[emoji], 48, true);
+                        el.innerHTML = IconLibrary.get(iconMap[emoji], 64, true);
+                    }
+                });
+
+                // Replace emojis in value prop cards
+                document.querySelectorAll('.prop-icon').forEach(el => {
+                    const emoji = el.textContent.trim();
+                    if (iconMap[emoji]) {
+                        el.innerHTML = IconLibrary.get(iconMap[emoji], 56, true);
                     }
                 });
             }
