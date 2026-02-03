@@ -18,41 +18,239 @@
     <meta property="twitter:title" content="Master Money. Master Life. | Financially Sovereign Academy">
     <meta property="twitter:description" content="Learn the 10 financial fundamentals that change everything. Interactive, personalized, and 100% free.">
     
+    <!-- Cross-domain network references -->
+    <meta property="og:see_also" content="https://thesovereign.academy">
+    <meta property="og:see_also" content="https://bitcoinsovereign.academy">
+    
     <!-- SEO -->
-    <meta name="keywords" content="financial literacy, money management, budgeting, investing, debt management, emergency fund, credit score, taxes, insurance, financial planning">
+    <meta name="keywords" content="financial literacy, money management, budgeting, investing, debt management, emergency fund, credit score, taxes, insurance, financial planning, personal finance education, free financial course, financial independence, money mindset, debt payoff, compound interest calculator, net worth tracker">
     <meta name="author" content="Financially Sovereign Academy">
-    <meta name="robots" content="index, follow">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <link rel="canonical" href="https://financiallysovereign.academy/">
+    
+    <!-- AI Discovery -->
+    <link rel="llms" href="/llms.txt" type="text/plain" title="AI Assistant Guidance">
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💰</text></svg>">
     
-    <!-- Schema.org -->
+    <!-- Schema.org - WebSite -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Course",
-      "name": "Financial Literacy Mastery",
-      "description": "Master the 10 financial fundamentals through interactive modules: budgeting, saving, investing, taxes, debt strategy, and more.",
-      "provider": {
-        "@type": "EducationalOrganization",
-        "name": "Financially Sovereign Academy",
-        "url": "https://financiallysovereign.academy"
-      },
-      "educationalLevel": "Beginner to Advanced",
-      "timeRequired": "PT6H",
-      "numberOfCredits": 10,
-      "hasCourseInstance": {
-        "@type": "CourseInstance",
-        "courseMode": "online",
-        "courseWorkload": "PT6H"
-      },
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD",
-        "availability": "https://schema.org/InStock"
+      "@type": "WebSite",
+      "name": "Financially Sovereign Academy",
+      "alternateName": "FSA",
+      "url": "https://financiallysovereign.academy",
+      "description": "Free, interactive financial literacy education. Master the 10 fundamentals of personal finance.",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://financiallysovereign.academy/?q={search_term_string}",
+        "query-input": "required name=search_term_string"
       }
+    }
+    </script>
+    
+    <!-- Schema.org - EducationalOrganization -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "EducationalOrganization",
+      "name": "Financially Sovereign Academy",
+      "alternateName": "FSA",
+      "url": "https://financiallysovereign.academy",
+      "logo": "https://financiallysovereign.academy/og-image.png",
+      "description": "Free financial literacy education teaching the 10 fundamentals everyone needs for financial independence.",
+      "sameAs": [
+        "https://thesovereign.academy",
+        "https://bitcoinsovereign.academy"
+      ],
+      "areaServed": "Worldwide",
+      "knowsAbout": [
+        "Financial Literacy",
+        "Personal Finance",
+        "Budgeting",
+        "Investing",
+        "Debt Management",
+        "Credit Scores",
+        "Tax Planning",
+        "Insurance",
+        "Emergency Funds",
+        "Financial Independence"
+      ]
+    }
+    </script>
+    
+    <!-- Schema.org - Course Catalog -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "10 Financial Fundamentals Course Catalog",
+      "description": "Complete curriculum for financial literacy mastery",
+      "numberOfItems": 10,
+      "itemListElement": [
+        {
+          "@type": "Course",
+          "position": 1,
+          "name": "Money Mindset & Cash Flow",
+          "description": "Understand your relationship with money and take control of your cash flow",
+          "url": "https://financiallysovereign.academy/modules/money-mindset-cash-flow.html",
+          "timeRequired": "PT30M",
+          "educationalLevel": "Beginner",
+          "isAccessibleForFree": true,
+          "provider": {"@type": "EducationalOrganization", "name": "Financially Sovereign Academy"}
+        },
+        {
+          "@type": "Course",
+          "position": 2,
+          "name": "Emergency Funds & Saving",
+          "description": "Build a financial security buffer that protects you from life's surprises",
+          "url": "https://financiallysovereign.academy/modules/emergency-funds-saving.html",
+          "timeRequired": "PT25M",
+          "educationalLevel": "Beginner",
+          "isAccessibleForFree": true,
+          "provider": {"@type": "EducationalOrganization", "name": "Financially Sovereign Academy"}
+        },
+        {
+          "@type": "Course",
+          "position": 3,
+          "name": "Banking Without Getting Robbed",
+          "description": "Use banks strategically and understand how the system really works",
+          "url": "https://financiallysovereign.academy/modules/banking-basics.html",
+          "timeRequired": "PT20M",
+          "educationalLevel": "Beginner",
+          "isAccessibleForFree": true,
+          "provider": {"@type": "EducationalOrganization", "name": "Financially Sovereign Academy"}
+        },
+        {
+          "@type": "Course",
+          "position": 4,
+          "name": "Credit Scores Decoded",
+          "description": "Build and maintain excellent credit strategically",
+          "url": "https://financiallysovereign.academy/modules/credit-scores.html",
+          "timeRequired": "PT25M",
+          "educationalLevel": "Beginner",
+          "isAccessibleForFree": true,
+          "provider": {"@type": "EducationalOrganization", "name": "Financially Sovereign Academy"}
+        },
+        {
+          "@type": "Course",
+          "position": 5,
+          "name": "Debt Strategy",
+          "description": "Understand the true cost of debt and when to use it strategically",
+          "url": "https://financiallysovereign.academy/modules/debt-strategy.html",
+          "timeRequired": "PT30M",
+          "educationalLevel": "Intermediate",
+          "isAccessibleForFree": true,
+          "provider": {"@type": "EducationalOrganization", "name": "Financially Sovereign Academy"}
+        },
+        {
+          "@type": "Course",
+          "position": 6,
+          "name": "Taxes & Paychecks Demystified",
+          "description": "Understand the tax system and maximize your take-home pay",
+          "url": "https://financiallysovereign.academy/modules/taxes-paychecks.html",
+          "timeRequired": "PT25M",
+          "educationalLevel": "Intermediate",
+          "isAccessibleForFree": true,
+          "provider": {"@type": "EducationalOrganization", "name": "Financially Sovereign Academy"}
+        },
+        {
+          "@type": "Course",
+          "position": 7,
+          "name": "Investing for Humans",
+          "description": "Build long-term wealth through compound growth",
+          "url": "https://financiallysovereign.academy/modules/investing-fundamentals.html",
+          "timeRequired": "PT35M",
+          "educationalLevel": "Intermediate",
+          "isAccessibleForFree": true,
+          "provider": {"@type": "EducationalOrganization", "name": "Financially Sovereign Academy"}
+        },
+        {
+          "@type": "Course",
+          "position": 8,
+          "name": "Protect What You've Built",
+          "description": "Risk management and insurance without over-insuring",
+          "url": "https://financiallysovereign.academy/modules/risk-insurance.html",
+          "timeRequired": "PT25M",
+          "educationalLevel": "Intermediate",
+          "isAccessibleForFree": true,
+          "provider": {"@type": "EducationalOrganization", "name": "Financially Sovereign Academy"}
+        },
+        {
+          "@type": "Course",
+          "position": 9,
+          "name": "Don't Get Scammed",
+          "description": "Make smart decisions and avoid predatory practices",
+          "url": "https://financiallysovereign.academy/modules/consumer-protection.html",
+          "timeRequired": "PT20M",
+          "educationalLevel": "Beginner",
+          "isAccessibleForFree": true,
+          "provider": {"@type": "EducationalOrganization", "name": "Financially Sovereign Academy"}
+        },
+        {
+          "@type": "Course",
+          "position": 10,
+          "name": "Your Financial Master Plan",
+          "description": "Integrate everything into a coherent life plan",
+          "url": "https://financiallysovereign.academy/modules/financial-master-plan.html",
+          "timeRequired": "PT30M",
+          "educationalLevel": "Advanced",
+          "isAccessibleForFree": true,
+          "provider": {"@type": "EducationalOrganization", "name": "Financially Sovereign Academy"}
+        }
+      ]
+    }
+    </script>
+    
+    <!-- Schema.org - FAQPage -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is Financially Sovereign Academy really free?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. All 10 core modules are 100% free forever. No credit card required."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need financial background to use Financially Sovereign Academy?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Designed for complete beginners. We explain everything in plain English."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does it take to complete all modules?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Most complete all 10 modules in 4-6 hours over 2-3 weeks. Go at your own pace."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is this about Bitcoin?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. This is universal financial literacy. Bitcoin is mentioned as one tool among many where relevant. Check out Bitcoin Sovereign Academy if you want Bitcoin-specific learning."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What's the catch with free financial education?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No catch. Financial literacy should be accessible to everyone. We believe in empowering people with knowledge."
+          }
+        }
+      ]
     }
     </script>
     <style>
@@ -794,6 +992,16 @@
         <div class="container">
             <h2>Ready to Become Financially Sovereign?</h2>
             <a href="assessment.html" class="cta-primary">Start Your Journey →</a>
+            
+            <!-- Network Footer -->
+            <div style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid rgba(16, 185, 129, 0.2);">
+                <p style="color: #6ee7b7; font-size: 0.9rem; margin-bottom: 1rem;">Part of the Sovereign Academy Network</p>
+                <div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+                    <a href="https://thesovereign.academy" target="_blank" style="color: #9ca3af; text-decoration: none; font-size: 0.9rem; transition: color 0.2s;" onmouseover="this.style.color='#10b981'" onmouseout="this.style.color='#9ca3af'">🏠 The Sovereign Academy</a>
+                    <a href="https://bitcoinsovereign.academy" target="_blank" style="color: #9ca3af; text-decoration: none; font-size: 0.9rem; transition: color 0.2s;" onmouseover="this.style.color='#f7931a'" onmouseout="this.style.color='#9ca3af'">₿ Bitcoin Sovereign Academy</a>
+                </div>
+                <p style="color: #6b7280; font-size: 0.8rem; margin-top: 1.5rem;">© 2026 Sovereign Academy Network. Educational content only.</p>
+            </div>
         </div>
     </section>
 

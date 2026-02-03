@@ -1,15 +1,128 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Core Pages -->
   <url>
-    <loc>https://financially-sovereign-academy.vercel.app/</loc>
-    <lastmod>2026-01-11</lastmod>
+    <loc>https://financiallysovereign.academy/</loc>
+    <lastmod>2026-02-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://financially-sovereign-academy.vercel.app/assessment.html</loc>
+    <loc>https://financiallysovereign.academy/assessment.html</loc>
     <lastmod>2026-01-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://financiallysovereign.academy/llms.txt</loc>
+    <lastmod>2026-02-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  
+  <!-- Modules -->
+  <url>
+    <loc>https://financiallysovereign.academy/modules/money-mindset-cash-flow.html</loc>
+    <lastmod>2026-01-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://financiallysovereign.academy/modules/emergency-funds-saving.html</loc>
+    <lastmod>2026-01-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://financiallysovereign.academy/modules/banking-basics.html</loc>
+    <lastmod>2026-01-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://financiallysovereign.academy/modules/credit-scores.html</loc>
+    <lastmod>2026-01-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://financiallysovereign.academy/modules/debt-strategy.html</loc>
+    <lastmod>2026-01-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://financiallysovereign.academy/modules/taxes-paychecks.html</loc>
+    <lastmod>2026-01-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://financiallysovereign.academy/modules/investing-fundamentals.html</loc>
+    <lastmod>2026-01-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://financiallysovereign.academy/modules/risk-insurance.html</loc>
+    <lastmod>2026-01-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://financiallysovereign.academy/modules/consumer-protection.html</loc>
+    <lastmod>2026-01-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://financiallysovereign.academy/modules/financial-master-plan.html</loc>
+    <lastmod>2026-01-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Calculators -->
+  <url>
+    <loc>https://financiallysovereign.academy/calculators/</loc>
+    <lastmod>2026-01-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://financiallysovereign.academy/calculators/compound-growth-calculator.html</loc>
+    <lastmod>2026-01-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://financiallysovereign.academy/calculators/debt-payoff-calculator.html</loc>
+    <lastmod>2026-01-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://financiallysovereign.academy/calculators/net-worth-tracker.html</loc>
+    <lastmod>2026-01-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://financiallysovereign.academy/calculators/budget-tracker.html</loc>
+    <lastmod>2026-01-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://financiallysovereign.academy/calculators/financial-freedom-timeline.html</loc>
+    <lastmod>2026-01-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://financiallysovereign.academy/calculators/bitcoin-comparison-calculator.html</loc>
+    <lastmod>2026-01-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
 </urlset>
