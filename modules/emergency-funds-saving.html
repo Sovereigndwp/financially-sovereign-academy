@@ -247,6 +247,7 @@
             color: var(--fsa-error);
         }
     </style>
+    <link rel="stylesheet" href="../css/lab-guide.css">
 </head>
 <body>
     <!-- Calculators Link -->
@@ -580,7 +581,18 @@
                 </div>
             </div>
         </section>
-    </main>
+    
+<div class="lab-card" data-lab="emergency-fund-calc" onclick="openLab('emergency-fund-calc')" style="cursor:pointer;">
+    <div class="lab-card-icon">🛡️</div>
+    <div class="lab-card-body">
+        <div class="lab-card-eyebrow">✅ Try It Now</div>
+        <h3>Calculate Your Emergency Fund Target</h3>
+        <p>Use your real essential expenses to find your exact 3–6 month runway number.</p>
+        <div class="lab-card-meta"><span class="lab-card-tag live">live</span><span class="lab-card-tag">Calculator</span><span class="lab-card-tag">10 min</span><span class="lab-card-tag">beginner</span></div>
+    </div>
+    <div class="lab-card-arrow">→</div>
+</div>
+</main>
 
     <script src="../js/module-progress.js"></script>
     <script src="../js/progress-manager.js"></script>
@@ -650,5 +662,6 @@
             window.location.href = '../index.html';
         }
     </script>
+<script src="../js/lab-guide.js"></script>
 </body>
 </html>

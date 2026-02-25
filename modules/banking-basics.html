@@ -287,6 +287,7 @@
             color: var(--fsa-error);
         }
     </style>
+    <link rel="stylesheet" href="../css/lab-guide.css">
 </head>
 <body>
     <!-- Calculators Link -->
@@ -642,7 +643,18 @@
                 </div>
             </div>
         </section>
-    </main>
+    
+<div class="lab-card" data-lab="net-worth-snapshot" onclick="openLab('net-worth-snapshot')" style="cursor:pointer;">
+    <div class="lab-card-icon">🏦</div>
+    <div class="lab-card-body">
+        <div class="lab-card-eyebrow">✅ Try It Now</div>
+        <h3>Calculate Your Net Worth</h3>
+        <p>Assets minus liabilities — your complete financial score in one number. Set your 12-month target.</p>
+        <div class="lab-card-meta"><span class="lab-card-tag live">live</span><span class="lab-card-tag">Pen & Paper</span><span class="lab-card-tag">15 min</span><span class="lab-card-tag">beginner</span></div>
+    </div>
+    <div class="lab-card-arrow">→</div>
+</div>
+</main>
 
     <script src="../js/module-progress.js"></script>
     <script src="../js/progress-manager.js"></script>
@@ -723,5 +735,6 @@
 
     <!-- Interactive Popup Lab System -->
     <script src="../js/popups.js"></script>
+<script src="../js/lab-guide.js"></script>
 </body>
 </html>
