@@ -197,6 +197,8 @@
         }
     </style>
     <link rel="stylesheet" href="../css/lab-guide.css">
+    <script src="../js/fsa-live-data.js"></script>
+    <script src="../js/fsa-plan-builder.js"></script>
 </head>
 <body>
     <!-- Calculators Link -->
@@ -209,6 +211,9 @@
             <h1>Module 5: Debt Strategy</h1>
             <p class="subtitle">Smart strategies to eliminate debt and build wealth</p>
         </div>
+
+        <div id="fsa-live-banner-5"></div>
+
 
         <!-- Reflection Question -->
         <div style="margin: 2rem 0; padding: 2rem; background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(59, 130, 246, 0.05)); border-left: 4px solid #3b82f6; border-radius: 0.5rem;">
@@ -232,16 +237,16 @@
                 <p>Here's the simple version:</p>
                 <p><strong>Bad Debt:</strong> Borrowed money for things that lose value or don't generate income</p>
                 <ul>
-                    <li>Credit cards (18-25% interest)</li>
-                    <li>Car loans on depreciating vehicles</li>
+                    <li>Credit cards (avg <span data-fsa-live="cc-apr">21.5%</span> APR right now)</li>
+                    <li>Car loans on depreciating vehicles (avg <span data-fsa-live="car-loan">7.1%</span>)</li>
                     <li>Personal loans for vacations or stuff</li>
                     <li>Payday loans (300%+ interest - never, ever use these)</li>
                 </ul>
-                
+
                 <p><strong>Maybe-OK Debt:</strong> Low interest, for assets that may appreciate</p>
                 <ul>
-                    <li>Mortgage (3-7% interest, house might appreciate)</li>
-                    <li>Student loans (if degree = higher income)</li>
+                    <li>Mortgage (avg <span data-fsa-live="mortgage-30">6.85%</span> today, house might appreciate)</li>
+                    <li>Student loans (avg <span data-fsa-live="student-loan">6.5%</span> federal rate)</li>
                     <li>Business loans (if business is profitable)</li>
                 </ul>
             </div>
@@ -487,6 +492,9 @@
             </div>
         </section>
 
+                <!-- My Financial Plan Widget -->
+        <div id="fsa-plan-widget-5"></div>
+
         <section class="section">
             <div class="card" style="text-align: center;">
                 <h3 class="card-title">Module 5 Complete! 🎉</h3>
@@ -504,6 +512,7 @@
         <h3>Build Your Debt Payoff Plan</h3>
         <p>Order your debts by interest rate and calculate exactly how much the avalanche method saves you.</p>
         <div class="lab-card-meta"><span class="lab-card-tag live">live</span><span class="lab-card-tag">Spreadsheet</span><span class="lab-card-tag">20 min</span><span class="lab-card-tag">beginner</span></div>
+
     </div>
     <div class="lab-card-arrow">→</div>
 </div>
@@ -512,6 +521,12 @@
     <script src="../js/module-progress.js"></script>
     <script src="../js/progress-manager.js"></script>
     <script>
+                // FSA Live Data & Plan Builder
+        FSALiveData.onReady(function() {
+            FSALiveData.renderBanner('fsa-live-banner-5', ['cc-apr', 'car-loan', 'student-loan', 'mortgage-30']);
+        });
+        FSAPlan.renderWidget('fsa-plan-widget-5', 5);
+
         const progressManager = new FSAProgressManager();
         progressManager.init();
         progressManager.setModuleVisited(5);

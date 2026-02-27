@@ -230,6 +230,8 @@
         }
     </style>
     <link rel="stylesheet" href="../css/lab-guide.css">
+    <script src="../js/fsa-live-data.js"></script>
+    <script src="../js/fsa-plan-builder.js"></script>
 </head>
 <body>
     <!-- Calculators Link -->
@@ -242,6 +244,9 @@
             <h1>Module 7: Investing Fundamentals</h1>
             <p class="subtitle">Build wealth that outpaces inflation</p>
         </div>
+
+        <div id="fsa-live-banner-7"></div>
+
 
         <!-- Reflection Question -->
         <div style="margin: 2rem 0; padding: 2rem; background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(59, 130, 246, 0.05)); border-left: 4px solid #3b82f6; border-radius: 0.5rem;">
@@ -409,32 +414,38 @@
                 <div class="comparison-row">
                     <span>Index Funds (Stocks)</span>
                     <span>Medium</span>
-                    <span>10%/year</span>
+                    <span><span data-fsa-live="sp500-hist">10%</span>/year (50yr avg)</span>
                     <span>Long-term growth</span>
                 </div>
                 <div class="comparison-row">
-                    <span>Bonds</span>
+                    <span>Bonds (10-yr Treasury)</span>
                     <span>Low</span>
-                    <span>4%/year</span>
+                    <span><span data-fsa-live="bond-10yr">4.4%</span>/year (current)</span>
                     <span>Stability</span>
                 </div>
                 <div class="comparison-row">
                     <span>Individual Stocks</span>
                     <span>High</span>
-                    <span>Varies</span>
+                    <span>Varies widely</span>
                     <span>Speculation</span>
                 </div>
                 <div class="comparison-row">
                     <span>Bitcoin</span>
                     <span>Very High</span>
-                    <span>Varies</span>
+                    <span><span data-fsa-live="btc-price" data-fsa-format="usd">—</span> today</span>
                     <span>Inflation hedge</span>
                 </div>
                 <div class="comparison-row">
-                    <span>Savings Account</span>
+                    <span>High-Yield Savings</span>
                     <span>None</span>
-                    <span>0.5%/year</span>
+                    <span><span data-fsa-live="hysa">4.5%</span>/year (current)</span>
                     <span>Emergency fund</span>
+                </div>
+                <div class="comparison-row" style="border-top: 2px solid rgba(239,68,68,0.3);">
+                    <span>Inflation (your enemy)</span>
+                    <span>—</span>
+                    <span style="color:#ef4444;"><span data-fsa-live="inflation">2.9%</span>/year erosion</span>
+                    <span>Your money loses this annually if idle</span>
                 </div>
             </div>
         </section>
@@ -545,6 +556,9 @@
             </div>
         </section>
 
+                <!-- My Financial Plan Widget -->
+        <div id="fsa-plan-widget-7"></div>
+
         <section class="section">
             <div class="card" style="text-align: center;">
                 <h3 class="card-title">Module 7 Complete! 🎉</h3>
@@ -562,6 +576,7 @@
         <h3>See Compound Interest in Action</h3>
         <p>Run three real scenarios showing the dollar cost of waiting 5 or 10 years to invest $200/month.</p>
         <div class="lab-card-meta"><span class="lab-card-tag live">live</span><span class="lab-card-tag">SEC Calculator</span><span class="lab-card-tag">10 min</span><span class="lab-card-tag">beginner</span></div>
+
     </div>
     <div class="lab-card-arrow">→</div>
 </div>
@@ -570,6 +585,12 @@
     <script src="../js/module-progress.js"></script>
     <script src="../js/progress-manager.js"></script>
     <script>
+                // FSA Live Data & Plan Builder
+        FSALiveData.onReady(function() {
+            FSALiveData.renderBanner('fsa-live-banner-7', ['sp500-hist', 'sp500-10yr', 'bond-10yr', 'inflation', 'btc-price']);
+        });
+        FSAPlan.renderWidget('fsa-plan-widget-7', 7);
+
         const progressManager = new FSAProgressManager();
         progressManager.init();
         progressManager.setModuleVisited(7);

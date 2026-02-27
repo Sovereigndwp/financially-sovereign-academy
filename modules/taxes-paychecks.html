@@ -208,6 +208,8 @@
         }
     </style>
     <link rel="stylesheet" href="../css/lab-guide.css">
+    <script src="../js/fsa-live-data.js"></script>
+    <script src="../js/fsa-plan-builder.js"></script>
 </head>
 <body>
     <!-- Calculators Link -->
@@ -220,6 +222,9 @@
             <h1>Module 6: Taxes & Paychecks</h1>
             <p class="subtitle">Understand your paycheck and keep more of what you earn</p>
         </div>
+
+        <div id="fsa-live-banner-6"></div>
+
 
         <!-- Reflection Question 1 -->
         <div style="margin: 2rem 0; padding: 2rem; background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(59, 130, 246, 0.05)); border-left: 4px solid #3b82f6; border-radius: 0.5rem;">
@@ -576,6 +581,9 @@
             </div>
         </section>
 
+                <!-- My Financial Plan Widget -->
+        <div id="fsa-plan-widget-6"></div>
+
         <section class="section">
             <div class="card" style="text-align: center;">
                 <h3 class="card-title">Module 6 Complete! 🎉</h3>
@@ -593,6 +601,7 @@
         <h3>Check Your Tax Withholding</h3>
         <p>Use the IRS estimator to stop over-paying the government — and put that money to work for you instead.</p>
         <div class="lab-card-meta"><span class="lab-card-tag live">live</span><span class="lab-card-tag">IRS.gov</span><span class="lab-card-tag">20 min</span><span class="lab-card-tag">intermediate</span></div>
+
     </div>
     <div class="lab-card-arrow">→</div>
 </div>
@@ -601,6 +610,12 @@
     <script src="../js/module-progress.js"></script>
     <script src="../js/progress-manager.js"></script>
     <script>
+                // FSA Live Data & Plan Builder
+        FSALiveData.onReady(function() {
+            FSALiveData.renderBanner('fsa-live-banner-6', ['inflation', 'fed-rate']);
+        });
+        FSAPlan.renderWidget('fsa-plan-widget-6', 6);
+
         const progressManager = new FSAProgressManager();
         progressManager.init();
         progressManager.setModuleVisited(6);

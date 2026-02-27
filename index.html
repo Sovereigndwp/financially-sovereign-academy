@@ -771,6 +771,7 @@
         <p class="hero-subtitle">
             Learn what financial advisors charge 1-2% annually to know. Keep the fees. Gain the knowledge.
         </p>
+        <div id="fsa-homepage-banner"></div>
 
         <!-- Two Clear Learning Paths -->
         <div class="learning-paths">
@@ -1006,6 +1007,13 @@
     </section>
 
     <!-- Icon Library -->
+    <script src="js/fsa-live-data.js"></script>
+    <script src="js/fsa-plan-builder.js"></script>
+    <script>
+        FSALiveData.onReady(function() {
+            FSALiveData.renderBanner('fsa-homepage-banner', ['inflation', 'hysa', 'cc-apr', 'sp500-hist', 'fed-rate', 'btc-price']);
+        });
+    </script>
     <script src="js/icon-library.js"></script>
     <script>
         // Replace emojis with animated SVG icons

@@ -248,6 +248,8 @@
         }
     </style>
     <link rel="stylesheet" href="../css/lab-guide.css">
+    <script src="../js/fsa-live-data.js"></script>
+    <script src="../js/fsa-plan-builder.js"></script>
 </head>
 <body>
     <!-- Calculators Link -->
@@ -260,6 +262,9 @@
             <h1>Module 2: Emergency Funds & Saving</h1>
             <p class="subtitle">Build financial resilience: protect yourself from life's surprises</p>
         </div>
+
+        <div id="fsa-live-banner-2"></div>
+
 
         <!-- Reflection Question -->
         <div style="margin: 2rem 0; padding: 2rem; background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(59, 130, 246, 0.05)); border-left: 4px solid #3b82f6; border-radius: 0.5rem;">
@@ -375,7 +380,7 @@
             <div class="content-block">
                 <h3>Best Options</h3>
                 <p><strong>1. High-Yield Savings Account (HYSA)</strong></p>
-                <p>Online banks like Marcus, Ally, or Discover offer 4-5% interest. FDIC insured. Easy to transfer to checking when needed.</p>
+                <p>Online banks like Marcus, Ally, or Discover offer up to <span data-fsa-live="hysa">4.5%</span> APY right now (vs avg <span data-fsa-live="avg-savings">0.47%</span> at traditional banks). FDIC insured. Easy to transfer to checking when needed.</p>
                 
                 <p><strong>2. Money Market Account</strong></p>
                 <p>Similar to HYSA but might include check-writing. Slightly more flexible.</p>
@@ -391,7 +396,7 @@
 
             <div class="content-block">
                 <h3>What About Inflation?</h3>
-                <p>Yes, savings accounts lose purchasing power to inflation (~3-4% per year).</p>
+                <p>Yes, savings accounts lose purchasing power to inflation (currently <span data-fsa-live="inflation">2.9%</span>/year). A HYSA at <span data-fsa-live="hysa">4.5%</span> helps offset this — but not fully. Emergency funds prioritize safety over returns.</p>
                 <p>But that's the <strong>cost of insurance</strong>. Your emergency fund isn't an investment. It's protection.</p>
                 <p>Once you hit 6 months of expenses, <em>then</em> you can explore other options like I-Bonds, gold, or Bitcoin for additional savings. But not before.</p>
             </div>
@@ -572,6 +577,9 @@
         </section>
 
         <!-- Module Complete -->
+                <!-- My Financial Plan Widget -->
+        <div id="fsa-plan-widget-2"></div>
+
         <section class="section">
             <div class="card" style="text-align: center;">
                 <h3 class="card-title">Module 2 Complete! 🎉</h3>
@@ -589,6 +597,7 @@
         <h3>Calculate Your Emergency Fund Target</h3>
         <p>Use your real essential expenses to find your exact 3–6 month runway number.</p>
         <div class="lab-card-meta"><span class="lab-card-tag live">live</span><span class="lab-card-tag">Calculator</span><span class="lab-card-tag">10 min</span><span class="lab-card-tag">beginner</span></div>
+
     </div>
     <div class="lab-card-arrow">→</div>
 </div>
@@ -597,6 +606,12 @@
     <script src="../js/module-progress.js"></script>
     <script src="../js/progress-manager.js"></script>
     <script>
+                // FSA Live Data & Plan Builder
+        FSALiveData.onReady(function() {
+            FSALiveData.renderBanner('fsa-live-banner-2', ['hysa', 'avg-savings', 'inflation']);
+        });
+        FSAPlan.renderWidget('fsa-plan-widget-2', 2);
+
         const progressManager = new FSAProgressManager();
         progressManager.init();
         progressManager.setModuleVisited(2);

@@ -288,6 +288,8 @@
         }
     </style>
     <link rel="stylesheet" href="../css/lab-guide.css">
+    <script src="../js/fsa-live-data.js"></script>
+    <script src="../js/fsa-plan-builder.js"></script>
 </head>
 <body>
     <!-- Calculators Link -->
@@ -300,6 +302,9 @@
             <h1>Module 3: Banking Without Getting Robbed</h1>
             <p class="subtitle">Navigate checking accounts, savings accounts, and hidden fees like a pro</p>
         </div>
+
+        <div id="fsa-live-banner-3"></div>
+
 
         <!-- Reflection Question -->
         <div style="margin: 2rem 0; padding: 2rem; background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(59, 130, 246, 0.05)); border-left: 4px solid #3b82f6; border-radius: 0.5rem;">
@@ -403,7 +408,7 @@
             <div class="content-block">
                 <h3>Savings Account</h3>
                 <p><strong>Purpose:</strong> Storing money for later - emergency fund, short-term goals</p>
-                <p><strong>Interest:</strong> 0.5-5% depending on the bank (high-yield savings accounts pay more)</p>
+                <p><strong>Interest:</strong> Standard banks pay avg <span data-fsa-live="avg-savings">0.47%</span>. High-yield savings accounts pay up to <span data-fsa-live="hysa">4.5%</span> right now.</p>
                 <p><strong>Access:</strong> Limited transactions (usually 6 withdrawals per month)</p>
                 <p><strong>Best for:</strong> Money you don't plan to touch for 3+ months</p>
             </div>
@@ -634,6 +639,9 @@
         </section>
 
         <!-- Module Complete -->
+                <!-- My Financial Plan Widget -->
+        <div id="fsa-plan-widget-3"></div>
+
         <section class="section">
             <div class="card" style="text-align: center;">
                 <h3 class="card-title">Module 3 Complete! 🎉</h3>
@@ -651,6 +659,7 @@
         <h3>Calculate Your Net Worth</h3>
         <p>Assets minus liabilities — your complete financial score in one number. Set your 12-month target.</p>
         <div class="lab-card-meta"><span class="lab-card-tag live">live</span><span class="lab-card-tag">Pen & Paper</span><span class="lab-card-tag">15 min</span><span class="lab-card-tag">beginner</span></div>
+
     </div>
     <div class="lab-card-arrow">→</div>
 </div>
@@ -659,6 +668,12 @@
     <script src="../js/module-progress.js"></script>
     <script src="../js/progress-manager.js"></script>
     <script>
+                // FSA Live Data & Plan Builder
+        FSALiveData.onReady(function() {
+            FSALiveData.renderBanner('fsa-live-banner-3', ['hysa', 'avg-savings', 'fed-rate']);
+        });
+        FSAPlan.renderWidget('fsa-plan-widget-3', 3);
+
         const progressManager = new FSAProgressManager();
         progressManager.init();
         progressManager.setModuleVisited(3);

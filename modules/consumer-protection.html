@@ -241,6 +241,8 @@
         }
     </style>
     <link rel="stylesheet" href="../css/lab-guide.css">
+    <script src="../js/fsa-live-data.js"></script>
+    <script src="../js/fsa-plan-builder.js"></script>
 </head>
 <body>
     <!-- Calculators Link -->
@@ -253,6 +255,9 @@
             <h1>Module 9: Consumer Protection</h1>
             <p class="subtitle">Avoid scams, predatory lenders, and financial traps</p>
         </div>
+
+        <div id="fsa-live-banner-9"></div>
+
 
         <!-- Reflection Question -->
         <div style="margin: 2rem 0; padding: 2rem; background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(59, 130, 246, 0.05)); border-left: 4px solid #3b82f6; border-radius: 0.5rem;">
@@ -552,6 +557,9 @@
             <p style="margin-top: 0.75rem; font-size: 0.9rem; color: rgba(255, 255, 255, 0.7);">Not just for parents — understand how custody decisions work</p>
         </div>
 
+                <!-- My Financial Plan Widget -->
+        <div id="fsa-plan-widget-9"></div>
+
         <section class="section">
             <div class="card" style="text-align: center;">
                 <h3 class="card-title">Module 9 Complete! 🎉</h3>
@@ -569,6 +577,7 @@
         <h3>Pull Your Free Credit Report</h3>
         <p>Review all three bureau reports for errors that may be silently lowering your score — and dispute them.</p>
         <div class="lab-card-meta"><span class="lab-card-tag live">live</span><span class="lab-card-tag">AnnualCreditReport.com</span><span class="lab-card-tag">15 min</span><span class="lab-card-tag">beginner</span></div>
+
     </div>
     <div class="lab-card-arrow">→</div>
 </div>
@@ -578,6 +587,12 @@
     <script src="../js/module-progress.js"></script>
     <script src="../js/progress-manager.js"></script>
     <script>
+                // FSA Live Data & Plan Builder
+        FSALiveData.onReady(function() {
+            FSALiveData.renderBanner('fsa-live-banner-9', ['cc-apr', 'inflation']);
+        });
+        FSAPlan.renderWidget('fsa-plan-widget-9', 9);
+
         const progressManager = new FSAProgressManager();
         progressManager.init();
         progressManager.setModuleVisited(9);

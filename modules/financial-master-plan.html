@@ -271,6 +271,8 @@
         }
     </style>
     <link rel="stylesheet" href="../css/lab-guide.css">
+    <script src="../js/fsa-live-data.js"></script>
+    <script src="../js/fsa-plan-builder.js"></script>
 </head>
 <body>
     <!-- Calculators Link -->
@@ -284,6 +286,9 @@
             <p class="subtitle">Your complete roadmap to financial sovereignty</p>
         </div>
 
+        <div id="fsa-live-banner-10"></div>
+
+
         <!-- Reflection Question -->
         <div style="margin: 2rem 0; padding: 2rem; background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(59, 130, 246, 0.05)); border-left: 4px solid #3b82f6; border-radius: 0.5rem;">
             <div style="font-size: 1.5rem; font-weight: 700; color: #60a5fa; margin-bottom: 1rem; font-style: italic;">
@@ -296,6 +301,9 @@
                 You've learned the tools. Now it's time to be honest: are you using them to build sovereignty, or just staying afloat?
             </p>
         </div>
+
+        <!-- Full Plan Summary — populated from FSAPlan across all modules -->
+        <div id="fsa-full-plan-summary"></div>
 
         <section class="section">
             <h2 class="section-title">You've Learned the Tools. Now Build Your Plan.</h2>
@@ -715,9 +723,13 @@
         <h3>Calculate Your Net Worth</h3>
         <p>Your master plan starts with knowing your score. Calculate net worth and set your annual target.</p>
         <div class="lab-card-meta"><span class="lab-card-tag live">live</span><span class="lab-card-tag">Pen & Paper</span><span class="lab-card-tag">15 min</span><span class="lab-card-tag">beginner</span></div>
+
     </div>
     <div class="lab-card-arrow">→</div>
 </div>
+
+        <!-- My Financial Plan Widget -->
+        <div id="fsa-plan-widget-10"></div>
 </main>
 
     <script src="../js/popups.js"></script>
@@ -725,6 +737,13 @@
     <script src="../js/progress-manager.js"></script>
     <script src="../js/module-navigation.js"></script>
     <script>
+                // FSA Live Data & Plan Builder
+        FSALiveData.onReady(function() {
+            FSALiveData.renderBanner('fsa-live-banner-10', ['inflation', 'hysa', 'sp500-hist', 'cc-apr']);
+        });
+        FSAPlan.renderWidget('fsa-plan-widget-10', 10);
+        FSAPlan.renderSummary('fsa-full-plan-summary');
+
         const progressManager = new FSAProgressManager();
         progressManager.init();
         progressManager.setModuleVisited(10);
