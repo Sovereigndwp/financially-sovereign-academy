@@ -29,6 +29,18 @@ Allow: /
 User-agent: Googlebot
 Allow: /
 
+User-agent: Bravecrawler
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
 # Sitemaps - This domain and sister properties
 Sitemap: https://financiallysovereign.academy/sitemap.xml
 Sitemap: https://thesovereign.academy/sitemap.xml
