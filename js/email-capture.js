@@ -9,7 +9,8 @@
     const CONFIG = {
         subscribeEndpoint: 'https://bitcoinsovereign.academy/api/subscribe',
         storageKey: 'fsa-email-captures',
-        hideAfterCapture: true
+        hideAfterCapture: true,
+        exitIntent: true
     };
 
     class EmailCapture {
@@ -54,6 +55,24 @@
                 .fsa-email-privacy { font-size: 0.8rem; color: #666; margin-top: 0.75rem; }
                 .fsa-email-privacy a { color: #10b981; }
                 .fsa-email-success { color: #4CAF50; font-weight: 600; padding: 1rem; }
+
+                /* Modal */
+                .fsa-email-modal-overlay {
+                    position:fixed; top:0; left:0; right:0; bottom:0;
+                    background:rgba(0,0,0,0.85); display:none;
+                    justify-content:center; align-items:center; z-index:10001; padding:1rem;
+                }
+                .fsa-email-modal-overlay.active { display:flex; }
+                .fsa-email-modal {
+                    background:#1a1a1a; border:2px solid #10b981; border-radius:20px;
+                    padding:2.5rem; max-width:480px; width:100%; position:relative; text-align:center;
+                }
+                .fsa-email-modal-close {
+                    position:absolute; top:1rem; right:1rem; background:none;
+                    border:none; color:#666; font-size:1.5rem; cursor:pointer;
+                }
+                .fsa-email-modal h3 { color:#10b981; font-size:1.5rem; margin-bottom:0.75rem; }
+                .fsa-email-modal p { color:#999; margin-bottom:1.5rem; }
             `;
             document.head.appendChild(styles);
         }
@@ -97,6 +116,60 @@
             }
         }
 
+        showModal(options = {}) {
+            if (this.hasSubmitted && CONFIG.hideAfterCapture) return;
+            const title = options.title || '💰 Level Up Your Finances';
+            const subtitle = options.subtitle || 'Get weekly money tips and financial strategies. No spam, ever.';
+            const buttonText = options.buttonText || 'Subscribe Free';
+            const source = options.source || 'modal';
+
+            let overlay = document.getElementById('fsa-email-modal-overlay');
+            if (!overlay) {
+                overlay = document.createElement('div');
+                overlay.id = 'fsa-email-modal-overlay';
+                overlay.className = 'fsa-email-modal-overlay';
+                overlay.innerHTML = `
+                    <div class="fsa-email-modal">
+                        <button class="fsa-email-modal-close" onclick="fsaEmailCapture.closeModal()">&times;</button>
+                        <h3>${title}</h3>
+                        <p>${subtitle}</p>
+                        <form class="fsa-email-form" onsubmit="fsaEmailCapture.handleSubmit(event, '${source}')">
+                            <input type="email" name="email" placeholder="your@email.com" required>
+                            <button type="submit">${buttonText}</button>
+                        </form>
+                        <p class="fsa-email-privacy">No spam. Unsubscribe anytime.</p>
+                    </div>
+                `;
+                document.body.appendChild(overlay);
+                overlay.addEventListener('click', (e) => { if (e.target === overlay) this.closeModal(); });
+            }
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        closeModal() {
+            const overlay = document.getElementById('fsa-email-modal-overlay');
+            if (overlay) { overlay.classList.remove('active'); document.body.style.overflow = ''; }
+        }
+
+        initExitIntent() {
+            if (!CONFIG.exitIntent || this.hasSubmitted) return;
+            if ('ontouchstart' in window || navigator.maxTouchPoints > 0) return;
+            let fired = false;
+            document.addEventListener('mouseout', (e) => {
+                if (fired) return;
+                if (e.clientY <= 0 && e.relatedTarget === null) {
+                    fired = true;
+                    this.showModal({
+                        title: '💰 Before You Go...',
+                        subtitle: 'Get weekly financial tips and strategies to build real wealth. Join for free.',
+                        buttonText: 'Yes, Keep Me Updated',
+                        source: 'exit_intent'
+                    });
+                }
+            });
+        }
+
         autoInject() {
             document.querySelectorAll('[data-fsa-email-capture]').forEach(el => {
                 if (this.hasSubmitted && CONFIG.hideAfterCapture) { el.style.display = 'none'; return; }
@@ -122,9 +195,10 @@
     const emailCapture = new EmailCapture();
 
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', () => emailCapture.autoInject());
+        document.addEventListener('DOMContentLoaded', () => { emailCapture.autoInject(); emailCapture.initExitIntent(); });
     } else {
         emailCapture.autoInject();
+        emailCapture.initExitIntent();
     }
 
     window.fsaEmailCapture = emailCapture;
