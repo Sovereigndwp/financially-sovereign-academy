@@ -325,12 +325,13 @@
             font-size: 1rem;
         }
     </style>
+    <link rel="stylesheet" href="../css/fsa-glossary.css">
 </head>
 <body>
     <div class="calculator-container">
         <div class="header">
             <h1>⚖️ Debt Payoff Calculator</h1>
-            <p>Compare Avalanche vs Snowball strategies and find your fastest path to freedom</p>
+            <p>Compare <span class="fsa-term" data-term="avalanche-method">Avalanche</span> vs <span class="fsa-term" data-term="snowball-method">Snowball</span> strategies and find your fastest path to freedom</p>
         </div>
 
         <div class="debt-input-section">
@@ -370,7 +371,7 @@
             <div class="comparison-grid">
                 <!-- Avalanche Strategy -->
                 <div class="strategy-card" id="avalanche-card">
-                    <div class="strategy-title">🏔️ Avalanche Strategy</div>
+                    <div class="strategy-title">🏔️ <span class="fsa-term" data-term="avalanche-method">Avalanche Strategy</span></div>
                     <p style="text-align: center; color: var(--fsa-text-secondary, #9ca3af); margin-bottom: 1.5rem;">
                         Highest interest rate first (saves most money)
                     </p>
@@ -395,7 +396,7 @@
 
                 <!-- Snowball Strategy -->
                 <div class="strategy-card" id="snowball-card">
-                    <div class="strategy-title">⚪ Snowball Strategy</div>
+                    <div class="strategy-title">⚪ <span class="fsa-term" data-term="snowball-method">Snowball Strategy</span></div>
                     <p style="text-align: center; color: var(--fsa-text-secondary, #9ca3af); margin-bottom: 1.5rem;">
                         Smallest balance first (quick wins for motivation)
                     </p>
@@ -459,11 +460,11 @@
                         <input type="number" class="input-field" placeholder="5000" value="${balance || ''}" id="balance-${debtCounter}">
                     </div>
                     <div class="input-group">
-                        <label class="input-label">Interest Rate (%)</label>
+                        <label class="input-label"><span class="fsa-term" data-term="apr">Interest Rate</span> (%)</label>
                         <input type="number" class="input-field" placeholder="18.99" step="0.01" value="${rate || ''}" id="rate-${debtCounter}">
                     </div>
                     <div class="input-group">
-                        <label class="input-label">Minimum Payment</label>
+                        <label class="input-label"><span class="fsa-term" data-term="minimum-payment">Minimum Payment</span></label>
                         <input type="number" class="input-field" placeholder="150" value="${minimum || ''}" id="minimum-${debtCounter}">
                     </div>
                 </div>
@@ -670,6 +671,7 @@
 <div style="margin: 2rem auto; max-width: 900px; padding: 0 1.5rem;">
     <div data-fsa-email-capture="page-footer" data-title="📬 Level Up Your Finances" data-subtitle="Weekly money tips and financial strategies. No spam, ever."></div>
 </div>
+<script src="/js/fsa-glossary.js" defer></script>
 <script src="/js/calculator-nav.js" defer></script>
 <script src="/js/analytics.js" defer></script>
 <script src="/js/email-capture.js" defer></script>

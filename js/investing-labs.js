@@ -8,8 +8,16 @@
 (function (global) {
     'use strict';
 
+    // Glossary helper — safe wrapper for FSAGlossary
+    var _g = function (key, text) {
+        return (typeof FSAGlossary !== 'undefined' && FSAGlossary.wrapTerm) ? FSAGlossary.wrapTerm(key, text) : (text || key);
+    };
+    var _rescan = function () {
+        if (typeof FSAGlossary !== 'undefined' && FSAGlossary.rescan) FSAGlossary.rescan();
+    };
+
     /* ================================================================
-       RATIO SANDBOX — Calculate and display financial ratios
+       RATIO SANDBOX
        ================================================================ */
 
     const RatioSandbox = {
@@ -152,7 +160,7 @@
                     + '<div class="company-header">'
                     + '<div class="company-icon">' + co.icon + '</div>'
                     + '<div><div class="company-name">' + co.name + '</div>'
-                    + '<div class="company-sector">Current Ratio: <strong style="color:' + (cr >= 1.5 ? '#34d399' : cr >= 1.0 ? '#fbbf24' : '#f87171') + '">' + cr.toFixed(2) + '</strong></div></div></div>'
+                + '<div class="company-sector">' + _g('current-ratio', 'Current Ratio') + ': <strong style="color:' + (cr >= 1.5 ? '#34d399' : cr >= 1.0 ? '#fbbf24' : '#f87171') + '">' + cr.toFixed(2) + '</strong></div></div></div>'
                     + '<div class="case-data-grid">'
                     + '<div class="case-data-item"><div class="data-label">Cash</div><div class="data-value">$' + co.cash.toLocaleString() + '</div></div>'
                     + '<div class="case-data-item"><div class="data-label">Receivables</div><div class="data-value">$' + co.receivables.toLocaleString() + '</div></div>'
@@ -180,6 +188,7 @@
                 + '</div>';
 
             c.innerHTML = html;
+            _rescan();
 
             // Wire slider
             var slider = document.getElementById('inv-slider');
@@ -225,7 +234,7 @@
                 html += '<div class="match-item" id="ddm-' + i + '">'
                     + '<div class="match-company">' + co.name + '</div>'
                     + '<div style="font-size:0.8rem;color:var(--fsa-text-dim);">' + co.sector + '</div>'
-                    + '<div class="match-data">D/E: ' + co.de.toFixed(1) + '</div>'
+                    + '<div class="match-data">' + _g('debt-to-equity', 'D/E') + ': ' + co.de.toFixed(1) + '</div>'
                     + '<div class="label-buttons" style="margin-top:0.75rem;">'
                     + '<button class="label-btn" onclick="InvestingLabs.DebtDangerMap.classify(' + i + ',\'fine\')">Usually Fine</button>'
                     + '<button class="label-btn" onclick="InvestingLabs.DebtDangerMap.classify(' + i + ',\'context\')">Needs Context</button>'
@@ -237,6 +246,7 @@
             html += '<button class="btn btn-primary" style="margin-top:1rem;width:100%;" onclick="InvestingLabs.DebtDangerMap.check()">Check Answers</button>';
 
             c.innerHTML = html;
+            _rescan();
         },
 
         classify: function (index, label) {
@@ -331,7 +341,7 @@
                     + '<div class="company-header">'
                     + '<div class="company-icon">🔍</div>'
                     + '<div><div class="company-name">' + cs.name + '</div>'
-                    + '<div class="company-sector">ROE: <strong style="color:#34d399;">' + cs.roe + '</strong></div></div></div>'
+                + '<div class="company-sector">' + _g('roe', 'ROE') + ': <strong style="color:#34d399;">' + cs.roe + '</strong></div></div></div>'
                     + '<div class="case-data-grid">'
                     + '<div class="case-data-item"><div class="data-label">Net Income</div><div class="data-value">' + cs.netIncome + '</div></div>'
                     + '<div class="case-data-item"><div class="data-label">Equity</div><div class="data-value">' + cs.equity + '</div></div>'
@@ -348,6 +358,7 @@
             });
 
             c.innerHTML = html;
+            _rescan();
         },
 
         answer: function (index, choice) {
@@ -401,7 +412,7 @@
             this.companies.forEach(function (co, i) {
                 html += '<div class="match-item" id="peg-' + i + '">'
                     + '<div class="match-company">' + co.name + '</div>'
-                    + '<div class="match-data">P/E: ' + co.pe + 'x | Growth: ' + co.growth + '%</div>'
+                + '<div class="match-data">' + _g('pe-ratio', 'P/E') + ': ' + co.pe + 'x | Growth: ' + co.growth + '%</div>'
                     + '<div class="label-buttons" style="margin-top:0.75rem;">';
                 labels.forEach(function (lab, j) {
                     html += '<button class="label-btn" onclick="InvestingLabs.PEGrowthGame.label(' + i + ',\'' + labelKeys[j] + '\')">' + lab + '</button>';
@@ -414,6 +425,7 @@
             html += '<div id="peg-feedback" style="margin-top:1rem;"></div>';
 
             c.innerHTML = html;
+            _rescan();
         },
 
         label: function (index, label) {
@@ -485,8 +497,8 @@
                 + '<div class="case-data-grid">'
                 + '<div class="case-data-item"><div class="data-label">Net Income</div><div class="data-value">$120M</div></div>'
                 + '<div class="case-data-item"><div class="data-label">Cash from Ops</div><div class="data-value">$60M</div></div>'
-                + '<div class="case-data-item"><div class="data-label">CapEx</div><div class="data-value">$55M</div></div>'
-                + '<div class="case-data-item"><div class="data-label">Free Cash Flow</div><div class="data-value" style="color:#f87171;">$5M</div></div>'
+                + '<div class="case-data-item"><div class="data-label">' + _g('capex', 'CapEx') + '</div><div class="data-value">$55M</div></div>'
+                + '<div class="case-data-item"><div class="data-label">' + _g('free-cash-flow', 'Free Cash Flow') + '</div><div class="data-value" style="color:#f87171;">$5M</div></div>'
                 + '</div></div>';
 
             // Company B
@@ -497,8 +509,8 @@
                 + '<div class="case-data-grid">'
                 + '<div class="case-data-item"><div class="data-label">Net Income</div><div class="data-value">$80M</div></div>'
                 + '<div class="case-data-item"><div class="data-label">Cash from Ops</div><div class="data-value">$110M</div></div>'
-                + '<div class="case-data-item"><div class="data-label">CapEx</div><div class="data-value">$30M</div></div>'
-                + '<div class="case-data-item"><div class="data-label">Free Cash Flow</div><div class="data-value" style="color:#34d399;">$80M</div></div>'
+                + '<div class="case-data-item"><div class="data-label">' + _g('capex', 'CapEx') + '</div><div class="data-value">$30M</div></div>'
+                + '<div class="case-data-item"><div class="data-label">' + _g('free-cash-flow', 'Free Cash Flow') + '</div><div class="data-value" style="color:#34d399;">$80M</div></div>'
                 + '</div></div>';
 
             html += '<div style="margin-top:1.5rem;">'
@@ -522,6 +534,7 @@
                 + '<div id="fcf-quality-fb"></div></div>';
 
             c.innerHTML = html;
+            _rescan();
         },
 
         answer: function (choice) {
@@ -591,6 +604,7 @@
             html += '<div id="vis-result"></div>';
 
             c.innerHTML = html;
+            _rescan();
         },
 
         update: function (id, value) {
@@ -657,9 +671,9 @@
 
             // Section A: Business Health
             html += '<div class="scorecard-section"><h4>Section A — Business Health</h4>'
-                + this._inputRow('sc-cr', 'Current Ratio', 'e.g. 1.5')
-                + this._inputRow('sc-de', 'Debt / Equity', 'e.g. 0.8')
-                + this._inputRow('sc-roe', 'ROE (%)', 'e.g. 18')
+                + this._inputRow('sc-cr', _g('current-ratio', 'Current Ratio'), 'e.g. 1.5')
+                + this._inputRow('sc-de', _g('debt-to-equity', 'Debt / Equity'), 'e.g. 0.8')
+                + this._inputRow('sc-roe', _g('roe', 'ROE') + ' (%)', 'e.g. 18')
                 + '<div style="margin-top:0.5rem;"><label style="color:var(--fsa-text-dim);font-size:0.85rem;">Is debt boosting ROE?</label>'
                 + '<select id="sc-roe-debt" style="width:100%;background:rgba(0,0,0,0.4);border:2px solid var(--fsa-border-medium);border-radius:0.5rem;padding:0.5rem;color:var(--fsa-text-primary);margin-top:0.25rem;">'
                 + '<option value="no">No — genuine operating strength</option>'
@@ -669,8 +683,8 @@
 
             // Section B: Price Sanity
             html += '<div class="scorecard-section"><h4>Section B — Price Sanity</h4>'
-                + this._inputRow('sc-pe', 'P/E Ratio', 'e.g. 22')
-                + this._inputRow('sc-pb', 'P/B Ratio', 'e.g. 2.1')
+                + this._inputRow('sc-pe', _g('pe-ratio', 'P/E Ratio'), 'e.g. 22')
+                + this._inputRow('sc-pb', _g('pb-ratio', 'P/B Ratio'), 'e.g. 2.1')
                 + this._inputRow('sc-pe-sector', 'Sector Avg P/E', 'e.g. 18')
                 + this._inputRow('sc-pe-5yr', 'Own 5yr Avg P/E', 'e.g. 20')
                 + '</div>';
@@ -714,6 +728,7 @@
             html += '</div>';
 
             c.innerHTML = html;
+            _rescan();
         },
 
         _inputRow: function (id, label, placeholder) {
@@ -749,7 +764,7 @@
                 + '<div class="ratio-input-group"><label>Years</label><input type="number" id="fee-years" value="30" min="1" max="50"></div>'
                 + '</div>'
                 + '<div class="slider-challenge" style="margin:1.5rem 0;">'
-                + '<h4>Fund Expense Ratio</h4>'
+                + '<h4>Fund ' + _g('expense-ratio', 'Expense Ratio') + '</h4>'
                 + '<div class="slider-row">'
                 + '<label>Low-Cost Fund</label>'
                 + '<input type="range" id="fee-low" min="0.01" max="0.5" value="0.05" step="0.01">'
@@ -765,6 +780,7 @@
                 + '</div>';
 
             c.innerHTML = html;
+            _rescan();
 
             // Wire sliders
             document.getElementById('fee-low').addEventListener('input', function () {
@@ -804,8 +820,9 @@
                 + '<div class="lost-amount">$' + Math.round(lost).toLocaleString() + '</div>'
                 + '<p style="color:var(--fsa-text-secondary);font-size:0.9rem;margin-top:0.75rem;line-height:1.6;">'
                 + 'That\'s real money — gone to fund managers instead of your retirement. '
-                + 'A ' + (feeHigh - feeLow).toFixed(2) + '% annual difference doesn\'t sound like much, but compound interest amplifies it relentlessly.</p>'
+                + 'A ' + (feeHigh - feeLow).toFixed(2) + '% annual difference doesn\'t sound like much, but ' + _g('compound-interest', 'compound interest') + ' amplifies it relentlessly.</p>'
                 + '</div>';
+            _rescan();
         },
 
         _compound: function (start, monthly, annualReturn, fee, years) {
@@ -865,6 +882,7 @@
                 + '</div>';
 
             c.innerHTML = html;
+            _rescan();
         },
 
         simulate: function () {
@@ -930,6 +948,7 @@
                 + '<strong>The strategy you\'ll actually follow beats the "optimal" strategy you\'ll abandon.</strong></p></div>';
 
             r.innerHTML = html;
+            _rescan();
         }
     };
 
@@ -1088,6 +1107,7 @@
             html += '<button class="btn btn-secondary" style="width:100%;margin-top:1.5rem;" onclick="InvestingLabs.RiskTolerance.render(\'' + this.containerId + '\')">Retake Assessment</button>';
 
             container.innerHTML = html;
+            _rescan();
         }
     };
 

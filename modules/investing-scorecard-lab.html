@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../css/fsa-theme.css">
     <link rel="stylesheet" href="../css/interactive-components.css">
     <link rel="stylesheet" href="../css/investing-labs.css">
+    <link rel="stylesheet" href="../css/fsa-glossary.css">
     <style>
         main {
             max-width: 900px;
@@ -173,7 +174,7 @@
 
             <!-- Current Ratio -->
             <div class="content-block">
-                <h3>1. Current Ratio</h3>
+                <h3>1. <span class="fsa-term" data-term="current-ratio">Current Ratio</span></h3>
                 <div class="formula-box">Current Assets ÷ Current Liabilities</div>
                 <p>Can the company cover its short-term bills? If not, it might not survive long enough for your investment thesis to play out.</p>
                 <div class="thumb-rule">
@@ -187,8 +188,8 @@
 
             <!-- Debt to Equity -->
             <div class="content-block">
-                <h3>2. Debt to Equity</h3>
-                <div class="formula-box">Total Liabilities ÷ Total Shareholder Equity</div>
+                <h3>2. <span class="fsa-term" data-term="debt-to-equity">Debt to Equity</span></h3>
+                <div class="formula-box">Total Liabilities ÷ Total <span class="fsa-term" data-term="shareholder-equity">Shareholder Equity</span></div>
                 <p>How much the company leans on debt. High D/E isn't automatically bad — it depends on the sector. A utility at D/E 2.0 is different from a software company at D/E 2.0.</p>
                 <div class="thumb-rule">
                     <span class="rule-icon">📏</span>
@@ -201,7 +202,7 @@
 
             <!-- ROE -->
             <div class="content-block">
-                <h3>3. Return on Equity</h3>
+                <h3>3. <span class="fsa-term" data-term="roe">Return on Equity</span></h3>
                 <div class="formula-box">Net Income ÷ Average Shareholder Equity</div>
                 <p>How efficiently profits are made from shareholder capital. Prefer consistently high ROE for at least 3 years.</p>
                 <div class="warning-box">
@@ -220,12 +221,12 @@
 
             <!-- P/E -->
             <div class="content-block">
-                <h3>4. P/E Ratio</h3>
-                <div class="formula-box">Price per Share ÷ Earnings per Share</div>
+                <h3>4. <span class="fsa-term" data-term="pe-ratio">P/E Ratio</span></h3>
+                <div class="formula-box">Price per Share ÷ <span class="fsa-term" data-term="eps">Earnings per Share</span></div>
                 <p>How expensive the stock is relative to current earnings. Lower is often preferred, but depends heavily on growth rate and sector.</p>
                 <div class="thumb-rule">
                     <span class="rule-icon">📏</span>
-                    <p><strong>Key insight:</strong> P/E alone is not a perfect measure. It can mislead if the company is cyclical. P/E and growth should match — that's what the PEG ratio checks.</p>
+                    <p><strong>Key insight:</strong> P/E alone is not a perfect measure. It can mislead if the company is cyclical. P/E and growth should match — that's what the <span class="fsa-term" data-term="peg-ratio">PEG ratio</span> checks.</p>
                 </div>
             </div>
 
@@ -234,8 +235,8 @@
 
             <!-- P/B -->
             <div class="content-block">
-                <h3>5. P/B Ratio</h3>
-                <div class="formula-box">Price per Share ÷ Book Value per Share</div>
+                <h3>5. <span class="fsa-term" data-term="pb-ratio">P/B Ratio</span></h3>
+                <div class="formula-box">Price per Share ÷ <span class="fsa-term" data-term="book-value">Book Value</span> per Share</div>
                 <p>How price compares to net assets on paper. Most useful when assets matter: banks, insurers, some industrials. Can be useless for asset-light companies like software firms.</p>
                 <div class="thumb-rule">
                     <span class="rule-icon">📏</span>
@@ -250,7 +251,7 @@
             <p style="color: var(--fsa-text-secondary); margin-bottom: 2rem;">Profit can be a story. Cash is harder to fake.</p>
 
             <div class="content-block">
-                <h3>6. Free Cash Flow</h3>
+                <h3>6. <span class="fsa-term" data-term="free-cash-flow">Free Cash Flow</span></h3>
                 <p><strong>Simple meaning:</strong> Cash left after running the business and paying for what it needs to keep operating.</p>
                 <p>Strong FCF suggests strength and flexibility. The company can pay debt, invest in growth, survive downturns, or return money to shareholders.</p>
                 <div class="thumb-rule">
@@ -341,6 +342,7 @@
         </section>
     </main>
 
+    <script src="../js/fsa-glossary.js"></script>
     <script src="../js/investing-labs.js"></script>
     <script>
         // Initialize all interactive components

@@ -338,6 +338,7 @@
             background: var(--fsa-green);
         }
     </style>
+    <link rel="stylesheet" href="../css/fsa-glossary.css">
 </head>
 <body>
     <div class="container">
@@ -348,12 +349,12 @@
 
         <div class="header">
             <h1>📊 Net Worth Tracker</h1>
-            <p>Assets minus liabilities. Track your financial progress over time.</p>
+            <p><span class="fsa-term" data-term="assets">Assets</span> minus <span class="fsa-term" data-term="liabilities">liabilities</span>. Track your financial progress over time.</p>
         </div>
 
         <!-- Net Worth Display -->
         <div class="net-worth-display">
-            <div class="net-worth-label">Your Net Worth</div>
+            <div class="net-worth-label">Your <span class="fsa-term" data-term="net-worth">Net Worth</span></div>
             <div class="net-worth-value positive" id="net-worth-value">$0</div>
             <div class="net-worth-change" id="net-worth-change">Add assets and liabilities to calculate</div>
         </div>
@@ -361,7 +362,7 @@
         <div class="grid">
             <!-- Assets -->
             <div class="card">
-                <h2 class="card-title">💰 Assets</h2>
+                <h2 class="card-title">💰 <span class="fsa-term" data-term="assets">Assets</span></h2>
                 
                 <div class="form-group">
                     <label class="form-label" for="asset-name">Asset Name</label>
@@ -387,7 +388,7 @@
 
             <!-- Liabilities -->
             <div class="card">
-                <h2 class="card-title">💳 Liabilities</h2>
+                <h2 class="card-title">💳 <span class="fsa-term" data-term="liabilities">Liabilities</span></h2>
                 
                 <div class="form-group">
                     <label class="form-label" for="liability-name">Liability Name</label>
@@ -739,6 +740,7 @@
 <div style="margin: 2rem auto; max-width: 900px; padding: 0 1.5rem;">
     <div data-fsa-email-capture="page-footer" data-title="📬 Level Up Your Finances" data-subtitle="Weekly money tips and financial strategies. No spam, ever."></div>
 </div>
+<script src="/js/fsa-glossary.js" defer></script>
 <script src="/js/calculator-nav.js" defer></script>
 <script src="/js/analytics.js" defer></script>
 <script src="/js/email-capture.js" defer></script>

@@ -25,10 +25,12 @@
             steps: [
                 {
                     title: 'Get the budget template',
-                    content: 'Start with a structured template — don\'t build from scratch. The FSA budget template separates fixed expenses, variable expenses, savings targets, and income.',
-                    links: [{ label: 'FSA Budget Template (Google Sheets — make a copy)', url: 'https://docs.google.com/spreadsheets/d/1BHgTqMFiCQs6VrIxNbqsmKaFMJgV7a6F8mxYOaU-0HQ/copy' }],
-                    info: 'Click "Make a copy" to get your own editable version. You\'ll need a free Google account.',
-                    verify: 'I have an open, editable copy of the budget template'
+                    content: 'Start with a structured template — don\'t build from scratch. The FSA budget template separates fixed expenses, variable expenses, savings targets, and income with a built-in 50/30/20 analysis.',
+                    links: [
+                        { label: 'Download FSA Budget Template (CSV)', url: '/assets/templates/fsa-budget-template.csv' }
+                    ],
+                    info: '<strong>Google Sheets:</strong> Open Google Sheets → File → Import → Upload the CSV → "Replace spreadsheet." <br><strong>Excel:</strong> Double-click the downloaded CSV to open it directly. <br>Then fill in your real numbers in the Amount column.',
+                    verify: 'I have the budget template open in a spreadsheet and ready to edit'
                 },
                 {
                     title: 'Enter your income (take-home pay only)',

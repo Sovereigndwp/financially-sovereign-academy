@@ -19,6 +19,15 @@
     const STORAGE_KEY = 'fsa-my-plan';
     const VERSION = '1.0';
 
+    // Budget method descriptions — shown below the select when an option is chosen
+    const BUDGET_METHOD_HELP = {
+        '50/30/20 Rule': '50% of take-home pay on needs (rent, food, insurance), 30% on wants (dining, fun), 20% on savings & debt. A simple starting framework.',
+        'Pay Yourself First': 'Auto-transfer 10-20% of each paycheck to savings BEFORE paying anything else. Budget with what\'s left.',
+        'Zero-Based Budget': 'Assign every dollar a job until income minus planned spending = $0. No unassigned money floating around.',
+        'Envelope Method': 'Put cash in labeled envelopes for each category. When an envelope is empty, you stop spending in that category.',
+        'Still deciding': 'Not sure yet? Start with the 50/30/20 Rule — it\'s the simplest. You can always switch later.'
+    };
+
     // Module field definitions — what each module contributes to the plan
     const MODULE_FIELDS = {
         1: {
@@ -196,11 +205,16 @@
                     const opts = f.options.map(o =>
                         `<option value="${o}" ${o === val ? 'selected' : ''}>${o}</option>`
                     ).join('');
+                    const helpId = 'fsa-plan-help-' + moduleId + '-' + f.key;
+                    const needsHelper = (f.key === 'budgetMethod');
+                    const initialHelp = (needsHelper && val && BUDGET_METHOD_HELP[val]) ? BUDGET_METHOD_HELP[val] : '';
                     return `<div class="fsa-plan-field">
                         <label class="fsa-plan-label">${f.label}</label>
-                        <select class="fsa-plan-input" data-plan-module="${moduleId}" data-plan-key="${f.key}">
+                        <select class="fsa-plan-input" data-plan-module="${moduleId}" data-plan-key="${f.key}"
+                            ${needsHelper ? 'data-plan-helper="' + helpId + '"' : ''}>
                             <option value="">Choose...</option>${opts}
                         </select>
+                        ${needsHelper ? '<div class="fsa-plan-method-help" id="' + helpId + '">' + initialHelp + '</div>' : ''}
                     </div>`;
                 } else if (f.type === 'currency') {
                     return `<div class="fsa-plan-field">
@@ -248,7 +262,7 @@
                         <button class="fsa-plan-save-btn" onclick="FSAPlan._saveWidget(${moduleId}, this)">
                             Save My Decisions
                         </button>
-                        <a href="/modules/financial-master-plan.html" style="font-size:0.85rem; color:#10b981; text-decoration:none;">
+                        <a href="/modules/financial-master-plan.html?from=${_moduleSlug(moduleId)}" style="font-size:0.85rem; color:#10b981; text-decoration:none;">
                             View My Full Plan →
                         </a>
                     </div>
@@ -256,6 +270,9 @@
                         ✓ Saved! This updates your Financial Master Plan in Module 10.
                     </div>
                 </div>`;
+
+            // Wire up budget method helper descriptions
+            _wireBudgetHelpers();
         },
 
         _saveWidget(moduleId, btn) {
@@ -271,6 +288,9 @@
                 msg.style.display = 'block';
                 setTimeout(() => { msg.style.display = 'none'; }, 3000);
             }
+
+            // Wire up budget method helper after save in case DOM re-rendered
+            _wireBudgetHelpers();
             // Update badge
             if (btn && btn.closest) {
                 const header = btn.closest('.fsa-plan-widget')?.querySelector('.fsa-plan-widget__header');
@@ -381,6 +401,17 @@
             window.location.reload();
         }
     };
+
+    function _wireBudgetHelpers() {
+        document.querySelectorAll('[data-plan-helper]').forEach(function(sel) {
+            if (sel._fsaPlanHelperBound) return;
+            sel._fsaPlanHelperBound = true;
+            sel.addEventListener('change', function() {
+                var helpDiv = document.getElementById(sel.getAttribute('data-plan-helper'));
+                if (helpDiv) helpDiv.textContent = BUDGET_METHOD_HELP[sel.value] || '';
+            });
+        });
+    }
 
     function _moduleSlug(id) {
         const slugs = {
@@ -584,6 +615,21 @@
             padding: 2rem;
             text-align: center;
             color: rgba(255,255,255,0.5);
+        }
+        .fsa-plan-method-help {
+            font-size: 0.8rem;
+            color: rgba(16,185,129,0.85);
+            background: rgba(16,185,129,0.08);
+            border-left: 3px solid rgba(16,185,129,0.4);
+            padding: 0.5rem 0.75rem;
+            border-radius: 0 6px 6px 0;
+            margin-top: 0.4rem;
+            min-height: 1.6rem;
+            line-height: 1.5;
+            transition: opacity 0.2s;
+        }
+        .fsa-plan-method-help:empty {
+            display: none;
         }
         `;
         document.head.appendChild(style);

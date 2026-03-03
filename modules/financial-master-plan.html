@@ -747,6 +747,33 @@
         <div id="fsa-plan-widget-10"></div>
 </main>
 
+    <!-- Back-to-module button when arriving via "View My Full Plan" link -->
+    <script>
+    (function() {
+        var MODULES = {
+            'money-mindset-cash-flow': 'Module 1: Money Mindset',
+            'emergency-funds-saving': 'Module 2: Emergency Funds',
+            'banking-basics': 'Module 3: Banking',
+            'debt-strategy': 'Module 5: Debt Strategy',
+            'credit-scores': 'Module 4: Credit Scores',
+            'taxes-paychecks': 'Module 6: Taxes',
+            'investing-fundamentals': 'Module 7: Investing',
+            'risk-insurance': 'Module 8: Insurance',
+            'consumer-protection': 'Module 9: Consumer Protection'
+        };
+        var params = new URLSearchParams(window.location.search);
+        var from = params.get('from');
+        if (from && MODULES[from]) {
+            var btn = document.createElement('a');
+            btn.href = '/modules/' + from + '.html';
+            btn.textContent = '← Back to ' + MODULES[from];
+            btn.style.cssText = 'position:fixed;top:1rem;left:1rem;z-index:10000;display:flex;align-items:center;gap:0.4rem;color:#10b981;text-decoration:none;font-weight:600;font-size:0.9rem;background:rgba(15,41,34,0.95);padding:0.65rem 1.1rem;border-radius:0.5rem;border:2px solid rgba(16,185,129,0.3);backdrop-filter:blur(10px);transition:all 0.2s;box-shadow:0 2px 8px rgba(0,0,0,0.3);';
+            btn.onmouseenter = function() { this.style.borderColor='#10b981'; this.style.transform='translateY(-2px)'; };
+            btn.onmouseleave = function() { this.style.borderColor='rgba(16,185,129,0.3)'; this.style.transform=''; };
+            document.body.appendChild(btn);
+        }
+    })();
+    </script>
     <script src="../js/popups.js"></script>
     <script src="../js/module-progress.js"></script>
     <script src="../js/progress-manager.js"></script>

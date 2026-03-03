@@ -494,6 +494,7 @@
             transform: translateY(-2px);
         }
     </style>
+    <link rel="stylesheet" href="../css/fsa-glossary.css">
 </head>
 <body>
     <!-- Educational Modal -->
@@ -554,7 +555,7 @@
     <div class="calculator-container">
         <div class="header">
             <h1>💰 Compound Growth Calculator</h1>
-            <p>See how your money grows over time with compound interest</p>
+            <p>See how your money grows over time with <span class="fsa-term" data-term="compound-interest">compound interest</span></p>
             <button class="learn-more-btn" onclick="openModal()" style="margin-top: 1rem;">
                 📖 Learn: Simple vs. Compound Interest
             </button>
@@ -578,7 +579,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">Monthly Contribution</label>
+                    <label class="form-label"><span class="fsa-term" data-term="monthly-contribution">Monthly Contribution</span></label>
                     <div class="slider-container">
                         <input type="range" id="monthly" class="slider" 
                                min="0" max="2000" step="50" value="500">
@@ -603,7 +604,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">Annual Return Rate</label>
+                    <label class="form-label"><span class="fsa-term" data-term="annual-return">Annual Return Rate</span></label>
                     <div class="slider-container">
                         <input type="range" id="rate" class="slider" 
                                min="0" max="20" step="0.5" value="7">
@@ -629,11 +630,22 @@
                 <div class="checkbox-group">
                     <label class="checkbox-label">
                         <input type="checkbox" id="adjust-inflation">
-                        <span>Adjust for inflation (3% annually)</span>
+                        <span>Adjust for <span class="fsa-term" data-term="inflation">inflation</span> — show values in <span class="fsa-term" data-term="todays-dollars">today's dollars</span></span>
                     </label>
+                    <div id="inflation-rate-group" style="display:none; margin: 0.75rem 0 0.5rem 2.25rem;">
+                        <label class="form-label" style="font-size:0.85rem;">Inflation Rate</label>
+                        <div class="slider-container" style="margin-top:0.25rem;">
+                            <input type="range" id="inflation-rate" class="slider" 
+                                   min="1" max="8" step="0.5" value="3">
+                            <div class="slider-value">
+                                <span class="value-display" id="inflation-rate-display" style="font-size:1rem;">3.0%</span>
+                                <span class="value-range">1% - 8%</span>
+                            </div>
+                        </div>
+                    </div>
                     <label class="checkbox-label">
                         <input type="checkbox" id="show-bitcoin">
-                        <span>Compare with Bitcoin DCA</span>
+                        <span>Compare with Bitcoin <span class="fsa-term" data-term="dca">DCA</span></span>
                     </label>
                 </div>
 
@@ -667,7 +679,7 @@
                         <span class="breakdown-value" id="interest-earned">$0</span>
                     </li>
                     <li class="breakdown-item">
-                        <span class="breakdown-label">Growth Multiple</span>
+                        <span class="breakdown-label"><span class="fsa-term" data-term="growth-multiple">Growth Multiple</span></span>
                         <span class="breakdown-value" id="growth-multiple">0.0x</span>
                     </li>
                 </ul>
@@ -683,7 +695,7 @@
                         <div class="comparison-value" id="savings-value">$0</div>
                     </div>
                     <div class="comparison-card">
-                        <div class="comparison-title">Index Fund (S&P 500)</div>
+                        <div class="comparison-title"><span class="fsa-term" data-term="index-fund">Index Fund</span> (<span class="fsa-term" data-term="sp500">S&P 500</span>)</div>
                         <div class="comparison-value" id="index-value">$0</div>
                     </div>
                     <div class="comparison-card" id="bitcoin-card" style="display: none;">
@@ -726,6 +738,16 @@
             document.getElementById('contrib-increase-display').textContent = parseFloat(e.target.value).toFixed(1) + '%/yr';
         });
 
+        // Inflation rate slider
+        document.getElementById('inflation-rate').addEventListener('input', (e) => {
+            document.getElementById('inflation-rate-display').textContent = parseFloat(e.target.value).toFixed(1) + '%';
+        });
+
+        // Show/hide inflation rate slider when checkbox toggled
+        document.getElementById('adjust-inflation').addEventListener('change', (e) => {
+            document.getElementById('inflation-rate-group').style.display = e.target.checked ? 'block' : 'none';
+        });
+
         // Auto-calculate on any change
         document.querySelectorAll('.slider, input[type="checkbox"]').forEach(elem => {
             elem.addEventListener('input', calculate);
@@ -740,6 +762,8 @@
             const adjustInflation = document.getElementById('adjust-inflation').checked;
             const showBitcoin = document.getElementById('show-bitcoin').checked;
             const annualIncrease = parseFloat(document.getElementById('contrib-increase').value) / 100;
+            const inflationRate = adjustInflation ? parseFloat(document.getElementById('inflation-rate').value) / 100 : 0;
+            const monthlyInflation = inflationRate / 12;
 
             const monthlyRate = annualRate / 12;
             const months = years * 12;
@@ -747,53 +771,56 @@
             // Calculate future value with monthly contributions and annual step-up
             let futureValue = principal;
             let totalInvested = principal;
-            const monthlyValues = [principal];
+            const nominalValues = [principal];
+            const realValues = [principal];
             let currentMonthly = monthly;
             
             for (let month = 1; month <= months; month++) {
                 futureValue = futureValue * (1 + monthlyRate) + currentMonthly;
                 totalInvested += currentMonthly;
-                monthlyValues.push(futureValue);
+                nominalValues.push(futureValue);
+                // Deflate each month's value to today's dollars
+                realValues.push(futureValue / Math.pow(1 + monthlyInflation, month));
                 if (month % 12 === 0 && annualIncrease > 0) {
                     currentMonthly = currentMonthly * (1 + annualIncrease);
                 }
             }
 
-            const interestEarned = futureValue - totalInvested;
-            const growthMultiple = futureValue / totalInvested;
+            const nominalInterest = futureValue - totalInvested;
+            const nominalMultiple = totalInvested > 0 ? futureValue / totalInvested : 0;
 
-            // Inflation adjustment
-            const inflationRate = 0.03;
-            const realValue = adjustInflation ? futureValue / Math.pow(1 + inflationRate, years) : futureValue;
+            // Deflate final values for display
+            const deflator = adjustInflation ? Math.pow(1 + inflationRate, years) : 1;
+            const displayFV = futureValue / deflator;
+            const displayInterest = (futureValue - totalInvested) / deflator;
+            const displayMultiple = totalInvested > 0 ? displayFV / totalInvested : 0;
 
-            // Update display
-            document.getElementById('future-value').textContent = '$' + Math.round(futureValue).toLocaleString();
+            // Update display — all values deflated when inflation is on
+            document.getElementById('future-value').textContent = '$' + Math.round(displayFV).toLocaleString();
             document.getElementById('total-invested').textContent = '$' + Math.round(totalInvested).toLocaleString();
-            document.getElementById('interest-earned').textContent = '$' + Math.round(interestEarned).toLocaleString();
-            document.getElementById('growth-multiple').textContent = growthMultiple.toFixed(2) + 'x';
+            document.getElementById('interest-earned').textContent = '$' + Math.round(displayInterest).toLocaleString();
+            document.getElementById('growth-multiple').textContent = displayMultiple.toFixed(2) + 'x';
 
             if (adjustInflation) {
                 document.getElementById('real-value-text').textContent = 
-                    `≈ $${Math.round(realValue).toLocaleString()} in today's dollars`;
+                    `All values shown in today's dollars (${(inflationRate * 100).toFixed(1)}% inflation). Nominal: $${Math.round(futureValue).toLocaleString()}`;
             } else {
                 document.getElementById('real-value-text').textContent = '';
             }
 
-            // Visual bar
-            const contributionPercent = (totalInvested / futureValue) * 100;
+            // Visual bar (use nominal ratio — contributions vs growth)
+            const contributionPercent = totalInvested > 0 ? (totalInvested / futureValue) * 100 : 0;
             document.getElementById('contribution-bar').style.width = contributionPercent + '%';
             document.getElementById('contribution-percent').textContent = Math.round(contributionPercent) + '% invested';
 
-            // Milestones
-            updateMilestones(futureValue);
+            // Milestones — use the displayed (potentially deflated) value
+            updateMilestones(displayFV);
 
-            // Comparison
-            if (showBitcoin) {
-                showComparison(principal, monthly, years);
-            }
+            // Comparison — deflate those too
+            showComparison(principal, monthly, years, adjustInflation, inflationRate);
 
-            // Chart
-            updateChart(monthlyValues, years);
+            // Chart — show both lines when inflation is on
+            updateChart(nominalValues, realValues, years, adjustInflation);
         }
 
         function updateMilestones(value) {
@@ -815,24 +842,24 @@
                 '<span style="color: var(--fsa-text-dim, #6b7280);">Keep going to unlock milestones!</span>';
         }
 
-        function showComparison(principal, monthly, years) {
+        function showComparison(principal, monthly, years, adjustInflation, inflationRate) {
             document.getElementById('comparison-section').style.display = 'grid';
-            
+            const deflator = adjustInflation ? Math.pow(1 + inflationRate, years) : 1;
+
             // Traditional savings (0.5% rate)
-            const savingsValue = calculateFV(principal, monthly, 0.005, years);
+            const savingsValue = calculateFV(principal, monthly, 0.005, years) / deflator;
             document.getElementById('savings-value').textContent = '$' + Math.round(savingsValue).toLocaleString();
 
             // S&P 500 (10% average)
-            const indexValue = calculateFV(principal, monthly, 0.10, years);
+            const indexValue = calculateFV(principal, monthly, 0.10, years) / deflator;
             document.getElementById('index-value').textContent = '$' + Math.round(indexValue).toLocaleString();
 
             // Bitcoin (historical 100%+ but use 30% conservatively)
             if (document.getElementById('show-bitcoin').checked) {
                 document.getElementById('bitcoin-card').style.display = 'block';
-                const bitcoinValue = calculateFV(principal, monthly, 0.30, years);
+                const bitcoinValue = calculateFV(principal, monthly, 0.30, years) / deflator;
                 document.getElementById('bitcoin-value').textContent = '$' + Math.round(bitcoinValue).toLocaleString();
                 
-                // Highlight winner
                 document.querySelectorAll('.comparison-card').forEach(c => c.classList.remove('winner'));
                 document.getElementById('bitcoin-card').classList.add('winner');
             } else {
@@ -852,8 +879,8 @@
             return value;
         }
 
-        function updateChart(values, years) {
-            const labels = Array.from({length: values.length}, (_, i) => {
+        function updateChart(nominalValues, realValues, years, showReal) {
+            const labels = Array.from({length: nominalValues.length}, (_, i) => {
                 if (i === 0) return '0';
                 if (i % 12 === 0) return `${i/12}y`;
                 return '';
@@ -865,29 +892,55 @@
                 growthChart.destroy();
             }
 
+            const datasets = [];
+
+            if (showReal) {
+                // Show both nominal (faded) and real (solid)
+                datasets.push({
+                    label: 'Nominal (before inflation)',
+                    data: nominalValues,
+                    borderColor: 'rgba(16, 185, 129, 0.3)',
+                    backgroundColor: 'rgba(16, 185, 129, 0.03)',
+                    borderDash: [6, 4],
+                    fill: false,
+                    tension: 0.4,
+                    pointRadius: 0
+                });
+                datasets.push({
+                    label: "Today's Dollars (real)",
+                    data: realValues,
+                    borderColor: '#10b981',
+                    backgroundColor: 'rgba(16, 185, 129, 0.12)',
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 0
+                });
+            } else {
+                datasets.push({
+                    label: 'Portfolio Value',
+                    data: nominalValues,
+                    borderColor: '#10b981',
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 0
+                });
+            }
+
             growthChart = new Chart(ctx, {
                 type: 'line',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        label: 'Portfolio Value',
-                        data: values,
-                        borderColor: '#10b981',
-                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
-                        fill: true,
-                        tension: 0.4
-                    }]
-                },
+                data: { labels, datasets },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
                         legend: {
-                            display: false
+                            display: showReal,
+                            labels: { color: '#9ca3af' }
                         },
                         tooltip: {
                             callbacks: {
-                                label: (context) => '$' + Math.round(context.parsed.y).toLocaleString()
+                                label: (context) => context.dataset.label + ': $' + Math.round(context.parsed.y).toLocaleString()
                             }
                         }
                     },
@@ -900,7 +953,7 @@
                             grid: { color: 'rgba(255, 255, 255, 0.1)' },
                             ticks: { 
                                 color: '#9ca3af',
-                                callback: (value) => '$' + (value/1000).toFixed(0) + 'K'
+                                callback: (value) => value >= 1000000 ? '$' + (value/1000000).toFixed(1) + 'M' : '$' + (value/1000).toFixed(0) + 'K'
                             }
                         }
                     }
@@ -916,7 +969,8 @@
                 y: document.getElementById('years').value,
                 i: document.getElementById('adjust-inflation').checked ? 1 : 0,
                 b: document.getElementById('show-bitcoin').checked ? 1 : 0,
-                u: document.getElementById('contrib-increase').value
+                u: document.getElementById('contrib-increase').value,
+                ir: document.getElementById('inflation-rate').value
             });
             const url = location.origin + location.pathname + '#' + params.toString();
             navigator.clipboard.writeText(url).then(() => {
@@ -927,12 +981,16 @@
         function loadFromHash() {
             if (!location.hash) return;
             const params = new URLSearchParams(location.hash.slice(1));
-            const setVal = (id, val) => { const el = document.getElementById(id); if (el) { el.value = val; el.dispatchEvent(new Event('input')); }};
+            const setVal = (id, val) => { const el = document.getElementById(id); if (el && val !== null) { el.value = val; el.dispatchEvent(new Event('input')); }};
             setVal('principal', params.get('p'));
             setVal('monthly', params.get('m'));
             setVal('rate', params.get('r'));
             setVal('years', params.get('y'));
-            if (params.get('i') !== null) document.getElementById('adjust-inflation').checked = params.get('i') === '1';
+            if (params.get('ir')) setVal('inflation-rate', params.get('ir'));
+            if (params.get('i') !== null) {
+                document.getElementById('adjust-inflation').checked = params.get('i') === '1';
+                document.getElementById('inflation-rate-group').style.display = params.get('i') === '1' ? 'block' : 'none';
+            }
             if (params.get('b') !== null) document.getElementById('show-bitcoin').checked = params.get('b') === '1';
             setVal('contrib-increase', params.get('u'));
         }
@@ -970,6 +1028,7 @@
 <div style="margin: 2rem auto; max-width: 900px; padding: 0 1.5rem;">
     <div data-fsa-email-capture="page-footer" data-title="📬 Level Up Your Finances" data-subtitle="Weekly money tips and financial strategies. No spam, ever."></div>
 </div>
+<script src="/js/fsa-glossary.js" defer></script>
 <script src="/js/calculator-nav.js" defer></script>
 <script src="/js/analytics.js" defer></script>
 <script src="/js/email-capture.js" defer></script>
