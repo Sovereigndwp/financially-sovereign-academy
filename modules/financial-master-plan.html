@@ -271,8 +271,11 @@
         }
     </style>
     <link rel="stylesheet" href="../css/lab-guide.css">
+    <link rel="stylesheet" href="../css/sovereignty-ladder.css">
     <script src="../js/fsa-live-data.js"></script>
     <script src="../js/fsa-plan-builder.js"></script>
+    <script src="../js/progress-manager.js"></script>
+    <script src="../js/sovereignty-ladder.js"></script>
 </head>
 <body>
     <!-- Calculators Link -->
@@ -304,6 +307,18 @@
 
         <!-- Full Plan Summary — populated from FSAPlan across all modules -->
         <div id="fsa-full-plan-summary"></div>
+
+        <!-- Your Sovereignty Path Progress -->
+        <section class="section">
+            <h2 class="section-title">Your Sovereignty Path</h2>
+            <p style="color: var(--fsa-text-secondary); margin-bottom: 1.5rem;">This is where you are on the path. Every step you've completed brought you here.</p>
+            <div id="sovereignty-path-m10"></div>
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    SovereigntyPath.renderLadder('sovereignty-path-m10', { showTitle: false });
+                });
+            </script>
+        </section>
 
         <section class="section">
             <h2 class="section-title">You've Learned the Tools. Now Build Your Plan.</h2>

@@ -1,0 +1,565 @@
+/* ================================================================
+   THE SOVEREIGNTY PATH — Ladder Visualization
+   ================================================================ */
+
+/* Full Ladder Container */
+.sovereignty-path {
+    position: relative;
+    padding: 2rem 0;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.sovereignty-path-title {
+    text-align: center;
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 800;
+    background: linear-gradient(135deg, #10b981 0%, #06b6d4 50%, #3b82f6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+}
+
+.sovereignty-path-subtitle {
+    text-align: center;
+    color: #9ca3af;
+    font-size: 1.05rem;
+    margin-bottom: 3rem;
+}
+
+/* Vertical Spine */
+.sp-ladder {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.sp-ladder::before {
+    content: '';
+    position: absolute;
+    left: 28px;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 2px;
+    z-index: 0;
+}
+
+.sp-ladder::after {
+    content: '';
+    position: absolute;
+    left: 28px;
+    top: 0;
+    width: 4px;
+    height: var(--sp-progress-height, 0%);
+    background: linear-gradient(180deg, #10b981, #06b6d4);
+    border-radius: 2px;
+    z-index: 1;
+    transition: height 0.8s ease;
+}
+
+/* Individual Rung */
+.sp-rung {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    padding: 1.5rem 0;
+    z-index: 2;
+}
+
+.sp-rung:first-child {
+    padding-top: 0;
+}
+
+.sp-rung:last-child {
+    padding-bottom: 0;
+}
+
+/* Rung Number Circle */
+.sp-rung-number {
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1.2rem;
+    border: 3px solid rgba(255, 255, 255, 0.1);
+    background: #0a1f1a;
+    color: #6b7280;
+    transition: all 0.4s ease;
+    position: relative;
+    z-index: 3;
+}
+
+.sp-rung.locked .sp-rung-number {
+    border-color: rgba(255, 255, 255, 0.08);
+    color: #4b5563;
+    background: #0a1f1a;
+}
+
+.sp-rung.active .sp-rung-number {
+    border-color: #10b981;
+    color: #10b981;
+    background: rgba(16, 185, 129, 0.15);
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.3),
+                0 0 0 6px rgba(16, 185, 129, 0.08);
+    animation: sp-pulse 2.5s ease-in-out infinite;
+}
+
+.sp-rung.complete .sp-rung-number {
+    border-color: #10b981;
+    color: white;
+    background: #10b981;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+@keyframes sp-pulse {
+    0%, 100% { box-shadow: 0 0 20px rgba(16, 185, 129, 0.3), 0 0 0 6px rgba(16, 185, 129, 0.08); }
+    50% { box-shadow: 0 0 30px rgba(16, 185, 129, 0.5), 0 0 0 10px rgba(16, 185, 129, 0.12); }
+}
+
+/* Rung Content Card */
+.sp-rung-body {
+    flex: 1;
+    background: linear-gradient(135deg, rgba(26, 58, 46, 0.6) 0%, rgba(15, 41, 34, 0.4) 100%);
+    border: 2px solid rgba(255, 255, 255, 0.06);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.sp-rung.locked .sp-rung-body {
+    opacity: 0.5;
+    cursor: default;
+}
+
+.sp-rung.active .sp-rung-body {
+    border-color: rgba(16, 185, 129, 0.3);
+    background: linear-gradient(135deg, rgba(26, 58, 46, 0.9) 0%, rgba(15, 41, 34, 0.7) 100%);
+}
+
+.sp-rung.complete .sp-rung-body {
+    border-color: rgba(16, 185, 129, 0.2);
+}
+
+.sp-rung-body:hover {
+    border-color: rgba(16, 185, 129, 0.4);
+    transform: translateX(4px);
+}
+
+.sp-rung.locked .sp-rung-body:hover {
+    transform: none;
+}
+
+/* Rung Title */
+.sp-rung-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #e0e0e0;
+    margin-bottom: 0.35rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.sp-rung.active .sp-rung-title {
+    color: #10b981;
+}
+
+.sp-rung.complete .sp-rung-title {
+    color: #34d399;
+}
+
+.sp-rung-title .sp-check {
+    display: none;
+    color: #10b981;
+    font-size: 1rem;
+}
+
+.sp-rung.complete .sp-rung-title .sp-check {
+    display: inline;
+}
+
+/* Rung Description */
+.sp-rung-desc {
+    color: #9ca3af;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 0.75rem;
+}
+
+.sp-rung.locked .sp-rung-desc {
+    color: #6b7280;
+}
+
+/* Module Tags inside rung */
+.sp-modules {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.sp-module-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.3rem 0.75rem;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 2rem;
+    font-size: 0.78rem;
+    color: #9ca3af;
+    text-decoration: none;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.sp-module-tag:hover {
+    border-color: rgba(16, 185, 129, 0.3);
+    color: #10b981;
+}
+
+.sp-module-tag .sp-tag-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #4b5563;
+}
+
+.sp-module-tag.visited .sp-tag-dot {
+    background: #fbbf24;
+}
+
+.sp-module-tag.completed .sp-tag-dot {
+    background: #10b981;
+}
+
+/* Rung Progress Bar (inside rung card) */
+.sp-rung-progress {
+    margin-top: 0.75rem;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.sp-rung-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #10b981, #34d399);
+    border-radius: 2px;
+    transition: width 0.5s ease;
+}
+
+/* Active Badge */
+.sp-active-badge {
+    display: none;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #10b981;
+    background: rgba(16, 185, 129, 0.12);
+    padding: 0.2rem 0.6rem;
+    border-radius: 0.25rem;
+    margin-left: auto;
+}
+
+.sp-rung.active .sp-active-badge {
+    display: inline-block;
+}
+
+/* ================================================================
+   COMPACT MODE — For module pages
+   ================================================================ */
+
+.sp-compact {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 1.25rem;
+    background: rgba(16, 185, 129, 0.06);
+    border: 1px solid rgba(16, 185, 129, 0.15);
+    border-radius: 0.75rem;
+    margin-bottom: 2rem;
+}
+
+.sp-compact-icon {
+    font-size: 1.5rem;
+}
+
+.sp-compact-info {
+    flex: 1;
+}
+
+.sp-compact-rung {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #10b981;
+}
+
+.sp-compact-module {
+    font-size: 0.85rem;
+    color: #9ca3af;
+}
+
+.sp-compact-progress {
+    width: 80px;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.sp-compact-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #10b981, #34d399);
+    border-radius: 3px;
+}
+
+.sp-compact-link {
+    color: #10b981;
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.sp-compact-link:hover {
+    text-decoration: underline;
+}
+
+/* ================================================================
+   MY JOURNEY PAGE — Extended styles
+   ================================================================ */
+
+.journey-hero {
+    text-align: center;
+    padding: 3rem 2rem;
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(6, 182, 212, 0.06) 100%);
+    border: 2px solid rgba(16, 185, 129, 0.2);
+    border-radius: var(--radius-xl, 1.5rem);
+    margin-bottom: 3rem;
+}
+
+.journey-hero-title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 800;
+    background: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+}
+
+.journey-current-rung {
+    font-size: 1.2rem;
+    color: #e0e0e0;
+    margin-bottom: 1.5rem;
+}
+
+.journey-stats {
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+}
+
+.journey-stat {
+    text-align: center;
+}
+
+.journey-stat-value {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #10b981;
+    font-family: var(--font-family-mono, 'SF Mono', monospace);
+}
+
+.journey-stat-label {
+    font-size: 0.8rem;
+    color: #9ca3af;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+/* Journey Ladder — Expanded view */
+.journey-ladder .sp-rung-body {
+    padding: 2rem;
+}
+
+.journey-ladder .sp-rung-desc {
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+}
+
+.journey-module-detail {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.journey-module-detail:last-child {
+    border-bottom: none;
+}
+
+.journey-module-status {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    flex-shrink: 0;
+}
+
+.journey-module-status.not-started {
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    color: #6b7280;
+}
+
+.journey-module-status.visited {
+    background: rgba(251, 191, 36, 0.15);
+    border: 2px solid rgba(251, 191, 36, 0.3);
+    color: #fbbf24;
+}
+
+.journey-module-status.completed {
+    background: rgba(16, 185, 129, 0.2);
+    border: 2px solid rgba(16, 185, 129, 0.4);
+    color: #10b981;
+}
+
+.journey-module-name {
+    flex: 1;
+    font-size: 0.9rem;
+    color: #e0e0e0;
+}
+
+.journey-module-name a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.journey-module-name a:hover {
+    color: #10b981;
+}
+
+.journey-module-time {
+    font-size: 0.75rem;
+    color: #6b7280;
+    font-family: var(--font-family-mono, monospace);
+}
+
+/* Reset Button */
+.journey-reset {
+    display: block;
+    margin: 3rem auto 0;
+    padding: 0.75rem 2rem;
+    background: transparent;
+    border: 2px solid rgba(239, 68, 68, 0.3);
+    border-radius: 0.5rem;
+    color: #f87171;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.9rem;
+}
+
+.journey-reset:hover {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: rgba(239, 68, 68, 0.5);
+}
+
+/* ================================================================
+   RESPONSIVE
+   ================================================================ */
+
+@media (max-width: 768px) {
+    .sp-ladder::before,
+    .sp-ladder::after {
+        left: 20px;
+    }
+
+    .sp-rung-number {
+        width: 40px;
+        height: 40px;
+        font-size: 0.95rem;
+    }
+
+    .sp-rung {
+        gap: 1rem;
+    }
+
+    .sp-rung-body {
+        padding: 1.25rem;
+    }
+
+    .sp-rung-title {
+        font-size: 1.1rem;
+    }
+
+    .journey-stats {
+        gap: 1.5rem;
+    }
+
+    .journey-stat-value {
+        font-size: 1.5rem;
+    }
+
+    .sp-compact {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 480px) {
+    .sovereignty-path {
+        padding: 1rem 0;
+    }
+
+    .sp-rung-number {
+        width: 36px;
+        height: 36px;
+        font-size: 0.85rem;
+    }
+
+    .sp-ladder::before,
+    .sp-ladder::after {
+        left: 16px;
+    }
+
+    .sp-modules {
+        gap: 0.35rem;
+    }
+
+    .sp-module-tag {
+        font-size: 0.72rem;
+        padding: 0.2rem 0.5rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .sp-rung.active .sp-rung-number {
+        animation: none;
+    }
+
+    .sp-ladder::after {
+        transition: none;
+    }
+}

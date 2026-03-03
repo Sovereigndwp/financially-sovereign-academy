@@ -791,6 +791,12 @@
         <span>Sovereign Academy</span>
     </a>
     
+    <!-- My Journey Link -->
+    <a href="my-journey.html" style="position: fixed; top: 1.5rem; right: 10.5rem; color: #10b981; text-decoration: none; z-index: 10000; font-weight: 600; display: flex; align-items: center; gap: 0.5rem; background: rgba(26, 58, 46, 0.9); padding: 0.75rem 1.25rem; border-radius: 0.5rem; border: 2px solid rgba(16, 185, 129, 0.3); backdrop-filter: blur(10px); transition: all 0.3s ease;" onmouseover="this.style.borderColor='#10b981'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 20px rgba(16, 185, 129, 0.3)';" onmouseout="this.style.borderColor='rgba(16, 185, 129, 0.3)'; this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+        <span style="font-size: 1.2rem;">🗺️</span>
+        <span>My Journey</span>
+    </a>
+
     <!-- Calculators Link -->
     <a href="calculators/" style="position: fixed; top: 1.5rem; right: 1.5rem; color: #10b981; text-decoration: none; z-index: 10000; font-weight: 600; display: flex; align-items: center; gap: 0.5rem; background: rgba(26, 58, 46, 0.9); padding: 0.75rem 1.25rem; border-radius: 0.5rem; border: 2px solid rgba(16, 185, 129, 0.3); backdrop-filter: blur(10px); transition: all 0.3s ease;" onmouseover="this.style.borderColor='#10b981'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 20px rgba(16, 185, 129, 0.3)';" onmouseout="this.style.borderColor='rgba(16, 185, 129, 0.3)'; this.style.transform='translateY(0)'; this.style.boxShadow='none';">
         <span style="font-size: 1.2rem;">🧮</span>
@@ -863,11 +869,18 @@
         </div>
     </section>
     
+    <!-- The Sovereignty Path -->
+    <section class="modules-section" style="background: #0a1f1a; padding-bottom: 2rem;">
+        <div class="container">
+            <div id="sovereignty-path-home"></div>
+        </div>
+    </section>
+
     <!-- Modules Grid -->
     <section class="modules-section">
         <div class="container">
-            <h2 class="section-title">Master These 10 Fundamentals</h2>
-            <p class="section-subtitle">Everything you need to become financially sovereign</p>
+            <h2 class="section-title">All 10 Modules</h2>
+            <p class="section-subtitle">Each module maps to a step on The Sovereignty Path</p>
             
             <div class="modules-grid">
                 <a href="modules/money-mindset-cash-flow.html" class="module-card">
@@ -1041,12 +1054,17 @@
     <!-- Icon Library -->
     <script src="js/fsa-live-data.js"></script>
     <script src="js/fsa-plan-builder.js"></script>
+    <script src="js/progress-manager.js"></script>
+    <script src="js/sovereignty-ladder.js"></script>
     <script>
         FSALiveData.onReady(function() {
             FSALiveData.renderBanner('fsa-homepage-banner', ['inflation', 'hysa', 'cc-apr', 'sp500-hist', 'fed-rate', 'btc-price']);
         });
+        document.addEventListener('DOMContentLoaded', function() {
+            SovereigntyPath.renderLadder('sovereignty-path-home', { showTitle: true });
+        });
     </script>
-    <script src="js/icon-library.js"></script>
+    <script src="js/icon-library.js">
     <script>
         // Replace emojis with animated SVG icons
         (function() {
