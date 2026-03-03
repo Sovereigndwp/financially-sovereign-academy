@@ -566,6 +566,16 @@ class PopupLabSystem {
             });
         }
 
+        // Convert string to function if needed (calculate is stored as string in JSON)
+        if (typeof popup.calculate === 'string') {
+            try {
+                popup.calculate = eval('(' + popup.calculate + ')');
+            } catch (e) {
+                console.error('Failed to parse calculate function for', popupId, e);
+                return;
+            }
+        }
+
         // Run calculation function
         const result = popup.calculate(inputs);
 
