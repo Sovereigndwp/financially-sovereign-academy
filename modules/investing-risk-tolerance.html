@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Risk Tolerance Discovery | Financially Sovereign Academy</title>
+    <meta name="description" content="Discover your true investment risk tolerance through realistic behavioral scenarios. Get a personalized risk profile and allocation suggestion.">
+    <link rel="stylesheet" href="../css/fsa-theme.css">
+    <link rel="stylesheet" href="../css/interactive-components.css">
+    <link rel="stylesheet" href="../css/investing-labs.css">
+    <style>
+        main { max-width: 900px; margin: 0 auto; padding: 2rem 1rem; }
+        .module-header { text-align: center; margin-bottom: 3rem; padding: 2rem; background: var(--fsa-gradient-card); border: 3px solid var(--fsa-green); border-radius: var(--radius-xl); }
+        .module-header h1 { font-size: var(--font-size-4xl); color: var(--fsa-green); margin-bottom: 1rem; }
+        .section { margin-bottom: 4rem; }
+        .section-title { font-size: var(--font-size-3xl); color: var(--fsa-green); margin-bottom: 1.5rem; border-bottom: 3px solid var(--fsa-border-medium); padding-bottom: 0.5rem; }
+        .content-block { background: var(--fsa-bg-card); border: 2px solid var(--fsa-border-subtle); border-radius: var(--radius-lg); padding: 2rem; margin-bottom: 2rem; line-height: 1.8; }
+        .content-block h3 { color: var(--fsa-green-light); font-size: var(--font-size-xl); margin-bottom: 1rem; }
+        .content-block p { margin-bottom: 1rem; color: var(--fsa-text-primary); }
+    </style>
+</head>
+<body>
+    <a href="investing-fundamentals.html" style="position: fixed; top: 1.5rem; left: 1.5rem; color: #10b981; text-decoration: none; z-index: 10000; font-weight: 600; display: flex; align-items: center; gap: 0.5rem; background: rgba(26, 58, 46, 0.95); padding: 0.75rem 1.25rem; border-radius: 0.5rem; border: 2px solid rgba(16, 185, 129, 0.3); backdrop-filter: blur(10px);">
+        <span>←</span><span>Module 7</span>
+    </a>
+
+    <main>
+        <div class="module-header">
+            <h1>Risk Tolerance Discovery</h1>
+            <p style="color: var(--fsa-text-secondary); font-size: var(--font-size-lg);">What you <em>think</em> you can handle and what you <em>actually</em> can handle are often different.</p>
+        </div>
+
+        <section class="section">
+            <h2 class="section-title">Why This Matters</h2>
+
+            <div class="content-block">
+                <h3>The Gap Between Theory and Reality</h3>
+                <p>Everyone says "I'm a long-term investor" when markets are up. Then the market drops 30% and they sell at the bottom. The difference between successful and unsuccessful investors isn't intelligence — it's self-awareness.</p>
+                <p>If your portfolio allocation doesn't match your <em>actual</em> risk tolerance, you will abandon your plan at the worst possible moment. That's the most expensive mistake in investing.</p>
+            </div>
+
+            <div class="content-block">
+                <h3>How This Assessment Works</h3>
+                <p>Instead of asking "how much risk do you want?" (everyone says "moderate"), this assessment puts you in <strong>realistic scenarios</strong> and asks what you'd actually do.</p>
+                <p>There are no right or wrong answers. Conservative isn't weak. Aggressive isn't brave. The right allocation is the one that matches your real behavior under stress.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Discover Your Profile</h2>
+            <p style="color: var(--fsa-text-secondary); margin-bottom: 2rem;">Answer honestly — not what you think the "right" answer is, but what you'd genuinely do with real money on the line.</p>
+            <div id="risk-tolerance"></div>
+        </section>
+
+        <section class="section">
+            <div class="card" style="text-align: center;">
+                <div style="margin-top: 1.5rem;">
+                    <a href="investing-fundamentals.html" class="btn btn-primary" style="text-decoration: none;">← Back to Module 7</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="../js/investing-labs.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            InvestingLabs.RiskTolerance.render('risk-tolerance');
+        });
+    </script>
+<script src="/js/analytics.js" defer></script>
+<script src="/js/email-capture.js" defer></script>
+</body>
+</html>

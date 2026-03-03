@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dollar-Cost Averaging Simulator | Financially Sovereign Academy</title>
+    <meta name="description" content="Interactive simulation comparing dollar-cost averaging, lump sum investing, and market timing across different market scenarios.">
+    <link rel="stylesheet" href="../css/fsa-theme.css">
+    <link rel="stylesheet" href="../css/interactive-components.css">
+    <link rel="stylesheet" href="../css/investing-labs.css">
+    <style>
+        main { max-width: 900px; margin: 0 auto; padding: 2rem 1rem; }
+        .module-header { text-align: center; margin-bottom: 3rem; padding: 2rem; background: var(--fsa-gradient-card); border: 3px solid var(--fsa-green); border-radius: var(--radius-xl); }
+        .module-header h1 { font-size: var(--font-size-4xl); color: var(--fsa-green); margin-bottom: 1rem; }
+        .section { margin-bottom: 4rem; }
+        .section-title { font-size: var(--font-size-3xl); color: var(--fsa-green); margin-bottom: 1.5rem; border-bottom: 3px solid var(--fsa-border-medium); padding-bottom: 0.5rem; }
+        .content-block { background: var(--fsa-bg-card); border: 2px solid var(--fsa-border-subtle); border-radius: var(--radius-lg); padding: 2rem; margin-bottom: 2rem; line-height: 1.8; }
+        .content-block h3 { color: var(--fsa-green-light); font-size: var(--font-size-xl); margin-bottom: 1rem; }
+        .content-block p { margin-bottom: 1rem; color: var(--fsa-text-primary); }
+    </style>
+</head>
+<body>
+    <a href="investing-fundamentals.html" style="position: fixed; top: 1.5rem; left: 1.5rem; color: #10b981; text-decoration: none; z-index: 10000; font-weight: 600; display: flex; align-items: center; gap: 0.5rem; background: rgba(26, 58, 46, 0.95); padding: 0.75rem 1.25rem; border-radius: 0.5rem; border: 2px solid rgba(16, 185, 129, 0.3); backdrop-filter: blur(10px);">
+        <span>←</span><span>Module 7</span>
+    </a>
+
+    <main>
+        <div class="module-header">
+            <h1>Dollar-Cost Averaging Simulator</h1>
+            <p style="color: var(--fsa-text-secondary); font-size: var(--font-size-lg);">Should you invest all at once, spread it out, or wait for a dip?</p>
+        </div>
+
+        <section class="section">
+            <h2 class="section-title">The Three Strategies</h2>
+
+            <div class="content-block">
+                <h3>Lump Sum</h3>
+                <p>Invest everything immediately. Your money is in the market for the maximum amount of time. Historically wins about 2/3 of the time because markets trend upward.</p>
+                <p><strong>Risk:</strong> If the market drops right after you invest, it hurts psychologically — even if you recover later.</p>
+            </div>
+
+            <div class="content-block">
+                <h3>Dollar-Cost Averaging (DCA)</h3>
+                <p>Invest equal amounts at regular intervals (e.g., $500/month). You buy more shares when prices are low, fewer when prices are high. Your average cost naturally adjusts.</p>
+                <p><strong>Advantage:</strong> Reduces regret risk. You never put everything in at the worst possible time. Most people find this psychologically easier to sustain.</p>
+            </div>
+
+            <div class="content-block">
+                <h3>Market Timer</h3>
+                <p>"I'll wait for a dip." In practice, this means sitting in cash while the market rises, then investing only after seeing clear upward momentum — usually after the recovery is well underway.</p>
+                <p><strong>Reality:</strong> Missing the 10 best trading days over 20 years can cut your returns in half. The best days often come right after the worst days.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Run the Simulation</h2>
+            <p style="color: var(--fsa-text-secondary); margin-bottom: 2rem;">Pick a market scenario and see how each strategy performs with your money.</p>
+            <div id="dca-simulator"></div>
+        </section>
+
+        <div style="margin: 3rem 0; padding: 2rem; background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(59, 130, 246, 0.05)); border-left: 4px solid #3b82f6; border-radius: 0.5rem;">
+            <p style="font-size: 1.15rem; line-height: 1.7; color: rgba(255, 255, 255, 0.9); margin-bottom: 0.75rem;">
+                <strong>The real lesson:</strong> The best strategy is the one you'll actually follow.
+            </p>
+            <p style="font-size: 0.95rem; color: rgba(255, 255, 255, 0.65);">
+                Lump sum wins mathematically most of the time. But if a 20% drop after a lump sum investment makes you panic sell, DCA is better <em>for you</em> even if it's slightly less optimal on paper. Consistency beats optimization.
+            </p>
+        </div>
+
+        <section class="section">
+            <div class="card" style="text-align: center;">
+                <div style="margin-top: 1.5rem;">
+                    <a href="investing-fundamentals.html" class="btn btn-primary" style="text-decoration: none;">← Back to Module 7</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="../js/investing-labs.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            InvestingLabs.DCASimulator.render('dca-simulator');
+        });
+    </script>
+<script src="/js/analytics.js" defer></script>
+<script src="/js/email-capture.js" defer></script>
+</body>
+</html>

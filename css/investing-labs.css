@@ -1,0 +1,811 @@
+/**
+ * FSA Investing Labs — Interactive Components
+ * Scorecard Lab, Fee Simulator, DCA Lab, Risk Tolerance
+ */
+
+/* ── Ratio Sandbox ─────────────────────────────────────────── */
+.ratio-sandbox {
+    background: var(--fsa-bg-card);
+    border: 2px solid var(--fsa-border-medium);
+    border-radius: var(--radius-xl);
+    padding: 2rem;
+    margin: 2rem 0;
+}
+
+.ratio-sandbox h3 {
+    color: var(--fsa-green);
+    font-size: var(--font-size-2xl);
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.ratio-input-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.ratio-input-group label {
+    display: block;
+    color: var(--fsa-text-accent);
+    font-weight: 600;
+    font-size: var(--font-size-sm);
+    margin-bottom: 0.35rem;
+}
+
+.ratio-input-group input {
+    width: 100%;
+    background: rgba(0,0,0,0.4);
+    border: 2px solid var(--fsa-border-medium);
+    border-radius: var(--radius-md);
+    padding: 0.65rem 0.85rem;
+    color: var(--fsa-text-primary);
+    font-size: var(--font-size-base);
+    font-family: var(--font-family-mono);
+    transition: border-color var(--transition-base);
+}
+
+.ratio-input-group input:focus {
+    outline: none;
+    border-color: var(--fsa-green);
+    box-shadow: 0 0 0 3px rgba(16,185,129,0.2);
+}
+
+/* ── Traffic Light ─────────────────────────────────────────── */
+.traffic-light {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 1rem;
+    border-radius: var(--radius-full);
+    font-weight: 700;
+    font-size: var(--font-size-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    transition: all var(--transition-base);
+}
+
+.traffic-light.green {
+    background: rgba(16,185,129,0.18);
+    color: #34d399;
+    border: 1.5px solid rgba(16,185,129,0.4);
+}
+
+.traffic-light.yellow {
+    background: rgba(245,158,11,0.18);
+    color: #fbbf24;
+    border: 1.5px solid rgba(245,158,11,0.4);
+}
+
+.traffic-light.red {
+    background: rgba(239,68,68,0.18);
+    color: #f87171;
+    border: 1.5px solid rgba(239,68,68,0.4);
+}
+
+.traffic-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.traffic-light.green .traffic-dot { background: #34d399; box-shadow: 0 0 8px rgba(52,211,153,0.5); }
+.traffic-light.yellow .traffic-dot { background: #fbbf24; box-shadow: 0 0 8px rgba(251,191,36,0.5); }
+.traffic-light.red .traffic-dot { background: #f87171; box-shadow: 0 0 8px rgba(248,113,113,0.5); }
+
+/* ── Ratio Result Cards ────────────────────────────────────── */
+.ratio-results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.ratio-result-card {
+    background: var(--fsa-bg-dark);
+    border: 2px solid var(--fsa-border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem;
+    text-align: center;
+    transition: all var(--transition-base);
+}
+
+.ratio-result-card .ratio-name {
+    font-size: var(--font-size-xs);
+    color: var(--fsa-text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.5rem;
+}
+
+.ratio-result-card .ratio-value {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-extrabold);
+    font-family: var(--font-family-mono);
+    margin-bottom: 0.5rem;
+}
+
+.ratio-result-card .ratio-value.good { color: #34d399; }
+.ratio-result-card .ratio-value.caution { color: #fbbf24; }
+.ratio-result-card .ratio-value.danger { color: #f87171; }
+
+.ratio-result-card .ratio-context {
+    font-size: var(--font-size-xs);
+    color: var(--fsa-text-secondary);
+    line-height: 1.5;
+}
+
+/* ── Sector Reminder Badge ─────────────────────────────────── */
+.sector-reminder {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(59,130,246,0.1);
+    border: 1px solid rgba(59,130,246,0.3);
+    border-radius: var(--radius-md);
+    padding: 0.6rem 1rem;
+    margin-top: 1rem;
+    font-size: var(--font-size-sm);
+    color: #93c5fd;
+}
+
+/* ── Slider Challenge ──────────────────────────────────────── */
+.slider-challenge {
+    background: var(--fsa-bg-secondary);
+    border: 2px solid var(--fsa-border-medium);
+    border-radius: var(--radius-xl);
+    padding: 2rem;
+    margin: 2rem 0;
+}
+
+.slider-challenge h4 {
+    color: var(--fsa-green-light);
+    font-size: var(--font-size-lg);
+    margin-bottom: 1rem;
+}
+
+.slider-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.slider-row label {
+    color: var(--fsa-text-secondary);
+    font-size: var(--font-size-sm);
+    min-width: 120px;
+}
+
+.slider-row input[type="range"] {
+    flex: 1;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 6px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 3px;
+    outline: none;
+}
+
+.slider-row input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--fsa-green);
+    cursor: pointer;
+    box-shadow: 0 0 8px rgba(16,185,129,0.4);
+    transition: all var(--transition-fast);
+}
+
+.slider-row input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+    box-shadow: 0 0 12px rgba(16,185,129,0.6);
+}
+
+.slider-value-badge {
+    background: var(--fsa-bg-card);
+    border: 1px solid var(--fsa-border-medium);
+    border-radius: var(--radius-md);
+    padding: 0.3rem 0.75rem;
+    min-width: 80px;
+    text-align: center;
+    font-family: var(--font-family-mono);
+    font-weight: 700;
+    font-size: var(--font-size-sm);
+    color: var(--fsa-green);
+}
+
+/* ── Case Study Cards ──────────────────────────────────────── */
+.case-study-pack {
+    margin: 2rem 0;
+}
+
+.case-study-card {
+    background: var(--fsa-bg-card);
+    border: 2px solid var(--fsa-border-medium);
+    border-radius: var(--radius-xl);
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.case-study-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--fsa-gradient-primary);
+}
+
+.case-study-card .company-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.company-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-lg);
+    background: rgba(16,185,129,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.company-name {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--fsa-text-primary);
+}
+
+.company-sector {
+    font-size: var(--font-size-sm);
+    color: var(--fsa-text-dim);
+}
+
+.case-data-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0.75rem;
+    margin: 1rem 0;
+}
+
+.case-data-item {
+    background: rgba(0,0,0,0.3);
+    border-radius: var(--radius-md);
+    padding: 0.75rem;
+    text-align: center;
+}
+
+.case-data-item .data-label {
+    font-size: var(--font-size-xs);
+    color: var(--fsa-text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.case-data-item .data-value {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    font-family: var(--font-family-mono);
+    color: var(--fsa-text-primary);
+    margin-top: 0.25rem;
+}
+
+/* ── Match Game ────────────────────────────────────────────── */
+.match-game {
+    margin: 2rem 0;
+}
+
+.match-game-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+}
+
+.match-item {
+    background: var(--fsa-bg-card);
+    border: 2px solid var(--fsa-border-medium);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    user-select: none;
+}
+
+.match-item:hover {
+    border-color: var(--fsa-green);
+    transform: translateY(-2px);
+}
+
+.match-item.selected {
+    border-color: var(--fsa-green);
+    background: rgba(16,185,129,0.1);
+    box-shadow: var(--shadow-glow);
+}
+
+.match-item.correct {
+    border-color: #34d399;
+    background: rgba(16,185,129,0.15);
+}
+
+.match-item.incorrect {
+    border-color: #ef4444;
+    background: rgba(239,68,68,0.1);
+}
+
+.match-item .match-company {
+    font-weight: var(--font-weight-bold);
+    color: var(--fsa-text-primary);
+    margin-bottom: 0.25rem;
+}
+
+.match-item .match-data {
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-sm);
+    color: var(--fsa-green);
+}
+
+/* ── Label Buttons (for match game answers) ────────────────── */
+.label-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1rem 0;
+}
+
+.label-btn {
+    padding: 0.5rem 1rem;
+    border: 2px solid var(--fsa-border-medium);
+    border-radius: var(--radius-full);
+    background: transparent;
+    color: var(--fsa-text-secondary);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    min-height: 36px;
+    min-width: auto;
+}
+
+.label-btn:hover {
+    border-color: var(--fsa-green);
+    color: var(--fsa-green);
+}
+
+.label-btn.active {
+    background: var(--fsa-green);
+    border-color: var(--fsa-green);
+    color: #000;
+}
+
+/* ── One Number Trap Nudge ─────────────────────────────────── */
+.one-number-nudge {
+    background: rgba(245,158,11,0.1);
+    border: 2px solid rgba(245,158,11,0.3);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem;
+    margin: 1.5rem 0;
+    display: none;
+    animation: nudgeSlide 0.3s ease;
+}
+
+.one-number-nudge.visible {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+}
+
+.one-number-nudge .nudge-icon {
+    font-size: 1.3rem;
+    flex-shrink: 0;
+}
+
+.one-number-nudge .nudge-text {
+    color: #fbbf24;
+    font-size: var(--font-size-sm);
+    line-height: 1.6;
+}
+
+@keyframes nudgeSlide {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Scorecard Template ────────────────────────────────────── */
+.scorecard {
+    background: var(--fsa-bg-card);
+    border: 3px solid var(--fsa-green);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    margin: 2rem 0;
+}
+
+.scorecard-header {
+    background: linear-gradient(135deg, rgba(16,185,129,0.2), rgba(16,185,129,0.1));
+    padding: 1.5rem 2rem;
+    border-bottom: 2px solid rgba(16,185,129,0.3);
+}
+
+.scorecard-header h3 {
+    color: var(--fsa-green);
+    font-size: var(--font-size-xl);
+    margin-bottom: 0.25rem;
+}
+
+.scorecard-header .scorecard-company {
+    font-family: var(--font-family-mono);
+    color: var(--fsa-text-secondary);
+    font-size: var(--font-size-sm);
+}
+
+.scorecard-section {
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.scorecard-section:last-child {
+    border-bottom: none;
+}
+
+.scorecard-section h4 {
+    font-size: var(--font-size-sm);
+    color: var(--fsa-green-light);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 1rem;
+}
+
+.scorecard-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+.scorecard-row:last-child {
+    border-bottom: none;
+}
+
+.scorecard-row .sc-label {
+    color: var(--fsa-text-secondary);
+    font-size: var(--font-size-sm);
+}
+
+.scorecard-row .sc-value {
+    font-family: var(--font-family-mono);
+    font-weight: 700;
+    font-size: var(--font-size-base);
+}
+
+.scorecard-row .sc-value.good { color: #34d399; }
+.scorecard-row .sc-value.caution { color: #fbbf24; }
+.scorecard-row .sc-value.danger { color: #f87171; }
+
+.scorecard-decision {
+    background: var(--fsa-bg-dark);
+    padding: 1.5rem 2rem;
+    text-align: center;
+}
+
+.decision-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.decision-btn {
+    padding: 0.6rem 1.25rem;
+    border-radius: var(--radius-full);
+    font-weight: 700;
+    font-size: var(--font-size-sm);
+    cursor: pointer;
+    transition: all var(--transition-base);
+    border: 2px solid;
+    min-height: 40px;
+    min-width: auto;
+}
+
+.decision-btn.never {
+    border-color: rgba(239,68,68,0.4);
+    background: rgba(239,68,68,0.1);
+    color: #f87171;
+}
+.decision-btn.watchlist {
+    border-color: rgba(245,158,11,0.4);
+    background: rgba(245,158,11,0.1);
+    color: #fbbf24;
+}
+.decision-btn.starter {
+    border-color: rgba(59,130,246,0.4);
+    background: rgba(59,130,246,0.1);
+    color: #93c5fd;
+}
+.decision-btn.add-slowly {
+    border-color: rgba(16,185,129,0.4);
+    background: rgba(16,185,129,0.1);
+    color: #34d399;
+}
+
+.decision-btn:hover {
+    transform: translateY(-2px);
+}
+
+.decision-btn.selected {
+    box-shadow: 0 0 12px currentColor;
+    transform: scale(1.05);
+}
+
+/* ── Fee Simulator ─────────────────────────────────────────── */
+.fee-comparison {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+}
+
+.fee-column {
+    background: var(--fsa-bg-dark);
+    border: 2px solid var(--fsa-border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    text-align: center;
+    transition: border-color var(--transition-base);
+}
+
+.fee-column.winner {
+    border-color: var(--fsa-green);
+    box-shadow: var(--shadow-glow);
+}
+
+.fee-column .fee-label {
+    font-size: var(--font-size-sm);
+    color: var(--fsa-text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.5rem;
+}
+
+.fee-column .fee-amount {
+    font-size: var(--font-size-4xl);
+    font-weight: var(--font-weight-extrabold);
+    font-family: var(--font-family-mono);
+    margin-bottom: 0.25rem;
+}
+
+.fee-column .fee-amount.good { color: #34d399; }
+.fee-column .fee-amount.bad { color: #f87171; }
+
+.fee-column .fee-detail {
+    font-size: var(--font-size-sm);
+    color: var(--fsa-text-secondary);
+}
+
+.fee-lost {
+    text-align: center;
+    margin-top: 1.5rem;
+    padding: 1.25rem;
+    background: rgba(239,68,68,0.1);
+    border: 2px solid rgba(239,68,68,0.3);
+    border-radius: var(--radius-lg);
+}
+
+.fee-lost .lost-amount {
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-extrabold);
+    font-family: var(--font-family-mono);
+    color: #f87171;
+}
+
+.fee-lost .lost-label {
+    font-size: var(--font-size-sm);
+    color: var(--fsa-text-secondary);
+    margin-top: 0.25rem;
+}
+
+/* ── DCA Simulator ─────────────────────────────────────────── */
+.dca-results {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.dca-strategy-card {
+    background: var(--fsa-bg-dark);
+    border: 2px solid var(--fsa-border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    text-align: center;
+    transition: all var(--transition-base);
+}
+
+.dca-strategy-card.best {
+    border-color: var(--fsa-green);
+    box-shadow: var(--shadow-glow);
+}
+
+.dca-strategy-card .strategy-name {
+    font-size: var(--font-size-sm);
+    color: var(--fsa-text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.75rem;
+}
+
+.dca-strategy-card .strategy-value {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-extrabold);
+    font-family: var(--font-family-mono);
+    color: var(--fsa-text-primary);
+    margin-bottom: 0.25rem;
+}
+
+.dca-strategy-card .strategy-return {
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+}
+
+.dca-strategy-card .strategy-return.positive { color: #34d399; }
+.dca-strategy-card .strategy-return.negative { color: #f87171; }
+
+/* ── Risk Tolerance Scenarios ──────────────────────────────── */
+.risk-scenario {
+    background: var(--fsa-bg-card);
+    border: 2px solid var(--fsa-border-medium);
+    border-radius: var(--radius-xl);
+    padding: 2rem;
+    margin: 1.5rem 0;
+}
+
+.risk-scenario .scenario-number {
+    font-size: var(--font-size-xs);
+    color: var(--fsa-green);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
+}
+
+.risk-scenario .scenario-prompt {
+    font-size: var(--font-size-lg);
+    color: var(--fsa-text-primary);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+}
+
+.risk-choices {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.risk-choice {
+    background: rgba(0,0,0,0.3);
+    border: 2px solid var(--fsa-border-medium);
+    border-radius: var(--radius-lg);
+    padding: 1rem 1.25rem;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    text-align: left;
+    color: var(--fsa-text-primary);
+    font-size: var(--font-size-base);
+    line-height: 1.6;
+}
+
+.risk-choice:hover {
+    border-color: var(--fsa-green);
+    transform: translateX(4px);
+}
+
+.risk-choice.selected {
+    border-color: var(--fsa-green);
+    background: rgba(16,185,129,0.1);
+}
+
+/* ── Risk Profile Result ───────────────────────────────────── */
+.risk-profile-result {
+    background: linear-gradient(135deg, rgba(16,185,129,0.15), rgba(16,185,129,0.05));
+    border: 3px solid var(--fsa-green);
+    border-radius: var(--radius-xl);
+    padding: 2rem;
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.risk-profile-result .profile-type {
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-extrabold);
+    color: var(--fsa-green);
+    margin-bottom: 0.5rem;
+}
+
+.risk-profile-result .profile-desc {
+    color: var(--fsa-text-secondary);
+    line-height: 1.7;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.risk-meter {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin: 1.5rem auto;
+    max-width: 400px;
+    height: 12px;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.risk-meter-segment {
+    flex: 1;
+    height: 100%;
+    transition: opacity var(--transition-base);
+}
+
+.risk-meter-segment.conservative { background: #3b82f6; }
+.risk-meter-segment.moderate { background: #10b981; }
+.risk-meter-segment.growth { background: #f59e0b; }
+.risk-meter-segment.aggressive { background: #ef4444; }
+
+.risk-meter-segment.active {
+    box-shadow: 0 0 8px currentColor;
+}
+
+.risk-meter-segment:not(.active) {
+    opacity: 0.25;
+}
+
+/* ── Visibility Score Stars ────────────────────────────────── */
+.visibility-score {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.vis-star {
+    font-size: 1.2rem;
+    color: rgba(255,255,255,0.15);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.vis-star.filled {
+    color: #fbbf24;
+    text-shadow: 0 0 6px rgba(251,191,36,0.4);
+}
+
+.vis-star:hover {
+    transform: scale(1.2);
+}
+
+/* ── Responsive ────────────────────────────────────────────── */
+@media (max-width: 768px) {
+    .ratio-input-grid { grid-template-columns: 1fr; }
+    .ratio-results-grid { grid-template-columns: 1fr 1fr; }
+    .fee-comparison { grid-template-columns: 1fr; }
+    .dca-results { grid-template-columns: 1fr; }
+    .match-game-grid { grid-template-columns: 1fr; }
+    .case-data-grid { grid-template-columns: repeat(2, 1fr); }
+    .decision-options { flex-direction: column; }
+    .scorecard-section { padding: 1rem 1.25rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .slider-row input[type="range"]::-webkit-slider-thumb { transition: none; }
+    .one-number-nudge { animation: none; }
+    .match-item, .risk-choice { transition: none; }
+}

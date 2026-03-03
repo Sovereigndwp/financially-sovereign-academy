@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fee Impact Simulator | Financially Sovereign Academy</title>
+    <meta name="description" content="See how a small difference in fund fees compounds into hundreds of thousands of dollars lost over time. Interactive fee comparison tool.">
+    <link rel="stylesheet" href="../css/fsa-theme.css">
+    <link rel="stylesheet" href="../css/interactive-components.css">
+    <link rel="stylesheet" href="../css/investing-labs.css">
+    <style>
+        main { max-width: 900px; margin: 0 auto; padding: 2rem 1rem; }
+        .module-header { text-align: center; margin-bottom: 3rem; padding: 2rem; background: var(--fsa-gradient-card); border: 3px solid var(--fsa-green); border-radius: var(--radius-xl); }
+        .module-header h1 { font-size: var(--font-size-4xl); color: var(--fsa-green); margin-bottom: 1rem; }
+        .section { margin-bottom: 4rem; }
+        .section-title { font-size: var(--font-size-3xl); color: var(--fsa-green); margin-bottom: 1.5rem; border-bottom: 3px solid var(--fsa-border-medium); padding-bottom: 0.5rem; }
+        .content-block { background: var(--fsa-bg-card); border: 2px solid var(--fsa-border-subtle); border-radius: var(--radius-lg); padding: 2rem; margin-bottom: 2rem; line-height: 1.8; }
+        .content-block h3 { color: var(--fsa-green-light); font-size: var(--font-size-xl); margin-bottom: 1rem; }
+        .content-block p { margin-bottom: 1rem; color: var(--fsa-text-primary); }
+    </style>
+</head>
+<body>
+    <a href="investing-fundamentals.html" style="position: fixed; top: 1.5rem; left: 1.5rem; color: #10b981; text-decoration: none; z-index: 10000; font-weight: 600; display: flex; align-items: center; gap: 0.5rem; background: rgba(26, 58, 46, 0.95); padding: 0.75rem 1.25rem; border-radius: 0.5rem; border: 2px solid rgba(16, 185, 129, 0.3); backdrop-filter: blur(10px);">
+        <span>←</span><span>Module 7</span>
+    </a>
+
+    <main>
+        <div class="module-header">
+            <h1>Fee Impact Simulator</h1>
+            <p style="color: var(--fsa-text-secondary); font-size: var(--font-size-lg);">A 1% fee sounds small. Over 30 years, it isn't.</p>
+        </div>
+
+        <section class="section">
+            <h2 class="section-title">Why Fees Are the Silent Wealth Killer</h2>
+
+            <div class="content-block">
+                <h3>The Math Most People Never See</h3>
+                <p>A fund charging 1% per year doesn't just take 1% of your money. It takes 1% of your money <strong>every year, compounded</strong>. That 1% grows alongside your portfolio — the bigger your account gets, the more they take.</p>
+                <p>Over 30 years, the difference between a 0.05% index fund and a 1.0% actively managed fund can exceed <strong>$200,000</strong> on a modest portfolio.</p>
+                <p>The irony: most actively managed funds <em>underperform</em> the cheap index fund they're charging more to compete with.</p>
+            </div>
+
+            <div class="content-block">
+                <h3>What You're Comparing</h3>
+                <p><strong>Low-cost index fund:</strong> 0.03%–0.20% expense ratio (e.g., VTI, VOO)</p>
+                <p><strong>Average actively managed fund:</strong> 0.50%–1.50% expense ratio</p>
+                <p><strong>High-fee fund or advisor-managed account:</strong> 1.00%–2.50% all-in costs</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Run the Numbers</h2>
+            <p style="color: var(--fsa-text-secondary); margin-bottom: 2rem;">Adjust the sliders and inputs. Watch how a tiny fee percentage becomes real money.</p>
+            <div id="fee-simulator"></div>
+        </section>
+
+        <div style="margin: 3rem 0; padding: 2rem; background: rgba(16,185,129,0.08); border: 2px solid rgba(16,185,129,0.3); border-radius: var(--radius-lg);">
+            <p style="color: var(--fsa-green); font-weight: 700; margin-bottom: 0.5rem;">What To Do With This Knowledge</p>
+            <ul style="color: var(--fsa-text-secondary); font-size: 0.95rem; line-height: 1.8; padding-left: 1.5rem;">
+                <li>Check the expense ratio of every fund you own (it's on the fund's webpage or your brokerage account)</li>
+                <li>If you're paying more than 0.20% for a broad market index fund, you're overpaying</li>
+                <li>If a financial advisor charges 1%+ of assets under management, calculate the dollar cost over your investing lifetime</li>
+                <li>This doesn't mean all advisors are bad — but you should know exactly what their fee costs you in real dollars</li>
+            </ul>
+        </div>
+
+        <section class="section">
+            <div class="card" style="text-align: center;">
+                <p class="card-description">Understanding fees is one of the highest-return financial skills you can develop.</p>
+                <div style="margin-top: 1.5rem;">
+                    <a href="investing-fundamentals.html" class="btn btn-primary" style="text-decoration: none;">← Back to Module 7</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="../js/investing-labs.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            InvestingLabs.FeeSimulator.render('fee-simulator');
+        });
+    </script>
+<script src="/js/analytics.js" defer></script>
+<script src="/js/email-capture.js" defer></script>
+</body>
+</html>

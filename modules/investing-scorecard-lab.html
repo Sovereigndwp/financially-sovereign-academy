@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investing Scorecard Lab | Financially Sovereign Academy</title>
+    <meta name="description" content="Interactive investing practice lab. Build a reusable stock scorecard using financial ratios, cash flow analysis, and earnings visibility scoring.">
+    <link rel="stylesheet" href="../css/fsa-theme.css">
+    <link rel="stylesheet" href="../css/interactive-components.css">
+    <link rel="stylesheet" href="../css/investing-labs.css">
+    <style>
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .module-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: var(--fsa-gradient-card);
+            border: 3px solid var(--fsa-green);
+            border-radius: var(--radius-xl);
+        }
+
+        .module-header h1 {
+            font-size: var(--font-size-4xl);
+            color: var(--fsa-green);
+            margin-bottom: 1rem;
+        }
+
+        .module-header .subtitle {
+            font-size: var(--font-size-lg);
+            color: var(--fsa-text-secondary);
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: var(--font-size-3xl);
+            color: var(--fsa-green);
+            margin-bottom: 1.5rem;
+            border-bottom: 3px solid var(--fsa-border-medium);
+            padding-bottom: 0.5rem;
+        }
+
+        .content-block {
+            background: var(--fsa-bg-card);
+            border: 2px solid var(--fsa-border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .content-block h3 {
+            color: var(--fsa-green-light);
+            font-size: var(--font-size-xl);
+            margin-bottom: 1rem;
+        }
+
+        .content-block p {
+            margin-bottom: 1rem;
+            color: var(--fsa-text-primary);
+        }
+
+        .formula-box {
+            background: rgba(0,0,0,0.4);
+            border: 2px solid var(--fsa-border-medium);
+            border-radius: var(--radius-md);
+            padding: 1rem 1.25rem;
+            font-family: var(--font-family-mono);
+            font-size: var(--font-size-lg);
+            color: var(--fsa-green);
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        .thumb-rule {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            background: rgba(16,185,129,0.08);
+            border-left: 4px solid var(--fsa-green);
+            border-radius: var(--radius-md);
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+        }
+
+        .thumb-rule .rule-icon {
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .thumb-rule p {
+            color: var(--fsa-text-accent);
+            font-size: var(--font-size-sm);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .warning-box {
+            background: rgba(245,158,11,0.1);
+            border: 2px solid rgba(245,158,11,0.3);
+            border-radius: var(--radius-md);
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+        }
+
+        .warning-box p {
+            color: #fbbf24;
+            font-size: var(--font-size-sm);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .elective-badge {
+            display: inline-block;
+            background: rgba(156,39,176,0.15);
+            color: #ce93d8;
+            border: 1px solid rgba(156,39,176,0.3);
+            border-radius: var(--radius-full);
+            padding: 0.3rem 1rem;
+            font-size: var(--font-size-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: 1rem;
+        }
+
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+    <!-- Back to Module 7 -->
+    <a href="investing-fundamentals.html" style="position: fixed; top: 1.5rem; left: 1.5rem; color: #10b981; text-decoration: none; z-index: 10000; font-weight: 600; display: flex; align-items: center; gap: 0.5rem; background: rgba(26, 58, 46, 0.95); padding: 0.75rem 1.25rem; border-radius: 0.5rem; border: 2px solid rgba(16, 185, 129, 0.3); backdrop-filter: blur(10px); transition: all 0.3s ease;" onmouseover="this.style.borderColor='#10b981';" onmouseout="this.style.borderColor='rgba(16, 185, 129, 0.3)';">
+        <span>←</span>
+        <span>Module 7</span>
+    </a>
+    <!-- Calculators Link -->
+    <a href="../calculators/" style="position: fixed; top: 1.5rem; right: 1.5rem; color: #10b981; text-decoration: none; z-index: 10000; font-weight: 600; display: flex; align-items: center; gap: 0.5rem; background: rgba(26, 58, 46, 0.95); padding: 0.75rem 1.25rem; border-radius: 0.5rem; border: 2px solid rgba(16, 185, 129, 0.3); backdrop-filter: blur(10px); transition: all 0.3s ease;" onmouseover="this.style.borderColor='#10b981';" onmouseout="this.style.borderColor='rgba(16, 185, 129, 0.3)';">
+        <span style="font-size: 1.2rem;">🧮</span>
+        <span>Calculators</span>
+    </a>
+
+    <main>
+        <div class="module-header">
+            <span class="elective-badge">Advanced Elective — Module 7</span>
+            <h1>Investing Scorecard Lab</h1>
+            <p class="subtitle">Build a reusable 1-page scorecard that forces 3 checks before you invest: business health, price sanity, and cash truth.</p>
+        </div>
+
+        <!-- Starter Rule -->
+        <div style="margin: 2rem 0; padding: 2rem; background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(59, 130, 246, 0.05)); border-left: 4px solid #3b82f6; border-radius: 0.5rem;">
+            <div style="font-size: 1.5rem; font-weight: 700; color: #60a5fa; margin-bottom: 1rem;">
+                Rule Zero
+            </div>
+            <p style="font-size: 1.15rem; line-height: 1.7; color: rgba(255, 255, 255, 0.9); margin-bottom: 0.75rem;">
+                <strong>Never judge a company from one number.</strong>
+            </p>
+            <p style="font-size: 0.95rem; color: rgba(255, 255, 255, 0.65);">
+                Ratios only make sense compared to three things: the company's own history, similar companies, and the sector average. A number in isolation is meaningless.
+            </p>
+        </div>
+
+        <!-- PART 1: Business Health Check -->
+        <section class="section">
+            <h2 class="section-title">Part 1 — Business Health Check</h2>
+            <p style="color: var(--fsa-text-secondary); margin-bottom: 2rem;">These are your "do not be stupid" checks. If a business fails here, nothing else matters.</p>
+
+            <!-- Current Ratio -->
+            <div class="content-block">
+                <h3>1. Current Ratio</h3>
+                <div class="formula-box">Current Assets ÷ Current Liabilities</div>
+                <p>Can the company cover its short-term bills? If not, it might not survive long enough for your investment thesis to play out.</p>
+                <div class="thumb-rule">
+                    <span class="rule-icon">📏</span>
+                    <p><strong>Thumb rule:</strong> Prefer above 1.0. Below 1.0 means they owe more than they have available short-term.</p>
+                </div>
+            </div>
+
+            <!-- Liquidity Stress Test -->
+            <div id="liquidity-stress-test"></div>
+
+            <!-- Debt to Equity -->
+            <div class="content-block">
+                <h3>2. Debt to Equity</h3>
+                <div class="formula-box">Total Liabilities ÷ Total Shareholder Equity</div>
+                <p>How much the company leans on debt. High D/E isn't automatically bad — it depends on the sector. A utility at D/E 2.0 is different from a software company at D/E 2.0.</p>
+                <div class="thumb-rule">
+                    <span class="rule-icon">📏</span>
+                    <p><strong>Thumb rule:</strong> Above 1.0 can be risky. But always check sector norms first.</p>
+                </div>
+            </div>
+
+            <!-- Debt Danger Map -->
+            <div id="debt-danger-map"></div>
+
+            <!-- ROE -->
+            <div class="content-block">
+                <h3>3. Return on Equity</h3>
+                <div class="formula-box">Net Income ÷ Average Shareholder Equity</div>
+                <p>How efficiently profits are made from shareholder capital. Prefer consistently high ROE for at least 3 years.</p>
+                <div class="warning-box">
+                    <p><strong>Warning:</strong> ROE can be "high" for bad reasons. Heavy debt inflates it (smaller denominator). Buybacks inflate it. One-time gains fake it. Always ask <em>why</em> ROE is high.</p>
+                </div>
+            </div>
+
+            <!-- ROE Lie Detector -->
+            <div id="roe-lie-detector"></div>
+        </section>
+
+        <!-- PART 2: Price Check -->
+        <section class="section">
+            <h2 class="section-title">Part 2 — The Price Check</h2>
+            <p style="color: var(--fsa-text-secondary); margin-bottom: 2rem;">This is where people mess up. They buy a great company at a silly price.</p>
+
+            <!-- P/E -->
+            <div class="content-block">
+                <h3>4. P/E Ratio</h3>
+                <div class="formula-box">Price per Share ÷ Earnings per Share</div>
+                <p>How expensive the stock is relative to current earnings. Lower is often preferred, but depends heavily on growth rate and sector.</p>
+                <div class="thumb-rule">
+                    <span class="rule-icon">📏</span>
+                    <p><strong>Key insight:</strong> P/E alone is not a perfect measure. It can mislead if the company is cyclical. P/E and growth should match — that's what the PEG ratio checks.</p>
+                </div>
+            </div>
+
+            <!-- PE vs Growth Match Game -->
+            <div id="pe-growth-game"></div>
+
+            <!-- P/B -->
+            <div class="content-block">
+                <h3>5. P/B Ratio</h3>
+                <div class="formula-box">Price per Share ÷ Book Value per Share</div>
+                <p>How price compares to net assets on paper. Most useful when assets matter: banks, insurers, some industrials. Can be useless for asset-light companies like software firms.</p>
+                <div class="thumb-rule">
+                    <span class="rule-icon">📏</span>
+                    <p><strong>Reality check:</strong> A software company can look "overpriced" on P/B forever and still be fine because its value is in intellectual property, not physical assets. Know when P/B applies.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PART 3: Cash Truth -->
+        <section class="section">
+            <h2 class="section-title">Part 3 — The Cash Truth</h2>
+            <p style="color: var(--fsa-text-secondary); margin-bottom: 2rem;">Profit can be a story. Cash is harder to fake.</p>
+
+            <div class="content-block">
+                <h3>6. Free Cash Flow</h3>
+                <p><strong>Simple meaning:</strong> Cash left after running the business and paying for what it needs to keep operating.</p>
+                <p>Strong FCF suggests strength and flexibility. The company can pay debt, invest in growth, survive downturns, or return money to shareholders.</p>
+                <div class="thumb-rule">
+                    <span class="rule-icon">📏</span>
+                    <p><strong>Thumb rule:</strong> Rising FCF over 3+ years is a strong signal. If FCF is negative, you need to understand why (heavy investment year? or structural problem?).</p>
+                </div>
+            </div>
+
+            <!-- FCF Quiz -->
+            <div id="fcf-quiz"></div>
+        </section>
+
+        <!-- PART 4: Future Check -->
+        <section class="section">
+            <h2 class="section-title">Part 4 — The Future Check</h2>
+            <p style="color: var(--fsa-text-secondary); margin-bottom: 2rem;">This is the part most beginners skip.</p>
+
+            <div class="content-block">
+                <h3>7. Earnings Growth</h3>
+                <p>Look for strong, consistent earnings growth. Two checks matter: Is growth consistent (not boom-and-bust)? Is growth bought with debt (unsustainable)?</p>
+            </div>
+
+            <div class="content-block">
+                <h3>8. Earnings Visibility</h3>
+                <p>How likely is the company to perform predictably in the future? Companies with recurring demand, contract revenue, and essential products have higher visibility — they're less likely to face surprise declines.</p>
+                <p><strong>Examples:</strong> Consumer staples, pharma, utilities, banking, essential retail tend to have high visibility.</p>
+            </div>
+
+            <!-- Visibility Scorer -->
+            <div id="visibility-scorer"></div>
+        </section>
+
+        <!-- PART 5: Ratio Sandbox -->
+        <section class="section">
+            <h2 class="section-title">Part 5 — The Ratio Sandbox</h2>
+            <p style="color: var(--fsa-text-secondary); margin-bottom: 2rem;">Type numbers from any company's financials. See all ratios calculated at once with traffic light signals.</p>
+
+            <div class="ratio-sandbox" id="ratio-sandbox-container">
+                <h3>Ratio Calculator</h3>
+                <div class="ratio-input-grid">
+                    <div class="ratio-input-group"><label>Current Assets ($)</label><input type="number" id="sb-current-assets" placeholder="e.g., 500000" step="1000"></div>
+                    <div class="ratio-input-group"><label>Current Liabilities ($)</label><input type="number" id="sb-current-liabilities" placeholder="e.g., 300000" step="1000"></div>
+                    <div class="ratio-input-group"><label>Total Liabilities ($)</label><input type="number" id="sb-total-liabilities" placeholder="e.g., 800000" step="1000"></div>
+                    <div class="ratio-input-group"><label>Shareholder Equity ($)</label><input type="number" id="sb-shareholder-equity" placeholder="e.g., 600000" step="1000"></div>
+                    <div class="ratio-input-group"><label>Net Income ($)</label><input type="number" id="sb-net-income" placeholder="e.g., 120000" step="1000"></div>
+                    <div class="ratio-input-group"><label>Price per Share ($)</label><input type="number" id="sb-price-per-share" placeholder="e.g., 150" step="0.01"></div>
+                    <div class="ratio-input-group"><label>Earnings per Share ($)</label><input type="number" id="sb-eps" placeholder="e.g., 7.50" step="0.01"></div>
+                    <div class="ratio-input-group"><label>Book Value / Share ($)</label><input type="number" id="sb-book-value" placeholder="e.g., 45" step="0.01"></div>
+                </div>
+                <button class="btn btn-primary" style="width:100%;" onclick="InvestingLabs.RatioSandbox.calculate('ratio-sandbox-container')">Calculate All Ratios</button>
+                <div class="ratio-results-grid">
+                    <p style="color: var(--fsa-text-dim); text-align: center; grid-column: 1/-1;">Enter numbers above to see ratios</p>
+                </div>
+                <div class="one-number-nudge">
+                    <span class="nudge-icon">⚠️</span>
+                    <span class="nudge-text"><strong>One-number trap detected.</strong> You're looking at a single metric. What else would you check? Fill in more fields to get the full picture.</span>
+                </div>
+                <div class="sector-reminder">
+                    <span>ℹ️</span>
+                    <span>Remember: these thresholds are general guidelines. Sector context matters. A bank's "normal" looks very different from a tech company's.</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- PART 6: Full Scorecard -->
+        <section class="section">
+            <h2 class="section-title">Part 6 — Your Reusable Scorecard</h2>
+            <p style="color: var(--fsa-text-secondary); margin-bottom: 2rem;">Fill this in for any company you're evaluating. Force yourself to check every section before making a decision.</p>
+
+            <div id="scorecard-generator"></div>
+        </section>
+
+        <!-- Safety Disclaimer -->
+        <div style="margin: 3rem 0; padding: 2rem; background: rgba(239,68,68,0.08); border: 2px solid rgba(239,68,68,0.2); border-radius: var(--radius-lg);">
+            <p style="color: #f87171; font-weight: 700; margin-bottom: 0.5rem;">Education, Not Financial Advice</p>
+            <p style="color: var(--fsa-text-secondary); font-size: 0.9rem; line-height: 1.7;">This lab teaches you how to read financial data and think critically about investments. Ratios and frameworks help you ask better questions — they do not remove risk. Always do your own research and consider consulting a licensed financial advisor before making investment decisions.</p>
+        </div>
+
+        <!-- Back to Module 7 -->
+        <section class="section">
+            <div class="card" style="text-align: center;">
+                <h3 class="card-title">Lab Complete!</h3>
+                <p class="card-description">You now have a reusable framework for evaluating any investment.</p>
+                <div style="margin-top: 2rem;">
+                    <a href="investing-fundamentals.html" class="btn btn-primary" style="text-decoration: none;">← Back to Module 7</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="../js/investing-labs.js"></script>
+    <script>
+        // Initialize all interactive components
+        document.addEventListener('DOMContentLoaded', function () {
+            InvestingLabs.LiquidityStressTest.render('liquidity-stress-test');
+            InvestingLabs.DebtDangerMap.render('debt-danger-map');
+            InvestingLabs.ROELieDetector.render('roe-lie-detector');
+            InvestingLabs.PEGrowthGame.render('pe-growth-game');
+            InvestingLabs.FCFQuiz.render('fcf-quiz');
+            InvestingLabs.VisibilityScorer.render('visibility-scorer');
+            InvestingLabs.ScorecardGenerator.render('scorecard-generator');
+        });
+    </script>
+
+<!-- FSA Analytics & Email Capture -->
+<div style="margin: 2rem auto; max-width: 900px; padding: 0 1.5rem;">
+    <div data-fsa-email-capture="page-footer" data-title="📬 Level Up Your Finances" data-subtitle="Weekly money tips and financial strategies. No spam, ever."></div>
+</div>
+<script src="/js/analytics.js" defer></script>
+<script src="/js/email-capture.js" defer></script>
+
+</body>
+</html>
