@@ -73,7 +73,7 @@ async def init_db():
         init_database()
     
     # Import all models to ensure they're registered
-    from app.models import user, academy, course, module, assessment, payment, progress
+    from app.models import user, academy, course, module, assessment, payment, progress, tenant, access_code
     
     # Create tables
     async with async_engine.begin() as conn:

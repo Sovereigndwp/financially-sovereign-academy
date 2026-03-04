@@ -11,7 +11,7 @@ from pathlib import Path
 
 from app.config import get_settings
 from app.database import init_db
-from app.routers import auth, academies, courses, modules, assessments, calculators, payments, users, mcp
+from app.routers import auth, academies, courses, modules, assessments, calculators, payments, users, mcp, tenants, access
 
 
 # Configure logging
@@ -119,6 +119,8 @@ app.include_router(calculators.router, prefix=f"{API_PREFIX}/calculators", tags=
 app.include_router(payments.router, prefix=f"{API_PREFIX}/payments", tags=["Payments"])
 app.include_router(users.router, prefix=f"{API_PREFIX}/users", tags=["Users"])
 app.include_router(mcp.router, prefix=f"{API_PREFIX}/mcp", tags=["MCP"])
+app.include_router(tenants.router, prefix=f"{API_PREFIX}/tenants", tags=["Tenants"])
+app.include_router(access.router, prefix=f"{API_PREFIX}/access", tags=["Access"])
 
 
 if __name__ == "__main__":

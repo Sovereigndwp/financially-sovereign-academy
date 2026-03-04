@@ -117,7 +117,11 @@ class Entitlement(Base):
     user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
     academy_id = Column(Integer, ForeignKey("academies.id"), nullable=False)
     payment_id = Column(Integer, ForeignKey("payments.id"), nullable=True)
-    
+
+    # Institutional licensing (set when access was granted via tenant, not individual purchase)
+    tenant_id = Column(Integer, ForeignKey("tenants.id"), nullable=True, index=True)
+    access_code_id = Column(Integer, ForeignKey("access_codes.id"), nullable=True)
+
     # What they have access to
     modules = Column(JSON, nullable=False, default=list)  # Array of module slugs/IDs
     courses = Column(JSON, nullable=False, default=list)  # Array of course slugs/IDs
@@ -138,6 +142,8 @@ class Entitlement(Base):
     # Relationships
     user = relationship("User", back_populates="entitlements")
     academy = relationship("Academy", back_populates="entitlements")
+    tenant = relationship("Tenant", back_populates="entitlements")
+    access_code = relationship("AccessCode")
 
     def __repr__(self):
         return f"<Entitlement(id={self.id}, user_id={self.user_id}, academy_id={self.academy_id})>"

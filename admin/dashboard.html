@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Financially Sovereign Academy</title>
+    <style>
+        :root {
+            --bg: #0a1f1a; --surface: #0f2922; --surface2: #1a3a2e; --border: #2d4a3e;
+            --text: #e0e0e0; --muted: #9ca3af; --green: #10b981; --green-light: #34d399;
+            --red: #ef4444; --orange: #f59e0b; --blue: #3b82f6;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); }
+
+        /* Layout */
+        .app { display: flex; min-height: 100vh; }
+        .sidebar { width: 220px; background: var(--surface); border-right: 1px solid var(--border); padding: 1.5rem 0; flex-shrink: 0; }
+        .sidebar h2 { font-size: 0.85rem; color: var(--green); padding: 0 1.25rem; margin-bottom: 1.5rem; letter-spacing: 0.05em; text-transform: uppercase; }
+        .sidebar a { display: block; padding: 0.6rem 1.25rem; color: var(--muted); text-decoration: none; font-size: 0.9rem; border-left: 3px solid transparent; transition: all 0.15s; }
+        .sidebar a:hover, .sidebar a.active { color: var(--text); background: rgba(16,185,129,0.08); border-left-color: var(--green); }
+        .main { flex: 1; padding: 2rem; overflow-y: auto; }
+
+        /* Login */
+        #login-view { max-width: 380px; margin: 10vh auto; }
+        #login-view h1 { color: var(--green); margin-bottom: 1.5rem; font-size: 1.5rem; }
+
+        /* Common */
+        h1 { font-size: 1.5rem; margin-bottom: 1rem; }
+        .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; margin-bottom: 1rem; }
+        .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+        .stat { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1rem 1.25rem; }
+        .stat .label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+        .stat .value { font-size: 1.75rem; font-weight: 700; color: var(--green); margin-top: 0.25rem; }
+        .stat .sub { font-size: 0.8rem; color: var(--muted); margin-top: 0.15rem; }
+        input, select { width: 100%; padding: 0.6rem 0.8rem; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-size: 0.9rem; margin-bottom: 0.75rem; }
+        input:focus, select:focus { outline: none; border-color: var(--green); }
+        label { display: block; font-size: 0.8rem; color: var(--muted); margin-bottom: 0.25rem; }
+        .btn { padding: 0.6rem 1.25rem; border: none; border-radius: 8px; font-weight: 600; font-size: 0.9rem; cursor: pointer; transition: all 0.15s; }
+        .btn-primary { background: var(--green); color: #000; }
+        .btn-primary:hover { background: var(--green-light); }
+        .btn-secondary { background: var(--surface2); color: var(--text); border: 1px solid var(--border); }
+        .btn-secondary:hover { border-color: var(--green); }
+        .btn-danger { background: rgba(239,68,68,0.15); color: var(--red); border: 1px solid rgba(239,68,68,0.3); }
+        .btn-sm { padding: 0.35rem 0.75rem; font-size: 0.8rem; }
+        .btn-row { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.75rem; }
+        .badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+        .badge-green { background: rgba(16,185,129,0.15); color: var(--green); }
+        .badge-red { background: rgba(239,68,68,0.15); color: var(--red); }
+        .badge-orange { background: rgba(245,158,11,0.15); color: var(--orange); }
+        table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+        th { text-align: left; padding: 0.5rem 0.75rem; color: var(--muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid var(--border); }
+        td { padding: 0.6rem 0.75rem; border-bottom: 1px solid rgba(45,74,62,0.5); }
+        .empty { text-align: center; padding: 3rem; color: var(--muted); }
+        .hidden { display: none !important; }
+        .toast { position: fixed; top: 1rem; right: 1rem; padding: 0.75rem 1.25rem; border-radius: 10px; font-size: 0.9rem; z-index: 999; animation: slideIn 0.3s ease; }
+        .toast-success { background: var(--green); color: #000; }
+        .toast-error { background: var(--red); color: #fff; }
+        @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+
+        /* Print styles for access codes */
+        @media print {
+            body { background: #fff; color: #000; }
+            .sidebar, #login-view, .btn, .no-print { display: none !important; }
+            .main { padding: 0; }
+            .code-card { border: 2px solid #000 !important; page-break-inside: avoid; margin: 0.5rem; background: #fff !important; color: #000 !important; }
+            .code-card .code { color: #000 !important; font-size: 1.5rem !important; }
+            .code-card .org { color: #333 !important; }
+            .print-grid { display: grid !important; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
+        }
+        .code-card { background: var(--surface2); border: 2px dashed var(--border); border-radius: 10px; padding: 1rem 1.25rem; text-align: center; }
+        .code-card .code { font-family: 'Courier New', monospace; font-size: 1.5rem; font-weight: 700; color: var(--green); letter-spacing: 0.15em; margin: 0.5rem 0; }
+        .code-card .org { font-size: 0.8rem; color: var(--muted); }
+        .code-card .instructions { font-size: 0.7rem; color: var(--muted); margin-top: 0.5rem; }
+        .print-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0.75rem; }
+        .progress-bar { height: 8px; background: var(--bg); border-radius: 4px; overflow: hidden; }
+        .progress-bar .fill { height: 100%; background: var(--green); border-radius: 4px; transition: width 0.3s; }
+    </style>
+</head>
+<body>
+<div class="app">
+    <nav class="sidebar hidden" id="sidebar">
+        <h2>FSA Admin</h2>
+        <a href="#" data-view="tenants" class="active">🏢 Tenants</a>
+        <a href="#" data-view="codes">🎫 Access Codes</a>
+        <a href="#" data-view="reports">📊 Reports</a>
+        <a href="#" data-view="create-tenant">➕ New Tenant</a>
+        <a href="#" data-view="generate-codes">🔑 Generate Codes</a>
+        <a href="#" style="margin-top:auto; color:var(--red);" onclick="logout()">Logout</a>
+    </nav>
+
+    <div class="main">
+        <!-- Login -->
+        <div id="login-view">
+            <h1>🔒 Admin Login</h1>
+            <div class="card">
+                <label>Email</label>
+                <input type="email" id="login-email" placeholder="admin@example.com">
+                <label>Password</label>
+                <input type="password" id="login-password" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()">
+                <button class="btn btn-primary" style="width:100%;margin-top:0.5rem" onclick="doLogin()">Sign In</button>
+            </div>
+        </div>
+
+        <!-- Tenants List -->
+        <div id="tenants-view" class="hidden">
+            <h1>Institutional Clients</h1>
+            <div class="stat-grid" id="tenants-stats"></div>
+            <div class="card">
+                <table>
+                    <thead><tr><th>Organization</th><th>Type</th><th>Tier</th><th>Seats</th><th>Status</th><th>Actions</th></tr></thead>
+                    <tbody id="tenants-table"></tbody>
+                </table>
+                <div id="tenants-empty" class="empty hidden">No tenants yet. Create one to get started.</div>
+            </div>
+        </div>
+
+        <!-- Tenant Detail / Reports -->
+        <div id="reports-view" class="hidden">
+            <h1 id="report-title">Usage Report</h1>
+            <div id="report-select" class="no-print" style="margin-bottom:1rem">
+                <label>Select Tenant</label>
+                <select id="report-tenant-select" onchange="loadReport(this.value)">
+                    <option value="">Choose a tenant...</option>
+                </select>
+            </div>
+            <div id="report-content" class="hidden">
+                <div class="stat-grid" id="report-stats"></div>
+                <div class="card">
+                    <h3 style="margin-bottom:0.75rem">Module Progress</h3>
+                    <div id="report-progress"></div>
+                </div>
+                <div class="card">
+                    <h3 style="margin-bottom:0.75rem">Access Code Redemption</h3>
+                    <div id="report-codes"></div>
+                </div>
+                <div class="btn-row no-print">
+                    <button class="btn btn-secondary" onclick="downloadReport()">📥 Download CSV</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Access Codes -->
+        <div id="codes-view" class="hidden">
+            <h1>Access Codes</h1>
+            <div class="no-print" style="margin-bottom:1rem">
+                <label>Select Tenant</label>
+                <select id="codes-tenant-select" onchange="loadCodes(this.value)">
+                    <option value="">Choose a tenant...</option>
+                </select>
+            </div>
+            <div id="codes-content" class="hidden">
+                <div class="btn-row no-print" style="margin-bottom:1rem">
+                    <button class="btn btn-primary" onclick="printCodes()">🖨️ Print Code Cards</button>
+                    <button class="btn btn-secondary" onclick="downloadCodes()">📥 Download CSV</button>
+                </div>
+                <div class="print-grid" id="codes-grid"></div>
+                <div class="card no-print" style="margin-top:1rem">
+                    <h3 style="margin-bottom:0.75rem">All Codes</h3>
+                    <table>
+                        <thead><tr><th>Code</th><th>Label</th><th>Status</th><th>Used</th><th>Expires</th><th>Actions</th></tr></thead>
+                        <tbody id="codes-table"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Create Tenant -->
+        <div id="create-tenant-view" class="hidden">
+            <h1>Create New Tenant</h1>
+            <div class="card" style="max-width:560px">
+                <label>Organization Name *</label>
+                <input type="text" id="ct-name" placeholder="e.g. Colorado DOC Reentry Program">
+                <label>Type</label>
+                <select id="ct-type">
+                    <option value="municipal">Municipal</option>
+                    <option value="correctional">Correctional</option>
+                    <option value="school">School</option>
+                    <option value="enterprise">Enterprise</option>
+                    <option value="nonprofit">Nonprofit</option>
+                </select>
+                <label>License Tier</label>
+                <select id="ct-tier">
+                    <option value="starter">Starter (50 seats, $2K/yr)</option>
+                    <option value="professional" selected>Professional (200 seats, $5K/yr)</option>
+                    <option value="enterprise">Enterprise (unlimited, $10K+/yr)</option>
+                </select>
+                <label>Max Seats</label>
+                <input type="number" id="ct-seats" value="200" min="1" max="100000">
+                <label>Contact Name</label>
+                <input type="text" id="ct-contact" placeholder="Program director name">
+                <label>Contact Email</label>
+                <input type="email" id="ct-email" placeholder="contact@org.gov">
+                <label>License End Date</label>
+                <input type="date" id="ct-end">
+                <label>Allowed Modules (comma-separated slugs, leave blank for all)</label>
+                <input type="text" id="ct-modules" placeholder="e.g. money-mindset-cash-flow,debt-strategy,banking-basics">
+                <div class="btn-row">
+                    <button class="btn btn-primary" onclick="createTenant()">Create Tenant</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Generate Codes -->
+        <div id="generate-codes-view" class="hidden">
+            <h1>Generate Access Codes</h1>
+            <div class="card" style="max-width:560px">
+                <label>Tenant</label>
+                <select id="gc-tenant"></select>
+                <label>Number of Codes</label>
+                <input type="number" id="gc-count" value="50" min="1" max="1000">
+                <label>Batch Label</label>
+                <input type="text" id="gc-label" placeholder="e.g. Spring 2026 Cohort">
+                <label>Expiration Date (optional)</label>
+                <input type="date" id="gc-expires">
+                <div class="btn-row">
+                    <button class="btn btn-primary" onclick="generateCodes()">Generate Codes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+const API = (location.port === '8001' ? 'http://localhost:8001' : '') + '/api/v1';
+let TOKEN = localStorage.getItem('fsa-admin-token') || '';
+let TENANTS = [];
+
+// ── Auth ──────────────────────────────────────────────────────────
+async function api(path, opts = {}) {
+    const res = await fetch(API + path, {
+        headers: { 'Content-Type': 'application/json', ...(TOKEN ? { 'Authorization': 'Bearer ' + TOKEN } : {}) },
+        ...opts,
+    });
+    if (res.status === 401 || res.status === 403) { logout(); throw new Error('Unauthorized'); }
+    if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err.detail || err.message || `Error ${res.status}`);
+    }
+    return res.json();
+}
+
+async function doLogin() {
+    const email = document.getElementById('login-email').value;
+    const password = document.getElementById('login-password').value;
+    try {
+        const data = await api('/auth/login', { method: 'POST', body: JSON.stringify({ email, password }) });
+        TOKEN = data.access_token;
+        localStorage.setItem('fsa-admin-token', TOKEN);
+        showApp();
+    } catch (e) { toast(e.message, 'error'); }
+}
+
+function logout() {
+    TOKEN = '';
+    localStorage.removeItem('fsa-admin-token');
+    document.getElementById('sidebar').classList.add('hidden');
+    hideAllViews();
+    document.getElementById('login-view').classList.remove('hidden');
+}
+
+function showApp() {
+    document.getElementById('login-view').classList.add('hidden');
+    document.getElementById('sidebar').classList.remove('hidden');
+    navigate('tenants');
+}
+
+// ── Navigation ────────────────────────────────────────────────────
+function hideAllViews() {
+    document.querySelectorAll('[id$="-view"]').forEach(v => v.classList.add('hidden'));
+}
+
+function navigate(view) {
+    hideAllViews();
+    document.getElementById(view + '-view').classList.remove('hidden');
+    document.querySelectorAll('.sidebar a').forEach(a => a.classList.toggle('active', a.dataset.view === view));
+    if (view === 'tenants') loadTenants();
+    if (view === 'reports') loadTenantSelects();
+    if (view === 'codes') loadTenantSelects();
+    if (view === 'create-tenant') { /* static form */ }
+    if (view === 'generate-codes') loadTenantSelects();
+}
+
+document.querySelectorAll('.sidebar a[data-view]').forEach(a => {
+    a.addEventListener('click', e => { e.preventDefault(); navigate(a.dataset.view); });
+});
+
+// ── Tenants ───────────────────────────────────────────────────────
+async function loadTenants() {
+    try {
+        TENANTS = await api('/tenants?active_only=false');
+        const tbody = document.getElementById('tenants-table');
+        const empty = document.getElementById('tenants-empty');
+        const stats = document.getElementById('tenants-stats');
+
+        if (TENANTS.length === 0) {
+            tbody.innerHTML = '';
+            empty.classList.remove('hidden');
+            stats.innerHTML = '';
+            return;
+        }
+        empty.classList.add('hidden');
+
+        const totalSeats = TENANTS.reduce((s, t) => s + (t.max_seats || 0), 0);
+        const active = TENANTS.filter(t => t.is_active).length;
+        stats.innerHTML = `
+            <div class="stat"><div class="label">Total Clients</div><div class="value">${TENANTS.length}</div></div>
+            <div class="stat"><div class="label">Active</div><div class="value">${active}</div></div>
+            <div class="stat"><div class="label">Total Licensed Seats</div><div class="value">${totalSeats.toLocaleString()}</div></div>
+        `;
+
+        tbody.innerHTML = TENANTS.map(t => `<tr>
+            <td><strong>${esc(t.name)}</strong><br><span style="color:var(--muted);font-size:0.8rem">${esc(t.slug)}</span></td>
+            <td>${esc(t.type)}</td>
+            <td>${esc(t.license_tier)}</td>
+            <td>${t.max_seats}</td>
+            <td>${t.is_active ? '<span class="badge badge-green">Active</span>' : '<span class="badge badge-red">Inactive</span>'}</td>
+            <td>
+                <button class="btn btn-secondary btn-sm" onclick="viewReport('${esc(t.slug)}')">📊</button>
+                <button class="btn btn-secondary btn-sm" onclick="viewCodes('${esc(t.slug)}')">🎫</button>
+            </td>
+        </tr>`).join('');
+    } catch (e) { toast(e.message, 'error'); }
+}
+
+async function createTenant() {
+    const modules = document.getElementById('ct-modules').value.trim();
+    const endDate = document.getElementById('ct-end').value;
+    const body = {
+        name: document.getElementById('ct-name').value,
+        type: document.getElementById('ct-type').value,
+        license_tier: document.getElementById('ct-tier').value,
+        max_seats: parseInt(document.getElementById('ct-seats').value),
+        contact_name: document.getElementById('ct-contact').value || null,
+        contact_email: document.getElementById('ct-email').value || null,
+        license_end: endDate ? new Date(endDate).toISOString() : null,
+        config: modules ? { allowed_modules: modules.split(',').map(s => s.trim()) } : {},
+    };
+    try {
+        await api('/tenants', { method: 'POST', body: JSON.stringify(body) });
+        toast('Tenant created!', 'success');
+        navigate('tenants');
+    } catch (e) { toast(e.message, 'error'); }
+}
+
+// ── Reports ───────────────────────────────────────────────────────
+let currentReport = null;
+
+async function loadTenantSelects() {
+    if (TENANTS.length === 0) {
+        try { TENANTS = await api('/tenants?active_only=false'); } catch(e) {}
+    }
+    const opts = '<option value="">Choose a tenant...</option>' +
+        TENANTS.map(t => `<option value="${esc(t.slug)}">${esc(t.name)}</option>`).join('');
+    ['report-tenant-select', 'codes-tenant-select', 'gc-tenant'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.innerHTML = opts;
+    });
+}
+
+function viewReport(slug) {
+    navigate('reports');
+    document.getElementById('report-tenant-select').value = slug;
+    loadReport(slug);
+}
+
+async function loadReport(slug) {
+    if (!slug) { document.getElementById('report-content').classList.add('hidden'); return; }
+    try {
+        currentReport = await api(`/tenants/${slug}/usage`);
+        const r = currentReport;
+        document.getElementById('report-title').textContent = r.tenant_name + ' — Usage Report';
+        document.getElementById('report-content').classList.remove('hidden');
+
+        document.getElementById('report-stats').innerHTML = `
+            <div class="stat"><div class="label">Seat Utilization</div><div class="value">${r.seats.utilization_percent}%</div>
+                <div class="sub">${r.seats.learners} / ${r.license.max_seats} seats</div>
+                <div class="progress-bar" style="margin-top:0.5rem"><div class="fill" style="width:${Math.min(r.seats.utilization_percent,100)}%"></div></div></div>
+            <div class="stat"><div class="label">Active (7 days)</div><div class="value">${r.activity.active_last_7_days}</div></div>
+            <div class="stat"><div class="label">Active (30 days)</div><div class="value">${r.activity.active_last_30_days}</div></div>
+            <div class="stat"><div class="label">Completion Rate</div><div class="value">${r.progress.completion_rate_percent}%</div>
+                <div class="sub">${r.progress.modules_completed} / ${r.progress.modules_started} modules</div></div>
+            <div class="stat"><div class="label">Avg Time / Module</div><div class="value">${r.progress.avg_time_per_module_minutes}m</div></div>
+            <div class="stat"><div class="label">License Status</div><div class="value">${r.license.is_valid ? '✅' : '❌'}</div>
+                <div class="sub">${r.license.tier}${r.license.end ? ' · ends ' + new Date(r.license.end).toLocaleDateString() : ''}</div></div>
+        `;
+
+        document.getElementById('report-codes').innerHTML = `
+            <div class="stat-grid">
+                <div class="stat"><div class="label">Codes Generated</div><div class="value">${r.access_codes.total_generated}</div></div>
+                <div class="stat"><div class="label">Redeemed</div><div class="value">${r.access_codes.redeemed}</div>
+                    <div class="sub">${r.access_codes.redemption_rate_percent}% redemption rate</div></div>
+                <div class="stat"><div class="label">Available</div><div class="value">${r.access_codes.still_available}</div></div>
+            </div>`;
+
+    } catch (e) { toast(e.message, 'error'); }
+}
+
+function downloadReport() {
+    if (!currentReport) return;
+    const r = currentReport;
+    const rows = [
+        ['Metric', 'Value'],
+        ['Tenant', r.tenant_name],
+        ['Report Date', r.report_generated_at],
+        ['License Tier', r.license.tier],
+        ['License Valid', r.license.is_valid],
+        ['Max Seats', r.license.max_seats],
+        ['Current Learners', r.seats.learners],
+        ['Utilization %', r.seats.utilization_percent],
+        ['Active (7d)', r.activity.active_last_7_days],
+        ['Active (30d)', r.activity.active_last_30_days],
+        ['Modules Started', r.progress.modules_started],
+        ['Modules Completed', r.progress.modules_completed],
+        ['Completion Rate %', r.progress.completion_rate_percent],
+        ['Avg Time (min)', r.progress.avg_time_per_module_minutes],
+        ['Codes Generated', r.access_codes.total_generated],
+        ['Codes Redeemed', r.access_codes.redeemed],
+        ['Codes Available', r.access_codes.still_available],
+    ];
+    downloadCSV(`${r.tenant_slug}-report-${new Date().toISOString().slice(0,10)}.csv`, rows);
+}
+
+// ── Access Codes ──────────────────────────────────────────────────
+let currentCodes = [];
+
+function viewCodes(slug) {
+    navigate('codes');
+    document.getElementById('codes-tenant-select').value = slug;
+    loadCodes(slug);
+}
+
+async function loadCodes(slug) {
+    if (!slug) { document.getElementById('codes-content').classList.add('hidden'); return; }
+    try {
+        const data = await api(`/tenants/${slug}/access-codes?active_only=false`);
+        currentCodes = data.codes || [];
+        const tenant = TENANTS.find(t => t.slug === slug);
+        document.getElementById('codes-content').classList.remove('hidden');
+
+        // Print-ready cards (only unredeemed)
+        const available = currentCodes.filter(c => c.is_active && c.times_used < c.max_uses);
+        document.getElementById('codes-grid').innerHTML = available.map(c => `
+            <div class="code-card">
+                <div class="org">${esc(tenant?.name || slug)}</div>
+                <div class="code">${esc(c.code)}</div>
+                <div class="instructions">Visit financiallysovereign.academy<br>Enter this code to start learning</div>
+            </div>`).join('');
+
+        // Table
+        document.getElementById('codes-table').innerHTML = currentCodes.map(c => {
+            const used = c.times_used >= c.max_uses;
+            const expired = c.expires_at && new Date(c.expires_at) < new Date();
+            const status = !c.is_active ? '<span class="badge badge-red">Revoked</span>'
+                : used ? '<span class="badge badge-orange">Used</span>'
+                : expired ? '<span class="badge badge-red">Expired</span>'
+                : '<span class="badge badge-green">Available</span>';
+            return `<tr>
+                <td><code style="color:var(--green);font-size:1rem;letter-spacing:0.1em">${esc(c.code)}</code></td>
+                <td>${esc(c.label || '—')}</td>
+                <td>${status}</td>
+                <td>${c.times_used}/${c.max_uses}</td>
+                <td>${c.expires_at ? new Date(c.expires_at).toLocaleDateString() : '—'}</td>
+                <td>${c.is_active ? `<button class="btn btn-danger btn-sm" onclick="revokeCode('${slug}','${c.code}')">Revoke</button>` : ''}</td>
+            </tr>`;
+        }).join('');
+    } catch (e) { toast(e.message, 'error'); }
+}
+
+async function generateCodes() {
+    const slug = document.getElementById('gc-tenant').value;
+    if (!slug) { toast('Select a tenant first', 'error'); return; }
+    const expires = document.getElementById('gc-expires').value;
+    const body = {
+        count: parseInt(document.getElementById('gc-count').value),
+        label: document.getElementById('gc-label').value || null,
+        expires_at: expires ? new Date(expires).toISOString() : null,
+    };
+    try {
+        const data = await api(`/tenants/${slug}/access-codes`, { method: 'POST', body: JSON.stringify(body) });
+        toast(`${data.count} codes generated!`, 'success');
+        viewCodes(slug);
+    } catch (e) { toast(e.message, 'error'); }
+}
+
+async function revokeCode(slug, code) {
+    if (!confirm(`Revoke code ${code}?`)) return;
+    try {
+        await api(`/tenants/${slug}/access-codes/${code}`, { method: 'DELETE' });
+        toast('Code revoked', 'success');
+        loadCodes(slug);
+    } catch (e) { toast(e.message, 'error'); }
+}
+
+function printCodes() { window.print(); }
+
+function downloadCodes() {
+    if (!currentCodes.length) return;
+    const slug = document.getElementById('codes-tenant-select').value;
+    const rows = [['Code', 'Label', 'Status', 'Used', 'MaxUses', 'Expires', 'Created']];
+    currentCodes.forEach(c => {
+        const used = c.times_used >= c.max_uses;
+        const status = !c.is_active ? 'Revoked' : used ? 'Used' : 'Available';
+        rows.push([c.code, c.label || '', status, c.times_used, c.max_uses,
+            c.expires_at || '', c.created_at || '']);
+    });
+    downloadCSV(`${slug}-codes-${new Date().toISOString().slice(0,10)}.csv`, rows);
+}
+
+// ── Utilities ─────────────────────────────────────────────────────
+function esc(s) { const d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; }
+
+function toast(msg, type = 'success') {
+    const el = document.createElement('div');
+    el.className = 'toast toast-' + type;
+    el.textContent = msg;
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 3500);
+}
+
+function downloadCSV(filename, rows) {
+    const csv = rows.map(r => r.map(v => `"${String(v).replace(/"/g, '""')}"`).join(',')).join('\n');
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = filename;
+    a.click();
+}
+
+// ── Init ──────────────────────────────────────────────────────────
+if (TOKEN) {
+    api('/auth/me').then(() => showApp()).catch(() => logout());
+} else {
+    document.getElementById('login-view').classList.remove('hidden');
+}
+</script>
+</body>
+</html>
