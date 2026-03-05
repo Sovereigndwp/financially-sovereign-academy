@@ -367,7 +367,7 @@
             align-items: center;
             text-align: center;
             background: linear-gradient(135deg, #0a4d3c 0%, #1a5f52 100%);
-            padding: 4rem 2rem 2rem;
+            padding: 8rem 2rem 2rem;
             position: relative;
         }
 
@@ -811,6 +811,23 @@
         @media (prefers-reduced-motion: reduce) {
             * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
         }
+
+        /* Institutional Navigation Header */
+        .inst-header { background: rgba(10,31,26,0.97); backdrop-filter: blur(10px); padding: 0.85rem 0; border-bottom: 2px solid #10b981; position: fixed; width: 100%; top: 0; z-index: 10001; }
+        .inst-header-inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; }
+        .inst-logo { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; color: #e0e0e0; }
+        .inst-logo-icon { width: 34px; height: 34px; background: linear-gradient(135deg,#10b981,#06b6d4); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; font-weight: bold; color: white; }
+        .inst-logo-text { font-size: 1rem; font-weight: bold; }
+        .inst-nav { display: flex; gap: 1.25rem; list-style: none; align-items: center; }
+        .inst-nav-link { color: #9ca3af; text-decoration: none; font-weight: 500; font-size: 0.88rem; transition: color 0.2s; }
+        .inst-nav-link:hover { color: #10b981; }
+        .inst-nav-cta { background: linear-gradient(135deg,#10b981,#06b6d4); padding: 0.45rem 1.1rem; border-radius: 16px; color: white !important; font-weight: 600; font-size: 0.85rem; }
+        .inst-dropdown { position: relative; }
+        .inst-dropdown .inst-menu { position: absolute; top: calc(100% + 10px); left: 0; background: #0f2922; border: 1px solid rgba(16,185,129,0.25); border-radius: 10px; padding: 0.4rem; min-width: 230px; opacity: 0; visibility: hidden; transform: translateY(-8px); transition: all 0.25s; z-index: 10002; box-shadow: 0 8px 24px rgba(0,0,0,0.5); }
+        .inst-dropdown:hover .inst-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+        .inst-menu a { display: flex; align-items: center; gap: 0.4rem; padding: 0.55rem 0.85rem; color: #9ca3af; text-decoration: none; border-radius: 6px; font-size: 0.88rem; transition: all 0.2s; }
+        .inst-menu a:hover { background: rgba(16,185,129,0.1); color: #10b981; }
+        @media (max-width: 900px) { .inst-nav { display: none; } }
     </style>
 </head>
 <body>
@@ -846,23 +863,31 @@
         </defs>
     </svg>
 
-    <!-- Navigation to Hub -->
-    <a href="https://thesovereign.academy" style="position: fixed; top: 1.5rem; left: 1.5rem; color: #10b981; text-decoration: none; z-index: 10000; font-weight: 600; display: flex; align-items: center; gap: 0.5rem; background: rgba(26, 58, 46, 0.9); padding: 0.75rem 1.25rem; border-radius: 0.5rem; border: 2px solid rgba(16, 185, 129, 0.3); backdrop-filter: blur(10px); transition: all 0.3s ease;" onmouseover="this.style.borderColor='#10b981'; this.style.transform='translateX(-4px)';" onmouseout="this.style.borderColor='rgba(16, 185, 129, 0.3)'; this.style.transform='translateX(0)';">
-        <span style="font-size: 1.2rem;">←</span>
-        <span>Sovereign Academy</span>
-    </a>
-    
-    <!-- My Journey Link -->
-    <a href="my-journey.html" style="position: fixed; top: 1.5rem; right: 10.5rem; color: #10b981; text-decoration: none; z-index: 10000; font-weight: 600; display: flex; align-items: center; gap: 0.5rem; background: rgba(26, 58, 46, 0.9); padding: 0.75rem 1.25rem; border-radius: 0.5rem; border: 2px solid rgba(16, 185, 129, 0.3); backdrop-filter: blur(10px); transition: all 0.3s ease;" onmouseover="this.style.borderColor='#10b981'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 20px rgba(16, 185, 129, 0.3)';" onmouseout="this.style.borderColor='rgba(16, 185, 129, 0.3)'; this.style.transform='translateY(0)'; this.style.boxShadow='none';">
-        <span style="font-size: 1.2rem;">🗺️</span>
-        <span>My Journey</span>
-    </a>
-
-    <!-- Calculators Link -->
-    <a href="calculators/" style="position: fixed; top: 1.5rem; right: 1.5rem; color: #10b981; text-decoration: none; z-index: 10000; font-weight: 600; display: flex; align-items: center; gap: 0.5rem; background: rgba(26, 58, 46, 0.9); padding: 0.75rem 1.25rem; border-radius: 0.5rem; border: 2px solid rgba(16, 185, 129, 0.3); backdrop-filter: blur(10px); transition: all 0.3s ease;" onmouseover="this.style.borderColor='#10b981'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 20px rgba(16, 185, 129, 0.3)';" onmouseout="this.style.borderColor='rgba(16, 185, 129, 0.3)'; this.style.transform='translateY(0)'; this.style.boxShadow='none';">
-        <span style="font-size: 1.2rem;">🧮</span>
-        <span>Calculators</span>
-    </a>
+    <!-- Site Header with Institutional Dropdown -->
+    <header class="inst-header">
+        <div class="inst-header-inner">
+            <a href="https://financiallysovereign.academy" class="inst-logo">
+                <div class="inst-logo-icon">💰</div>
+                <span class="inst-logo-text">Financially Sovereign Academy</span>
+            </a>
+            <ul class="inst-nav">
+                <li><a href="https://thesovereign.academy" class="inst-nav-link">← Hub</a></li>
+                <li><a href="my-journey.html" class="inst-nav-link">🗺️ My Journey</a></li>
+                <li><a href="calculators/" class="inst-nav-link">🧮 Calculators</a></li>
+                <li class="inst-dropdown">
+                    <a href="/institutional/" class="inst-nav-link" style="color:#10b981; font-weight:600;">Institutional ▾</a>
+                    <div class="inst-menu">
+                        <a href="/institutional/cities">🏛️ Cities &amp; Municipalities</a>
+                        <a href="/institutional/corporations">🏢 Corporations</a>
+                        <a href="/institutional/wealth-advisors">💼 Wealth Advisors</a>
+                        <a href="/institutional/correctional">🔄 Correctional Facilities</a>
+                        <a href="/institutional/education">🎓 Educational Institutions</a>
+                    </div>
+                </li>
+                <li><a href="https://calendly.com/dalia-thebitcoinadviser/discovery-call" class="inst-nav-link inst-nav-cta">Book Consultation</a></li>
+            </ul>
+        </div>
+    </header>
     
     <!-- Hero Section -->
     <section class="hero">

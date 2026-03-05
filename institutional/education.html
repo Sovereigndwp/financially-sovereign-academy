@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Literacy Curriculum for Schools & Universities | Financially Sovereign Academy</title>
+    <meta name="description" content="Age-appropriate financial education for K-12 and higher education. Standards-aligned curriculum, teacher certification, and measurable outcomes that prepare students for real financial life.">
+    <link rel="canonical" href="https://financiallysovereign.academy/institutional/education">
+    <meta property="og:title" content="Financial Literacy Curriculum for Schools & Universities | Financially Sovereign Academy">
+    <meta property="og:description" content="Age-appropriate financial education for K-12 and higher education. Standards-aligned curriculum, teacher certification, and measurable outcomes that prepare students for real financial life.">
+    <meta property="og:url" content="https://financiallysovereign.academy/institutional/education">
+    <style>
+        :root { --primary:#10b981; --dark:#0a1f1a; --dark2:#0f2922; --light:#e0e0e0; --dim:#9ca3af; --grad:linear-gradient(135deg,#10b981,#06b6d4); }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; background:var(--dark); color:var(--light); line-height:1.6; }
+        .header { background:rgba(10,31,26,0.97); backdrop-filter:blur(10px); padding:1rem 0; border-bottom:2px solid var(--primary); position:fixed; width:100%; top:0; z-index:1000; }
+        .header-content { max-width:1200px; margin:0 auto; padding:0 2rem; display:flex; justify-content:space-between; align-items:center; }
+        .logo { display:flex; align-items:center; gap:0.75rem; text-decoration:none; color:var(--light); }
+        .logo-icon { width:38px; height:38px; background:var(--grad); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.3rem; font-weight:bold; color:white; }
+        .logo-text { font-size:1.1rem; font-weight:bold; }
+        .nav-links { display:flex; gap:1.5rem; list-style:none; align-items:center; }
+        .nav-link { color:var(--dim); text-decoration:none; transition:color 0.2s; font-weight:500; font-size:0.95rem; }
+        .nav-link:hover { color:var(--primary); }
+        .cta-nav { background:var(--grad); padding:0.5rem 1.2rem; border-radius:20px; color:white!important; font-weight:600; }
+        .nav-dropdown { position:relative; }
+        .nav-dropdown .dropdown-menu { position:absolute; top:calc(100% + 10px); left:0; background:var(--dark2); border:1px solid rgba(16,185,129,0.25); border-radius:10px; padding:0.5rem; min-width:220px; opacity:0; visibility:hidden; transform:translateY(-8px); transition:all 0.25s; z-index:1000; box-shadow:0 8px 24px rgba(0,0,0,0.5); }
+        .nav-dropdown:hover .dropdown-menu { opacity:1; visibility:visible; transform:translateY(0); }
+        .dropdown-menu a { display:flex; align-items:center; gap:0.5rem; padding:0.6rem 1rem; color:var(--dim); text-decoration:none; border-radius:6px; font-size:0.9rem; transition:all 0.2s; }
+        .dropdown-menu a:hover { background:rgba(16,185,129,0.1); color:var(--primary); }
+        .hero { padding:8rem 2rem 5rem; text-align:center; position:relative; }
+        .hero-content { max-width:820px; margin:0 auto; position:relative; z-index:1; }
+        .badge { display:inline-block; padding:0.4rem 1rem; border-radius:20px; font-size:0.82rem; font-weight:600; margin-bottom:1.5rem; letter-spacing:0.5px; background:rgba(16,185,129,0.15); border:1px solid rgba(16,185,129,0.4); color:#6ee7b7; }
+        .hero h1 { font-size:clamp(2.2rem,4.5vw,3.2rem); font-weight:700; margin-bottom:1.25rem; line-height:1.15; }
+        .hero h1 span { background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+        .hero p.sub { font-size:1.15rem; color:var(--dim); max-width:680px; margin:0 auto 2.5rem; }
+        .stats-row { display:flex; justify-content:center; gap:3rem; flex-wrap:wrap; margin:2rem 0; padding:2rem 0; border-top:1px solid rgba(16,185,129,0.2); border-bottom:1px solid rgba(16,185,129,0.2); }
+        .stat { text-align:center; }
+        .stat-n { font-size:2.2rem; font-weight:800; color:var(--primary); display:block; }
+        .stat-l { font-size:0.82rem; color:var(--dim); text-transform:uppercase; letter-spacing:0.5px; margin-top:0.2rem; }
+        .ctas { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; margin-top:2rem; }
+        .btn-p { display:inline-block; padding:1rem 2.5rem; background:var(--grad); color:white; text-decoration:none; border-radius:50px; font-weight:700; font-size:1rem; transition:all 0.3s; box-shadow:0 4px 20px rgba(16,185,129,0.4); }
+        .btn-p:hover { transform:translateY(-2px); box-shadow:0 8px 30px rgba(16,185,129,0.55); }
+        .btn-s { display:inline-block; padding:1rem 2.5rem; background:transparent; color:var(--light); text-decoration:none; border:2px solid rgba(224,224,224,0.2); border-radius:50px; font-weight:700; font-size:1rem; transition:all 0.3s; }
+        .btn-s:hover { border-color:var(--primary); color:var(--primary); }
+        section { padding:5rem 2rem; }
+        .inner { max-width:1100px; margin:0 auto; }
+        h2.sec-t { font-size:2.1rem; text-align:center; margin-bottom:1rem; }
+        p.sec-sub { text-align:center; color:var(--dim); font-size:1.05rem; max-width:700px; margin:0 auto 3rem; }
+        .dark-bg { background:var(--dark2); }
+        .grid-2 { display:grid; grid-template-columns:repeat(2,1fr); gap:1.75rem; }
+        .grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:1.75rem; }
+        .card { background:rgba(16,185,129,0.06); border:1px solid rgba(16,185,129,0.2); border-radius:12px; padding:1.75rem; transition:all 0.3s; }
+        .card:hover { transform:translateY(-4px); border-color:var(--primary); }
+        .card h3 { color:var(--primary); font-size:1.05rem; margin-bottom:0.75rem; }
+        .card p { color:var(--dim); font-size:0.9rem; }
+        .prog-card { background:rgba(16,185,129,0.05); border:2px solid rgba(16,185,129,0.2); border-radius:14px; padding:2rem; position:relative; transition:all 0.3s; }
+        .prog-card.feat { border-color:var(--primary); }
+        .prog-card.feat::before { content:'RECOMMENDED'; position:absolute; top:-11px; left:50%; transform:translateX(-50%); background:var(--primary); color:white; font-size:0.72rem; font-weight:700; padding:0.25rem 0.9rem; border-radius:12px; }
+        .prog-card:hover { transform:translateY(-4px); border-color:var(--primary); }
+        .prog-card h3 { color:var(--primary); font-size:1.05rem; margin-bottom:0.5rem; text-align:center; }
+        .prog-card .icon { font-size:2.5rem; text-align:center; display:block; margin-bottom:1rem; }
+        .prog-card p { color:var(--dim); font-size:0.88rem; text-align:center; margin-bottom:1.25rem; }
+        .prog-card ul { list-style:none; }
+        .prog-card ul li { color:var(--dim); font-size:0.88rem; padding:0.3rem 0 0.3rem 1.2rem; position:relative; }
+        .prog-card ul li::before { content:'✓'; position:absolute; left:0; color:var(--primary); font-size:0.82rem; }
+        .cta-section { padding:5rem 2rem; background:linear-gradient(135deg,#0a4d3c,#1a5f52); text-align:center; }
+        .cta-section h2 { font-size:2.1rem; margin-bottom:1rem; }
+        .cta-section p { color:rgba(224,224,224,0.8); font-size:1.05rem; max-width:620px; margin:0 auto 2.5rem; }
+        .contact-row { display:flex; gap:2rem; justify-content:center; flex-wrap:wrap; margin-top:1.5rem; }
+        .contact-row span { color:rgba(224,224,224,0.7); font-size:0.92rem; }
+        .contact-row a { color:#6ee7b7; text-decoration:none; }
+        .contact-row a:hover { text-decoration:underline; }
+        footer { padding:2rem; background:var(--dark); text-align:center; border-top:1px solid rgba(16,185,129,0.15); }
+        footer p { color:var(--dim); font-size:0.83rem; margin-top:0.75rem; }
+        .footer-links { display:flex; justify-content:center; gap:2rem; flex-wrap:wrap; margin-bottom:0.5rem; }
+        .footer-links a { color:var(--dim); text-decoration:none; font-size:0.83rem; }
+        .footer-links a:hover { color:var(--primary); }
+        @media (max-width:768px) { .grid-2,.grid-3 { grid-template-columns:1fr; } .nav-links { display:none; } .hero h1 { font-size:2rem; } .ctas { flex-direction:column; align-items:center; } }
+</style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="https://financiallysovereign.academy" class="logo">
+                <div class="logo-icon">&#x1F4B0;</div>
+                <span class="logo-text">Financially Sovereign Academy</span>
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="https://financiallysovereign.academy" class="nav-link">Home</a></li>
+                    <li><a href="https://financiallysovereign.academy/#modules" class="nav-link">Modules</a></li>
+                    <li class="nav-dropdown">
+                        <a href="/institutional/" class="nav-link">Institutional &#x25BE;</a>
+                        <div class="dropdown-menu">
+                            <a href="/institutional/cities">&#x1F3DB;&#xFE0F; Cities &amp; Municipalities</a>
+                            <a href="/institutional/corporations">&#x1F3E2; Corporations</a>
+                            <a href="/institutional/wealth-advisors">&#x1F4BC; Wealth Advisors</a>
+                            <a href="/institutional/correctional">&#x1F504; Correctional Facilities</a>
+                            <a href="/institutional/education">&#x1F393; Educational Institutions</a>
+                        </div>
+                    </li>
+                    <li><a href="mailto:dalia@thesovereign.academy" class="nav-link">Contact</a></li>
+                    <li><a href="https://calendly.com/dalia-thebitcoinadviser/discovery-call" class="nav-link cta-nav">Book Consultation</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="badge">🎓 FOR EDUCATIONAL INSTITUTIONS</div>
+            <h1>Financial Skills That <span>Actually Prepare Students for Life.</span></h1>
+            <p class="sub">Fewer than 25% of young adults demonstrate basic financial literacy. Schools and universities that teach real-world money skills create measurably better outcomes — and students who graduate truly prepared.</p>
+            <div class="stats-row">
+                <div class="stat"><span class="stat-n">25%</span><span class="stat-l">Young adults with basic financial literacy</span></div>
+                <div class="stat"><span class="stat-n">3x</span><span class="stat-l">Better financial outcomes with early education</span></div>
+                <div class="stat"><span class="stat-n">44</span><span class="stat-l">States now require personal finance coursework</span></div>
+            </div>
+            <div class="ctas">
+                <a href="https://calendly.com/dalia-thebitcoinadviser/discovery-call" class="btn-p">Schedule Free Consultation</a>
+                <a href="#programs" class="btn-s">Explore Programs</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="dark-bg">
+        <div class="inner">
+            <h2 class="sec-t">The Financial Literacy Challenge You Face</h2>
+            <p class="sec-sub">Understanding the specific pressure points helps us design the right educational program for your organization.</p>
+            <div class="grid-2">
+                <div class="card"><h3>📚 Outdated or Missing Curriculum</h3><p>Most financial literacy content in schools was written decades ago and doesn't address modern money realities: gig economy income, digital payments, student loan crisis, investing apps, and inflation dynamics.</p></div>
+                <div class="card"><h3>👨‍🏫 Untrained Teachers</h3><p>Teachers assigned to teach personal finance often have no training in the subject. Without educator support and curriculum, even well-intentioned financial education produces poor outcomes.</p></div>
+                <div class="card"><h3>💳 Student Debt Without Financial Context</h3><p>Students take on $30,000-$100,000 in student loans without understanding interest, amortization, or lifetime cost implications. Financial literacy taught before borrowing decisions changes this outcome.</p></div>
+                <div class="card"><h3>🌐 Disconnect Between Classroom and Real Life</h3><p>Students learn about checking accounts in theory but never practice real budgeting, tax filing, or investment decisions — leaving them financially illiterate despite technically receiving financial education.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="programs">
+        <div class="inner">
+            <h2 class="sec-t">Three Focused Financial Literacy Programs</h2>
+            <p class="sec-sub">Choose the engagement model that fits your timeline and goals. All programs include live facilitation, materials, and 90-day follow-up support.</p>
+            <div class="grid-3">
+                <div class="prog-card feat">
+                    <span class="icon">📗</span>
+                    <h3>K-12 Financial Literacy Curriculum</h3>
+                    <p>Age-appropriate modules for elementary through high school</p>
+                    <ul><li>Grades K-5: Money basics, earning, saving, and sharing</li>
+<li>Grades 6-8: Budgeting, banking, and credit foundations</li>
+<li>Grades 9-12: Investing, taxes, debt, and life planning</li>
+<li>Standards alignment (Common Core, NGSS compatible)</li>
+<li>Assessment rubrics and learning objective mapping</li>
+<li>Digital and print materials for all learning environments</li></ul>
+                </div>
+                <div class="prog-card">
+                    <span class="icon">🎓</span>
+                    <h3>College Financial Literacy Program</h3>
+                    <p>Practical curriculum for first-year and transfer students</p>
+                    <ul><li>Student loan literacy: what you owe and how to minimize it</li>
+<li>First paycheck: taxes, withholding, and take-home pay</li>
+<li>Credit cards: how to use them without destroying your credit</li>
+<li>Budgeting on a student income</li>
+<li>Investing your first dollar: Roth IRA, index funds</li>
+<li>First job: negotiating salary and evaluating benefits</li></ul>
+                </div>
+                <div class="prog-card">
+                    <span class="icon">👨‍🏫</span>
+                    <h3>Teacher Certification & Training</h3>
+                    <p>Professional development for educators teaching financial literacy</p>
+                    <ul><li>40-hour financial literacy educator certification program</li>
+<li>Classroom facilitation techniques for money conversations</li>
+<li>Using real-world scenarios and current events</li>
+<li>Assessment design and measuring learning outcomes</li>
+<li>Module-by-module teaching guides and answer keys</li>
+<li>Ongoing curriculum update access as financial landscape evolves</li></ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="dark-bg">
+        <div class="inner">
+            <h2 class="sec-t">What Every Program Includes</h2>
+            <div class="grid-3" style="margin-top:2.5rem;">
+                <div class="card"><h3>📋 Standards-Aligned Materials</h3><p>Curriculum mapped to Common Core, NGSS, and state personal finance standards — making adoption straightforward and satisfying compliance requirements.</p></div>
+                <div class="card"><h3>🎤 Guest Practitioner Network</h3><p>Access our network of financial professionals for guest classroom sessions, career day panels, and virtual Q&A sessions with real-world practitioners.</p></div>
+                <div class="card"><h3>📊 Learning Outcome Assessment</h3><p>Pre-built quizzes, project rubrics, and summative assessments designed for both formative evaluation and demonstrating program effectiveness to administrators.</p></div>
+                <div class="card"><h3>🤝 Ongoing Curriculum Support</h3><p>Annual curriculum updates as the financial landscape evolves, plus access to our educator community for sharing best practices and classroom resources.</p></div>
+                <div class="card"><h3>💡 Interactive Simulations</h3><p>Built-in online calculators, budget simulators, and investment compound growth tools that turn abstract concepts into hands-on, memorable learning experiences.</p></div>
+                <div class="card"><h3>🏆 Student Financial Literacy Certification</h3><p>Completion certificates for students who master the curriculum — a credential that demonstrates practical financial knowledge to colleges and employers.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <h2>Ready to Give Your Students Real Financial Life Skills?</h2>
+        <p>Schedule a free consultation to design a financial literacy program that fits your grade levels, curriculum structure, and state requirements.</p>
+        <a href="https://calendly.com/dalia-thebitcoinadviser/discovery-call" class="btn-p">Schedule Free Consultation</a>
+        <div class="contact-row">
+            <span>&#x1F4E7; <a href="mailto:dalia@thesovereign.academy">dalia@thesovereign.academy</a></span>
+            <span>&#x1F310; <a href="https://thesovereign.academy">thesovereign.academy</a></span>
+        </div>
+    </section>
+
+        <footer>
+        <div class="footer-links">
+            <a href="https://financiallysovereign.academy">Financially Sovereign Academy</a>
+            <a href="https://bitcoinsovereign.academy">Bitcoin Sovereign Academy</a>
+            <a href="https://thesovereign.academy">The Sovereign Academy</a>
+            <a href="/institutional/">All Institutional Programs</a>
+        </div>
+        <p>&copy; 2026 The Sovereign Academy &middot; Educational content only &middot; Not financial advice</p>
+    </footer>
+</body>
+</html>

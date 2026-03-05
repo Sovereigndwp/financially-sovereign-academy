@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Literacy for Correctional Reentry Programs | Financially Sovereign Academy</title>
+    <meta name="description" content="Reduce recidivism with practical financial education. Evidence-based money management programs for returning citizens covering banking, credit, budgeting, and employment finance.">
+    <link rel="canonical" href="https://financiallysovereign.academy/institutional/correctional">
+    <meta property="og:title" content="Financial Literacy for Correctional Reentry Programs | Financially Sovereign Academy">
+    <meta property="og:description" content="Reduce recidivism with practical financial education. Evidence-based money management programs for returning citizens covering banking, credit, budgeting, and employment finance.">
+    <meta property="og:url" content="https://financiallysovereign.academy/institutional/correctional">
+    <style>
+        :root { --primary:#10b981; --dark:#0a1f1a; --dark2:#0f2922; --light:#e0e0e0; --dim:#9ca3af; --grad:linear-gradient(135deg,#10b981,#06b6d4); }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; background:var(--dark); color:var(--light); line-height:1.6; }
+        .header { background:rgba(10,31,26,0.97); backdrop-filter:blur(10px); padding:1rem 0; border-bottom:2px solid var(--primary); position:fixed; width:100%; top:0; z-index:1000; }
+        .header-content { max-width:1200px; margin:0 auto; padding:0 2rem; display:flex; justify-content:space-between; align-items:center; }
+        .logo { display:flex; align-items:center; gap:0.75rem; text-decoration:none; color:var(--light); }
+        .logo-icon { width:38px; height:38px; background:var(--grad); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.3rem; font-weight:bold; color:white; }
+        .logo-text { font-size:1.1rem; font-weight:bold; }
+        .nav-links { display:flex; gap:1.5rem; list-style:none; align-items:center; }
+        .nav-link { color:var(--dim); text-decoration:none; transition:color 0.2s; font-weight:500; font-size:0.95rem; }
+        .nav-link:hover { color:var(--primary); }
+        .cta-nav { background:var(--grad); padding:0.5rem 1.2rem; border-radius:20px; color:white!important; font-weight:600; }
+        .nav-dropdown { position:relative; }
+        .nav-dropdown .dropdown-menu { position:absolute; top:calc(100% + 10px); left:0; background:var(--dark2); border:1px solid rgba(16,185,129,0.25); border-radius:10px; padding:0.5rem; min-width:220px; opacity:0; visibility:hidden; transform:translateY(-8px); transition:all 0.25s; z-index:1000; box-shadow:0 8px 24px rgba(0,0,0,0.5); }
+        .nav-dropdown:hover .dropdown-menu { opacity:1; visibility:visible; transform:translateY(0); }
+        .dropdown-menu a { display:flex; align-items:center; gap:0.5rem; padding:0.6rem 1rem; color:var(--dim); text-decoration:none; border-radius:6px; font-size:0.9rem; transition:all 0.2s; }
+        .dropdown-menu a:hover { background:rgba(16,185,129,0.1); color:var(--primary); }
+        .hero { padding:8rem 2rem 5rem; text-align:center; position:relative; }
+        .hero-content { max-width:820px; margin:0 auto; position:relative; z-index:1; }
+        .badge { display:inline-block; padding:0.4rem 1rem; border-radius:20px; font-size:0.82rem; font-weight:600; margin-bottom:1.5rem; letter-spacing:0.5px; background:rgba(16,185,129,0.15); border:1px solid rgba(16,185,129,0.4); color:#6ee7b7; }
+        .hero h1 { font-size:clamp(2.2rem,4.5vw,3.2rem); font-weight:700; margin-bottom:1.25rem; line-height:1.15; }
+        .hero h1 span { background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+        .hero p.sub { font-size:1.15rem; color:var(--dim); max-width:680px; margin:0 auto 2.5rem; }
+        .stats-row { display:flex; justify-content:center; gap:3rem; flex-wrap:wrap; margin:2rem 0; padding:2rem 0; border-top:1px solid rgba(16,185,129,0.2); border-bottom:1px solid rgba(16,185,129,0.2); }
+        .stat { text-align:center; }
+        .stat-n { font-size:2.2rem; font-weight:800; color:var(--primary); display:block; }
+        .stat-l { font-size:0.82rem; color:var(--dim); text-transform:uppercase; letter-spacing:0.5px; margin-top:0.2rem; }
+        .ctas { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; margin-top:2rem; }
+        .btn-p { display:inline-block; padding:1rem 2.5rem; background:var(--grad); color:white; text-decoration:none; border-radius:50px; font-weight:700; font-size:1rem; transition:all 0.3s; box-shadow:0 4px 20px rgba(16,185,129,0.4); }
+        .btn-p:hover { transform:translateY(-2px); box-shadow:0 8px 30px rgba(16,185,129,0.55); }
+        .btn-s { display:inline-block; padding:1rem 2.5rem; background:transparent; color:var(--light); text-decoration:none; border:2px solid rgba(224,224,224,0.2); border-radius:50px; font-weight:700; font-size:1rem; transition:all 0.3s; }
+        .btn-s:hover { border-color:var(--primary); color:var(--primary); }
+        section { padding:5rem 2rem; }
+        .inner { max-width:1100px; margin:0 auto; }
+        h2.sec-t { font-size:2.1rem; text-align:center; margin-bottom:1rem; }
+        p.sec-sub { text-align:center; color:var(--dim); font-size:1.05rem; max-width:700px; margin:0 auto 3rem; }
+        .dark-bg { background:var(--dark2); }
+        .grid-2 { display:grid; grid-template-columns:repeat(2,1fr); gap:1.75rem; }
+        .grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:1.75rem; }
+        .card { background:rgba(16,185,129,0.06); border:1px solid rgba(16,185,129,0.2); border-radius:12px; padding:1.75rem; transition:all 0.3s; }
+        .card:hover { transform:translateY(-4px); border-color:var(--primary); }
+        .card h3 { color:var(--primary); font-size:1.05rem; margin-bottom:0.75rem; }
+        .card p { color:var(--dim); font-size:0.9rem; }
+        .prog-card { background:rgba(16,185,129,0.05); border:2px solid rgba(16,185,129,0.2); border-radius:14px; padding:2rem; position:relative; transition:all 0.3s; }
+        .prog-card.feat { border-color:var(--primary); }
+        .prog-card.feat::before { content:'RECOMMENDED'; position:absolute; top:-11px; left:50%; transform:translateX(-50%); background:var(--primary); color:white; font-size:0.72rem; font-weight:700; padding:0.25rem 0.9rem; border-radius:12px; }
+        .prog-card:hover { transform:translateY(-4px); border-color:var(--primary); }
+        .prog-card h3 { color:var(--primary); font-size:1.05rem; margin-bottom:0.5rem; text-align:center; }
+        .prog-card .icon { font-size:2.5rem; text-align:center; display:block; margin-bottom:1rem; }
+        .prog-card p { color:var(--dim); font-size:0.88rem; text-align:center; margin-bottom:1.25rem; }
+        .prog-card ul { list-style:none; }
+        .prog-card ul li { color:var(--dim); font-size:0.88rem; padding:0.3rem 0 0.3rem 1.2rem; position:relative; }
+        .prog-card ul li::before { content:'✓'; position:absolute; left:0; color:var(--primary); font-size:0.82rem; }
+        .cta-section { padding:5rem 2rem; background:linear-gradient(135deg,#0a4d3c,#1a5f52); text-align:center; }
+        .cta-section h2 { font-size:2.1rem; margin-bottom:1rem; }
+        .cta-section p { color:rgba(224,224,224,0.8); font-size:1.05rem; max-width:620px; margin:0 auto 2.5rem; }
+        .contact-row { display:flex; gap:2rem; justify-content:center; flex-wrap:wrap; margin-top:1.5rem; }
+        .contact-row span { color:rgba(224,224,224,0.7); font-size:0.92rem; }
+        .contact-row a { color:#6ee7b7; text-decoration:none; }
+        .contact-row a:hover { text-decoration:underline; }
+        footer { padding:2rem; background:var(--dark); text-align:center; border-top:1px solid rgba(16,185,129,0.15); }
+        footer p { color:var(--dim); font-size:0.83rem; margin-top:0.75rem; }
+        .footer-links { display:flex; justify-content:center; gap:2rem; flex-wrap:wrap; margin-bottom:0.5rem; }
+        .footer-links a { color:var(--dim); text-decoration:none; font-size:0.83rem; }
+        .footer-links a:hover { color:var(--primary); }
+        @media (max-width:768px) { .grid-2,.grid-3 { grid-template-columns:1fr; } .nav-links { display:none; } .hero h1 { font-size:2rem; } .ctas { flex-direction:column; align-items:center; } }
+</style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="https://financiallysovereign.academy" class="logo">
+                <div class="logo-icon">&#x1F4B0;</div>
+                <span class="logo-text">Financially Sovereign Academy</span>
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="https://financiallysovereign.academy" class="nav-link">Home</a></li>
+                    <li><a href="https://financiallysovereign.academy/#modules" class="nav-link">Modules</a></li>
+                    <li class="nav-dropdown">
+                        <a href="/institutional/" class="nav-link">Institutional &#x25BE;</a>
+                        <div class="dropdown-menu">
+                            <a href="/institutional/cities">&#x1F3DB;&#xFE0F; Cities &amp; Municipalities</a>
+                            <a href="/institutional/corporations">&#x1F3E2; Corporations</a>
+                            <a href="/institutional/wealth-advisors">&#x1F4BC; Wealth Advisors</a>
+                            <a href="/institutional/correctional">&#x1F504; Correctional Facilities</a>
+                            <a href="/institutional/education">&#x1F393; Educational Institutions</a>
+                        </div>
+                    </li>
+                    <li><a href="mailto:dalia@thesovereign.academy" class="nav-link">Contact</a></li>
+                    <li><a href="https://calendly.com/dalia-thebitcoinadviser/discovery-call" class="nav-link cta-nav">Book Consultation</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="badge">🔄 FOR CORRECTIONAL & REENTRY PROGRAMS</div>
+            <h1>Break the Financial Cycle. <span>Give Returning Citizens Real Skills.</span></h1>
+            <p class="sub">Over two-thirds of released individuals return to prison within 3 years. Financial instability is a primary driver. Our evidence-based financial literacy programs address the practical money skills needed for successful, permanent reintegration.</p>
+            <div class="stats-row">
+                <div class="stat"><span class="stat-n">68%</span><span class="stat-l">3-year recidivism rate without intervention</span></div>
+                <div class="stat"><span class="stat-n">40%</span><span class="stat-l">Lower recidivism with financial literacy programs</span></div>
+                <div class="stat"><span class="stat-n">78%</span><span class="stat-l">Returning citizens without stable banking access</span></div>
+            </div>
+            <div class="ctas">
+                <a href="https://calendly.com/dalia-thebitcoinadviser/discovery-call" class="btn-p">Schedule Free Consultation</a>
+                <a href="#programs" class="btn-s">Explore Programs</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="dark-bg">
+        <div class="inner">
+            <h2 class="sec-t">The Financial Literacy Challenge You Face</h2>
+            <p class="sec-sub">Understanding the specific pressure points helps us design the right educational program for your organization.</p>
+            <div class="grid-2">
+                <div class="card"><h3>🏦 Banking Access Barriers</h3><p>Returning citizens face systemic barriers to opening bank accounts. Without banking access, they're forced into cash and predatory financial services that drain earnings and create ongoing criminal exposure.</p></div>
+                <div class="card"><h3>💳 Destroyed Credit Histories</h3><p>Many returning citizens have court-ordered debts, unpaid fines, and collection accounts that devastate credit scores — preventing housing rental, employment background checks, and utility deposits.</p></div>
+                <div class="card"><h3>💸 Predatory Financial Targeting</h3><p>Payday lenders, check cashers, and rent-to-own stores disproportionately target recently released individuals, trapping them in high-cost financial products that consume the majority of their income.</p></div>
+                <div class="card"><h3>🧠 No Financial Decision Framework</h3><p>Most returning citizens received no formal financial education. Basic concepts like compound interest, credit utilization, and emergency savings are genuinely unknown — leading to predictable, preventable financial mistakes.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="programs">
+        <div class="inner">
+            <h2 class="sec-t">Three Focused Financial Literacy Programs</h2>
+            <p class="sec-sub">Choose the engagement model that fits your timeline and goals. All programs include live facilitation, materials, and 90-day follow-up support.</p>
+            <div class="grid-3">
+                <div class="prog-card feat">
+                    <span class="icon">🏦</span>
+                    <h3>Banking & Credit Rebuilding</h3>
+                    <p>6-week foundational program (most urgent needs)</p>
+                    <ul><li>Opening a bank account with limited ID or history</li>
+<li>Second-chance bank accounts and credit unions</li>
+<li>Understanding your credit report and disputing errors</li>
+<li>Secured credit cards and credit-building strategies</li>
+<li>Avoiding check cashers, payday lenders, and predatory services</li>
+<li>Direct deposit setup and digital banking basics</li></ul>
+                </div>
+                <div class="prog-card">
+                    <span class="icon">💰</span>
+                    <h3>Budgeting & Emergency Savings</h3>
+                    <p>8-week practical money management curriculum</p>
+                    <ul><li>Tracking income and expenses on a tight budget</li>
+<li>Zero-based budgeting for irregular income</li>
+<li>Building a $500-$1,000 emergency fund from scratch</li>
+<li>Navigating government benefits and work income simultaneously</li>
+<li>Managing court-ordered payments and restitution</li>
+<li>Finding community financial resources and food banks</li></ul>
+                </div>
+                <div class="prog-card">
+                    <span class="icon">🏗️</span>
+                    <h3>Building Financial Independence</h3>
+                    <p>10-week advanced track for motivated participants</p>
+                    <ul><li>Debt elimination strategies and prioritization</li>
+<li>Understanding employment benefits and negotiating pay</li>
+<li>Tax filing as a returning citizen (EITC, refundable credits)</li>
+<li>Starting a small business with limited capital</li>
+<li>Long-term wealth building on a low income</li>
+<li>Homeownership pathways for formerly incarcerated individuals</li></ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="dark-bg">
+        <div class="inner">
+            <h2 class="sec-t">What Every Program Includes</h2>
+            <div class="grid-3" style="margin-top:2.5rem;">
+                <div class="card"><h3>📝 Plain-Language Materials</h3><p>All curriculum written at an 8th-grade reading level with visual guides and real-world scenarios — accessible to participants with varying education levels and learning styles.</p></div>
+                <div class="card"><h3>🎤 Peer Facilitation Training</h3><p>We train formerly incarcerated facilitators to co-lead programs — creating credibility, cultural relevance, and employment opportunities simultaneously.</p></div>
+                <div class="card"><h3>📊 Outcome Tracking & Reporting</h3><p>Pre/post assessments, 6-month and 12-month post-release follow-up surveys, and a formal outcomes report for funders, courts, and program administrators.</p></div>
+                <div class="card"><h3>🤝 Reentry Partner Network</h3><p>Program connects participants to local credit unions offering second-chance accounts, CDFIs offering microloans, and workforce development programs — bridging education to action.</p></div>
+                <div class="card"><h3>📋 Funder & Grant Documentation</h3><p>Complete documentation package for grant applications: program curriculum, outcome metrics, evidence base citations, and previous program results.</p></div>
+                <div class="card"><h3>🏛️ Facility Integration Support</h3><p>Curriculum designed to work within correctional facility constraints — no internet required, suitable for tablet or paper delivery, compatible with security protocols.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <h2>Ready to Reduce Recidivism Through Financial Education?</h2>
+        <p>Schedule a free consultation to design a program that fits your facility's population, available resources, and reentry goals.</p>
+        <a href="https://calendly.com/dalia-thebitcoinadviser/discovery-call" class="btn-p">Schedule Free Consultation</a>
+        <div class="contact-row">
+            <span>&#x1F4E7; <a href="mailto:dalia@thesovereign.academy">dalia@thesovereign.academy</a></span>
+            <span>&#x1F310; <a href="https://thesovereign.academy">thesovereign.academy</a></span>
+        </div>
+    </section>
+
+        <footer>
+        <div class="footer-links">
+            <a href="https://financiallysovereign.academy">Financially Sovereign Academy</a>
+            <a href="https://bitcoinsovereign.academy">Bitcoin Sovereign Academy</a>
+            <a href="https://thesovereign.academy">The Sovereign Academy</a>
+            <a href="/institutional/">All Institutional Programs</a>
+        </div>
+        <p>&copy; 2026 The Sovereign Academy &middot; Educational content only &middot; Not financial advice</p>
+    </footer>
+</body>
+</html>

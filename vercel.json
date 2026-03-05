@@ -1,3 +1,21 @@
 {
-  "alias": ["financiallysovereign.academy"]
+  "alias": ["financiallysovereign.academy"],
+  "rewrites": [
+    {
+      "source": "/institutional",
+      "destination": "/institutional/index.html"
+    },
+    {
+      "source": "/institutional/",
+      "destination": "/institutional/index.html"
+    },
+    {
+      "source": "/institutional/:page",
+      "destination": "/institutional/:page.html"
+    },
+    {
+      "source": "/institutional/:page/",
+      "destination": "/institutional/:page.html"
+    }
+  ]
 }
