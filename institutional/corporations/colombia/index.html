@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programa de Estabilidad Financiera para Empresas | Financially Sovereign Academy</title>
+    <meta name="description" content="Programa empresarial de educación financiera práctica para equipos colombianos. Ayuda a los trabajadores a comprender cómo la inflación y los cambios económicos afectan las finanzas familiares.">
+    <link rel="canonical" href="https://financiallysovereign.academy/institutional/corporations/colombia">
+    <style>
+        :root { --primary:#dc2626; --dark:#0a1f1a; --dark2:#0f2922; --light:#e0e0e0; --dim:#9ca3af; --grad:linear-gradient(135deg,#dc2626,#d97706); }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; background:var(--dark); color:var(--light); line-height:1.6; }
+        .header { background:rgba(10,31,26,0.97); backdrop-filter:blur(10px); padding:1rem 0; border-bottom:2px solid var(--primary); position:fixed; width:100%; top:0; z-index:1000; }
+        .header-content { max-width:1200px; margin:0 auto; padding:0 2rem; display:flex; justify-content:space-between; align-items:center; }
+        .logo { display:flex; align-items:center; gap:0.75rem; text-decoration:none; color:var(--light); }
+        .logo-icon { width:38px; height:38px; background:var(--grad); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.3rem; font-weight:bold; color:white; }
+        .logo-text { font-size:1.1rem; font-weight:bold; }
+        .nav-links { display:flex; gap:1.5rem; list-style:none; align-items:center; }
+        .nav-link { color:var(--dim); text-decoration:none; transition:color 0.2s; font-weight:500; font-size:0.95rem; }
+        .nav-link:hover { color:var(--primary); }
+        .cta-nav { background:var(--grad); padding:0.5rem 1.2rem; border-radius:20px; color:white!important; font-weight:600; }
+        .hero { padding:8rem 2rem 5rem; text-align:center; position:relative; }
+        .hero-content { max-width:820px; margin:0 auto; position:relative; z-index:1; }
+        .badge { display:inline-block; padding:0.4rem 1rem; border-radius:20px; font-size:0.82rem; font-weight:600; margin-bottom:1.5rem; letter-spacing:0.5px; background:rgba(220,38,38,0.15); border:1px solid rgba(220,38,38,0.4); color:#fca5a5; }
+        .hero h1 { font-size:clamp(2.2rem,4.5vw,3.2rem); font-weight:700; margin-bottom:1.25rem; line-height:1.15; }
+        .hero h1 span { background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+        .hero p.sub { font-size:1.15rem; color:var(--dim); max-width:680px; margin:0 auto 2.5rem; }
+        .stats-row { display:flex; justify-content:center; gap:3rem; flex-wrap:wrap; margin:2rem 0; padding:2rem 0; border-top:1px solid rgba(220,38,38,0.2); border-bottom:1px solid rgba(220,38,38,0.2); }
+        .stat { text-align:center; }
+        .stat-n { font-size:2.2rem; font-weight:800; color:var(--primary); display:block; }
+        .stat-l { font-size:0.82rem; color:var(--dim); text-transform:uppercase; letter-spacing:0.5px; margin-top:0.2rem; }
+        .ctas { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; margin-top:2rem; }
+        .btn-p { display:inline-block; padding:1rem 2.5rem; background:var(--grad); color:white; text-decoration:none; border-radius:50px; font-weight:700; font-size:1rem; transition:all 0.3s; box-shadow:0 4px 20px rgba(220,38,38,0.4); }
+        .btn-p:hover { transform:translateY(-2px); box-shadow:0 8px 30px rgba(220,38,38,0.55); }
+        .btn-s { display:inline-block; padding:1rem 2.5rem; background:transparent; color:var(--light); text-decoration:none; border:2px solid rgba(224,224,224,0.2); border-radius:50px; font-weight:700; font-size:1rem; transition:all 0.3s; }
+        .btn-s:hover { border-color:var(--primary); color:var(--primary); }
+        section { padding:5rem 2rem; }
+        .inner { max-width:1100px; margin:0 auto; }
+        h2.sec-t { font-size:2.1rem; text-align:center; margin-bottom:1rem; }
+        p.sec-sub { text-align:center; color:var(--dim); font-size:1.05rem; max-width:700px; margin:0 auto 3rem; }
+        .dark-bg { background:var(--dark2); }
+        .grid-2 { display:grid; grid-template-columns:repeat(2,1fr); gap:1.75rem; }
+        .grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:1.75rem; }
+        .card { background:rgba(220,38,38,0.06); border:1px solid rgba(220,38,38,0.2); border-radius:12px; padding:1.75rem; transition:all 0.3s; }
+        .card:hover { transform:translateY(-4px); border-color:var(--primary); }
+        .card h3 { color:var(--primary); font-size:1.05rem; margin-bottom:0.75rem; }
+        .card p { color:var(--dim); font-size:0.9rem; }
+        .collapsible { background:rgba(220,38,38,0.05); border:1px solid rgba(220,38,38,0.2); border-radius:12px; margin:1rem 0; overflow:hidden; }
+        .collapsible-header { padding:1.5rem; cursor:pointer; display:flex; justify-content:space-between; align-items:center; background:rgba(220,38,38,0.08); border-bottom:1px solid rgba(220,38,38,0.1); }
+        .collapsible-header h3 { color:var(--primary); font-size:1.1rem; margin:0; }
+        .collapsible-toggle { color:var(--primary); font-size:1.2rem; transition:transform 0.3s; }
+        .collapsible-content { padding:0; max-height:0; overflow:hidden; transition:all 0.3s ease; }
+        .collapsible-content.active { padding:1.5rem; max-height:1000px; }
+        .collapsible.active .collapsible-toggle { transform:rotate(180deg); }
+        .highlight-box { background:rgba(220,38,38,0.1); border:2px solid var(--primary); border-radius:14px; padding:2rem; margin:2rem 0; }
+        .highlight-box h3 { color:var(--primary); font-size:1.2rem; margin-bottom:1rem; }
+        .cta-section { padding:5rem 2rem; background:linear-gradient(135deg,#7f1d1d,#a16207); text-align:center; }
+        .cta-section h2 { font-size:2.1rem; margin-bottom:1rem; }
+        .cta-section p { color:rgba(224,224,224,0.8); font-size:1.05rem; max-width:620px; margin:0 auto 2.5rem; }
+        .contact-row { display:flex; gap:2rem; justify-content:center; flex-wrap:wrap; margin-top:1.5rem; }
+        .contact-row span { color:rgba(224,224,224,0.7); font-size:0.92rem; }
+        .contact-row a { color:#fca5a5; text-decoration:none; }
+        .contact-row a:hover { text-decoration:underline; }
+        footer { padding:2rem; background:var(--dark); text-align:center; border-top:1px solid rgba(220,38,38,0.15); }
+        footer p { color:var(--dim); font-size:0.83rem; margin-top:0.75rem; }
+        @media (max-width:768px) { .grid-2,.grid-3 { grid-template-columns:1fr; } .nav-links { display:none; } .hero h1 { font-size:2rem; } .ctas { flex-direction:column; align-items:center; } }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="https://financiallysovereign.academy" class="logo">
+                <div class="logo-icon">💰</div>
+                <span class="logo-text">Financially Sovereign Academy</span>
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="https://financiallysovereign.academy" class="nav-link">Inicio</a></li>
+                    <li><a href="/institutional/corporations" class="nav-link">Programas Empresariales</a></li>
+                    <li><a href="mailto:dalia@thesovereign.academy" class="nav-link">Contacto</a></li>
+                    <li><a href="https://calendly.com/dalia-sovereign" class="nav-link cta-nav">Consulta Gratuita</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="badge">🇨🇴 PROGRAMA PARA EMPRESAS COLOMBIANAS</div>
+            <h1><span>Ruta de Estabilidad</span> y Crecimiento Financiero</h1>
+            <p class="sub">Un programa de educación financiera práctica que ayuda a sus empleados a comprender cómo la inflación, los cambios de precios y las decisiones económicas externas afectan las finanzas familiares.</p>
+            <div class="stats-row">
+                <div class="stat"><span class="stat-n">10</span><span class="stat-l">Semanas de contenido práctico</span></div>
+                <div class="stat"><span class="stat-n">100%</span><span class="stat-l">Educación no política</span></div>
+                <div class="stat"><span class="stat-n">85%</span><span class="stat-l">Mejora en claridad financiera</span></div>
+            </div>
+            <div class="ctas">
+                <a href="https://calendly.com/dalia-sovereign" class="btn-p">Agendar Consulta Gratuita</a>
+                <a href="#programa" class="btn-s">Explorar Programa</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="dark-bg">
+        <div class="inner">
+            <h2 class="sec-t">Educación Financiera Práctica y Sin Sesgo Político</h2>
+            <p class="sec-sub">Desarrollado por Financially Sovereign Academy, este programa se enfoca exclusivamente en herramientas prácticas de educación financiera.</p>
+            
+            <div class="highlight-box">
+                <h3>🎯 Enfoque Completamente Neutral</h3>
+                <p>Este programa no promueve ninguna ideología política. Se centra exclusivamente en educación financiera práctica: cómo funcionan los presupuestos, el ahorro, la inversión y cómo las fuerzas económicas externas afectan las decisiones familiares. Los empleados aprenden a navegar el sistema financiero actual, sin agenda política.</p>
+            </div>
+
+            <div class="grid-3">
+                <div class="card">
+                    <h3>📊 Comprensión Económica Real</h3>
+                    <p>Los trabajadores aprenden cómo la inflación, los cambios en tasas de interés y las decisiones del banco central afectan directamente el poder adquisitivo familiar y las decisiones de ahorro.</p>
+                </div>
+                <div class="card">
+                    <h3>🏛️ Respaldo Institucional Sólido</h3>
+                    <p>Creado por Financially Sovereign Academy, una institución educativa especializada en alfabetización financiera práctica con metodología probada internacionalmente.</p>
+                </div>
+                <div class="card">
+                    <h3>🛠️ Herramientas, No Opiniones</h3>
+                    <p>El programa enseña calculadoras, estrategias de presupuesto, conceptos de inversión y planificación financiera — herramientas prácticas que funcionan independientemente de creencias políticas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="programa">
+        <div class="inner">
+            <h2 class="sec-t">Cómo Funciona el Programa</h2>
+            <p class="sec-sub">Contenido estructurado y práctico diseñado para empleados ocupados que necesitan claridad financiera.</p>
+            
+            <div class="collapsible">
+                <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                    <h3>📚 Contenido y Metodología</h3>
+                    <span class="collapsible-toggle">▼</span>
+                </div>
+                <div class="collapsible-content">
+                    <div class="grid-2">
+                        <div>
+                            <h4 style="color:var(--primary); margin-bottom:0.5rem;">Módulos Semanales:</h4>
+                            <ul style="color:var(--dim); line-height:1.8;">
+                                <li>Presupuesto familiar y control de gastos</li>
+                                <li>Comprensión de la inflación y poder adquisitivo</li>
+                                <li>Ahorro de emergencia y metas financieras</li>
+                                <li>Conceptos básicos de inversión</li>
+                                <li>Planificación para gastos mayores</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 style="color:var(--primary); margin-bottom:0.5rem;">Formato de Entrega:</h4>
+                            <ul style="color:var(--dim); line-height:1.8;">
+                                <li>Sesiones de 45 minutos por semana</li>
+                                <li>Materiales digitales y calculadoras</li>
+                                <li>Ejercicios prácticos con casos reales</li>
+                                <li>Acceso posterior a recursos de referencia</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="collapsible">
+                <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                    <h3>🎯 Beneficios para la Empresa</h3>
+                    <span class="collapsible-toggle">▼</span>
+                </div>
+                <div class="collapsible-content">
+                    <div class="grid-2">
+                        <div class="card">
+                            <h3>💼 Reducción del Estrés Financiero</h3>
+                            <p>Empleados con mayor claridad financiera reportan menos distracciones laborales y mejor concentración en el trabajo.</p>
+                        </div>
+                        <div class="card">
+                            <h3>🤝 Beneficio Diferenciador</h3>
+                            <p>La educación financiera es un beneficio valorado que mejora la retención y atrae talento sin costos operativos continuos.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="collapsible">
+                <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                    <h3>⚙️ Implementación Práctica</h3>
+                    <span class="collapsible-toggle">▼</span>
+                </div>
+                <div class="collapsible-content">
+                    <p style="color:var(--dim); margin-bottom:1.5rem;">El programa se adapta al horario de su empresa:</p>
+                    <div class="grid-3">
+                        <div class="card">
+                            <h3>🕐 Horarios Flexibles</h3>
+                            <p>Sesiones matutinas, en horario de almuerzo, o después del trabajo según sus necesidades.</p>
+                        </div>
+                        <div class="card">
+                            <h3>👥 Grupos Manejables</h3>
+                            <p>Máximo 20 participantes por grupo para garantizar interacción y comprensión personalizada.</p>
+                        </div>
+                        <div class="card">
+                            <h3>📱 Acceso Digital</h3>
+                            <p>Materiales accesibles desde cualquier dispositivo para repaso y referencia posterior.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="dark-bg">
+        <div class="inner">
+            <h2 class="sec-t">Lo Que Aprenden Sus Empleados</h2>
+            <p class="sec-sub">Conocimientos prácticos que impactan directamente la estabilidad financiera familiar y el rendimiento laboral.</p>
+            
+            <div class="grid-2">
+                <div class="card">
+                    <h3>💰 Comprensión de Fuerzas Económicas</h3>
+                    <p>Cómo la inflación afecta los precios de alimentos, vivienda y servicios. Por qué los costos suben y cómo planificar para estos cambios sin depender de predicciones políticas o económicas complejas.</p>
+                </div>
+                <div class="card">
+                    <h3>🏠 Planificación de Gastos Mayores</h3>
+                    <p>Estrategias para ahorrar para vivienda, educación de hijos, y gastos médicos considerando escenarios de inflación y cambios en ingresos familiares.</p>
+                </div>
+                <div class="card">
+                    <h3>📈 Protección del Poder Adquisitivo</h3>
+                    <p>Opciones de ahorro e inversión que mantienen valor a lo largo del tiempo, con explicaciones claras sobre riesgo, liquidez y rendimiento esperado.</p>
+                </div>
+                <div class="card">
+                    <h3>⚖️ Toma de Decisiones Financieras</h3>
+                    <p>Marcos de decisión para evaluar créditos, cambios de empleo, y oportunidades de inversión basados en matemáticas simples, no en emociones o presión social.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <h2>¿Listo para Implementar el Programa?</h2>
+        <p>Programe una consulta gratuita para revisar cómo adaptar este programa a las necesidades específicas de su equipo y horarios empresariales.</p>
+        <a href="https://calendly.com/dalia-sovereign" class="btn-p">Agendar Consulta Gratuita</a>
+        <div class="contact-row">
+            <span>📧 <a href="mailto:dalia@thesovereign.academy">dalia@thesovereign.academy</a></span>
+            <span>🌐 <a href="https://financiallysovereign.academy">financiallysovereign.academy</a></span>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Financially Sovereign Academy &middot; Contenido educativo únicamente &middot; No constituye asesoría financiera</p>
+    </footer>
+
+    <script>
+        function toggleCollapsible(header) {
+            const collapsible = header.parentNode;
+            const content = collapsible.querySelector('.collapsible-content');
+            
+            collapsible.classList.toggle('active');
+            content.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
