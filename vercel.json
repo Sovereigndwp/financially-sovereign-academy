@@ -1,5 +1,18 @@
 {
   "alias": ["financiallysovereign.academy"],
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.financiallysovereign.academy"
+        }
+      ],
+      "destination": "https://financiallysovereign.academy/:path*",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/",
