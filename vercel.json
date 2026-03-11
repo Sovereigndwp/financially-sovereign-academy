@@ -51,6 +51,38 @@
       "destination": "https://bitcoinsovereign.academy/institutional/corporations/colombia/ruta-estabilidad-crecimiento/"
     },
     {
+      "source": "/institutional/corporations/colombia/ruta-estabilidad-crecimiento/semana-1",
+      "destination": "https://bitcoinsovereign.academy/institutional/corporations/colombia/ruta-estabilidad-crecimiento/semana-1"
+    },
+    {
+      "source": "/institutional/corporations/colombia/ruta-estabilidad-crecimiento/semana-1/",
+      "destination": "https://bitcoinsovereign.academy/institutional/corporations/colombia/ruta-estabilidad-crecimiento/semana-1/"
+    },
+    {
+      "source": "/institutional/corporations/colombia/ruta-estabilidad-crecimiento/semana-2",
+      "destination": "https://bitcoinsovereign.academy/institutional/corporations/colombia/ruta-estabilidad-crecimiento/semana-2"
+    },
+    {
+      "source": "/institutional/corporations/colombia/ruta-estabilidad-crecimiento/semana-2/",
+      "destination": "https://bitcoinsovereign.academy/institutional/corporations/colombia/ruta-estabilidad-crecimiento/semana-2/"
+    },
+    {
+      "source": "/institutional/corporations/colombia/ruta-estabilidad-crecimiento/semana-4",
+      "destination": "https://bitcoinsovereign.academy/institutional/corporations/colombia/ruta-estabilidad-crecimiento/semana-4"
+    },
+    {
+      "source": "/institutional/corporations/colombia/ruta-estabilidad-crecimiento/semana-4/",
+      "destination": "https://bitcoinsovereign.academy/institutional/corporations/colombia/ruta-estabilidad-crecimiento/semana-4/"
+    },
+    {
+      "source": "/institutional/corporations/colombia/ruta-estabilidad-crecimiento/semana-6",
+      "destination": "https://bitcoinsovereign.academy/institutional/corporations/colombia/ruta-estabilidad-crecimiento/semana-6"
+    },
+    {
+      "source": "/institutional/corporations/colombia/ruta-estabilidad-crecimiento/semana-6/",
+      "destination": "https://bitcoinsovereign.academy/institutional/corporations/colombia/ruta-estabilidad-crecimiento/semana-6/"
+    },
+    {
       "source": "/institutional/corporations/colombia/ruta-estabilidad-crecimiento/:path*",
       "destination": "https://bitcoinsovereign.academy/institutional/corporations/colombia/ruta-estabilidad-crecimiento/:path*"
     },
