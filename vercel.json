@@ -43,6 +43,18 @@
       "destination": "https://bitcoinsovereign.academy/institutional/corporations/colombia/"
     },
     {
+      "source": "/institutional/corporations/colombia/ruta-estabilidad-crecimiento",
+      "destination": "https://bitcoinsovereign.academy/institutional/corporations/colombia/ruta-estabilidad-crecimiento/"
+    },
+    {
+      "source": "/institutional/corporations/colombia/ruta-estabilidad-crecimiento/",
+      "destination": "https://bitcoinsovereign.academy/institutional/corporations/colombia/ruta-estabilidad-crecimiento/"
+    },
+    {
+      "source": "/institutional/corporations/colombia/ruta-estabilidad-crecimiento/:path*",
+      "destination": "https://bitcoinsovereign.academy/institutional/corporations/colombia/ruta-estabilidad-crecimiento/:path*"
+    },
+    {
       "source": "/institutional/corporations/colombia/:path*",
       "destination": "https://bitcoinsovereign.academy/institutional/corporations/colombia/:path*"
     },
