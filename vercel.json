@@ -63,6 +63,10 @@
       "destination": "https://bitcoinsovereign.academy/programa-colombia/"
     },
     {
+      "source": "/programa-colombia/:path/",
+      "destination": "https://bitcoinsovereign.academy/programa-colombia/:path/"
+    },
+    {
       "source": "/programa-colombia/:path*",
       "destination": "https://bitcoinsovereign.academy/programa-colombia/:path*"
     },
