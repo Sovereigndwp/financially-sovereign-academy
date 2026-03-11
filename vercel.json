@@ -35,6 +35,30 @@
   ],
   "rewrites": [
     {
+      "source": "/institutional/corporations/colombia",
+      "destination": "https://bitcoinsovereign.academy/institutional/corporations/colombia/"
+    },
+    {
+      "source": "/institutional/corporations/colombia/",
+      "destination": "https://bitcoinsovereign.academy/institutional/corporations/colombia/"
+    },
+    {
+      "source": "/institutional/corporations/colombia/:path*",
+      "destination": "https://bitcoinsovereign.academy/institutional/corporations/colombia/:path*"
+    },
+    {
+      "source": "/institutional/wealth-advisors/bitcoin-advisor-certification",
+      "destination": "https://bitcoinsovereign.academy/institutional/wealth-advisors/bitcoin-advisor-certification/"
+    },
+    {
+      "source": "/institutional/wealth-advisors/bitcoin-advisor-certification/",
+      "destination": "https://bitcoinsovereign.academy/institutional/wealth-advisors/bitcoin-advisor-certification/"
+    },
+    {
+      "source": "/institutional/wealth-advisors/bitcoin-advisor-certification/:path*",
+      "destination": "https://bitcoinsovereign.academy/institutional/wealth-advisors/bitcoin-advisor-certification/:path*"
+    },
+    {
       "source": "/institutional",
       "destination": "/institutional/index.html"
     },
