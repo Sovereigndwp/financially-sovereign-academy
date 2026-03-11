@@ -136,6 +136,10 @@ When building a new page, define: who it is for, what problem it solves, what de
 
 Default page structure: clear headline → simple explanation of the problem → practical options or framework → real-life example → clear next step.
 
+## Verifiable Content
+
+Never fabricate statistics, data points, percentages, dollar figures, or claims in published content. Every quantitative claim must be traceable to a named, verifiable source. Add source attribution where stats are displayed.
+
 ## Quality Control
 
-Before finalizing, check for: repetition, jargon, too much abstraction, condescending tone, visual clutter, unclear action step, and missing tradeoffs.
+Before finalizing, check for: repetition, jargon, too much abstraction, condescending tone, visual clutter, unclear action step, missing tradeoffs, and unverified claims.
