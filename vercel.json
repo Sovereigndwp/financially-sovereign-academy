@@ -55,22 +55,6 @@
       "destination": "https://bitcoinsovereign.academy/programa-colombia/"
     },
     {
-      "source": "/programa-colombia",
-      "destination": "https://bitcoinsovereign.academy/programa-colombia/"
-    },
-    {
-      "source": "/programa-colombia/",
-      "destination": "https://bitcoinsovereign.academy/programa-colombia/"
-    },
-    {
-      "source": "/programa-colombia/:path/",
-      "destination": "https://bitcoinsovereign.academy/programa-colombia/:path/"
-    },
-    {
-      "source": "/programa-colombia/:path*",
-      "destination": "https://bitcoinsovereign.academy/programa-colombia/:path*"
-    },
-    {
       "source": "/institutional/corporations/colombia/:path*",
       "destination": "https://bitcoinsovereign.academy/institutional/corporations/colombia/:path*"
     },
