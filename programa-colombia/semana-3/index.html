@@ -390,13 +390,12 @@
 
                 <div class="monthly-payment-row">
                     <span class="payment-label">Presupuesto mensual para deudas:</span>
-                    <input type="number" id="monthly-budget" class="payment-input" placeholder="500000" value="500000">
+                    <input type="number" id="monthly-budget" class="payment-input" placeholder="350000" value="350000">
                     <span class="payment-hint">Lo que puedes destinar a deudas cada mes</span>
                 </div>
                 <div class="budget-presets" aria-label="Presupuestos de ejemplo">
                     <button type="button" class="budget-preset-btn" onclick="setBudgetPreset('minimos')">Solo m&#237;nimos</button>
                     <button type="button" class="budget-preset-btn" onclick="setBudgetPreset('aire')">Un poco de extra</button>
-                    <button type="button" class="budget-preset-btn" onclick="setBudgetPreset('agresivo')">M&#225;s acelerado</button>
                 </div>
 
                 <button class="compare-btn" onclick="simulatePayoff()">Comparar m&#233;todos de pago &#8594;</button>
@@ -588,9 +587,9 @@
 
         // ---------- DEBT TABLE ----------
         const defaultDebts = [
-            { name: 'Tarjeta de cr\u00e9dito', balance: 8000000, rate: 2.5, min: 80000  },
-            { name: 'Cr\u00e9dito de consumo',  balance: 1500000, rate: 1.8, min: 120000 },
-            { name: 'Libranza / fondo',        balance: 2000000, rate: 1.2, min: 150000 },
+            { name: 'Tarjeta de cr\u00e9dito', balance: 8000000, rate: 2.1, min: 80000  },
+            { name: 'Cr\u00e9dito de consumo',  balance: 2000000, rate: 5.3, min: 200000 },
+            { name: 'Libranza / fondo',        balance: 50000, rate: 1.2, min: 0 },
         ];
 
         function getRateBadge(rate) {
@@ -1010,7 +1009,7 @@
                 return;
             }
 
-            const budget   = parseFloat(document.getElementById('monthly-budget').value) || 500000;
+            const budget   = parseFloat(document.getElementById('monthly-budget').value) || 350000;
             const totalMin = debts.reduce((sum, debt) => sum + debt.min, 0);
 
             if (budget < totalMin) {
