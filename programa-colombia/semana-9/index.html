@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semana 9: Mi historial crediticio | Ruta de Estabilidad y Crecimiento</title>
+    <meta name="description" content="Entiende qué mira tu historial crediticio, revisa un ejercicio hipotético y sal con una forma más clara de revisarlo y fortalecerlo con el tiempo.">
+    <link rel="stylesheet" href="../lesson-structure.css">
+    <style>
+        :root {
+            --primary: #FCD116;
+            --dark: #1a1a1a;
+            --dark2: #2d2d2d;
+            --light: #e0e0e0;
+            --dim: #b3b3b3;
+            --red: #ef4444;
+            --yellow: #fcd116;
+            --blue: #3b82f6;
+            --green: #2ecc71;
+            --grad: #FCD116;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; background:var(--dark); color:var(--light); line-height:1.6; padding:1rem; }
+
+        .container { max-width:1000px; margin:0 auto; }
+        .back-link { display:inline-flex; align-items:center; gap:0.5rem; color:var(--primary); text-decoration:none; margin-bottom:2rem; font-weight:600; transition:transform 0.2s; }
+        .back-link:hover { transform:translateX(-4px); }
+        .header { text-align:center; margin-bottom:3rem; }
+        .week-badge { display:inline-block; background:rgba(252,209,22,0.15); border:1px solid var(--primary); border-radius:2rem; padding:0.3rem 1rem; font-size:0.85rem; color:var(--primary); margin-bottom:1rem; }
+        .week-title { font-size:2.4rem; color:var(--primary); margin-bottom:0.5rem; }
+        .week-subtitle { font-size:1.1rem; color:var(--dim); }
+
+        .section { margin-bottom:3rem; }
+        .section-card { background:var(--dark2); border:2px solid rgba(252,209,22,0.2); border-radius:1rem; padding:2rem; }
+        .section-title { font-size:1.5rem; color:var(--primary); margin-bottom:0.75rem; }
+        .section-text { color:var(--dim); font-size:1rem; line-height:1.8; margin-bottom:1rem; }
+        .section-text strong { color:var(--light); }
+
+        /* Signal cards */
+        .signal-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(165px, 1fr)); gap:0.9rem; margin-top:1.5rem; }
+        .signal-card { background:var(--dark); border:1px solid rgba(252,209,22,0.15); border-radius:0.85rem; padding:1rem; }
+        .signal-icon { font-size:1.35rem; margin-bottom:0.5rem; }
+        .signal-name { color:var(--light); font-weight:700; margin-bottom:0.35rem; line-height:1.4; }
+        .signal-desc { color:var(--dim); font-size:0.84rem; line-height:1.55; }
+
+        /* Score area */
+        .score-display { background:var(--dark); border:1px solid rgba(252,209,22,0.15); border-radius:1rem; padding:1.4rem; text-align:center; margin:1.5rem 0; }
+        .score-kicker { color:var(--primary); font-size:0.78rem; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; margin-bottom:0.5rem; }
+        .score-bar { height:16px; background:linear-gradient(to right, var(--red) 0%, var(--yellow) 45%, var(--yellow) 75%, var(--green) 100%); border-radius:8px; position:relative; margin:1rem 0 0.5rem; }
+        .score-pointer { position:absolute; top:-6px; width:4px; height:28px; background:white; border-radius:2px; transform:translateX(-50%); transition:left 0.8s ease; box-shadow:0 0 6px rgba(0,0,0,0.4); }
+        .score-pointer-label { position:absolute; top:-28px; transform:translateX(-50%); font-size:0.75rem; font-weight:700; color:white; white-space:nowrap; }
+        .score-number { font-size:2.2rem; font-weight:900; font-family:'Courier New',monospace; display:block; }
+        .score-label { font-size:0.9rem; color:var(--dim); }
+        .score-range { display:flex; justify-content:space-between; font-size:0.75rem; color:var(--dim); margin-top:0.25rem; }
+        .score-summary { margin-top:1.2rem; }
+
+        /* Score factors */
+        .factors-grid { display:grid; gap:0.75rem; margin-top:1.5rem; }
+        .factor-row { background:var(--dark); border:1px solid rgba(252,209,22,0.15); border-radius:0.75rem; padding:1.25rem; }
+        .factor-header { display:flex; align-items:center; justify-content:space-between; gap:1rem; margin-bottom:0.75rem; }
+        .factor-name { font-weight:700; color:var(--light); }
+        .factor-weight { font-size:0.75rem; color:var(--primary); font-weight:700; text-align:right; }
+        .factor-bar-track { background:rgba(255,255,255,0.05); border-radius:4px; height:8px; overflow:hidden; margin-top:0.6rem; }
+        .factor-bar-fill { height:100%; border-radius:4px; transition:width 0.5s; }
+        .factor-select { background:var(--dark2); border:2px solid rgba(252,209,22,0.2); border-radius:0.5rem; color:var(--light); padding:0.65rem 0.75rem; font-size:0.85rem; margin-top:0.25rem; width:100%; }
+        .factor-impact { font-size:0.8rem; margin-top:0.55rem; line-height:1.5; }
+        .factor-impact.positive { color:var(--yellow); }
+        .factor-impact.negative { color:var(--red); }
+        .factor-impact.neutral { color:var(--dim); }
+
+        /* What weighs most */
+        .weight-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem; margin-top:1.5rem; }
+        .weight-card { background:var(--dark); border:1px solid rgba(252,209,22,0.15); border-radius:0.85rem; padding:1.15rem; }
+        .weight-card.help { border-left:4px solid var(--yellow); }
+        .weight-card.watch { border-left:4px solid var(--red); }
+        .weight-card.review { border-left:4px solid var(--blue); }
+        .weight-label { font-size:0.8rem; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; margin-bottom:0.6rem; }
+        .weight-card.help .weight-label { color:var(--yellow); }
+        .weight-card.watch .weight-label { color:var(--red); }
+        .weight-card.review .weight-label { color:var(--blue); }
+        .weight-card ul { margin:0; padding-left:1.1rem; }
+        .weight-card li { color:var(--dim); font-size:0.9rem; line-height:1.65; margin-bottom:0.45rem; }
+        .weight-card li:last-child { margin-bottom:0; }
+
+        /* Practical steps */
+        .steps-grid { display:grid; gap:1rem; margin-top:1.5rem; }
+        .step-item { background:var(--dark); border-left:4px solid var(--primary); border-radius:0.25rem 0.75rem 0.75rem 0.25rem; padding:1.15rem; display:flex; gap:1rem; align-items:flex-start; }
+        .step-num-circle { background:rgba(252,209,22,0.15); color:var(--primary); border-radius:50%; width:32px; height:32px; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:0.9rem; flex-shrink:0; }
+        .step-content { flex:1; }
+        .step-title { font-weight:700; color:var(--light); margin-bottom:0.25rem; }
+        .step-desc { font-size:0.9rem; color:var(--dim); line-height:1.6; }
+        .step-url { color:var(--primary); font-size:0.85rem; margin-top:0.35rem; }
+        .details-card { margin-top:1rem; background:var(--dark); border:1px solid rgba(252,209,22,0.15); border-radius:0.85rem; overflow:hidden; }
+        .details-card summary { list-style:none; cursor:pointer; padding:1rem 1.1rem; color:var(--light); font-weight:700; }
+        .details-card summary::-webkit-details-marker { display:none; }
+        .details-card summary::after { content:'▾'; float:right; color:var(--primary); transition:transform 0.2s; }
+        .details-card[open] summary::after { transform:rotate(180deg); }
+        .details-body { border-top:1px solid rgba(252,209,22,0.12); padding:1rem 1.1rem 1.1rem; color:var(--dim); font-size:0.9rem; line-height:1.7; }
+        .details-body p { margin-bottom:0.75rem; }
+        .details-body p:last-child { margin-bottom:0; }
+
+        /* Myths */
+        .myths-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:0.9rem; margin-top:1.5rem; }
+        .myth-item { background:var(--dark); border:1px solid rgba(252,209,22,0.1); border-radius:0.75rem; padding:1rem; }
+        .myth-false { color:var(--red); font-size:0.74rem; font-weight:700; text-transform:uppercase; margin-bottom:0.35rem; }
+        .myth-text { color:var(--light); font-weight:700; font-size:0.95rem; line-height:1.45; margin-bottom:0.45rem; }
+        .myth-truth { color:var(--dim); font-size:0.85rem; line-height:1.55; }
+
+        .tip-box { background:rgba(252,209,22,0.08); border:2px solid rgba(252,209,22,0.4); border-radius:0.75rem; padding:1.25rem; margin:1.5rem 0; }
+        .tip-header { color:var(--yellow); font-weight:700; margin-bottom:0.4rem; }
+        .tip-text { color:var(--dim); font-size:0.9rem; line-height:1.65; }
+
+        .next-week { background:var(--dark2); border:2px solid var(--primary); border-radius:1rem; padding:2rem; text-align:center; }
+        .next-week h3 { color:var(--primary); margin-bottom:0.75rem; }
+        .next-week p { color:var(--dim); margin-bottom:1rem; }
+        .btn { padding:0.9rem 2rem; border:none; border-radius:0.75rem; font-weight:700; font-size:1rem; cursor:pointer; transition:all 0.3s; text-decoration:none; display:inline-block; }
+        .btn-primary { background:var(--grad); color:#1a1a1a; }
+        .btn-primary:hover { transform:translateY(-2px); box-shadow:0 8px 25px rgba(252,209,22,0.4); }
+        .next-week-btn { margin-top:0.5rem; }
+
+        @media (max-width:768px) {
+            .week-title { font-size:1.8rem; }
+            .section-card { padding:1.4rem; }
+            .factor-header { flex-direction:column; align-items:flex-start; }
+            .factor-weight { text-align:left; }
+        }
+
+        body::before { content:""; display:block; height:3px; background:linear-gradient(90deg, #FCD116, #003893 50%, #CE1126); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../" class="back-link">← Volver al Programa</a>
+
+        <div class="header">
+            <div class="week-badge">Semana 9 de 10</div>
+            <h1 class="week-title">Mi historial crediticio</h1>
+            <p class="week-subtitle">Qué mira el sistema y qué puedes fortalecer con el tiempo</p>
+        </div>
+
+        <div class="section">
+            <div class="section-card">
+                <h2 class="section-title">Una situación muy común</h2>
+                <p class="section-text">
+                    Quieres arrendar un lugar, sacar algo a cuotas o pedir un préstamo, y de pronto te ofrecen una respuesta distinta a la que esperabas.
+                </p>
+                <p class="section-text">
+                    A veces no cambia solo la respuesta. También cambia la tasa, el cupo o las condiciones.
+                </p>
+                <p class="section-text">
+                    Entonces aparece una pregunta muy natural: <strong>¿Cómo se está viendo mi historial?</strong>
+                </p>
+            </div>
+        </div>
+
+        <div class="program-lesson-section program-lesson-section--callout">
+            <div class="program-lesson-callout-title">Idea clave de la semana</div>
+            <div class="program-lesson-callout-text">El historial crediticio no es una etiqueta fija. Es una señal que cambia con hábitos repetidos y con el tiempo.</div>
+        </div>
+
+        <div class="program-lesson-section program-lesson-section--soft">
+            <div class="program-lesson-kicker">¿Por qué pasa esto?</div>
+            <h2 class="program-lesson-title program-lesson-title--small">Lo que se mira son patrones visibles, no magia</h2>
+            <p class="program-lesson-text">Cuando una entidad financiera evalúa a una persona, intenta ver cómo ha manejado sus compromisos a lo largo del tiempo.</p>
+            <p class="program-lesson-text">No se trata de un número mágico. Se trata de señales visibles: pagos, uso del cupo, antigüedad, consultas y continuidad.</p>
+            <p class="program-lesson-text">Por eso el historial se puede entender mejor cuando dejas de verlo como algo misterioso y empiezas a verlo como un conjunto de hábitos observables.</p>
+        </div>
+
+        <div class="section">
+            <div class="section-card">
+                <h2 class="section-title">¿Qué suele mirar el sistema?</h2>
+                <p class="section-text">Antes de mirar un puntaje hipotético, vale la pena ubicar las señales que suelen repetirse.</p>
+
+                <div class="signal-grid">
+                    <div class="signal-card">
+                        <div class="signal-icon">📅</div>
+                        <div class="signal-name">Pagos a tiempo</div>
+                        <div class="signal-desc">Es una de las señales más visibles. La continuidad suele pesar más que una promesa de pago futuro.</div>
+                    </div>
+                    <div class="signal-card">
+                        <div class="signal-icon">💳</div>
+                        <div class="signal-name">Uso del cupo</div>
+                        <div class="signal-desc">No solo importa tener crédito. También importa cuánto del cupo disponible estás usando de forma repetida.</div>
+                    </div>
+                    <div class="signal-card">
+                        <div class="signal-icon">⏳</div>
+                        <div class="signal-name">Antigüedad del historial</div>
+                        <div class="signal-desc">Un historial más largo da más contexto. El tiempo ayuda a que la señal sea más clara.</div>
+                    </div>
+                    <div class="signal-card">
+                        <div class="signal-icon">🔎</div>
+                        <div class="signal-name">Consultas recientes</div>
+                        <div class="signal-desc">Muchas solicitudes en poco tiempo pueden hacer ver el panorama más apretado de lo que realmente es.</div>
+                    </div>
+                    <div class="signal-card">
+                        <div class="signal-icon">🧾</div>
+                        <div class="signal-name">Tipos de productos</div>
+                        <div class="signal-desc">Uno o dos productos bien manejados suelen dar más contexto que no tener ningún rastro visible.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-card">
+                <h2 class="section-title">Hagamos un ejercicio</h2>
+                <p class="section-text">Para este ejercicio usaremos un puntaje estimado e hipotético.</p>
+                <p class="section-text">La meta no es adivinar tu puntaje real.</p>
+                <p class="section-text">La meta es entender qué factores suelen empujarlo hacia arriba o hacia abajo.</p>
+
+                <div class="score-display">
+                    <div class="score-kicker">Puntaje ilustrativo del ejercicio</div>
+                    <div class="score-bar">
+                        <div class="score-pointer" id="score-pointer">
+                            <div class="score-pointer-label" id="score-pointer-label"></div>
+                        </div>
+                    </div>
+                    <div class="score-range">
+                        <span>150</span>
+                        <span>500</span>
+                        <span>700</span>
+                        <span>950</span>
+                    </div>
+                    <div class="score-summary">
+                        <span class="score-number" id="score-number">--</span>
+                        <div class="score-label" id="score-category">Ajusta los factores para ver cómo cambia este ejemplo</div>
+                    </div>
+                </div>
+
+                <div class="factors-grid">
+                    <div class="factor-row">
+                        <div class="factor-header">
+                            <span class="factor-name">Pagos a tiempo</span>
+                            <span class="factor-weight">Se suele mirar mucho</span>
+                        </div>
+                        <select class="factor-select" id="factor-payments" onchange="updateScore()">
+                            <option value="100">Pagos siempre a tiempo</option>
+                            <option value="70" selected>Alguna demora leve en el pasado</option>
+                            <option value="45">Demoras repetidas</option>
+                            <option value="20">Moras largas o cartera vencida</option>
+                        </select>
+                        <div class="factor-bar-track"><div class="factor-bar-fill" id="bar-payments"></div></div>
+                        <div class="factor-impact" id="impact-payments"></div>
+                    </div>
+
+                    <div class="factor-row">
+                        <div class="factor-header">
+                            <span class="factor-name">Uso del cupo</span>
+                            <span class="factor-weight">Se suele mirar mucho</span>
+                        </div>
+                        <select class="factor-select" id="factor-util" onchange="updateScore()">
+                            <option value="100">Uso una parte pequeña del cupo</option>
+                            <option value="65" selected>Uso una parte media del cupo</option>
+                            <option value="30">Uso una parte alta del cupo</option>
+                            <option value="0">Llego casi al tope del cupo</option>
+                        </select>
+                        <div class="factor-bar-track"><div class="factor-bar-fill" id="bar-util"></div></div>
+                        <div class="factor-impact" id="impact-util"></div>
+                    </div>
+
+                    <div class="factor-row">
+                        <div class="factor-header">
+                            <span class="factor-name">Antigüedad del historial</span>
+                            <span class="factor-weight">Ayuda a dar contexto</span>
+                        </div>
+                        <select class="factor-select" id="factor-age" onchange="updateScore()">
+                            <option value="100">Más de 5 años visibles</option>
+                            <option value="70" selected>Entre 2 y 5 años</option>
+                            <option value="40">Entre 1 y 2 años</option>
+                            <option value="15">Muy reciente o sin historial</option>
+                        </select>
+                        <div class="factor-bar-track"><div class="factor-bar-fill" id="bar-age"></div></div>
+                        <div class="factor-impact" id="impact-age"></div>
+                    </div>
+
+                    <div class="factor-row">
+                        <div class="factor-header">
+                            <span class="factor-name">Consultas recientes</span>
+                            <span class="factor-weight">Se suele mirar menos</span>
+                        </div>
+                        <select class="factor-select" id="factor-inquiries" onchange="updateScore()">
+                            <option value="100">0 o 1 consultas recientes</option>
+                            <option value="70" selected>2 a 4 consultas recientes</option>
+                            <option value="40">Muchas solicitudes en poco tiempo</option>
+                        </select>
+                        <div class="factor-bar-track"><div class="factor-bar-fill" id="bar-inquiries"></div></div>
+                        <div class="factor-impact" id="impact-inquiries"></div>
+                    </div>
+
+                    <div class="factor-row">
+                        <div class="factor-header">
+                            <span class="factor-name">Tipos de productos</span>
+                            <span class="factor-weight">Suma contexto</span>
+                        </div>
+                        <select class="factor-select" id="factor-products" onchange="updateScore()">
+                            <option value="100">Tengo más de un producto bien manejado</option>
+                            <option value="60" selected>Tengo un solo producto visible</option>
+                            <option value="20">No tengo productos activos visibles</option>
+                        </select>
+                        <div class="factor-bar-track"><div class="factor-bar-fill" id="bar-products"></div></div>
+                        <div class="factor-impact" id="impact-products"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-card">
+                <h2 class="section-title">Lo que más suele pesar</h2>
+                <p class="section-text">Cuando ordenas las señales, el historial deja de sentirse abstracto y empieza a verse más manejable.</p>
+
+                <div class="weight-grid">
+                    <div class="weight-card help">
+                        <div class="weight-label">Lo que más ayuda</div>
+                        <ul>
+                            <li>pagar a tiempo</li>
+                            <li>usar el cupo con cuidado</li>
+                            <li>mantener continuidad en el historial</li>
+                        </ul>
+                    </div>
+                    <div class="weight-card watch">
+                        <div class="weight-label">Lo que puede debilitarlo</div>
+                        <ul>
+                            <li>moras</li>
+                            <li>uso alto del cupo</li>
+                            <li>muchas solicitudes en poco tiempo</li>
+                        </ul>
+                    </div>
+                    <div class="weight-card review">
+                        <div class="weight-label">Lo que conviene revisar</div>
+                        <ul>
+                            <li>errores en el reporte</li>
+                            <li>productos no reconocidos</li>
+                            <li>moras viejas ya resueltas</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-card">
+                <h2 class="section-title">Un pequeño paso esta semana</h2>
+                <p class="section-text">Consulta tu historial con calma. No para alarmarte, sino para ver qué aparece hoy y qué te conviene revisar primero.</p>
+
+                <div class="steps-grid">
+                    <div class="step-item">
+                        <div class="step-num-circle">1</div>
+                        <div class="step-content">
+                            <div class="step-title">Entra al sitio oficial</div>
+                            <div class="step-desc">Puedes revisar tu historial desde el portal oficial de DataCrédito en Colombia.</div>
+                            <div class="step-url">datacredito.com.co / midatacredito.com</div>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-num-circle">2</div>
+                        <div class="step-content">
+                            <div class="step-title">Verifica que los productos sí sean tuyos</div>
+                            <div class="step-desc">Mira con calma si las tarjetas, créditos o reportes que aparecen corresponden realmente a tu historia.</div>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-num-circle">3</div>
+                        <div class="step-content">
+                            <div class="step-title">Marca cualquier dato que no entiendas o no reconozcas</div>
+                            <div class="step-desc">A veces el primer avance no es corregir todo. Es saber qué punto necesita revisión o una pregunta adicional.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <details class="details-card">
+                    <summary>Ver más detalles sobre la consulta</summary>
+                    <div class="details-body">
+                        <p>La consulta básica del historial suele estar disponible por los canales oficiales de DataCrédito. El acceso puede pedir validación de identidad con cédula, correo y preguntas de seguridad.</p>
+                        <p>Si ves información que no entiendes, un producto que no reconoces o una mora que ya resolviste, conviene guardar la referencia y usar los canales oficiales para pedir aclaración o corrección.</p>
+                    </div>
+                </details>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-card">
+                <h2 class="section-title">Mitos que vale la pena soltar</h2>
+                <div class="myths-grid">
+                    <div class="myth-item">
+                        <div class="myth-false">Mito</div>
+                        <div class="myth-text">“Estar en DataCrédito” significa estar mal</div>
+                        <div class="myth-truth">No. Tener información allí solo significa que existe un rastro financiero. Lo importante es cómo se ven los pagos y los productos.</div>
+                    </div>
+                    <div class="myth-item">
+                        <div class="myth-false">Mito</div>
+                        <div class="myth-text">Una deuda te marca para siempre</div>
+                        <div class="myth-truth">No. El historial cambia con el tiempo. Pagar y ordenar la situación sí modifica la señal que queda visible.</div>
+                    </div>
+                    <div class="myth-item">
+                        <div class="myth-false">Mito</div>
+                        <div class="myth-text">Consultar tu propio historial te perjudica</div>
+                        <div class="myth-truth">No. Revisarlo por tu cuenta sirve para entenderlo mejor y detectar errores antes de necesitar un producto.</div>
+                    </div>
+                    <div class="myth-item">
+                        <div class="myth-false">Mito</div>
+                        <div class="myth-text">No tener ningún crédito siempre ayuda</div>
+                        <div class="myth-truth">No necesariamente. Sin señales visibles, el sistema tiene menos contexto. Un producto bien manejado puede aportar más claridad.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tip-box">
+            <div class="tip-header">💡 El mejor momento para fortalecer el historial suele ser antes de necesitarlo.</div>
+            <div class="tip-text">Si en el futuro podrías buscar vivienda, educación o crédito para un negocio, construir hábitos temprano suele abrir mejores opciones después.</div>
+        </div>
+
+        <div class="program-lesson-section">
+            <div class="program-lesson-kicker">Antes de seguir</div>
+            <h2 class="program-lesson-title program-lesson-title--small">Qué conviene mirar con más calma ahora</h2>
+            <div class="program-lesson-reflections">
+                <div class="program-lesson-question">
+                    <p class="program-lesson-text"><strong>¿Qué factor de tu historial sientes más claro ahora?</strong><br>Nombrarlo ayuda a que deje de sentirse abstracto.</p>
+                </div>
+                <div class="program-lesson-question">
+                    <p class="program-lesson-text"><strong>¿Qué revisión te conviene hacer primero?</strong><br>Puede ser el reporte, un producto viejo o una demora que quieras entender mejor.</p>
+                </div>
+                <div class="program-lesson-question">
+                    <p class="program-lesson-text"><strong>¿Qué hábito pequeño podría fortalecer tu historial en los próximos meses?</strong><br>A veces una práctica repetida pesa más que un cambio grande pero aislado.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="next-week">
+            <h3>Lo que sigue</h3>
+            <p>Hoy vimos que el historial crediticio no se trata solo de un puntaje. Se construye con hábitos visibles y consistentes.</p>
+            <p>La próxima semana cerramos la ruta con una pregunta natural después de ordenar presupuesto, deuda, ahorro e historial:</p>
+            <p><strong>cómo decidir mejor dónde poner cada ahorro según el tiempo, el propósito y el riesgo</strong></p>
+            <a href="../semana-10/" class="btn btn-primary next-week-btn">Continuar a Semana 10</a>
+        </div>
+    </div>
+
+    <script>
+        function fmt(n) {
+            return new Intl.NumberFormat('es-CO', { minimumFractionDigits:0 }).format(Math.round(n));
+        }
+
+        const factorWeights = {
+            payments: 0.35,
+            util: 0.30,
+            age: 0.15,
+            inquiries: 0.10,
+            products: 0.10
+        };
+
+        const factorImpacts = {
+            payments: {
+                100: 'Los pagos a tiempo repetidos suelen ser la señal más fuerte.',
+                70: 'Una demora leve puede pesar, aunque todavía hay base para fortalecer.',
+                45: 'Las demoras repetidas suelen debilitar la lectura del historial.',
+                20: 'Las moras largas suelen ser de lo primero que conviene revisar.'
+            },
+            util: {
+                100: 'Usar solo una parte del cupo suele verse como una señal de control.',
+                65: 'Un uso medio puede funcionar, pero todavía hay margen para mejorar.',
+                30: 'Un uso alto del cupo puede hacer ver el panorama más ajustado.',
+                0: 'Llegar casi al tope del cupo suele debilitar más la lectura del historial.'
+            },
+            age: {
+                100: 'El tiempo le da más contexto al historial.',
+                70: 'Ya hay una base visible para que el sistema observe continuidad.',
+                40: 'Todavía es un historial corto, así que cada hábito pesa más.',
+                15: 'Cuando el historial es muy reciente, casi todo está empezando a formarse.'
+            },
+            inquiries: {
+                100: 'Pocas consultas dejan una señal más tranquila.',
+                70: 'Algunas consultas son normales cuando comparas opciones.',
+                40: 'Muchas solicitudes en poco tiempo pueden hacer ver más presión.'
+            },
+            products: {
+                100: 'Más de un producto bien manejado puede dar más contexto.',
+                60: 'Un producto visible ya aporta una señal, aunque todavía es limitada.',
+                20: 'Sin productos visibles, el sistema tiene menos pistas para evaluar.'
+            }
+        };
+
+        const barColors = {
+            100: 'var(--green)',
+            70: 'var(--yellow)',
+            65: 'var(--yellow)',
+            60: 'var(--yellow)',
+            45: 'var(--red)',
+            40: 'var(--yellow)',
+            30: 'var(--red)',
+            20: 'var(--red)',
+            15: 'var(--red)',
+            0: 'var(--red)'
+        };
+
+        function updateScore() {
+            const factors = {
+                payments: parseInt(document.getElementById('factor-payments').value, 10),
+                util: parseInt(document.getElementById('factor-util').value, 10),
+                age: parseInt(document.getElementById('factor-age').value, 10),
+                inquiries: parseInt(document.getElementById('factor-inquiries').value, 10),
+                products: parseInt(document.getElementById('factor-products').value, 10),
+            };
+
+            let weightedScore = 0;
+            Object.keys(factorWeights).forEach((key) => {
+                weightedScore += factors[key] * factorWeights[key];
+
+                const bar = document.getElementById(`bar-${key}`);
+                if (bar) {
+                    bar.style.width = factors[key] + '%';
+                    bar.style.background = barColors[factors[key]] || 'var(--yellow)';
+                }
+
+                const impactEl = document.getElementById(`impact-${key}`);
+                if (impactEl) {
+                    impactEl.textContent = factorImpacts[key][factors[key]] || '';
+                    impactEl.className = 'factor-impact ' + (factors[key] >= 70 ? 'positive' : factors[key] >= 40 ? 'neutral' : 'negative');
+                }
+            });
+
+            const score = Math.round(150 + (weightedScore / 100) * 800);
+            const pct = ((score - 150) / 800) * 100;
+
+            document.getElementById('score-number').textContent = fmt(score);
+            document.getElementById('score-pointer').style.left = Math.min(Math.max(pct, 2), 98) + '%';
+            document.getElementById('score-pointer-label').textContent = fmt(score);
+
+            let category = '';
+            let color = 'var(--yellow)';
+
+            if (score >= 800) {
+                category = 'Lectura ilustrativa: base muy sólida';
+                color = 'var(--green)';
+            } else if (score >= 680) {
+                category = 'Lectura ilustrativa: base buena';
+                color = 'var(--yellow)';
+            } else if (score >= 520) {
+                category = 'Lectura ilustrativa: base en desarrollo';
+                color = 'var(--yellow)';
+            } else if (score >= 350) {
+                category = 'Lectura ilustrativa: conviene revisar algunos factores';
+                color = 'var(--red)';
+            } else {
+                category = 'Lectura ilustrativa: conviene empezar por lo más visible';
+                color = 'var(--red)';
+            }
+
+            document.getElementById('score-number').style.color = color;
+            document.getElementById('score-category').textContent = category;
+        }
+
+        updateScore();
+    </script>
+    <script src="../program-state.js"></script>
+</body>
+</html>

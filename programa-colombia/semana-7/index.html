@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semana 7: Usar tu banco digital sin enredarte ni pagar de más | Ruta de Estabilidad y Crecimiento</title>
+    <meta name="description" content="Aprende a elegir mejor tu herramienta digital, revisar cobros pequeños y usar tu banco desde el celular con más criterio.">
+    <link rel="stylesheet" href="../lesson-structure.css">
+    <style>
+        :root {
+            --primary: #FCD116;
+            --dark: #1a1a1a;
+            --dark2: #2d2d2d;
+            --light: #e0e0e0;
+            --dim: #b3b3b3;
+            --red: #ef4444;
+            --yellow: #fcd116;
+            --blue: #3b82f6;
+            --purple: #8b5cf6;
+            --grad: #FCD116;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; background:var(--dark); color:var(--light); line-height:1.6; padding:1rem; }
+
+        .container { max-width:1000px; margin:0 auto; }
+        .back-link { display:inline-flex; align-items:center; gap:0.5rem; color:var(--primary); text-decoration:none; margin-bottom:2rem; font-weight:600; transition:transform 0.2s; }
+        .back-link:hover { transform:translateX(-4px); }
+        .header { text-align:center; margin-bottom:3rem; }
+        .week-badge { display:inline-block; background:rgba(252,209,22,0.15); border:1px solid var(--primary); border-radius:2rem; padding:0.3rem 1rem; font-size:0.85rem; color:var(--primary); margin-bottom:1rem; }
+        .week-title { font-size:2.4rem; color:var(--primary); margin-bottom:0.5rem; }
+        .week-subtitle { font-size:1.1rem; color:var(--dim); }
+
+        .section { margin-bottom:3rem; }
+        .section-card { background:var(--dark2); border:2px solid rgba(252,209,22,0.2); border-radius:1rem; padding:2rem; }
+        .section-title { font-size:1.5rem; color:var(--primary); margin-bottom:0.75rem; }
+        .section-text { color:var(--dim); font-size:1rem; line-height:1.8; margin-bottom:1.25rem; }
+
+        /* Tool comparison */
+        .tools-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1.25rem; margin-top:1.5rem; }
+        .tool-card { background:var(--dark); border:2px solid rgba(252,209,22,0.15); border-radius:1rem; padding:1.5rem; transition:border-color 0.2s; display:flex; flex-direction:column; gap:0.9rem; }
+        .tool-card:hover { border-color:rgba(252,209,22,0.4); }
+        .tool-header { display:flex; align-items:center; gap:0.75rem; margin-bottom:1rem; }
+        .tool-icon { font-size:2rem; }
+        .tool-name { font-size:1.15rem; font-weight:700; }
+        .tool-owner { font-size:0.8rem; color:var(--dim); }
+        .tool-tag { display:inline-block; font-size:0.7rem; font-weight:700; padding:0.15rem 0.5rem; border-radius:1rem; margin-bottom:1rem; }
+        .tag-free { background:rgba(252,209,22,0.2); color:var(--yellow); }
+        .tag-popular { background:rgba(59,130,246,0.2); color:var(--blue); }
+        .tag-full { background:rgba(252,209,22,0.2); color:var(--primary); }
+        .tool-summary-block { background:var(--dark2); border:1px solid rgba(252,209,22,0.12); border-radius:0.75rem; padding:0.9rem; }
+        .tool-summary-label { font-size:0.74rem; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; color:var(--primary); margin-bottom:0.25rem; }
+        .tool-summary-text { font-size:0.9rem; color:var(--dim); line-height:1.6; }
+
+        /* Decision tool */
+        .decision-tool { background:var(--dark); border:2px solid rgba(252,209,22,0.15); border-radius:1rem; padding:1.75rem; margin-top:1.5rem; }
+        .decision-title { color:var(--primary); font-weight:700; font-size:1.1rem; margin-bottom:1.25rem; }
+        .decision-q { margin-bottom:1.25rem; }
+        .decision-q-text { color:var(--light); font-weight:600; font-size:0.95rem; margin-bottom:0.5rem; }
+        .decision-options { display:flex; gap:0.75rem; flex-wrap:wrap; }
+        .decision-opt { background:var(--dark2); border:2px solid rgba(252,209,22,0.2); border-radius:0.5rem; padding:0.5rem 1rem; cursor:pointer; font-size:0.9rem; color:var(--dim); transition:all 0.2s; }
+        .decision-opt:hover { border-color:var(--primary); color:var(--light); }
+        .decision-opt.selected { border-color:var(--primary); color:var(--primary); background:rgba(252,209,22,0.1); }
+        .decision-result { display:none; background:rgba(252,209,22,0.08); border:2px solid var(--primary); border-radius:0.75rem; padding:1.25rem; margin-top:1rem; }
+        .decision-result.visible { display:block; }
+        .decision-recommendation { font-size:1.1rem; font-weight:700; color:var(--primary); margin-bottom:0.5rem; }
+        .decision-why { font-size:0.9rem; color:var(--dim); }
+        .security-bridge { background:rgba(59,130,246,0.07); border:1px solid rgba(59,130,246,0.25); border-left:3px solid var(--blue); border-radius:0.75rem; padding:1rem 1.1rem; margin-bottom:1.25rem; color:var(--dim); font-size:0.92rem; line-height:1.7; }
+
+        /* Security quiz */
+        .quiz-container { }
+        .quiz-q { background:var(--dark); border:2px solid rgba(252,209,22,0.15); border-radius:1rem; padding:1.5rem; margin-bottom:1.25rem; }
+        .quiz-q-text { color:var(--light); font-weight:600; margin-bottom:0.5rem; }
+        .quiz-scenario-box { background:var(--dark2); border-left:3px solid rgba(252,209,22,0.4); padding:0.75rem 1rem; border-radius:0 0.5rem 0.5rem 0; margin:0.75rem 0; color:var(--dim); font-size:0.9rem; font-style:italic; }
+        .quiz-options-list { display:grid; gap:0.5rem; margin-top:0.75rem; }
+        .quiz-opt { background:var(--dark2); border:2px solid rgba(252,209,22,0.15); border-radius:0.5rem; padding:0.85rem 1rem; cursor:pointer; color:var(--dim); font-size:0.9rem; transition:all 0.2s; text-align:left; width:100%; }
+        .quiz-opt:hover:not(:disabled) { border-color:var(--primary); color:var(--light); }
+        .quiz-opt.correct { border-color:var(--yellow) !important; background:rgba(252,209,22,0.1); color:var(--yellow); }
+        .quiz-opt.incorrect { border-color:var(--red) !important; background:rgba(239,68,68,0.08); color:var(--red); }
+        .quiz-opt:disabled { cursor:not-allowed; }
+        .quiz-explanation { display:none; background:var(--dark2); border-left:3px solid var(--primary); padding:0.75rem 1rem; border-radius:0 0.5rem 0.5rem 0; margin-top:0.75rem; font-size:0.85rem; color:var(--dim); }
+        .quiz-explanation.show { display:block; }
+
+        .quiz-score-bar { background:var(--dark); border:2px solid rgba(252,209,22,0.3); border-radius:1rem; padding:1.5rem; text-align:center; margin-top:1.5rem; display:none; }
+        .quiz-score-bar.visible { display:block; }
+        .score-big { font-size:3rem; font-weight:900; font-family:'Courier New',monospace; margin-bottom:0.5rem; }
+        .score-label { color:var(--dim); font-size:0.9rem; }
+
+        /* Fee audit */
+        .fee-table { width:100%; border-collapse:collapse; margin-top:1.25rem; }
+        .fee-table th { text-align:left; color:var(--dim); font-size:0.8rem; text-transform:uppercase; letter-spacing:0.05em; padding:0.5rem 0.75rem; border-bottom:1px solid rgba(252,209,22,0.2); }
+        .fee-table td { padding:0.75rem; border-bottom:1px solid rgba(255,255,255,0.04); font-size:0.9rem; }
+        .fee-table tr:last-child td { border-bottom:none; }
+        .fee-name { color:var(--light); }
+        .fee-cost { font-family:'Courier New',monospace; font-weight:700; }
+        .fee-cost.free { color:var(--yellow); }
+        .fee-cost.low { color:var(--yellow); }
+        .fee-cost.high { color:var(--red); }
+        .fee-avoid { font-size:0.8rem; color:var(--dim); }
+        .fee-tool { font-size:0.8rem; }
+
+        .monthly-fee-calc { background:var(--dark); border:2px solid rgba(252,209,22,0.15); border-radius:1rem; padding:1.5rem; margin-top:1.5rem; }
+        .fee-inputs { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem; margin-bottom:1.5rem; }
+        .fee-label { display:block; color:var(--light); font-weight:600; font-size:0.9rem; margin-bottom:0.4rem; }
+        .fee-input { width:100%; padding:0.6rem; background:var(--dark2); border:2px solid rgba(252,209,22,0.2); border-radius:0.5rem; color:var(--light); font-family:'Courier New',monospace; font-size:0.9rem; }
+        .fee-input:focus { outline:none; border-color:var(--primary); }
+        .fee-result-box { background:var(--dark2); border:2px solid var(--primary); border-radius:0.75rem; padding:1.25rem; text-align:center; }
+        .fee-total-monthly { font-size:2rem; font-weight:900; font-family:'Courier New',monospace; color:var(--red); }
+        .fee-total-annual { color:var(--dim); font-size:0.9rem; margin-top:0.25rem; }
+
+        /* Action steps */
+        .steps-grid { display:grid; gap:1rem; margin-top:1.5rem; }
+        .step-item { background:var(--dark); border-left:4px solid var(--primary); border-radius:0.25rem 0.75rem 0.75rem 0.25rem; padding:1.25rem; display:flex; gap:1rem; align-items:flex-start; }
+        .step-num-circle { background:rgba(252,209,22,0.15); color:var(--primary); border-radius:50%; width:32px; height:32px; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:0.9rem; flex-shrink:0; margin-top:0.1rem; }
+        .step-content { flex:1; }
+        .step-title { font-weight:700; color:var(--light); margin-bottom:0.25rem; }
+        .step-desc { font-size:0.9rem; color:var(--dim); line-height:1.6; }
+
+        .tip-box { background:rgba(252,209,22,0.08); border:2px solid rgba(252,209,22,0.4); border-radius:0.75rem; padding:1.25rem; margin:1.5rem 0; }
+        .tip-header { color:var(--yellow); font-weight:700; margin-bottom:0.4rem; }
+        .tip-text { color:var(--dim); font-size:0.9rem; }
+
+        .next-week { background:var(--dark2); border:2px solid var(--primary); border-radius:1rem; padding:2rem; text-align:center; }
+        .next-week h3 { color:var(--primary); margin-bottom:0.75rem; }
+        .next-week p { color:var(--dim); margin-bottom:1.5rem; }
+        .btn { padding:0.9rem 2rem; border:none; border-radius:0.75rem; font-weight:700; font-size:1rem; cursor:pointer; transition:all 0.3s; text-decoration:none; display:inline-block; }
+        .btn-primary { background:var(--grad); color:#1a1a1a; }
+        .btn-primary:hover { transform:translateY(-2px); box-shadow:0 8px 25px rgba(252,209,22,0.4); }
+
+        @media (max-width:768px) {
+            .week-title { font-size:1.8rem; }
+            .tools-grid { grid-template-columns:1fr; }
+            .fee-inputs { grid-template-columns:1fr; }
+        }
+        body::before { content:""; display:block; height:3px; background:linear-gradient(90deg, #FCD116, #003893 50%, #CE1126); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../" class="back-link">← Volver al Programa</a>
+
+        <div class="header">
+            <div class="week-badge">Semana 7 de 10</div>
+            <h1 class="week-title">Usar tu banco digital sin enredarte ni pagar de más</h1>
+            <p class="week-subtitle">Las herramientas que ya existen para ti y cómo usarlas con más criterio</p>
+        </div>
+
+        <!-- INTRO -->
+        <div class="section">
+            <div class="section-card">
+                <h2 class="section-title">Una situación muy común</h2>
+                <p class="section-text">
+                    Te llega un pago, quieres enviar una parte, pagar un servicio y dejar algo separado. Abres el celular y aparecen varias opciones: Nequi, Daviplata, la app del banco.
+                </p>
+                <p class="section-text">Todas parecen servir, pero no hacen exactamente lo mismo ni te cobran igual. Cuando eso no está claro, es fácil terminar usando una herramienta que te enreda o te cuesta más de lo necesario.</p>
+            </div>
+        </div>
+
+        <div class="program-lesson-section program-lesson-section--callout">
+            <div class="program-lesson-callout-title">Idea clave de la semana</div>
+            <div class="program-lesson-callout-text">La mejor herramienta digital no es la más completa. Es la que entiendes, te cobra menos y te deja mover tu dinero con tranquilidad.</div>
+        </div>
+
+        <div class="program-lesson-section program-lesson-section--soft">
+            <div class="program-lesson-kicker">¿Por qué pasa esto?</div>
+            <h2 class="program-lesson-title program-lesson-title--small">Elegir una herramienta digital también es una decisión financiera</h2>
+            <p class="program-lesson-text">Mover dinero desde el celular hoy es más fácil, pero también hay más opciones, más límites y más cobros pequeños.</p>
+            <p class="program-lesson-text">Si eliges solo por costumbre o porque alguien te dijo “esa es la mejor”, puedes terminar con pasos que no entiendes o con gastos que no habías visto.</p>
+        </div>
+
+        <!-- TOOL COMPARISON -->
+        <div class="section">
+            <div class="section-card">
+                <h2 class="section-title">Hagamos un ejercicio</h2>
+                <p class="section-text">Primero, elige bien la herramienta. No pensando en cuál tiene más funciones, sino en cuál te sirve mejor para lo que haces más seguido.</p>
+                <p class="section-text" style="color:var(--primary); font-weight:700; margin-bottom:1rem;">Primero, elige bien la herramienta</p>
+
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <span class="tool-icon">💜</span>
+                            <div>
+                                <div class="tool-name">Nequi</div>
+                                <div class="tool-owner">Bancolombia</div>
+                            </div>
+                        </div>
+                        <span class="tool-tag tag-popular">Uso cotidiano</span>
+                        <div class="tool-summary-block">
+                            <div class="tool-summary-label">Mejor para</div>
+                            <div class="tool-summary-text">Enviar y recibir plata rápido, pagar cosas del día a día y separar gastos pequeños.</div>
+                        </div>
+                        <div class="tool-summary-block">
+                            <div class="tool-summary-label">Lo bueno</div>
+                            <div class="tool-summary-text">Es simple de abrir, se mueve fácil entre personas y te ayuda a ordenar dinero en bolsillos sin cuota de manejo.</div>
+                        </div>
+                        <div class="tool-summary-block">
+                            <div class="tool-summary-label">Conviene vigilar</div>
+                            <div class="tool-summary-text">Tiene topes y no reemplaza todas las funciones de una cuenta bancaria más completa.</div>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <span class="tool-icon">🟠</span>
+                            <div>
+                                <div class="tool-name">Daviplata</div>
+                                <div class="tool-owner">Davivienda</div>
+                            </div>
+                        </div>
+                        <span class="tool-tag tag-free">Pagos sencillos</span>
+                        <div class="tool-summary-block">
+                            <div class="tool-summary-label">Mejor para</div>
+                            <div class="tool-summary-text">Pagos, recargas y personas que ya reciben dinero o subsidios por esa vía.</div>
+                        </div>
+                        <div class="tool-summary-block">
+                            <div class="tool-summary-label">Lo bueno</div>
+                            <div class="tool-summary-text">Suele sentirse directa para lo básico y puede funcionar bien si tu entorno ya la usa.</div>
+                        </div>
+                        <div class="tool-summary-block">
+                            <div class="tool-summary-label">Conviene vigilar</div>
+                            <div class="tool-summary-text">No siempre ofrece la misma amplitud para mover dinero fuera de su ecosistema o ver finanzas más completas.</div>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <span class="tool-icon">🏦</span>
+                            <div>
+                                <div class="tool-name">App de tu banco</div>
+                                <div class="tool-owner">Bancolombia / Davivienda / etc.</div>
+                            </div>
+                        </div>
+                        <span class="tool-tag tag-full">Más completa</span>
+                        <div class="tool-summary-block">
+                            <div class="tool-summary-label">Mejor para</div>
+                            <div class="tool-summary-text">Ver tu cuenta completa, revisar extractos, manejar créditos y hacer movimientos más formales o grandes.</div>
+                        </div>
+                        <div class="tool-summary-block">
+                            <div class="tool-summary-label">Lo bueno</div>
+                            <div class="tool-summary-text">Te da más contexto: historial, productos del banco, transferencias ACH y pagos más completos.</div>
+                        </div>
+                        <div class="tool-summary-block">
+                            <div class="tool-summary-label">Conviene vigilar</div>
+                            <div class="tool-summary-text">Puede tener más pasos, más menús y, en algunos casos, cobros que no siempre ves desde el principio.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DECISION TOOL -->
+                <div class="decision-tool">
+                    <div class="decision-title">¿Qué necesitas hacer más seguido?</div>
+                    <div class="decision-q">
+                        <div class="decision-q-text">Elige la tarea que más repites y mira qué herramienta suele encajar mejor.</div>
+                        <div class="decision-options">
+                            <button class="decision-opt" onclick="chooseNeed('quick', this)">Enviar o recibir plata rápido</button>
+                            <button class="decision-opt" onclick="chooseNeed('pay', this)">Pagar servicios, recargar o comprar</button>
+                            <button class="decision-opt" onclick="chooseNeed('full', this)">Ver mi cuenta completa y mover montos más grandes</button>
+                        </div>
+                    </div>
+
+                    <div class="decision-result" id="decision-result">
+                        <div class="decision-recommendation" id="decision-rec"></div>
+                        <div class="decision-why" id="decision-why"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FEE AUDIT -->
+        <div class="section">
+            <div class="section-card">
+                <h2 class="section-title">Lo que muestra el ejercicio</h2>
+                <p class="section-text">
+                    La herramienta correcta no es solo la que funciona. También importa cuánto te cobra por acompañarte en lo cotidiano.
+                </p>
+                <h3 style="color:var(--primary); margin-bottom:0.75rem;">Cobros pequeños que vale la pena revisar</h3>
+                <p class="section-text">A veces no es un cobro grande. Son varios cobros pequeños que se repiten y terminan quitando espacio a tu presupuesto.</p>
+
+                <table class="fee-table">
+                    <thead>
+                        <tr>
+                            <th>Cobro</th>
+                            <th>Costo típico</th>
+                            <th>¿Se puede evitar?</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="fee-name">Cuota de manejo tarjeta débito</td>
+                            <td class="fee-cost high">$8.000–$18.000/mes</td>
+                            <td class="fee-avoid">Sí — Nequi y Daviplata no cobran. Algunos bancos la exoneran.</td>
+                        </tr>
+                        <tr>
+                            <td class="fee-name">Retiro en cajero propio banco</td>
+                            <td class="fee-cost low">Gratis (límite de retiros)</td>
+                            <td class="fee-avoid">Usa solo cajeros de tu banco. Más de ~4 retiros/mes puede cobrar.</td>
+                        </tr>
+                        <tr>
+                            <td class="fee-name">Retiro en cajero otro banco (ATM)</td>
+                            <td class="fee-cost high">$3.000–$7.000 por retiro</td>
+                            <td class="fee-avoid">Sí — planifica retiros para hacerlos en tu banco.</td>
+                        </tr>
+                        <tr>
+                            <td class="fee-name">Transferencia interbancaria (ACH)</td>
+                            <td class="fee-cost low">$700–$3.000</td>
+                            <td class="fee-avoid">Usa Nequi o Daviplata para transferir entre amigos sin costo.</td>
+                        </tr>
+                        <tr>
+                            <td class="fee-name">Cuota de manejo tarjeta crédito</td>
+                            <td class="fee-cost high">$15.000–$40.000/mes</td>
+                            <td class="fee-avoid">Negocia exoneración si pagas puntual. Algunas sin cuota en mercado.</td>
+                        </tr>
+                        <tr>
+                            <td class="fee-name">SMS bancarios / alertas</td>
+                            <td class="fee-cost low">$1.500–$5.000/mes</td>
+                            <td class="fee-avoid">Activa alertas por app (gratis) en vez de SMS.</td>
+                        </tr>
+                        <tr>
+                            <td class="fee-name">Seguro de tarjeta (fraude)</td>
+                            <td class="fee-cost low">$5.000–$12.000/mes</td>
+                            <td class="fee-avoid">Opcional. La mayoría de bancos protegen por ley si reportas a tiempo.</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="monthly-fee-calc">
+                    <div style="color:var(--primary); font-weight:700; margin-bottom:1rem;">Haz una cuenta rápida con tus cobros del mes</div>
+                    <p class="section-text" style="font-size:0.9rem; margin-bottom:1rem;">Escribe valores como <strong style="color:var(--light);">15000</strong> o <strong style="color:var(--light);">3000</strong>. La calculadora suma el costo mensual y anual.</p>
+                    <div class="fee-inputs" id="fee-inputs">
+                        <!-- filled by JS -->
+                    </div>
+                    <div class="fee-result-box">
+                        <div class="fee-total-monthly" id="fee-total-monthly">$0</div>
+                        <div class="fee-total-annual">Al año: <span id="fee-total-annual">$0</span></div>
+                        <div id="fee-advice" style="color:var(--dim); font-size:0.85rem; margin-top:0.75rem;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECURITY QUIZ -->
+        <div class="section">
+            <div class="section-card">
+                <h2 class="section-title">Ahora pensemos en seguridad</h2>
+                <div class="security-bridge">Elegir bien la herramienta y revisar cobros ayuda mucho. Pero todavía falta una parte: usarla sin regalar claves, códigos o accesos por descuido.</div>
+                <h3 style="color:var(--primary); margin-bottom:0.75rem;">Hagamos una prueba</h3>
+                <p class="section-text">Pon a prueba tu criterio con situaciones simples que se repiten mucho en la vida real.</p>
+
+                <div class="quiz-container" id="security-quiz"></div>
+                <div class="quiz-score-bar" id="quiz-score-bar">
+                    <div class="score-big" id="score-big"></div>
+                    <div class="score-label" id="score-label"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ACTION STEPS -->
+        <div class="section">
+            <div class="section-card">
+                <h2 class="section-title">Un pequeño paso esta semana</h2>
+                <p class="section-text">No necesitas cambiar todo hoy. Elige una sola acción de esta lista y hazla con calma.</p>
+                <div class="steps-grid">
+                    <div class="step-item">
+                        <div class="step-num-circle">1</div>
+                        <div class="step-content">
+                            <div class="step-title">Define cuál va a ser tu herramienta principal para lo cotidiano</div>
+                            <div class="step-desc">No por moda, sino por la tarea que repites más seguido: enviar, pagar, revisar o mover dinero.</div>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-num-circle">2</div>
+                        <div class="step-content">
+                            <div class="step-title">Revisa tu último extracto o historial y anota un cobro que quieras entender mejor</div>
+                            <div class="step-desc">A veces una sola comisión repetida explica por qué sientes que el dinero se va sin darte cuenta.</div>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-num-circle">3</div>
+                        <div class="step-content">
+                            <div class="step-title">Activa alertas y decide una regla simple de seguridad</div>
+                            <div class="step-desc">Por ejemplo: nunca compartir códigos, nunca entrar por enlaces de mensajes y siempre verificar desde la app oficial.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="program-lesson-section">
+            <div class="program-lesson-kicker">Antes de seguir</div>
+            <h2 class="program-lesson-title program-lesson-title--small">Qué conviene tener claro antes de la próxima semana</h2>
+            <div class="program-lesson-reflections">
+                <div class="program-lesson-question">
+                    <p class="program-lesson-text"><strong>¿Qué operación haces más seguido desde el celular?</strong><br>La respuesta te ayuda a elegir con más criterio.</p>
+                </div>
+                <div class="program-lesson-question">
+                    <p class="program-lesson-text"><strong>¿Qué cobro pequeño vale la pena revisar este mes?</strong><br>A veces una sola comisión repetida explica más de lo que parece.</p>
+                </div>
+                <div class="program-lesson-question">
+                    <p class="program-lesson-text"><strong>¿Qué señal te haría pausar si un mensaje dice venir de tu banco?</strong><br>Tener esa respuesta clara te ayuda a reaccionar mejor cuando aparezca un intento de engaño.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="next-week">
+            <h3>Lo que sigue</h3>
+            <p>Hoy vimos que una herramienta digital útil no es solo la que funciona. Es la que entiendes, controlas y usas con criterio.</p>
+            <p>La próxima semana vamos a usar esa claridad para algo más concreto:</p>
+            <p><strong>definir metas de ahorro y convertirlas en un plan que sí se pueda sostener</strong></p>
+            <a href="../semana-8/" class="btn btn-primary" style="text-decoration:none; margin-top:0.5rem; display:inline-block;">Continuar a Semana 8 →</a>
+        </div>
+    </div>
+
+    <script>
+        function fmt(n) {
+            return new Intl.NumberFormat('es-CO', { style:'currency', currency:'COP', minimumFractionDigits:0 }).format(n);
+        }
+
+        // ---------- DECISION TOOL ----------
+        const needRecommendations = {
+            quick: {
+                rec: 'Nequi suele ser el punto de partida más simple.',
+                why: 'Encaja bien si repites envíos entre personas, pagos rápidos y separación de gastos pequeños. Si luego necesitas más contexto, la puedes complementar con la app de tu banco.'
+            },
+            pay: {
+                rec: 'Daviplata o Nequi pueden resolver bien lo cotidiano.',
+                why: 'Si lo que más haces es pagar, recargar o comprar, suele convenir la herramienta que ya se usa más en tu entorno y te pone menos fricción.'
+            },
+            full: {
+                rec: 'La app de tu banco te da más control.',
+                why: 'Si necesitas extractos, productos del banco, transferencias formales o movimientos más grandes, esa app suele darte más contexto aunque sea menos ágil.'
+            }
+        };
+
+        function chooseNeed(need, button) {
+            const result = document.getElementById('decision-result');
+            const rec = document.getElementById('decision-rec');
+            const why = document.getElementById('decision-why');
+            const recommendation = needRecommendations[need];
+
+            button.closest('.decision-options').querySelectorAll('.decision-opt').forEach(b => b.classList.remove('selected'));
+            button.classList.add('selected');
+            result.classList.add('visible');
+            rec.textContent = recommendation.rec;
+            why.textContent = recommendation.why;
+        }
+
+        // ---------- SECURITY QUIZ ----------
+        const quizData = [
+            {
+                q: 'Recibes este SMS a tu celular:',
+                scenario: '"BanColombia: Tu cuenta ha sido BLOQUEADA. Llama al 350-282-9100 para desbloquear. Urgente."',
+                options: [
+                    { text: 'Llamo al número del SMS inmediatamente', correct: false },
+                    { text: 'Llamo al número oficial de Bancolombia que está en su web o en mi tarjeta', correct: true },
+                    { text: 'Entro a la app y cambio mi clave por precaución', correct: false },
+                ],
+                explanation: 'El número del SMS es falso. Los bancos nunca envían números alternativos por SMS. Siempre usa el número impreso en tu tarjeta o la web oficial del banco. Nunca llames a números que lleguen por mensaje.'
+            },
+            {
+                q: '¿Cuál de estas contraseñas es más segura para tu app bancaria?',
+                scenario: null,
+                options: [
+                    { text: '1998 (mi año de nacimiento)', correct: false },
+                    { text: '1234 (fácil de recordar)', correct: false },
+                    { text: 'Una frase: "miGato3TieneSombrero"', correct: true },
+                ],
+                explanation: 'Las contraseñas largas con combinación de palabras, números y mayúsculas son mucho más difíciles de adivinar. No uses datos personales: cumpleaños, cédula, o nombre.'
+            },
+            {
+                q: 'Alguien te llama diciendo ser del banco. Te pide el código de 6 dígitos que acaba de llegar a tu celular. ¿Qué haces?',
+                scenario: '"Señor/a, estamos verificando su identidad. Por favor dígame el código que le llegó al celular."',
+                options: [
+                    { text: 'Le doy el código porque sí me parece que es del banco', correct: false },
+                    { text: 'No doy el código. Cuelgo y llamo directamente al banco.', correct: true },
+                    { text: 'Le pido que me dé el número del banco para verificar', correct: false },
+                ],
+                explanation: 'Los códigos OTP (One Time Password) son privados. NADIE del banco los pide. Ese código sirve para acceder a tu cuenta — si lo compartes, el estafador entra como si fuera tú. Cuelga siempre.'
+            },
+            {
+                q: 'Conectas tu celular a un Wi-Fi público en un centro comercial. ¿Qué evitas hacer?',
+                scenario: 'Wi-Fi: "OPEN_MALL_GRATIS" — sin contraseña',
+                options: [
+                    { text: 'Ver redes sociales', correct: false },
+                    { text: 'Entrar a la app del banco o hacer transferencias', correct: true },
+                    { text: 'Revisar el correo electrónico personal', correct: false },
+                ],
+                explanation: 'En redes Wi-Fi públicas sin contraseña, alguien con conocimiento técnico puede interceptar tu tráfico. Usa datos móviles para todo lo bancario, o una VPN si usas Wi-Fi pública.'
+            },
+        ];
+
+        let answeredQuestions = 0;
+        let correctAnswers = 0;
+
+        function buildQuiz() {
+            const container = document.getElementById('security-quiz');
+            container.innerHTML = '';
+            answeredQuestions = 0;
+            correctAnswers = 0;
+
+            quizData.forEach((q, qi) => {
+                const div = document.createElement('div');
+                div.className = 'quiz-q';
+                div.id = `sq-${qi}`;
+                div.innerHTML = `
+                    <div class="quiz-q-text">Pregunta ${qi + 1}: ${q.q}</div>
+                    ${q.scenario ? `<div class="quiz-scenario-box">${q.scenario}</div>` : ''}
+                    <div class="quiz-options-list">
+                        ${q.options.map((opt, oi) => `
+                            <button class="quiz-opt" onclick="answerQuiz(${qi}, ${oi}, ${opt.correct})">${opt.text}</button>
+                        `).join('')}
+                    </div>
+                    <div class="quiz-explanation" id="sq-exp-${qi}">${q.explanation}</div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function answerQuiz(qi, oi, isCorrect) {
+            const qDiv = document.getElementById(`sq-${qi}`);
+            const btns = qDiv.querySelectorAll('.quiz-opt');
+            if (btns[oi].disabled) return;
+
+            btns.forEach(b => b.disabled = true);
+            btns[oi].classList.add(isCorrect ? 'correct' : 'incorrect');
+
+            if (!isCorrect) {
+                const correctIdx = quizData[qi].options.findIndex(o => o.correct);
+                btns[correctIdx].classList.add('correct');
+            }
+
+            document.getElementById(`sq-exp-${qi}`).classList.add('show');
+
+            answeredQuestions++;
+            if (isCorrect) correctAnswers++;
+
+            if (answeredQuestions === quizData.length) {
+                showScore();
+            }
+        }
+
+        function showScore() {
+            const bar = document.getElementById('quiz-score-bar');
+            bar.classList.add('visible');
+            const pct = Math.round((correctAnswers / quizData.length) * 100);
+            const big = document.getElementById('score-big');
+            big.textContent = `${correctAnswers}/${quizData.length}`;
+            big.style.color = pct >= 75 ? 'var(--yellow)' : pct >= 50 ? 'var(--yellow)' : 'var(--red)';
+
+            const messages = {
+                100: '¡Perfecto! Estás listo para enfrentar estafadores digitales.',
+                75: 'Bien. Repasa las preguntas incorrectas — cada una puede costarte dinero real.',
+                50: 'Hay área de mejora. Relee las explicaciones con cuidado.',
+                0: 'Comparte esta semana con tu familia — todos necesitan saber esto.'
+            };
+
+            const key = pct === 100 ? 100 : pct >= 75 ? 75 : pct >= 50 ? 50 : 0;
+            document.getElementById('score-label').textContent = messages[key];
+            bar.scrollIntoView({ behavior:'smooth', block:'nearest' });
+        }
+
+        // ---------- FEE CALCULATOR ----------
+        const feeItems = [
+            { name: 'Cuota manejo cuenta/tarjeta', placeholder: '15000' },
+            { name: 'Retiros cajeros externos', placeholder: '0' },
+            { name: 'Transferencias interbancarias', placeholder: '0' },
+            { name: 'SMS bancarios / alertas', placeholder: '3000' },
+            { name: 'Seguros opcionales tarjeta', placeholder: '0' },
+            { name: 'Otros cobros del banco', placeholder: '0' },
+        ];
+
+        function parseFeeValue(value) {
+            const cleaned = String(value || '').replace(/[^\d]/g, '');
+            return cleaned ? parseInt(cleaned, 10) : 0;
+        }
+
+        function buildFeeCalc() {
+            const container = document.getElementById('fee-inputs');
+            container.innerHTML = '';
+
+            feeItems.forEach((item, i) => {
+                const div = document.createElement('div');
+                div.innerHTML = `
+                    <label class="fee-label" for="fee-${i}">${item.name}</label>
+                    <input type="text" id="fee-${i}" class="fee-input" placeholder="${item.placeholder}" inputmode="numeric">
+                `;
+                container.appendChild(div);
+                div.querySelector('.fee-input').addEventListener('input', calcFees);
+            });
+
+            calcFees();
+        }
+
+        function calcFees() {
+            let total = 0;
+            feeItems.forEach((_, i) => {
+                total += parseFeeValue(document.getElementById(`fee-${i}`)?.value);
+            });
+
+            document.getElementById('fee-total-monthly').textContent = fmt(total);
+            document.getElementById('fee-total-annual').textContent = fmt(total * 12);
+
+            const advice = document.getElementById('fee-advice');
+            if (total === 0) {
+                advice.textContent = 'Si llenas los cobros que sí pagas, verás cuánto suman al mes y al año.';
+            } else if (total > 50000) {
+                advice.textContent = `Estás pagando ${fmt(total * 12)} al año solo en comisiones. Es dinero que podría ir a tu fondo de emergencia o a una meta de ahorro.`;
+            } else if (total > 15000) {
+                advice.textContent = 'Podrías reducir esto aún más. Llama al banco y pregunta por exoneraciones.';
+            } else {
+                advice.textContent = '¡Bien manejado! Sigue revisando cada mes que no aparezcan cobros nuevos.';
+            }
+        }
+
+        // Init
+        buildQuiz();
+        buildFeeCalc();
+    </script>
+    <script src="../program-state.js"></script>
+</body>
+</html>
