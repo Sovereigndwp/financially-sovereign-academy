@@ -11,6 +11,11 @@
       ],
       "destination": "https://financiallysovereign.academy/:path*",
       "permanent": true
+    },
+    {
+      "source": "/programa-colombia/semana-10/experimento-dos-economias/",
+      "destination": "/programa-colombia/semana-10/experimento-dos-economias",
+      "permanent": true
     }
   ],
   "headers": [
