@@ -11,11 +11,6 @@
       ],
       "destination": "https://financiallysovereign.academy/:path*",
       "permanent": true
-    },
-    {
-      "source": "/programa-colombia/semana-10/experimento-dos-economias/",
-      "destination": "/programa-colombia/semana-10/experimento-dos-economias",
-      "permanent": true
     }
   ],
   "headers": [
@@ -39,6 +34,14 @@
     }
   ],
   "rewrites": [
+    {
+      "source": "/programa-colombia/semana-10/experimento-dos-economias",
+      "destination": "/programa-colombia/semana-10/experimento-dos-economias/index.html"
+    },
+    {
+      "source": "/programa-colombia/semana-10/experimento-dos-economias/",
+      "destination": "/programa-colombia/semana-10/experimento-dos-economias/index.html"
+    },
     {
       "source": "/institutional/corporations/colombia",
       "destination": "https://bitcoinsovereign.academy/institutional/corporations/colombia/"
