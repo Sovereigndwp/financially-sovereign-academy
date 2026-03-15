@@ -186,6 +186,190 @@
             background: rgba(239, 68, 68, 0.1);
             color: var(--fsa-error);
         }
+
+        /* Accordion Styles for Credit Myths */
+        .myths-accordion {
+            margin: 2rem 0;
+        }
+
+        .myth-item {
+            border: 2px solid var(--fsa-border-medium);
+            border-radius: var(--radius-lg);
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .myth-header {
+            background: var(--fsa-bg-card);
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all var(--transition-base);
+        }
+
+        .myth-header:hover {
+            background: rgba(239, 68, 68, 0.05);
+        }
+
+        .myth-header h3 {
+            color: var(--fsa-error);
+            margin: 0;
+            font-size: var(--font-size-lg);
+        }
+
+        .myth-toggle {
+            font-size: 1.5rem;
+            color: var(--fsa-error);
+            transition: transform 0.3s ease;
+        }
+
+        .myth-content {
+            padding: 1.5rem;
+            background: var(--fsa-bg-secondary);
+            border-top: 1px solid var(--fsa-border-subtle);
+            display: none;
+        }
+
+        .myth-content.open {
+            display: block;
+        }
+
+        .myth-item.open .myth-toggle {
+            transform: rotate(180deg);
+        }
+
+        .myth-content p {
+            margin-bottom: 1rem;
+            color: var(--fsa-text-primary);
+            line-height: 1.7;
+        }
+
+        .myth-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Accordion Styles for Building Credit */
+        .build-credit-accordion {
+            margin: 2rem 0;
+        }
+
+        .build-item {
+            border: 2px solid var(--fsa-border-medium);
+            border-radius: var(--radius-lg);
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .build-header {
+            background: var(--fsa-bg-card);
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all var(--transition-base);
+        }
+
+        .build-header:hover {
+            background: rgba(16, 185, 129, 0.05);
+        }
+
+        .build-header h3 {
+            color: var(--fsa-green);
+            margin: 0;
+            font-size: var(--font-size-lg);
+        }
+
+        .build-toggle {
+            font-size: 1.5rem;
+            color: var(--fsa-green);
+            transition: transform 0.3s ease;
+        }
+
+        .build-content {
+            padding: 1.5rem;
+            background: var(--fsa-bg-secondary);
+            border-top: 1px solid var(--fsa-border-subtle);
+            display: none;
+        }
+
+        .build-content.open {
+            display: block;
+        }
+
+        .build-item.open .build-toggle {
+            transform: rotate(180deg);
+        }
+
+        .build-content p {
+            margin-bottom: 1rem;
+            color: var(--fsa-text-primary);
+            line-height: 1.7;
+        }
+
+        .build-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Reflection Question Component */
+        .reflection-question {
+            margin: 2rem 0;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(59, 130, 246, 0.05));
+            border-left: 4px solid #3b82f6;
+            border-radius: 0.5rem;
+        }
+
+        .reflection-question .question-header {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #60a5fa;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .reflection-question .question-text {
+            font-size: 1.15rem;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 0.75rem;
+        }
+
+        .reflection-question .question-subtitle {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.65);
+            font-style: italic;
+        }
+
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            .myth-header, .build-header {
+                padding: 1rem;
+            }
+            
+            .myth-header h3, .build-header h3 {
+                font-size: var(--font-size-base);
+                line-height: 1.4;
+            }
+            
+            .myth-content, .build-content {
+                padding: 1rem;
+            }
+            
+            .reflection-question {
+                padding: 1.5rem;
+            }
+            
+            .reflection-question .question-header {
+                font-size: 1.25rem;
+            }
+            
+            .reflection-question .question-text {
+                font-size: 1rem;
+            }
+        }
     </style>
     <link rel="stylesheet" href="../css/lab-guide.css">
     <script src="../js/fsa-live-data.js"></script>
@@ -207,14 +391,14 @@
 
 
         <!-- Reflection Question -->
-        <div style="margin: 2rem 0; padding: 2rem; background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(59, 130, 246, 0.05)); border-left: 4px solid #3b82f6; border-radius: 0.5rem;">
-            <div style="font-size: 1.5rem; font-weight: 700; color: #60a5fa; margin-bottom: 1rem; font-style: italic;">
+        <div class="reflection-question">
+            <div class="question-header">
                 🤔 The real risk question...
             </div>
-            <p style="font-size: 1.15rem; line-height: 1.7; color: rgba(255, 255, 255, 0.9); margin-bottom: 0.75rem;">
+            <p class="question-text">
                 <strong>If I take on debt, who is really taking the risk?</strong>
             </p>
-            <p style="font-size: 0.95rem; color: rgba(255, 255, 255, 0.65); font-style: italic;">
+            <p class="question-subtitle">
                 Think about it: lenders charge YOU interest for the "risk" of lending to you. But who loses if you can't pay?
             </p>
         </div>
@@ -401,25 +585,49 @@
         <section class="section">
             <h2 class="section-title">Common Myths About Credit Scores</h2>
             
-            <div class="content-block">
-                <h3>Myth #1: "Checking my credit hurts my score"</h3>
-                <p><strong>False.</strong> Checking your own credit is a "soft inquiry" and doesn't affect your score.</p>
-                <p>Only hard inquiries (from lenders when you apply for credit) affect your score.</p>
-            </div>
+            <p style="margin-bottom: 2rem; color: var(--fsa-text-secondary); font-size: var(--font-size-lg);">Click each myth to see the truth:</p>
+            
+            <div class="myths-accordion">
+                <div class="myth-item">
+                    <div class="myth-header" onclick="toggleMythItem(this)">
+                        <h3>Myth #1: "Checking my credit hurts my score"</h3>
+                        <span class="myth-toggle">▼</span>
+                    </div>
+                    <div class="myth-content">
+                        <p><strong>False.</strong> Checking your own credit is a "soft inquiry" and doesn't affect your score.</p>
+                        <p>Only hard inquiries (from lenders when you apply for credit) affect your score.</p>
+                    </div>
+                </div>
 
-            <div class="content-block">
-                <h3>Myth #2: "Closing credit cards improves my score"</h3>
-                <p><strong>False.</strong> Closing cards reduces your available credit (increases utilization) and shortens your credit history. Both hurt your score.</p>
-            </div>
+                <div class="myth-item">
+                    <div class="myth-header" onclick="toggleMythItem(this)">
+                        <h3>Myth #2: "Closing credit cards improves my score"</h3>
+                        <span class="myth-toggle">▼</span>
+                    </div>
+                    <div class="myth-content">
+                        <p><strong>False.</strong> Closing cards reduces your available credit (increases utilization) and shortens your credit history. Both hurt your score.</p>
+                    </div>
+                </div>
 
-            <div class="content-block">
-                <h3>Myth #3: "I need to carry a balance to build credit"</h3>
-                <p><strong>False.</strong> You don't need to pay interest to build credit. Just use your card and pay it off in full every month.</p>
-            </div>
+                <div class="myth-item">
+                    <div class="myth-header" onclick="toggleMythItem(this)">
+                        <h3>Myth #3: "I need to carry a balance to build credit"</h3>
+                        <span class="myth-toggle">▼</span>
+                    </div>
+                    <div class="myth-content">
+                        <p><strong>False.</strong> You don't need to pay interest to build credit. Just use your card and pay it off in full every month.</p>
+                    </div>
+                </div>
 
-            <div class="content-block">
-                <h3>Myth #4: "Income affects my credit score"</h3>
-                <p><strong>False.</strong> Your salary, savings, and net worth don't affect your credit score. Only your borrowing behavior.</p>
+                <div class="myth-item">
+                    <div class="myth-header" onclick="toggleMythItem(this)">
+                        <h3>Myth #4: "Income affects my credit score"</h3>
+                        <span class="myth-toggle">▼</span>
+                    </div>
+                    <div class="myth-content">
+                        <p><strong>False.</strong> Your salary, savings, and net worth don't affect your credit score. Only your borrowing behavior.</p>
+                    </div>
+                </div>
             </div>
 
             <!-- Interactive Lab: Minimum Payment Trap -->
@@ -439,24 +647,38 @@
         <section class="section">
             <h2 class="section-title">How to Build Credit From Zero</h2>
             
-            <div class="content-block">
-                <h3>Starting With No Credit History</h3>
-                <p><strong>Option 1: Secured Credit Card</strong></p>
-                <p>Put down $200-500 as collateral. Use it like a normal card. Pay in full each month. After 6-12 months, upgrade to unsecured.</p>
-                
-                <p><strong>Option 2: Credit Builder Loan</strong></p>
-                <p>Some credit unions offer these. You "borrow" money that gets held in savings. As you pay it back, it builds credit.</p>
-                
-                <p><strong>Option 3: Become an Authorized User</strong></p>
-                <p>If a family member has good credit, ask to be added as an authorized user. Their history can help yours.</p>
-            </div>
+            <p style="margin-bottom: 2rem; color: var(--fsa-text-secondary); font-size: var(--font-size-lg);">Click each section to learn your options:</p>
+            
+            <div class="build-credit-accordion">
+                <div class="build-item">
+                    <div class="build-header" onclick="toggleBuildItem(this)">
+                        <h3>Starting With No Credit History</h3>
+                        <span class="build-toggle">▼</span>
+                    </div>
+                    <div class="build-content">
+                        <p><strong>Option 1: Secured Credit Card</strong></p>
+                        <p>Put down $200-500 as collateral. Use it like a normal card. Pay in full each month. After 6-12 months, upgrade to unsecured.</p>
+                        
+                        <p><strong>Option 2: Credit Builder Loan</strong></p>
+                        <p>Some credit unions offer these. You "borrow" money that gets held in savings. As you pay it back, it builds credit.</p>
+                        
+                        <p><strong>Option 3: Become an Authorized User</strong></p>
+                        <p>If a family member has good credit, ask to be added as an authorized user. Their history can help yours.</p>
+                    </div>
+                </div>
 
-            <div class="content-block">
-                <h3>Timeline: Building Good Credit</h3>
-                <p><strong>6 months:</strong> Enough history to get a basic credit score</p>
-                <p><strong>12 months:</strong> Can qualify for better credit cards and small loans</p>
-                <p><strong>24 months:</strong> Good credit score (700+) if you've done everything right</p>
-                <p><strong>7 years:</strong> Most negative marks fall off your report</p>
+                <div class="build-item">
+                    <div class="build-header" onclick="toggleBuildItem(this)">
+                        <h3>Timeline: Building Good Credit</h3>
+                        <span class="build-toggle">▼</span>
+                    </div>
+                    <div class="build-content">
+                        <p><strong>6 months:</strong> Enough history to get a basic credit score</p>
+                        <p><strong>12 months:</strong> Can qualify for better credit cards and small loans</p>
+                        <p><strong>24 months:</strong> Good credit score (700+) if you've done everything right</p>
+                        <p><strong>7 years:</strong> Most negative marks fall off your report</p>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -601,6 +823,46 @@
             progressManager.setModuleComplete(4, { timeSpent: 0, score: 100 });
             alert('Module 4 complete! Next: Module 5 - Debt Strategy.');
             window.location.href = '../index.html';
+        }
+
+        // Accordion Toggle for Credit Myths
+        function toggleMythItem(header) {
+            const item = header.parentElement;
+            const content = item.querySelector('.myth-content');
+            const toggle = item.querySelector('.myth-toggle');
+            
+            // Close all other items
+            const allItems = document.querySelectorAll('.myth-item');
+            allItems.forEach(otherItem => {
+                if (otherItem !== item) {
+                    otherItem.classList.remove('open');
+                    otherItem.querySelector('.myth-content').classList.remove('open');
+                }
+            });
+            
+            // Toggle current item
+            item.classList.toggle('open');
+            content.classList.toggle('open');
+        }
+
+        // Accordion Toggle for Building Credit
+        function toggleBuildItem(header) {
+            const item = header.parentElement;
+            const content = item.querySelector('.build-content');
+            const toggle = item.querySelector('.build-toggle');
+            
+            // Close all other items
+            const allItems = document.querySelectorAll('.build-item');
+            allItems.forEach(otherItem => {
+                if (otherItem !== item) {
+                    otherItem.classList.remove('open');
+                    otherItem.querySelector('.build-content').classList.remove('open');
+                }
+            });
+            
+            // Toggle current item
+            item.classList.toggle('open');
+            content.classList.toggle('open');
         }
     </script>
 
