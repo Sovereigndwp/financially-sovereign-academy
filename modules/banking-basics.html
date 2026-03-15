@@ -286,6 +286,157 @@
             background: rgba(239, 68, 68, 0.1);
             color: var(--fsa-error);
         }
+
+        /* Accordion Styles for Bank Types Comparison */
+        .bank-accordion {
+            margin: 2rem 0;
+        }
+
+        .bank-item {
+            border: 2px solid var(--fsa-border-medium);
+            border-radius: var(--radius-lg);
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .bank-header {
+            background: var(--fsa-bg-card);
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all var(--transition-base);
+        }
+
+        .bank-header:hover {
+            background: rgba(16, 185, 129, 0.05);
+        }
+
+        .bank-header h3 {
+            color: var(--fsa-green);
+            margin: 0;
+            font-size: var(--font-size-lg);
+        }
+
+        .bank-toggle {
+            font-size: 1.5rem;
+            color: var(--fsa-green);
+            transition: transform 0.3s ease;
+        }
+
+        .bank-content {
+            padding: 1.5rem;
+            background: var(--fsa-bg-secondary);
+            border-top: 1px solid var(--fsa-border-subtle);
+            display: none;
+        }
+
+        .bank-content.open {
+            display: block;
+        }
+
+        .bank-item.open .bank-toggle {
+            transform: rotate(180deg);
+        }
+
+        .bank-content .pros-cons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .bank-content .pros-cons {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .pros, .cons {
+            padding: 1rem;
+            border-radius: var(--radius-md);
+        }
+
+        .pros {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .cons {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .pros h4 {
+            color: var(--fsa-success);
+            margin-top: 0;
+            font-size: var(--font-size-base);
+        }
+
+        .cons h4 {
+            color: var(--fsa-error);
+            margin-top: 0;
+            font-size: var(--font-size-base);
+        }
+
+        /* Reflection Question Component */
+        .reflection-question {
+            margin: 2rem 0;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(59, 130, 246, 0.05));
+            border-left: 4px solid #3b82f6;
+            border-radius: 0.5rem;
+        }
+
+        .reflection-question .question-header {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #60a5fa;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .reflection-question .question-text {
+            font-size: 1.15rem;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 0.75rem;
+        }
+
+        .reflection-question .question-subtitle {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.65);
+            font-style: italic;
+        }
+
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            .bank-header {
+                padding: 1rem;
+            }
+            
+            .bank-header h3 {
+                font-size: var(--font-size-base);
+                line-height: 1.4;
+            }
+            
+            .bank-content {
+                padding: 1rem;
+            }
+            
+            .reflection-question {
+                padding: 1.5rem;
+            }
+            
+            .reflection-question .question-header {
+                font-size: 1.25rem;
+            }
+            
+            .reflection-question .question-text {
+                font-size: 1rem;
+            }
+        }
     </style>
     <link rel="stylesheet" href="../css/lab-guide.css">
     <script src="../js/fsa-live-data.js"></script>
@@ -307,14 +458,14 @@
 
 
         <!-- Reflection Question -->
-        <div style="margin: 2rem 0; padding: 2rem; background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(59, 130, 246, 0.05)); border-left: 4px solid #3b82f6; border-radius: 0.5rem;">
-            <div style="font-size: 1.5rem; font-weight: 700; color: #60a5fa; margin-bottom: 1rem; font-style: italic;">
+        <div class="reflection-question">
+            <div class="question-header">
                 🤔 Follow the money...
             </div>
-            <p style="font-size: 1.15rem; line-height: 1.7; color: rgba(255, 255, 255, 0.9); margin-bottom: 0.75rem;">
+            <p class="question-text">
                 <strong>Who really profits from my banking habits?</strong>
             </p>
-            <p style="font-size: 0.95rem; color: rgba(255, 255, 255, 0.65); font-style: italic;">
+            <p class="question-subtitle">
                 Those "small" fees add up. But where does that money go, and what are you trading for "convenience"?
             </p>
         </div>
@@ -545,29 +696,101 @@
             
             <div class="content-block">
                 <h3>Traditional Banks vs Online Banks vs Credit Unions</h3>
+                <p style="margin-bottom: 2rem; color: var(--fsa-text-secondary);">Click each type to compare pros and cons:</p>
                 
-                <table class="comparison-table">
-                    <tr>
-                        <th>Type</th>
-                        <th>Pros</th>
-                        <th>Cons</th>
-                    </tr>
-                    <tr>
-                        <td><strong>Traditional Banks</strong><br>(Chase, Wells Fargo, BofA)</td>
-                        <td>Physical branches, ATMs everywhere</td>
-                        <td>Low interest rates, high fees, terrible customer service</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Online Banks</strong><br>(Ally, Marcus, Discover)</td>
-                        <td>High interest (4-5%), no fees, great apps</td>
-                        <td>No physical branches, transfers take 1-2 days</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Credit Unions</strong><br>(Local, member-owned)</td>
-                        <td>Lower fees, better rates, community-focused</td>
-                        <td>Fewer ATMs, older technology</td>
-                    </tr>
-                </table>
+                <div class="bank-accordion">
+                    <div class="bank-item">
+                        <div class="bank-header" onclick="toggleBankItem(this)">
+                            <h3>Traditional Banks (Chase, Wells Fargo, BofA)</h3>
+                            <span class="bank-toggle">▼</span>
+                        </div>
+                        <div class="bank-content">
+                            <p>The big names with branches everywhere. What you gain in convenience, you pay for in fees.</p>
+                            <div class="pros-cons">
+                                <div class="pros">
+                                    <h4>✓ Pros</h4>
+                                    <ul>
+                                        <li>Physical branches everywhere</li>
+                                        <li>ATMs on every corner</li>
+                                        <li>Full service (loans, mortgages, etc.)</li>
+                                        <li>Name recognition</li>
+                                    </ul>
+                                </div>
+                                <div class="cons">
+                                    <h4>✗ Cons</h4>
+                                    <ul>
+                                        <li>Low interest rates (near 0%)</li>
+                                        <li>High fees for everything</li>
+                                        <li>Poor customer service</li>
+                                        <li>Complicated fee structures</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bank-item">
+                        <div class="bank-header" onclick="toggleBankItem(this)">
+                            <h3>Online Banks (Ally, Marcus, Discover)</h3>
+                            <span class="bank-toggle">▼</span>
+                        </div>
+                        <div class="bank-content">
+                            <p>No physical locations means lower costs and higher rates for you.</p>
+                            <div class="pros-cons">
+                                <div class="pros">
+                                    <h4>✓ Pros</h4>
+                                    <ul>
+                                        <li>High interest rates (4-5%)</li>
+                                        <li>No monthly fees</li>
+                                        <li>Great mobile apps</li>
+                                        <li>24/7 customer service</li>
+                                        <li>Better technology</li>
+                                    </ul>
+                                </div>
+                                <div class="cons">
+                                    <h4>✗ Cons</h4>
+                                    <ul>
+                                        <li>No physical branches</li>
+                                        <li>Transfers take 1-2 days</li>
+                                        <li>Limited ATM network</li>
+                                        <li>No in-person help</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bank-item">
+                        <div class="bank-header" onclick="toggleBankItem(this)">
+                            <h3>Credit Unions (Local, member-owned)</h3>
+                            <span class="bank-toggle">▼</span>
+                        </div>
+                        <div class="bank-content">
+                            <p>Member-owned cooperatives focused on service over profit.</p>
+                            <div class="pros-cons">
+                                <div class="pros">
+                                    <h4>✓ Pros</h4>
+                                    <ul>
+                                        <li>Lower fees than big banks</li>
+                                        <li>Better loan rates</li>
+                                        <li>Personal service</li>
+                                        <li>Community-focused</li>
+                                        <li>Member ownership</li>
+                                    </ul>
+                                </div>
+                                <div class="cons">
+                                    <h4>✗ Cons</h4>
+                                    <ul>
+                                        <li>Fewer ATMs</li>
+                                        <li>Older technology</li>
+                                        <li>Limited locations</li>
+                                        <li>Membership requirements</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="content-block">
@@ -745,6 +968,26 @@
             progressManager.setModuleComplete(3, { timeSpent: 0, score: 100 });
             alert('Module 3 complete! Next up: Module 4 - Credit Scores Decoded.');
             window.location.href = '../index.html';
+        }
+
+        // Accordion Toggle for Bank Types
+        function toggleBankItem(header) {
+            const item = header.parentElement;
+            const content = item.querySelector('.bank-content');
+            const toggle = item.querySelector('.bank-toggle');
+            
+            // Close all other items
+            const allItems = document.querySelectorAll('.bank-item');
+            allItems.forEach(otherItem => {
+                if (otherItem !== item) {
+                    otherItem.classList.remove('open');
+                    otherItem.querySelector('.bank-content').classList.remove('open');
+                }
+            });
+            
+            // Toggle current item
+            item.classList.toggle('open');
+            content.classList.toggle('open');
         }
     </script>
 
