@@ -828,7 +828,38 @@
         .inst-dropdown:hover .inst-menu { opacity: 1; visibility: visible; transform: translateY(0); }
         .inst-menu a { display: flex; align-items: center; gap: 0.4rem; padding: 0.55rem 0.85rem; color: #9ca3af; text-decoration: none; border-radius: 6px; font-size: 0.88rem; transition: all 0.2s; }
         .inst-menu a:hover { background: rgba(16,185,129,0.1); color: #10b981; }
-        @media (max-width: 900px) { .inst-nav { display: none; } }
+        
+        /* Mobile Navigation */
+        .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; }
+        .hamburger-icon { width: 24px; height: 20px; position: relative; transform: rotate(0deg); transition: 0.3s ease-in-out; }
+        .hamburger-icon span { display: block; position: absolute; height: 3px; width: 100%; background: #10b981; border-radius: 3px; opacity: 1; left: 0; transform: rotate(0deg); transition: 0.3s ease-in-out; }
+        .hamburger-icon span:nth-child(1) { top: 0px; }
+        .hamburger-icon span:nth-child(2) { top: 8px; }
+        .hamburger-icon span:nth-child(3) { top: 16px; }
+        .hamburger.active .hamburger-icon span:nth-child(1) { top: 8px; transform: rotate(135deg); }
+        .hamburger.active .hamburger-icon span:nth-child(2) { opacity: 0; left: -60px; }
+        .hamburger.active .hamburger-icon span:nth-child(3) { top: 8px; transform: rotate(-135deg); }
+        
+        .mobile-menu { display: none; position: fixed; top: 100%; left: 0; width: 100%; background: rgba(10,31,26,0.98); backdrop-filter: blur(15px); border-top: 2px solid #10b981; z-index: 10000; max-height: calc(100vh - 70px); overflow-y: auto; transform: translateY(-100%); transition: all 0.3s ease; }
+        .mobile-menu.active { display: block; transform: translateY(-100%); }
+        .mobile-menu-content { padding: 2rem 2rem 3rem; }
+        .mobile-nav-section { margin-bottom: 2rem; }
+        .mobile-nav-section h3 { color: #10b981; font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid rgba(16,185,129,0.3); }
+        .mobile-nav-item { display: block; padding: 0.75rem 1rem; margin: 0.5rem 0; color: #e0e0e0; text-decoration: none; background: rgba(16,185,129,0.1); border-radius: 8px; transition: all 0.2s; }
+        .mobile-nav-item:hover { background: rgba(16,185,129,0.2); color: #10b981; }
+        .mobile-nav-cta { background: linear-gradient(135deg,#10b981,#06b6d4); color: white !important; font-weight: 600; text-align: center; margin-top: 1.5rem; }
+        
+        @media (max-width: 900px) { 
+            .inst-nav { display: none; } 
+            .hamburger { display: block; }
+            .inst-logo-text { font-size: 0.9rem; }
+            .mobile-menu.active { transform: translateY(0); }
+        }
+        
+        @media (max-width: 640px) {
+            .inst-header-inner { padding: 0 1rem; }
+            .inst-logo-text { display: none; }
+        }
     </style>
 </head>
 <body>
@@ -889,6 +920,40 @@
                 </li>
                 <li><a href="https://calendly.com/dalia-sovereign" class="inst-nav-link inst-nav-cta">Book Consultation</a></li>
             </ul>
+            
+            <!-- Mobile Navigation Toggle -->
+            <button class="hamburger" id="mobile-nav-toggle" aria-label="Toggle navigation menu">
+                <div class="hamburger-icon">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu Overlay -->
+        <div class="mobile-menu" id="mobile-menu">
+            <div class="mobile-menu-content">
+                <div class="mobile-nav-section">
+                    <h3>Navigation</h3>
+                    <a href="https://thesovereign.academy" class="mobile-nav-item">← Hub</a>
+                    <a href="my-journey.html" class="mobile-nav-item">🗺️ My Journey</a>
+                    <a href="calculators/" class="mobile-nav-item">🧮 Calculators</a>
+                </div>
+                
+                <div class="mobile-nav-section">
+                    <h3>Institutional Programs</h3>
+                    <a href="/institutional/cities" class="mobile-nav-item">🏛️ Cities & Municipalities</a>
+                    <a href="/institutional/corporations" class="mobile-nav-item">🏢 Corporations</a>
+                    <a href="/institutional/corporations/colombia/" class="mobile-nav-item">🇨🇴 Colombia Employer Program</a>
+                    <a href="/institutional/wealth-advisors" class="mobile-nav-item">💼 Wealth Advisors</a>
+                    <a href="/institutional/wealth-advisors/bitcoin-advisor-certification/" class="mobile-nav-item">₿ Bitcoin Advisor Certification</a>
+                    <a href="/institutional/correctional" class="mobile-nav-item">🔄 Correctional Facilities</a>
+                    <a href="/institutional/education" class="mobile-nav-item">🎓 Educational Institutions</a>
+                </div>
+                
+                <a href="https://calendly.com/dalia-sovereign" class="mobile-nav-item mobile-nav-cta">Book Consultation</a>
+            </div>
         </div>
     </header>
     
@@ -1151,6 +1216,44 @@
         });
         document.addEventListener('DOMContentLoaded', function() {
             SovereigntyPath.renderLadder('sovereignty-path-home', { showTitle: true });
+            
+            // Mobile Navigation Toggle
+            const hamburger = document.getElementById('mobile-nav-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const body = document.body;
+            
+            if (hamburger && mobileMenu) {
+                hamburger.addEventListener('click', function() {
+                    hamburger.classList.toggle('active');
+                    mobileMenu.classList.toggle('active');
+                    
+                    // Prevent body scroll when menu is open
+                    if (mobileMenu.classList.contains('active')) {
+                        body.style.overflow = 'hidden';
+                    } else {
+                        body.style.overflow = '';
+                    }
+                });
+                
+                // Close menu when clicking on menu items
+                const menuItems = mobileMenu.querySelectorAll('.mobile-nav-item');
+                menuItems.forEach(item => {
+                    item.addEventListener('click', function() {
+                        hamburger.classList.remove('active');
+                        mobileMenu.classList.remove('active');
+                        body.style.overflow = '';
+                    });
+                });
+                
+                // Close menu on window resize if viewport becomes large
+                window.addEventListener('resize', function() {
+                    if (window.innerWidth > 900) {
+                        hamburger.classList.remove('active');
+                        mobileMenu.classList.remove('active');
+                        body.style.overflow = '';
+                    }
+                });
+            }
         });
     </script>
     <script src="js/icon-library.js">
