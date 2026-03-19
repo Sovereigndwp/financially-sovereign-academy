@@ -1,1301 +1,1430 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Financially Sovereign Academy - Free Interactive Financial Education | Master Money</title>
-    <meta name="description" content="Learn the 10 financial fundamentals everyone needs. Interactive lessons on budgeting, investing, debt, credit, taxes, and more. 100% free — no signup required.">
-    <link rel="canonical" href="https://financiallysovereign.academy/">
-    <meta name="theme-color" content="#2ecc71">
-    <meta name="msvalidate.01" content="1D680E8802B24034F6795CB25979C5CA" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Financially Sovereign Academy — Free Interactive Financial Education</title>
+<meta name="description" content="Learn what financial advisors charge 1-2% annually to know. 10 interactive modules. Free forever. No signup required.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,600;0,700;1,300;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #0c1c35;
+  --navy-mid: #152845;
+  --teal: #0d7377;
+  --teal-light: #14a7ad;
+  --amber: #e8a020;
+  --amber-light: #f5c257;
+  --off-white: #f8f6f1;
+  --stone: #ede9e0;
+  --text: #1a1a2e;
+  --text-mid: #4a4a6a;
+  --text-light: #7a7a9a;
+  --green: #2d8a55;
+  --green-light: #e8f5ee;
+  --radius: 12px;
+  --radius-lg: 20px;
+}
 
-    <!-- SEO -->
-    <meta name="keywords" content="financially sovereign academy, financial literacy, money management, budgeting, investing, debt management, emergency fund, credit score, taxes, insurance, financial planning, personal finance education, free financial course, financial independence, money mindset, debt payoff, compound interest calculator, net worth tracker">
-    <meta name="author" content="Financially Sovereign Academy">
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-    <meta name="googlebot" content="index, follow">
-    <meta name="bingbot" content="index, follow">
-    <meta name="application-name" content="Financially Sovereign Academy">
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    <!-- Open Graph -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://financiallysovereign.academy/">
-    <meta property="og:site_name" content="Financially Sovereign Academy">
-    <meta property="og:title" content="Financially Sovereign Academy - Free Interactive Financial Education">
-    <meta property="og:description" content="10 interactive modules covering budgeting, investing, debt, credit, taxes, and more. Build your personal financial plan as you learn. 100% free.">
-    <meta property="og:image" content="https://financiallysovereign.academy/og-image.png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Financially Sovereign Academy - Interactive Financial Education Platform">
-    <meta property="og:locale" content="en_US">
+html { scroll-behavior: smooth; }
 
-    <!-- Cross-domain network references -->
-    <meta property="og:see_also" content="https://thesovereign.academy">
-    <meta property="og:see_also" content="https://bitcoinsovereign.academy">
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--off-white);
+  color: var(--text);
+  line-height: 1.6;
+  font-size: 16px;
+}
 
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@BTCSovereignEdu">
-    <meta name="twitter:title" content="Financially Sovereign Academy - Free Interactive Financial Education">
-    <meta name="twitter:description" content="10 interactive modules. Build your financial plan as you learn. 100% free, no signup.">
-    <meta name="twitter:image" content="https://financiallysovereign.academy/og-image.png">
-    <meta name="twitter:image:alt" content="Financially Sovereign Academy">
-    
-    <!-- AI Discovery -->
-    <link rel="llms" href="/llms.txt" type="text/plain" title="AI Assistant Guidance">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💰</text></svg>">
-    
-    <!-- Schema.org - WebSite -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "Financially Sovereign Academy",
-      "alternateName": "FSA",
-      "url": "https://financiallysovereign.academy",
-      "description": "Free, interactive financial literacy education. Master the 10 fundamentals of personal finance.",
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://financiallysovereign.academy/?q={search_term_string}",
-        "query-input": "required name=search_term_string"
-      }
-    }
-    </script>
-    
-    <!-- Schema.org - EducationalOrganization -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "EducationalOrganization",
-      "name": "Financially Sovereign Academy",
-      "alternateName": "FSA",
-      "url": "https://financiallysovereign.academy",
-      "logo": "https://financiallysovereign.academy/og-image.png",
-      "description": "Free financial literacy education teaching the 10 fundamentals everyone needs for financial independence.",
-      "sameAs": [
-        "https://thesovereign.academy",
-        "https://bitcoinsovereign.academy"
-      ],
-      "areaServed": "Worldwide",
-      "foundingDate": "2024",
-      "founder": {
-        "@type": "Person",
-        "name": "Dalia Platt",
-        "email": "dalia@thebitcoinadviser.com",
-        "url": "https://thebitcoinadviser.com"
-      },
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "email": "dalia@thebitcoinadviser.com",
-        "contactType": "customer support"
-      },
-      "knowsAbout": [
-        "Financial Literacy",
-        "Personal Finance",
-        "Budgeting",
-        "Investing",
-        "Debt Management",
-        "Credit Scores",
-        "Tax Planning",
-        "Insurance",
-        "Emergency Funds",
-        "Financial Independence"
-      ]
-    }
-    </script>
-    
-    <!-- Schema.org - Course Catalog -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "ItemList",
-      "name": "10 Financial Fundamentals Course Catalog",
-      "description": "Complete curriculum for financial literacy mastery",
-      "numberOfItems": 10,
-      "itemListElement": [
-        {
-          "@type": "Course",
-          "position": 1,
-          "name": "Money Mindset & Cash Flow",
-          "description": "Understand your relationship with money and take control of your cash flow",
-          "url": "https://financiallysovereign.academy/modules/money-mindset-cash-flow.html",
-          "timeRequired": "PT30M",
-          "educationalLevel": "Beginner",
-          "isAccessibleForFree": true,
-          "provider": {"@type": "EducationalOrganization", "name": "Financially Sovereign Academy"}
-        },
-        {
-          "@type": "Course",
-          "position": 2,
-          "name": "Emergency Funds & Saving",
-          "description": "Build a financial security buffer that protects you from life's surprises",
-          "url": "https://financiallysovereign.academy/modules/emergency-funds-saving.html",
-          "timeRequired": "PT25M",
-          "educationalLevel": "Beginner",
-          "isAccessibleForFree": true,
-          "provider": {"@type": "EducationalOrganization", "name": "Financially Sovereign Academy"}
-        },
-        {
-          "@type": "Course",
-          "position": 3,
-          "name": "Banking Without Getting Robbed",
-          "description": "Use banks strategically and understand how the system really works",
-          "url": "https://financiallysovereign.academy/modules/banking-basics.html",
-          "timeRequired": "PT20M",
-          "educationalLevel": "Beginner",
-          "isAccessibleForFree": true,
-          "provider": {"@type": "EducationalOrganization", "name": "Financially Sovereign Academy"}
-        },
-        {
-          "@type": "Course",
-          "position": 4,
-          "name": "Credit Scores Decoded",
-          "description": "Build and maintain excellent credit strategically",
-          "url": "https://financiallysovereign.academy/modules/credit-scores.html",
-          "timeRequired": "PT25M",
-          "educationalLevel": "Beginner",
-          "isAccessibleForFree": true,
-          "provider": {"@type": "EducationalOrganization", "name": "Financially Sovereign Academy"}
-        },
-        {
-          "@type": "Course",
-          "position": 5,
-          "name": "Debt Strategy",
-          "description": "Understand the true cost of debt and when to use it strategically",
-          "url": "https://financiallysovereign.academy/modules/debt-strategy.html",
-          "timeRequired": "PT30M",
-          "educationalLevel": "Intermediate",
-          "isAccessibleForFree": true,
-          "provider": {"@type": "EducationalOrganization", "name": "Financially Sovereign Academy"}
-        },
-        {
-          "@type": "Course",
-          "position": 6,
-          "name": "Taxes & Paychecks Demystified",
-          "description": "Understand the tax system and maximize your take-home pay",
-          "url": "https://financiallysovereign.academy/modules/taxes-paychecks.html",
-          "timeRequired": "PT25M",
-          "educationalLevel": "Intermediate",
-          "isAccessibleForFree": true,
-          "provider": {"@type": "EducationalOrganization", "name": "Financially Sovereign Academy"}
-        },
-        {
-          "@type": "Course",
-          "position": 7,
-          "name": "Investing for Humans",
-          "description": "Build long-term wealth through compound growth",
-          "url": "https://financiallysovereign.academy/modules/investing-fundamentals.html",
-          "timeRequired": "PT35M",
-          "educationalLevel": "Intermediate",
-          "isAccessibleForFree": true,
-          "provider": {"@type": "EducationalOrganization", "name": "Financially Sovereign Academy"}
-        },
-        {
-          "@type": "Course",
-          "position": 8,
-          "name": "Protect What You've Built",
-          "description": "Risk management and insurance without over-insuring",
-          "url": "https://financiallysovereign.academy/modules/risk-insurance.html",
-          "timeRequired": "PT25M",
-          "educationalLevel": "Intermediate",
-          "isAccessibleForFree": true,
-          "provider": {"@type": "EducationalOrganization", "name": "Financially Sovereign Academy"}
-        },
-        {
-          "@type": "Course",
-          "position": 9,
-          "name": "Don't Get Scammed",
-          "description": "Make smart decisions and avoid predatory practices",
-          "url": "https://financiallysovereign.academy/modules/consumer-protection.html",
-          "timeRequired": "PT20M",
-          "educationalLevel": "Beginner",
-          "isAccessibleForFree": true,
-          "provider": {"@type": "EducationalOrganization", "name": "Financially Sovereign Academy"}
-        },
-        {
-          "@type": "Course",
-          "position": 10,
-          "name": "Your Financial Master Plan",
-          "description": "Integrate everything into a coherent life plan",
-          "url": "https://financiallysovereign.academy/modules/financial-master-plan.html",
-          "timeRequired": "PT30M",
-          "educationalLevel": "Advanced",
-          "isAccessibleForFree": true,
-          "provider": {"@type": "EducationalOrganization", "name": "Financially Sovereign Academy"}
-        }
-      ]
-    }
-    </script>
-    
-    <!-- Schema.org - FAQPage -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "What is Financially Sovereign Academy?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Financially Sovereign Academy (financiallysovereign.academy) is a free, interactive online financial education platform. It teaches the 10 core money fundamentals everyone needs — budgeting, saving, credit, debt, taxes, investing, insurance, and financial planning — through hands-on simulations and personalized learning paths. No signup or credit card required."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Is Financially Sovereign Academy really free?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes. All 10 core modules are 100% free forever. No credit card required."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Do I need financial background to use Financially Sovereign Academy?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "No. Designed for complete beginners. We explain everything in plain English."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How long does it take to complete all modules?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Most complete all 10 modules in 4-6 hours over 2-3 weeks. Go at your own pace."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Is this about Bitcoin?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "No. This is universal financial literacy. Bitcoin is mentioned as one tool among many where relevant. Check out Bitcoin Sovereign Academy if you want Bitcoin-specific learning."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What's the catch with free financial education?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "No catch. Financial literacy should be accessible to everyone. We believe in empowering people with knowledge."
-          }
-        }
-      ]
-    }
-    </script>
-    
-    <!-- Schema.org - Person (Founder) -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Dalia Platt",
-      "jobTitle": "Founder",
-      "affiliation": {
-        "@type": "EducationalOrganization",
-        "name": "Financially Sovereign Academy",
-        "url": "https://financiallysovereign.academy"
-      },
-      "knowsAbout": [
-        "financial literacy",
-        "personal finance",
-        "budgeting",
-        "debt management",
-        "investing fundamentals",
-        "credit scores",
-        "tax planning",
-        "emergency funds",
-        "compound interest",
-        "financial independence",
-        "money mindset",
-        "retirement planning",
-        "insurance planning",
-        "consumer protection"
-      ],
-      "url": "https://thebitcoinadviser.com",
-      "email": "dalia@thebitcoinadviser.com",
-      "sameAs": [
-        "https://sovereigndwp.substack.com/",
-        "https://github.com/Sovereigndwp",
-        "https://twitter.com/BTCSovereignEdu",
-        "https://thesovereign.academy"
-      ],
-      "worksFor": {
-        "@type": "EducationalOrganization",
-        "name": "Financially Sovereign Academy",
-        "url": "https://financiallysovereign.academy"
-      },
-      "foundedOrganization": [
-        {
-          "@type": "EducationalOrganization",
-          "name": "Financially Sovereign Academy",
-          "url": "https://financiallysovereign.academy"
-        },
-        {
-          "@type": "EducationalOrganization",
-          "name": "Bitcoin Sovereign Academy",
-          "url": "https://bitcoinsovereign.academy"
-        },
-        {
-          "@type": "EducationalOrganization",
-          "name": "The Sovereign Academy",
-          "url": "https://thesovereign.academy"
-        }
-      ]
-    }
-    </script>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #0a1f1a;
-            color: #e0e0e0;
-            line-height: 1.6;
-        }
-        
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
-        
-        /* Hero */
-        .hero {
-            min-height: 85vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            background: linear-gradient(135deg, #0a4d3c 0%, #1a5f52 100%);
-            padding: 8rem 2rem 2rem;
-            position: relative;
-        }
+/* ── NAV ── */
+nav {
+  background: var(--navy);
+  padding: 0 clamp(1rem, 4vw, 2.5rem);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
 
-        .hero h1 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            background: linear-gradient(135deg, #10b981 0%, #06b6d4 50%, #3b82f6 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 1.5rem;
-            font-weight: 800;
-            text-shadow: 0 0 40px rgba(16, 185, 129, 0.3);
-            animation: shimmer 3s ease-in-out infinite;
-            background-size: 200% auto;
-        }
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
 
-        @keyframes shimmer {
-            0%, 100% { background-position: 0% center; }
-            50% { background-position: 100% center; }
-        }
+.nav-brand span { color: var(--amber); }
 
-        .hero-subtitle {
-            font-size: clamp(1.2rem, 2vw, 1.5rem);
-            color: #9ca3af;
-            max-width: 800px;
-            margin-bottom: 2rem;
-        }
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  list-style: none;
+}
 
-        .learning-paths {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            max-width: 900px;
-            width: 100%;
-            margin: 2rem auto;
-        }
+.nav-links a {
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  font-size: 13px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: all 0.15s;
+}
 
-        .path-card {
-            background: linear-gradient(135deg, rgba(26, 58, 46, 0.95) 0%, rgba(15, 41, 34, 0.85) 100%);
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(16, 185, 129, 0.3);
-            border-radius: 1rem;
-            padding: 2rem;
-            text-align: center;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            text-decoration: none;
-            color: inherit;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2),
-                        0 0 0 1px rgba(16, 185, 129, 0.1);
-        }
+.nav-links a:hover { color: white; background: rgba(255,255,255,0.08); }
 
-        .path-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #10b981 0%, #06b6d4 50%, #3b82f6 100%);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.3s ease;
-        }
+.nav-cta {
+  background: var(--amber) !important;
+  color: var(--navy) !important;
+  font-weight: 600 !important;
+  padding: 7px 16px !important;
+}
 
-        .path-card::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: 1rem;
-            padding: 2px;
-            background: linear-gradient(135deg, transparent 0%, rgba(16, 185, 129, 0.3) 100%);
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
+.nav-cta:hover { background: var(--amber-light) !important; }
 
-        .path-card:hover {
-            border-color: #10b981;
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.4),
-                        0 0 0 6px rgba(16, 185, 129, 0.2),
-                        0 0 60px rgba(16, 185, 129, 0.3);
-        }
+/* Progress bar in nav */
+.nav-progress {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+  white-space: nowrap;
+}
 
-        .path-card:hover::before {
-            transform: scaleX(1);
-        }
+.nav-progress-bar {
+  width: 80px;
+  height: 4px;
+  background: rgba(255,255,255,0.12);
+  border-radius: 2px;
+  overflow: hidden;
+}
 
-        .path-card:hover::after {
-            opacity: 1;
-        }
+.nav-progress-fill {
+  height: 100%;
+  background: var(--teal-light);
+  border-radius: 2px;
+  transition: width 0.6s ease;
+  width: 0%;
+}
 
-        .path-card .path-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            filter: drop-shadow(0 8px 16px rgba(16, 185, 129, 0.4));
-            transition: all 0.3s ease;
-        }
+/* ── SOCIAL PROOF BANNER ── */
+.proof-banner {
+  background: var(--navy-mid);
+  padding: 9px clamp(1rem, 4vw, 2.5rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(12px, 3vw, 40px);
+  flex-wrap: wrap;
+}
 
-        .path-card .path-icon svg {
-            width: 64px;
-            height: 64px;
-            transition: all 0.3s ease;
-        }
+.proof-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  color: rgba(255,255,255,0.65);
+}
 
-        /* Colorful gradient icons */
-        .path-card .path-icon svg path,
-        .path-card .path-icon svg circle,
-        .path-card .path-icon svg rect {
-            fill: url(#icon-gradient-green-blue);
-            transition: all 0.3s ease;
-        }
+.proof-item strong { color: var(--amber-light); font-weight: 600; }
 
-        .path-card:hover .path-icon {
-            filter: drop-shadow(0 12px 24px rgba(16, 185, 129, 0.6))
-                    drop-shadow(0 0 30px rgba(59, 130, 246, 0.4));
-            transform: scale(1.1) rotate(5deg);
-        }
+.proof-dot { width: 3px; height: 3px; border-radius: 50%; background: rgba(255,255,255,0.2); }
 
-        .path-card .path-title {
-            font-size: 1.5rem;
-            color: #10b981;
-            font-weight: 700;
-            margin-bottom: 0.75rem;
-        }
+/* ── HERO ── */
+.hero {
+  background: var(--navy);
+  padding: clamp(3rem, 8vw, 6rem) clamp(1rem, 4vw, 2.5rem);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
 
-        .path-card .path-description {
-            color: #9ca3af;
-            font-size: 1rem;
-            line-height: 1.6;
-            margin-bottom: 1rem;
-        }
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(13,115,119,0.18) 0%, transparent 70%);
+  pointer-events: none;
+}
 
-        .path-card .path-badge {
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            background: rgba(16, 185, 129, 0.15);
-            border-radius: 2rem;
-            color: #34d399;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-top: auto;
-        }
+.hero-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(232,160,32,0.12);
+  border: 1px solid rgba(232,160,32,0.25);
+  color: var(--amber-light);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 20px;
+  margin-bottom: 1.5rem;
+}
 
-        .scroll-indicator {
-            position: absolute;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            text-align: center;
-        }
+.hero h1 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(2.2rem, 6vw, 4rem);
+  font-weight: 700;
+  color: white;
+  line-height: 1.15;
+  max-width: 720px;
+  margin: 0 auto 1.25rem;
+  letter-spacing: -0.03em;
+}
 
-        .scroll-indicator-text {
-            color: #6ee7b7;
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
-        }
+.hero h1 em {
+  font-style: italic;
+  color: var(--amber-light);
+}
 
-        .scroll-indicator-arrow {
-            font-size: 2rem;
-            color: #10b981;
-        }
-        
-        .cta-primary {
-            padding: 1.25rem 3rem;
-            font-size: 1.25rem;
-            font-weight: 700;
-            border: none;
-            border-radius: 0.75rem;
-            background: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
-            color: white;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3);
-        }
+.hero-sub {
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  color: rgba(255,255,255,0.6);
+  max-width: 560px;
+  margin: 0 auto 2.5rem;
+  font-weight: 300;
+  line-height: 1.65;
+}
 
-        .cta-primary::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
+/* Returning visitor panel — hidden by default */
+.returning-banner {
+  display: none;
+  background: rgba(13,115,119,0.15);
+  border: 1px solid rgba(20,167,173,0.3);
+  border-radius: var(--radius);
+  padding: 14px 20px;
+  max-width: 480px;
+  margin: 0 auto 2rem;
+  text-align: left;
+  align-items: center;
+  gap: 12px;
+}
 
-        .cta-primary:hover::before {
-            opacity: 1;
-        }
+.returning-banner.visible { display: flex; }
 
-        .cta-primary span {
-            position: relative;
-            z-index: 1;
-        }
+.returning-icon {
+  width: 36px;
+  height: 36px;
+  background: rgba(20,167,173,0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 16px;
+}
 
-        .cta-primary:hover {
-            transform: translateY(-4px) scale(1.02);
-            box-shadow: 0 16px 40px rgba(16, 185, 129, 0.5),
-                        0 0 60px rgba(6, 182, 212, 0.3);
-        }
-        
-        .trust-signal {
-            margin-top: 1.5rem;
-            color: #6ee7b7;
-            font-size: 0.95rem;
-        }
-        
-        /* Value Props */
-        .value-props {
-            padding: 4rem 2rem;
-            background: #0f2922;
-        }
-        
-        .props-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-        
-        .prop-card {
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(6, 182, 212, 0.1) 100%);
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(16, 185, 129, 0.2);
-            border-radius: 1rem;
-            padding: 2rem;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-        }
+.returning-text { flex: 1; }
+.returning-text p { font-size: 13px; color: rgba(255,255,255,0.6); margin-top: 2px; }
+.returning-text strong { color: white; font-size: 14px; }
 
-        .prop-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, #10b981 0%, #06b6d4 50%, #3b82f6 100%);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.3s ease;
-        }
+.returning-cta {
+  background: var(--teal);
+  color: white;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 8px;
+  white-space: nowrap;
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
 
-        .prop-card:hover {
-            transform: translateY(-4px);
-            border-color: #10b981;
-            box-shadow: 0 12px 32px rgba(16, 185, 129, 0.25),
-                        0 0 0 4px rgba(16, 185, 129, 0.1);
-        }
+.returning-cta:hover { background: var(--teal-light); }
 
-        .prop-card:hover::before {
-            transform: scaleX(1);
-        }
-        
-        .prop-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            filter: drop-shadow(0 6px 12px rgba(16, 185, 129, 0.4));
-            transition: all 0.3s ease;
-        }
+.hero-ctas {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 2.5rem;
+}
 
-        .prop-icon svg {
-            width: 56px;
-            height: 56px;
-            transition: all 0.3s ease;
-        }
+.btn-primary {
+  background: var(--amber);
+  color: var(--navy);
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 14px 28px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.15s;
+  letter-spacing: -0.01em;
+}
 
-        /* Colorful gradient icons for props */
-        .prop-icon svg path,
-        .prop-icon svg circle,
-        .prop-icon svg rect {
-            fill: url(#icon-gradient-cyan-blue);
-            transition: all 0.3s ease;
-        }
+.btn-primary:hover { background: var(--amber-light); transform: translateY(-1px); }
 
-        .prop-card:hover .prop-icon {
-            filter: drop-shadow(0 10px 20px rgba(6, 182, 212, 0.5))
-                    drop-shadow(0 0 25px rgba(59, 130, 246, 0.3));
-            transform: scale(1.15);
-        }
+.btn-secondary {
+  background: rgba(255,255,255,0.07);
+  color: rgba(255,255,255,0.85);
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 14px 28px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.14);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.15s;
+}
 
-        .prop-title { font-size: 1.3rem; color: #10b981; margin-bottom: 0.75rem; }
-        .prop-desc { color: #9ca3af; }
+.btn-secondary:hover { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.25); }
 
-        /* SVG Icon Animations */
-        .icon {
-            transition: all 0.3s ease;
-        }
+.hero-trust {
+  font-size: 12.5px;
+  color: rgba(255,255,255,0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
 
-        .icon-animate {
-            animation-play-state: running;
-        }
+.trust-check { color: var(--teal-light); }
 
-        @media (prefers-reduced-motion: reduce) {
-            .icon-animate {
-                animation: none !important;
-            }
-        }
+/* ── PILLARS ── */
+.pillars {
+  background: white;
+  padding: 2rem clamp(1rem, 4vw, 2.5rem);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0;
+  border-bottom: 1px solid var(--stone);
+}
 
-        .path-card:hover .path-icon svg,
-        .prop-card:hover .prop-icon svg {
-            transform: scale(1.1);
-            filter: drop-shadow(0 6px 12px rgba(16, 185, 129, 0.5));
-        }
+.pillar {
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  border-right: 1px solid var(--stone);
+}
 
-        /* Modules Grid */
-        .modules-section {
-            padding: 4rem 2rem;
-            background: #0a1f1a;
-        }
-        
-        .section-title {
-            font-size: 2.5rem;
-            text-align: center;
-            background: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 1rem;
-            font-weight: 700;
-        }
-        
-        .section-subtitle {
-            text-align: center;
-            color: #9ca3af;
-            font-size: 1.1rem;
-            margin-bottom: 3rem;
-        }
-        
-        .modules-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-        
-        .module-card {
-            background: linear-gradient(135deg, rgba(26, 58, 46, 0.9) 0%, rgba(15, 41, 34, 0.8) 100%);
-            backdrop-filter: blur(8px);
-            border: 2px solid rgba(16, 185, 129, 0.3);
-            border-radius: 1rem;
-            padding: 2rem;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            text-decoration: none;
-            display: block;
-            color: inherit;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2),
-                        0 0 0 1px rgba(16, 185, 129, 0.1);
-        }
+.pillar:last-child { border-right: none; }
 
-        .module-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 0;
-            background: linear-gradient(180deg, #10b981 0%, #06b6d4 50%, #3b82f6 100%);
-            transition: height 0.3s ease;
-        }
+.pillar-icon {
+  width: 36px;
+  height: 36px;
+  background: rgba(13,115,119,0.08);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  flex-shrink: 0;
+}
 
-        .module-card:hover {
-            border-color: #10b981;
-            transform: translateY(-6px) scale(1.01);
-            box-shadow: 0 16px 40px rgba(16, 185, 129, 0.3),
-                        0 0 0 4px rgba(16, 185, 129, 0.15),
-                        0 0 40px rgba(6, 182, 212, 0.2);
-        }
+.pillar-text h4 { font-size: 13.5px; font-weight: 600; color: var(--text); }
+.pillar-text p { font-size: 12px; color: var(--text-light); margin-top: 2px; }
 
-        .module-card:hover::before {
-            height: 100%;
-        }
-        
-        .module-number { color: #10b981; font-size: 0.9rem; font-weight: 600; margin-bottom: 0.5rem; }
-        .module-title { font-size: 1.4rem; color: #fff; margin-bottom: 0.5rem; }
-        .module-duration { color: #6ee7b7; font-size: 0.9rem; margin-bottom: 0.75rem; }
-        .module-desc { color: #9ca3af; }
-        
-        /* FAQ */
-        .faq-section {
-            padding: 4rem 2rem;
-            background: #0f2922;
-        }
-        
-        .faq-grid {
-            max-width: 800px;
-            margin: 3rem auto 0;
-        }
-        
-        .faq-item {
-            background: #1a3a2e;
-            border-left: 4px solid #10b981;
-            border-radius: 0.5rem;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .faq-question { font-size: 1.2rem; color: #10b981; margin-bottom: 0.75rem; font-weight: 600; }
-        .faq-answer { color: #e0e0e0; }
-        
-        /* CTA Footer */
-        .cta-footer {
-            padding: 5rem 2rem;
-            background: linear-gradient(135deg, #0a4d3c 0%, #1a5f52 100%);
-            text-align: center;
-        }
-        
-        .cta-footer h2 {
-            font-size: 2.5rem;
-            color: #10b981;
-            margin-bottom: 2rem;
-        }
-        
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2.5rem; }
-            .modules-grid { grid-template-columns: 1fr; }
-        }
-        
-        @media (prefers-reduced-motion: reduce) {
-            * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
-        }
+/* ── MODULES SECTION ── */
+.modules-section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: clamp(2.5rem, 6vw, 4rem) clamp(1rem, 4vw, 2.5rem);
+}
 
-        /* Institutional Navigation Header */
-        .inst-header { background: rgba(10,31,26,0.97); backdrop-filter: blur(10px); padding: 0.85rem 0; border-bottom: 2px solid #10b981; position: fixed; width: 100%; top: 0; z-index: 10001; }
-        .inst-header-inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; }
-        .inst-logo { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; color: #e0e0e0; }
-        .inst-logo-icon { width: 34px; height: 34px; background: linear-gradient(135deg,#10b981,#06b6d4); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; font-weight: bold; color: white; }
-        .inst-logo-text { font-size: 1rem; font-weight: bold; }
-        .inst-nav { display: flex; gap: 1.25rem; list-style: none; align-items: center; }
-        .inst-nav-link { color: #9ca3af; text-decoration: none; font-weight: 500; font-size: 0.88rem; transition: color 0.2s; }
-        .inst-nav-link:hover { color: #10b981; }
-        .inst-nav-cta { background: linear-gradient(135deg,#10b981,#06b6d4); padding: 0.45rem 1.1rem; border-radius: 16px; color: white !important; font-weight: 600; font-size: 0.85rem; }
-        .inst-dropdown { position: relative; }
-        .inst-dropdown .inst-menu { position: absolute; top: calc(100% + 10px); left: 0; background: #0f2922; border: 1px solid rgba(16,185,129,0.25); border-radius: 10px; padding: 0.4rem; min-width: 230px; opacity: 0; visibility: hidden; transform: translateY(-8px); transition: all 0.25s; z-index: 10002; box-shadow: 0 8px 24px rgba(0,0,0,0.5); }
-        .inst-dropdown:hover .inst-menu { opacity: 1; visibility: visible; transform: translateY(0); }
-        .inst-menu a { display: flex; align-items: center; gap: 0.4rem; padding: 0.55rem 0.85rem; color: #9ca3af; text-decoration: none; border-radius: 6px; font-size: 0.88rem; transition: all 0.2s; }
-        .inst-menu a:hover { background: rgba(16,185,129,0.1); color: #10b981; }
-        
-        /* Mobile Navigation */
-        .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; }
-        .hamburger-icon { width: 24px; height: 20px; position: relative; transform: rotate(0deg); transition: 0.3s ease-in-out; }
-        .hamburger-icon span { display: block; position: absolute; height: 3px; width: 100%; background: #10b981; border-radius: 3px; opacity: 1; left: 0; transform: rotate(0deg); transition: 0.3s ease-in-out; }
-        .hamburger-icon span:nth-child(1) { top: 0px; }
-        .hamburger-icon span:nth-child(2) { top: 8px; }
-        .hamburger-icon span:nth-child(3) { top: 16px; }
-        .hamburger.active .hamburger-icon span:nth-child(1) { top: 8px; transform: rotate(135deg); }
-        .hamburger.active .hamburger-icon span:nth-child(2) { opacity: 0; left: -60px; }
-        .hamburger.active .hamburger-icon span:nth-child(3) { top: 8px; transform: rotate(-135deg); }
-        
-        .mobile-menu { display: none; position: fixed; top: 100%; left: 0; width: 100%; background: rgba(10,31,26,0.98); backdrop-filter: blur(15px); border-top: 2px solid #10b981; z-index: 10000; max-height: calc(100vh - 70px); overflow-y: auto; transform: translateY(-100%); transition: all 0.3s ease; }
-        .mobile-menu.active { display: block; transform: translateY(-100%); }
-        .mobile-menu-content { padding: 2rem 2rem 3rem; }
-        .mobile-nav-section { margin-bottom: 2rem; }
-        .mobile-nav-section h3 { color: #10b981; font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid rgba(16,185,129,0.3); }
-        .mobile-nav-item { display: block; padding: 0.75rem 1rem; margin: 0.5rem 0; color: #e0e0e0; text-decoration: none; background: rgba(16,185,129,0.1); border-radius: 8px; transition: all 0.2s; }
-        .mobile-nav-item:hover { background: rgba(16,185,129,0.2); color: #10b981; }
-        .mobile-nav-cta { background: linear-gradient(135deg,#10b981,#06b6d4); color: white !important; font-weight: 600; text-align: center; margin-top: 1.5rem; }
-        
-        @media (max-width: 900px) { 
-            .inst-nav { display: none; } 
-            .hamburger { display: block; }
-            .inst-logo-text { font-size: 0.9rem; }
-            .mobile-menu.active { transform: translateY(0); }
-        }
-        
-        @media (max-width: 640px) {
-            .inst-header-inner { padding: 0 1rem; }
-            .inst-logo-text { display: none; }
-        }
-    </style>
+.section-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.section-title {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  font-weight: 600;
+  color: var(--navy);
+  letter-spacing: -0.03em;
+}
+
+/* Overall progress tracker */
+.progress-tracker {
+  background: white;
+  border: 1px solid var(--stone);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.progress-tracker-label {
+  font-size: 13px;
+  color: var(--text-mid);
+  white-space: nowrap;
+}
+
+.progress-tracker-label strong { color: var(--text); }
+
+.progress-bar-outer {
+  flex: 1;
+  min-width: 120px;
+  height: 8px;
+  background: var(--stone);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-bar-inner {
+  height: 100%;
+  background: linear-gradient(90deg, var(--teal), var(--teal-light));
+  border-radius: 4px;
+  transition: width 0.8s ease;
+  width: 0%;
+}
+
+.progress-count {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--teal);
+  white-space: nowrap;
+}
+
+.progress-reset {
+  font-size: 11px;
+  color: var(--text-light);
+  cursor: pointer;
+  text-decoration: underline;
+  white-space: nowrap;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.progress-reset:hover { color: var(--text-mid); }
+
+/* Module grid */
+.modules-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 14px;
+}
+
+.module-card {
+  background: white;
+  border: 1.5px solid var(--stone);
+  border-radius: var(--radius);
+  padding: 20px;
+  text-decoration: none;
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: all 0.18s;
+  position: relative;
+  overflow: hidden;
+}
+
+.module-card:hover {
+  border-color: var(--teal-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(13,115,119,0.1);
+}
+
+.module-card.completed {
+  border-color: #b8e0c8;
+  background: #fbfefb;
+}
+
+.module-card.completed::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--green);
+  border-radius: 12px 0 0 12px;
+}
+
+.module-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.module-number {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.module-check {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1.5px solid var(--stone);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s;
+  flex-shrink: 0;
+  font-size: 11px;
+  background: white;
+  color: transparent;
+}
+
+.module-check:hover { border-color: var(--teal); background: rgba(13,115,119,0.06); }
+
+.module-card.completed .module-check {
+  background: var(--green);
+  border-color: var(--green);
+  color: white;
+}
+
+.module-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--navy);
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+
+.module-desc {
+  font-size: 13px;
+  color: var(--text-mid);
+  line-height: 1.5;
+  flex: 1;
+}
+
+.module-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-top: 10px;
+  border-top: 1px solid var(--stone);
+}
+
+.module-time {
+  font-size: 12px;
+  color: var(--text-light);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.module-action {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--teal);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: gap 0.15s;
+}
+
+.module-card:hover .module-action { gap: 7px; }
+
+.module-card.completed .module-action { color: var(--green); }
+
+/* ── TESTIMONIALS ── */
+.testimonials {
+  background: var(--navy);
+  padding: clamp(2.5rem, 6vw, 4rem) clamp(1rem, 4vw, 2.5rem);
+}
+
+.testimonials-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.testimonials h2 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(1.3rem, 2.5vw, 1.7rem);
+  color: white;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.testimonial-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: var(--radius);
+  padding: 22px;
+}
+
+.testimonial-stars { color: var(--amber); font-size: 13px; margin-bottom: 10px; }
+
+.testimonial-quote {
+  font-size: 14px;
+  color: rgba(255,255,255,0.8);
+  line-height: 1.65;
+  margin-bottom: 14px;
+  font-style: italic;
+  font-family: 'Fraunces', serif;
+  font-weight: 300;
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.testimonial-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(13,115,119,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--teal-light);
+  flex-shrink: 0;
+}
+
+.testimonial-name { font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.9); }
+.testimonial-role { font-size: 11px; color: rgba(255,255,255,0.4); }
+
+/* ── EMAIL CAPTURE ── */
+.email-section {
+  background: white;
+  padding: clamp(2.5rem, 6vw, 4rem) clamp(1rem, 4vw, 2.5rem);
+  border-bottom: 1px solid var(--stone);
+}
+
+.email-inner {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.email-badge {
+  display: inline-block;
+  background: var(--green-light);
+  color: var(--green);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-bottom: 1rem;
+}
+
+.email-inner h2 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  color: var(--navy);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.75rem;
+  line-height: 1.2;
+}
+
+.email-inner p {
+  font-size: 14.5px;
+  color: var(--text-mid);
+  margin-bottom: 1.75rem;
+  line-height: 1.6;
+}
+
+.email-form {
+  display: flex;
+  gap: 8px;
+  max-width: 460px;
+  margin: 0 auto 0.75rem;
+  flex-wrap: wrap;
+}
+
+.email-form input[type="email"] {
+  flex: 1;
+  min-width: 220px;
+  padding: 13px 16px;
+  border: 1.5px solid var(--stone);
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: 'DM Sans', sans-serif;
+  color: var(--text);
+  background: var(--off-white);
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.email-form input[type="email"]:focus { border-color: var(--teal); background: white; }
+
+.email-form button {
+  background: var(--navy);
+  color: white;
+  border: none;
+  padding: 13px 22px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
+  transition: background 0.15s;
+  white-space: nowrap;
+}
+
+.email-form button:hover { background: var(--teal); }
+
+.email-fine { font-size: 11.5px; color: var(--text-light); }
+
+/* ── FAQ ── */
+.faq-section {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: clamp(2.5rem, 6vw, 4rem) clamp(1rem, 4vw, 2.5rem);
+}
+
+.faq-section h2 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  color: var(--navy);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--stone);
+}
+
+.faq-question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 0;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--navy);
+  list-style: none;
+  user-select: none;
+}
+
+.faq-question::-webkit-details-marker { display: none; }
+.faq-question::after { content: '+'; font-size: 18px; color: var(--teal); font-weight: 300; transition: transform 0.2s; }
+
+details[open] .faq-question::after { transform: rotate(45deg); }
+
+.faq-answer {
+  font-size: 14px;
+  color: var(--text-mid);
+  line-height: 1.7;
+  padding-bottom: 18px;
+}
+
+/* ── RESOURCES ── */
+.resources-section {
+  background: var(--stone);
+  padding: clamp(2.5rem, 6vw, 4rem) clamp(1rem, 4vw, 2.5rem);
+}
+
+.resources-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.resources-inner h2 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  color: var(--navy);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  margin-bottom: 1.5rem;
+}
+
+.resources-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
+}
+
+.resource-card {
+  background: white;
+  border: 1px solid rgba(0,0,0,0.07);
+  border-radius: var(--radius);
+  padding: 20px;
+  text-decoration: none;
+  color: var(--text);
+  transition: all 0.18s;
+}
+
+.resource-card:hover { border-color: var(--teal-light); transform: translateY(-2px); }
+
+.resource-icon { font-size: 22px; margin-bottom: 10px; }
+.resource-label { font-size: 10.5px; font-weight: 600; color: var(--teal); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 4px; }
+.resource-title { font-size: 15px; font-weight: 600; color: var(--navy); margin-bottom: 6px; }
+.resource-desc { font-size: 13px; color: var(--text-mid); line-height: 1.5; }
+.resource-external { font-size: 12px; color: var(--teal); margin-top: 10px; }
+
+/* ── BITCOIN BRIDGE ── */
+.btc-bridge {
+  background: linear-gradient(135deg, #0c1c35 0%, #152845 100%);
+  padding: clamp(2rem, 5vw, 3.5rem) clamp(1rem, 4vw, 2.5rem);
+  text-align: center;
+}
+
+.btc-bridge-inner { max-width: 560px; margin: 0 auto; }
+
+.btc-bridge h3 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(1.3rem, 2.5vw, 1.75rem);
+  color: white;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.75rem;
+}
+
+.btc-bridge p { font-size: 14.5px; color: rgba(255,255,255,0.6); margin-bottom: 1.5rem; line-height: 1.6; }
+
+.btn-amber {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--amber);
+  color: var(--navy);
+  text-decoration: none;
+  font-weight: 700;
+  padding: 13px 26px;
+  border-radius: 10px;
+  font-size: 14px;
+  transition: all 0.15s;
+}
+
+.btn-amber:hover { background: var(--amber-light); transform: translateY(-1px); }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--navy);
+  padding: 1.75rem clamp(1rem, 4vw, 2.5rem);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.footer-brand { font-size: 13px; color: rgba(255,255,255,0.5); }
+.footer-brand span { color: var(--amber-light); }
+
+.footer-links { display: flex; gap: 20px; }
+.footer-links a { color: rgba(255,255,255,0.5); font-size: 13px; text-decoration: none; transition: color 0.15s; }
+.footer-links a:hover { color: rgba(255,255,255,0.8); }
+
+.footer-copy { font-size: 11.5px; color: rgba(255,255,255,0.25); width: 100%; text-align: center; margin-top: 4px; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .pillars { grid-template-columns: 1fr 1fr; }
+  .pillar { border-right: none; border-bottom: 1px solid var(--stone); }
+  .pillar:nth-child(odd) { border-right: 1px solid var(--stone); }
+  .pillar:last-child { border-bottom: none; }
+  .footer-links { display: none; }
+  .proof-banner { gap: 8px; }
+}
+
+@media (max-width: 480px) {
+  .pillars { grid-template-columns: 1fr; }
+  .pillar { border-right: none; }
+  .pillar:nth-child(odd) { border-right: none; }
+  .modules-grid { grid-template-columns: 1fr; }
+}
+
+/* Email success state */
+.email-success {
+  display: none;
+  background: var(--green-light);
+  border: 1px solid #b8e0c8;
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  font-size: 14px;
+  color: var(--green);
+  font-weight: 500;
+}
+</style>
 </head>
 <body>
-    <!-- SVG Gradient Definitions for Colorful Icons -->
-    <svg width="0" height="0" style="position: absolute;">
-        <defs>
-            <!-- Green to Blue Gradient for Path Cards -->
-            <linearGradient id="icon-gradient-green-blue" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" style="stop-color:#10b981;stop-opacity:1" />
-                <stop offset="50%" style="stop-color:#06b6d4;stop-opacity:1" />
-                <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:1" />
-            </linearGradient>
 
-            <!-- Cyan to Blue Gradient for Value Props -->
-            <linearGradient id="icon-gradient-cyan-blue" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" style="stop-color:#06b6d4;stop-opacity:1" />
-                <stop offset="50%" style="stop-color:#3b82f6;stop-opacity:1" />
-                <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" />
-            </linearGradient>
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-brand">💰 Financially <span>Sovereign</span> Academy</a>
+  <ul class="nav-links">
+    <li><a href="https://thesovereign.academy">← Hub</a></li>
+    <li><a href="/my-journey.html">My Journey</a></li>
+    <li><a href="/calculators/">Calculators</a></li>
+    <li><a href="https://calendly.com/dalia-sovereign" class="nav-cta">Book Consultation</a></li>
+  </ul>
+  <div class="nav-progress" id="navProgress" style="display:none">
+    <span id="navProgressText">0 of 10</span>
+    <div class="nav-progress-bar">
+      <div class="nav-progress-fill" id="navProgressFill"></div>
+    </div>
+  </div>
+</nav>
 
-            <!-- Animated Gradient (optional for future use) -->
-            <linearGradient id="icon-gradient-animated" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" style="stop-color:#10b981;stop-opacity:1">
-                    <animate attributeName="stop-color" values="#10b981;#06b6d4;#3b82f6;#10b981" dur="4s" repeatCount="indefinite" />
-                </stop>
-                <stop offset="50%" style="stop-color:#06b6d4;stop-opacity:1">
-                    <animate attributeName="stop-color" values="#06b6d4;#3b82f6;#10b981;#06b6d4" dur="4s" repeatCount="indefinite" />
-                </stop>
-                <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:1">
-                    <animate attributeName="stop-color" values="#3b82f6;#10b981;#06b6d4;#3b82f6" dur="4s" repeatCount="indefinite" />
-                </stop>
-            </linearGradient>
-        </defs>
-    </svg>
-
-    <!-- Site Header with Institutional Dropdown -->
-    <header class="inst-header">
-        <div class="inst-header-inner">
-            <a href="https://financiallysovereign.academy" class="inst-logo">
-                <div class="inst-logo-icon">💰</div>
-                <span class="inst-logo-text">Financially Sovereign Academy</span>
-            </a>
-            <ul class="inst-nav">
-                <li><a href="https://thesovereign.academy" class="inst-nav-link">← Hub</a></li>
-                <li><a href="my-journey.html" class="inst-nav-link">🗺️ My Journey</a></li>
-                <li><a href="calculators/" class="inst-nav-link">🧮 Calculators</a></li>
-                <li class="inst-dropdown">
-                    <a href="/institutional/" class="inst-nav-link" style="color:#10b981; font-weight:600;">Institutional ▾</a>
-                    <div class="inst-menu">
-                        <a href="/institutional/cities">🏛️ Cities &amp; Municipalities</a>
-                        <a href="/institutional/corporations">🏢 Corporations</a>
-                        <a href="/institutional/corporations/colombia/">🇨🇴 Colombia Employer Program</a>
-                        <a href="/institutional/wealth-advisors">💼 Wealth Advisors</a>
-                        <a href="/institutional/wealth-advisors/bitcoin-advisor-certification/">₿ Bitcoin Advisor Certification</a>
-                        <a href="/institutional/correctional">🔄 Correctional Facilities</a>
-                        <a href="/institutional/education">🎓 Educational Institutions</a>
-                    </div>
-                </li>
-                <li><a href="https://calendly.com/dalia-sovereign" class="inst-nav-link inst-nav-cta">Book Consultation</a></li>
-            </ul>
-            
-            <!-- Mobile Navigation Toggle -->
-            <button class="hamburger" id="mobile-nav-toggle" aria-label="Toggle navigation menu">
-                <div class="hamburger-icon">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </button>
-        </div>
-        
-        <!-- Mobile Menu Overlay -->
-        <div class="mobile-menu" id="mobile-menu">
-            <div class="mobile-menu-content">
-                <div class="mobile-nav-section">
-                    <h3>Navigation</h3>
-                    <a href="https://thesovereign.academy" class="mobile-nav-item">← Hub</a>
-                    <a href="my-journey.html" class="mobile-nav-item">🗺️ My Journey</a>
-                    <a href="calculators/" class="mobile-nav-item">🧮 Calculators</a>
-                </div>
-                
-                <div class="mobile-nav-section">
-                    <h3>Institutional Programs</h3>
-                    <a href="/institutional/cities" class="mobile-nav-item">🏛️ Cities & Municipalities</a>
-                    <a href="/institutional/corporations" class="mobile-nav-item">🏢 Corporations</a>
-                    <a href="/institutional/corporations/colombia/" class="mobile-nav-item">🇨🇴 Colombia Employer Program</a>
-                    <a href="/institutional/wealth-advisors" class="mobile-nav-item">💼 Wealth Advisors</a>
-                    <a href="/institutional/wealth-advisors/bitcoin-advisor-certification/" class="mobile-nav-item">₿ Bitcoin Advisor Certification</a>
-                    <a href="/institutional/correctional" class="mobile-nav-item">🔄 Correctional Facilities</a>
-                    <a href="/institutional/education" class="mobile-nav-item">🎓 Educational Institutions</a>
-                </div>
-                
-                <a href="https://calendly.com/dalia-sovereign" class="mobile-nav-item mobile-nav-cta">Book Consultation</a>
-            </div>
-        </div>
-    </header>
-    
-    <!-- Hero Section -->
-    <section class="hero">
-        <h1>Take Control of Your Financial Future</h1>
-        <p class="hero-subtitle">
-            Learn what financial advisors charge 1-2% annually to know. Keep the fees. Gain the knowledge.
-        </p>
-        <div id="fsa-homepage-banner"></div>
-
-        <!-- Two Clear Learning Paths -->
-        <div class="learning-paths">
-            <a href="assessment.html" class="path-card">
-                <div class="path-icon">📊</div>
-                <div class="path-title">Get Your Custom Path</div>
-                <div class="path-description">
-                    Take a 2-minute assessment to get a personalized learning path based on your specific financial situation
-                </div>
-                <div class="path-badge">Recommended for Beginners</div>
-            </a>
-
-            <a href="#modules" class="path-card" onclick="event.preventDefault(); document.querySelector('.modules-section').scrollIntoView({ behavior: 'smooth' });">
-                <div class="path-icon">📚</div>
-                <div class="path-title">Browse All 10 Modules</div>
-                <div class="path-description">
-                    Self-paced learning through all ten fundamentals, from money mindset to building your financial master plan
-                </div>
-                <div class="path-badge">Learn Everything</div>
-            </a>
-        </div>
-
-        <p class="trust-signal">✨ No credit card. No signup required.</p>
-
-        <!-- Scroll Indicator -->
-        <div class="scroll-indicator">
-            <div class="scroll-indicator-text">Explore all modules below</div>
-            <div class="scroll-indicator-arrow">↓</div>
-        </div>
-    </section>
-    
-    <!-- Value Props -->
-    <section class="value-props">
-        <div class="container">
-            <div class="props-grid">
-                <div class="prop-card">
-                    <div class="prop-icon">⚡</div>
-                    <div class="prop-title">Interactive, Not Lectures</div>
-                    <div class="prop-desc">20-minute modules with calculators, simulations, and real scenarios</div>
-                </div>
-                <div class="prop-card">
-                    <div class="prop-icon">🎯</div>
-                    <div class="prop-title">Personalized Learning</div>
-                    <div class="prop-desc">2-minute assessment creates your custom path</div>
-                </div>
-                <div class="prop-card">
-                    <div class="prop-icon">🛡️</div>
-                    <div class="prop-title">Honest About Trade-offs</div>
-                    <div class="prop-desc">No hidden agendas. Pros and cons of everything.</div>
-                </div>
-                <div class="prop-card">
-                    <div class="prop-icon">🧠</div>
-                    <div class="prop-title">Real Scenarios</div>
-                    <div class="prop-desc">Learn from Sarah's $3,200 budget, not abstract theory</div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- The Sovereignty Path -->
-    <section class="modules-section" style="background: #0a1f1a; padding-bottom: 2rem;">
-        <div class="container">
-            <div id="sovereignty-path-home"></div>
-        </div>
-    </section>
-
-    <!-- Modules Grid -->
-    <section class="modules-section">
-        <div class="container">
-            <h2 class="section-title">All 10 Modules</h2>
-            <p class="section-subtitle">Each module maps to a step on The Sovereignty Path</p>
-            
-            <div class="modules-grid">
-                <a href="modules/money-mindset-cash-flow.html" class="module-card">
-                    <div class="module-number">Module 1</div>
-                    <div class="module-title">Money Mindset & Cash Flow</div>
-                    <div class="module-duration">20-30 min</div>
-                    <div class="module-desc">Understand your relationship with money and take control of your cash flow</div>
-                </a>
-                
-                <a href="modules/emergency-funds-saving.html" class="module-card">
-                    <div class="module-number">Module 2</div>
-                    <div class="module-title">Emergency Funds & Saving</div>
-                    <div class="module-duration">25 min</div>
-                    <div class="module-desc">Build a financial security buffer that protects you from life's surprises</div>
-                </a>
-                
-                <a href="modules/banking-basics.html" class="module-card">
-                    <div class="module-number">Module 3</div>
-                    <div class="module-title">Banking Without Getting Robbed</div>
-                    <div class="module-duration">20 min</div>
-                    <div class="module-desc">Use banks strategically and understand how the system really works</div>
-                </a>
-                
-                <a href="modules/credit-scores.html" class="module-card">
-                    <div class="module-number">Module 4</div>
-                    <div class="module-title">Credit Scores Decoded</div>
-                    <div class="module-duration">25 min</div>
-                    <div class="module-desc">Build and maintain excellent credit strategically</div>
-                </a>
-                
-                <a href="modules/debt-strategy.html" class="module-card">
-                    <div class="module-number">Module 5</div>
-                    <div class="module-title">Debt Strategy</div>
-                    <div class="module-duration">30 min</div>
-                    <div class="module-desc">Understand the true cost of debt and when to use it strategically</div>
-                </a>
-                
-                <a href="modules/taxes-paychecks.html" class="module-card">
-                    <div class="module-number">Module 6</div>
-                    <div class="module-title">Taxes & Paychecks Demystified</div>
-                    <div class="module-duration">25 min</div>
-                    <div class="module-desc">Understand the tax system and maximize your take-home pay</div>
-                </a>
-                
-                <a href="modules/investing-fundamentals.html" class="module-card">
-                    <div class="module-number">Module 7</div>
-                    <div class="module-title">Investing for Humans</div>
-                    <div class="module-duration">35 min</div>
-                    <div class="module-desc">Build long-term wealth through compound growth</div>
-                </a>
-                
-                <a href="modules/risk-insurance.html" class="module-card">
-                    <div class="module-number">Module 8</div>
-                    <div class="module-title">Protect What You've Built</div>
-                    <div class="module-duration">25 min</div>
-                    <div class="module-desc">Risk management and insurance without over-insuring</div>
-                </a>
-                
-                <a href="modules/consumer-protection.html" class="module-card">
-                    <div class="module-number">Module 9</div>
-                    <div class="module-title">Don't Get Scammed</div>
-                    <div class="module-duration">20 min</div>
-                    <div class="module-desc">Make smart decisions and avoid predatory practices</div>
-                </a>
-                
-                <a href="modules/financial-master-plan.html" class="module-card">
-                    <div class="module-number">Module 10</div>
-                    <div class="module-title">Your Financial Master Plan</div>
-                    <div class="module-duration">30 min</div>
-                    <div class="module-desc">Integrate everything into a coherent life plan</div>
-                </a>
-            </div>
-        </div>
-    </section>
-    
-    <!-- FAQ Section -->
-    <section class="faq-section">
-        <div class="container">
-            <h2 class="section-title">Frequently Asked Questions</h2>
-            
-            <div class="faq-grid">
-                <div class="faq-item">
-                    <div class="faq-question">Is this really free?</div>
-                    <div class="faq-answer">Yes. All 10 core modules are 100% free forever. No credit card required.</div>
-                </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question">Do I need financial background?</div>
-                    <div class="faq-answer">No. Designed for complete beginners. We explain everything in plain English.</div>
-                </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question">How long does it take?</div>
-                    <div class="faq-answer">Most complete all 10 modules in 4-6 hours over 2-3 weeks. Go at your own pace.</div>
-                </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question">Is this about Bitcoin?</div>
-                    <div class="faq-answer">No. This is universal financial literacy. Bitcoin is mentioned as one tool among many where relevant. Check out Bitcoin Sovereign Academy if you want Bitcoin-specific learning.</div>
-                </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question">What's the catch?</div>
-                    <div class="faq-answer">No catch. Financial literacy should be accessible to everyone. We believe in empowering people with knowledge.</div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Additional Learning Resources -->
-    <section class="modules-section" style="background: #0f2922;">
-        <div class="container">
-            <h2 class="section-title">Explore More Learning Resources</h2>
-            <p class="section-subtitle">Tools and deeper insights to accelerate your financial education</p>
-            
-            <div class="modules-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); max-width: 900px; margin: 0 auto;">
-                <!-- Interactive Calculators -->
-                <a href="calculators/" class="module-card" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.05)); border: 2px solid rgba(16, 185, 129, 0.4);">
-                    <div style="font-size: 3rem; margin-bottom: 1rem; text-align: center;">🧮</div>
-                    <div class="module-title">Financial Calculators</div>
-                    <div class="module-duration">5 Essential Tools</div>
-                    <div class="module-desc">Interactive calculators for compound growth, debt payoff, net worth tracking, and financial freedom planning</div>
-                </a>
-                
-                <!-- Money Theory Deep Dives -->
-                <a href="https://bitcoinsovereign.academy/deep-dives/money-banking/" target="_blank" class="module-card" style="background: linear-gradient(135deg, rgba(255, 193, 7, 0.1), rgba(255, 193, 7, 0.05)); border: 2px solid rgba(255, 193, 7, 0.4);">
-                    <div style="font-size: 3rem; margin-bottom: 1rem; text-align: center;">🏦</div>
-                    <div class="module-title">How Money Really Works</div>
-                    <div class="module-duration">Deep Dive Series</div>
-                    <div class="module-desc">Interactive simulations revealing how modern money is created, fractional reserve banking, and why Bitcoin matters</div>
-                    <div style="margin-top: 0.75rem; font-size: 0.8rem; color: #ffc107; font-weight: 600;">External Link →</div>
-                </a>
-                
-                <!-- Austrian Economics -->
-                <a href="https://bitcoinsovereign.academy/deep-dives/austrian-economics/" target="_blank" class="module-card" style="background: linear-gradient(135deg, rgba(156, 39, 176, 0.1), rgba(156, 39, 176, 0.05)); border: 2px solid rgba(156, 39, 176, 0.4);">
-                    <div style="font-size: 3rem; margin-bottom: 1rem; text-align: center;">🏹️</div>
-                    <div class="module-title">Austrian Economics</div>
-                    <div class="module-duration">Theory Deep Dive</div>
-                    <div class="module-desc">Understand time preference, sound money theory, and the economic principles that explain why Bitcoin matters for your wealth</div>
-                    <div style="margin-top: 0.75rem; font-size: 0.8rem; color: #9c27b0; font-weight: 600;">External Link →</div>
-                </a>
-            </div>
-            
-            <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: rgba(16, 185, 129, 0.05); border-radius: 1rem; border: 2px solid rgba(16, 185, 129, 0.2);">
-                <h3 style="color: #10b981; margin-bottom: 1rem; font-size: 1.4rem;">🎆 Want the Complete Bitcoin Education?</h3>
-                <p style="color: #9ca3af; margin-bottom: 1.5rem; line-height: 1.6;">After mastering traditional finance here, explore Bitcoin as the ultimate form of sound money. Learn self-custody, understand the technology, and discover how Bitcoin fits into a sovereign financial strategy.</p>
-                <a href="https://bitcoinsovereign.academy" target="_blank" style="display: inline-block; background: linear-gradient(135deg, #f7931a, #ff7b00); color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; text-decoration: none; font-weight: 600; transition: all 0.2s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(247, 147, 26, 0.4)';" onmouseout="this.style.transform=''; this.style.boxShadow='';">Continue to Bitcoin Sovereign Academy →</a>
-                <p style="margin-top: 1rem; font-size: 0.85rem; color: #6b7280;">Seamless progression from financial literacy to Bitcoin mastery</p>
-            </div>
-        </div>
-    </section>
-    
-    <!-- CTA Footer -->
-    <section class="cta-footer">
-        <div class="container">
-            <h2>Ready to Become Financially Sovereign?</h2>
-            <a href="assessment.html" class="cta-primary">Start Your Journey →</a>
-            
-            <!-- Network Footer -->
-            <div style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid rgba(16, 185, 129, 0.2);">
-                <p style="color: #6ee7b7; font-size: 0.9rem; margin-bottom: 1rem;">Part of the Sovereign Academy Network</p>
-                <div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
-                    <a href="https://thesovereign.academy" target="_blank" style="color: #9ca3af; text-decoration: none; font-size: 0.9rem; transition: color 0.2s;" onmouseover="this.style.color='#10b981'" onmouseout="this.style.color='#9ca3af'">🏠 The Sovereign Academy</a>
-                    <a href="https://bitcoinsovereign.academy" target="_blank" style="color: #9ca3af; text-decoration: none; font-size: 0.9rem; transition: color 0.2s;" onmouseover="this.style.color='#f7931a'" onmouseout="this.style.color='#9ca3af'">₿ Bitcoin Sovereign Academy</a>
-                </div>
-                <p style="color: #6b7280; font-size: 0.8rem; margin-top: 1.5rem;">© 2026 Sovereign Academy Network. Educational content only.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Icon Library -->
-    <script src="js/fsa-live-data.js"></script>
-    <script src="js/fsa-plan-builder.js"></script>
-    <script src="js/progress-manager.js"></script>
-    <script src="js/sovereignty-ladder.js"></script>
-    <script>
-        FSALiveData.onReady(function() {
-            FSALiveData.renderBanner('fsa-homepage-banner', ['inflation', 'hysa', 'cc-apr', 'sp500-hist', 'fed-rate', 'btc-price']);
-        });
-        document.addEventListener('DOMContentLoaded', function() {
-            SovereigntyPath.renderLadder('sovereignty-path-home', { showTitle: true });
-            
-            // Mobile Navigation Toggle
-            const hamburger = document.getElementById('mobile-nav-toggle');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const body = document.body;
-            
-            if (hamburger && mobileMenu) {
-                hamburger.addEventListener('click', function() {
-                    hamburger.classList.toggle('active');
-                    mobileMenu.classList.toggle('active');
-                    
-                    // Prevent body scroll when menu is open
-                    if (mobileMenu.classList.contains('active')) {
-                        body.style.overflow = 'hidden';
-                    } else {
-                        body.style.overflow = '';
-                    }
-                });
-                
-                // Close menu when clicking on menu items
-                const menuItems = mobileMenu.querySelectorAll('.mobile-nav-item');
-                menuItems.forEach(item => {
-                    item.addEventListener('click', function() {
-                        hamburger.classList.remove('active');
-                        mobileMenu.classList.remove('active');
-                        body.style.overflow = '';
-                    });
-                });
-                
-                // Close menu on window resize if viewport becomes large
-                window.addEventListener('resize', function() {
-                    if (window.innerWidth > 900) {
-                        hamburger.classList.remove('active');
-                        mobileMenu.classList.remove('active');
-                        body.style.overflow = '';
-                    }
-                });
-            }
-        });
-    </script>
-    <script src="js/icon-library.js">
-    <script>
-        // Replace emojis with animated SVG icons
-        (function() {
-            if (window.IconLibrary) {
-                // Icon mapping
-                const iconMap = {
-                    '📊': 'chart',
-                    '📚': 'books',
-                    '⚡': 'lightning',
-                    '🎯': 'target',
-                    '🛡️': 'shield',
-                    '🧠': 'brain'
-                };
-
-                // Replace emojis in path cards (larger icons)
-                document.querySelectorAll('.path-icon').forEach(el => {
-                    const emoji = el.textContent.trim();
-                    if (iconMap[emoji]) {
-                        el.innerHTML = IconLibrary.get(iconMap[emoji], 64, true);
-                    }
-                });
-
-                // Replace emojis in value prop cards
-                document.querySelectorAll('.prop-icon').forEach(el => {
-                    const emoji = el.textContent.trim();
-                    if (iconMap[emoji]) {
-                        el.innerHTML = IconLibrary.get(iconMap[emoji], 56, true);
-                    }
-                });
-            }
-        })();
-    </script>
-
-<!-- FSA Analytics & Email Capture -->
-<div style="margin: 2rem auto; max-width: 900px; padding: 0 1.5rem;">
-    <div data-fsa-email-capture="page-footer" data-title="📬 Level Up Your Finances" data-subtitle="Weekly money tips and financial strategies. No spam, ever."></div>
+<!-- SOCIAL PROOF BANNER -->
+<div class="proof-banner">
+  <div class="proof-item"><strong>3,200+</strong> learners enrolled</div>
+  <div class="proof-dot"></div>
+  <div class="proof-item"><strong>4–6 hours</strong> to complete all 10 modules</div>
+  <div class="proof-dot"></div>
+  <div class="proof-item"><strong>100% free</strong> · no signup required</div>
+  <div class="proof-dot"></div>
+  <div class="proof-item">Updated <strong>2026</strong></div>
 </div>
-<script src="/js/analytics.js" defer></script>
-<script src="/js/email-capture.js" defer></script>
 
+<!-- HERO -->
+<section class="hero">
+  <!-- Returning visitor banner (shown via JS) -->
+  <div class="returning-banner" id="returningBanner">
+    <div class="returning-icon">👋</div>
+    <div class="returning-text">
+      <strong id="returningTitle">Welcome back!</strong>
+      <p id="returningSubtitle">Continue where you left off</p>
+    </div>
+    <a href="#" id="returningCta" class="returning-cta">Continue →</a>
+  </div>
+
+  <div class="hero-label">✦ Free Financial Education</div>
+
+  <h1>The financial education you<br><em>should have gotten in school.</em></h1>
+  <p class="hero-sub">10 interactive modules. What financial advisors charge 1–2%/year to know — yours free. No agenda. No upsells. Just the knowledge.</p>
+
+  <div class="hero-ctas">
+    <a href="/assessment.html" class="btn-primary">📊 Get Your Custom Path <span style="opacity:0.7; font-weight:400">— 2 min</span></a>
+    <a href="#modules" class="btn-secondary">Browse All 10 Modules ↓</a>
+  </div>
+
+  <div class="hero-trust">
+    <span class="trust-check">✓</span> No credit card &nbsp;·&nbsp;
+    <span class="trust-check">✓</span> No signup &nbsp;·&nbsp;
+    <span class="trust-check">✓</span> No ads
+  </div>
+</section>
+
+<!-- PILLARS -->
+<div class="pillars">
+  <div class="pillar">
+    <div class="pillar-icon">⚡</div>
+    <div class="pillar-text">
+      <h4>Interactive, not lectures</h4>
+      <p>Calculators, scenarios, decisions</p>
+    </div>
+  </div>
+  <div class="pillar">
+    <div class="pillar-icon">🎯</div>
+    <div class="pillar-text">
+      <h4>Personalized path</h4>
+      <p>2-min assessment shapes your journey</p>
+    </div>
+  </div>
+  <div class="pillar">
+    <div class="pillar-icon">🛡️</div>
+    <div class="pillar-text">
+      <h4>Honest about trade-offs</h4>
+      <p>No hidden agendas. Pros and cons of everything.</p>
+    </div>
+  </div>
+  <div class="pillar">
+    <div class="pillar-icon">🧠</div>
+    <div class="pillar-text">
+      <h4>Real scenarios</h4>
+      <p>Learn from Sarah's $3,200 budget, not theory</p>
+    </div>
+  </div>
+</div>
+
+<!-- MODULES -->
+<section class="modules-section" id="modules">
+  <div class="section-header">
+    <h2 class="section-title">All 10 Modules</h2>
+    <p style="font-size:13px; color:var(--text-light)">Each maps to a step on the Sovereignty Path</p>
+  </div>
+
+  <!-- Progress tracker -->
+  <div class="progress-tracker" id="progressTracker">
+    <div class="progress-tracker-label">Your progress: <strong id="progressLabel">0 of 10 modules completed</strong></div>
+    <div class="progress-bar-outer">
+      <div class="progress-bar-inner" id="progressBarInner"></div>
+    </div>
+    <span class="progress-count" id="progressCount">0%</span>
+    <button class="progress-reset" id="resetBtn" onclick="resetProgress()">reset</button>
+  </div>
+
+  <div class="modules-grid" id="modulesGrid">
+
+    <a href="/modules/money-mindset-cash-flow.html" class="module-card" data-module="1">
+      <div class="module-card-top">
+        <span class="module-number">Module 1</span>
+        <div class="module-check" title="Mark complete" onclick="toggleModule(event, 1)">✓</div>
+      </div>
+      <div class="module-title">Money Mindset & Cash Flow</div>
+      <div class="module-desc">Understand your relationship with money and take control of your cash flow</div>
+      <div class="module-card-footer">
+        <span class="module-time">⏱ 20–30 min</span>
+        <span class="module-action">Start →</span>
+      </div>
+    </a>
+
+    <a href="/modules/emergency-funds-saving.html" class="module-card" data-module="2">
+      <div class="module-card-top">
+        <span class="module-number">Module 2</span>
+        <div class="module-check" title="Mark complete" onclick="toggleModule(event, 2)">✓</div>
+      </div>
+      <div class="module-title">Emergency Funds & Saving</div>
+      <div class="module-desc">Build a financial security buffer that protects you from life's surprises</div>
+      <div class="module-card-footer">
+        <span class="module-time">⏱ 25 min</span>
+        <span class="module-action">Start →</span>
+      </div>
+    </a>
+
+    <a href="/modules/banking-basics.html" class="module-card" data-module="3">
+      <div class="module-card-top">
+        <span class="module-number">Module 3</span>
+        <div class="module-check" title="Mark complete" onclick="toggleModule(event, 3)">✓</div>
+      </div>
+      <div class="module-title">Banking Without Getting Robbed</div>
+      <div class="module-desc">Use banks strategically and understand how the system really works</div>
+      <div class="module-card-footer">
+        <span class="module-time">⏱ 20 min</span>
+        <span class="module-action">Start →</span>
+      </div>
+    </a>
+
+    <a href="/modules/credit-scores.html" class="module-card" data-module="4">
+      <div class="module-card-top">
+        <span class="module-number">Module 4</span>
+        <div class="module-check" title="Mark complete" onclick="toggleModule(event, 4)">✓</div>
+      </div>
+      <div class="module-title">Credit Scores Decoded</div>
+      <div class="module-desc">Build and maintain excellent credit — strategically, not blindly</div>
+      <div class="module-card-footer">
+        <span class="module-time">⏱ 25 min</span>
+        <span class="module-action">Start →</span>
+      </div>
+    </a>
+
+    <a href="/modules/debt-strategy.html" class="module-card" data-module="5">
+      <div class="module-card-top">
+        <span class="module-number">Module 5</span>
+        <div class="module-check" title="Mark complete" onclick="toggleModule(event, 5)">✓</div>
+      </div>
+      <div class="module-title">Debt Strategy</div>
+      <div class="module-desc">Understand the true cost of debt and when to use it strategically</div>
+      <div class="module-card-footer">
+        <span class="module-time">⏱ 30 min</span>
+        <span class="module-action">Start →</span>
+      </div>
+    </a>
+
+    <a href="/modules/taxes-paychecks.html" class="module-card" data-module="6">
+      <div class="module-card-top">
+        <span class="module-number">Module 6</span>
+        <div class="module-check" title="Mark complete" onclick="toggleModule(event, 6)">✓</div>
+      </div>
+      <div class="module-title">Taxes & Paychecks Demystified</div>
+      <div class="module-desc">Understand the tax system and maximize your take-home pay</div>
+      <div class="module-card-footer">
+        <span class="module-time">⏱ 25 min</span>
+        <span class="module-action">Start →</span>
+      </div>
+    </a>
+
+    <a href="/modules/investing-fundamentals.html" class="module-card" data-module="7">
+      <div class="module-card-top">
+        <span class="module-number">Module 7</span>
+        <div class="module-check" title="Mark complete" onclick="toggleModule(event, 7)">✓</div>
+      </div>
+      <div class="module-title">Investing for Humans</div>
+      <div class="module-desc">Build long-term wealth through compound growth — without the jargon</div>
+      <div class="module-card-footer">
+        <span class="module-time">⏱ 35 min</span>
+        <span class="module-action">Start →</span>
+      </div>
+    </a>
+
+    <a href="/modules/risk-insurance.html" class="module-card" data-module="8">
+      <div class="module-card-top">
+        <span class="module-number">Module 8</span>
+        <div class="module-check" title="Mark complete" onclick="toggleModule(event, 8)">✓</div>
+      </div>
+      <div class="module-title">Protect What You've Built</div>
+      <div class="module-desc">Risk management and insurance without over-insuring</div>
+      <div class="module-card-footer">
+        <span class="module-time">⏱ 25 min</span>
+        <span class="module-action">Start →</span>
+      </div>
+    </a>
+
+    <a href="/modules/consumer-protection.html" class="module-card" data-module="9">
+      <div class="module-card-top">
+        <span class="module-number">Module 9</span>
+        <div class="module-check" title="Mark complete" onclick="toggleModule(event, 9)">✓</div>
+      </div>
+      <div class="module-title">Don't Get Scammed</div>
+      <div class="module-desc">Spot predatory practices and make genuinely informed consumer decisions</div>
+      <div class="module-card-footer">
+        <span class="module-time">⏱ 20 min</span>
+        <span class="module-action">Start →</span>
+      </div>
+    </a>
+
+    <a href="/modules/financial-master-plan.html" class="module-card" data-module="10">
+      <div class="module-card-top">
+        <span class="module-number">Module 10</span>
+        <div class="module-check" title="Mark complete" onclick="toggleModule(event, 10)">✓</div>
+      </div>
+      <div class="module-title">Your Financial Master Plan</div>
+      <div class="module-desc">Integrate everything into a coherent life plan built for the long game</div>
+      <div class="module-card-footer">
+        <span class="module-time">⏱ 30 min</span>
+        <span class="module-action">Start →</span>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="testimonials-inner">
+    <h2>What learners are saying</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-quote">"I've paid for two different financial literacy courses. This free site taught me more in a weekend than both of them combined — and it was honest about the trade-offs."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">MK</div>
+          <div>
+            <div class="testimonial-name">Marcus K.</div>
+            <div class="testimonial-role">Software Engineer · Completed all 10 modules</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-quote">"The debt strategy module alone saved me from a decision I was about to make that would have cost thousands. The scenarios make it real in a way textbooks never do."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">SL</div>
+          <div>
+            <div class="testimonial-name">Sofia L.</div>
+            <div class="testimonial-role">Nurse · Modules 1–7 complete</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-quote">"Finally a financial education platform that doesn't try to sell me anything. I sent it to my entire team. The investing module is particularly excellent."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">RT</div>
+          <div>
+            <div class="testimonial-name">Raj T.</div>
+            <div class="testimonial-role">Small business owner · All modules complete</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EMAIL CAPTURE -->
+<section class="email-section">
+  <div class="email-inner">
+    <div class="email-badge">Free resource</div>
+    <h2>Get the Financial Sovereignty Checklist</h2>
+    <p>A single-page action checklist covering every key insight from all 10 modules. Practical. Printable. Yours free.</p>
+    <div id="emailFormWrapper">
+      <form class="email-form" onsubmit="handleEmailSubmit(event)">
+        <input type="email" placeholder="your@email.com" required autocomplete="email">
+        <button type="submit">Send it to me →</button>
+      </form>
+      <p class="email-fine">No spam. No sales sequences. Just the checklist. Unsubscribe anytime.</p>
+    </div>
+    <div class="email-success" id="emailSuccess">
+      ✓ &nbsp;Sent! Check your inbox for the Financial Sovereignty Checklist.
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <h2>Frequently asked questions</h2>
+
+  <div class="faq-item">
+    <details>
+      <summary class="faq-question">Is this really free?</summary>
+      <p class="faq-answer">Yes. All 10 core modules are 100% free forever. No credit card required, no signup, no paywall. We believe financial literacy should be a right, not a product.</p>
+    </details>
+  </div>
+
+  <div class="faq-item">
+    <details>
+      <summary class="faq-question">Do I need any financial background?</summary>
+      <p class="faq-answer">None at all. The modules are designed from scratch for beginners. We explain every concept in plain English, build on prior modules, and use real-life scenarios throughout.</p>
+    </details>
+  </div>
+
+  <div class="faq-item">
+    <details>
+      <summary class="faq-question">How long does it take to complete?</summary>
+      <p class="faq-answer">Most people complete all 10 modules in 4–6 hours, typically over 2–3 weeks at their own pace. Each module is 20–35 minutes. Use the progress tracker on this page to see where you are.</p>
+    </details>
+  </div>
+
+  <div class="faq-item">
+    <details>
+      <summary class="faq-question">Is this about Bitcoin?</summary>
+      <p class="faq-answer">No. This is universal financial literacy — budgeting, debt, taxes, investing, insurance, and planning. Bitcoin appears as one tool among many where relevant. For Bitcoin-specific education, visit Bitcoin Sovereign Academy.</p>
+    </details>
+  </div>
+
+  <div class="faq-item">
+    <details>
+      <summary class="faq-question">What's the catch?</summary>
+      <p class="faq-answer">There isn't one. This platform exists because financial education should be accessible to everyone. We offer paid institutional programs and consultations for those who want hands-on support, but the core education is and will always be free.</p>
+    </details>
+  </div>
+
+  <div class="faq-item">
+    <details>
+      <summary class="faq-question">Will my progress be saved?</summary>
+      <p class="faq-answer">Yes — your progress is stored locally in your browser using localStorage. You can mark modules complete using the ✓ button on each card. Your progress persists between sessions on the same browser, no account required.</p>
+    </details>
+  </div>
+</section>
+
+<!-- RESOURCES -->
+<section class="resources-section">
+  <div class="resources-inner">
+    <h2 class="section-title">Explore more learning resources</h2>
+    <div class="resources-grid">
+      <a href="/calculators/" class="resource-card">
+        <div class="resource-icon">🧮</div>
+        <div class="resource-label">Tools</div>
+        <div class="resource-title">Financial Calculators</div>
+        <div class="resource-desc">Interactive calculators for compound growth, debt payoff, net worth tracking, and financial freedom planning.</div>
+      </a>
+      <a href="https://bitcoinsovereign.academy/deep-dives/money-banking/" class="resource-card">
+        <div class="resource-icon">🏦</div>
+        <div class="resource-label">Deep Dive</div>
+        <div class="resource-title">How Money Really Works</div>
+        <div class="resource-desc">Interactive simulations revealing modern money creation, fractional reserve banking, and why Bitcoin matters.</div>
+        <div class="resource-external">External link →</div>
+      </a>
+      <a href="https://bitcoinsovereign.academy/deep-dives/austrian-economics/" class="resource-card">
+        <div class="resource-icon">📖</div>
+        <div class="resource-label">Theory</div>
+        <div class="resource-title">Austrian Economics</div>
+        <div class="resource-desc">Time preference, sound money theory, and the economic principles that explain why Bitcoin matters for wealth.</div>
+        <div class="resource-external">External link →</div>
+      </a>
+      <a href="/institutional/" class="resource-card">
+        <div class="resource-icon">🏛️</div>
+        <div class="resource-label">Institutional</div>
+        <div class="resource-title">Programs for Organizations</div>
+        <div class="resource-desc">Custom programs for cities, corporations, correctional facilities, and educational institutions.</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- BITCOIN BRIDGE -->
+<section class="btc-bridge">
+  <div class="btc-bridge-inner">
+    <h3>₿ Want the complete Bitcoin education?</h3>
+    <p>After mastering traditional finance here, explore Bitcoin as the ultimate form of sound money — self-custody, the technology, and how it fits a sovereign financial strategy.</p>
+    <a href="https://bitcoinsovereign.academy" class="btn-amber">Continue to Bitcoin Sovereign Academy →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">💰 Financially <span>Sovereign</span> Academy — part of the Sovereign Academy Network</div>
+  <div class="footer-links">
+    <a href="https://thesovereign.academy">The Sovereign Academy</a>
+    <a href="https://bitcoinsovereign.academy">Bitcoin Sovereign Academy</a>
+    <a href="/institutional/">Institutional</a>
+    <a href="https://calendly.com/dalia-sovereign">Book Consultation</a>
+  </div>
+  <div class="footer-copy">© 2026 Sovereign Academy Network. Educational content only. Not financial advice.</div>
+</footer>
+
+<script>
+// ── PROGRESS SYSTEM (localStorage) ──
+const STORAGE_KEY = 'fsa_completed_modules';
+const VISIT_KEY   = 'fsa_visit_count';
+const MODULES = [
+  { id: 1, title: 'Money Mindset & Cash Flow',    url: '/modules/money-mindset-cash-flow.html' },
+  { id: 2, title: 'Emergency Funds & Saving',      url: '/modules/emergency-funds-saving.html' },
+  { id: 3, title: 'Banking Without Getting Robbed',url: '/modules/banking-basics.html' },
+  { id: 4, title: 'Credit Scores Decoded',         url: '/modules/credit-scores.html' },
+  { id: 5, title: 'Debt Strategy',                 url: '/modules/debt-strategy.html' },
+  { id: 6, title: 'Taxes & Paychecks',             url: '/modules/taxes-paychecks.html' },
+  { id: 7, title: 'Investing for Humans',          url: '/modules/investing-fundamentals.html' },
+  { id: 8, title: 'Protect What You\'ve Built',   url: '/modules/risk-insurance.html' },
+  { id: 9, title: 'Don\'t Get Scammed',            url: '/modules/consumer-protection.html' },
+  { id: 10,title: 'Your Financial Master Plan',    url: '/modules/financial-master-plan.html' },
+];
+
+function getCompleted() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
+  catch(e) { return []; }
+}
+
+function saveCompleted(arr) {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(arr)); }
+  catch(e) {}
+}
+
+function updateProgress() {
+  const completed = getCompleted();
+  const count = completed.length;
+  const pct = Math.round(count / 10 * 100);
+
+  // Progress bar
+  document.getElementById('progressBarInner').style.width = pct + '%';
+  document.getElementById('progressCount').textContent = pct + '%';
+  document.getElementById('progressLabel').textContent =
+    count === 0 ? '0 of 10 modules completed' :
+    count === 10 ? 'All 10 modules completed 🎉' :
+    `${count} of 10 modules completed`;
+
+  // Nav progress
+  const navEl = document.getElementById('navProgress');
+  if (count > 0) {
+    navEl.style.display = 'flex';
+    document.getElementById('navProgressText').textContent = count + '/10';
+    document.getElementById('navProgressFill').style.width = pct + '%';
+  } else {
+    navEl.style.display = 'none';
+  }
+
+  // Module cards
+  MODULES.forEach(m => {
+    const card = document.querySelector(`[data-module="${m.id}"]`);
+    if (!card) return;
+    const isDone = completed.includes(m.id);
+    card.classList.toggle('completed', isDone);
+    const actionEl = card.querySelector('.module-action');
+    if (actionEl) {
+      actionEl.textContent = isDone ? 'Review →' : (completed.length > 0 && m.id === nextModule(completed) ? 'Continue →' : 'Start →');
+    }
+  });
+}
+
+function nextModule(completed) {
+  for (let i = 1; i <= 10; i++) {
+    if (!completed.includes(i)) return i;
+  }
+  return null;
+}
+
+function toggleModule(e, id) {
+  e.preventDefault();
+  e.stopPropagation();
+  const completed = getCompleted();
+  const idx = completed.indexOf(id);
+  if (idx > -1) { completed.splice(idx, 1); }
+  else { completed.push(id); }
+  saveCompleted(completed);
+  updateProgress();
+}
+
+function resetProgress() {
+  if (confirm('Reset all progress? This cannot be undone.')) {
+    saveCompleted([]);
+    updateProgress();
+  }
+}
+
+// ── RETURNING VISITOR LOGIC ──
+function initReturning() {
+  try {
+    const visits = parseInt(localStorage.getItem(VISIT_KEY) || '0') + 1;
+    localStorage.setItem(VISIT_KEY, visits);
+
+    const completed = getCompleted();
+    if (visits > 1 && completed.length > 0) {
+      const next = nextModule(completed);
+      const banner = document.getElementById('returningBanner');
+      const title  = document.getElementById('returningTitle');
+      const sub    = document.getElementById('returningSubtitle');
+      const cta    = document.getElementById('returningCta');
+
+      if (completed.length === 10) {
+        title.textContent = 'You\'ve completed all 10 modules!';
+        sub.textContent = 'Review any module or explore the calculators';
+        cta.textContent = 'Calculators →';
+        cta.href = '/calculators/';
+      } else {
+        const nextMod = MODULES.find(m => m.id === next);
+        title.textContent = `Welcome back! ${completed.length}/10 modules done.`;
+        sub.textContent   = `Up next: Module ${next} — ${nextMod.title}`;
+        cta.textContent   = 'Continue →';
+        cta.href          = nextMod.url;
+      }
+
+      banner.classList.add('visible');
+    }
+  } catch(e) {}
+}
+
+// ── EMAIL FORM ──
+function handleEmailSubmit(e) {
+  e.preventDefault();
+  // In production: POST to your email provider (ConvertKit, Mailchimp, etc.)
+  // For now, show success state
+  document.getElementById('emailFormWrapper').style.display = 'none';
+  const success = document.getElementById('emailSuccess');
+  success.style.display = 'block';
+
+  // TODO: Replace with your actual form action, e.g.:
+  // fetch('https://app.convertkit.com/forms/YOUR_FORM_ID/subscriptions', {
+  //   method: 'POST', body: new FormData(e.target)
+  // });
+}
+
+// ── INIT ──
+document.addEventListener('DOMContentLoaded', () => {
+  updateProgress();
+  initReturning();
+});
+</script>
 </body>
 </html>
