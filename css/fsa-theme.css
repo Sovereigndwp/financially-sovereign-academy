@@ -297,3 +297,14 @@ ul ul ul {
         display: none !important;
     }
 }
+
+/* Legal footer (locked footer convention — sub-project #7) */
+.legal-footer {
+    margin-top: 2rem;
+    padding: 1.5rem 1rem;
+    border-top: 1px solid rgba(16, 185, 129, 0.2);
+    text-align: center;
+    font-size: 0.85rem;
+    color: #9ca3af;
+    line-height: 1.5;
+}
