@@ -1,82 +1,231 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-CO">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="refresh" content="0;url=https://bitcoinsovereign.academy/institutional/corporations/colombia/">
-    <link rel="canonical" href="https://bitcoinsovereign.academy/institutional/corporations/colombia/">
-    <title>Redirigiendo al programa Colombia para empresas...</title>
-    <style>
-        :root {
-            --co-yellow: #FCD116;
-            --co-blue: #003893;
-            --co-red: #CE1126;
-            --dark: #0d0d0d;
-            --light: #eaeaea;
-            --dim: #a0a0a0;
-            --grad-flag: linear-gradient(135deg, var(--co-yellow) 0%, var(--co-blue) 50%, var(--co-red) 100%);
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-            background:
-                radial-gradient(ellipse at 30% 20%, rgba(252, 209, 22, 0.06) 0%, transparent 50%),
-                radial-gradient(ellipse at 70% 80%, rgba(206, 17, 38, 0.04) 0%, transparent 50%),
-                radial-gradient(ellipse at 50% 50%, rgba(0, 56, 147, 0.05) 0%, transparent 60%),
-                var(--dark);
-            color: var(--light);
-        }
-        main {
-            max-width: 720px;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(252, 209, 22, 0.18);
-            border-radius: 1rem;
-            padding: 2rem;
-            text-align: center;
-        }
-        .flag {
-            font-size: 2.2rem;
-            margin-bottom: 0.75rem;
-        }
-        h1 {
-            font-size: clamp(1.8rem, 4vw, 2.4rem);
-            margin-bottom: 0.85rem;
-            line-height: 1.15;
-        }
-        p {
-            color: var(--dim);
-            line-height: 1.7;
-            margin-bottom: 1rem;
-        }
-        a {
-            display: inline-block;
-            margin-top: 0.5rem;
-            padding: 0.85rem 1.6rem;
-            border-radius: 999px;
-            text-decoration: none;
-            font-weight: 700;
-            color: #1a1a1a;
-            background: var(--grad-flag);
-            box-shadow: 0 6px 20px rgba(252, 209, 22, 0.22);
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Educación financiera para empresas | Colombia · Financially Sovereign Academy</title>
+<meta name="description" content="Programa gratuito de 10 semanas para que sus colaboradores tomen mejores decisiones de dinero. 15 min por semana, por WhatsApp, sin costo, sin datos de empleados.">
+<link rel="canonical" href="https://financiallysovereign.academy/institutional/corporations/colombia">
+<style>
+  :root{
+    --bg:#0f1115; --panel:#161a22; --panel2:#1d2330; --line:#2a3142;
+    --text:#e8ecf3; --muted:#aab2c0; --accent:#f7b500; --accent2:#22c55e; --link:#7cc4ff;
+    --maxw:880px;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:24px}
+  header.hero{padding:48px 24px 24px;text-align:center}
+  .flag{font-size:42px}
+  .eyebrow{color:var(--muted);font-size:13px;letter-spacing:.12em;text-transform:uppercase;margin:8px 0 12px}
+  h1{font-size:34px;line-height:1.2;margin:8px 0 16px}
+  h2{font-size:24px;margin:40px 0 12px;border-bottom:1px solid var(--line);padding-bottom:6px}
+  h3{font-size:18px;margin:18px 0 6px}
+  p{margin:10px 0}
+  .lede{color:#cfd6e3;font-size:18px;max-width:680px;margin:0 auto 18px}
+  .pills{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:14px 0 22px}
+  .pill{background:var(--panel);border:1px solid var(--line);padding:6px 12px;border-radius:999px;font-size:13px;color:var(--muted)}
+  .cta-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:18px 0}
+  .btn{display:inline-block;padding:12px 18px;border-radius:10px;text-decoration:none;font-weight:600;font-size:15px;border:1px solid transparent}
+  .btn-primary{background:var(--accent);color:#1a1300}
+  .btn-secondary{background:transparent;color:var(--text);border-color:var(--line)}
+  .btn:hover{filter:brightness(1.05)}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;margin:14px 0}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:680px){.grid2{grid-template-columns:1fr}}
+  ul.clean{padding-left:20px;margin:8px 0}
+  ul.clean li{margin:6px 0}
+  .note{background:var(--panel2);border-left:3px solid var(--accent);padding:14px 16px;border-radius:0 10px 10px 0;color:#d6dce8;font-size:15px}
+  .small{font-size:13px;color:var(--muted)}
+  .kpi{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin:6px 0 0}
+  .kpi div{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px;min-width:140px;text-align:center}
+  .kpi b{display:block;font-size:20px;color:var(--accent)}
+  .copybox{background:#0b0d12;border:1px dashed var(--line);border-radius:10px;padding:16px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:14px;line-height:1.55;white-space:pre-wrap;color:#d6dce8}
+  .copybtn{margin-top:10px;background:var(--panel2);color:var(--text);border:1px solid var(--line);padding:8px 14px;border-radius:8px;cursor:pointer;font-size:13px}
+  .copybtn:hover{background:#252c3c}
+  .steps{counter-reset:step;list-style:none;padding:0;margin:14px 0}
+  .steps li{counter-increment:step;display:flex;gap:14px;margin:14px 0}
+  .steps li::before{content:counter(step);background:var(--accent);color:#1a1300;font-weight:700;width:30px;height:30px;border-radius:999px;flex:0 0 30px;display:flex;align-items:center;justify-content:center}
+  a{color:var(--link)}
+  footer{margin-top:48px;padding:30px 24px;text-align:center;color:var(--muted);font-size:13px;border-top:1px solid var(--line)}
+  .badge{display:inline-block;background:var(--panel2);border:1px solid var(--line);padding:3px 10px;border-radius:999px;font-size:12px;color:var(--muted);margin-left:6px;vertical-align:middle}
+  .bridge{background:linear-gradient(180deg,#1d2330 0%,#161a22 100%);border:1px solid var(--line);border-radius:14px;padding:20px;margin:20px 0}
+  .bridge h3{color:var(--accent);margin-top:0}
+</style>
 </head>
 <body>
-    <main>
-        <div class="flag">🇨🇴</div>
-        <h1>Redirigiendo al programa Colombia para empresas</h1>
-        <p>Esta versión local redirige al contenido compartido que se sirve desde Bitcoin Sovereign Academy.</p>
-        <p>Si no te redirige automáticamente, usa el botón de abajo.</p>
-        <a href="https://bitcoinsovereign.academy/institutional/corporations/colombia/">Ir al programa</a>
-    </main>
-    <script>
-        window.location.replace('https://bitcoinsovereign.academy/institutional/corporations/colombia/');
-    </script>
+
+<header class="hero">
+  <div class="flag">🇨🇴</div>
+  <div class="eyebrow">Para empresas en Colombia · Programa gratuito</div>
+  <h1>Equipos con menos estrés financiero rinden mejor</h1>
+  <p class="lede">Programa de 10 semanas, 15 minutos por semana, por WhatsApp. Para que sus colaboradores tomen mejores decisiones con su dinero — sin cargar a recursos humanos, sin recoger datos de empleados, sin costo para la empresa.</p>
+  <div class="pills">
+    <span class="pill">⏱ 15 min/semana</span>
+    <span class="pill">📱 Por WhatsApp</span>
+    <span class="pill">🇨🇴 Hecho para Colombia</span>
+    <span class="pill">🎁 $0 para la empresa</span>
+    <span class="pill">🔒 0 datos de empleados</span>
+  </div>
+  <div class="cta-row">
+    <a class="btn btn-primary" href="#piloto">Iniciar un piloto en mi empresa</a>
+    <a class="btn btn-secondary" href="#programa">Ver el programa completo</a>
+  </div>
+  <p class="small">¿Eres colaborador y quieres proponerlo? <a href="#mensaje">Salta al mensaje listo para reenviar.</a></p>
+</header>
+
+<main class="wrap">
+
+  <section class="note">
+    <strong>¿Por qué esta página dice "Bitcoin" en la dirección?</strong><br>
+    Financially Sovereign Academy y Bitcoin Sovereign Academy son dos puertas a una misma idea: que las personas entiendan cómo funciona su dinero. Esta página vive en ambos dominios porque el contenido es <em>universal y útil hoy</em> — presupuesto, deuda, ahorro, fraude. Si después de las 10 semanas alguien quiere entender por qué el dinero pierde valor y qué alternativas existen, hay un puente opcional al final. Aquí no se vende Bitcoin ni ningún producto.
+  </section>
+
+  <h2>El problema concreto que resuelve</h2>
+  <p>El estrés financiero es uno de los costos invisibles más grandes para una empresa. Cuando una persona no entiende su comprobante de nómina, está endeudada con un gota a gota, o no sabe si una oferta es una estafa, dedica horas laborales a preocuparse y toma decisiones costosas por presión.</p>
+  <p>Este programa cubre 10 temas concretos — presupuesto, nómina, deuda, fondo de emergencia, inflación, fraudes, banca digital, metas, historial crediticio y crecimiento del dinero — explicados de forma simple y aplicable a Colombia, con herramientas reales (calculadoras, simuladores, comparadores).</p>
+
+  <h2>Lo que gana cada parte</h2>
+  <div class="grid2">
+    <div class="card">
+      <h3>👷 Para sus colaboradores</h3>
+      <ul class="clean">
+        <li>Claridad sobre en qué se les va el dinero</li>
+        <li>Herramientas para evitar fraudes y gota a gota</li>
+        <li>Confianza con Nequi, Daviplata y banca digital</li>
+        <li>Menos presión financiera, más capacidad de enfoque</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>🏢 Para la empresa</h3>
+      <ul class="clean">
+        <li>Menor rotación — retener cuesta menos que reemplazar</li>
+        <li>Equipos más enfocados durante la jornada</li>
+        <li>Mejor manejo de herramientas digitales internas</li>
+        <li>Imagen de empresa responsable que atrae talento</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>Lo que <em>no</em> hace este programa</h2>
+  <div class="card">
+    <ul class="clean">
+      <li><strong>No recoge datos individuales.</strong> La empresa no ve el progreso de cada empleado. No hay registro obligatorio.</li>
+      <li><strong>No vende productos financieros.</strong> No hay comisiones, ni convenios con bancos, ni recomendaciones de productos específicos.</li>
+      <li><strong>No es consejo financiero personal.</strong> Es educación práctica basada en datos públicos (DANE, Banco de la República, Superintendencia Financiera).</li>
+      <li><strong>No carga a RRHH.</strong> Lanzar el piloto toma menos de una hora. No hay plataforma nueva que aprender.</li>
+    </ul>
+  </div>
+
+  <h2>Cómo medimos si funcionó</h2>
+  <p>Antes de iniciar y al terminar las 10 semanas, los participantes responden — de forma anónima y voluntaria — tres preguntas:</p>
+  <ul class="clean">
+    <li><strong>Claridad:</strong> "¿Qué tan claro tengo en qué se me va el dinero cada mes?" (1–5)</li>
+    <li><strong>Confianza:</strong> "¿Qué tan capaz me siento de tomar buenas decisiones financieras?" (1–5)</li>
+    <li><strong>Estrés:</strong> "¿Con qué frecuencia el dinero me preocupa durante el trabajo?" (1–5)</li>
+  </ul>
+  <p>La empresa recibe los resultados agregados — nunca individuales — para ver el cambio entre semana 1 y semana 10.</p>
+
+  <h2 id="piloto">Cómo implementarlo: piloto de 10 semanas</h2>
+  <ol class="steps">
+    <li>
+      <div>
+        <strong>Revise el programa.</strong> Recorra las 10 semanas en <a href="#programa">la siguiente sección</a> o abra una semana de muestra. Ya está listo, no hay que producir nada.
+      </div>
+    </li>
+    <li>
+      <div>
+        <strong>Defina el grupo piloto (15–30 personas).</strong> Una reunión de 20 minutos basta: quiénes participan, cuándo empieza, qué canal de WhatsApp se usa (grupo o difusión).
+      </div>
+    </li>
+    <li>
+      <div>
+        <strong>Envíe la encuesta de entrada y la Semana 1.</strong> Después, una semana a la vez. El programa acompaña el ritmo. Al final, encuesta de salida y resultados agregados para la empresa.
+      </div>
+    </li>
+  </ol>
+
+  <div class="cta-row">
+    <a class="btn btn-primary" href="mailto:dalia@thesovereign.academy?subject=Piloto%20programa%20Colombia%20-%20[Empresa]&body=Hola%2C%20nos%20interesa%20iniciar%20un%20piloto%20del%20programa.%20Somos%20[empresa]%2C%20[n%C3%BAmero]%20colaboradores.%20Quisi%C3%A9ramos%20empezar%20en%20[fecha].">📩 Solicitar kit de piloto para RRHH</a>
+    <a class="btn btn-secondary" href="https://bitcoinsovereign.academy/semana-1/">Ver una semana de muestra</a>
+  </div>
+
+  <h2 id="mensaje">Mensaje listo para reenviar al decisor</h2>
+  <p>Si usted es colaborador y cree que esto ayudaría a su equipo, copie este mensaje y envíelo a la persona indicada (gerencia, RRHH, bienestar).</p>
+  <div class="copybox" id="msg">Hola,
+
+Encontré un programa gratuito de educación financiera para empresas en Colombia. Son 10 semanas, 15 minutos por semana, y cubre presupuesto, deuda, ahorro, inflación, fraudes, banca digital e historial crediticio.
+
+Lo que me gusta: no recoge datos individuales de empleados, no vende productos financieros, no carga a RRHH, y se envía por WhatsApp. Se puede empezar con un piloto de 15–30 personas.
+
+Puede verlo aquí: https://financiallysovereign.academy/institutional/corporations/colombia
+
+Si te interesa, te paso más detalles.</div>
+  <button class="copybtn" onclick="navigator.clipboard.writeText(document.getElementById('msg').innerText);this.innerText='✅ Copiado';setTimeout(()=>this.innerText='📋 Copiar mensaje',2000)">📋 Copiar mensaje</button>
+
+  <h2 id="programa">El programa: 10 semanas, 3 bloques</h2>
+  <div class="kpi">
+    <div><b>10</b>semanas</div>
+    <div><b>15</b>min/semana</div>
+    <div><b>10</b>herramientas reales</div>
+    <div><b>$0</b>costo</div>
+  </div>
+
+  <div class="card">
+    <h3>🏠 Mi Plata Hoy <span class="badge">Semanas 1–4</span></h3>
+    <p>Presupuesto real, leer el comprobante de nómina, manejar deuda sin drama, primer fondo de emergencia.</p>
+  </div>
+  <div class="card">
+    <h3>🛡️ Mi Dinero Seguro <span class="badge">Semanas 5–7</span></h3>
+    <p>Inflación como vecina real, fraudes y estafas en Colombia, banco en el celular (Nequi, Daviplata, comisiones).</p>
+  </div>
+  <div class="card">
+    <h3>🎯 Mi Futuro Financiero <span class="badge">Semanas 8–10</span></h3>
+    <p>Metas de ahorro, historial crediticio (DataCrédito), comparar opciones reales para hacer crecer el dinero (CDT, cuenta de ahorro, fondos) frente a la inflación.</p>
+  </div>
+
+  <div class="bridge">
+    <h3>🧭 Después de la Semana 10: el experimento de las dos economías</h3>
+    <p>Una simulación interactiva donde dos comunidades empiezan con los mismos recursos pero toman decisiones distintas sobre ahorro, gasto e incentivos. En 4 rondas se ve cómo esas decisiones cambian el resultado a largo plazo. Es lo más cercano a "sentir" el efecto del tiempo y la inflación sin que nadie se lo explique.</p>
+    <p><a href="https://bitcoinsovereign.academy/semana-10/experimento-dos-economias">Probar la simulación →</a></p>
+  </div>
+
+  <div class="bridge">
+    <h3>🌱 Puente opcional: ¿y si ahorrar bien no alcanza?</h3>
+    <p>El programa enseña a usar bien las herramientas que existen hoy. Pero una pregunta honesta: si la inflación en Colombia ronda el 5–10% al año y un CDT paga menos, ¿el ahorro tradicional realmente protege el poder de compra? Para quien quiera explorar la respuesta — sin compromiso, sin venta — hay una lectura corta sobre qué es el dinero duro y por qué algunas personas eligen Bitcoin como reserva de valor.</p>
+    <p class="small">Esta sección es opcional, posterior al programa, y no forma parte del piloto corporativo.</p>
+    <p><a href="https://bitcoinsovereign.academy/">Explorar Bitcoin Sovereign Academy →</a></p>
+  </div>
+
+  <h2>¿Quién está detrás?</h2>
+  <p>El programa es desarrollado y mantenido por <strong>The Sovereign Academy</strong>, una iniciativa de educación financiera independiente. El contenido está revisado para Colombia, usa datos del DANE, Banco de la República y Superintendencia Financiera, y se actualiza cuando cambian los marcos regulatorios.</p>
+  <p class="small">Contacto directo: <a href="mailto:dalia@thesovereign.academy">dalia@thesovereign.academy</a></p>
+
+  <h2>Preguntas frecuentes</h2>
+  <div class="card">
+    <h3>¿Qué pasa si un colaborador tiene una duda durante la semana?</h3>
+    <p>Cada módulo incluye explicaciones y ejemplos. Para dudas adicionales, pueden escribir al correo de contacto. No se ofrece asesoría financiera personal — el programa es educativo.</p>
+    <h3>¿Necesitamos firmar algo?</h3>
+    <p>No. Para el piloto basta acordar internamente quiénes participan. Si su área legal pide un memo de uso de datos, lo enviamos por correo (resumen: no recogemos datos individuales).</p>
+    <h3>¿Funciona si parte del equipo no tiene smartphone?</h3>
+    <p>Sí. Cada módulo está disponible también como PDF imprimible de una página. El acompañamiento por WhatsApp es opcional.</p>
+    <h3>¿Pueden hacer un módulo a medida para nuestra empresa?</h3>
+    <p>El programa estándar es gratuito. Adaptaciones específicas (sector, ubicación, idioma) se evalúan caso a caso por correo.</p>
+  </div>
+
+  <h2>Empezar</h2>
+  <div class="cta-row">
+    <a class="btn btn-primary" href="mailto:dalia@thesovereign.academy?subject=Piloto%20programa%20Colombia">📩 Iniciar piloto en mi empresa</a>
+    <a class="btn btn-secondary" href="https://bitcoinsovereign.academy/semana-1/">Ver Semana 1 como colaborador</a>
+  </div>
+
+</main>
+
+<footer>
+  Financially Sovereign Academy · Bitcoin Sovereign Academy<br>
+  Contacto: <a href="mailto:dalia@thesovereign.academy" style="color:var(--link)">dalia@thesovereign.academy</a><br>
+  © 2026 The Sovereign Academy · Contenido educativo · No es consejo financiero
+</footer>
+
 </body>
 </html>
