@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Financially Sovereign Academy · Keep the 1–2% fee. Own the knowledge.</title>
+<meta name="description" content="10 interactive modules covering budgeting, debt, credit, taxes, investing, and protection. Built so you can do for yourself what advisors charge 1–2% of your assets to do for you. 100% free, no signup, no upsell.">
+<meta name="theme-color" content="#1a1a1a">
+<meta name="application-name" content="Financially Sovereign Academy">
+<meta name="author" content="Financially Sovereign Academy">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta property="og:title" content="Keep the 1–2% fee. Own the knowledge.">
+<meta property="og:description" content="10 interactive modules. What advisors charge 1–2% of your portfolio to know, made free and self-paced. No signup. No upsell.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://financiallysovereign.academy/">
+<meta property="og:image" content="https://financiallysovereign.academy/og-image.png">
+<meta property="og:image:alt" content="Financially Sovereign Academy">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="Financially Sovereign Academy">
+<meta property="og:see_also" content="https://bitcoinsovereign.academy">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Keep the 1–2% fee. Own the knowledge.">
+<meta name="twitter:description" content="10 interactive modules. Free. No signup. No upsell.">
+<meta name="twitter:image" content="https://financiallysovereign.academy/og-image.png">
+<meta name="twitter:site" content="@BTCSovereignEdu">
+<link rel="canonical" href="https://financiallysovereign.academy/">
+<style>
+  :root{
+    --bg:#1a1a1a; --panel:#20232a; --panel2:#2a2e38; --line:#353a46;
+    --text:#e8ecf3; --muted:#aab2c0;
+    --accent:#FCD116;     /* Sovereign Academy gold */
+    --accent2:#22c55e;    /* Growth/success green */
+    --link:#7cc4ff;
+    --maxw:840px;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+  body::before{
+    content:"";display:block;height:2px;
+    background:linear-gradient(90deg,var(--accent) 0%,var(--accent2) 100%);
+  }
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+
+  /* --- Top nav --- */
+  nav.top{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:14px 22px;max-width:var(--maxw);margin:0 auto;flex-wrap:wrap}
+  nav.top .brand{font-weight:700;font-size:15px;color:var(--text);text-decoration:none}
+  nav.top .brand b{color:var(--accent)}
+  nav.top ul{list-style:none;display:flex;gap:14px;padding:0;margin:0;flex-wrap:wrap;font-size:13.5px}
+  nav.top a{color:var(--muted);text-decoration:none;padding:6px 0;transition:color .15s ease}
+  nav.top a:hover{color:var(--text)}
+  nav.top .book{background:var(--accent);color:#1a1300;padding:7px 12px;border-radius:8px;font-weight:600}
+  nav.top .book:hover{filter:brightness(1.06)}
+
+  /* --- Hero --- */
+  header.hero{padding:36px 22px 18px;text-align:center;max-width:var(--maxw);margin:0 auto}
+  .eyebrow{color:var(--accent);font-size:12px;letter-spacing:.14em;text-transform:uppercase;margin:0 0 14px;font-weight:600}
+  h1{font-size:36px;line-height:1.16;margin:0 0 16px;letter-spacing:-.01em}
+  h1 em{font-style:normal;color:var(--accent);white-space:nowrap}
+  h2{font-size:24px;margin:44px 0 14px;letter-spacing:-.005em}
+  h3{font-size:17px;margin:14px 0 6px}
+  p{margin:10px 0}
+  .lede{color:#cfd6e3;font-size:18px;max-width:640px;margin:0 auto 18px;line-height:1.5}
+  .total{color:#cfd6e3;font-size:15px;margin:6px 0 18px}
+  .total b{color:var(--text)}
+  .cta-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:18px 0}
+  .btn{display:inline-block;padding:14px 22px;border-radius:10px;text-decoration:none;font-weight:600;font-size:15px;border:1px solid transparent;transition:filter .15s ease,transform .15s ease}
+  .btn-primary{background:var(--accent);color:#1a1300;box-shadow:0 4px 14px rgba(252,209,22,.18)}
+  .btn-secondary{background:transparent;color:var(--text);border-color:var(--line)}
+  .btn:hover{filter:brightness(1.06);transform:translateY(-1px)}
+  .reassure{color:var(--muted);font-size:13px;margin-top:8px}
+
+  /* --- "Is this for you" gate --- */
+  .for-you{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;margin:24px 0}
+  .for-you h3{margin-top:0;color:var(--accent)}
+  .for-you .row{display:flex;gap:10px;margin:8px 0;align-items:flex-start}
+  .for-you .row span:first-child{flex:0 0 22px;color:var(--accent2);font-weight:700}
+
+  /* --- Preview box --- */
+  .preview{background:#0b0d12;border:1px solid var(--line);border-radius:10px;padding:14px 16px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13.5px;color:#cfd6e3;margin:10px 0;line-height:1.55}
+  .preview .label{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.1em;display:block;margin-bottom:6px;font-family:-apple-system,sans-serif}
+  .small{font-size:13px;color:var(--muted)}
+
+  /* --- Outcome list --- */
+  ul.clean{padding-left:18px;margin:8px 0}
+  ul.clean li{margin:6px 0}
+
+  /* --- 3-band block grid --- */
+  .blocks{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
+  @media(max-width:680px){.blocks{grid-template-columns:1fr}}
+  .block{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px;text-align:center}
+  .block .ic{font-size:22px}
+  .block .lbl{font-size:13px;color:var(--muted);margin-top:4px}
+  .block .nm{font-weight:600;margin-top:4px}
+
+  /* --- Module accordion --- */
+  details.module{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:0;margin:8px 0;overflow:hidden}
+  details.module summary{padding:14px 16px;cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:10px}
+  details.module summary::-webkit-details-marker{display:none}
+  details.module summary .num{color:var(--accent);font-variant-numeric:tabular-nums;font-weight:700;flex:0 0 24px}
+  details.module summary .title{flex:1}
+  details.module summary .time{font-size:12px;color:var(--muted);font-weight:500}
+  details.module summary .chev{color:var(--muted);transition:transform .2s}
+  details.module[open] summary .chev{transform:rotate(90deg)}
+  details.module .body{padding:0 16px 14px;color:#d6dce8;font-size:14.5px;border-top:1px solid var(--line)}
+  details.module .body a{color:var(--link);font-size:14px;display:inline-block;margin-top:8px}
+
+  /* --- Bridge card --- */
+  .bridge{background:linear-gradient(180deg,#1d2330 0%,#161a22 100%);border:1px solid var(--line);border-radius:14px;padding:20px;margin:24px 0}
+  .bridge h3{color:var(--accent);margin-top:0}
+
+  /* --- FAQ card --- */
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;margin:12px 0}
+
+  /* --- Modules sub-bar --- */
+  .resources{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
+  @media(max-width:680px){.resources{grid-template-columns:1fr}}
+  .res{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px;text-decoration:none;color:var(--text);display:block;transition:border-color .15s ease,transform .15s ease}
+  .res:hover{border-color:rgba(252,209,22,.32);transform:translateY(-1px)}
+  .res .ic{font-size:20px;margin-bottom:4px}
+  .res .nm{font-weight:600;margin-bottom:2px}
+  .res .lbl{font-size:13px;color:var(--muted)}
+
+  /* --- Closing --- */
+  .close-punch{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px;margin:30px 0 10px;text-align:center}
+  .close-punch p.punch{font-size:19px;line-height:1.5;color:var(--text);max-width:600px;margin:0 auto 14px}
+
+  /* --- Share row --- */
+  .share{display:flex;gap:10px;justify-content:center;margin:10px 0;flex-wrap:wrap}
+  .share a{background:var(--panel);border:1px solid var(--line);padding:8px 14px;border-radius:8px;color:var(--text);text-decoration:none;font-size:13px}
+
+  /* --- Footer --- */
+  footer{margin-top:36px;padding:28px 22px;text-align:center;color:var(--muted);font-size:13px;border-top:1px solid var(--line)}
+  footer a{color:var(--link);text-decoration:none}
+  footer .net{margin-top:10px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+  a{color:var(--link)}
+
+  @media(max-width:680px){
+    h1{font-size:28px}
+    .lede{font-size:17px}
+    nav.top ul{order:3;width:100%;justify-content:flex-start;gap:10px;font-size:12.5px}
+  }
+</style>
+</head>
+<body>
+
+<nav class="top">
+  <a class="brand" href="/"><b>💰</b> Financially Sovereign Academy</a>
+  <ul>
+    <li><a href="https://thesovereign.academy">← Hub</a></li>
+    <li><a href="/my-journey.html">My Journey</a></li>
+    <li><a href="/calculators/">Calculators</a></li>
+    <li><a href="/institutional/">Institutional</a></li>
+  </ul>
+  <a class="book" href="https://calendly.com/dalia-sovereign">Book a call</a>
+</nav>
+
+<header class="hero">
+  <div class="eyebrow">100% free · No signup · No upsell</div>
+  <h1>Keep the <em>1–2%</em> your advisor charges.<br>Own the knowledge instead.</h1>
+  <p class="lede">10 interactive modules covering what financial advisors are paid to know — budgeting, debt, credit, taxes, investing, insurance, scams, and the master plan that ties it together. Built for adults, not children. No filler.</p>
+  <div class="total"><b>4–6 hours total</b>, self-paced over 2–3 weeks. Built-in calculators, real scenarios, no logins.</div>
+  <div class="cta-row">
+    <a class="btn btn-primary" href="/assessment.html">Take the 2-min assessment →</a>
+    <a class="btn btn-secondary" href="#modules">Or browse all 10 modules</a>
+  </div>
+  <p class="reassure">No credit card. No email. No tracking pixels masquerading as "personalization."</p>
+</header>
+
+<main class="wrap">
+
+  <section class="for-you">
+    <h3>Is this for you?</h3>
+    <div class="row"><span>✓</span><span>You earn a paycheck and aren't sure where it goes each month.</span></div>
+    <div class="row"><span>✓</span><span>You've been told you "need an advisor" but a 1% fee on a $100k portfolio is $1,000/year — and you're not sure what you get for it.</span></div>
+    <div class="row"><span>✓</span><span>You want to understand how credit, debt, and taxes actually work — without being sold a credit card, a loan, or a course.</span></div>
+    <div class="row"><span>✓</span><span>You're skeptical of finance influencers but want a coherent, honest starting point.</span></div>
+    <div class="row"><span>✓</span><span>You'd rather learn the system in 4 hours than be charged for it for the next 30 years.</span></div>
+  </section>
+
+  <h2>What "1–2% over 30 years" actually costs you</h2>
+  <p>The fee sounds small. Compounded over a working life, it's not.</p>
+  <div class="preview">
+    <span class="label">Sample: $100,000 invested, 7% annual return, 30 years</span>
+    Without advisor fee (0%) ........ <b style="color:#22c55e">$761,225</b><br>
+    With 1% advisor fee ............. $574,349   <span style="color:#aab2c0">(−$186,876)</span><br>
+    With 2% advisor fee ............. <b style="color:#FCD116">$432,194</b>   <span style="color:#aab2c0">(−$329,031)</span><br>
+    <span style="color:#aab2c0">────────────────────────────────────────────────</span><br>
+    <b style="color:#FCD116">A 2% fee can quietly erase 43% of your portfolio.</b>
+  </div>
+  <p class="small">The real calculator inside Module 7 lets you change the numbers to your situation.</p>
+
+  <h2>What you'll be able to do when you finish</h2>
+  <ul class="clean">
+    <li>Read your paycheck and know exactly which line items can be optimized.</li>
+    <li>Build an emergency fund with a specific dollar target, not a vague "3–6 months."</li>
+    <li>Choose between debt-avalanche and debt-snowball based on math, not vibes.</li>
+    <li>Understand your credit report and the 3 actions that move the score most.</li>
+    <li>Run a tax-bracket calculation yourself in under 60 seconds.</li>
+    <li>Evaluate any index fund, ETF, or retirement vehicle on the same 4 criteria pros use.</li>
+    <li>Identify when insurance is protecting you vs. just transferring money.</li>
+    <li>Recognize the 6 most common predatory patterns aimed at people with money.</li>
+    <li>Write a one-page personal financial master plan you actually use.</li>
+  </ul>
+
+  <h2>How it's organized</h2>
+  <p>10 modules in 3 progressions. Each module builds on the previous, but each is useful on its own — skip, repeat, or jump in where you are.</p>
+
+  <div class="blocks">
+    <div class="block"><div class="ic">🏠</div><div class="nm">Ground</div><div class="lbl">Modules 1–3 · Cash flow, emergency fund, banking</div></div>
+    <div class="block"><div class="ic">🛡️</div><div class="nm">Protect</div><div class="lbl">Modules 4–6 · Credit, debt, taxes</div></div>
+    <div class="block"><div class="ic">🌱</div><div class="nm">Grow</div><div class="lbl">Modules 7–10 · Investing, insurance, scams, master plan</div></div>
+  </div>
+
+  <h2 id="modules">The 10 modules</h2>
+  <p class="small">Tap any module to see what's inside. The assessment will recommend the order that fits your situation.</p>
+
+  <details class="module"><summary><span class="num">1</span><span class="title">Money Mindset &amp; Cash Flow</span><span class="time">20–30 min</span><span class="chev">›</span></summary><div class="body">
+    <p>Audit your relationship with money before doing anything else. Cash-flow tracker built in.</p>
+    <ul><li>Identify your real monthly spend</li><li>Distinguish needs / wants / leaks</li><li>Spot the 3 lifestyle patterns that erase income</li></ul>
+    <a href="/modules/money-mindset-cash-flow.html">Open module 1 →</a>
+  </div></details>
+
+  <details class="module"><summary><span class="num">2</span><span class="title">Emergency Funds &amp; Saving</span><span class="time">25 min</span><span class="chev">›</span></summary><div class="body">
+    <p>Build a financial security buffer that actually protects you. Calculator gives a target sized to your situation.</p>
+    <ul><li>Compute your real emergency-fund target</li><li>Choose where to hold it</li><li>Build the habit without sacrificing the basics</li></ul>
+    <a href="/modules/emergency-funds-saving.html">Open module 2 →</a>
+  </div></details>
+
+  <details class="module"><summary><span class="num">3</span><span class="title">Banking Without Getting Robbed</span><span class="time">20 min</span><span class="chev">›</span></summary><div class="body">
+    <p>Use banks strategically. Understand fees, account types, and the system's incentives.</p>
+    <ul><li>Audit hidden fees you're paying right now</li><li>Pick checking, savings, and money-market accounts correctly</li><li>Know when to leave a bank</li></ul>
+    <a href="/modules/banking-basics.html">Open module 3 →</a>
+  </div></details>
+
+  <details class="module"><summary><span class="num">4</span><span class="title">Credit Scores Decoded</span><span class="time">25 min</span><span class="chev">›</span></summary><div class="body">
+    <p>The 5 factors that determine your score, ranked by how much each moves the needle.</p>
+    <ul><li>Pull your credit report (free, legally)</li><li>Identify the 3 highest-leverage actions for your score</li><li>Know what to ignore</li></ul>
+    <a href="/modules/credit-scores.html">Open module 4 →</a>
+  </div></details>
+
+  <details class="module"><summary><span class="num">5</span><span class="title">Debt Strategy</span><span class="time">30 min</span><span class="chev">›</span></summary><div class="body">
+    <p>The true cost of debt, when it's useful, and how to get out efficiently.</p>
+    <ul><li>Calculate the real cost of any loan</li><li>Avalanche vs. snowball: pick the right one for you</li><li>Recognize debt traps before signing</li></ul>
+    <a href="/modules/debt-strategy.html">Open module 5 →</a>
+  </div></details>
+
+  <details class="module"><summary><span class="num">6</span><span class="title">Taxes &amp; Paychecks Demystified</span><span class="time">25 min</span><span class="chev">›</span></summary><div class="body">
+    <p>Read your paycheck. Calculate your effective rate. Know which deductions actually apply to you.</p>
+    <ul><li>Understand every line of your pay stub</li><li>Calculate marginal vs. effective tax rate</li><li>Optimize withholdings and benefits</li></ul>
+    <a href="/modules/taxes-paychecks.html">Open module 6 →</a>
+  </div></details>
+
+  <details class="module"><summary><span class="num">7</span><span class="title">Investing for Humans</span><span class="time">35 min</span><span class="chev">›</span></summary><div class="body">
+    <p>Long-term compound growth without the jargon. The 4-criteria evaluation any fund or ETF must pass.</p>
+    <ul><li>Run the compound-interest calculator on your numbers</li><li>Evaluate any investment on cost, risk, liquidity, fit</li><li>Understand why advisor fees compound too</li></ul>
+    <a href="/modules/investing-fundamentals.html">Open module 7 →</a>
+  </div></details>
+
+  <details class="module"><summary><span class="num">8</span><span class="title">Protect What You've Built</span><span class="time">25 min</span><span class="chev">›</span></summary><div class="body">
+    <p>Insurance without over-insuring. The 4 policies most adults actually need and the rest that are sold to them.</p>
+    <ul><li>Decide what really needs insurance</li><li>Compare policies on the same terms</li><li>Skip the products that mostly transfer money to brokers</li></ul>
+    <a href="/modules/risk-insurance.html">Open module 8 →</a>
+  </div></details>
+
+  <details class="module"><summary><span class="num">9</span><span class="title">Don't Get Scammed</span><span class="time">20 min</span><span class="chev">›</span></summary><div class="body">
+    <p>The patterns predators use to extract money from people who have it.</p>
+    <ul><li>Recognize the 6 most common predatory patterns</li><li>Question any "guaranteed" or "exclusive" offer in 30 seconds</li><li>Know what to do if you're targeted</li></ul>
+    <a href="/modules/consumer-protection.html">Open module 9 →</a>
+  </div></details>
+
+  <details class="module"><summary><span class="num">10</span><span class="title">Your Financial Master Plan</span><span class="time">30 min</span><span class="chev">›</span></summary><div class="body">
+    <p>Integrate everything into a one-page plan you can actually open in 6 months and update.</p>
+    <ul><li>Write your one-page master plan</li><li>Set review checkpoints</li><li>Build the habit of revisiting</li></ul>
+    <a href="/modules/financial-master-plan.html">Open module 10 →</a>
+  </div></details>
+
+  <h2>Tools and deeper resources</h2>
+  <div class="resources">
+    <a class="res" href="/calculators/"><div class="ic">🧮</div><div class="nm">5 Calculators</div><div class="lbl">Compound growth, debt payoff, net worth, financial freedom, more</div></a>
+    <a class="res" href="https://bitcoinsovereign.academy/deep-dives/money-banking/"><div class="ic">🏦</div><div class="nm">How Money Really Works</div><div class="lbl">Money creation, fractional reserves, why hard money matters</div></a>
+    <a class="res" href="https://bitcoinsovereign.academy/deep-dives/austrian-economics/"><div class="ic">📜</div><div class="nm">Austrian Economics 101</div><div class="lbl">Time preference, sound money theory, accessible</div></a>
+  </div>
+
+  <div class="bridge">
+    <h3>🧭 After Module 10: the optional Bitcoin path</h3>
+    <p>The honest question: if a CD or money-market account pays less than inflation, is "saving" really protecting your purchasing power? Inflation is invisible until it isn't. After finishing the 10 modules, some people want to explore what harder forms of money exist and how to think about them. That's what Bitcoin Sovereign Academy is for.</p>
+    <p>This is opt-in, not required, and the 10 modules stand on their own. No Bitcoin literacy assumed.</p>
+    <p><a href="https://bitcoinsovereign.academy">Visit Bitcoin Sovereign Academy →</a></p>
+  </div>
+
+  <h2>Common questions</h2>
+  <div class="card">
+    <h3>Is this really free? What's the catch?</h3>
+    <p>All 10 modules and the calculators are free, no signup, no email required, no advertising tracking. I (Dalia) build this because financial literacy is the cheapest leverage available to most adults. If you find it useful and want to support it, there's an optional Lightning tip address at the bottom of the page — that's the only ask, and it's optional.</p>
+    <h3>Do I need any background in finance?</h3>
+    <p>No. The modules are written for adults with no finance background. Math is explained as it appears.</p>
+    <h3>How long will it take?</h3>
+    <p>4–6 hours of focused time, spread over 2–3 weeks if you do one or two modules per week. Faster if you binge.</p>
+    <h3>Is this about Bitcoin?</h3>
+    <p>No. This is universal financial literacy. Bitcoin is mentioned in two places: (a) when it's relevant to a specific topic like inflation or storage of value, and (b) as an optional follow-up after Module 10 for readers who want to go further. The 10 modules don't assume or require any Bitcoin knowledge.</p>
+    <h3>Will you sell me a course or financial product later?</h3>
+    <p>No. There's no upsell. No course bundle. No "premium tier." No affiliate links. If that changes, this answer will change first.</p>
+    <h3>Who's behind this?</h3>
+    <p>Dalia, an independent financial educator. Background, motivation, and the full <em>Sovereign Academy</em> network are linked at the bottom of the page.</p>
+  </div>
+
+  <h2>For institutions</h2>
+  <p>Cities, employers, wealth advisors, correctional facilities, and educational institutions have used this curriculum as a low-friction financial-literacy layer for their constituents or staff.</p>
+  <div class="resources">
+    <a class="res" href="/institutional/cities"><div class="ic">🏛️</div><div class="nm">Cities &amp; Municipalities</div><div class="lbl">Civic financial literacy</div></a>
+    <a class="res" href="/institutional/corporations"><div class="ic">🏢</div><div class="nm">Corporations</div><div class="lbl">Employee wellbeing programs</div></a>
+    <a class="res" href="/institutional/corporations/colombia/"><div class="ic">🇨🇴</div><div class="nm">Colombia Employer Program</div><div class="lbl">Spanish-language, 10 weeks</div></a>
+    <a class="res" href="/institutional/wealth-advisors"><div class="ic">💼</div><div class="nm">Wealth Advisors</div><div class="lbl">Client education layer</div></a>
+    <a class="res" href="/institutional/wealth-advisors/bitcoin-advisor-certification/"><div class="ic">₿</div><div class="nm">Bitcoin Advisor Cert</div><div class="lbl">For licensed advisors</div></a>
+    <a class="res" href="/institutional/education"><div class="ic">🎓</div><div class="nm">Educational Institutions</div><div class="lbl">High school + college curricula</div></a>
+  </div>
+
+  <section class="close-punch">
+    <p class="punch">The most expensive thing you can do with money isn't losing it on one bad decision. It's paying someone 1–2% a year for 30 years to manage what you could have learned in 4 hours.</p>
+    <a class="btn btn-primary" href="/assessment.html">Take the 2-min assessment →</a>
+    <p class="reassure">Or skip the assessment and start with <a href="/modules/money-mindset-cash-flow.html">Module 1</a>.</p>
+  </section>
+
+  <div class="share">
+    <a href="https://twitter.com/intent/tweet?text=Free%2010-module%20financial%20literacy%20course.%20No%20signup%2C%20no%20upsell.&url=https%3A%2F%2Ffinanciallysovereign.academy%2F">𝕏 Share</a>
+    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Ffinanciallysovereign.academy%2F">in Share on LinkedIn</a>
+    <a href="https://wa.me/?text=Free%2010-module%20financial%20literacy%20course%3A%20https%3A%2F%2Ffinanciallysovereign.academy%2F">📲 WhatsApp</a>
+  </div>
+
+  <p class="small" style="text-align:center;margin-top:18px">
+    Questions, feedback, or institutional partnerships?<br>
+    <a href="mailto:dalia@thesovereign.academy">dalia@thesovereign.academy</a>
+  </p>
+  <p class="small" style="text-align:center;margin-top:6px">
+    Support the project (optional, all content is free):<br>
+    <a href="lightning:sovereigndwp@getalby.com">⚡ sovereigndwp@getalby.com</a>
+  </p>
+
+</main>
+
+<footer>
+  Part of the Sovereign Academy Network
+  <div class="net">
+    <a href="https://thesovereign.academy">🏠 The Sovereign Academy</a>
+    <a href="https://bitcoinsovereign.academy">₿ Bitcoin Sovereign Academy</a>
+  </div>
+  <p style="margin-top:14px">© 2026 Sovereign Academy Network · Educational content only · Not financial advice</p>
+</footer>
+
+</body>
+</html>
