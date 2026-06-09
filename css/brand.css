@@ -1,0 +1,508 @@
+/* Bitcoin Sovereign Academy Brand Tokens
+   Brand direction 2026-05
+   Signature identity: deep black base + electric orange + bright yellow glow.
+   The orange to yellow fade is the signature.
+   Flat orange is the daily workhorse.
+   Flat yellow is the attention signal.
+   Champagne brass, muted gold, and beige cream have been removed.
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=JetBrains+Mono:wght@300;400;500;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap');
+
+:root {
+  /* Brand core */
+  --color-brand: #FF7A00;              /* flat orange, daily workhorse */
+  --color-accent: #FF8A00;             /* brighter orange for active states and emphasis */
+  --color-orange: #FF7A00;
+  --color-orange-bright: #FF8A00;
+  --color-orange-hot: #FF9A00;
+  --color-orange-deep: #E85F00;        /* deeper orange for pressed states and strong contrast */
+  --color-yellow: #FFD400;             /* bright yellow attention signal */
+  --color-yellow-bright: #FFE600;      /* strongest yellow for glow, key bars, and highlights */
+  --color-yellow-soft: #FFC400;        /* softer yellow for labels and small callouts */
+
+  /* Legacy compatibility tokens, remapped to brand colors */
+  --color-gold: #FFD400;               /* compatibility token, now brand yellow */
+  --color-gold-light: #FFE600;         /* compatibility token, now bright yellow */
+  --color-gold-pale: #FFF2A3;          /* pale yellow only for subtle light accents */
+  --color-orange-burnt: #E85F00;       /* compatibility token, now deep orange */
+
+  /* Neutrals: charcoal surface system kept intact */
+  --color-bg: #16181C;
+  --color-surface: #1F2024;
+  --color-surface-deepest: #272930;
+  --color-border: #2D2F35;
+  --color-chip: #1F2024;
+
+  /* Black system for BSA infographic and editorial pages */
+  --color-black: #000000;
+  --color-black-soft: #050505;
+  --color-panel: #0B0B0B;
+  --color-panel-soft: #101010;
+  --color-line-orange: rgba(255, 122, 0, 0.72);
+  --color-line-yellow: rgba(255, 212, 0, 0.72);
+
+  /* Light inversions: clean white, not beige */
+  --color-cream: #F7F7F2;
+  --color-cream-2: #EDEDE8;
+  --color-cream-3: #DADAD2;
+  --color-cream-wash: rgba(247, 247, 242, 0.04);
+  --color-ink-on-cream: #16181C;
+  --color-muted-on-cream: #64645F;
+
+  /* Text: high contrast on black */
+  --color-text: #F7F7F2;
+  --color-text-strong: #FFFFFF;
+  --color-muted: #B8B8B0;
+  --text-dim: #B8B8B0;                 /* deprecated alias, use --color-muted */
+
+  /* Status and diagram accents */
+  --color-success: #8CC63F;            /* small trust and verification accent */
+  --color-success-pale: #A9E25A;
+  --color-danger: #FF2B2B;             /* clear red for mistakes, warnings, and X icons */
+  --color-danger-soft: #E85F00;        /* orange warning when red is too harsh */
+  --color-danger-bright: #FF2B2B;
+  --color-warning: #FFD400;            /* brand yellow warning */
+  --color-info: #2F75FF;               /* rare technical info state */
+
+  /* Optional demo specific */
+  --color-node-green: #8CC63F;
+  --color-node-red: #FF2B2B;
+  --color-node-blue: #2F75FF;
+
+  /* Signature gradients */
+  --brand-gradient: linear-gradient(
+    90deg,
+    #FFE600 0%,
+    #FFD400 18%,
+    #FF9A00 48%,
+    #FF7A00 78%,
+    #E85F00 100%
+  );
+
+  --gradient-brand: linear-gradient(
+    135deg,
+    #FFE600 0%,
+    #FFD400 22%,
+    #FF9A00 52%,
+    #FF7A00 75%,
+    #E85F00 100%
+  );
+
+  --gradient-brand-horizontal: linear-gradient(
+    90deg,
+    #FFE600 0%,
+    #FFD400 18%,
+    #FF9A00 48%,
+    #FF7A00 78%,
+    #E85F00 100%
+  );
+
+  --gradient-key-takeaway: linear-gradient(
+    90deg,
+    #FFE600 0%,
+    #FFD400 20%,
+    #FF9A00 55%,
+    #FF7A00 100%
+  );
+
+  --gradient-title: linear-gradient(
+    180deg,
+    #FFFFFF 0%,
+    #F7F7F2 38%,
+    #FF8A00 39%,
+    #FF7A00 100%
+  );
+
+  --gradient-surface: linear-gradient(135deg, #1F2024 0%, #272930 100%);
+
+  /* Glow effects */
+  --glow-orange: 0 0 22px rgba(255, 122, 0, 0.45);
+  --glow-yellow: 0 0 28px rgba(255, 212, 0, 0.42);
+  --glow-red: 0 0 22px rgba(255, 43, 43, 0.38);
+
+  /* Radii: sovereign editorial scale */
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
+  --radius-pill: 999px;                /* use only for chips or badges */
+  --radius-button: 2px;
+
+  /* Shadows */
+  --shadow-1: 0 2px 8px rgba(0, 0, 0, 0.35);
+  --shadow-2: 0 8px 24px rgba(0, 0, 0, 0.45);
+  --shadow-card: 0 12px 48px rgba(0, 0, 0, 0.5);
+
+  /* Typography */
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', monospace;
+  --font-body: 'Crimson Pro', Georgia, Cambria, serif;
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Ubuntu, Cantarell, Noto Sans, Arial, sans-serif;
+
+  /* Spacing */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+}
+
+/* Minimal base defaults */
+html,
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+}
+
+/* Links */
+a {
+  color: var(--color-brand);
+}
+
+a:hover {
+  color: color-mix(in srgb, var(--color-brand) 82%, var(--color-yellow-bright));
+}
+
+/* Signature gradient utility */
+.brand-gradient-text {
+  background: var(--brand-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Demo link: high contrast orange to yellow CTA */
+.demo-link {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  background: var(--gradient-brand-horizontal);
+  color: #000000 !important;
+  text-decoration: none;
+  border-radius: var(--radius-md);
+  font-weight: 700;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  text-align: center;
+  box-shadow: var(--glow-orange);
+}
+
+.demo-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 18px rgba(255, 122, 0, 0.5);
+  color: #000000 !important;
+}
+
+/* Accessibility: focus indicators */
+*:focus {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
+}
+
+button:focus,
+a:focus,
+input:focus,
+select:focus,
+textarea:focus,
+[role="button"]:focus,
+[role="radio"]:focus,
+[role="checkbox"]:focus,
+[tabindex]:focus {
+  outline: 3px solid var(--color-brand);
+  outline-offset: 4px;
+}
+
+*:focus:not(:focus-visible) {
+  outline: none;
+}
+
+*:focus-visible {
+  outline: 3px solid var(--color-brand);
+  outline-offset: 4px;
+  box-shadow: 0 0 0 4px rgba(255, 122, 0, 0.22);
+}
+
+/* Accessibility: skip links */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--color-brand);
+  color: #000000;
+  padding: 12px 20px;
+  text-decoration: none;
+  font-weight: 700;
+  z-index: 10001;
+  border-radius: 0 0 4px 0;
+  transition: top 0.3s ease;
+}
+
+.skip-link:focus {
+  top: 0;
+  outline: 3px solid #FFFFFF;
+  outline-offset: 2px;
+}
+
+/* Hero eyebrow */
+.hero-eyebrow {
+  display: inline-block;
+  font-size: 0.875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--color-brand);
+  margin-bottom: 0.75rem;
+}
+
+/* Button system
+   Primary: orange to yellow fade with black text.
+   Secondary: dark surface with orange outline and orange text.
+   Ghost: transparent with white text and orange hover.
+*/
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 14px 28px;
+  font-size: 11px;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  line-height: 1.2;
+  text-decoration: none;
+  border: 2px solid transparent;
+  border-radius: var(--radius-button);
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  white-space: nowrap;
+}
+
+.btn-lg {
+  padding: 16px 32px;
+  font-size: 12px;
+}
+
+.btn-sm {
+  padding: 8px 16px;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+}
+
+.btn-primary {
+  background: var(--gradient-key-takeaway);
+  color: #000000;
+  border-color: var(--color-brand);
+  box-shadow: var(--glow-orange);
+}
+
+.btn-primary:hover {
+  background: var(--gradient-brand-horizontal);
+  border-color: var(--color-yellow);
+  box-shadow: var(--glow-yellow);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--color-brand);
+  border-color: rgba(255, 122, 0, 0.62);
+}
+
+.btn-secondary:hover {
+  border-color: var(--color-yellow);
+  color: var(--color-yellow);
+  background: rgba(255, 122, 0, 0.10);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--color-text);
+  border-color: transparent;
+  padding-left: 0.4rem;
+  padding-right: 0.4rem;
+}
+
+.btn-ghost:hover {
+  color: var(--color-brand);
+}
+
+@media (max-width: 768px) {
+  .btn {
+    width: 100%;
+  }
+}
+
+/* Sovereign editorial light page mode
+   Use only when a page needs a light reading surface.
+   Default BSA identity should remain black first.
+*/
+
+body.page-cream {
+  background: var(--color-cream);
+  color: var(--color-ink-on-cream);
+}
+
+/* Route-level black-first correction for /interactive-demos/, /start/, and /start-simple/.
+   This intentionally uses !important because older pages still contain inline brass/gold styles.
+*/
+body {
+  background: #16181C !important;
+  color: #F7F7F2 !important;
+  font-family: var(--font-sans) !important;
+}
+
+body::before {
+  background: radial-gradient(ellipse at top, rgba(255, 122, 0, 0.14) 0%, transparent 62%) !important;
+}
+
+em,
+.category-desc,
+.bitcoin-quote,
+.path-persona,
+.onboarding-promise {
+  font-style: normal !important;
+}
+
+.welcome-screen h1,
+h1,
+.learning-paths h2,
+.category-title,
+.path-card h3,
+.question-number,
+.feature-title,
+.agent-name,
+.data-value {
+  font-family: var(--font-sans) !important;
+}
+
+.welcome-screen h1,
+h1 {
+  background: none !important;
+  -webkit-text-fill-color: #F7F7F2 !important;
+  color: #F7F7F2 !important;
+  text-shadow: 0 2px 22px rgba(255, 122, 0, 0.22) !important;
+}
+
+.learning-paths h2,
+.category-title,
+.path-card h3 {
+  background: none !important;
+  -webkit-text-fill-color: #F7F7F2 !important;
+  color: #F7F7F2 !important;
+}
+
+.intro,
+.welcome-screen .subtitle,
+.question-subtitle,
+.path-card p,
+.card p,
+.category-desc,
+.option-text,
+.benefit-list li {
+  color: #B8B8B0 !important;
+}
+
+.learning-paths,
+.path-card,
+.card,
+.featured-card,
+.question-card,
+.benefit-list,
+.option-card,
+.progress-bar {
+  background: #101010 !important;
+  border-color: rgba(255, 122, 0, 0.24) !important;
+  color: #F7F7F2 !important;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.42) !important;
+}
+
+.path-card:hover,
+.card:hover,
+.option-card:hover,
+.option-card.selected {
+  border-color: rgba(255, 122, 0, 0.62) !important;
+  background: #16181C !important;
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.52), 0 0 0 1px rgba(255, 122, 0, 0.20) inset !important;
+}
+
+.learning-paths::before,
+.path-card::before,
+.card::before {
+  background: #FF7A00 !important;
+}
+
+.path-start-btn,
+.btn-primary,
+.progress-fill,
+.skip-link,
+.demo-link {
+  background: var(--brand-gradient) !important;
+  color: #000000 !important;
+  border-color: #FF7A00 !important;
+  box-shadow: 0 8px 28px rgba(255, 122, 0, 0.30) !important;
+}
+
+.path-start-btn:hover,
+.btn-primary:hover,
+.demo-link:hover {
+  background: var(--brand-gradient) !important;
+  color: #000000 !important;
+  box-shadow: 0 12px 34px rgba(255, 122, 0, 0.42) !important;
+}
+
+.btn-secondary {
+  background: transparent !important;
+  color: #FF7A00 !important;
+  border-color: rgba(255, 122, 0, 0.55) !important;
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 122, 0, 0.10) !important;
+  color: #FF8A00 !important;
+  border-color: #FF8A00 !important;
+}
+
+.benefit-list li::before,
+.question-number,
+.path-badge,
+.path-highlight strong,
+.card .learn-outcome,
+.chip.featured {
+  color: #FF7A00 !important;
+  border-color: #FF7A00 !important;
+}
+
+.benefit-list li::before,
+.option-card.selected .option-checkbox {
+  background: transparent !important;
+  color: #FF7A00 !important;
+  border-color: #FF7A00 !important;
+}
+
+.option-card.selected .option-checkbox::after {
+  color: #FF7A00 !important;
+}
+
+.card .learn-outcome,
+.chip.featured,
+.path-highlight {
+  background: rgba(255, 122, 0, 0.10) !important;
+  border-color: rgba(255, 122, 0, 0.45) !important;
+}
+
+.featured-card {
+  background: linear-gradient(135deg, rgba(255, 122, 0, 0.14), rgba(255, 122, 0, 0.06)) !important;
+  border-color: #FF7A00 !important;
+}
+
+*:focus-visible,
+.card:focus-visible,
+a:focus-visible,
+button:focus-visible {
+  outline-color: #FF7A00 !important;
+  box-shadow: 0 0 0 5px rgba(255, 122, 0, 0.22) !important;
+}
