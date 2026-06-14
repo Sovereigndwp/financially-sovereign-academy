@@ -73,7 +73,7 @@
     background: rgba(255,255,255,0.1); transition: background 0.3s;
 }
 .lab-step-dot.done    { background: #FF7A00; }
-.lab-step-dot.current { background: #FFD400; }
+.lab-step-dot.current { background: #FF8A00; }
 .lab-progress-label { font-size: 0.78rem; color: #6b7280; white-space: nowrap; }
 
 /* ── Body ─────────────────────────────────────────────────── */
@@ -125,7 +125,7 @@
     background: rgba(255, 122, 0,0.06); border-left: 3px solid #FF7A00;
     border-radius: 10px; padding: 1rem 1.1rem; margin-top: 1.25rem;
 }
-.lab-reflection h4 { color: #FFD400; font-size: 0.88rem; margin-bottom: 0.4rem; }
+.lab-reflection h4 { color: #FF8A00; font-size: 0.88rem; margin-bottom: 0.4rem; }
 .lab-reflection p  { color: #d1fae5; font-size: 0.88rem; line-height: 1.65; margin: 0; }
 
 /* ── Footer ───────────────────────────────────────────────── */
@@ -150,7 +150,7 @@
     cursor: pointer; transition: all 0.25s; position: relative; overflow: hidden;
 }
 .lab-card:hover {
-    border-color: rgba(255, 122, 0,0.65); border-top-color: #FFD400;
+    border-color: rgba(255, 122, 0,0.65); border-top-color: #FF8A00;
     background: linear-gradient(135deg, rgba(255, 122, 0,0.13) 0%, rgba(255, 122, 0,0.07) 100%);
     transform: translateY(-1px);
 }
@@ -161,7 +161,7 @@
 .lab-card p  { font-size: 0.85rem; color: #9ca3af; margin: 0 0 0.75rem; line-height: 1.5; }
 .lab-card-meta { display: flex; gap: 0.5rem; flex-wrap: wrap; }
 .lab-card-tag { font-size: 0.72rem; padding: 0.15rem 0.5rem; border-radius: 999px; background: rgba(255,255,255,0.07); color: #9ca3af; border: 1px solid rgba(255,255,255,0.1); }
-.lab-card-tag.live { background: rgba(255, 122, 0,0.15); color: #FFD400; border-color: rgba(255, 122, 0,0.3); }
+.lab-card-tag.live { background: rgba(255, 122, 0,0.15); color: #FF8A00; border-color: rgba(255, 122, 0,0.3); }
 .lab-card-arrow { font-size: 1.3rem; color: #FF7A00; align-self: center; flex-shrink: 0; transition: transform 0.2s; }
 .lab-card:hover .lab-card-arrow { transform: translateX(3px); }
 .lab-card.completed { border-color: rgba(76,175,80,0.5); border-top-color: #4caf50; }

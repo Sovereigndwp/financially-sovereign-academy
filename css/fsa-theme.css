@@ -18,7 +18,7 @@
 :root {
     /* Primary accent — remapped from green to brand orange/yellow */
     --fsa-green: var(--color-brand, #FF7A00);
-    --fsa-green-light: var(--color-yellow, #FFD400);
+    --fsa-green-light: var(--color-accent, #FF8A00);
     --fsa-green-dark: var(--color-orange-deep, #E85F00);
     --fsa-green-hover: var(--color-accent, #FF8A00);
 
@@ -31,7 +31,7 @@
     /* Text Colors */
     --fsa-text-primary: var(--color-text, #F7F7F2);
     --fsa-text-secondary: var(--color-muted, #B8B8B0);
-    --fsa-text-accent: var(--color-yellow, #FFD400);
+    --fsa-text-accent: var(--accent-bitcoin-text-on-dark, #FF8A00);
     --fsa-text-dim: var(--color-muted, #B8B8B0);
 
     /* Status Colors — standard semantic tokens */
