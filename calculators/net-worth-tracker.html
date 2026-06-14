@@ -8,16 +8,16 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <style>
         :root {
-            --fsa-green: #10b981;
-            --fsa-green-light: #34d399;
-            --fsa-bg-dark: #0a1f1a;
-            --fsa-bg-secondary: #0f2922;
-            --fsa-bg-card: #1a3a2e;
+            --fsa-green: #FF7A00;
+            --fsa-green-light: #FFD400;
+            --fsa-bg-dark: #16181C;
+            --fsa-bg-secondary: #1F2024;
+            --fsa-bg-card: #101010;
             --fsa-text-primary: #e0e0e0;
             --fsa-text-secondary: #9ca3af;
-            --fsa-border-subtle: rgba(16, 185, 129, 0.2);
-            --fsa-border-medium: rgba(16, 185, 129, 0.3);
-            --fsa-success: #10b981;
+            --fsa-border-subtle: rgba(255, 122, 0, 0.2);
+            --fsa-border-medium: rgba(255, 122, 0, 0.3);
+            --fsa-success: #FF7A00;
             --fsa-warning: #f59e0b;
             --fsa-error: #ef4444;
             --radius-lg: 0.75rem;
@@ -75,7 +75,7 @@
         }
 
         .net-worth-display {
-            background: linear-gradient(135deg, #0a4d3c 0%, #1a5f52 100%);
+            background: linear-gradient(135deg, #16181C 0%, #1F2024 100%);
             border: 3px solid var(--fsa-green);
             border-radius: var(--radius-xl);
             padding: 3rem;
@@ -178,7 +178,7 @@
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+            box-shadow: 0 8px 20px rgba(255, 122, 0, 0.4);
         }
 
         .btn-secondary {
@@ -665,14 +665,14 @@
                     datasets: [{
                         label: 'Net Worth',
                         data: data,
-                        borderColor: '#10b981',
-                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                        borderColor: '#FF7A00',
+                        backgroundColor: 'rgba(255, 122, 0, 0.1)',
                         borderWidth: 3,
                         fill: true,
                         tension: 0.4,
                         pointRadius: 6,
                         pointHoverRadius: 8,
-                        pointBackgroundColor: '#10b981',
+                        pointBackgroundColor: '#FF7A00',
                         pointBorderColor: '#e0e0e0',
                         pointBorderWidth: 2
                     }]
@@ -702,7 +702,7 @@
                                 }
                             },
                             grid: {
-                                color: 'rgba(16, 185, 129, 0.1)'
+                                color: 'rgba(255, 122, 0, 0.1)'
                             }
                         },
                         x: {
@@ -710,7 +710,7 @@
                                 color: '#e0e0e0'
                             },
                             grid: {
-                                color: 'rgba(16, 185, 129, 0.1)'
+                                color: 'rgba(255, 122, 0, 0.1)'
                             }
                         }
                     }

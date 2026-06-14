@@ -1,43 +1,55 @@
 /**
  * FSA Theme - Color Tokens & Typography
- * Master money. Master life.
+ * Cascaded onto the shared family design system (tokens + brand.css).
+ * The --fsa-* tokens below are now thin aliases over the canonical
+ * orange/yellow + charcoal brand tokens, so every page (and every
+ * downstream stylesheet — interactive-components, investing-labs)
+ * that references --fsa-* recolors to the family system automatically.
+ * Edit the brand tokens in brand.css/tokens.css, not the values here.
  */
 
+/* Pull in the canonical system. @import must precede all other rules.
+   Paths are relative to this file's location (/css/). brand.css also
+   @imports the Playfair Display / JetBrains Mono / Crimson Pro fonts. */
+@import url('tokens.css');
+@import url('design-tokens.css');
+@import url('brand.css');
+
 :root {
-    /* Primary Colors - Green Palette */
-    --fsa-green: #10b981;
-    --fsa-green-light: #34d399;
-    --fsa-green-dark: #059669;
-    --fsa-green-hover: #0d9668;
-    
-    /* Background Colors */
-    --fsa-bg-dark: #0a1f1a;
-    --fsa-bg-secondary: #0f2922;
-    --fsa-bg-card: #1a3a2e;
-    --fsa-bg-hover: #234a3c;
-    
+    /* Primary accent — remapped from green to brand orange/yellow */
+    --fsa-green: var(--color-brand, #FF7A00);
+    --fsa-green-light: var(--color-yellow, #FFD400);
+    --fsa-green-dark: var(--color-orange-deep, #E85F00);
+    --fsa-green-hover: var(--color-accent, #FF8A00);
+
+    /* Background Colors — charcoal surface system */
+    --fsa-bg-dark: var(--color-bg, #16181C);
+    --fsa-bg-secondary: var(--color-surface, #1F2024);
+    --fsa-bg-card: var(--color-panel-soft, #101010);
+    --fsa-bg-hover: var(--color-surface-deepest, #272930);
+
     /* Text Colors */
-    --fsa-text-primary: #e0e0e0;
-    --fsa-text-secondary: #9ca3af;
-    --fsa-text-accent: #6ee7b7;
-    --fsa-text-dim: #6b7280;
-    
-    /* Status Colors */
-    --fsa-success: #10b981;
-    --fsa-warning: #f59e0b;
-    --fsa-error: #ef4444;
-    --fsa-info: #3b82f6;
-    
-    /* Border Colors */
-    --fsa-border-subtle: rgba(16, 185, 129, 0.1);
-    --fsa-border-medium: rgba(16, 185, 129, 0.3);
-    --fsa-border-strong: rgba(16, 185, 129, 0.6);
-    
-    /* Gradients */
-    --fsa-gradient-primary: linear-gradient(135deg, var(--fsa-green), var(--fsa-green-light));
-    --fsa-gradient-bg: linear-gradient(135deg, var(--fsa-bg-dark) 0%, var(--fsa-bg-secondary) 100%);
-    --fsa-gradient-card: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(16, 185, 129, 0.05));
-    
+    --fsa-text-primary: var(--color-text, #F7F7F2);
+    --fsa-text-secondary: var(--color-muted, #B8B8B0);
+    --fsa-text-accent: var(--color-yellow, #FFD400);
+    --fsa-text-dim: var(--color-muted, #B8B8B0);
+
+    /* Status Colors — standard semantic tokens */
+    --fsa-success: var(--color-success, #8CC63F);
+    --fsa-warning: var(--color-warning, #FFD400);
+    --fsa-error: var(--color-danger, #FF2B2B);
+    --fsa-info: var(--color-info, #2F75FF);
+
+    /* Border Colors — orange-tinted */
+    --fsa-border-subtle: rgba(255, 122, 0, 0.10);
+    --fsa-border-medium: rgba(255, 122, 0, 0.30);
+    --fsa-border-strong: rgba(255, 122, 0, 0.60);
+
+    /* Gradients — signature orange/yellow fade + charcoal surfaces */
+    --fsa-gradient-primary: var(--brand-gradient, linear-gradient(90deg,#FFE600,#FFD400,#FF9A00,#FF7A00,#E85F00));
+    --fsa-gradient-bg: linear-gradient(135deg, #16181C 0%, #1F2024 100%);
+    --fsa-gradient-card: linear-gradient(135deg, rgba(255, 122, 0, 0.10), rgba(255, 122, 0, 0.05));
+
     /* Spacing Scale */
     --space-xs: 0.25rem;
     --space-sm: 0.5rem;
@@ -47,9 +59,9 @@
     --space-2xl: 3rem;
     --space-3xl: 4rem;
     
-    /* Typography */
-    --font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    --font-family-mono: 'Courier New', Courier, monospace;
+    /* Typography — family fonts (Inter sans, JetBrains mono) */
+    --font-family-base: var(--font-sans, 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif);
+    --font-family-mono: var(--font-mono, 'JetBrains Mono', ui-monospace, 'SF Mono', monospace);
     
     --font-size-xs: 0.75rem;
     --font-size-sm: 0.875rem;
@@ -85,7 +97,7 @@
     --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
     --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
     --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-    --shadow-glow: 0 0 20px rgba(16, 185, 129, 0.3);
+    --shadow-glow: var(--glow-orange, 0 0 22px rgba(255, 122, 0, 0.45));
     
     /* Transitions */
     --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -189,7 +201,7 @@ body {
 button:focus-visible, a:focus-visible {
     outline: 3px solid var(--fsa-green);
     outline-offset: 4px;
-    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);
+    box-shadow: 0 0 0 4px rgba(255, 122, 0, 0.22);
 }
 
 /* Touch Targets (WCAG 2.5.5) - Minimum 44x44px */
@@ -226,7 +238,7 @@ button, a, [role="button"], input[type="button"], input[type="submit"] {
     top: -40px;
     left: 0;
     background: var(--fsa-green);
-    color: white;
+    color: #000;
     padding: 8px;
     text-decoration: none;
     z-index: 100;
@@ -302,9 +314,9 @@ ul ul ul {
 .legal-footer {
     margin-top: 2rem;
     padding: 1.5rem 1rem;
-    border-top: 1px solid rgba(16, 185, 129, 0.2);
+    border-top: 1px solid rgba(255, 122, 0, 0.2);
     text-align: center;
     font-size: 0.85rem;
-    color: #9ca3af;
+    color: var(--color-muted, #B8B8B0);
     line-height: 1.5;
 }

@@ -10,7 +10,7 @@
     <meta property="og:description" content="Financially stressed employees cost $500B+ annually in lost productivity. Our evidence-based financial wellness programs improve retention, reduce absenteeism, and boost engagement.">
     <meta property="og:url" content="https://financiallysovereign.academy/institutional/corporations">
     <style>
-        :root { --primary:#10b981; --dark:#0a1f1a; --dark2:#0f2922; --light:#e0e0e0; --dim:#9ca3af; --grad:linear-gradient(135deg,#10b981,#06b6d4); }
+        :root { --primary:#FF7A00; --dark:#16181C; --dark2:#1F2024; --light:#e0e0e0; --dim:#9ca3af; --grad:linear-gradient(135deg,#FF7A00,#06b6d4); }
         * { margin:0; padding:0; box-sizing:border-box; }
         body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; background:var(--dark); color:var(--light); line-height:1.6; }
         .header { background:rgba(10,31,26,0.97); backdrop-filter:blur(10px); padding:1rem 0; border-bottom:2px solid var(--primary); position:fixed; width:100%; top:0; z-index:1000; }
@@ -23,23 +23,23 @@
         .nav-link:hover { color:var(--primary); }
         .cta-nav { background:var(--grad); padding:0.5rem 1.2rem; border-radius:20px; color:white!important; font-weight:600; }
         .nav-dropdown { position:relative; }
-        .nav-dropdown .dropdown-menu { position:absolute; top:calc(100% + 10px); left:0; background:var(--dark2); border:1px solid rgba(16,185,129,0.25); border-radius:10px; padding:0.5rem; min-width:220px; opacity:0; visibility:hidden; transform:translateY(-8px); transition:all 0.25s; z-index:1000; box-shadow:0 8px 24px rgba(0,0,0,0.5); }
+        .nav-dropdown .dropdown-menu { position:absolute; top:calc(100% + 10px); left:0; background:var(--dark2); border:1px solid rgba(255, 122, 0,0.25); border-radius:10px; padding:0.5rem; min-width:220px; opacity:0; visibility:hidden; transform:translateY(-8px); transition:all 0.25s; z-index:1000; box-shadow:0 8px 24px rgba(0,0,0,0.5); }
         .nav-dropdown:hover .dropdown-menu { opacity:1; visibility:visible; transform:translateY(0); }
         .dropdown-menu a { display:flex; align-items:center; gap:0.5rem; padding:0.6rem 1rem; color:var(--dim); text-decoration:none; border-radius:6px; font-size:0.9rem; transition:all 0.2s; }
-        .dropdown-menu a:hover { background:rgba(16,185,129,0.1); color:var(--primary); }
+        .dropdown-menu a:hover { background:rgba(255, 122, 0,0.1); color:var(--primary); }
         .hero { padding:8rem 2rem 5rem; text-align:center; position:relative; }
         .hero-content { max-width:820px; margin:0 auto; position:relative; z-index:1; }
-        .badge { display:inline-block; padding:0.4rem 1rem; border-radius:20px; font-size:0.82rem; font-weight:600; margin-bottom:1.5rem; letter-spacing:0.5px; background:rgba(16,185,129,0.15); border:1px solid rgba(16,185,129,0.4); color:#6ee7b7; }
+        .badge { display:inline-block; padding:0.4rem 1rem; border-radius:20px; font-size:0.82rem; font-weight:600; margin-bottom:1.5rem; letter-spacing:0.5px; background:rgba(255, 122, 0,0.15); border:1px solid rgba(255, 122, 0,0.4); color:#FFD400; }
         .hero h1 { font-size:clamp(2.2rem,4.5vw,3.2rem); font-weight:700; margin-bottom:1.25rem; line-height:1.15; }
         .hero h1 span { background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
         .hero p.sub { font-size:1.15rem; color:var(--dim); max-width:680px; margin:0 auto 2.5rem; }
-        .stats-row { display:flex; justify-content:center; gap:3rem; flex-wrap:wrap; margin:2rem 0; padding:2rem 0; border-top:1px solid rgba(16,185,129,0.2); border-bottom:1px solid rgba(16,185,129,0.2); }
+        .stats-row { display:flex; justify-content:center; gap:3rem; flex-wrap:wrap; margin:2rem 0; padding:2rem 0; border-top:1px solid rgba(255, 122, 0,0.2); border-bottom:1px solid rgba(255, 122, 0,0.2); }
         .stat { text-align:center; }
         .stat-n { font-size:2.2rem; font-weight:800; color:var(--primary); display:block; }
         .stat-l { font-size:0.82rem; color:var(--dim); text-transform:uppercase; letter-spacing:0.5px; margin-top:0.2rem; }
         .ctas { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; margin-top:2rem; }
-        .btn-p { display:inline-block; padding:1rem 2.5rem; background:var(--grad); color:white; text-decoration:none; border-radius:50px; font-weight:700; font-size:1rem; transition:all 0.3s; box-shadow:0 4px 20px rgba(16,185,129,0.4); }
-        .btn-p:hover { transform:translateY(-2px); box-shadow:0 8px 30px rgba(16,185,129,0.55); }
+        .btn-p { display:inline-block; padding:1rem 2.5rem; background:var(--grad); color:white; text-decoration:none; border-radius:50px; font-weight:700; font-size:1rem; transition:all 0.3s; box-shadow:0 4px 20px rgba(255, 122, 0,0.4); }
+        .btn-p:hover { transform:translateY(-2px); box-shadow:0 8px 30px rgba(255, 122, 0,0.55); }
         .btn-s { display:inline-block; padding:1rem 2.5rem; background:transparent; color:var(--light); text-decoration:none; border:2px solid rgba(224,224,224,0.2); border-radius:50px; font-weight:700; font-size:1rem; transition:all 0.3s; }
         .btn-s:hover { border-color:var(--primary); color:var(--primary); }
         section { padding:5rem 2rem; }
@@ -49,11 +49,11 @@
         .dark-bg { background:var(--dark2); }
         .grid-2 { display:grid; grid-template-columns:repeat(2,1fr); gap:1.75rem; }
         .grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:1.75rem; }
-        .card { background:rgba(16,185,129,0.06); border:1px solid rgba(16,185,129,0.2); border-radius:12px; padding:1.75rem; transition:all 0.3s; }
+        .card { background:rgba(255, 122, 0,0.06); border:1px solid rgba(255, 122, 0,0.2); border-radius:12px; padding:1.75rem; transition:all 0.3s; }
         .card:hover { transform:translateY(-4px); border-color:var(--primary); }
         .card h3 { color:var(--primary); font-size:1.05rem; margin-bottom:0.75rem; }
         .card p { color:var(--dim); font-size:0.9rem; }
-        .prog-card { background:rgba(16,185,129,0.05); border:2px solid rgba(16,185,129,0.2); border-radius:14px; padding:2rem; position:relative; transition:all 0.3s; }
+        .prog-card { background:rgba(255, 122, 0,0.05); border:2px solid rgba(255, 122, 0,0.2); border-radius:14px; padding:2rem; position:relative; transition:all 0.3s; }
         .prog-card.feat { border-color:var(--primary); }
         .prog-card.feat::before { content:'RECOMMENDED'; position:absolute; top:-11px; left:50%; transform:translateX(-50%); background:var(--primary); color:white; font-size:0.72rem; font-weight:700; padding:0.25rem 0.9rem; border-radius:12px; }
         .prog-card:hover { transform:translateY(-4px); border-color:var(--primary); }
@@ -63,14 +63,14 @@
         .prog-card ul { list-style:none; }
         .prog-card ul li { color:var(--dim); font-size:0.88rem; padding:0.3rem 0 0.3rem 1.2rem; position:relative; }
         .prog-card ul li::before { content:'✓'; position:absolute; left:0; color:var(--primary); font-size:0.82rem; }
-        .cta-section { padding:5rem 2rem; background:linear-gradient(135deg,#0a4d3c,#1a5f52); text-align:center; }
+        .cta-section { padding:5rem 2rem; background:linear-gradient(135deg,#16181C,#1F2024); text-align:center; }
         .cta-section h2 { font-size:2.1rem; margin-bottom:1rem; }
         .cta-section p { color:rgba(224,224,224,0.8); font-size:1.05rem; max-width:620px; margin:0 auto 2.5rem; }
         .contact-row { display:flex; gap:2rem; justify-content:center; flex-wrap:wrap; margin-top:1.5rem; }
         .contact-row span { color:rgba(224,224,224,0.7); font-size:0.92rem; }
-        .contact-row a { color:#6ee7b7; text-decoration:none; }
+        .contact-row a { color:#FFD400; text-decoration:none; }
         .contact-row a:hover { text-decoration:underline; }
-        footer { padding:2rem; background:var(--dark); text-align:center; border-top:1px solid rgba(16,185,129,0.15); }
+        footer { padding:2rem; background:var(--dark); text-align:center; border-top:1px solid rgba(255, 122, 0,0.15); }
         footer p { color:var(--dim); font-size:0.83rem; margin-top:0.75rem; }
         .footer-links { display:flex; justify-content:center; gap:2rem; flex-wrap:wrap; margin-bottom:0.5rem; }
         .footer-links a { color:var(--dim); text-decoration:none; font-size:0.83rem; }
@@ -89,9 +89,9 @@
         .mobile-menu.active { display:block; transform:translateY(-100%); }
         .mobile-menu-content { padding:2rem 2rem 3rem; }
         .mobile-nav-section { margin-bottom:2rem; }
-        .mobile-nav-section h3 { color:var(--primary); font-size:1.1rem; font-weight:600; margin-bottom:1rem; padding-bottom:0.5rem; border-bottom:1px solid rgba(16,185,129,0.3); }
-        .mobile-nav-item { display:block; padding:0.75rem 1rem; margin:0.5rem 0; color:var(--light); text-decoration:none; background:rgba(16,185,129,0.1); border-radius:8px; transition:all 0.2s; }
-        .mobile-nav-item:hover { background:rgba(16,185,129,0.2); color:var(--primary); }
+        .mobile-nav-section h3 { color:var(--primary); font-size:1.1rem; font-weight:600; margin-bottom:1rem; padding-bottom:0.5rem; border-bottom:1px solid rgba(255, 122, 0,0.3); }
+        .mobile-nav-item { display:block; padding:0.75rem 1rem; margin:0.5rem 0; color:var(--light); text-decoration:none; background:rgba(255, 122, 0,0.1); border-radius:8px; transition:all 0.2s; }
+        .mobile-nav-item:hover { background:rgba(255, 122, 0,0.2); color:var(--primary); }
         .mobile-nav-cta { background:var(--grad); color:white!important; font-weight:600; text-align:center; margin-top:1.5rem; }
         @media (max-width:768px) { .grid-2,.grid-3 { grid-template-columns:1fr; } .nav-links { display:none; } .hamburger { display:block; } .hero h1 { font-size:2rem; } .ctas { flex-direction:column; align-items:center; } .mobile-menu.active { transform:translateY(0); } .logo-text { font-size:0.9rem; } }
         @media (max-width:640px) { .header-content { padding:0 1rem; } .logo-text { display:none; } }
@@ -181,12 +181,12 @@
                 <div class="card">
                     <h3>🇨🇴 Ruta de Estabilidad y Crecimiento (Colombia)</h3>
                     <p>A 10-week employer program for Colombia teams focused on everyday financial stability, workplace impact, and practical decision skills.</p>
-                    <p style="margin-top:1rem;"><a href="/institutional/corporations/colombia/" style="color:#6ee7b7; text-decoration:none; font-weight:600;">Explore Colombia program &rarr;</a></p>
+                    <p style="margin-top:1rem;"><a href="/institutional/corporations/colombia/" style="color:#FFD400; text-decoration:none; font-weight:600;">Explore Colombia program &rarr;</a></p>
                 </div>
                 <div class="card">
                     <h3>₿ Bitcoin Advisor Certification</h3>
                     <p>For wealth and advisory teams that want a structured, credible Bitcoin education layer to complement broader financial planning.</p>
-                    <p style="margin-top:1rem;"><a href="/institutional/wealth-advisors/bitcoin-advisor-certification/" style="color:#6ee7b7; text-decoration:none; font-weight:600;">Explore advisor certification &rarr;</a></p>
+                    <p style="margin-top:1rem;"><a href="/institutional/wealth-advisors/bitcoin-advisor-certification/" style="color:#FFD400; text-decoration:none; font-weight:600;">Explore advisor certification &rarr;</a></p>
                 </div>
             </div>
         </div>
