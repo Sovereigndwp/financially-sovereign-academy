@@ -6,7 +6,12 @@
     <title>Budget Tracker | Financially Sovereign Academy</title>
     <meta name="description" content="Track your income and expenses by category. Visualize spending patterns and identify opportunities to save.">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-    <style>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap">
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/design-tokens.css">
+  <link rel="stylesheet" href="/css/brand.css">
+<style>
         :root {
             --fsa-green: #FF7A00;
             --fsa-green-light: #FF8A00;
@@ -316,6 +321,20 @@
         }
     </style>
     <link rel="stylesheet" href="../css/fsa-glossary.css">
+<style id="brand-overrides">
+  :root{ --radius-lg:8px; --radius-xl:8px; }
+  body{ background:var(--color-bg) !important; }
+  .header h1{ font-family:var(--font-sans) !important; color:var(--color-text-strong) !important; -webkit-text-fill-color:var(--color-text-strong) !important; font-weight:900; }
+  .card-title{ font-family:var(--font-sans); font-weight:800; color:var(--color-text-strong); }
+  .form-label{ font-family:var(--font-mono); font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--color-muted); }
+  .form-input,.form-select{ border-radius:4px; }
+  .btn{ font-family:var(--font-mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; border-radius:2px; }
+  .btn-primary{ background:var(--brand-gradient); color:#000; box-shadow:var(--glow-orange); }
+  .card{ border-radius:8px; }
+  .net-worth-value,.total-amount,.item-amount,.snapshot-value{ font-family:var(--font-mono); }
+  .net-worth-display{ background:var(--color-cream); color:var(--color-ink-on-cream); border:none; border-left:4px solid var(--color-brand); border-radius:0; box-shadow:var(--shadow-card); }
+  .net-worth-label{ font-family:var(--font-mono); font-size:10px; letter-spacing:.2em; color:var(--color-muted-on-cream); }
+</style>
 </head>
 <body>
     <div class="container">
