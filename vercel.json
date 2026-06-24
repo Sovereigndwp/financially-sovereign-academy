@@ -1,5 +1,7 @@
 {
-  "alias": ["financiallysovereign.academy"],
+  "alias": [
+    "financiallysovereign.academy"
+  ],
   "redirects": [
     {
       "source": "/:path*",
@@ -94,5 +96,7 @@
       "source": "/institutional/:page/",
       "destination": "/institutional/:page.html"
     }
-  ]
+  ],
+  "cleanUrls": true,
+  "trailingSlash": false
 }
