@@ -1,0 +1,434 @@
+/* Financially Sovereign Academy: Brand Tokens & Components
+   Sister brand to Bitcoin Sovereign Academy: same editorial grammar
+   (Playfair Display + Crimson Pro + Inter + JetBrains Mono, sharp 2px
+   radius, 4px spacing, the diagonal brand fade), palette translated
+   from BSA's orange/yellow to FSA's emerald/mint on neutral dark.
+
+   Identity: neutral dark surfaces, white/gray text, emerald + mint as
+   accent only. The teal->emerald->mint fade is the signature, used only
+   on headline accents, card outlines, and button outlines. Buttons are
+   never filled with green. No yellow. No pale-green surfaces.
+
+   Canonical source of truth for FSA visual tokens. Date: 2026-06-24.
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500;1,700&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+:root {
+  /* ---- Accent (emerald/mint): accent use only, never large fields ---- */
+  --color-brand:        #10B981;   /* emerald, primary accent / action */
+  --color-brand-soft:   #0D9668;   /* deeper emerald */
+  --color-brand-deep:   #047857;   /* deepest emerald (AA text on dark edge cases) */
+  --color-mint:         #6EE7B7;   /* bright accent: numbers, links, diamonds */
+  --color-mint-bright:  #A7F3D0;
+
+  /* ---- Signature fade (B): teal -> emerald -> aqua-mint ---- */
+  --brand-gradient:            linear-gradient(135deg, #0F766E 0%, #10B981 50%, #5EEAD4 100%);
+  --brand-gradient-horizontal: linear-gradient(90deg,  #0F766E 0%, #10B981 50%, #5EEAD4 100%);
+
+  /* ---- Neutral dark surface system (no green tint) ---- */
+  --color-bg:        #0E1013;   /* page background, near-black neutral */
+  --color-surface:   #16181C;   /* alt sections, panels */
+  --color-elevated:  #1C1F24;   /* cards */
+  --color-deepest:   #08090B;   /* dramatic / CTA bands */
+  --color-border:    #2A2E35;   /* default neutral border */
+  --color-border-strong: #3A3F47;
+
+  /* ---- Text (white / neutral gray) ---- */
+  --color-text:        #F4F6F7;  /* body */
+  --color-text-strong: #FFFFFF;  /* headings emphasis */
+  --color-muted:       #A8B0B8;  /* supporting copy */
+  --color-faint:       #6B7280;  /* captions, disabled: never body text */
+  --ink-on-brand:      #06231A;  /* dark ink for the rare on-emerald label */
+
+  /* ---- Semantic alerts (solid, never gradient) ---- */
+  --color-success: #10B981;
+  --color-warning: #F59E0B;   /* the one warm accent, alerts only */
+  --color-error:   #F87171;
+  --color-info:    #60A5FA;
+
+  /* ---- Typography ---- */
+  --font-serif: 'Playfair Display', Georgia, serif;     /* h1, h2 */
+  --font-body:  'Crimson Pro', Georgia, Cambria, serif; /* body */
+  --font-sans:  'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; /* UI, labels, h3/h4 */
+  --font-mono:  'JetBrains Mono', ui-monospace, 'SF Mono', monospace; /* labels, data, chips */
+
+  --fs-h1: clamp(2.1rem, 5vw, 3.4rem);
+  --fs-h2: clamp(1.6rem, 3.2vw, 2.3rem);
+  --fs-h3: 1.15rem;
+  --fs-h4: 1rem;
+  --fs-lede: 1.2rem;
+  --fs-body: 1.05rem;
+  --fs-small: 0.9rem;
+  --fs-eyebrow: 0.72rem;
+  --fs-mono: 0.85rem;
+
+  /* ---- Spacing (4px base) ---- */
+  --space-1: 4px;  --space-2: 8px;  --space-3: 12px; --space-4: 16px;
+  --space-6: 24px; --space-8: 32px; --space-12: 48px; --space-16: 64px; --space-20: 80px;
+  --space-section: clamp(2.75rem, 5vw, 4rem);
+
+  /* ---- Layout ---- */
+  --width-prose: 680px;
+  --width-content: 760px;
+  --width-default: 1100px;
+  --width-wide: 1280px;
+
+  /* ---- Radius (sharp editorial) ---- */
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
+  --radius-pill: 999px;
+  --radius-button: 2px;
+
+  /* ---- Shadows (deep, for dark surfaces) ---- */
+  --shadow-1: 0 2px 10px rgba(0, 0, 0, 0.40);
+  --shadow-2: 0 8px 24px rgba(0, 0, 0, 0.45);
+  --shadow-card: 0 14px 44px rgba(0, 0, 0, 0.55);
+
+  /* ---- Motion ---- */
+  --transition-base: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================================
+   Base
+   ============================================================ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.65;
+  font-size: 18px;
+  min-height: 100vh;
+}
+
+a { color: var(--color-mint); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ============================================================
+   Layout helpers
+   ============================================================ */
+.fsa-container, .fsa-wrap {
+  max-width: var(--width-default);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+.fsa-container--prose { max-width: var(--width-prose); }
+.fsa-container--content { max-width: var(--width-content); }
+
+.fsa-section { padding: var(--space-section) 0; border-top: 1px solid var(--color-border); }
+.fsa-section--alt { background: var(--color-surface); }
+.fsa-section--deep {
+  background: var(--color-deepest);
+  position: relative;
+  overflow: hidden;
+}
+/* single subtle "lit from within" glow for hero / CTA bands */
+.fsa-section--glow::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 70% 35%, rgba(16, 185, 129, 0.10) 0%, transparent 58%);
+  pointer-events: none;
+}
+.fsa-section--glow > * { position: relative; }
+
+.fsa-divider { border: 0; border-top: 1px solid var(--color-border); }
+
+/* ============================================================
+   Typography
+   ============================================================ */
+.fsa-h1, h1.fsa {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: var(--fs-h1);
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  color: var(--color-text-strong);
+}
+.fsa-h2, h2.fsa {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: var(--fs-h2);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--color-text-strong);
+}
+.fsa-h3, h3.fsa {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: var(--fs-h3);
+  letter-spacing: -0.005em;
+  color: var(--color-text);
+}
+.fsa-h4, h4.fsa {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: var(--fs-h4);
+  color: var(--color-text);
+}
+
+/* Gradient accent on headline emphasis (one of the 3 permitted fade surfaces).
+   Always provide a solid fallback color for browsers without bg-clip:text. */
+.fsa-h1 em, h1.fsa em,
+.fsa-h2 em, h2.fsa em,
+.fsa-accent-text {
+  font-style: italic;
+  color: var(--color-mint); /* fallback */
+  background: var(--brand-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.fsa-lede {
+  font-size: var(--fs-lede);
+  color: var(--color-muted);
+  max-width: var(--width-prose);
+  line-height: 1.6;
+}
+
+.fsa-eyebrow {
+  font-family: var(--font-sans);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: var(--fs-eyebrow);
+  font-weight: 600;
+  color: var(--color-mint);
+}
+
+/* Section tag: mono-uppercase chip with a mint diamond */
+.fsa-section-tag {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--color-text);
+}
+.fsa-section-tag::before {
+  content: '\25C6'; /* diamond */
+  font-size: 8px;
+  color: var(--color-mint);
+}
+
+.fsa-mono { font-family: var(--font-mono); font-size: var(--fs-mono); }
+
+/* Pull quote */
+.fsa-pullquote {
+  border-left: 2px solid var(--color-brand);
+  font-family: var(--font-serif);
+  font-style: italic;
+  padding: 0.4rem 0 0.4rem 1.4rem;
+  color: var(--color-text);
+}
+
+/* ============================================================
+   Buttons: gradient OUTLINE, light text, never green-filled
+   The inner fill must match the surface the button sits on; override
+   --btn-bg on dark sections (e.g. .fsa-section--deep button { --btn-bg: var(--color-deepest); }).
+   ============================================================ */
+.fsa-btn {
+  --btn-bg: var(--color-bg);
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  padding: 0.85rem 1.6rem;
+  border-radius: var(--radius-button);
+  border: 1.6px solid transparent;
+  color: var(--color-text);
+  cursor: pointer;
+  transition: var(--transition-base);
+}
+.fsa-btn:hover { text-decoration: none; }
+
+.fsa-btn--primary {
+  background:
+    linear-gradient(var(--btn-bg), var(--btn-bg)) padding-box,
+    var(--brand-gradient) border-box;
+  color: var(--color-text);
+}
+.fsa-btn--primary:hover {
+  color: var(--color-text-strong);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-2);
+}
+
+.fsa-btn--secondary {
+  background: transparent;
+  color: var(--color-text);
+  border: 1.5px solid var(--color-border);
+}
+.fsa-btn--secondary:hover {
+  border-color: var(--color-mint);
+  color: var(--color-mint);
+}
+
+/* On deep/alt surfaces, keep the button center matched to the surface */
+.fsa-section--alt .fsa-btn { --btn-bg: var(--color-surface); }
+.fsa-section--deep .fsa-btn { --btn-bg: var(--color-deepest); }
+
+/* Small mono chip (e.g. Open / PDF / DOCX links) */
+.fsa-chip {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 0.78rem;
+  color: var(--color-mint);
+  border: 1px solid var(--color-brand);
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: var(--transition-base);
+}
+.fsa-chip:hover { background: rgba(16, 185, 129, 0.12); text-decoration: none; }
+.fsa-chip--muted { color: var(--color-muted); border-color: var(--color-border); }
+
+/* ============================================================
+   Cards
+   ============================================================ */
+.fsa-card {
+  background: var(--color-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-1);
+  transition: var(--transition-base);
+}
+.fsa-card--hover:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-brand);
+  box-shadow: var(--shadow-card);
+}
+
+/* Gradient-bordered card (permitted fade surface): layered-backgrounds.
+   --card-bg must match the inner card color for the surface it's on. */
+.fsa-card--gradient {
+  --card-bg: var(--color-elevated);
+  border: 2px solid transparent;
+  border-radius: var(--radius-lg);
+  background:
+    linear-gradient(var(--card-bg), var(--card-bg)) padding-box,
+    var(--brand-gradient) border-box;
+  padding: 1.6rem 1.8rem;
+  box-shadow: var(--shadow-1);
+}
+
+/* Mono data panel (e.g. the cost comparison) */
+.fsa-panel {
+  font-family: var(--font-mono);
+  font-size: 0.92rem;
+  line-height: 1.9;
+  background: var(--color-deepest);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1.4rem 1.6rem;
+  color: var(--color-text);
+}
+.fsa-panel__label {
+  display: block;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin-bottom: 0.7rem;
+}
+.fsa-panel__accent { color: var(--color-mint); font-weight: 700; }
+
+/* Diamond list */
+.fsa-list { list-style: none; }
+.fsa-list li {
+  padding: 0.45rem 0 0.45rem 1.7rem;
+  position: relative;
+  border-bottom: 1px solid var(--color-border);
+}
+.fsa-list li::before {
+  content: '\25C6';
+  position: absolute;
+  left: 0;
+  top: 0.7rem;
+  color: var(--color-mint);
+  font-size: 0.7rem;
+}
+
+/* Badge / pill */
+.fsa-badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--color-mint);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  padding: 0.35rem 0.9rem;
+  border-radius: var(--radius-pill);
+}
+
+/* ============================================================
+   Accessibility
+   ============================================================ */
+*:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 3px;
+}
+.fsa-btn:focus-visible, a:focus-visible {
+  outline: 2px solid var(--color-mint);
+  outline-offset: 4px;
+}
+
+/* Touch targets (WCAG 2.5.5) */
+.fsa-btn, .fsa-chip { min-height: 44px; display: inline-flex; align-items: center; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.fsa-sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0);
+  white-space: nowrap; border-width: 0;
+}
+
+.fsa-skip-link {
+  position: absolute; top: -40px; left: 0;
+  background: var(--color-brand); color: var(--ink-on-brand);
+  padding: 8px 12px; z-index: 100; font-family: var(--font-sans); font-weight: 600;
+}
+.fsa-skip-link:focus { top: 0; }
+
+/* Legal footer (locked footer convention) */
+.fsa-legal-footer {
+  padding: 2.2rem 1rem;
+  border-top: 1px solid var(--color-border);
+  text-align: center;
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  color: var(--color-muted);
+  line-height: 1.5;
+}
+
+/* Print */
+@media print {
+  body { background: #fff; color: #000; }
+  .fsa-no-print { display: none !important; }
+}
