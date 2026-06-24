@@ -14,7 +14,7 @@
     text-align: center;
     font-size: clamp(1.8rem, 4vw, 2.5rem);
     font-weight: 800;
-    background: linear-gradient(135deg, #FF7A00 0%, #06b6d4 50%, #3b82f6 100%);
+    background: linear-gradient(135deg, #10b981 0%, #06b6d4 50%, #3b82f6 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -55,7 +55,7 @@
     top: 0;
     width: 4px;
     height: var(--sp-progress-height, 0%);
-    background: linear-gradient(180deg, #FF7A00, #06b6d4);
+    background: linear-gradient(180deg, #10b981, #06b6d4);
     border-radius: 2px;
     z-index: 1;
     transition: height 0.8s ease;
@@ -91,7 +91,7 @@
     font-weight: 800;
     font-size: 1.2rem;
     border: 3px solid rgba(255, 255, 255, 0.1);
-    background: #16181C;
+    background: #0a1f1a;
     color: #6b7280;
     transition: all 0.4s ease;
     position: relative;
@@ -101,28 +101,28 @@
 .sp-rung.locked .sp-rung-number {
     border-color: rgba(255, 255, 255, 0.08);
     color: #4b5563;
-    background: #16181C;
+    background: #0a1f1a;
 }
 
 .sp-rung.active .sp-rung-number {
-    border-color: #FF7A00;
-    color: #FF7A00;
-    background: rgba(255, 122, 0, 0.15);
-    box-shadow: 0 0 20px rgba(255, 122, 0, 0.3),
-                0 0 0 6px rgba(255, 122, 0, 0.08);
+    border-color: #10b981;
+    color: #10b981;
+    background: rgba(16, 185, 129, 0.15);
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.3),
+                0 0 0 6px rgba(16, 185, 129, 0.08);
     animation: sp-pulse 2.5s ease-in-out infinite;
 }
 
 .sp-rung.complete .sp-rung-number {
-    border-color: #FF7A00;
+    border-color: #10b981;
     color: white;
-    background: #FF7A00;
-    box-shadow: 0 4px 12px rgba(255, 122, 0, 0.3);
+    background: #10b981;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
 }
 
 @keyframes sp-pulse {
-    0%, 100% { box-shadow: 0 0 20px rgba(255, 122, 0, 0.3), 0 0 0 6px rgba(255, 122, 0, 0.08); }
-    50% { box-shadow: 0 0 30px rgba(255, 122, 0, 0.5), 0 0 0 10px rgba(255, 122, 0, 0.12); }
+    0%, 100% { box-shadow: 0 0 20px rgba(16, 185, 129, 0.3), 0 0 0 6px rgba(16, 185, 129, 0.08); }
+    50% { box-shadow: 0 0 30px rgba(16, 185, 129, 0.5), 0 0 0 10px rgba(16, 185, 129, 0.12); }
 }
 
 /* Rung Content Card */
@@ -145,16 +145,16 @@
 }
 
 .sp-rung.active .sp-rung-body {
-    border-color: rgba(255, 122, 0, 0.3);
+    border-color: rgba(16, 185, 129, 0.3);
     background: linear-gradient(135deg, rgba(26, 58, 46, 0.9) 0%, rgba(15, 41, 34, 0.7) 100%);
 }
 
 .sp-rung.complete .sp-rung-body {
-    border-color: rgba(255, 122, 0, 0.2);
+    border-color: rgba(16, 185, 129, 0.2);
 }
 
 .sp-rung-body:hover {
-    border-color: rgba(255, 122, 0, 0.4);
+    border-color: rgba(16, 185, 129, 0.4);
     transform: translateX(4px);
 }
 
@@ -174,16 +174,16 @@
 }
 
 .sp-rung.active .sp-rung-title {
-    color: #FF7A00;
+    color: #10b981;
 }
 
 .sp-rung.complete .sp-rung-title {
-    color: #FF8A00;
+    color: #34d399;
 }
 
 .sp-rung-title .sp-check {
     display: none;
-    color: #FF7A00;
+    color: #10b981;
     font-size: 1rem;
 }
 
@@ -226,8 +226,8 @@
 }
 
 .sp-module-tag:hover {
-    border-color: rgba(255, 122, 0, 0.3);
-    color: #FF7A00;
+    border-color: rgba(16, 185, 129, 0.3);
+    color: #10b981;
 }
 
 .sp-module-tag .sp-tag-dot {
@@ -242,7 +242,7 @@
 }
 
 .sp-module-tag.completed .sp-tag-dot {
-    background: #FF7A00;
+    background: #10b981;
 }
 
 /* Rung Progress Bar (inside rung card) */
@@ -256,7 +256,7 @@
 
 .sp-rung-progress-fill {
     height: 100%;
-    background: linear-gradient(90deg, #FF7A00, #FFD400);
+    background: linear-gradient(90deg, #10b981, #34d399);
     border-radius: 2px;
     transition: width 0.5s ease;
 }
@@ -268,8 +268,8 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: #FF7A00;
-    background: rgba(255, 122, 0, 0.12);
+    color: #10b981;
+    background: rgba(16, 185, 129, 0.12);
     padding: 0.2rem 0.6rem;
     border-radius: 0.25rem;
     margin-left: auto;
@@ -288,8 +288,8 @@
     align-items: center;
     gap: 1rem;
     padding: 0.75rem 1.25rem;
-    background: rgba(255, 122, 0, 0.06);
-    border: 1px solid rgba(255, 122, 0, 0.15);
+    background: rgba(16, 185, 129, 0.06);
+    border: 1px solid rgba(16, 185, 129, 0.15);
     border-radius: 0.75rem;
     margin-bottom: 2rem;
 }
@@ -307,7 +307,7 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    color: #FF7A00;
+    color: #10b981;
 }
 
 .sp-compact-module {
@@ -325,12 +325,12 @@
 
 .sp-compact-progress-fill {
     height: 100%;
-    background: linear-gradient(90deg, #FF7A00, #FFD400);
+    background: linear-gradient(90deg, #10b981, #34d399);
     border-radius: 3px;
 }
 
 .sp-compact-link {
-    color: #FF7A00;
+    color: #10b981;
     text-decoration: none;
     font-size: 0.8rem;
     font-weight: 600;
@@ -348,8 +348,8 @@
 .journey-hero {
     text-align: center;
     padding: 3rem 2rem;
-    background: linear-gradient(135deg, rgba(255, 122, 0, 0.12) 0%, rgba(6, 182, 212, 0.06) 100%);
-    border: 2px solid rgba(255, 122, 0, 0.2);
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(6, 182, 212, 0.06) 100%);
+    border: 2px solid rgba(16, 185, 129, 0.2);
     border-radius: var(--radius-xl, 1.5rem);
     margin-bottom: 3rem;
 }
@@ -357,7 +357,7 @@
 .journey-hero-title {
     font-size: clamp(2rem, 5vw, 3rem);
     font-weight: 800;
-    background: linear-gradient(135deg, #FF7A00 0%, #06b6d4 100%);
+    background: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -384,7 +384,7 @@
 .journey-stat-value {
     font-size: 2rem;
     font-weight: 800;
-    color: #FF7A00;
+    color: #10b981;
     font-family: var(--font-family-mono, 'SF Mono', monospace);
 }
 
@@ -441,9 +441,9 @@
 }
 
 .journey-module-status.completed {
-    background: rgba(255, 122, 0, 0.2);
-    border: 2px solid rgba(255, 122, 0, 0.4);
-    color: #FF7A00;
+    background: rgba(16, 185, 129, 0.2);
+    border: 2px solid rgba(16, 185, 129, 0.4);
+    color: #10b981;
 }
 
 .journey-module-name {
@@ -458,7 +458,7 @@
 }
 
 .journey-module-name a:hover {
-    color: #FF7A00;
+    color: #10b981;
 }
 
 .journey-module-time {
