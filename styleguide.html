@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FSA Style Guide</title>
+<link rel="stylesheet" href="/css/fsa-brand.css">
+<style>
+  /* page-local layout only; all visual tokens come from fsa-brand.css */
+  .sg-head { padding: 4rem 0 2rem; }
+  .sg-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-top: 1rem; }
+  .sw { border: 1px solid var(--color-border); border-radius: var(--radius-md); overflow: hidden; }
+  .sw .chip-bar { height: 70px; }
+  .sw .meta { padding: 0.6rem 0.8rem; font-family: var(--font-mono); font-size: 0.72rem; color: var(--color-muted); background: var(--color-surface); }
+  .sw .meta b { color: var(--color-text); display: block; font-family: var(--font-sans); font-size: 0.8rem; }
+  .row { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; margin-top: 1rem; }
+  .label { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-muted); margin: 2rem 0 0.6rem; }
+  .type-spec { font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-muted); }
+</style>
+</head>
+<body>
+
+<a class="fsa-skip-link" href="#main">Skip to content</a>
+
+<header class="fsa-section--deep fsa-section--glow">
+  <div class="fsa-wrap sg-head">
+    <div class="fsa-eyebrow">Financially Sovereign Academy</div>
+    <h1 class="fsa-h1">The <em>visual system</em>, in one page.</h1>
+    <p class="fsa-lede">Sister brand to Bitcoin Sovereign Academy: same editorial grammar, palette translated to emerald and mint on neutral dark. This page renders directly from <span class="fsa-mono">css/fsa-brand.css</span>.</p>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- COLOR -->
+<section class="fsa-section">
+  <div class="fsa-wrap">
+    <div class="fsa-section-tag">Color</div>
+    <h2 class="fsa-h2">Surfaces and text</h2>
+    <div class="sg-grid">
+      <div class="sw"><div class="chip-bar" style="background:var(--color-bg)"></div><div class="meta"><b>Page</b>--color-bg · #0E1013</div></div>
+      <div class="sw"><div class="chip-bar" style="background:var(--color-surface)"></div><div class="meta"><b>Surface</b>--color-surface · #16181C</div></div>
+      <div class="sw"><div class="chip-bar" style="background:var(--color-elevated)"></div><div class="meta"><b>Card</b>--color-elevated · #1C1F24</div></div>
+      <div class="sw"><div class="chip-bar" style="background:var(--color-deepest)"></div><div class="meta"><b>Deepest</b>--color-deepest · #08090B</div></div>
+      <div class="sw"><div class="chip-bar" style="background:var(--color-text)"></div><div class="meta"><b>Text</b>--color-text · #F4F6F7</div></div>
+      <div class="sw"><div class="chip-bar" style="background:var(--color-muted)"></div><div class="meta"><b>Muted</b>--color-muted · #A8B0B8</div></div>
+    </div>
+
+    <div class="label">Accent (emerald / mint): accent use only</div>
+    <div class="sg-grid">
+      <div class="sw"><div class="chip-bar" style="background:var(--color-brand)"></div><div class="meta"><b>Brand</b>--color-brand · #10B981</div></div>
+      <div class="sw"><div class="chip-bar" style="background:var(--color-brand-deep)"></div><div class="meta"><b>Brand deep</b>--color-brand-deep · #047857</div></div>
+      <div class="sw"><div class="chip-bar" style="background:var(--color-mint)"></div><div class="meta"><b>Mint</b>--color-mint · #6EE7B7</div></div>
+      <div class="sw"><div class="chip-bar" style="background:var(--brand-gradient)"></div><div class="meta"><b>Signature fade (B)</b>--brand-gradient · 135deg teal&rarr;emerald&rarr;mint</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TYPOGRAPHY -->
+<section class="fsa-section fsa-section--alt">
+  <div class="fsa-wrap">
+    <div class="fsa-section-tag">Typography</div>
+    <h2 class="fsa-h2">A type system with one <em>editorial moment</em></h2>
+    <div class="label">Heading 1 · Playfair Display 700</div>
+    <div class="fsa-h1">Keep the <em>1&ndash;2%</em> your advisor charges.</div>
+    <div class="label">Heading 2 · Playfair Display 700</div>
+    <div class="fsa-h2">What it <em>actually</em> costs you</div>
+    <div class="label">Heading 3 · Inter 600</div>
+    <div class="fsa-h3">Banking without getting robbed</div>
+    <div class="label">Eyebrow · Inter 600 uppercase</div>
+    <div class="fsa-eyebrow">100% free &middot; No signup</div>
+    <div class="label">Lede · Crimson Pro</div>
+    <p class="fsa-lede">Ten interactive modules covering what financial advisors are paid to know, built for adults, with no filler.</p>
+    <div class="label">Body · Crimson Pro</div>
+    <p style="max-width:var(--width-prose)">The fee sounds small. Compounded over a working life, it is not. This paragraph is set in Crimson Pro at the body size, the same reading face used across long-form pages and learning surfaces.</p>
+    <div class="label">Mono · JetBrains Mono</div>
+    <p class="fsa-mono">block 905,210 &middot; fee 7 sat/vB &middot; 2-of-3</p>
+  </div>
+</section>
+
+<!-- BUTTONS -->
+<section class="fsa-section">
+  <div class="fsa-wrap">
+    <div class="fsa-section-tag">Buttons</div>
+    <h2 class="fsa-h2">Gradient outline, never green-filled</h2>
+    <p style="color:var(--color-muted);max-width:var(--width-prose)">Primary uses the brand fade as its outline with light text. Secondary is a quiet neutral outline. Both keep light text and a 44px hit area.</p>
+    <div class="row">
+      <a class="fsa-btn fsa-btn--primary" href="#">Take the 2-min assessment &rarr;</a>
+      <a class="fsa-btn fsa-btn--secondary" href="#">Browse all 10 modules</a>
+      <a class="fsa-chip" href="#">Open</a>
+      <a class="fsa-chip fsa-chip--muted" href="#">PDF</a>
+      <a class="fsa-chip fsa-chip--muted" href="#">DOCX</a>
+    </div>
+  </div>
+</section>
+
+<!-- CARDS -->
+<section class="fsa-section fsa-section--alt">
+  <div class="fsa-wrap">
+    <div class="fsa-section-tag">Cards</div>
+    <h2 class="fsa-h2">Surfaces and the gradient border</h2>
+    <div class="row" style="align-items:stretch">
+      <div class="fsa-card fsa-card--hover" style="flex:1;min-width:240px">
+        <h3 class="fsa-h3">Standard card</h3>
+        <p style="color:var(--color-muted);font-size:0.95rem;margin-top:0.4rem">Elevated neutral surface, 1px border, soft shadow, sharp 2px corners. Lifts on hover.</p>
+      </div>
+      <div class="fsa-card--gradient" style="flex:1;min-width:240px">
+        <h3 class="fsa-h3">Gradient card</h3>
+        <p style="color:var(--color-muted);font-size:0.95rem;margin-top:0.4rem">The fade appears only as the border. Inner surface stays solid for readability.</p>
+      </div>
+    </div>
+
+    <div class="label">List + panel</div>
+    <div class="row" style="align-items:flex-start">
+      <ul class="fsa-list" style="flex:1;min-width:240px">
+        <li>Open an account, even with limited ID.</li>
+        <li>Read a credit report and score.</li>
+        <li>Avoid payday lenders and check cashers.</li>
+      </ul>
+      <div class="fsa-panel" style="flex:1;min-width:240px">
+        <span class="fsa-panel__label">$100,000 · 7% · 30 years</span>
+        No advisor fee &nbsp;<span class="fsa-panel__accent">$761,225</span><br>
+        2% advisor fee &nbsp;$432,194<br>
+        <span class="fsa-panel__accent">A 2% fee can erase 43%.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BADGE + PULLQUOTE -->
+<section class="fsa-section">
+  <div class="fsa-wrap">
+    <div class="fsa-section-tag">Accents</div>
+    <div class="row">
+      <span class="fsa-badge">&#x1F3E6; Flagship program</span>
+      <span class="fsa-eyebrow">Section eyebrow</span>
+    </div>
+    <blockquote class="fsa-pullquote" style="margin-top:1.4rem;max-width:var(--width-prose)">Open education creates trust. Tools create clarity. The brand stays quiet so the content can be loud.</blockquote>
+  </div>
+</section>
+
+<footer class="fsa-legal-footer">
+  Created by Dalia &middot; financiallysovereign.academy &middot; Educational content only &middot; Not financial advice
+</footer>
+
+</main>
+</body>
+</html>

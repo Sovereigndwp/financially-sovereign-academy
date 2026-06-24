@@ -26,13 +26,13 @@
 <meta name="twitter:image" content="https://financiallysovereign.academy/og-image.png">
 <meta name="twitter:site" content="@BTCSovereignEdu">
 <link rel="canonical" href="https://financiallysovereign.academy/">
+<link rel="stylesheet" href="/css/fsa-brand.css">
 <style>
   :root{
-    --bg:#1a1a1a; --panel:#20232a; --panel2:#2a2e38; --line:#353a46;
-    --text:#e8ecf3; --muted:#aab2c0;
-    --accent:#FFD400;     /* Sovereign Academy gold */
-    --accent2:#22c55e;    /* Growth/success green */
-    --link:#7cc4ff;
+    --bg:var(--color-bg); --panel:var(--color-surface); --panel2:var(--color-elevated); --line:var(--color-border);
+    --text:var(--color-text); --muted:var(--color-muted);
+    --accent:var(--color-mint); --accent2:var(--color-brand);
+    --link:var(--color-mint);
     --maxw:840px;
   }
   *{box-sizing:border-box}
@@ -50,7 +50,7 @@
   nav.top ul{list-style:none;display:flex;gap:14px;padding:0;margin:0;flex-wrap:wrap;font-size:13.5px}
   nav.top a{color:var(--muted);text-decoration:none;padding:6px 0;transition:color .15s ease}
   nav.top a:hover{color:var(--text)}
-  nav.top .book{background:var(--accent);color:#1a1300;padding:7px 12px;border-radius:8px;font-weight:600}
+  nav.top .book{background:var(--accent);color:#06231A;padding:7px 12px;border-radius:8px;font-weight:600}
   nav.top .book:hover{filter:brightness(1.06)}
 
   /* --- Hero --- */
@@ -66,7 +66,7 @@
   .total b{color:var(--text)}
   .cta-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:18px 0}
   .btn{display:inline-block;padding:14px 22px;border-radius:10px;text-decoration:none;font-weight:600;font-size:15px;border:1px solid transparent;transition:filter .15s ease,transform .15s ease}
-  .btn-primary{background:var(--accent);color:#1a1300;box-shadow:0 4px 14px rgba(252,209,22,.18)}
+  .btn-primary{background:var(--accent);color:#06231A;box-shadow:0 4px 14px rgba(16,185,129,.18)}
   .btn-secondary{background:transparent;color:var(--text);border-color:var(--line)}
   .btn:hover{filter:brightness(1.06);transform:translateY(-1px)}
   .reassure{color:var(--muted);font-size:13px;margin-top:8px}
@@ -117,7 +117,7 @@
   .resources{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
   @media(max-width:680px){.resources{grid-template-columns:1fr}}
   .res{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px;text-decoration:none;color:var(--text);display:block;transition:border-color .15s ease,transform .15s ease}
-  .res:hover{border-color:rgba(252,209,22,.32);transform:translateY(-1px)}
+  .res:hover{border-color:rgba(16,185,129,.32);transform:translateY(-1px)}
   .res .ic{font-size:20px;margin-bottom:4px}
   .res .nm{font-weight:600;margin-bottom:2px}
   .res .lbl{font-size:13px;color:var(--muted)}
@@ -142,6 +142,18 @@
     .lede{font-size:17px}
     nav.top ul{order:3;width:100%;justify-content:flex-start;gap:10px;font-size:12.5px}
   }
+
+/* ===== FSA brand bridge (PR2): apply css/fsa-brand.css system ===== */
+body{font-family:var(--font-body)}
+h1,h2{font-family:var(--font-serif)}
+nav.top,.eyebrow,.btn,.btn-primary,.btn-secondary,nav.top .book,.block .nm,.res .nm,details.module summary,.share a,.small,.reassure{font-family:var(--font-sans)}
+h1 em{background:var(--brand-gradient);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:var(--color-mint)}
+body::before{background:var(--brand-gradient-horizontal)}
+.btn-primary,nav.top .book{background:linear-gradient(var(--color-bg),var(--color-bg)) padding-box,var(--brand-gradient) border-box!important;border:1.6px solid transparent!important;color:var(--color-text)!important;box-shadow:none!important}
+.btn-secondary{border:1px solid var(--color-border)!important;color:var(--color-text)!important}
+.btn-secondary:hover{border-color:var(--color-mint)!important;color:var(--color-mint)!important}
+.res:hover{border-color:var(--color-mint)!important}
+/* ===== end FSA brand bridge ===== */
 </style>
 </head>
 <body>
@@ -184,11 +196,11 @@
   <p>The fee sounds small. Compounded over a working life, it's not.</p>
   <div class="preview">
     <span class="label">Sample: $100,000 invested, 7% annual return, 30 years</span>
-    Without advisor fee (0%) ........ <b style="color:#22c55e">$761,225</b><br>
+    Without advisor fee (0%) ........ <b style="color:#10B981">$761,225</b><br>
     With 1% advisor fee ............. $574,349   <span style="color:#aab2c0">(−$186,876)</span><br>
-    With 2% advisor fee ............. <b style="color:#FFD400">$432,194</b>   <span style="color:#aab2c0">(−$329,031)</span><br>
+    With 2% advisor fee ............. <b style="color:#6EE7B7">$432,194</b>   <span style="color:#aab2c0">(−$329,031)</span><br>
     <span style="color:#aab2c0">────────────────────────────────────────────────</span><br>
-    <b style="color:#FFD400">A 2% fee can quietly erase 43% of your portfolio.</b>
+    <b style="color:#6EE7B7">A 2% fee can quietly erase 43% of your portfolio.</b>
   </div>
   <p class="small">The real calculator inside Module 7 lets you change the numbers to your situation.</p>
 
