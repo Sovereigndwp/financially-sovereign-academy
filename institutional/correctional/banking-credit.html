@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banking &amp; Credit Rebuilding | Reentry Financial Education | Financially Sovereign Academy</title>
+    <meta name="description" content="A 6-week reentry financial education program on safe banking access, credit reports, debt decisions, and avoiding predatory financial products. Facility-led and learner workbook versions. Educational content only.">
+    <link rel="canonical" href="https://financiallysovereign.academy/institutional/correctional/banking-credit">
+    <meta property="og:title" content="Banking &amp; Credit Rebuilding | Reentry Financial Education">
+    <meta property="og:description" content="A 6-week reentry financial education program: safe banking access, credit reports, debt decisions, and avoiding predatory financial products.">
+    <meta property="og:url" content="https://financiallysovereign.academy/institutional/correctional/banking-credit">
+    <style>
+        :root { --primary:#10b981; --dark:#0a1f1a; --dark2:#0f2922; --light:#e0e0e0; --dim:#9ca3af; --grad:linear-gradient(135deg,#10b981,#0d9488); }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; background:var(--dark); color:var(--light); line-height:1.6; }
+        .header { background:rgba(10,31,26,0.97); backdrop-filter:blur(10px); padding:1rem 0; border-bottom:2px solid var(--primary); position:fixed; width:100%; top:0; z-index:1000; }
+        .header-content { max-width:1200px; margin:0 auto; padding:0 2rem; display:flex; justify-content:space-between; align-items:center; }
+        .logo { display:flex; align-items:center; gap:0.75rem; text-decoration:none; color:var(--light); }
+        .logo-icon { width:38px; height:38px; background:var(--grad); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.3rem; font-weight:bold; color:white; }
+        .logo-text { font-size:1.1rem; font-weight:bold; }
+        .nav-links { display:flex; gap:1.5rem; list-style:none; align-items:center; }
+        .nav-link { color:var(--dim); text-decoration:none; transition:color 0.2s; font-weight:500; font-size:0.95rem; }
+        .nav-link:hover { color:var(--primary); }
+        .cta-nav { background:var(--grad); padding:0.5rem 1.2rem; border-radius:20px; color:white!important; font-weight:600; }
+        .crumbs { max-width:1100px; margin:0 auto; padding:6.5rem 2rem 0; font-size:0.85rem; color:var(--dim); }
+        .crumbs a { color:var(--dim); text-decoration:none; }
+        .crumbs a:hover { color:var(--primary); }
+        .hero { padding:2.5rem 2rem 3.5rem; text-align:center; }
+        .hero-content { max-width:820px; margin:0 auto; }
+        .badge { display:inline-block; padding:0.4rem 1rem; border-radius:20px; font-size:0.82rem; font-weight:600; margin-bottom:1.25rem; letter-spacing:0.5px; background:rgba(16,185,129,0.15); border:1px solid rgba(16,185,129,0.4); color:#6ee7b7; }
+        .hero h1 { font-size:clamp(2rem,4.5vw,3rem); font-weight:700; margin-bottom:1.25rem; line-height:1.15; }
+        .hero h1 span { background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+        .hero p.sub { font-size:1.12rem; color:var(--dim); max-width:680px; margin:0 auto 2rem; }
+        .ctas { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; margin-top:1.5rem; }
+        .btn-p { display:inline-block; padding:1rem 2.2rem; background:var(--grad); color:white; text-decoration:none; border-radius:50px; font-weight:700; font-size:1rem; transition:all 0.3s; box-shadow:0 4px 20px rgba(16,185,129,0.4); }
+        .btn-p:hover { transform:translateY(-2px); }
+        .btn-s { display:inline-block; padding:1rem 2.2rem; background:transparent; color:var(--light); text-decoration:none; border:2px solid rgba(224,224,224,0.25); border-radius:50px; font-weight:700; font-size:1rem; transition:all 0.3s; }
+        .btn-s:hover { border-color:var(--primary); color:var(--primary); }
+        section { padding:3.5rem 2rem; }
+        .inner { max-width:1000px; margin:0 auto; }
+        h2.sec-t { font-size:1.8rem; margin-bottom:1rem; }
+        p.sec-sub { color:var(--dim); font-size:1.02rem; margin-bottom:2rem; max-width:760px; }
+        .dark-bg { background:var(--dark2); }
+        .grid-2 { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:1.5rem; }
+        .card { background:rgba(16,185,129,0.06); border:1px solid rgba(16,185,129,0.2); border-radius:12px; padding:1.6rem; }
+        .card h3 { color:var(--primary); font-size:1.1rem; margin-bottom:0.75rem; }
+        .card p, .card li { color:var(--dim); font-size:0.95rem; }
+        .card ul { margin:0.5rem 0 0 1.1rem; }
+        .card ul li { margin-bottom:0.35rem; }
+        ul.learn { list-style:none; max-width:760px; }
+        ul.learn li { color:var(--dim); padding:0.4rem 0 0.4rem 1.6rem; position:relative; }
+        ul.learn li::before { content:'\2713'; position:absolute; left:0; color:var(--primary); font-weight:700; }
+        .mat-list { list-style:none; }
+        .mat-list li { display:flex; justify-content:space-between; align-items:center; gap:1rem; flex-wrap:wrap; padding:0.85rem 0; border-bottom:1px solid rgba(16,185,129,0.15); }
+        .mat-list li:last-child { border-bottom:none; }
+        .mat-name { font-weight:600; color:var(--light); font-size:0.97rem; }
+        .mat-desc { color:var(--dim); font-size:0.85rem; display:block; font-weight:400; }
+        .mat-open { color:var(--primary); text-decoration:none; font-weight:700; font-size:0.9rem; white-space:nowrap; border:1px solid rgba(16,185,129,0.4); padding:0.4rem 1rem; border-radius:20px; }
+        .mat-open:hover { background:rgba(16,185,129,0.12); }
+        .soon { font-size:0.8rem; color:var(--dim); font-style:italic; }
+        .outline-step { border-left:3px solid var(--primary); padding:0.4rem 0 0.9rem 1.2rem; margin-bottom:0.4rem; }
+        .outline-step b { color:var(--light); }
+        .boundary { background:rgba(16,185,129,0.05); border:1px solid rgba(16,185,129,0.25); border-radius:12px; padding:1.6rem; }
+        .boundary ul { margin:0.6rem 0 0 1.1rem; }
+        .boundary li { color:var(--dim); margin-bottom:0.4rem; }
+        .note { background:rgba(16,185,129,0.07); border-left:3px solid var(--primary); padding:1rem 1.2rem; border-radius:6px; color:var(--dim); font-size:0.92rem; margin-top:1.5rem; }
+        .cta-section { padding:4.5rem 2rem; background:linear-gradient(135deg,#0a4d3c,#1a5f52); text-align:center; }
+        .cta-section h2 { font-size:1.9rem; margin-bottom:1rem; }
+        .cta-section p { color:rgba(224,224,224,0.85); font-size:1.02rem; max-width:600px; margin:0 auto 2rem; }
+        .contact-row { display:flex; gap:2rem; justify-content:center; flex-wrap:wrap; margin-top:1.25rem; }
+        .contact-row span { color:rgba(224,224,224,0.75); font-size:0.92rem; }
+        .contact-row a { color:#6ee7b7; text-decoration:none; }
+        footer { padding:2rem; background:var(--dark); text-align:center; border-top:1px solid rgba(16,185,129,0.15); }
+        footer p { color:var(--dim); font-size:0.83rem; margin-top:0.5rem; }
+        .footer-links { display:flex; justify-content:center; gap:1.5rem; flex-wrap:wrap; }
+        .footer-links a { color:var(--dim); text-decoration:none; font-size:0.83rem; }
+        .footer-links a:hover { color:var(--primary); }
+        @media (max-width:768px) { .nav-links { display:none; } .hero h1 { font-size:1.8rem; } }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="https://financiallysovereign.academy" class="logo">
+                <div class="logo-icon">&#x1F4B0;</div>
+                <span class="logo-text">Financially Sovereign Academy</span>
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="https://financiallysovereign.academy" class="nav-link">Home</a></li>
+                    <li><a href="/institutional/" class="nav-link">Institutional</a></li>
+                    <li><a href="/institutional/correctional" class="nav-link">Correctional</a></li>
+                    <li><a href="https://meetings.hubspot.com/dalia-platt" class="nav-link cta-nav">Book Consultation</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="crumbs">
+        <a href="/institutional/">Institutional</a> &rsaquo;
+        <a href="/institutional/correctional">Correctional &amp; Reentry</a> &rsaquo;
+        Banking &amp; Credit Rebuilding
+    </div>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="badge">&#x1F3E6; FLAGSHIP REENTRY PROGRAM</div>
+            <h1>Banking &amp; Credit <span>Rebuilding</span></h1>
+            <p class="sub">A 6-week reentry financial education program focused on safe banking access, credit reports, debt decisions, and avoiding predatory financial products.</p>
+            <div class="ctas">
+                <a href="#facilitators" class="btn-p">For facilitators</a>
+                <a href="#learners" class="btn-s">For learners and participants</a>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="inner">
+            <h2 class="sec-t">Who this is for</h2>
+            <p class="sec-sub">This program is for the people and organizations working through the first money barriers after incarceration.</p>
+            <ul class="learn">
+                <li>Returning citizens preparing for release or recently released.</li>
+                <li>People on probation or parole who want practical money skills.</li>
+                <li>Correctional facilities, jails, and reentry nonprofits running live classes.</li>
+                <li>Workforce programs and probation or parole partners.</li>
+                <li>Funders supporting reentry and financial stability.</li>
+            </ul>
+            <p class="sec-sub" style="margin-top:1.5rem;">It works even if a participant does not yet have an ID, a phone, housing, a job, or a bank account. The class meets people where they are.</p>
+        </div>
+    </section>
+
+    <section class="dark-bg">
+        <div class="inner">
+            <h2 class="sec-t">What participants learn</h2>
+            <ul class="learn">
+                <li>Why a bank account is usually safer and cheaper than cash and check cashers.</li>
+                <li>How to open an account, including with limited ID or a flagged history, using second-chance and Bank On certified accounts and credit unions.</li>
+                <li>How to read a credit report and understand what a credit score is and is not.</li>
+                <li>Safe ways to start rebuilding credit, like secured cards used and paid on time.</li>
+                <li>How to spot and avoid payday lenders, check cashers, and rent-to-own.</li>
+                <li>First steps for old debt, collections, and court-ordered payments, with referral to free legal help.</li>
+                <li>A simple 30-day money setup plan they can actually follow.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <div class="inner">
+            <h2 class="sec-t">Two ways to use the program</h2>
+            <p class="sec-sub">The same six-week curriculum comes in two forms. They work together. The facility version teaches and plans. The learner version helps people take real steps after release.</p>
+            <div class="grid-2">
+                <div class="card">
+                    <h3>&#x1F3DB;&#xFE0F; Facility-led version</h3>
+                    <p>For live, facilitator-led classes inside jails, prisons, probation or parole programs, and reentry organizations.</p>
+                    <ul>
+                        <li>Paper-first. No internet or phones required.</li>
+                        <li>Printable workbook and assessments.</li>
+                        <li>Safe for facility security review.</li>
+                        <li>No live bank applications and no sharing of private financial details in class.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>&#x1F4F1; Learner workbook version</h3>
+                    <p>For participants to work through with a facilitator, or on their own after release when they may have a phone.</p>
+                    <ul>
+                        <li>Plain-language workbook that can be printed.</li>
+                        <li>Step-by-step worksheets and a 30-day plan.</li>
+                        <li>No internet needed to use the printed workbook.</li>
+                        <li>Can be led by a facilitator or used independently.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="dark-bg" id="facilitators">
+        <div class="inner">
+            <h2 class="sec-t">For facilitators: open or print the materials</h2>
+            <p class="sec-sub">These open as web pages you can read and print from your browser. Use the print option in your browser to make paper copies. Printable PDF versions are in progress.</p>
+            <ul class="mat-list">
+                <li>
+                    <span class="mat-name">Program overview and six-week outline<span class="mat-desc">What the program is, who it serves, and the weekly plan. You are on this page.</span></span>
+                    <a class="mat-open" href="#outline">View outline</a>
+                </li>
+                <li>
+                    <span class="mat-name">Facilitator guide<span class="mat-desc">Week-by-week scripts, timings, activities, and boundaries.</span></span>
+                    <a class="mat-open" href="/institutional/correctional/banking-credit/facilitator-guide">Open</a>
+                </li>
+                <li>
+                    <span class="mat-name">Facility implementation guide<span class="mat-desc">How to set up and run the class within facility constraints.</span></span>
+                    <a class="mat-open" href="/institutional/correctional/banking-credit/facility-implementation-guide">Open</a>
+                </li>
+                <li>
+                    <span class="mat-name">Pre and post assessment<span class="mat-desc">Matched knowledge and confidence check, with answer key.</span></span>
+                    <a class="mat-open" href="/institutional/correctional/banking-credit/pre-post-assessment">Open</a>
+                </li>
+                <li>
+                    <span class="mat-name">90-day follow-up survey<span class="mat-desc">Post-release behavior survey, run by staff or a partner.</span></span>
+                    <a class="mat-open" href="/institutional/correctional/banking-credit/follow-up-survey">Open</a>
+                </li>
+                <li>
+                    <span class="mat-name">Partner network checklist<span class="mat-desc">Find and vet credit unions, CDFIs, legal aid, workforce, and ID help.</span></span>
+                    <a class="mat-open" href="/institutional/correctional/banking-credit/partner-network-checklist">Open</a>
+                </li>
+                <li>
+                    <span class="mat-name">Grant and funder one-pager<span class="mat-desc">Labeled, sourced claims and the outcomes framework for funders.</span></span>
+                    <a class="mat-open" href="/institutional/correctional/banking-credit/grant-funder-one-pager">Open</a>
+                </li>
+                <li>
+                    <span class="mat-name">Our sources and claims<span class="mat-desc">Every statistic we use, labeled and sourced. Our transparency record.</span></span>
+                    <a class="mat-open" href="/institutional/correctional/banking-credit/source-and-claims-ledger">Open</a>
+                </li>
+            </ul>
+            <div class="note">Printable PDF versions of each document are coming soon. For now, open a document and use your browser's print option to make paper copies for class.</div>
+        </div>
+    </section>
+
+    <section id="learners">
+        <div class="inner">
+            <h2 class="sec-t">For learners and participants</h2>
+            <p class="sec-sub">The student workbook holds every lesson and worksheet for the six weeks. It is written in plain language. You do not need the internet to use the printed workbook. A facilitator can lead you through it, or you can work through it on your own.</p>
+            <ul class="mat-list">
+                <li>
+                    <span class="mat-name">Student workbook<span class="mat-desc">All six weeks of lessons, worksheets, and your 30-day plan. Print it or have a facilitator print it for you.</span></span>
+                    <a class="mat-open" href="/institutional/correctional/banking-credit/student-workbook">Open</a>
+                </li>
+            </ul>
+            <h3 style="color:var(--primary);margin:2rem 0 0.75rem;font-size:1.05rem;">A simple look at the six lessons</h3>
+            <ul class="learn">
+                <li>Week 1: Why a bank account beats cash.</li>
+                <li>Week 2: Opening an account, even with little ID or a record.</li>
+                <li>Week 3: How credit reports and scores really work.</li>
+                <li>Week 4: Safe ways to start building credit.</li>
+                <li>Week 5: Old debt, collections, and court debt.</li>
+                <li>Week 6: Your 30-day money setup plan.</li>
+            </ul>
+            <div class="note">This workbook can be printed, or a facilitator can use it with a group. Nothing here asks you to go online or share private financial details.</div>
+        </div>
+    </section>
+
+    <section class="dark-bg" id="outline">
+        <div class="inner">
+            <h2 class="sec-t">Six-week outline</h2>
+            <p class="sec-sub">About 90 minutes per session. The schedule can be compressed into fewer longer sessions or stretched into more short ones to fit a facility.</p>
+            <div class="outline-step"><b>Week 1. Why banking beats cash.</b> The real cost of check cashers. Banks and credit unions. What FDIC and NCUA insurance mean.</div>
+            <div class="outline-step"><b>Week 2. Opening an account with a record or little ID.</b> Documents you need and how to get them. What ChexSystems is. Second-chance and Bank On certified accounts.</div>
+            <div class="outline-step"><b>Week 3. How credit really works.</b> Credit report versus credit score. What moves a score. How to get a free report.</div>
+            <div class="outline-step"><b>Week 4. Rebuilding credit step by step.</b> Secured cards and credit-builder tools. On-time payments. Avoiding credit repair scams.</div>
+            <div class="outline-step"><b>Week 5. Old debt, collections, and court debt.</b> The three kinds of debt. First steps for each. Free legal help for court fines, fees, restitution, and child support.</div>
+            <div class="outline-step"><b>Week 6. Your 30-day money setup plan.</b> Put it together: ID, account, one credit step. Avoid the common traps. Know who to call.</div>
+        </div>
+    </section>
+
+    <section>
+        <div class="inner">
+            <h2 class="sec-t">Facilitator notes</h2>
+            <p class="sec-sub">A few things that make this program work in a reentry setting.</p>
+            <ul class="learn">
+                <li>You do not need to be a finance expert. You need to be prepared, honest, and respectful.</li>
+                <li>Co-facilitation with someone who has lived reentry experience builds trust. This is our design choice, supported in general reentry practice, and not a measured outcome.</li>
+                <li>In class, keep things general. People should never write or say account numbers, Social Security numbers, PINs, balances, or case numbers.</li>
+                <li>When a question becomes personal, point to a vetted local partner. The class is education, not personal advice.</li>
+                <li>The full scripts, timings, and activities are in the facilitator guide above.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="dark-bg">
+        <div class="inner">
+            <h2 class="sec-t">Important boundaries</h2>
+            <div class="boundary">
+                <p style="color:var(--light);font-weight:600;">This program is education and preparation. It is not advice.</p>
+                <ul>
+                    <li>Educational content only.</li>
+                    <li>Not financial advice.</li>
+                    <li>Not legal advice.</li>
+                    <li>Not tax advice.</li>
+                    <li>No private financial information should be shared in class.</li>
+                    <li>We do not promise account approval, a credit score, or a specific drop in recidivism.</li>
+                    <li>For personal needs, we connect people to qualified local partners.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <h2>Bring Banking &amp; Credit Rebuilding to Your Program</h2>
+        <p>Schedule a free consultation to design a version that fits your facility, your people, and your schedule.</p>
+        <a href="https://meetings.hubspot.com/dalia-platt" class="btn-p">Schedule Free Consultation</a>
+        <div class="contact-row">
+            <span>&#x1F4E7; <a href="mailto:thesovereign.academy@proton.me">thesovereign.academy@proton.me</a></span>
+            <span>&#x1F310; <a href="https://thesovereign.academy">thesovereign.academy</a></span>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-links">
+            <a href="/institutional/correctional">Correctional &amp; Reentry</a>
+            <a href="/institutional/">All Institutional Programs</a>
+            <a href="https://financiallysovereign.academy">Financially Sovereign Academy</a>
+        </div>
+        <p>&copy; 2026 The Sovereign Academy &middot; Educational content only &middot; Not financial, legal, or tax advice</p>
+    </footer>
+</body>
+</html>
