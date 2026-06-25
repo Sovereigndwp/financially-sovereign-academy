@@ -254,7 +254,7 @@
     width: 48px;
     height: 48px;
     border-radius: var(--radius-lg);
-    background: rgba(16,185,129,0.15);
+    background: var(--color-elevated);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -432,7 +432,7 @@
 }
 
 .scorecard-header {
-    background: linear-gradient(135deg, rgba(16,185,129,0.2), rgba(16,185,129,0.1));
+    background: var(--color-elevated);
     padding: 1.5rem 2rem;
     border-bottom: 2px solid rgba(16,185,129,0.3);
 }
@@ -717,7 +717,7 @@
 
 /* ── Risk Profile Result ───────────────────────────────────── */
 .risk-profile-result {
-    background: linear-gradient(135deg, rgba(16,185,129,0.15), rgba(16,185,129,0.05));
+    background: var(--color-surface);
     border: 3px solid var(--fsa-green);
     border-radius: var(--radius-xl);
     padding: 2rem;
