@@ -20,10 +20,19 @@
 
         body {
             background: var(--fsa-bg-dark, #0a1f1a);
-            color: var(--fsa-text-primary, #e0e0e0);
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: var(--color-text, #e0e0e0);
+            font-family: var(--font-body, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif);
             line-height: 1.6;
             padding: 2rem 1rem;
+        }
+
+        /* Intentional FSA emerald fade for a key heading word (solid fallback avoids invisible text) */
+        .fade-accent {
+            background: var(--brand-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: var(--color-mint, #6ee7b7);
         }
 
         .container {
@@ -33,18 +42,21 @@
 
         .header {
             text-align: center;
-            margin-bottom: 4rem;
+            margin-bottom: 3rem;
         }
 
         .header h1 {
-            font-size: 3rem;
-            color: var(--fsa-green, #10b981);
-            margin-bottom: 1rem;
+            font-family: var(--font-serif, Georgia, serif);
+            font-weight: 700;
+            font-size: clamp(2rem, 1.4rem + 2.4vw, 2.75rem);
+            line-height: 1.1;
+            color: var(--color-text-strong, #ffffff);
+            margin-bottom: 0.85rem;
         }
 
         .header p {
-            font-size: 1.2rem;
-            color: var(--fsa-text-secondary, #9ca3af);
+            font-size: 1.05rem;
+            color: var(--color-muted, #9ca3af);
             max-width: 600px;
             margin: 0 auto;
         }
@@ -58,7 +70,7 @@
 
         .calc-card {
             background: var(--fsa-bg-card, #1a3a2e);
-            border: 2px solid var(--fsa-border-medium, #2a5a4e);
+            border: 1px solid var(--color-border, #2a2e35);
             border-radius: 1rem;
             padding: 2rem;
             transition: all 0.3s ease;
@@ -85,7 +97,7 @@
         .calc-card:hover {
             transform: translateY(-5px);
             border-color: var(--fsa-green, #10b981);
-            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+            box-shadow: var(--shadow-card, 0 14px 44px rgba(0, 0, 0, 0.55));
         }
 
         .calc-card:hover::before {
@@ -93,15 +105,16 @@
         }
 
         .calc-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+            font-size: 2.25rem;
+            margin-bottom: 0.85rem;
         }
 
         .calc-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--fsa-green, #10b981);
-            margin-bottom: 0.75rem;
+            font-family: var(--font-sans, system-ui, sans-serif);
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--color-text-strong, #ffffff);
+            margin-bottom: 0.6rem;
         }
 
         .calc-description {
@@ -134,8 +147,8 @@
         }
 
         .cta-section {
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(16, 185, 129, 0.05));
-            border: 2px solid var(--fsa-green, #10b981);
+            background: var(--color-surface, #16181c);
+            border: 1px solid var(--color-border, #2a2e35);
             border-radius: 1rem;
             padding: 3rem;
             text-align: center;
@@ -143,23 +156,26 @@
         }
 
         .cta-title {
-            font-size: 2rem;
+            font-family: var(--font-serif, Georgia, serif);
+            font-size: 1.6rem;
             font-weight: 700;
-            color: var(--fsa-green, #10b981);
+            color: var(--color-text-strong, #ffffff);
             margin-bottom: 1rem;
         }
 
         .cta-text {
-            font-size: 1.1rem;
-            color: var(--fsa-text-secondary, #9ca3af);
+            font-size: 1rem;
+            color: var(--color-muted, #9ca3af);
             margin-bottom: 2rem;
         }
 
         .btn {
             display: inline-block;
-            background: var(--fsa-green, #10b981);
-            color: white;
-            padding: 1rem 2rem;
+            background: linear-gradient(var(--color-surface), var(--color-surface)) padding-box,
+                        var(--brand-gradient) border-box;
+            border: 1.6px solid transparent;
+            color: var(--color-text, #f4f6f7);
+            padding: 0.9rem 2rem;
             border-radius: 0.5rem;
             font-weight: 600;
             text-decoration: none;
@@ -167,9 +183,8 @@
         }
 
         .btn:hover {
-            background: var(--fsa-green-light, #34d399);
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+            box-shadow: 0 4px 16px rgba(16, 185, 129, 0.25);
         }
 
         .back-link {
@@ -204,7 +219,7 @@
         <a href="../index.html" class="back-link">← Back to Home</a>
 
         <div class="header">
-            <h1>🧮 Financial Calculators</h1>
+            <h1>🧮 Financial <span class="fade-accent">Calculators</span></h1>
             <p>Interactive tools to plan your financial future with confidence</p>
         </div>
 
