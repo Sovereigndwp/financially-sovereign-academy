@@ -52,7 +52,7 @@
 
 /* ---- Popup card ---- */
 .fsa-glossary-popup {
-    background: linear-gradient(135deg, #0f2922, #1a3a2e);
+    background: var(--color-elevated, #1c1f24);
     border: 2px solid #10b981;
     border-radius: 1rem;
     max-width: 440px;
