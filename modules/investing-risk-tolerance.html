@@ -6,10 +6,21 @@
     <title>Risk Tolerance Discovery | Financially Sovereign Academy</title>
     <meta name="description" content="Discover your true investment risk tolerance through realistic behavioral scenarios. Get a personalized risk profile and allocation suggestion.">
     <link rel="stylesheet" href="../css/fsa-theme.css">
+    <link rel="stylesheet" href="../css/fsa-brand.css">
     <link rel="stylesheet" href="../css/interactive-components.css">
     <link rel="stylesheet" href="../css/investing-labs.css">
     <link rel="stylesheet" href="../css/fsa-glossary.css">
     <style>
+        :root {
+            /* PR4b bridge: neutralize old fsa-theme green background tokens to neutral FSA brand tokens (accents unchanged) */
+            --fsa-bg-dark: var(--color-bg);
+            --fsa-bg-secondary: var(--color-surface);
+            --fsa-bg-card: var(--color-elevated);
+            --fsa-bg-hover: var(--color-border);
+            --fsa-gradient-bg: var(--color-bg);
+            --fsa-gradient-card: var(--color-surface);
+        }
+
         main { max-width: 900px; margin: 0 auto; padding: 2rem 1rem; }
         .module-header { text-align: center; margin-bottom: 3rem; padding: 2rem; background: var(--fsa-gradient-card); border: 3px solid var(--fsa-green); border-radius: var(--radius-xl); }
         .module-header h1 { font-size: var(--font-size-4xl); color: var(--fsa-green); margin-bottom: 1rem; }

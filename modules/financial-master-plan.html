@@ -6,8 +6,19 @@
     <title>Module 10: Financial Master Plan | Financially Sovereign Academy</title>
     <meta name="description" content="Put it all together. Your complete roadmap to financial sovereignty.">
     <link rel="stylesheet" href="../css/fsa-theme.css">
+    <link rel="stylesheet" href="../css/fsa-brand.css">
     <link rel="stylesheet" href="../css/interactive-components.css">
     <style>
+        :root {
+            /* PR4b bridge: neutralize old fsa-theme green background tokens to neutral FSA brand tokens (accents unchanged) */
+            --fsa-bg-dark: var(--color-bg);
+            --fsa-bg-secondary: var(--color-surface);
+            --fsa-bg-card: var(--color-elevated);
+            --fsa-bg-hover: var(--color-border);
+            --fsa-gradient-bg: var(--color-bg);
+            --fsa-gradient-card: var(--color-surface);
+        }
+
         main {
             max-width: 900px;
             margin: 0 auto;
@@ -160,7 +171,7 @@
         }
 
         .cta-card {
-            background: linear-gradient(135deg, #1a3a2e 0%, #0f2922 100%);
+            background: linear-gradient(135deg, var(--color-elevated) 0%, var(--color-surface) 100%);
             border: 3px solid var(--fsa-green);
             border-radius: var(--radius-xl);
             padding: 3rem 2rem;
