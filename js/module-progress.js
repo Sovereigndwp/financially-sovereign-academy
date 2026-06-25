@@ -31,9 +31,9 @@
                 top: 0;
                 left: 0;
                 right: 0;
-                background: rgba(10, 31, 26, 0.95);
+                background: var(--color-surface);
                 backdrop-filter: blur(10px);
-                border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+                border-bottom: 1px solid var(--color-border);
                 z-index: 1000;
                 transform: translateY(-100%);
                 transition: transform 0.3s ease;
@@ -81,14 +81,14 @@
 
             .progress-fill-bar {
                 height: 100%;
-                background: linear-gradient(90deg, #10b981, #34d399);
+                background: var(--brand-gradient);
                 width: 0%;
                 transition: width 0.1s linear;
             }
 
             .time-remaining-badge {
-                background: rgba(16, 185, 129, 0.15);
-                color: #10b981;
+                background: var(--color-elevated);
+                color: var(--color-mint);
                 padding: 0.25rem 0.75rem;
                 border-radius: 12px;
                 font-size: 0.8rem;
