@@ -6,7 +6,18 @@
     <title>Financial Calculators | Financially Sovereign Academy</title>
     <meta name="description" content="Interactive financial calculators for compound growth, debt payoff, and financial freedom planning.">
     <link rel="stylesheet" href="../css/fsa-theme.css">
+    <link rel="stylesheet" href="../css/fsa-brand.css">
     <style>
+        :root {
+            /* Calc cleanup Group A1 bridge: neutralize old fsa-theme green background tokens to neutral FSA brand tokens (accents + semantic state tokens unchanged) */
+            --fsa-bg-dark: var(--color-bg);
+            --fsa-bg-secondary: var(--color-surface);
+            --fsa-bg-card: var(--color-elevated);
+            --fsa-bg-hover: var(--color-border);
+            --fsa-gradient-bg: var(--color-bg);
+            --fsa-gradient-card: var(--color-surface);
+        }
+
         body {
             background: var(--fsa-bg-dark, #0a1f1a);
             color: var(--fsa-text-primary, #e0e0e0);
