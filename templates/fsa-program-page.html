@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Program Name | Financially Sovereign Academy</title>
+<meta name="description" content="One-sentence description of this FSA program.">
+
+<!--
+  FSA PROGRAM STARTER TEMPLATE
+  Canonical brand: css/fsa-brand.css  (+ styleguide.html for the live reference)
+  Full rules: docs/fsa-program-style-contract.md
+
+  DO:    build from .fsa-* classes; backgrounds via var(--color-bg/surface/elevated);
+         borders via var(--color-border); emerald/mint for ACCENTS only;
+         primary buttons = .fsa-btn--primary (gradient-outline).
+  DON'T: use the legacy green theme stylesheet or its dark-green surface colors;
+         don't add a page-local brand token block; don't use green-tinted
+         background fills; don't copy styling from the old correctional Program 1
+         pages. See the style contract for the exact forbidden list.
+  Before finishing: run  scripts/fsa-style-check.sh <this file>
+-->
+
+<link rel="stylesheet" href="/css/fsa-brand.css">
+
+<!-- Page-local LAYOUT only (no colors, no :root brand tokens). Delete if unused. -->
+<style>
+  .pg-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; margin-top: 1rem; }
+</style>
+</head>
+<body>
+
+<a class="fsa-skip-link" href="#main">Skip to content</a>
+
+<!-- HERO -->
+<header class="fsa-section--deep fsa-section--glow">
+  <div class="fsa-wrap" style="padding-top:4rem;padding-bottom:2.5rem">
+    <div class="fsa-eyebrow">Financially Sovereign Academy</div>
+    <h1 class="fsa-h1">Program name, with one <em>accent</em> word.</h1>
+    <p class="fsa-lede">One or two sentences on who this program is for and what it delivers. Keep it concrete.</p>
+    <div style="margin-top:1.25rem">
+      <a class="fsa-btn fsa-btn--primary" href="#main">Primary action &rarr;</a>
+      <a class="fsa-btn fsa-btn--secondary" href="#">Secondary action</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- CONTENT SECTION: cards on neutral surfaces -->
+  <section class="fsa-section">
+    <div class="fsa-wrap">
+      <div class="fsa-section-tag">What's inside</div>
+      <h2 class="fsa-h2">A neutral section with <em>cards</em></h2>
+      <div class="pg-grid">
+        <div class="fsa-card fsa-card--hover">
+          <h3 class="fsa-h3">Card title</h3>
+          <p style="color:var(--color-muted);margin-top:0.4rem">Neutral elevated surface, neutral border. Emerald only on the optional badge.</p>
+          <span class="fsa-badge">Accent badge</span>
+        </div>
+        <div class="fsa-card fsa-card--hover">
+          <h3 class="fsa-h3">Card title</h3>
+          <p style="color:var(--color-muted);margin-top:0.4rem">Repeat as needed. Keep emerald/mint for accents only.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PANEL + LIST -->
+  <section class="fsa-section fsa-section--alt">
+    <div class="fsa-wrap">
+      <h2 class="fsa-h2">Outcomes</h2>
+      <ul class="fsa-list">
+        <li>Concrete outcome one.</li>
+        <li>Concrete outcome two.</li>
+        <li>Concrete outcome three.</li>
+      </ul>
+      <div class="fsa-panel" style="margin-top:1rem">
+        <span class="fsa-panel__label">Highlight</span>
+        Use <span class="fsa-panel__accent">an accent</span> sparingly for the number or phrase that matters.
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA band -->
+  <section class="fsa-section--deep">
+    <div class="fsa-wrap" style="text-align:center;padding-top:3rem;padding-bottom:3rem">
+      <h2 class="fsa-h2">Clear closing call to action</h2>
+      <p class="fsa-lede" style="margin:0.5rem auto 1.25rem">One line restating the value, then a single primary action.</p>
+      <a class="fsa-btn fsa-btn--primary" href="#">Take the next step &rarr;</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="fsa-legal-footer">
+  Created by Dalia &middot; financiallysovereign.academy &middot; Educational content only &middot; Not financial advice
+</footer>
+
+</body>
+</html>
