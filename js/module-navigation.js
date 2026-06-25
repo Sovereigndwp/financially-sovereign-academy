@@ -45,8 +45,8 @@ class ModuleNavigation {
         
         return `
             <div class="module-navigation" style="
-                background: var(--fsa-bg-secondary, #0f2922);
-                border: 2px solid var(--fsa-border-medium, #2a5a4e);
+                background: var(--color-surface);
+                border: 1px solid var(--color-border);
                 border-radius: 1rem;
                 padding: 2rem;
                 margin: 3rem 0;
@@ -64,13 +64,13 @@ class ModuleNavigation {
                             gap: 0.5rem;
                             padding: 0.75rem 1.5rem;
                             background: transparent;
-                            border: 2px solid var(--fsa-border-medium, #2a5a4e);
+                            border: 1px solid var(--color-border);
                             border-radius: 0.5rem;
                             color: var(--fsa-text-secondary, #9ca3af);
                             text-decoration: none;
                             font-weight: 600;
                             transition: all 0.2s;
-                        " onmouseover="this.style.borderColor='var(--fsa-green, #10b981)'; this.style.color='var(--fsa-green, #10b981)';" onmouseout="this.style.borderColor='var(--fsa-border-medium, #2a5a4e)'; this.style.color='var(--fsa-text-secondary, #9ca3af)';">
+                        " onmouseover="this.style.borderColor='var(--fsa-green, #10b981)'; this.style.color='var(--fsa-green, #10b981)';" onmouseout="this.style.borderColor='var(--color-border)'; this.style.color='var(--fsa-text-secondary, #9ca3af)';">
                             <span>←</span>
                             <div>
                                 <div style="font-size: 0.8rem; opacity: 0.7;">Previous</div>
@@ -85,14 +85,14 @@ class ModuleNavigation {
                     <div class="progress-bar" style="
                         width: 200px;
                         height: 8px;
-                        background: var(--fsa-bg-dark, #0a1f1a);
+                        background: var(--color-deepest);
                         border-radius: 4px;
                         overflow: hidden;
                         margin: 0 auto;
                     ">
                         <div style="
                             height: 100%;
-                            background: linear-gradient(90deg, var(--fsa-green, #10b981), var(--fsa-green-light, #34d399));
+                            background: var(--brand-gradient);
                             width: ${(currentId / this.modules.length) * 100}%;
                             transition: width 0.3s ease;
                         "></div>
@@ -106,14 +106,14 @@ class ModuleNavigation {
                             align-items: center;
                             gap: 0.5rem;
                             padding: 0.75rem 1.5rem;
-                            background: var(--fsa-green, #10b981);
-                            border: 2px solid var(--fsa-green, #10b981);
+                            background: linear-gradient(var(--color-bg), var(--color-bg)) padding-box, var(--brand-gradient) border-box;
+                            border: 1.5px solid transparent;
                             border-radius: 0.5rem;
-                            color: white;
+                            color: var(--color-text);
                             text-decoration: none;
                             font-weight: 600;
                             transition: all 0.2s;
-                        " onmouseover="this.style.background='var(--fsa-green-light, #34d399)'; this.style.transform='translateY(-2px)';" onmouseout="this.style.background='var(--fsa-green, #10b981)'; this.style.transform='translateY(0)';">
+                        " onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 0 18px rgba(16,185,129,0.18)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='';">
                             <div>
                                 <div style="font-size: 0.8rem; opacity: 0.9;">Next</div>
                                 <div style="font-size: 0.9rem;">${next.title}</div>
@@ -126,14 +126,14 @@ class ModuleNavigation {
                             align-items: center;
                             gap: 0.5rem;
                             padding: 0.75rem 1.5rem;
-                            background: linear-gradient(135deg, var(--fsa-green, #10b981), var(--fsa-green-light, #34d399));
-                            border: 2px solid var(--fsa-green, #10b981);
+                            background: linear-gradient(var(--color-bg), var(--color-bg)) padding-box, var(--brand-gradient) border-box;
+                            border: 1.5px solid transparent;
                             border-radius: 0.5rem;
-                            color: white;
+                            color: var(--color-text);
                             text-decoration: none;
                             font-weight: 600;
                             transition: all 0.2s;
-                        " onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(16, 185, 129, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='';">
+                        " onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 0 18px rgba(16,185,129,0.18)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='';">
                             <span>🎉</span>
                             <div>
                                 <div style="font-size: 0.8rem; opacity: 0.9;">Complete</div>
