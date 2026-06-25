@@ -316,7 +316,7 @@
 
 /* ===== DIALOGUE BOXES ===== */
 .dialogue {
-    background: rgba(16, 185, 129, 0.1);
+    background: var(--color-surface);
     border-left: 4px solid var(--fsa-green);
     padding: var(--space-lg);
     margin: var(--space-lg) 0;
