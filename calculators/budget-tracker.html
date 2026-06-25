@@ -6,6 +6,7 @@
     <title>Budget Tracker | Financially Sovereign Academy</title>
     <meta name="description" content="Track your income and expenses by category. Visualize spending patterns and identify opportunities to save.">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <link rel="stylesheet" href="../css/fsa-brand.css">
     <style>
         :root {
             --fsa-green: #10b981;
@@ -24,6 +25,24 @@
             --radius-xl: 1rem;
         }
 
+        /* Calc B bridge: neutralize old green background tokens to neutral FSA brand tokens (semantic + accent tokens unchanged) */
+        :root {
+            --fsa-bg-dark: var(--color-bg);
+            --fsa-bg-secondary: var(--color-surface);
+            --fsa-bg-card: var(--color-elevated);
+            --fsa-bg-hover: var(--color-border);
+            --fsa-gradient-bg: var(--color-bg);
+            --fsa-gradient-card: var(--color-surface);
+        }
+        /* Intentional FSA emerald fade for a key heading word (solid fallback avoids invisible text) */
+        .fade-accent {
+            background: var(--brand-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: var(--color-mint, #6ee7b7);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -31,7 +50,7 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: var(--font-body, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif);
             background: var(--fsa-bg-dark);
             color: var(--fsa-text-primary);
             line-height: 1.6;
@@ -49,8 +68,11 @@
         }
 
         .header h1 {
-            font-size: 2.5rem;
-            color: var(--fsa-green);
+            font-family: var(--font-serif, Georgia, serif);
+            font-weight: 700;
+            font-size: clamp(2rem, 1.4rem + 2.2vw, 2.6rem);
+            line-height: 1.1;
+            color: var(--color-text-strong, #ffffff);
             margin-bottom: 0.5rem;
         }
 
@@ -134,8 +156,10 @@
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, var(--fsa-green), var(--fsa-green-light));
-            color: white;
+            background: linear-gradient(var(--color-surface), var(--color-surface)) padding-box,
+                        var(--brand-gradient) border-box;
+            border: 1.6px solid transparent;
+            color: var(--color-text, #f4f6f7);
         }
 
         .btn-primary:hover {
@@ -191,7 +215,7 @@
         .stat-value {
             font-size: 2rem;
             font-weight: 700;
-            font-family: 'Courier New', monospace;
+            font-family: var(--font-mono, 'Courier New', monospace);
         }
 
         .stat-value.positive {
@@ -240,7 +264,7 @@
         .expense-amount {
             font-size: 1.25rem;
             font-weight: 700;
-            font-family: 'Courier New', monospace;
+            font-family: var(--font-mono, 'Courier New', monospace);
             color: var(--fsa-text-primary);
             margin-right: 1rem;
         }
@@ -325,7 +349,7 @@
         </a>
 
         <div class="header">
-            <h1>💰 Budget Tracker</h1>
+            <h1>💰 <span class="fade-accent">Budget</span> Tracker</h1>
             <p>Track income and expenses by category. See where your money goes.</p>
         </div>
 
