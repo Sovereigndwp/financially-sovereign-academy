@@ -6,8 +6,19 @@
     <title>Module 2: Emergency Funds & Saving | Financially Sovereign Academy</title>
     <meta name="description" content="Learn why emergency funds matter and how to build yours. Interactive calculator and real-world scenarios.">
     <link rel="stylesheet" href="../css/fsa-theme.css">
+    <link rel="stylesheet" href="../css/fsa-brand.css">
     <link rel="stylesheet" href="../css/interactive-components.css">
     <style>
+        :root {
+            /* PR4b bridge: neutralize old fsa-theme green background tokens to neutral FSA brand tokens (accents unchanged) */
+            --fsa-bg-dark: var(--color-bg);
+            --fsa-bg-secondary: var(--color-surface);
+            --fsa-bg-card: var(--color-elevated);
+            --fsa-bg-hover: var(--color-border);
+            --fsa-gradient-bg: var(--color-bg);
+            --fsa-gradient-card: var(--color-surface);
+        }
+
         main {
             max-width: 900px;
             margin: 0 auto;
