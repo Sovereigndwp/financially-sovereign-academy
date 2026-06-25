@@ -6,11 +6,30 @@
     <title>Financial Freedom Timeline | Financially Sovereign Academy</title>
     <meta name="description" content="Calculate when you can achieve financial freedom and retire early with interactive timeline visualization.">
     <link rel="stylesheet" href="../css/fsa-theme.css">
+    <link rel="stylesheet" href="../css/fsa-brand.css">
     <style>
+        :root {
+            /* Calc A2 bridge: neutralize old fsa-theme green background tokens to neutral FSA brand tokens (accents + semantic state tokens unchanged) */
+            --fsa-bg-dark: var(--color-bg);
+            --fsa-bg-secondary: var(--color-surface);
+            --fsa-bg-card: var(--color-elevated);
+            --fsa-bg-hover: var(--color-border);
+            --fsa-gradient-bg: var(--color-bg);
+            --fsa-gradient-card: var(--color-surface);
+        }
+        /* Intentional FSA emerald fade for a key heading word (solid fallback avoids invisible text) */
+        .fade-accent {
+            background: var(--brand-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: var(--color-mint, #6ee7b7);
+        }
+
         body {
             background: var(--fsa-bg-dark, #0a1f1a);
             color: var(--fsa-text-primary, #e0e0e0);
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: var(--font-body, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif);
             line-height: 1.6;
             padding: 2rem 1rem;
         }
@@ -26,8 +45,11 @@
         }
 
         .header h1 {
-            font-size: 2.5rem;
-            color: var(--fsa-green, #10b981);
+            font-family: var(--font-serif, Georgia, serif);
+            font-weight: 700;
+            font-size: clamp(2rem, 1.4rem + 2.2vw, 2.6rem);
+            line-height: 1.1;
+            color: var(--color-text-strong, #ffffff);
             margin-bottom: 0.5rem;
         }
 
@@ -112,7 +134,7 @@
             font-size: 1.2rem;
             font-weight: 700;
             color: var(--fsa-text-primary, #e0e0e0);
-            font-family: 'Courier New', monospace;
+            font-family: var(--font-mono, 'Courier New', monospace);
         }
 
         .results-panel {
@@ -123,7 +145,7 @@
         }
 
         .freedom-date-card {
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.05));
+            background: var(--color-surface, #16181c);
             border: 3px solid var(--fsa-green, #10b981);
             border-radius: 1rem;
             padding: 2.5rem;
@@ -144,7 +166,7 @@
             font-size: 3.5rem;
             font-weight: 900;
             color: var(--fsa-green, #10b981);
-            font-family: 'Courier New', monospace;
+            font-family: var(--font-mono, 'Courier New', monospace);
             margin: 0.5rem 0;
         }
 
@@ -180,7 +202,7 @@
             font-size: 1.8rem;
             font-weight: 800;
             color: var(--fsa-green, #10b981);
-            font-family: 'Courier New', monospace;
+            font-family: var(--font-mono, 'Courier New', monospace);
             margin-top: 0.5rem;
         }
 
@@ -262,7 +284,7 @@
         .projection-table td {
             padding: 0.75rem 1rem;
             border-bottom: 1px solid var(--fsa-border-subtle, #1a3a2e);
-            font-family: 'Courier New', monospace;
+            font-family: var(--font-mono, 'Courier New', monospace);
         }
 
         .projection-table tr:hover {
@@ -275,7 +297,7 @@
         }
 
         .info-box {
-            background: rgba(16, 185, 129, 0.1);
+            background: var(--color-elevated, #1c1f24);
             border-left: 4px solid var(--fsa-green, #10b981);
             border-radius: 0.5rem;
             padding: 1rem 1.5rem;
@@ -293,7 +315,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>🎯 Financial Freedom Timeline</h1>
+            <h1>🎯 Financial <span class="fade-accent">Freedom</span> Timeline</h1>
             <p>Calculate your path to financial independence and early retirement</p>
         </div>
 
