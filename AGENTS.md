@@ -40,7 +40,7 @@ python api/main.py                     # Run subscription API locally
 
 ### Fully Static Frontend
 
-All pages are standalone HTML files with inline or linked CSS/JS. No build step, no bundler, no transpilation. Pages load `css/fsa-theme.css` for theming and shared JS from `js/`.
+All pages are standalone HTML files with inline or linked CSS/JS. No build step, no bundler, no transpilation. **New pages link `css/fsa-brand.css`** (the canonical FSA brand system) and shared JS from `js/`. `css/fsa-theme.css` is **legacy/deprecated** (the old broad-green theme) — do not use it for new pages.
 
 ### Key Directories
 
@@ -55,7 +55,7 @@ All pages are standalone HTML files with inline or linked CSS/JS. No build step,
   - `sovereignty-ladder.js` — Gamified progression system
   - `investing-labs.js` — Interactive investing simulations
   - `analytics.js` — Privacy-first Plausible tracking
-- `css/` — Stylesheets; `fsa-theme.css` defines the green-themed design system. `interactive-components.css` for shared interactive element styles.
+- `css/` — Stylesheets. **`fsa-brand.css` is the canonical FSA brand system (neutral-dark surfaces, emerald/mint accents) — use it for all new pages.** `fsa-theme.css` is the legacy green theme (deprecated, do not link in new pages). `interactive-components.css` for shared interactive element styles.
 - `institutional/` — Pages for institutional audiences (cities, corporations, correctional, education, wealth advisors)
 - `articles/` — Long-form educational articles
 - `mcp/` — MCP builder (`fsa-builder.js`) and AI generation prompts for creating modules and calculators
@@ -67,13 +67,22 @@ All pages are standalone HTML files with inline or linked CSS/JS. No build step,
 
 All user state (progress, assessment results, preferences) is stored in **localStorage**. There is no backend user database.
 
-### Design Tokens
+### Design Tokens & Brand System (READ BEFORE BUILDING ANY PAGE)
 
-FSA uses a green/blue palette distinct from BSA's orange:
-- Primary green: `#10b981` (`--fsa-green`)
-- Dark background: `#0a1f1a` (`--fsa-bg-dark`)
-- Secondary dark: `#0f2922` (`--fsa-bg-secondary`)
-- Card background: `#1a3a2e` (`--fsa-bg-card`)
+**Canonical source of truth: `css/fsa-brand.css` + `styleguide.html`.** FSA uses a **neutral dark** surface system with **emerald/mint as accents only** — NOT a broad green theme.
+
+- Page background → `var(--color-bg)`; cards/panels → `var(--color-surface)` / `var(--color-elevated)`; borders → `var(--color-border)`.
+- Accents (emerald/mint) → `var(--color-brand)`, `var(--color-mint)`, `var(--brand-gradient)` — used only for accents, badges, focus, small highlights, one heading fade word, and semantic positive states.
+- Primary buttons → the gradient-outline treatment (`.fsa-btn--primary`), never hue-filled.
+- Semantic colors stay semantic: `var(--color-success)`, `var(--color-warning)`, `var(--color-error)`, positive/negative outputs, and meaningful chart colors.
+
+**Forbidden (the deprecated green theme):** do not link `fsa-theme.css`; do not use broad green surfaces `#0a1f1a` / `#0f2922` / `#1a3a2e` / `#234a3c`, green-tinted gradients, or large `rgba(16,185,129,…)` background fills; do not define a page-local `:root` brand system or redefine `--fsa-*` / `--color-*`; do not define `--fsa-green` or green `--fsa-bg-*`.
+
+**Mandatory for new FSA program / brand-sensitive pages:**
+1. Start from `templates/fsa-program-page.html`.
+2. Obey `docs/fsa-program-style-contract.md`.
+3. Do **not** copy styling from old Program 1 / `institutional/correctional/banking-credit/` pages (legacy green).
+4. Run `scripts/fsa-style-check.sh <path>` before finishing and resolve every hit.
 
 ### Relationship to BSA
 
