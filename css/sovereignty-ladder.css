@@ -128,7 +128,7 @@
 /* Rung Content Card */
 .sp-rung-body {
     flex: 1;
-    background: linear-gradient(135deg, rgba(26, 58, 46, 0.6) 0%, rgba(15, 41, 34, 0.4) 100%);
+    background: var(--color-elevated);
     border: 2px solid rgba(255, 255, 255, 0.06);
     border-radius: 1rem;
     padding: 1.5rem;
@@ -146,7 +146,7 @@
 
 .sp-rung.active .sp-rung-body {
     border-color: rgba(16, 185, 129, 0.3);
-    background: linear-gradient(135deg, rgba(26, 58, 46, 0.9) 0%, rgba(15, 41, 34, 0.7) 100%);
+    background: var(--color-surface);
 }
 
 .sp-rung.complete .sp-rung-body {
