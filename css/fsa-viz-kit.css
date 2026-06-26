@@ -108,6 +108,8 @@
 .fsa-split__seg--1 { background: var(--color-brand, #10B981); }
 .fsa-split__seg--2 { background: var(--color-mint, #6EE7B7); }
 .fsa-split__seg--3 { background: #A7F3D0; }
+.fsa-split__seg--n { background: var(--color-border-strong, #3A3F47); color: var(--color-text, #F4F6F7); }
+.fsa-split__seg + .fsa-split__seg { box-shadow: inset 1px 0 0 var(--color-bg, #0E1013); }
 
 /* ---- 4. Step-flow diagram (a sequence) ---- */
 .fsa-flow {

@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../css/fsa-theme.css">
     <link rel="stylesheet" href="../css/fsa-brand.css">
     <link rel="stylesheet" href="../css/interactive-components.css">
+    <link rel="stylesheet" href="../css/fsa-viz-kit.css">
     <style>
         :root {
             /* PR4b bridge: neutralize old fsa-theme green background tokens to neutral FSA brand tokens (accents unchanged) */
@@ -458,6 +459,17 @@
                 <p>Start with $1,000. Then build from there. Progress beats perfection.</p>
             </div>
 
+            <div class="fsa-figure">
+                <div class="fsa-figure__title">Build it in stages, not all at once</div>
+                <div class="fsa-flow" role="img" aria-label="Emergency fund stages: start with $1,000, then one month of expenses, then three months, then six months.">
+                    <div class="fsa-flow__step fsa-flow__step--key">Start: $1,000</div>
+                    <div class="fsa-flow__step">1 month of expenses</div>
+                    <div class="fsa-flow__step">3 months</div>
+                    <div class="fsa-flow__step">6 months</div>
+                </div>
+                <div class="fsa-figure__caption">Each milestone is a real safety upgrade, so progress beats perfection. <span class="fsa-figure__source">Amounts are examples; your target depends on your monthly expenses.</span></div>
+            </div>
+
             <div class="calculator">
                 <h3 style="font-size: var(--font-size-2xl); color: var(--fsa-green); margin-bottom: 1.5rem; text-align: center;">Emergency Fund Calculator</h3>
                 
@@ -528,6 +540,25 @@
                     <li>Crypto (even more volatile)</li>
                     <li>Under your mattress (loses value to inflation)</li>
                 </ul>
+            </div>
+
+            <div class="fsa-figure">
+                <div class="fsa-figure__title">Where to keep it: safe, separate, reachable</div>
+                <div class="fsa-flow" style="grid-template-columns:repeat(3,1fr)" role="img" aria-label="Good places: high-yield savings or money market. Avoid: checking, stocks, crypto, or cash at home.">
+                    <div class="fsa-flow__step fsa-flow__step--key" style="text-align:left">
+                        <strong style="color:var(--color-mint)">High-yield savings</strong>
+                        <div style="color:var(--color-muted);font-size:0.82rem;margin-top:0.3rem">Earns interest, FDIC insured, easy to transfer</div>
+                    </div>
+                    <div class="fsa-flow__step" style="text-align:left">
+                        <strong>Money market</strong>
+                        <div style="color:var(--color-muted);font-size:0.82rem;margin-top:0.3rem">Similar to HYSA, may allow checks</div>
+                    </div>
+                    <div class="fsa-flow__step" style="text-align:left">
+                        <strong>Avoid</strong>
+                        <div style="color:var(--color-muted);font-size:0.82rem;margin-top:0.3rem">Checking (too easy to spend), stocks or crypto (can drop), cash at home (inflation)</div>
+                    </div>
+                </div>
+                <div class="fsa-figure__caption">An emergency fund prioritizes safety and access over returns. <span class="fsa-figure__source">FDIC insurance: fdic.gov. Savings rates: FDIC National Rates baseline, early 2026.</span></div>
             </div>
 
             <div class="content-block">
