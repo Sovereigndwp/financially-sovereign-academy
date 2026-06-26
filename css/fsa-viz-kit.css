@@ -1,0 +1,137 @@
+/* ============================================================
+   FSA Visual Kit  (DRAFT — not linked anywhere yet)
+   Reusable, teaching-first visual components for course modules.
+   Dark neutral surfaces + emerald/mint accents. Mobile-first,
+   accessible, no decorative-only elements.
+
+   Link AFTER css/fsa-brand.css so the --color-* tokens resolve.
+   Every component is opt-in: adding this file changes nothing
+   until markup uses these classes.
+
+   Rules baked in:
+   - Each viz must teach one point (stat, comparison, part-to-whole,
+     trend, or sequence). No decoration.
+   - Never rely on color alone: states carry text/icons too.
+   - Any factual number rendered here must be sourced in the page.
+   ============================================================ */
+
+/* ---- Figure wrapper: gives every viz a caption + source slot ---- */
+.fsa-figure {
+    margin: 1.75rem 0;
+}
+.fsa-figure__title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--color-text, #F4F6F7);
+    margin-bottom: 0.5rem;
+}
+.fsa-figure__caption {
+    font-size: 0.85rem;
+    color: var(--color-muted, #A8B0B8);
+    margin-top: 0.5rem;
+    line-height: 1.5;
+}
+.fsa-figure__source {
+    font-size: 0.75rem;
+    color: var(--color-muted, #A8B0B8);
+    opacity: 0.85;
+}
+
+/* ---- 1. Stat callouts: anchor a key number ---- */
+.fsa-stat-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.75rem;
+    margin: 1.5rem 0;
+}
+.fsa-stat {
+    background: var(--color-elevated, #1C1F24);
+    border: 1px solid var(--color-border, #2A2E35);
+    border-radius: 10px;
+    padding: 0.9rem 1rem;
+}
+.fsa-stat__value {
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--color-mint, #6EE7B7);
+    line-height: 1.1;
+}
+.fsa-stat__unit {
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: var(--color-muted, #A8B0B8);
+    margin-left: 0.15rem;
+}
+.fsa-stat__label {
+    font-size: 0.82rem;
+    color: var(--color-muted, #A8B0B8);
+    margin-top: 0.2rem;
+}
+
+/* ---- 2. Comparison bars: this vs that ---- */
+.fsa-bars { margin: 1.25rem 0; display: flex; flex-direction: column; gap: 0.55rem; }
+.fsa-bar { display: flex; align-items: center; gap: 0.75rem; font-size: 0.9rem; }
+.fsa-bar__label { flex: 0 0 8.5rem; color: var(--color-text, #F4F6F7); }
+.fsa-bar__track {
+    flex: 1;
+    background: var(--color-surface, #16181C);
+    border-radius: 6px;
+    overflow: hidden;
+    height: 18px;
+}
+.fsa-bar__fill { height: 100%; border-radius: 6px; background: var(--color-brand, #10B981); }
+.fsa-bar__fill--muted { background: var(--color-border-strong, #3A3F47); }
+.fsa-bar__value { flex: 0 0 auto; font-family: var(--font-mono, monospace); color: var(--color-text, #F4F6F7); }
+@media (max-width: 560px) {
+    .fsa-bar { flex-wrap: wrap; }
+    .fsa-bar__label { flex-basis: 100%; }
+}
+
+/* ---- 3. Part-to-whole split bar (e.g. 50/30/20) ---- */
+.fsa-split {
+    display: flex;
+    height: 30px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 1.25rem 0;
+    font-size: 0.78rem;
+}
+.fsa-split__seg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ink-on-brand, #06231A);
+    white-space: nowrap;
+    padding: 0 0.4rem;
+}
+.fsa-split__seg--1 { background: var(--color-brand, #10B981); }
+.fsa-split__seg--2 { background: var(--color-mint, #6EE7B7); }
+.fsa-split__seg--3 { background: #A7F3D0; }
+
+/* ---- 4. Step-flow diagram (a sequence) ---- */
+.fsa-flow {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 0.6rem;
+    margin: 1.25rem 0;
+}
+.fsa-flow__step {
+    background: var(--color-elevated, #1C1F24);
+    border: 1px solid var(--color-border, #2A2E35);
+    border-radius: 10px;
+    padding: 0.8rem 0.6rem;
+    text-align: center;
+    font-size: 0.82rem;
+    color: var(--color-text, #F4F6F7);
+}
+.fsa-flow__step--key { border: 1.6px solid var(--color-brand, #10B981); }
+.fsa-flow__icon { color: var(--color-mint, #6EE7B7); font-size: 1.25rem; display: block; margin-bottom: 0.3rem; }
+
+/* ---- 5. Inline chart figure (Chart.js or hand-built SVG) ---- */
+.fsa-chart { position: relative; width: 100%; }
+.fsa-chart svg { display: block; width: 100%; height: auto; }
+
+@media (prefers-reduced-motion: reduce) {
+    .fsa-bar__fill, .fsa-split__seg { transition: none; }
+}
