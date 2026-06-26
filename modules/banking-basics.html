@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../css/fsa-theme.css">
     <link rel="stylesheet" href="../css/fsa-brand.css">
     <link rel="stylesheet" href="../css/interactive-components.css">
+    <link rel="stylesheet" href="../css/fsa-viz-kit.css">
     <style>
         :root {
             /* PR4b bridge: neutralize old fsa-theme green background tokens to neutral FSA brand tokens (accents unchanged) */
@@ -498,11 +499,21 @@
                     <li>Fees (overdraft, ATM, monthly maintenance, minimum balance)</li>
                     <li>Selling your data to marketers</li>
                 </ul>
-                <p>The average American pays <strong>$329/year</strong> in bank fees. That's $329 you could have saved or invested.</p>
+                <p>Bank fees can add up to hundreds of dollars a year. That's money you could have saved or invested.</p>
+            </div>
+
+            <div class="fsa-figure">
+                <div class="fsa-figure__title">How banks earn the spread</div>
+                <div class="fsa-bars" role="img" aria-label="On the money you deposit, the bank pays you about 0.5 percent but lends it out at about 7 percent.">
+                    <div class="fsa-bar"><span class="fsa-bar__label">They pay you</span><div class="fsa-bar__track"><div class="fsa-bar__fill fsa-bar__fill--muted" style="width:7%"></div></div><span class="fsa-bar__value">0.5%</span></div>
+                    <div class="fsa-bar"><span class="fsa-bar__label">They lend it out at</span><div class="fsa-bar__track"><div class="fsa-bar__fill" style="width:100%"></div></div><span class="fsa-bar__value">7%</span></div>
+                </div>
+                <div class="fsa-figure__caption">Banks earn the gap between what they pay you and what they charge borrowers. <span class="fsa-figure__source">Rates shown are illustrative examples, not specific offers.</span></div>
             </div>
 
             <div class="content-block">
                 <h3>Common Bank Fees</h3>
+                <p style="color: var(--fsa-text-secondary); font-size: var(--font-size-sm); margin-bottom: 1rem;">Typical ranges. Actual fees vary by bank and account.</p>
                 <div class="fee-list">
                     <div class="fee-item">
                         <span class="fee-name">Monthly maintenance fee</span>
@@ -575,8 +586,18 @@
                 <h3>Savings Account</h3>
                 <p><strong>Purpose:</strong> Storing money for later - emergency fund, short-term goals</p>
                 <p><strong>Interest:</strong> Standard banks pay avg <span data-fsa-live="avg-savings">0.47%</span>. High-yield savings accounts pay up to <span data-fsa-live="hysa">4.5%</span> right now.</p>
-                <p><strong>Access:</strong> Limited transactions (usually 6 withdrawals per month)</p>
+                <p><strong>Access:</strong> Some banks may still limit certain savings withdrawals by policy. The old federal six-per-month rule (Regulation D) was suspended in 2020, so it is no longer a universal limit.</p>
                 <p><strong>Best for:</strong> Money you don't plan to touch for 3+ months</p>
+            </div>
+
+            <div class="fsa-figure">
+                <div class="fsa-figure__title">What your cash earns, by account type</div>
+                <div class="fsa-bars" role="img" aria-label="Yearly interest: checking near zero percent, standard savings about 0.47 percent, high-yield savings about 4.5 percent.">
+                    <div class="fsa-bar"><span class="fsa-bar__label">Checking</span><div class="fsa-bar__track"><div class="fsa-bar__fill fsa-bar__fill--muted" style="width:1%"></div></div><span class="fsa-bar__value">~0%</span></div>
+                    <div class="fsa-bar"><span class="fsa-bar__label">Standard savings</span><div class="fsa-bar__track"><div class="fsa-bar__fill fsa-bar__fill--muted" style="width:10%"></div></div><span class="fsa-bar__value">~0.47%</span></div>
+                    <div class="fsa-bar"><span class="fsa-bar__label">High-yield savings</span><div class="fsa-bar__track"><div class="fsa-bar__fill" style="width:100%"></div></div><span class="fsa-bar__value">~4.5%</span></div>
+                </div>
+                <div class="fsa-figure__caption">Where you keep cash changes how much it earns. <span class="fsa-figure__source">Source: FDIC National Rates and Rate Caps; baseline as of early 2026. Actual rates vary by bank.</span></div>
             </div>
 
             <div class="highlight highlight-tip">
@@ -612,6 +633,21 @@
                     <li>Gold</li>
                 </ul>
                 <p>These can lose value. That's the trade-off for potential higher returns.</p>
+            </div>
+
+            <div class="fsa-figure">
+                <div class="fsa-figure__title">What FDIC protects</div>
+                <div class="fsa-flow" style="grid-template-columns:repeat(2,1fr)">
+                    <div class="fsa-flow__step fsa-flow__step--key" style="text-align:left">
+                        <strong style="color:var(--color-mint)">Protected, up to $250k</strong>
+                        <div style="color:var(--color-muted);font-size:0.82rem;margin-top:0.3rem">Checking, savings, CDs, money market deposit accounts</div>
+                    </div>
+                    <div class="fsa-flow__step" style="text-align:left">
+                        <strong>Not protected</strong>
+                        <div style="color:var(--color-muted);font-size:0.82rem;margin-top:0.3rem">Stocks, bonds, mutual funds (including money market funds), crypto, gold</div>
+                    </div>
+                </div>
+                <div class="fsa-figure__caption">FDIC covers bank deposits up to $250,000 per depositor, per bank. Investments sit outside that safety net. <span class="fsa-figure__source">Source: FDIC standard maximum deposit insurance, $250,000 per depositor, per insured bank, per ownership category (fdic.gov).</span></div>
             </div>
         </section>
 
