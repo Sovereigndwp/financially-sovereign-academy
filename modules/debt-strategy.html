@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../css/fsa-theme.css">
     <link rel="stylesheet" href="../css/fsa-brand.css">
     <link rel="stylesheet" href="../css/interactive-components.css">
+    <link rel="stylesheet" href="../css/fsa-viz-kit.css">
     <style>
         :root {
             /* PR4b bridge: neutralize old fsa-theme green background tokens to neutral FSA brand tokens (accents unchanged) */
@@ -510,6 +511,25 @@
                 <p><strong>Strategy:</strong> Make minimum payments, invest the rest</p>
                 <p><strong>Why:</strong> Inflation erodes this debt. 3% debt during 4% inflation means you're making money by having debt.</p>
                 <p><strong>Caveat:</strong> Only if you actually invest the difference. If you'll spend it, pay off the debt.</p>
+            </div>
+
+            <div class="fsa-figure">
+                <div class="fsa-figure__title">Pay off or invest? Use the interest rate</div>
+                <div class="fsa-flow" style="grid-template-columns:repeat(3,1fr)" role="img" aria-label="Under 5 percent: invest the difference. 5 to 10 percent: it depends, often split. Over 10 percent: pay off first.">
+                    <div class="fsa-flow__step" style="text-align:left">
+                        <strong style="color:var(--color-mint)">Under 5%</strong>
+                        <div style="color:var(--color-muted);font-size:0.82rem;margin-top:0.3rem">Invest the difference (low-rate mortgage, federal student loans)</div>
+                    </div>
+                    <div class="fsa-flow__step" style="text-align:left">
+                        <strong>5% to 10%</strong>
+                        <div style="color:var(--color-muted);font-size:0.82rem;margin-top:0.3rem">It depends. Many people split 50/50.</div>
+                    </div>
+                    <div class="fsa-flow__step fsa-flow__step--key" style="text-align:left">
+                        <strong>Over 10%</strong>
+                        <div style="color:var(--color-muted);font-size:0.82rem;margin-top:0.3rem">Pay off first (credit cards, payday loans)</div>
+                    </div>
+                </div>
+                <div class="fsa-figure__caption">Debt payoff is a guaranteed return; market gains are not. <span class="fsa-figure__source">Rules of thumb for guidance, not exact rules. Your situation may differ.</span></div>
             </div>
 
             <div class="content-block">
