@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../css/fsa-theme.css">
     <link rel="stylesheet" href="../css/fsa-brand.css">
     <link rel="stylesheet" href="../css/interactive-components.css">
+    <link rel="stylesheet" href="../css/fsa-viz-kit.css">
     <style>
         :root {
             /* PR4b bridge: neutralize old fsa-theme green background tokens to neutral FSA brand tokens (accents unchanged) */
@@ -403,6 +404,16 @@
                     <li>Next $12,850 ($47,151-$60,000) @ 22% = $2,827</li>
                 </ul>
                 <p><strong>Total federal tax: $8,253 (13.8% effective rate, not 22%)</strong></p>
+            </div>
+
+            <div class="fsa-figure">
+                <div class="fsa-figure__title">Your top bracket is not your real tax rate</div>
+                <div class="fsa-split" role="img" aria-label="On $60,000, about 19 percent of income is taxed at 10 percent, 59 percent at 12 percent, and only 22 percent of income at the 22 percent rate.">
+                    <div class="fsa-split__seg fsa-split__seg--3" style="width:19%">10%</div>
+                    <div class="fsa-split__seg fsa-split__seg--2" style="width:59%">12%</div>
+                    <div class="fsa-split__seg fsa-split__seg--1" style="width:22%">22%</div>
+                </div>
+                <div class="fsa-figure__caption">On $60,000, only the income above $47,150 is taxed at 22%. Your effective rate is about 13.8%, not 22%. <span class="fsa-figure__source">Example: single filer, 2024 federal brackets (IRS).</span></div>
             </div>
 
             <div class="highlight highlight-tip">
