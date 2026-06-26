@@ -442,3 +442,36 @@
         padding: var(--space-lg);
     }
 }
+
+/* ============================================================
+   Layout density utilities (desktop two-column, mobile single)
+   Additive, opt-in. Wrap related short cards in .fsa-two-up
+   (exactly 2 columns) or .fsa-card-grid (auto-fit) on desktop;
+   both collapse to a single column on phones.
+   ============================================================ */
+.fsa-two-up {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    align-items: start;
+    margin: 2rem 0;
+}
+.fsa-card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    align-items: start;
+    margin: 2rem 0;
+}
+/* Inside these grids, let the grid gap control spacing */
+.fsa-two-up > *,
+.fsa-card-grid > * {
+    margin-bottom: 0;
+    margin-top: 0;
+}
+@media (max-width: 768px) {
+    .fsa-two-up,
+    .fsa-card-grid {
+        grid-template-columns: 1fr;
+    }
+}
