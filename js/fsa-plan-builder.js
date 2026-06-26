@@ -21,12 +21,15 @@
 
     // Budget method descriptions — shown below the select when an option is chosen
     const BUDGET_METHOD_HELP = {
-        '50/30/20 Rule': '50% of take-home pay on needs (rent, food, insurance), 30% on wants (dining, fun), 20% on savings & debt. A simple starting framework.',
-        'Pay Yourself First': 'Auto-transfer 10-20% of each paycheck to savings BEFORE paying anything else. Budget with what\'s left.',
-        'Zero-Based Budget': 'Assign every dollar a job until income minus planned spending = $0. No unassigned money floating around.',
-        'Envelope Method': 'Put cash in labeled envelopes for each category. When an envelope is empty, you stop spending in that category.',
-        'Still deciding': 'Not sure yet? Start with the 50/30/20 Rule — it\'s the simplest. You can always switch later.'
+        '50/30/20 Rule': "A simple rule of thumb that splits income into three buckets: about 50% for needs, 30% for wants, and 20% for savings or debt payoff. Example: if you bring home $2,000, you might plan $1,000 for needs, $600 for wants, and $400 for savings or debt.",
+        'Pay Yourself First': "You set aside money for savings or debt payoff before spending on anything else. Example: when you get paid, you move $100 to savings first, then build the rest of your spending plan around what is left.",
+        'Zero-Based Budget': "You give every dollar a job before the month begins, so income minus planned spending equals zero. Zero does not mean you spend everything. Savings, debt payoff, and giving are also jobs. Example: if you bring home $2,000, you assign all $2,000 across rent, food, bills, savings, debt, and spending.",
+        'Envelope Method': "You divide money into categories, like groceries, gas, rent, and fun money. When a category runs out, you pause spending in that category or move money from another one. This can be done with cash envelopes or digital buckets. Example: if groceries has $300 for the month, each grocery trip comes out of that bucket.",
+        'Still deciding': "Not sure yet? You can choose a method now and change it later. The guide above explains each option so you can compare them."
     };
+
+    // Methods shown in the always-visible 'What does each method mean?' guide (Module 1 budget choice only)
+    const BUDGET_METHOD_GUIDE_ORDER = ['50/30/20 Rule', 'Pay Yourself First', 'Zero-Based Budget', 'Envelope Method'];
 
     // Module field definitions — what each module contributes to the plan
     const MODULE_FIELDS = {
@@ -208,8 +211,17 @@
                     const helpId = 'fsa-plan-help-' + moduleId + '-' + f.key;
                     const needsHelper = (f.key === 'budgetMethod');
                     const initialHelp = (needsHelper && val && BUDGET_METHOD_HELP[val]) ? BUDGET_METHOD_HELP[val] : '';
+                    const methodsGuide = needsHelper ? (
+                        '<details class="fsa-plan-methods-guide">'
+                        + '<summary>What does each budget method mean?</summary>'
+                        + '<dl>' + BUDGET_METHOD_GUIDE_ORDER.map(function (m) {
+                            return '<dt>' + m + '</dt><dd>' + BUDGET_METHOD_HELP[m] + '</dd>';
+                        }).join('') + '</dl>'
+                        + '</details>'
+                    ) : '';
                     return `<div class="fsa-plan-field">
                         <label class="fsa-plan-label">${f.label}</label>
+                        ${methodsGuide}
                         <select class="fsa-plan-input" data-plan-module="${moduleId}" data-plan-key="${f.key}"
                             ${needsHelper ? 'data-plan-helper="' + helpId + '"' : ''}>
                             <option value="">Choose...</option>${opts}
@@ -615,6 +627,43 @@
             padding: 2rem;
             text-align: center;
             color: rgba(255,255,255,0.5);
+        }
+        .fsa-plan-methods-guide {
+            margin: 0.1rem 0 0.2rem;
+            font-size: 0.82rem;
+        }
+        .fsa-plan-methods-guide > summary {
+            cursor: pointer;
+            color: #34d399;
+            font-weight: 600;
+            list-style: none;
+            padding: 0.35rem 0;
+        }
+        .fsa-plan-methods-guide > summary::-webkit-details-marker { display: none; }
+        .fsa-plan-methods-guide > summary::before {
+            content: '\\25B8';
+            display: inline-block;
+            margin-right: 0.4rem;
+            transition: transform 0.2s;
+        }
+        .fsa-plan-methods-guide[open] > summary::before { transform: rotate(90deg); }
+        .fsa-plan-methods-guide dl {
+            margin: 0.35rem 0 0;
+            padding: 0.6rem 0.85rem;
+            background: rgba(16,185,129,0.06);
+            border-left: 3px solid rgba(16,185,129,0.4);
+            border-radius: 0 6px 6px 0;
+        }
+        .fsa-plan-methods-guide dt {
+            font-weight: 700;
+            color: #fff;
+            margin-top: 0.55rem;
+        }
+        .fsa-plan-methods-guide dt:first-child { margin-top: 0; }
+        .fsa-plan-methods-guide dd {
+            margin: 0.15rem 0 0;
+            color: rgba(255,255,255,0.72);
+            line-height: 1.5;
         }
         .fsa-plan-method-help {
             font-size: 0.8rem;
