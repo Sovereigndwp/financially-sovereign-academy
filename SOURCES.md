@@ -55,6 +55,13 @@ This document lists the verifiable sources behind statistics, data points, and f
 **Source:** FDIC — National Rates and Rate Caps  
 **URL:** https://www.fdic.gov/bank/individual/financial/firates.html
 
+### Regulation D — Six-Per-Month Savings Withdrawal Limit (suspended 2020)
+**Claim:** The federal six-per-month limit on convenient transfers/withdrawals from savings deposits (Regulation D) was suspended in 2020 and is no longer a universal limit; individual banks may still limit withdrawals by their own policy.
+**Source:** Federal Reserve Board — interim final rule amending Regulation D (press release, April 24, 2020)
+**URL:** https://www.federalreserve.gov/newsevents/pressreleases/bcreg20200424a.htm
+**Supporting:** Federal Register, "Regulation D: Reserve Requirements of Depository Institutions" (Apr 28, 2020) — https://www.federalregister.gov/documents/2020/04/28/2020-09044/regulation-d-reserve-requirements-of-depository-institutions
+**Date checked:** 2026-06-27
+
 ---
 
 ## Inflation & Purchasing Power
