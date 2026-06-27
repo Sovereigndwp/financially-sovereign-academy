@@ -1,0 +1,13 @@
+{
+  "name": "fsa-eleventy-poc",
+  "private": true,
+  "version": "0.0.1",
+  "description": "Deployment-isolated Eleventy PoC for FSA module templatization (Stage 1B). NOT a production build. Lives outside the deploy root so Vercel never auto-detects it.",
+  "scripts": {
+    "build": "eleventy",
+    "verify": "eleventy && md5sum _site/modules/risk-insurance.html ../../modules/risk-insurance.html"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0"
+  }
+}

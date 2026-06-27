@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title | safe }}</title>
+    <meta name="description" content="{{ description | safe }}">
+    <link rel="stylesheet" href="../css/fsa-theme.css">
+    <link rel="stylesheet" href="../css/fsa-brand.css">
+    <link rel="stylesheet" href="../css/interactive-components.css">
+    <style>
+        :root {
+            /* PR4b bridge: neutralize old fsa-theme green background tokens to neutral FSA brand tokens (accents unchanged) */
+            --fsa-bg-dark: var(--color-bg);
+            --fsa-bg-secondary: var(--color-surface);
+            --fsa-bg-card: var(--color-elevated);
+            --fsa-bg-hover: var(--color-border);
+            --fsa-gradient-bg: var(--color-bg);
+            --fsa-gradient-card: var(--color-surface);
+        }
+
+        /* PR-M3: FSA brand typography */
+        body { font-family: var(--font-body); }
+        h1, h2 { font-family: var(--font-serif); }
+
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .module-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: var(--fsa-gradient-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-xl);
+        }
+
+        .module-header h1 {
+            font-size: var(--font-size-4xl);
+            color: var(--fsa-green);
+            margin-bottom: 1rem;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: var(--font-size-3xl);
+            color: var(--fsa-green);
+            margin-bottom: 1.5rem;
+            border-bottom: 3px solid var(--fsa-border-medium);
+            padding-bottom: 0.5rem;
+        }
+
+        .content-block {
+            background: var(--fsa-bg-card);
+            border: 2px solid var(--fsa-border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .content-block h3 {
+            color: var(--fsa-green-light);
+            font-size: var(--font-size-xl);
+            margin-bottom: 1rem;
+        }
+
+        .calculator {
+            background: var(--fsa-bg-secondary);
+            border: 2px solid var(--fsa-border-medium);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .result-display {
+            background: var(--fsa-bg-dark);
+            border: 2px solid var(--fsa-green);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .result-display.hidden {
+            display: none;
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--fsa-border-subtle);
+        }
+
+        .result-item.total {
+            border-top: 3px solid var(--fsa-green);
+            border-bottom: none;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            font-size: var(--font-size-xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--fsa-green);
+        }
+
+        .insurance-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .insurance-card {
+            background: var(--fsa-bg-dark);
+            border: 2px solid var(--fsa-border-medium);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            transition: all var(--transition-base);
+        }
+
+        .insurance-card.essential {
+            border-color: var(--fsa-green);
+        }
+
+        .insurance-card.optional {
+            border-color: var(--fsa-warning);
+        }
+
+        .insurance-card.avoid {
+            border-color: var(--fsa-error);
+        }
+
+        .insurance-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: var(--radius-md);
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-bold);
+            margin-bottom: 1rem;
+        }
+
+        .badge-essential {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--fsa-green);
+        }
+
+        .badge-optional {
+            background: rgba(251, 191, 36, 0.2);
+            color: var(--fsa-warning);
+        }
+
+        .badge-avoid {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--fsa-error);
+        }
+
+        .scenario-container {
+            background: var(--fsa-bg-card);
+            border: 2px solid var(--fsa-border-medium);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .scenario-choices {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .scenario-outcome {
+            background: var(--fsa-bg-dark);
+            border: 2px solid var(--fsa-green);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .scenario-outcome.hidden {
+            display: none;
+        }
+
+        .quiz {
+            background: var(--fsa-bg-card);
+            border: 2px solid var(--fsa-border-medium);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .quiz-question {
+            font-size: var(--font-size-xl);
+            color: var(--fsa-green);
+            margin-bottom: 1.5rem;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .quiz-option {
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid var(--fsa-border-medium);
+            border-radius: var(--radius-md);
+            padding: 1rem;
+            cursor: pointer;
+            transition: all var(--transition-base);
+            color: var(--fsa-text-primary);
+            text-align: left;
+        }
+
+        .quiz-option:hover {
+            border-color: var(--fsa-green);
+        }
+
+        .quiz-option.correct {
+            background: rgba(16, 185, 129, 0.2);
+            border-color: var(--fsa-success);
+        }
+
+        .quiz-option.incorrect {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: var(--fsa-error);
+        }
+
+        .quiz-feedback {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: var(--radius-md);
+        }
+
+        .quiz-feedback.correct {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--fsa-success);
+        }
+
+        .quiz-feedback.incorrect {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--fsa-error);
+        }
+
+        @media (max-width: 768px) {
+            .insurance-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="../css/lab-guide.css">
+    <script src="../js/fsa-live-data.js"></script>
+    <script src="../js/fsa-plan-builder.js"></script>
+</head>{{ content | safe }}
