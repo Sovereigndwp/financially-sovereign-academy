@@ -1,0 +1,998 @@
+---
+layout: layouts/passthrough.njk
+permalink: "modules/money-mindset-cash-flow.html"
+---
+{% raw %}<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 1: Money Mindset & Cash Flow | Financially Sovereign Academy</title>
+    <meta name="description" content="Master cash flow and develop a healthy money mindset. Interactive lessons on income, expenses, and the pay yourself first principle.">
+    <link rel="stylesheet" href="../css/fsa-theme.css">
+    <link rel="stylesheet" href="../css/fsa-brand.css">
+    <link rel="stylesheet" href="../css/interactive-components.css">
+    <style>
+        :root {
+            /* PR4b bridge: neutralize old fsa-theme green background tokens to neutral FSA brand tokens (accents unchanged) */
+            --fsa-bg-dark: var(--color-bg);
+            --fsa-bg-secondary: var(--color-surface);
+            --fsa-bg-card: var(--color-elevated);
+            --fsa-bg-hover: var(--color-border);
+            --fsa-gradient-bg: var(--color-bg);
+            --fsa-gradient-card: var(--color-surface);
+        }
+
+        /* PR-M3: FSA brand typography */
+        body { font-family: var(--font-body); }
+        h1, h2 { font-family: var(--font-serif); }
+
+        /* Module-specific styles */
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .module-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: var(--fsa-gradient-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-xl);
+        }
+
+        .module-header h1 {
+            font-size: var(--font-size-4xl);
+            color: var(--fsa-green);
+            margin-bottom: 1rem;
+        }
+
+        .module-header .subtitle {
+            font-size: var(--font-size-lg);
+            color: var(--fsa-text-secondary);
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: var(--font-size-3xl);
+            color: var(--fsa-green);
+            margin-bottom: 1.5rem;
+            border-bottom: 3px solid var(--fsa-border-medium);
+            padding-bottom: 0.5rem;
+        }
+
+        .content-block {
+            background: var(--fsa-bg-card);
+            border: 2px solid var(--fsa-border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .content-block h3 {
+            color: var(--fsa-green-light);
+            font-size: var(--font-size-xl);
+            margin-bottom: 1rem;
+        }
+
+        .content-block p {
+            margin-bottom: 1rem;
+            color: var(--fsa-text-primary);
+        }
+
+        .content-block ul, .content-block ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .content-block li {
+            margin-bottom: 0.5rem;
+            color: var(--fsa-text-primary);
+        }
+
+        /* Cash Flow Calculator */
+        .calculator {
+            background: var(--fsa-bg-secondary);
+            border: 2px solid var(--fsa-border-medium);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .calculator-title {
+            font-size: var(--font-size-2xl);
+            color: var(--fsa-green);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .flow-result {
+            text-align: center;
+            padding: 2rem;
+            background: var(--fsa-bg-dark);
+            border-radius: var(--radius-lg);
+            margin-top: 2rem;
+            min-height: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .flow-amount {
+            font-size: var(--font-size-5xl);
+            font-weight: var(--font-weight-extrabold);
+            font-family: var(--font-family-mono);
+            margin-bottom: 0.5rem;
+        }
+
+        .flow-amount.positive {
+            color: var(--fsa-success);
+        }
+
+        .flow-amount.negative {
+            color: var(--fsa-error);
+        }
+
+        .flow-amount.zero {
+            color: var(--fsa-warning);
+        }
+
+        .flow-label {
+            font-size: var(--font-size-base);
+            color: var(--fsa-text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .flow-description {
+            font-size: var(--font-size-lg);
+            color: var(--fsa-text-secondary);
+            margin-top: 1rem;
+            font-style: italic;
+        }
+
+        /* Scenario Styles */
+        .scenario {
+            background: var(--fsa-bg-card);
+            border: 2px solid var(--fsa-border-medium);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .scenario-text {
+            font-size: var(--font-size-lg);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: var(--fsa-text-primary);
+        }
+
+        .scenario-choices {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .scenario-choice {
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid var(--fsa-border-medium);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all var(--transition-base);
+            text-align: left;
+            color: var(--fsa-text-primary);
+        }
+
+        .scenario-choice:hover {
+            border-color: var(--fsa-green);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .scenario-choice .choice-title {
+            font-weight: var(--font-weight-bold);
+            font-size: var(--font-size-lg);
+            margin-bottom: 0.5rem;
+            color: var(--fsa-green);
+        }
+
+        .scenario-choice .choice-desc {
+            color: var(--fsa-text-secondary);
+            font-size: var(--font-size-sm);
+        }
+
+        .outcome {
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            margin-top: 2rem;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .outcome.success {
+            background: rgba(16, 185, 129, 0.1);
+            border: 2px solid var(--fsa-success);
+        }
+
+        .outcome.warning {
+            background: rgba(245, 158, 11, 0.1);
+            border: 2px solid var(--fsa-warning);
+        }
+
+        .outcome.failure {
+            background: rgba(239, 68, 68, 0.1);
+            border: 2px solid var(--fsa-error);
+        }
+
+        .outcome-title {
+            font-size: var(--font-size-2xl);
+            font-weight: var(--font-weight-bold);
+            margin-bottom: 1rem;
+        }
+
+        .outcome.success .outcome-title {
+            color: var(--fsa-success);
+        }
+
+        .outcome.warning .outcome-title {
+            color: var(--fsa-warning);
+        }
+
+        .outcome.failure .outcome-title {
+            color: var(--fsa-error);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* Quiz */
+        .quiz {
+            background: var(--fsa-bg-card);
+            border: 2px solid var(--fsa-border-medium);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .quiz-question {
+            font-size: var(--font-size-xl);
+            color: var(--fsa-green);
+            margin-bottom: 1.5rem;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .quiz-option {
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid var(--fsa-border-medium);
+            border-radius: var(--radius-md);
+            padding: 1rem;
+            cursor: pointer;
+            transition: all var(--transition-base);
+            color: var(--fsa-text-primary);
+            text-align: left;
+        }
+
+        .quiz-option:hover {
+            border-color: var(--fsa-green);
+        }
+
+        .quiz-option.correct {
+            background: rgba(16, 185, 129, 0.2);
+            border-color: var(--fsa-success);
+        }
+
+        .quiz-option.incorrect {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: var(--fsa-error);
+        }
+
+        .quiz-feedback {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: var(--radius-md);
+            font-size: var(--font-size-base);
+        }
+
+        .quiz-feedback.correct {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--fsa-success);
+        }
+
+        .quiz-feedback.incorrect {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--fsa-error);
+        }
+
+        /* Accordion Styles for Money Mindset Traps */
+        .mindset-accordion {
+            margin: 2rem 0;
+        }
+
+        .mindset-item {
+            border: 2px solid var(--fsa-border-medium);
+            border-radius: var(--radius-lg);
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .mindset-header {
+            background: var(--fsa-bg-card);
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all var(--transition-base);
+            width: 100%;
+            box-sizing: border-box;
+            border: 0;
+            font: inherit;
+            color: inherit;
+            text-align: left;
+        }
+
+        .mindset-header:focus-visible {
+            outline: 2px solid var(--fsa-green);
+            outline-offset: 2px;
+        }
+
+        .mindset-header:hover {
+            background: rgba(16, 185, 129, 0.05);
+        }
+
+        .mindset-header h3 {
+            color: var(--fsa-green);
+            margin: 0;
+            font-size: var(--font-size-lg);
+        }
+
+        .mindset-toggle {
+            font-size: 1.5rem;
+            color: var(--fsa-green);
+            transition: transform 0.3s ease;
+        }
+
+        .mindset-content {
+            padding: 1.5rem;
+            background: var(--fsa-bg-secondary);
+            border-top: 1px solid var(--fsa-border-subtle);
+            display: none;
+        }
+
+        .mindset-content.open {
+            display: block;
+        }
+
+        .mindset-item.open .mindset-toggle {
+            transform: rotate(180deg);
+        }
+
+        .mindset-content p {
+            margin-bottom: 1rem;
+            color: var(--fsa-text-primary);
+            line-height: 1.7;
+        }
+
+        .mindset-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Reflection Question Component */
+        .reflection-question {
+            margin: 2rem 0;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(59, 130, 246, 0.05));
+            border-left: 4px solid #3b82f6;
+            border-radius: 0.5rem;
+        }
+
+        .reflection-question .question-header {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #60a5fa;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .reflection-question .question-text {
+            font-size: 1.15rem;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 0.75rem;
+        }
+
+        .reflection-question .question-subtitle {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.65);
+            font-style: italic;
+        }
+
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            .mindset-header {
+                padding: 1rem;
+            }
+            
+            .mindset-header h3 {
+                font-size: var(--font-size-base);
+                line-height: 1.4;
+            }
+            
+            .mindset-content {
+                padding: 1rem;
+            }
+            
+            .reflection-question {
+                padding: 1.5rem;
+            }
+            
+            .reflection-question .question-header {
+                font-size: 1.25rem;
+            }
+            
+            .reflection-question .question-text {
+                font-size: 1rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="../css/lab-guide.css">
+    <script src="../js/fsa-live-data.js"></script>
+    <script src="../js/fsa-plan-builder.js"></script>
+</head>
+<body>
+    <!-- Calculators Link -->
+    <a href="../calculators/" style="position: fixed; top: 1.5rem; right: 1.5rem; color: var(--color-brand); text-decoration: none; z-index: 10000; font-weight: 600; display: flex; align-items: center; gap: 0.5rem; background: var(--color-surface); padding: 0.75rem 1.25rem; border-radius: 0.5rem; border: 1.5px solid rgba(16,185,129,0.35); backdrop-filter: blur(10px); transition: all 0.3s ease; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);" onmouseover="this.style.borderColor='#10b981'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 0 22px rgba(16,185,129,0.22)';" onmouseout="this.style.borderColor='rgba(16, 185, 129, 0.3)'; this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 6px rgba(0, 0, 0, 0.3)';">
+        <span style="font-size: 1.2rem;">🧮</span>
+        <span>Calculators</span>
+    </a>
+    <main>
+        <div class="module-header">
+            <h1>Module 1: Money Mindset & Cash Flow</h1>
+            <p class="subtitle">Master the fundamentals: understand where your money goes and develop healthy financial habits</p>
+        </div>
+
+        <div id="fsa-live-banner-1"></div>
+
+
+        <!-- Opening Reality Check -->
+        <div class="reflection-question">
+            <div class="question-header">
+                🗣️ The question nobody asks...
+            </div>
+            <p class="question-text">
+                <strong>Why does everyone say "just make a budget" but 80% of people who try one give up within 3 months?</strong>
+            </p>
+            <p class="question-subtitle">
+                The real issue isn't that budgeting is hard. It's that we're trying to solve an emotional problem with a mathematical solution.
+            </p>
+        </div>
+
+        <!-- Section 1: The Real Problem -->
+        <section class="section">
+            <h2 class="section-title">The Money Avoidance Trap</h2>
+            
+            <div class="content-block">
+                <h3>The Sunday Night Financial Anxiety</h3>
+                <p>You know the feeling. It's Sunday night. You're lying in bed, and suddenly your brain starts:</p>
+                <p><em>"I should really check my bank account... but what if it's worse than I think? Maybe tomorrow. Actually, I'll just be more careful this week..."</em></p>
+                <p>Sound familiar? You're not alone. <strong>Financial avoidance</strong> is how most people "manage" money. And it's killing their financial future.</p>
+            </div>
+
+            <div class="content-block">
+                <h3>Why Smart People Make Dumb Money Decisions</h3>
+                <p>You can calculate a tip in your head. You can plan complex projects at work. But when it comes to money, suddenly you "just can't deal with numbers."</p>
+                <p>This isn't about intelligence. It's about emotional overwhelm.</p>
+                <p>Money carries too much psychological weight: security, status, self-worth, family history, future fears. So we avoid dealing with it... which makes everything worse.</p>
+            </div>
+
+            <div class="highlight highlight-warning" style="background: rgba(239, 68, 68, 0.1); border: 2px solid #ef4444;">
+                <strong>⚠️ Reality Check:</strong> Every day you avoid understanding your money, you're making an unconscious choice to stay financially vulnerable.
+            </div>
+        </section>
+
+        <!-- Section 2: Cash Flow Fundamentals -->
+        <section class="section">
+            <h2 class="section-title">Cash Flow: The One Number That Matters</h2>
+            
+            <div class="content-block">
+                <h3>Cut Through the Complexity</h3>
+                <p>Forget budgeting apps with 47 categories. Forget complicated spreadsheets. Start with one simple question:</p>
+                <p><strong>"Am I making more than I'm spending this month?"</strong></p>
+                <p>That's cash flow. Money in minus money out. If it's positive, you're building financial strength. If it's negative, you're eroding it.</p>
+            </div>
+
+            <div class="content-block">
+                <h3>The Counterintuitive Truth About Income</h3>
+                <p>A surgeon making $400,000 who spends $420,000 is financially weaker than a teacher making $50,000 who spends $45,000.</p>
+                <p>The surgeon has a cash flow of -$20,000/year. The teacher has +$5,000/year.</p>
+                <p><strong>Income is what you earn. Cash flow is what you keep. Only one of these builds wealth.</strong></p>
+            </div>
+
+            <div class="highlight highlight-tip">
+                <strong>💡 The Liberation:</strong> Once you control your cash flow, income becomes a tool for faster progress, not a requirement for starting.
+            </div>
+        </section>
+
+        <!-- Section 2: Interactive Cash Flow Calculator -->
+        <section class="section">
+            <h2 class="section-title">Your Cash Flow Reality Check</h2>
+            
+            <div class="calculator">
+                <h3 class="calculator-title">Monthly Cash Flow Calculator</h3>
+                
+                <div class="form-group">
+                    <label class="form-label" for="monthly-income">Monthly Income (after taxes)</label>
+                    <input type="number" id="monthly-income" class="form-input" placeholder="e.g., 3000" min="0" step="100">
+                    <span class="form-help">Your take-home pay each month</span>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="fixed-expenses">Fixed Expenses (rent, car, insurance, etc.)</label>
+                    <input type="number" id="fixed-expenses" class="form-input" placeholder="e.g., 1800" min="0" step="100">
+                    <span class="form-help">Bills you pay every month no matter what</span>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="variable-expenses">Variable Expenses (food, gas, entertainment, etc.)</label>
+                    <input type="number" id="variable-expenses" class="form-input" placeholder="e.g., 800" min="0" step="100">
+                    <span class="form-help">Spending that changes month to month</span>
+                </div>
+
+                <button class="btn btn-primary" onclick="calculateCashFlow()">Calculate My Cash Flow</button>
+
+                <div class="flow-result hidden" id="flow-result">
+                    <div class="flow-label">Your Monthly Cash Flow</div>
+                    <div class="flow-amount" id="flow-amount">$0</div>
+                    <div class="flow-description" id="flow-description"></div>
+                </div>
+            </div>
+
+            <div class="highlight highlight-success" style="margin-top: 2rem; padding: 1.5rem; background: var(--color-elevated); border: 1px solid rgba(16,185,129,0.35);">
+                <strong style="font-size: 1.1rem; color: var(--fsa-green);">💰 Want to see your money grow long-term?</strong>
+                <p style="margin: 0.5rem 0;">Use our advanced <strong>Compound Growth Calculator</strong> to visualize how your positive cash flow turns into real wealth over 10, 20, or 30 years.</p>
+                <a href="../calculators/compound-growth-calculator.html?from=money-mindset-cash-flow" style="display: inline-block; margin-top: 0.75rem; padding: 0.75rem 1.5rem; background: linear-gradient(var(--color-bg), var(--color-bg)) padding-box, var(--brand-gradient) border-box; border: 1.5px solid transparent; color: var(--color-text); text-decoration: none; border-radius: var(--radius-md); font-weight: bold; transition: all 0.2s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 0 22px rgba(16,185,129,0.22)';" onmouseout="this.style.transform=''; this.style.boxShadow='';">Try Compound Growth Calculator →</a>
+            </div>
+        </section>
+
+        <!-- Reflection Question -->
+        <div class="reflection-question">
+            <div class="question-header">
+                🤔 Stop and think...
+            </div>
+            <p class="question-text">
+                <strong>Why does saving feel like running in place?</strong>
+            </p>
+            <p class="question-subtitle">
+                If you're saving but still feel broke, something deeper is happening. Let's explore why.
+            </p>
+        </div>
+
+        <!-- Section 3: Pay Yourself First -->
+        <section class="section">
+            <h2 class="section-title">The Pay Yourself First Principle</h2>
+            
+            <div class="content-block">
+                <h3>The Old Way (That Doesn't Work)</h3>
+                <ol>
+                    <li>Get paid</li>
+                    <li>Pay all your bills</li>
+                    <li>Spend on whatever</li>
+                    <li>Save whatever's left</li>
+                </ol>
+                <p><strong>Problem:</strong> There's never anything left.</p>
+            </div>
+
+            <div class="content-block">
+                <h3>The New Way (That Actually Works)</h3>
+                <ol>
+                    <li>Get paid</li>
+                    <li><strong>Immediately save 10-20% (pay yourself first)</strong></li>
+                    <li>Pay your bills with what's left</li>
+                    <li>Spend on whatever</li>
+                </ol>
+                <p><strong>Why it works:</strong> You never see the money. You can't miss what you never had.</p>
+            </div>
+
+            <div class="dialogue">
+                <span class="dialogue-speaker">Common Objection:</span>
+                "But I can't afford to save 20%! I'm barely making it now!"
+            </div>
+
+            <div class="content-block">
+                <h3>The Truth About "I Can't Afford It"</h3>
+                <p>Start with 5%. Or 3%. Or even 1%.</p>
+                <p>The amount doesn't matter at first. The <strong>habit</strong> matters.</p>
+                <p>Once you automate saving 5%, you'll adjust. Your brain stops seeing that money as available. Then you can increase it.</p>
+                <p>Someone who saves 5% of $40,000 ($2,000/year) for 30 years beats someone who saves 0% of $100,000 every single time.</p>
+            </div>
+        </section>
+
+        <!-- Section 4: Interactive Scenario -->
+        <section class="section">
+            <h2 class="section-title">Scenario: The Paycheck-to-Paycheck Trap</h2>
+            
+            <div class="scenario" id="scenario-container">
+                <div id="scenario-intro">
+                    <p class="scenario-text">
+                        <strong>Meet Alex.</strong> 26 years old, makes $3,500/month after taxes. Fixed expenses: $1,900 (rent, car, insurance, phone, utilities). Variable spending: $1,400 (food, gas, entertainment).
+                    </p>
+                    <p class="scenario-text">
+                        <strong>Cash flow: +$200/month.</strong> But Alex never saves it. The money just disappears on coffee, Amazon orders, surprise expenses.
+                    </p>
+                    <div class="dialogue">
+                        <span class="dialogue-speaker">Alex (frustrated):</span>
+                        "I make decent money. Why do I feel broke all the time?"
+                    </div>
+
+                    <!-- Reflection Question -->
+                    <div style="margin: 2rem 0; padding: 2rem; background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(59, 130, 246, 0.05)); border-left: 4px solid #3b82f6; border-radius: 0.5rem;">
+                        <div style="font-size: 1.5rem; font-weight: 700; color: #60a5fa; margin-bottom: 1rem; font-style: italic;">
+                            🤔 Alex's real question...
+                        </div>
+                        <p style="font-size: 1.15rem; line-height: 1.7; color: rgba(255, 255, 255, 0.9); margin-bottom: 0.75rem;">
+                            <strong>Why does my cost of living keep rising even when I'm doing everything right?</strong>
+                        </p>
+                        <p style="font-size: 0.95rem; color: rgba(255, 255, 255, 0.65); font-style: italic;">
+                            This is the question most people never ask. But it's the most important one. We'll come back to this.
+                        </p>
+                    </div>
+
+                    <!-- Interactive Lab: Sinking Fund Builder -->
+                    <div style="margin: 2rem 0; padding: 1.5rem; background: rgba(16, 185, 129, 0.1); border: 2px solid #10b981; border-radius: 0.75rem;">
+                        <p style="color: #10b981; font-weight: 600; margin-bottom: 0.75rem;">💡 Before we continue: "Random stuff" like car repairs isn't random if you plan for it...</p>
+                        <button
+                            onclick="PopupLabs.open('sinking-fund-builder')"
+                            style="background: linear-gradient(var(--color-bg), var(--color-bg)) padding-box, var(--brand-gradient) border-box; color: var(--color-text); border: 1.5px solid transparent; padding: 0.875rem 1.5rem; border-radius: 0.5rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease; width: 100%;"
+                            onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 0 22px rgba(16,185,129,0.22)';"
+                            onmouseout="this.style.transform=''; this.style.boxShadow='';">
+                            Try the Sinking Fund Builder →
+                        </button>
+                        <p style="font-size: 0.85rem; color: #9ca3af; margin-top: 0.5rem; margin-bottom: 0;">2-minute interactive lab showing how to prevent "surprise" expenses</p>
+                    </div>
+
+                    <p class="scenario-text">
+                        <strong>What should Alex do?</strong>
+                    </p>
+
+                    <div class="scenario-choices">
+                        <button class="scenario-choice" onclick="showOutcome('choice1')">
+                            <div class="choice-title">Option 1: Ask for a raise</div>
+                            <div class="choice-desc">"I just need to make more money. Then I'll start saving."</div>
+                        </button>
+                        <button class="scenario-choice" onclick="showOutcome('choice2')">
+                            <div class="choice-title">Option 2: Track every expense for one month</div>
+                            <div class="choice-desc">"I need to see where my money actually goes."</div>
+                        </button>
+                        <button class="scenario-choice" onclick="showOutcome('choice3')">
+                            <div class="choice-title">Option 3: Automate $200 to savings immediately on payday</div>
+                            <div class="choice-desc">"Pay myself first. Force myself to live on $3,300."</div>
+                        </button>
+                    </div>
+                </div>
+
+                <div id="outcome1" class="outcome warning hidden">
+                    <h3 class="outcome-title">Outcome: The Income Trap</h3>
+                    <p>Six months later, Alex gets a $500/month raise and immediately upgrades lifestyle: nicer apartment (+$200), better car (+$150).</p>
+                    <p><strong>Result:</strong> Income $4,000, spending $3,650. Still saves $0.</p>
+                    <div class="dialogue">
+                        <span class="dialogue-speaker">What Happened:</span>
+                        "Lifestyle inflation" — spending rises with income. You make more but you're still broke.
+                    </div>
+                    <p><strong>Lesson:</strong> More money doesn't fix bad habits. It makes them more expensive.</p>
+                    <button class="btn btn-secondary" onclick="resetScenario()">Try Again</button>
+                </div>
+
+                <div id="outcome2" class="outcome warning hidden">
+                    <h3 class="outcome-title">Outcome: Analysis Paralysis</h3>
+                    <p>Alex tracks expenses for a month and finds $300 in "waste" (subscriptions, takeout). Promises to cut it out.</p>
+                    <p><strong>Two months later:</strong> All old habits are back.</p>
+                    <div class="dialogue">
+                        <span class="dialogue-speaker">What Happened:</span>
+                        Awareness isn't enough. Willpower runs out. You need systems, not discipline.
+                    </div>
+                    <p><strong>Lesson:</strong> Knowing your problem doesn't fix it. You need to automate the solution.</p>
+                    <button class="btn btn-secondary" onclick="resetScenario()">Try Again</button>
+                </div>
+
+                <div id="outcome3" class="outcome success hidden">
+                    <h3 class="outcome-title">Outcome: The Savings Snowball</h3>
+                    <p>Alex sets up automatic transfer: $200 goes to a separate savings account the day the paycheck hits.</p>
+                    <p><strong>Month 1:</strong> Tight, but doable. One less dinner out.</p>
+                    <p><strong>Month 3:</strong> Alex doesn't even notice the $200 missing anymore.</p>
+                    <p><strong>Month 6:</strong> $1,200 saved. First emergency fund ever.</p>
+                    <p><strong>Month 12:</strong> $2,400 saved. Car breaks down. Alex pays cash instead of credit card.</p>
+                    <div class="dialogue">
+                        <span class="dialogue-speaker">Alex (realizing):</span>
+                        "Oh. This is what financial peace feels like."
+                    </div>
+                    <div class="dialogue" style="margin-top: 1rem;">
+                        <span class="dialogue-speaker">What Alex Avoided:</span>
+                        By automating savings first, Alex avoided "lifestyle inflation" — the trap where your spending automatically rises to match any income increases. When Alex eventually gets a raise, that extra money can go straight to savings instead of disappearing into upgraded expenses.
+                    </div>
+                    <p><strong>Lesson:</strong> Automate your savings before you can spend it. Your future self will thank you.</p>
+                    <button class="btn btn-secondary" onclick="resetScenario()">Try Again</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Common Money Mindset Traps -->
+        <section class="section">
+            <h2 class="section-title">Common Money Mindset Traps</h2>
+            
+            <p style="margin-bottom: 2rem; color: var(--fsa-text-secondary); font-size: var(--font-size-lg);">Click each trap to see why it happens and how to escape it:</p>
+            
+            <div class="mindset-accordion">
+                <div class="mindset-item">
+                    <button type="button" class="mindset-header" onclick="toggleMindsetItem(this)" aria-expanded="false" aria-controls="mindset-panel-1">
+                        <h3>1. "I'll start saving when I make more money"</h3>
+                        <span class="mindset-toggle" aria-hidden="true">▼</span>
+                    </button>
+                    <div class="mindset-content" id="mindset-panel-1">
+                        <p><strong>The trap:</strong> You won't. This is called <strong>lifestyle inflation</strong> — your spending automatically increases to match your income. Make $50k, spend $49k. Make $100k, spend $99k. You make more but you're still broke.</p>
+                        <p><strong>The fix:</strong> Start saving a tiny percentage NOW. Build the habit while the stakes are low. When you do get a raise, save the entire increase before your lifestyle adapts to it.</p>
+                    </div>
+                </div>
+
+                <div class="mindset-item">
+                    <button type="button" class="mindset-header" onclick="toggleMindsetItem(this)" aria-expanded="false" aria-controls="mindset-panel-2">
+                        <h3>2. "I deserve to treat myself"</h3>
+                        <span class="mindset-toggle" aria-hidden="true">▼</span>
+                    </button>
+                    <div class="mindset-content" id="mindset-panel-2">
+                        <p><strong>The trap:</strong> Every day becomes a treat day. You're not treating yourself—you're sabotaging your future.</p>
+                        <p><strong>The fix:</strong> Treat yourself AFTER you hit your savings goal for the month. Make it a reward, not a right.</p>
+                    </div>
+                </div>
+
+                <div class="mindset-item">
+                    <button type="button" class="mindset-header" onclick="toggleMindsetItem(this)" aria-expanded="false" aria-controls="mindset-panel-3">
+                        <h3>3. "It's only $5"</h3>
+                        <span class="mindset-toggle" aria-hidden="true">▼</span>
+                    </button>
+                    <div class="mindset-content" id="mindset-panel-3">
+                        <p><strong>The trap:</strong> $5/day is $1,825/year. That's a vacation. That's 3 months of groceries.</p>
+                        <p><strong>The fix:</strong> Calculate the annual cost. $5 doesn't sound like much. $1,825 sounds like real money (because it is).</p>
+                    </div>
+                </div>
+
+                <div class="mindset-item">
+                    <button type="button" class="mindset-header" onclick="toggleMindsetItem(this)" aria-expanded="false" aria-controls="mindset-panel-4">
+                        <h3>4. "I'm bad with money"</h3>
+                        <span class="mindset-toggle" aria-hidden="true">▼</span>
+                    </button>
+                    <div class="mindset-content" id="mindset-panel-4">
+                        <p><strong>The trap:</strong> This becomes a self-fulfilling prophecy. You believe it, so you don't even try.</p>
+                        <p><strong>The fix:</strong> You're not bad with money. You just haven't learned the skills yet. Nobody is born knowing this stuff.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: Comprehension Quiz -->
+        <section class="section">
+            <h2 class="section-title">Check Your Understanding</h2>
+            
+            <div class="quiz">
+                <div class="quiz-question">1. What is cash flow?</div>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="checkAnswer(1, 'a', false)">A) How much money you make</button>
+                    <button class="quiz-option" onclick="checkAnswer(1, 'b', true)">B) Money coming in minus money going out</button>
+                    <button class="quiz-option" onclick="checkAnswer(1, 'c', false)">C) Your total bank account balance</button>
+                </div>
+                <div class="quiz-feedback hidden" id="feedback-1"></div>
+            </div>
+
+            <div class="quiz">
+                <div class="quiz-question">2. What does "pay yourself first" mean?</div>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="checkAnswer(2, 'a', false)">A) Buy things you want before paying bills</button>
+                    <button class="quiz-option" onclick="checkAnswer(2, 'b', true)">B) Automatically save a percentage before spending on anything else</button>
+                    <button class="quiz-option" onclick="checkAnswer(2, 'c', false)">C) Pay yourself a salary from your savings</button>
+                </div>
+                <div class="quiz-feedback hidden" id="feedback-2"></div>
+            </div>
+
+            <div class="quiz">
+                <div class="quiz-question">3. Why does lifestyle inflation happen?</div>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="checkAnswer(3, 'a', true)">A) Your spending increases to match your income</button>
+                    <button class="quiz-option" onclick="checkAnswer(3, 'b', false)">B) Inflation makes everything more expensive</button>
+                    <button class="quiz-option" onclick="checkAnswer(3, 'c', false)">C) You need more things as you get older</button>
+                </div>
+                <div class="quiz-feedback hidden" id="feedback-3"></div>
+            </div>
+        </section>
+
+        <!-- Module Complete -->
+                <!-- My Financial Plan Widget -->
+        <div id="fsa-plan-widget-1"></div>
+
+        <section class="section">
+            <div class="card" style="text-align: center;">
+                <h3 class="card-title">Module 1 Complete! 🎉</h3>
+                <p class="card-description">You've mastered the fundamentals of cash flow and money mindset.</p>
+                <div style="margin-top: 2rem;">
+                    <button class="btn btn-primary" onclick="completeModule()">Mark Complete & Continue to Module 2</button>
+                </div>
+            </div>
+        </section>
+    
+<div class="lab-card" data-lab="budget-tracker" onclick="openLab('budget-tracker')" style="cursor:pointer;">
+    <div class="lab-card-icon">💰</div>
+    <div class="lab-card-body">
+        <div class="lab-card-eyebrow">✅ Try It Now</div>
+        <h3>Build Your First Monthly Budget</h3>
+        <p>Track income and expenses in a real spreadsheet. Find your monthly surplus — the foundation of every financial goal.</p>
+        <div class="lab-card-meta"><span class="lab-card-tag live">live</span><span class="lab-card-tag">Google Sheets</span><span class="lab-card-tag">20 min</span><span class="lab-card-tag">beginner</span></div>
+
+    </div>
+    <div class="lab-card-arrow">→</div>
+</div>
+</main>
+
+    <script src="../js/module-progress.js"></script>
+    <script src="../js/progress-manager.js"></script>
+    <script src="../js/module-navigation.js"></script>
+    <script>
+        // Initialize progress manager
+                // FSA Live Data & Plan Builder
+        FSALiveData.onReady(function() {
+            FSALiveData.renderBanner('fsa-live-banner-1', ['inflation', 'avg-savings', 'hysa']);
+        });
+        FSAPlan.renderWidget('fsa-plan-widget-1', 1);
+
+        const progressManager = new FSAProgressManager();
+        progressManager.init();
+        progressManager.setModuleVisited(1);
+
+        // Cash Flow Calculator
+        function calculateCashFlow() {
+            const income = parseFloat(document.getElementById('monthly-income').value) || 0;
+            const fixed = parseFloat(document.getElementById('fixed-expenses').value) || 0;
+            const variable = parseFloat(document.getElementById('variable-expenses').value) || 0;
+
+            if (income === 0) {
+                alert('Please enter your monthly income');
+                return;
+            }
+
+            const cashFlow = income - fixed - variable;
+            const resultDiv = document.getElementById('flow-result');
+            const amountDiv = document.getElementById('flow-amount');
+            const descDiv = document.getElementById('flow-description');
+
+            resultDiv.classList.remove('hidden');
+            amountDiv.textContent = cashFlow >= 0 ? `+$${Math.abs(cashFlow).toFixed(0)}` : `-$${Math.abs(cashFlow).toFixed(0)}`;
+
+            // Remove previous classes
+            amountDiv.classList.remove('positive', 'negative', 'zero');
+
+            if (cashFlow > 0) {
+                amountDiv.classList.add('positive');
+                const percentage = ((cashFlow / income) * 100).toFixed(1);
+                descDiv.textContent = `Great! You're saving ${percentage}% of your income. Keep it up!`;
+            } else if (cashFlow < 0) {
+                amountDiv.classList.add('negative');
+                descDiv.textContent = `Warning: You're spending more than you earn. Time to make changes.`;
+            } else {
+                amountDiv.classList.add('zero');
+                descDiv.textContent = `You're breaking even. No savings, but not going backwards either.`;
+            }
+        }
+
+        // Scenario Functions
+        function showOutcome(choice) {
+            document.getElementById('scenario-intro').classList.add('hidden');
+            document.getElementById('outcome1').classList.add('hidden');
+            document.getElementById('outcome2').classList.add('hidden');
+            document.getElementById('outcome3').classList.add('hidden');
+
+            if (choice === 'choice1') {
+                document.getElementById('outcome1').classList.remove('hidden');
+            } else if (choice === 'choice2') {
+                document.getElementById('outcome2').classList.remove('hidden');
+            } else if (choice === 'choice3') {
+                document.getElementById('outcome3').classList.remove('hidden');
+            }
+        }
+
+        function resetScenario() {
+            document.getElementById('scenario-intro').classList.remove('hidden');
+            document.getElementById('outcome1').classList.add('hidden');
+            document.getElementById('outcome2').classList.add('hidden');
+            document.getElementById('outcome3').classList.add('hidden');
+        }
+
+        // Quiz Functions
+        function checkAnswer(questionNum, answer, isCorrect) {
+            const feedback = document.getElementById(`feedback-${questionNum}`);
+            const options = feedback.parentElement.querySelectorAll('.quiz-option');
+            
+            // Disable all options
+            options.forEach(opt => opt.style.pointerEvents = 'none');
+            
+            // Mark selected option
+            event.target.classList.add(isCorrect ? 'correct' : 'incorrect');
+            
+            // Show feedback
+            feedback.classList.remove('hidden');
+            feedback.classList.add(isCorrect ? 'correct' : 'incorrect');
+            
+            if (isCorrect) {
+                feedback.textContent = '✓ Correct! Great job.';
+            } else {
+                feedback.textContent = '✗ Not quite. Review the content above and try again.';
+                // Re-enable after 2 seconds
+                setTimeout(() => {
+                    options.forEach(opt => opt.style.pointerEvents = 'auto');
+                    event.target.classList.remove('incorrect');
+                    feedback.classList.add('hidden');
+                }, 2000);
+            }
+        }
+
+        // Complete Module
+        function completeModule() {
+            progressManager.setModuleComplete(1, { timeSpent: 0, score: 100 });
+            alert('Module 1 complete! Great work. Continue to Module 2: Emergency Funds & Saving.');
+            window.location.href = 'emergency-funds-saving.html';
+        }
+
+        // Accordion Toggle for Money Mindset Traps
+        function toggleMindsetItem(header) {
+            const item = header.parentElement;
+            const content = item.querySelector('.mindset-content');
+            const toggle = item.querySelector('.mindset-toggle');
+            
+            // Close all other items
+            const allItems = document.querySelectorAll('.mindset-item');
+            allItems.forEach(otherItem => {
+                if (otherItem !== item) {
+                    otherItem.classList.remove('open');
+                    otherItem.querySelector('.mindset-content').classList.remove('open');
+                    otherItem.querySelector('.mindset-header').setAttribute('aria-expanded', 'false');
+                }
+            });
+            
+            // Toggle current item
+            item.classList.toggle('open');
+            content.classList.toggle('open');
+            header.setAttribute('aria-expanded', item.classList.contains('open') ? 'true' : 'false');
+        }
+    </script>
+
+    <!-- Interactive Popup Lab System -->
+    <script src="../js/popups.js"></script>
+<script src="../js/lab-guide.js"></script>
+
+<!-- FSA Analytics & Email Capture -->
+<div style="margin: 2rem auto; max-width: 900px; padding: 0 1.5rem;">
+    <div data-fsa-email-capture="page-footer" data-title="📬 Level Up Your Finances" data-subtitle="Weekly money tips and financial strategies. No spam, ever."></div>
+</div>
+<script src="/js/analytics.js" defer></script>
+<script src="/js/email-capture.js" defer></script>
+
+<footer class="legal-footer">© 2026 The Sovereign Academy · Educational content only · Not financial advice</footer>
+
+    <script src="../js/fsa-keep-feedback-visible.js"></script>
+</body>
+</html>
+{% endraw %}
