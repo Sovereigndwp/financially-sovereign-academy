@@ -5,7 +5,3 @@ __pycache__/
 *.pyc
 academy.db
 .DS_Store
-
-# Eleventy (Stage-1 PoC) — build output and deps are not committed
-node_modules/
-_site/
