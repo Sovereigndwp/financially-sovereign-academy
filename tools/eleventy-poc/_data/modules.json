@@ -1,0 +1,15 @@
+{
+  "note": "Canonical FSA module catalog for Phase 3 templatization. Stage 1B commits this as the prepared source of truth; it is NOT yet wired to the PoC page (risk-insurance uses front matter). Stage 1C will drive titles/links from here via computed data.",
+  "order": [
+    { "n": 1,  "slug": "money-mindset-cash-flow",  "title": "Money Mindset & Cash Flow",        "completionId": 1 },
+    { "n": 2,  "slug": "emergency-funds-saving",    "title": "Emergency Funds & Saving",          "completionId": 2 },
+    { "n": 3,  "slug": "banking-basics",            "title": "Banking Without Getting Robbed",    "completionId": 3 },
+    { "n": 4,  "slug": "credit-scores",             "title": "Credit Scores Decoded",             "completionId": 4 },
+    { "n": 5,  "slug": "debt-strategy",             "title": "Debt Strategy",                     "completionId": 5 },
+    { "n": 6,  "slug": "taxes-paychecks",           "title": "Taxes & Paychecks Demystified",     "completionId": 6 },
+    { "n": 7,  "slug": "investing-fundamentals",    "title": "Investing for Humans",              "completionId": 7 },
+    { "n": 8,  "slug": "risk-insurance",            "title": "Protect What You've Built",         "completionId": 8 },
+    { "n": 9,  "slug": "consumer-protection",       "title": "Don't Get Scammed",                 "completionId": 9 },
+    { "n": 10, "slug": "financial-master-plan",     "title": "Your Financial Master Plan",        "completionId": 10 }
+  ]
+}
