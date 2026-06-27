@@ -1,0 +1,28 @@
+{%- set m = null -%}
+{%- for x in modules -%}{%- if x.slug == page.fileSlug -%}{%- set m = x -%}{%- endif -%}{%- endfor -%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ m.title | safe }}</title>
+    <meta name="description" content="{{ m.description | safe }}">
+    <link rel="stylesheet" href="../css/fsa-theme.css">
+    <link rel="stylesheet" href="../css/fsa-brand.css">
+    <link rel="stylesheet" href="../css/interactive-components.css">{{ content | safe }}{% raw %}    <!-- Interactive Popup Lab System -->
+    <script src="../js/popups.js"></script>
+<script src="../js/lab-guide.js"></script>
+
+<!-- FSA Analytics & Email Capture -->
+<div style="margin: 2rem auto; max-width: 900px; padding: 0 1.5rem;">
+    <div data-fsa-email-capture="page-footer" data-title="📬 Level Up Your Finances" data-subtitle="Weekly money tips and financial strategies. No spam, ever."></div>
+</div>
+<script src="/js/analytics.js" defer></script>
+<script src="/js/email-capture.js" defer></script>
+
+<footer class="legal-footer">© 2026 The Sovereign Academy · Educational content only · Not financial advice</footer>
+
+    <script src="../js/fsa-keep-feedback-visible.js"></script>
+</body>
+</html>
+{% endraw %}
