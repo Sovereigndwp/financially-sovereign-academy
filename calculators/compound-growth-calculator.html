@@ -345,6 +345,84 @@
             font-size: 0.9rem;
         }
 
+        /* Bar figure title, legend, and helper note (labels only) */
+        .figure-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--fsa-text, #e5e7eb);
+            margin: 1.25rem 0 0.4rem;
+        }
+        .bar-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 0.5rem 0 0.25rem;
+            font-size: 0.85rem;
+            color: var(--fsa-text-secondary, #9ca3af);
+        }
+        .bar-legend__item { display: inline-flex; align-items: center; gap: 0.4rem; }
+        .bar-legend__swatch {
+            width: 0.85rem; height: 0.85rem; border-radius: 3px; flex: 0 0 auto;
+        }
+        .bar-legend__swatch--in { background: linear-gradient(90deg, var(--fsa-green, #10b981), var(--fsa-green-light, #34d399)); }
+        .bar-legend__swatch--growth { background: var(--fsa-bg-dark, #0a1f1a); border: 1px solid var(--fsa-green, #10b981); }
+        .bar-help {
+            font-size: 0.85rem;
+            color: var(--fsa-text-dim, #6b7280);
+            line-height: 1.5;
+            margin: 0.5rem 0 0;
+        }
+
+        /* Accessible inline info tooltip (labels/help only, no logic) */
+        .info-dot {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 1.05rem;
+            height: 1.05rem;
+            margin-left: 0.35rem;
+            padding: 0;
+            font-size: 0.72rem;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 1;
+            color: var(--fsa-green, #10b981);
+            background: transparent;
+            border: 1px solid var(--fsa-green, #10b981);
+            border-radius: 50%;
+            cursor: help;
+            vertical-align: middle;
+        }
+        .info-dot__tip {
+            position: absolute;
+            bottom: calc(100% + 0.5rem);
+            left: 50%;
+            transform: translateX(-50%);
+            width: max-content;
+            max-width: 16rem;
+            padding: 0.55rem 0.7rem;
+            font-size: 0.8rem;
+            font-weight: 400;
+            line-height: 1.45;
+            color: var(--fsa-text, #e5e7eb);
+            text-align: left;
+            background: var(--fsa-bg-card, #0f2922);
+            border: 1px solid var(--fsa-green, #10b981);
+            border-radius: 0.5rem;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.15s ease;
+            z-index: 20;
+        }
+        .info-dot:hover .info-dot__tip,
+        .info-dot:focus .info-dot__tip,
+        .info-dot:focus-visible .info-dot__tip { opacity: 1; visibility: visible; }
+        @media (max-width: 560px) {
+            .info-dot__tip { left: 0; transform: none; max-width: 12rem; }
+        }
+
         /* Modal Styles */
         .modal-overlay {
             display: none;
@@ -589,7 +667,7 @@
                 <h2 style="color: var(--fsa-green, #10b981); margin-bottom: 1.5rem;">Your Investment Plan</h2>
                 
                 <div class="form-group">
-                    <label class="form-label">Starting Amount</label>
+                    <label class="form-label">Starting Amount<button type="button" class="info-dot" aria-label="Starting amount: money invested at the beginning, so it has the most time to grow.">i<span class="info-dot__tip" role="tooltip">Money invested at the beginning. Because it has the most time to grow, it usually becomes a large share of your final value.</span></button></label>
                     <div class="slider-container">
                         <input type="range" id="principal" class="slider" 
                                min="0" max="100000" step="1000" value="10000">
@@ -601,7 +679,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label"><span class="fsa-term" data-term="monthly-contribution">Monthly Contribution</span></label>
+                    <label class="form-label"><span class="fsa-term" data-term="monthly-contribution">Monthly Contribution</span><button type="button" class="info-dot" aria-label="Monthly contribution: money added over time, so later deposits have less time to grow.">i<span class="info-dot__tip" role="tooltip">Money you add over time. Later deposits have less time to grow, so adding more here usually raises how much of your final value is money you put in.</span></button></label>
                     <div class="slider-container">
                         <input type="range" id="monthly" class="slider" 
                                min="0" max="2000" step="50" value="500">
@@ -613,7 +691,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">Annual Contribution Increase</label>
+                    <label class="form-label">Annual Contribution Increase<button type="button" class="info-dot" aria-label="Annual contribution increase: raises future deposits, but those later deposits have less time to compound.">i<span class="info-dot__tip" role="tooltip">Raises your future deposits (for example, as you get raises). Those later deposits have less time to compound, so this usually raises the share that is money you put in.</span></button></label>
                     <div class="slider-container">
                         <input type="range" id="contrib-increase" class="slider" 
                                min="0" max="15" step="0.5" value="3">
@@ -626,7 +704,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label"><span class="fsa-term" data-term="annual-return">Annual Return Rate</span></label>
+                    <label class="form-label"><span class="fsa-term" data-term="annual-return">Annual Return Rate</span><button type="button" class="info-dot" aria-label="Annual return rate: the assumed yearly growth rate. A higher rate usually makes growth a larger share of the final value.">i<span class="info-dot__tip" role="tooltip">The assumed yearly growth rate. A higher rate usually makes growth a larger share of your final value, so the money-you-put-in share gets smaller. This is an assumption, not a guarantee.</span></button></label>
                     <div class="slider-container">
                         <input type="range" id="rate" class="slider" 
                                min="0" max="20" step="0.5" value="7">
@@ -638,7 +716,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">Time Period (Years)</label>
+                    <label class="form-label">Time Period (Years)<button type="button" class="info-dot" aria-label="Time period: more years gives compounding more time to work.">i<span class="info-dot__tip" role="tooltip">How long the money stays invested. More years gives compounding more time to work, so growth usually becomes a larger share of your final value.</span></button></label>
                     <div class="slider-container">
                         <input type="range" id="years" class="slider" 
                                min="1" max="40" step="1" value="20">
@@ -685,19 +763,25 @@
                     <div class="result-description" id="real-value-text"></div>
                 </div>
 
+                <div class="figure-title">Where your final value comes from</div>
                 <div class="visual-bar">
                     <div class="visual-bar-fill" id="contribution-bar" style="width: 0%">
                         <span id="contribution-percent"></span>
                     </div>
                 </div>
+                <div class="bar-legend">
+                    <span class="bar-legend__item"><span class="bar-legend__swatch bar-legend__swatch--in"></span>Money you put in</span>
+                    <span class="bar-legend__item"><span class="bar-legend__swatch bar-legend__swatch--growth"></span>Growth earned</span>
+                </div>
+                <p class="bar-help">This shows the share of your final result that came from your own contributions versus growth over time. It is not how much money you invested in dollars (that is shown below).</p>
 
                 <ul class="breakdown-list">
                     <li class="breakdown-item">
-                        <span class="breakdown-label">Total Invested</span>
+                        <span class="breakdown-label">Money you put in (total invested)<button type="button" class="info-dot" aria-label="Money you put in: the amount you personally contributed.">i<span class="info-dot__tip" role="tooltip">The amount you personally contributed: your starting amount plus all your deposits.</span></button></span>
                         <span class="breakdown-value" id="total-invested">$0</span>
                     </li>
                     <li class="breakdown-item">
-                        <span class="breakdown-label">Interest Earned</span>
+                        <span class="breakdown-label">Growth earned<button type="button" class="info-dot" aria-label="Growth earned: the amount produced by compounding, not extra money you directly added.">i<span class="info-dot__tip" role="tooltip">The amount produced by compounding over time. This is not extra money you added yourself; it is what your invested money earned.</span></button></span>
                         <span class="breakdown-value" id="interest-earned">$0</span>
                     </li>
                     <li class="breakdown-item">
@@ -833,7 +917,7 @@
             // Visual bar (use nominal ratio — contributions vs growth)
             const contributionPercent = totalInvested > 0 ? (totalInvested / futureValue) * 100 : 0;
             document.getElementById('contribution-bar').style.width = contributionPercent + '%';
-            document.getElementById('contribution-percent').textContent = Math.round(contributionPercent) + '% invested';
+            document.getElementById('contribution-percent').textContent = Math.round(contributionPercent) + '% you put in';
 
             // Milestones — use the displayed (potentially deflated) value
             updateMilestones(displayFV);
