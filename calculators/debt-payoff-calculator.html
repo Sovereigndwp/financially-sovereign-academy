@@ -368,9 +368,9 @@
                 <label style="color: var(--fsa-text-secondary, #9ca3af); font-weight: 600; margin-bottom: 0.5rem; display: block;">
                     How much can you pay toward debt each month?
                 </label>
-                <input type="range" id="monthly-payment" class="slider" min="100" max="3000" step="50" value="500">
+                <input type="range" id="monthly-payment" class="slider" min="100" max="3000" step="50" value="750">
                 <div class="slider-display">
-                    <span class="slider-value" id="payment-display">$500</span>
+                    <span class="slider-value" id="payment-display">$750</span>
                     <span style="color: var(--fsa-text-dim, #6b7280);">$100 - $3,000</span>
                 </div>
             </div>
@@ -461,10 +461,11 @@
         let debtCounter = 0;
         let debts = [];
 
-        // Initialize with 2 example debts
+        // Initialize with 3 example debts (high-rate vs small-balance differ, so avalanche and snowball diverge)
         function init() {
-            addDebt('Credit Card', 5000, 19.99, 150);
-            addDebt('Car Loan', 12000, 6.5, 350);
+            addDebt('Credit Card', 6000, 22.9, 150);
+            addDebt('Car Loan', 9000, 5.9, 250);
+            addDebt('Phone Financing', 1000, 0, 40);
             
             document.getElementById('monthly-payment').addEventListener('input', function(e) {
                 document.getElementById('payment-display').textContent = '$' + parseInt(e.target.value).toLocaleString();
