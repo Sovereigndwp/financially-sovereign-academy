@@ -78,8 +78,8 @@ class PopupLabSystem {
 
             .popup-container {
                 position: relative;
-                background: linear-gradient(135deg, #1a3a2e 0%, #0f2922 100%);
-                border: 3px solid #10b981;
+                background: var(--color-elevated, #1C1F24);
+                border: 1px solid var(--color-border, #2A2E35);
                 border-radius: 1rem;
                 max-width: 800px;
                 width: 90%;
