@@ -177,6 +177,39 @@ The following claims appear in content but currently lack primary source citatio
 
 ---
 
+## Live-Data Baselines (js/fsa-live-data.js)
+
+_Static fallback figures in the FSA Live Data Service. Last refreshed June 2026. These are not real-time; the banner now reads "baseline data, last checked June 2026" rather than the current date._
+
+> Follow-up (separate PR): reconcile inflation methodology. This baseline uses **BLS CPI-U, all items, 12-month change** (4.2%, May 2026). The live World Bank fetch path uses a **different annual/lagged CPI definition**, so the fallback and the live value can silently disagree. Pick one learner-facing definition.
+
+| Value | Figure | As of | Source |
+|---|---|---|---|
+| Fed funds rate (upper bound) | 3.75% (range 3.50-3.75%) | Jun 17 2026 | Federal Reserve FOMC statement |
+| 30-yr fixed mortgage | 6.49% | Jun 25 2026 | Freddie Mac PMMS |
+| 10-yr Treasury yield | 4.38% | Jun 26 2026 | FRED DGS10 (US Treasury) |
+| Top HYSA APY | 4.15% | Jun 2026 | Bankrate best high-yield savings |
+| Avg savings APY | 0.38% | Jun 2026 | FDIC National Rates |
+| US inflation (CPI-U, all items, 12-month change) | 4.2% | May 2026 | BLS CPI |
+| Avg credit card APR (accounts assessed interest) | 21.52% | Q1 2026 | Federal Reserve G.19 |
+| Avg auto loan (60-mo new) | 6.92% | Jun 24 2026 | Bankrate |
+| Federal student loan (undergrad Direct, 2026-27) | 6.52% | eff Jul 1 2026 | Federal Student Aid (US Dept of Education) |
+| S&P 500 long-run avg | ~10% | long-run (illustrative) | ~50-yr nominal historical average |
+
+URLs:
+- Fed FOMC statement (Jun 17 2026): https://www.federalreserve.gov/newsevents/pressreleases/monetary20260617a.htm
+- FRED Fed funds upper limit (DFEDTARU): https://fred.stlouisfed.org/series/DFEDTARU
+- Freddie Mac PMMS: https://www.freddiemac.com/pmms
+- FRED 10-yr Treasury (DGS10): https://fred.stlouisfed.org/series/DGS10
+- Bankrate best HYSA: https://www.bankrate.com/banking/savings/best-high-yield-interests-savings-accounts/
+- FDIC National Rates and Rate Caps: https://www.fdic.gov/national-rates-and-rate-caps
+- BLS CPI: https://www.bls.gov/cpi/
+- Federal Reserve G.19 Consumer Credit: https://www.federalreserve.gov/releases/g19/current/
+- Bankrate auto loan rates: https://www.bankrate.com/loans/auto-loans/rates/
+- Federal Student Aid (2026-27 Direct Loan rates): https://fsapartners.ed.gov/knowledge-center/library/electronic-announcements/2026-06-04/interest-rates-federal-direct-loans-first-disbursed-between-july-1-2026-and-june-30-2027
+
+---
+
 ## Adding New Sources
 
 When adding a new stat or data point to any FSA page:
