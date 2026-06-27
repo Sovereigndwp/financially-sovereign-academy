@@ -442,3 +442,12 @@
         padding: var(--space-lg);
     }
 }
+
+/* Keyboard focus affordance for quiz/scenario choices (WCAG 2.4.7).
+   Scoped to these two components; higher specificity than the global
+   *:focus-visible rules, so the focus ring is consistent and on-brand. */
+.scenario-choice:focus-visible,
+.quiz-option:focus-visible {
+    outline: 3px solid var(--fsa-green);
+    outline-offset: 2px;
+}
