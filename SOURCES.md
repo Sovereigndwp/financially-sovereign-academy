@@ -112,17 +112,27 @@ This document lists the verifiable sources behind statistics, data points, and f
 
 ## Taxes
 
-### Federal Tax Brackets
-**Source:** IRS — Tax Rates and Inflation Adjustments  
-**URL:** https://www.irs.gov/newsroom/irs-provides-tax-inflation-adjustments-for-tax-year-2025
+_Tax-year 2026 figures (single filer). Refreshed 2026-06-27._
 
-### Standard Deduction
-**Source:** IRS — Publication 501 (Dependents, Standard Deduction, and Filing Information)  
-**URL:** https://www.irs.gov/publications/p501
+### Federal Tax Brackets (Tax Year 2026, single filer)
+**Claim:** 10% up to $12,400; 12% $12,400 to $50,400; 22% $50,400 to $105,700; 24% $105,700 to $201,775; 32% $201,775 to $256,225; 35% $256,225 to $640,600; 37% over $640,600.
+**Source:** IRS — Tax inflation adjustments for tax year 2026 (IR-2025-103)
+**URL:** https://www.irs.gov/newsroom/irs-releases-tax-inflation-adjustments-for-tax-year-2026-including-amendments-from-the-one-big-beautiful-bill
 
-### 401(k) Contribution Limits
-**Source:** IRS — Retirement Plans — 401(k) Resource Guide  
-**URL:** https://www.irs.gov/retirement-plans/plan-participant-employee/retirement-topics-401k-and-profit-sharing-plan-contribution-limits
+### Standard Deduction (Tax Year 2026)
+**Claim:** Single filer standard deduction = $16,100.
+**Source:** IRS — Tax inflation adjustments for tax year 2026 (IR-2025-103)
+**URL:** https://www.irs.gov/newsroom/irs-releases-tax-inflation-adjustments-for-tax-year-2026-including-amendments-from-the-one-big-beautiful-bill
+
+### Retirement Contribution Limits (2026)
+**Claim:** 401(k) elective deferral limit = $24,500; IRA contribution limit = $7,500.
+**Source:** IRS — 401(k) limit increases to $24,500 for 2026; IRA limit increases to $7,500
+**URL:** https://www.irs.gov/newsroom/401k-limit-increases-to-24500-for-2026-ira-limit-increases-to-7500
+
+### Social Security Wage Base (2026)
+**Claim:** Social Security (OASDI) tax of 6.2% applies to wages up to $184,500; Medicare (1.45%) has no wage cap.
+**Source:** SSA — 2026 Cost-of-Living Adjustment fact sheet
+**URL:** https://www.ssa.gov/news/en/cola/factsheets/2026.html
 
 ---
 

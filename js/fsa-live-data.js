@@ -30,19 +30,19 @@
         bondYield10yr: 4.4,           // 10-year Treasury yield
         bitcoinPrice: null,           // Filled live from CoinGecko
         bitcoin_1yr_return: null,     // Filled live or omitted
-        // Tax brackets 2025 (Single filer, US federal)
-        taxBrackets2025: [
-            { rate: 10, min: 0, max: 11925 },
-            { rate: 12, min: 11925, max: 48475 },
-            { rate: 22, min: 48475, max: 103350 },
-            { rate: 24, min: 103350, max: 197300 },
-            { rate: 32, min: 197300, max: 250525 },
-            { rate: 35, min: 250525, max: 626350 },
-            { rate: 37, min: 626350, max: Infinity }
+        // Tax brackets 2026 (Single filer, US federal)
+        taxBrackets2026: [
+            { rate: 10, min: 0, max: 12400 },
+            { rate: 12, min: 12400, max: 50400 },
+            { rate: 22, min: 50400, max: 105700 },
+            { rate: 24, min: 105700, max: 201775 },
+            { rate: 32, min: 201775, max: 256225 },
+            { rate: 35, min: 256225, max: 640600 },
+            { rate: 37, min: 640600, max: Infinity }
         ],
-        standardDeduction2025: 15000, // Single filer standard deduction
-        iraLimit2025: 7000,
-        k401Limit2025: 23500,
+        standardDeduction2026: 16100, // Single filer standard deduction
+        iraLimit2026: 7500,
+        k401Limit2026: 24500,
         // Asset class comparison (real returns, annualized, ~20yr)
         assetReturns: {
             sp500: 10.0,
@@ -109,9 +109,9 @@
                     case 'bond-10yr':        value = state.bondYield10yr; break;
                     case 'btc-price':        value = state.bitcoinPrice; break;
                     case 'btc-return':       value = state.bitcoin_1yr_return; break;
-                    case 'ira-limit':        value = state.iraLimit2025; break;
-                    case 'k401-limit':       value = state.k401Limit2025; break;
-                    case 'std-deduction':    value = state.standardDeduction2025; break;
+                    case 'ira-limit':        value = state.iraLimit2026; break;
+                    case 'k401-limit':       value = state.k401Limit2026; break;
+                    case 'std-deduction':    value = state.standardDeduction2026; break;
                 }
 
                 if (value !== null) {
