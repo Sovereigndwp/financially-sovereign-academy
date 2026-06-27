@@ -16,6 +16,9 @@
             --fsa-bg-hover: var(--color-border);
             --fsa-gradient-bg: var(--color-bg);
             --fsa-gradient-card: var(--color-surface);
+            /* neutralize residual old-green border tokens (emerald accents on --fsa-green unchanged) */
+            --fsa-border-subtle: var(--color-border);
+            --fsa-border-medium: var(--color-border);
         }
         /* Intentional FSA emerald fade for a key heading word (solid fallback avoids invisible text) */
         .fade-accent {
