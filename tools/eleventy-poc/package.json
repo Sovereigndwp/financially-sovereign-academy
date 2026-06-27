@@ -5,7 +5,7 @@
   "description": "Deployment-isolated Eleventy PoC for FSA module templatization (Stage 1B). NOT a production build. Lives outside the deploy root so Vercel never auto-detects it.",
   "scripts": {
     "build": "eleventy",
-    "verify": "eleventy && for m in risk-insurance emergency-funds-saving consumer-protection financial-master-plan credit-scores banking-basics debt-strategy; do if cmp -s _site/modules/$m.html ../../modules/$m.html; then echo \"$m: BYTE-IDENTICAL\"; else echo \"$m: DIFFERS\"; fi; done"
+    "verify": "eleventy && for m in money-mindset-cash-flow emergency-funds-saving banking-basics credit-scores debt-strategy taxes-paychecks investing-fundamentals risk-insurance consumer-protection financial-master-plan; do if cmp -s _site/modules/$m.html ../../modules/$m.html; then echo \"$m: BYTE-IDENTICAL\"; else echo \"$m: DIFFERS\"; fi; done"
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.0.0"
