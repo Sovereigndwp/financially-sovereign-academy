@@ -14,20 +14,21 @@
     'use strict';
 
     // ─── Baseline fallback data ───────────────────────────────────────────────
-    // Values reflect US averages as of early 2026. Update periodically.
+    // Baseline US figures last refreshed June 2026 (each sourced in SOURCES.md).
+    // Static fallbacks - update periodically. Do NOT present these as checked-today.
     const BASELINE = {
-        inflationRate: 2.9,           // US CPI YoY % (2025 avg)
-        fedFundsRate: 4.50,           // Federal Funds Rate upper bound
-        hysa_apy: 4.50,               // Top high-yield savings account APY
-        avgSavingsApy: 0.47,          // Average traditional savings account APY
+        inflationRate: 4.2,           // BLS CPI-U, all items, 12-month change, May 2026
+        fedFundsRate: 3.75,           // Fed funds target range 3.50-3.75%, upper bound; FOMC Jun 17 2026
+        hysa_apy: 4.15,               // Top HYSA APY; Bankrate, Jun 2026
+        avgSavingsApy: 0.38,          // FDIC national average savings APY; Jun 2026
         avgCheckingApy: 0.08,         // Average checking account APY
-        avgCreditCardApr: 21.5,       // Average credit card APR
-        avgMortgage30yr: 6.85,        // 30-year fixed mortgage rate
-        avgCarLoanRate: 7.1,          // Average auto loan rate (new car)
-        avgStudentLoanRate: 6.5,      // Average federal student loan rate
-        sp500HistoricalAvg: 10.0,     // S&P 500 avg annual return (50yr)
+        avgCreditCardApr: 21.5,       // Avg APR, accounts assessed interest (21.52%); Fed G.19, Q1 2026
+        avgMortgage30yr: 6.49,        // 30-yr fixed; Freddie Mac PMMS, Jun 25 2026
+        avgCarLoanRate: 6.92,         // 60-mo new car; Bankrate, Jun 24 2026
+        avgStudentLoanRate: 6.52,     // Undergrad Direct Sub/Unsub 2026-27 (eff Jul 1 2026); Federal Student Aid
+        sp500HistoricalAvg: 10.0,     // S&P 500 ~long-run nominal avg (illustrative, ~50yr)
         sp500_10yr: 12.6,             // S&P 500 avg 10-year annualized return
-        bondYield10yr: 4.4,           // 10-year Treasury yield
+        bondYield10yr: 4.38,          // 10-yr Treasury (FRED DGS10); Jun 26 2026
         bitcoinPrice: null,           // Filled live from CoinGecko
         bitcoin_1yr_return: null,     // Filled live or omitted
         // Tax brackets 2026 (Single filer, US federal)
@@ -53,8 +54,8 @@
             savings: 0.5,
             inflation: null           // filled from live data
         },
-        basedOn: 'Q1 2026',
-        lastChecked: new Date().toISOString().split('T')[0]
+        basedOn: 'June 2026 baseline (see SOURCES.md)',
+        dataAsOf: 'June 2026'   // static; baseline last refreshed 2026-06-27. Never new Date() (overstates freshness)
     };
 
     // ─── State ────────────────────────────────────────────────────────────────
@@ -136,7 +137,7 @@
                     <div class="fsa-live-banner__header">
                         <span class="fsa-live-banner__dot"></span>
                         Live Financial Context
-                        <span class="fsa-live-banner__date">as of ${state.lastChecked}</span>
+                        <span class="fsa-live-banner__date">baseline data, last checked ${state.dataAsOf}</span>
                     </div>
                     <div class="fsa-live-banner__grid">
                         ${items.join('')}
@@ -192,6 +193,9 @@
         _fireReady();
     }
 
+    // TODO Follow-up: reconcile inflation methodology. Baseline uses BLS CPI-U 12-month change;
+    // live fetch currently uses World Bank annual CPI. Pick one learner-facing definition so
+    // fallback and live values do not silently disagree.
     async function _fetchWorldBankInflation() {
         try {
             const url = 'https://api.worldbank.org/v2/country/US/indicator/FP.CPI.TOTL.ZG?format=json&mrv=2&per_page=1';
@@ -202,7 +206,7 @@
             if (Array.isArray(data) && data.length > 0 && data[0].value != null) {
                 state.inflationRate = Math.round(data[0].value * 10) / 10;
                 state.assetReturns.inflation = state.inflationRate;
-                state.lastChecked = new Date().toISOString().split('T')[0];
+                // Note: World Bank CPI is an annual figure; do not stamp it as "checked today".
             }
         } catch (_) {
             // Use baseline value silently
