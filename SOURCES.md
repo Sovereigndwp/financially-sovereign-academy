@@ -132,7 +132,7 @@ _Tax-year 2026 figures (single filer). Refreshed 2026-06-27._
 **URL:** https://www.irs.gov/newsroom/irs-releases-tax-inflation-adjustments-for-tax-year-2026-including-amendments-from-the-one-big-beautiful-bill
 
 ### Retirement Contribution Limits (2026)
-**Claim:** 401(k) elective deferral limit = $24,500; IRA contribution limit = $7,500.
+**Claim:** 401(k) elective deferral limit = $24,500; IRA contribution limit = $7,500, plus a $1,100 catch-up for age 50+ (so $8,600 total). The IRA limit is combined across Traditional and Roth IRAs (not separate for each), cannot exceed the year's taxable compensation, and Roth IRA eligibility phases out at higher incomes.
 **Source:** IRS — 401(k) limit increases to $24,500 for 2026; IRA limit increases to $7,500
 **URL:** https://www.irs.gov/newsroom/401k-limit-increases-to-24500-for-2026-ira-limit-increases-to-7500
 
