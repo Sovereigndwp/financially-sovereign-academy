@@ -306,6 +306,32 @@ permalink: "modules/financial-master-plan.html"
         .fsa-checklist__link:hover, .fsa-checklist__link:focus-visible { text-decoration: underline; }
         .fsa-checklist-nojs { color: var(--fsa-text-secondary); font-size: 0.9rem; }
         @media (max-width: 560px) { .fsa-checklist__row { grid-template-columns: 1fr; grid-template-areas: "name" "chip" "why" "link"; } .fsa-checklist__chip, .fsa-checklist__link { justify-self: start; } }
+
+        /* PR2b: collapsible roadmap stages (native details/summary) */
+        details.roadmap-stage > summary.roadmap-stage__summary {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            cursor: pointer;
+        }
+        details.roadmap-stage > summary.roadmap-stage__summary::-webkit-details-marker { display: none; }
+        .roadmap-stage__summary .stage-number { margin-right: 0; }
+        .roadmap-stage__summary .stage-title { margin: 0; }
+        .roadmap-stage__chev {
+            margin-left: auto;
+            color: var(--fsa-green);
+            font-size: 1.1rem;
+            transition: transform 0.2s ease;
+        }
+        details.roadmap-stage[open] > summary .roadmap-stage__chev { transform: rotate(90deg); }
+        .roadmap-stage__summary:focus-visible {
+            outline: 2px solid var(--fsa-green);
+            outline-offset: 2px;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .roadmap-stage__chev { transition: none; }
+        }
     </style>
     <link rel="stylesheet" href="../css/lab-guide.css">
     <link rel="stylesheet" href="../css/sovereignty-ladder.css">
@@ -469,9 +495,12 @@ permalink: "modules/financial-master-plan.html"
                     <div class="fsa-figure__caption">Each stage builds on the one before it, so follow them in order. The detailed steps are below. <span class="fsa-figure__source">Time ranges are typical, not guarantees.</span></div>
                 </div>
 
-                <div class="roadmap-stage">
-                    <span class="stage-number">1</span>
-                    <h3 class="stage-title">Stabilize (Months 1-3)</h3>
+                <details class="roadmap-stage" open>
+                    <summary class="roadmap-stage__summary">
+                        <span class="stage-number">1</span>
+                        <h3 class="stage-title">Stabilize (Months 1-3)</h3>
+                        <span class="roadmap-stage__chev" aria-hidden="true">▸</span>
+                    </summary>
                     <div class="stage-content">
                         <p><strong>Goal:</strong> Stop the financial bleeding. Get a clear picture of where you are.</p>
                         <ul class="checklist">
@@ -483,11 +512,14 @@ permalink: "modules/financial-master-plan.html"
                         </ul>
                         <p style="margin-top: 1rem; color: var(--fsa-text-dim);"><strong>Why this matters:</strong> You can't fix what you don't measure. This stage gives you clarity.</p>
                     </div>
-                </div>
+                </details>
 
-                <div class="roadmap-stage">
-                    <span class="stage-number">2</span>
-                    <h3 class="stage-title">Cover Essentials (Months 3-6)</h3>
+                <details class="roadmap-stage">
+                    <summary class="roadmap-stage__summary">
+                        <span class="stage-number">2</span>
+                        <h3 class="stage-title">Cover Essentials (Months 3-6)</h3>
+                        <span class="roadmap-stage__chev" aria-hidden="true">▸</span>
+                    </summary>
                     <div class="stage-content">
                         <p><strong>Goal:</strong> Protect yourself from catastrophe.</p>
                         <ul class="checklist">
@@ -499,11 +531,14 @@ permalink: "modules/financial-master-plan.html"
                         </ul>
                         <p style="margin-top: 1rem; color: var(--fsa-text-dim);"><strong>Why this matters:</strong> One medical emergency or lawsuit can destroy years of progress. Insurance is your shield.</p>
                     </div>
-                </div>
+                </details>
 
-                <div class="roadmap-stage">
-                    <span class="stage-number">3</span>
-                    <h3 class="stage-title">Eliminate High-Interest Debt (Months 6-24)</h3>
+                <details class="roadmap-stage">
+                    <summary class="roadmap-stage__summary">
+                        <span class="stage-number">3</span>
+                        <h3 class="stage-title">Eliminate High-Interest Debt (Months 6-24)</h3>
+                        <span class="roadmap-stage__chev" aria-hidden="true">▸</span>
+                    </summary>
                     <div class="stage-content">
                         <p><strong>Goal:</strong> Kill any debt above 10% interest.</p>
                         <ul class="checklist">
@@ -515,11 +550,14 @@ permalink: "modules/financial-master-plan.html"
                         </ul>
                         <p style="margin-top: 1rem; color: var(--fsa-text-dim);"><strong>Why this matters:</strong> 20% credit card interest is a guaranteed negative return. No investment beats paying this off.</p>
                     </div>
-                </div>
+                </details>
 
-                <div class="roadmap-stage">
-                    <span class="stage-number">4</span>
-                    <h3 class="stage-title">Build Full Emergency Fund (Months 12-30)</h3>
+                <details class="roadmap-stage">
+                    <summary class="roadmap-stage__summary">
+                        <span class="stage-number">4</span>
+                        <h3 class="stage-title">Build Full Emergency Fund (Months 12-30)</h3>
+                        <span class="roadmap-stage__chev" aria-hidden="true">▸</span>
+                    </summary>
                     <div class="stage-content">
                         <p><strong>Goal:</strong> 3-6 months of expenses in savings.</p>
                         <ul class="checklist">
@@ -531,11 +569,14 @@ permalink: "modules/financial-master-plan.html"
                         </ul>
                         <p style="margin-top: 1rem; color: var(--fsa-text-dim);"><strong>Why this matters:</strong> This fund means you never have to go back into debt for emergencies. It's financial peace of mind.</p>
                     </div>
-                </div>
+                </details>
 
-                <div class="roadmap-stage">
-                    <span class="stage-number">5</span>
-                    <h3 class="stage-title">Invest for Retirement (Ongoing - Years 1-40)</h3>
+                <details class="roadmap-stage">
+                    <summary class="roadmap-stage__summary">
+                        <span class="stage-number">5</span>
+                        <h3 class="stage-title">Invest for Retirement (Ongoing - Years 1-40)</h3>
+                        <span class="roadmap-stage__chev" aria-hidden="true">▸</span>
+                    </summary>
                     <div class="stage-content">
                         <p><strong>Goal:</strong> Build wealth that outpaces inflation.</p>
                         <ul class="checklist">
@@ -547,11 +588,14 @@ permalink: "modules/financial-master-plan.html"
                         </ul>
                         <p style="margin-top: 1rem; color: var(--fsa-text-dim);"><strong>Why this matters:</strong> Starting earlier gives compounding more time to work. Delaying means your money has fewer years to grow.</p>
                     </div>
-                </div>
+                </details>
 
-                <div class="roadmap-stage">
-                    <span class="stage-number">6</span>
-                    <h3 class="stage-title">Optimize & Diversify (Years 3-10)</h3>
+                <details class="roadmap-stage">
+                    <summary class="roadmap-stage__summary">
+                        <span class="stage-number">6</span>
+                        <h3 class="stage-title">Optimize & Diversify (Years 3-10)</h3>
+                        <span class="roadmap-stage__chev" aria-hidden="true">▸</span>
+                    </summary>
                     <div class="stage-content">
                         <p><strong>Goal:</strong> Fine-tune your financial system.</p>
                         <ul class="checklist">
@@ -563,11 +607,14 @@ permalink: "modules/financial-master-plan.html"
                         </ul>
                         <p style="margin-top: 1rem; color: var(--fsa-text-dim);"><strong>Why this matters:</strong> Once the foundation is solid, you can explore more advanced strategies and opportunities.</p>
                     </div>
-                </div>
+                </details>
 
-                <div class="roadmap-stage">
-                    <span class="stage-number">7</span>
-                    <h3 class="stage-title">Financial Independence (Years 10-30+)</h3>
+                <details class="roadmap-stage">
+                    <summary class="roadmap-stage__summary">
+                        <span class="stage-number">7</span>
+                        <h3 class="stage-title">Financial Independence (Years 10-30+)</h3>
+                        <span class="roadmap-stage__chev" aria-hidden="true">▸</span>
+                    </summary>
                     <div class="stage-content">
                         <p><strong>Goal:</strong> Your investments generate enough to cover expenses.</p>
                         <ul class="checklist">
@@ -579,7 +626,7 @@ permalink: "modules/financial-master-plan.html"
                         </ul>
                         <p style="margin-top: 1rem; color: var(--fsa-text-dim);"><strong>Why this matters:</strong> This is true sovereignty. You work because you want to, not because you have to.</p>
                     </div>
-                </div>
+                </details>
             </div>
 
             <div class="highlight highlight-success" style="margin-top: 2rem; padding: 2rem; background: var(--color-elevated); border: 1px solid rgba(16,185,129,0.35); box-shadow: none;">
