@@ -35,6 +35,8 @@
     const MODULE_FIELDS = {
         1: {
             label: 'Money Mindset & Cash Flow',
+            pieceName: 'Your monthly money picture',
+            why: 'Income minus expenses is the foundation everything else builds on.',
             icon: '💰',
             fields: [
                 { key: 'monthlyIncome', label: 'Monthly take-home income', type: 'currency', placeholder: 'e.g. 3500' },
@@ -46,6 +48,8 @@
         },
         2: {
             label: 'Emergency Funds & Saving',
+            pieceName: 'Your emergency fund plan',
+            why: 'A cash buffer keeps one bad month from turning into debt.',
             icon: '🛡️',
             fields: [
                 { key: 'emergencyMonths', label: 'Emergency fund target (months of expenses)', type: 'select',
@@ -58,6 +62,8 @@
         },
         3: {
             label: 'Banking',
+            pieceName: 'Your banking setup',
+            why: 'The right accounts cut fees and make saving automatic.',
             icon: '🏦',
             fields: [
                 { key: 'bankType', label: 'Banking setup I will use', type: 'select',
@@ -69,6 +75,8 @@
         },
         4: {
             label: 'Credit Scores',
+            pieceName: 'Your credit plan',
+            why: 'A better score lowers the cost of borrowing for years.',
             icon: '📊',
             fields: [
                 { key: 'currentCreditScore', label: 'My current credit score range', type: 'select',
@@ -81,6 +89,8 @@
         },
         5: {
             label: 'Debt Strategy',
+            pieceName: 'Your debt payoff plan',
+            why: 'A clear method pays off debt faster and for less.',
             icon: '🎯',
             fields: [
                 { key: 'totalDebt', label: 'My total debt (non-mortgage)', type: 'currency', placeholder: 'e.g. 8500' },
@@ -92,6 +102,8 @@
         },
         6: {
             label: 'Taxes & Paychecks',
+            pieceName: 'Your tax plan',
+            why: 'Understanding your paycheck helps you keep more of what you earn.',
             icon: '🧾',
             fields: [
                 { key: 'filingStatus', label: 'My tax filing status', type: 'select',
@@ -103,6 +115,8 @@
         },
         7: {
             label: 'Investing',
+            pieceName: 'Your investing plan',
+            why: 'Investing consistently is how money grows over time.',
             icon: '📈',
             fields: [
                 { key: 'investingStrategy', label: 'My investment strategy', type: 'select',
@@ -116,6 +130,8 @@
         },
         8: {
             label: 'Risk & Insurance',
+            pieceName: 'Your protection plan',
+            why: 'The right coverage protects your plan from a single disaster.',
             icon: '🔒',
             fields: [
                 { key: 'healthInsurance', label: 'My health insurance status', type: 'select',
@@ -128,6 +144,8 @@
         },
         9: {
             label: 'Consumer Protection',
+            pieceName: 'Your safety setup',
+            why: 'A credit freeze and basic habits stop most fraud.',
             icon: '🛡️',
             fields: [
                 { key: 'creditFreeze', label: 'Credit freeze status', type: 'select',
@@ -191,6 +209,46 @@
         completedModules() {
             const plan = _load();
             return Object.keys(plan.modules).map(Number);
+        },
+
+        /** Read-only: per-module 1-9 plan-readiness status for the Module 10 checklist */
+        getChecklist() {
+            const plan = _load();
+            return [1,2,3,4,5,6,7,8,9].map(function (id) {
+                const def = MODULE_FIELDS[id];
+                const saved = plan.modules[id] || {};
+                const total = def.fields.length;
+                const filled = def.fields.filter(function (f) {
+                    const v = saved[f.key];
+                    return v !== undefined && v !== null && String(v).trim() !== '';
+                }).length;
+                const status = filled === 0 ? 'missing' : (filled < total ? 'partial' : 'complete');
+                return {
+                    id: id, label: def.label, slug: _moduleSlug(id),
+                    pieceName: def.pieceName, why: def.why,
+                    filled: filled, total: total, status: status,
+                    anchor: '/modules/' + _moduleSlug(id) + '.html#fsa-plan-widget-' + id
+                };
+            });
+        },
+
+        /** Renders the Plan Readiness Checklist (Module 10 only) */
+        renderChecklist(containerId) {
+            const el = document.getElementById(containerId);
+            if (!el) return;
+            const rows = this.getChecklist().map(function (r) {
+                let chipText, linkText;
+                if (r.status === 'complete') { chipText = 'Complete'; linkText = 'Edit'; }
+                else if (r.status === 'partial') { chipText = 'Edit \u00b7 ' + r.filled + ' of ' + r.total; linkText = 'Finish'; }
+                else { chipText = 'Missing'; linkText = 'Complete now'; }
+                return '<li class="fsa-checklist__row fsa-checklist__row--' + r.status + '">'
+                    + '<span class="fsa-checklist__name">' + r.pieceName + '</span>'
+                    + '<span class="fsa-checklist__chip fsa-checklist__chip--' + r.status + '">' + chipText + '</span>'
+                    + '<span class="fsa-checklist__why">' + r.why + '</span>'
+                    + '<a class="fsa-checklist__link" href="' + r.anchor + '" aria-label="' + linkText + ': ' + r.pieceName + '">' + linkText + '</a>'
+                    + '</li>';
+            }).join('');
+            el.innerHTML = '<ul class="fsa-checklist" role="list">' + rows + '</ul>';
         },
 
         /** Renders a "My Plan" input widget into containerId for a given moduleId */
@@ -324,8 +382,7 @@
 
             if (completedCount === 0) {
                 el.innerHTML = `<div class="fsa-plan-summary-empty">
-                    <p>You haven't filled in your plan yet.</p>
-                    <p>Go through modules 1–9 and complete the "My Plan" section in each one. Your decisions will appear here automatically.</p>
+                    <p>You do not need to redo the course. Complete or edit the missing pieces below, and your plan will appear here.</p>
                 </div>`;
                 return;
             }

@@ -289,6 +289,23 @@ permalink: "modules/financial-master-plan.html"
                 grid-template-columns: 1fr;
             }
         }
+
+        /* Plan Readiness Checklist (PR2a, Module 10 only) */
+        .fsa-checklist { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.6rem; }
+        .fsa-checklist__row { display: grid; grid-template-columns: 1fr auto; grid-template-areas: "name chip" "why link"; gap: 0.35rem 1rem; align-items: center; background: var(--fsa-bg-card); border: 1px solid var(--color-border); border-left: 3px solid var(--color-border-strong); border-radius: 10px; padding: 0.9rem 1.1rem; }
+        .fsa-checklist__row--complete { border-left-color: var(--fsa-green); }
+        .fsa-checklist__row--partial { border-left-color: #fbbf24; }
+        .fsa-checklist__row--missing { border-left-color: #ef4444; }
+        .fsa-checklist__name { grid-area: name; font-weight: 600; color: var(--fsa-text-primary); }
+        .fsa-checklist__chip { grid-area: chip; justify-self: end; font-size: 0.72rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 999px; white-space: nowrap; }
+        .fsa-checklist__chip--complete { background: rgba(16,185,129,0.18); color: var(--fsa-green); }
+        .fsa-checklist__chip--partial { background: rgba(251,191,36,0.18); color: #fbbf24; }
+        .fsa-checklist__chip--missing { background: rgba(239,68,68,0.18); color: #ef4444; }
+        .fsa-checklist__why { grid-area: why; font-size: 0.85rem; color: var(--fsa-text-secondary); }
+        .fsa-checklist__link { grid-area: link; justify-self: end; font-size: 0.85rem; font-weight: 600; color: var(--fsa-green); text-decoration: none; white-space: nowrap; }
+        .fsa-checklist__link:hover, .fsa-checklist__link:focus-visible { text-decoration: underline; }
+        .fsa-checklist-nojs { color: var(--fsa-text-secondary); font-size: 0.9rem; }
+        @media (max-width: 560px) { .fsa-checklist__row { grid-template-columns: 1fr; grid-template-areas: "name" "chip" "why" "link"; } .fsa-checklist__chip, .fsa-checklist__link { justify-self: start; } }
     </style>
     <link rel="stylesheet" href="../css/lab-guide.css">
     <link rel="stylesheet" href="../css/sovereignty-ladder.css">
@@ -329,8 +346,20 @@ permalink: "modules/financial-master-plan.html"
             </p>
         </div>
 
-        <!-- Full Plan Summary — populated from FSAPlan across all modules -->
-        <div id="fsa-full-plan-summary"></div>
+        <!-- Plan Readiness Checklist (PR2a) -->
+        <section class="section">
+            <h2 class="section-title">Plan Readiness Checklist</h2>
+            <p style="margin-bottom: 1.25rem; color: var(--fsa-text-secondary);">Here is what you decided across Modules 1 to 9. Complete or edit any missing pieces, then your assembled plan appears below.</p>
+            <div id="fsa-plan-checklist">
+                <p class="fsa-checklist-nojs">Your saved plan appears when JavaScript is enabled. You can still revisit each module and complete the plan sections.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Your Assembled Plan</h2>
+            <!-- Full Plan Summary — populated from FSAPlan across all modules -->
+            <div id="fsa-full-plan-summary"></div>
+        </section>
 
         <!-- Your Sovereignty Path Progress -->
         <section class="section">
@@ -822,6 +851,7 @@ permalink: "modules/financial-master-plan.html"
         });
         FSAPlan.renderWidget('fsa-plan-widget-10', 10);
         FSAPlan.renderSummary('fsa-full-plan-summary');
+        FSAPlan.renderChecklist('fsa-plan-checklist');
 
         const progressManager = new FSAProgressManager();
         progressManager.init();
