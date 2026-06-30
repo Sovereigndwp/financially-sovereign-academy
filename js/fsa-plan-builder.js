@@ -190,6 +190,20 @@
         try { localStorage.setItem(STORAGE_KEY, JSON.stringify(plan)); } catch (_) {}
     }
 
+    // Strict per-module completion status, shared by getChecklist() and renderSummary().
+    // missing: 0 fields filled; partial: some but not all; complete: all fields filled.
+    function _moduleStatus(id, plan) {
+        const def = MODULE_FIELDS[id];
+        const saved = (plan && plan.modules[id]) || {};
+        const total = def.fields.length;
+        const filled = def.fields.filter(function (f) {
+            const v = saved[f.key];
+            return v !== undefined && v !== null && String(v).trim() !== '';
+        }).length;
+        const status = filled === 0 ? 'missing' : (filled < total ? 'partial' : 'complete');
+        return { filled: filled, total: total, status: status };
+    }
+
     // ─── Public API ──────────────────────────────────────────────────────────
     window.FSAPlan = {
         set(moduleId, key, value) {
@@ -216,17 +230,11 @@
             const plan = _load();
             return [1,2,3,4,5,6,7,8,9].map(function (id) {
                 const def = MODULE_FIELDS[id];
-                const saved = plan.modules[id] || {};
-                const total = def.fields.length;
-                const filled = def.fields.filter(function (f) {
-                    const v = saved[f.key];
-                    return v !== undefined && v !== null && String(v).trim() !== '';
-                }).length;
-                const status = filled === 0 ? 'missing' : (filled < total ? 'partial' : 'complete');
+                const st = _moduleStatus(id, plan);
                 return {
                     id: id, label: def.label, slug: _moduleSlug(id),
                     pieceName: def.pieceName, why: def.why,
-                    filled: filled, total: total, status: status,
+                    filled: st.filled, total: st.total, status: st.status,
                     anchor: '/modules/' + _moduleSlug(id) + '.html#fsa-plan-widget-' + id
                 };
             });
@@ -378,26 +386,21 @@
             const el = document.getElementById(containerId);
             if (!el) return;
             const plan = _load();
-            const completedCount = Object.keys(plan.modules).length;
+            const anySaved = Object.keys(plan.modules).length;
 
-            if (completedCount === 0) {
+            if (anySaved === 0) {
                 el.innerHTML = `<div class="fsa-plan-summary-empty">
                     <p>You do not need to redo the course. Complete or edit the missing pieces below, and your plan will appear here.</p>
                 </div>`;
                 return;
             }
 
+            let completeCount = 0;
             const sections = Object.entries(MODULE_FIELDS).map(([id, def]) => {
-                const saved = plan.modules[id];
-                if (!saved || Object.keys(saved).length === 0) {
-                    return `<div class="fsa-plan-section fsa-plan-section--empty">
-                        <div class="fsa-plan-section__header">
-                            <span>${def.icon}</span> ${def.label}
-                            <span class="fsa-plan-section__status fsa-plan-section__status--pending">Not filled</span>
-                        </div>
-                        <a href="/modules/${_moduleSlug(Number(id))}.html" class="fsa-plan-section__link">Complete this module →</a>
-                    </div>`;
-                }
+                const st = _moduleStatus(Number(id), plan);
+                if (st.status === 'missing') return '';
+                if (st.status === 'complete') completeCount++;
+                const saved = plan.modules[id] || {};
                 const items = def.fields.map(f => {
                     const v = saved[f.key];
                     if (!v) return '';
@@ -408,15 +411,16 @@
                         <span class="fsa-plan-item__value">${display}</span>
                     </div>`;
                 }).filter(Boolean).join('');
-
+                const statusLabel = st.status === 'complete' ? 'Complete' : 'In progress';
+                const statusClass = st.status === 'complete' ? '' : ' fsa-plan-section__status--partial';
                 return `<div class="fsa-plan-section">
                     <div class="fsa-plan-section__header">
                         <span>${def.icon}</span> ${def.label}
-                        <span class="fsa-plan-section__status">✓ Complete</span>
+                        <span class="fsa-plan-section__status${statusClass}">${statusLabel}</span>
                     </div>
                     ${items}
                 </div>`;
-            }).join('');
+            }).filter(Boolean).join('');
 
             const exportData = _buildExportText(plan);
 
@@ -425,9 +429,9 @@
                     <div class="fsa-plan-summary__header">
                         <h3>My Financial Plan</h3>
                         <div class="fsa-plan-progress-bar">
-                            <div class="fsa-plan-progress-fill" style="width:${completedCount * 10}%"></div>
+                            <div class="fsa-plan-progress-fill" style="width:${completeCount * 10}%"></div>
                         </div>
-                        <p>${completedCount}/10 modules completed · Last updated: ${plan.updatedAt || 'never'}</p>
+                        <p>${completeCount}/10 modules complete · Last updated: ${plan.updatedAt || 'never'}</p>
                     </div>
                     <div class="fsa-plan-sections">${sections}</div>
                     <div class="fsa-plan-export">
@@ -646,6 +650,7 @@
             color: #34d399;
         }
         .fsa-plan-section__status--pending { color: rgba(255,255,255,0.3); }
+        .fsa-plan-section__status--partial { color: #fbbf24; }
         .fsa-plan-section__link {
             font-size: 0.85rem;
             color: #10b981;
