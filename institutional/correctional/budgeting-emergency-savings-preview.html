@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Budgeting &amp; Emergency Savings for Reentry — Provisional Preview</title>
+<link rel="stylesheet" href="/css/fsa-brand.css">
+<style>
+  /* page-local layout only; visual tokens come from fsa-brand.css */
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--color-bg); color: var(--color-text); font-family: var(--font-body, Georgia, serif); line-height: 1.6; }
+  .wrap { max-width: 1000px; margin: 0 auto; padding: 0 1.5rem; }
+  a { color: var(--color-mint); }
+  .eyebrow { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-mint); }
+  h1 { font-family: var(--font-serif); font-size: clamp(2rem, 5vw, 3.1rem); line-height: 1.08; color: var(--color-text-strong); margin: 0.6rem 0 0; }
+  h1 em { font-style: italic; background: var(--brand-gradient); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: var(--color-mint); }
+  h2 { font-family: var(--font-serif); font-size: clamp(1.4rem, 3vw, 2rem); color: var(--color-text-strong); margin: 0 0 0.4rem; }
+  h3 { font-family: var(--font-sans); font-size: 1.05rem; color: var(--color-text-strong); margin: 0 0 0.3rem; }
+  .lede { font-size: 1.2rem; color: var(--color-muted); max-width: 42rem; margin-top: 1rem; }
+  section { padding: 2.6rem 0; border-top: 1px solid var(--color-border); }
+  header.hero { padding: 3.4rem 0 2.6rem; background: var(--color-deepest); }
+  /* status banner */
+  .status-banner { background: var(--color-surface); border: 1px solid var(--color-border-strong); border-left: 3px solid var(--color-brand); border-radius: 4px; padding: 1rem 1.2rem; margin: 1.6rem 0 0; color: var(--color-text); font-size: 0.95rem; }
+  .status-banner strong { color: var(--color-text-strong); }
+  .tagrow { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1.2rem; }
+  .chip { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 5px 11px; border-radius: 999px; border: 1px solid var(--color-border-strong); color: var(--color-muted); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin-top: 1.2rem; }
+  .card { background: var(--color-elevated); border: 1px solid var(--color-border); border-radius: 4px; padding: 1.2rem; }
+  ul.clean { list-style: none; padding: 0; margin: 0.6rem 0 0; }
+  ul.clean li { position: relative; padding: 0.4rem 0 0.4rem 1.3rem; border-bottom: 1px solid var(--color-border); }
+  ul.clean li::before { content: "\25C6"; position: absolute; left: 0; top: 0.55rem; color: var(--color-brand); font-size: 0.7em; }
+  .sessions { display: grid; gap: 0.8rem; margin-top: 1.2rem; }
+  .session { display: grid; grid-template-columns: auto 1fr; gap: 1rem; align-items: baseline; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 4px; padding: 1rem 1.2rem; }
+  .session .num { font-family: var(--font-mono); font-size: 0.8rem; color: var(--color-mint); letter-spacing: 0.1em; }
+  /* download cards */
+  .dl-featured { border: 1px solid transparent; background: linear-gradient(var(--color-elevated), var(--color-elevated)) padding-box, var(--brand-gradient) border-box; }
+  .dl { display: flex; flex-direction: column; gap: 0.5rem; }
+  .dl .badge { align-self: flex-start; font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 9px; border-radius: 999px; }
+  .badge-rec { color: var(--color-deepest); background: var(--color-mint); }
+  .badge-prov { color: var(--color-muted); border: 1px solid var(--color-border-strong); }
+  .btn { display: inline-flex; align-items: center; gap: 8px; min-height: 42px; padding: 0 18px; font-family: var(--font-sans); font-weight: 600; font-size: 0.9rem; text-decoration: none; border-radius: 2px; border: 1.6px solid transparent; background: linear-gradient(var(--color-elevated), var(--color-elevated)) padding-box, var(--brand-gradient) border-box; color: var(--color-text-strong); align-self: flex-start; }
+  .btn:hover { background: linear-gradient(var(--color-surface), var(--color-surface)) padding-box, var(--brand-gradient) border-box; }
+  .note-box { background: var(--color-surface); border: 1px solid var(--color-border-strong); border-radius: 4px; padding: 1.2rem 1.4rem; margin-top: 1rem; color: var(--color-muted); font-size: 0.95rem; }
+  .note-box strong { color: var(--color-text); }
+  footer { padding: 2.4rem 0 3rem; border-top: 1px solid var(--color-border); color: var(--color-faint, #6b7280); font-size: 0.85rem; }
+  @media (max-width: 560px) { .session { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<!-- 1 · HERO / OVERVIEW -->
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Financially Sovereign Academy · Correctional &amp; Reentry · Provisional preview</div>
+    <h1>Budgeting &amp; Emergency Savings <em>for Reentry</em></h1>
+    <p class="lede">A paper-first financial decision-making module for correctional and reentry settings. When money is short, the skill is slowing the damage, protecting the next step, asking early, and keeping one option open.</p>
+    <div class="tagrow">
+      <span class="chip">Paper-first</span>
+      <span class="chip">Facility-ready</span>
+      <span class="chip">Hybrid-supported</span>
+      <span class="chip">Pilot-ready, not proven</span>
+    </div>
+    <div class="status-banner">
+      <strong>Provisional pilot-ready draft. External counsel review pending. Not for final facility distribution until legal/privacy feedback is reconciled.</strong>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- 2 · WHO IT IS FOR -->
+<section><div class="wrap">
+  <h2>Who it is for</h2>
+  <div class="grid">
+    <div class="card"><h3>Correctional facilities</h3><p style="color:var(--color-muted);margin:0">Jails and programs that run reentry education on paper, with no internet, phones, or calculators.</p></div>
+    <div class="card"><h3>Reentry organizations</h3><p style="color:var(--color-muted);margin:0">Nonprofits supporting people in the first months after release.</p></div>
+    <div class="card"><h3>Workforce &amp; reentry partners</h3><p style="color:var(--color-muted);margin:0">Workforce boards and partners framing financial stabilization for employment readiness.</p></div>
+    <div class="card"><h3>Funders &amp; institutional reviewers</h3><p style="color:var(--color-muted);margin:0">Foundations, cities, and CDFIs evaluating a pilot.</p></div>
+  </div>
+</div></section>
+
+<!-- 3 · WHAT LEARNERS PRACTICE -->
+<section><div class="wrap">
+  <h2>What learners practice</h2>
+  <ul class="clean">
+    <li>A first-week money map: irregular money in, stacked money out, on one sheet.</li>
+    <li>Bill and card prioritization: sort real pressures into pay now / negotiate / later, and defend the order.</li>
+    <li>The conversations before damage grows: the early ask, in writing, and answering a family money ask without burning the relationship.</li>
+    <li>Emergency and shock planning: a personal definition of an emergency and a realistic first cushion rung.</li>
+    <li>Traps, fees, and fast-money pressure: picking the least expensive option from realistic fast-money offers and saying why.</li>
+  </ul>
+</div></section>
+
+<!-- 4 · FOUR-SESSION STRUCTURE -->
+<section><div class="wrap">
+  <h2>Four-session structure</h2>
+  <p style="color:var(--color-muted);margin:0">About 90 minutes each, standalone, plus an optional capstone.</p>
+  <div class="sessions">
+    <div class="session"><span class="num">Session 1</span><div><strong>Where the Money Goes.</strong> See irregular money honestly on a one-week map.</div></div>
+    <div class="session"><span class="num">Session 2</span><div><strong>Plan to the Floor.</strong> A plan that survives a good week and a bad week.</div></div>
+    <div class="session"><span class="num">Session 3</span><div><strong>The Conversations.</strong> The early ask, in writing; answering a family money ask.</div></div>
+    <div class="session"><span class="num">Session 4</span><div><strong>Shocks, Traps, and the Plan.</strong> Emergencies, fast-money traps, true cost, a plan that holds.</div></div>
+    <div class="session"><span class="num">Optional</span><div><strong>Capstone: The First 30 Days.</strong> Consolidation, usable as a standalone review.</div></div>
+  </div>
+</div></section>
+
+<!-- 5 · HYBRID MODEL -->
+<section><div class="wrap">
+  <h2>Hybrid model</h2>
+  <div class="grid">
+    <div class="card"><h3>Online</h3><p style="color:var(--color-muted);margin:0">This page: overview, partner review, and provisional downloads.</p></div>
+    <div class="card"><h3>Paper workbook</h3><p style="color:var(--color-muted);margin:0">For learners, pencil-only, black-and-white.</p></div>
+    <div class="card"><h3>Facilitator binder</h3><p style="color:var(--color-muted);margin:0">Session notes, boundaries, and routing scripts for delivery.</p></div>
+    <div class="card"><h3>Facility implementation packet</h3><p style="color:var(--color-muted);margin:0">Setup and operations for the site.</p></div>
+    <div class="card"><h3>Assessment &amp; survey</h3><p style="color:var(--color-muted);margin:0">Optional, for aggregate learning feedback only.</p></div>
+  </div>
+</div></section>
+
+<!-- 6 · DOWNLOADABLE PROVISIONAL PDFs -->
+<section><div class="wrap">
+  <h2>Downloadable provisional PDFs</h2>
+  <p class="note-box"><strong>Recommended for external sharing:</strong> the Investor Preview. The operational documents below are provisional internal review drafts, not for final student or facility distribution.</p>
+  <div class="grid" style="margin-top:1.4rem">
+    <div class="card dl-featured dl">
+      <span class="badge badge-rec">Recommended for external sharing</span>
+      <h3>Investor / Partner Preview</h3>
+      <p style="color:var(--color-muted);margin:0">Polished overview of structure, exercises, and pilot pathway.</p>
+      <a class="btn" href="/assets/pdfs/correctional/budgeting-emergency-savings/provisional/FSA-BES-Investor-Preview-v0.1-provisional.pdf">Open PDF</a>
+    </div>
+    <div class="card dl">
+      <span class="badge badge-prov">Provisional internal review draft</span>
+      <h3>Student Workbook</h3>
+      <p style="color:var(--color-muted);margin:0">Sessions 1 to 4 plus optional capstone.</p>
+      <a class="btn" href="/assets/pdfs/correctional/budgeting-emergency-savings/provisional/FSA-BES-Student-Workbook-v0.1-provisional.pdf">Open PDF</a>
+    </div>
+    <div class="card dl">
+      <span class="badge badge-prov">Provisional internal review draft</span>
+      <h3>Facilitator Binder</h3>
+      <p style="color:var(--color-muted);margin:0">Program overview plus facilitator guide.</p>
+      <a class="btn" href="/assets/pdfs/correctional/budgeting-emergency-savings/provisional/FSA-BES-Facilitator-Binder-v0.1-provisional.pdf">Open PDF</a>
+    </div>
+    <div class="card dl">
+      <span class="badge badge-prov">Provisional internal review draft</span>
+      <h3>Facility Implementation</h3>
+      <p style="color:var(--color-muted);margin:0">Setup, operations, and MOU checklist.</p>
+      <a class="btn" href="/assets/pdfs/correctional/budgeting-emergency-savings/provisional/FSA-BES-Facility-Implementation-v0.1-provisional.pdf">Open PDF</a>
+    </div>
+    <div class="card dl">
+      <span class="badge badge-prov">Provisional internal review draft</span>
+      <h3>Assessment &amp; Survey</h3>
+      <p style="color:var(--color-muted);margin:0">Optional, aggregate learning feedback only.</p>
+      <a class="btn" href="/assets/pdfs/correctional/budgeting-emergency-savings/provisional/FSA-BES-Assessment-Survey-v0.1-provisional.pdf">Open PDF</a>
+    </div>
+    <div class="card dl">
+      <span class="badge badge-prov">Provisional internal review draft</span>
+      <h3>Partner / Funder</h3>
+      <p style="color:var(--color-muted);margin:0">Overview, partner-network checklist, funder one-pager.</p>
+      <a class="btn" href="/assets/pdfs/correctional/budgeting-emergency-savings/provisional/FSA-BES-Partner-Funder-v0.1-provisional.pdf">Open PDF</a>
+    </div>
+  </div>
+</div></section>
+
+<!-- 7 · IMPORTANT STATUS NOTE -->
+<section><div class="wrap">
+  <h2>Important status note</h2>
+  <div class="note-box">
+    <p style="margin:0 0 0.6rem">External counsel review of the privacy, assessment, and facilitator-boundary language is pending. This is not final student or facility distribution.</p>
+    <p style="margin:0 0 0.6rem">The program gives no legal, tax, credit-repair, or financial advice. It teaches decisions and questions and routes case-specific matters to the right office or free legal aid.</p>
+    <p style="margin:0">The program is described as pilot-ready. It makes no claims of proven outcomes, recidivism reduction, or guaranteed financial stability.</p>
+  </div>
+</div></section>
+
+<!-- 8 · NEXT STEP / CONTACT -->
+<section><div class="wrap">
+  <h2>Next step</h2>
+  <p style="color:var(--color-muted);max-width:42rem">For pilot review or partnership discussion, contact Dalia / Financially Sovereign Academy. [contact email / phone placeholder]</p>
+</div></section>
+
+</main>
+
+<footer><div class="wrap">
+  Created by Dalia · Financially Sovereign Academy · Provisional preview, not indexed · Educational content only · Not financial advice
+</div></footer>
+
+</body>
+</html>
