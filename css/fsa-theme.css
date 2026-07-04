@@ -3,10 +3,16 @@
  * Master money. Master life.
  */
 
+/* Share the emerald source with fsa-brand.css: pull the vendored FSA accent
+   subset (--fsa-emerald/-mint/-solid). Only the 4 byte-identical greens below
+   re-point to it, each with a literal fallback so a missing import can never
+   collapse the color. Backgrounds, fonts, sizing, radius, status stay as-is. */
+@import url('tsa-shared-tokens.css');
+
 :root {
-    /* Primary Colors - Green Palette */
-    --fsa-green: #10b981;
-    --fsa-green-light: #34d399;
+    /* Primary Colors - Green Palette (green/green-light bridged; dark/hover literal) */
+    --fsa-green: var(--fsa-emerald, #10b981);
+    --fsa-green-light: var(--fsa-solid, #34d399);
     --fsa-green-dark: #059669;
     --fsa-green-hover: #0d9668;
     
@@ -19,11 +25,11 @@
     /* Text Colors */
     --fsa-text-primary: #e0e0e0;
     --fsa-text-secondary: #9ca3af;
-    --fsa-text-accent: #6ee7b7;
+    --fsa-text-accent: var(--fsa-mint, #6ee7b7);
     --fsa-text-dim: #6b7280;
     
     /* Status Colors */
-    --fsa-success: #10b981;
+    --fsa-success: var(--fsa-emerald, #10b981);
     --fsa-warning: #f59e0b;
     --fsa-error: #ef4444;
     --fsa-info: #3b82f6;
