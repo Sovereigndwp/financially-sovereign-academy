@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>FSA Module Template Prototype (v0.1) — reference only</title>
+<!--
+  STANDALONE PROTOTYPE of the redesigned FSA hybrid module template.
+  Reference/demo only. NOT a live module, NOT in modules/, NOT linked from nav.
+  Uses Module 2 (Emergency Funds) content as the worked example. Self-contained:
+  it does not import live site CSS/JS, so it cannot affect the live course.
+  The a11y CSS below mirrors snippets/a11y-css-snippet-v0.1.css. Emerald values are
+  literal here only because this file is standalone; live modules use fsa-brand tokens.
+-->
+<style>
+  :root{
+    --color-bg:#0E1013; --color-surface:#16181C; --color-elevated:#1C1F24;
+    --color-border:#2A2E35; --color-border-strong:#3A3F47;
+    --color-text:#F4F6F7; --color-muted:#A8B0B8; --color-brand:#10B981; --color-mint:#6EE7B7;
+    --fsa-fade:linear-gradient(135deg,#0F766E,#10B981 50%,#5EEAD4);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--color-bg);color:var(--color-text);
+    font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;line-height:1.6}
+  .wrap{max-width:760px;margin:0 auto;padding:0 20px}
+  a{color:var(--color-mint)}
+  h1,h2,h3{line-height:1.2}
+  .demo-banner{background:#3A3F47;color:#fff;text-align:center;font-size:13px;padding:8px}
+  .hero{padding:40px 0 24px;border-bottom:1px solid var(--color-border)}
+  .hero .eyebrow{font-family:ui-monospace,monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--color-mint)}
+  .hero h1{font-size:2rem;margin:8px 0 6px}
+  .hero p{color:var(--color-muted);margin:0}
+  section{padding:28px 0;border-bottom:1px solid var(--color-border)}
+  .block-tag{font-family:ui-monospace,monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#6B7280;margin:0 0 8px}
+  /* Gate */
+  .fsa-gate{background:var(--color-surface);border:1px solid var(--color-border);border-radius:8px;padding:18px 20px}
+  .fsa-gate__title{margin:0 0 8px;font-size:1.15rem}
+  .fsa-gate__list{margin:6px 0}
+  .fsa-gate__outcome{margin:8px 0 0}
+  /* Calculator */
+  .calc{background:var(--color-elevated);border:1px solid var(--color-border);border-radius:8px;padding:18px 20px}
+  .calc label{display:block;font-size:.9rem;color:var(--color-muted);margin:10px 0 4px}
+  .calc input{width:100%;font-size:16px;padding:10px;background:var(--color-bg);border:1px solid var(--color-border-strong);border-radius:4px;color:var(--color-text)}
+  .calc button{margin-top:14px}
+  .calc__result{margin-top:14px;font-size:1.1rem;min-height:1.6em}
+  .calc__result b{color:var(--color-mint)}
+  /* Buttons (gradient outline, never hue-filled) */
+  .fsa-btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;font-weight:600;
+    border-radius:4px;text-decoration:none;cursor:pointer;border:1.6px solid transparent;
+    background:linear-gradient(var(--color-elevated),var(--color-elevated)) padding-box,var(--fsa-fade) border-box;color:var(--color-text)}
+  .fsa-btn--secondary{background:transparent;border:1.5px solid var(--color-border-strong);color:var(--color-text)}
+  /* Scenario */
+  .scenario .choices{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0}
+  .scenario__outcome{min-height:1.6em;color:var(--color-mint)}
+  /* Traps */
+  .fsa-traps{background:var(--color-surface);border-left:3px solid var(--color-brand);border-radius:0 8px 8px 0;padding:14px 18px}
+  .fsa-traps__title{margin:0 0 6px;font-size:1rem}
+  /* Quiz */
+  .quiz-q{margin:14px 0}
+  .quiz-option{display:block;width:100%;text-align:left;margin:6px 0;padding:10px 12px;background:var(--color-elevated);
+    border:1px solid var(--color-border-strong);border-radius:4px;color:var(--color-text);cursor:pointer;min-height:44px}
+  .quiz-option[aria-pressed="true"]{border-color:var(--color-brand)}
+  .quiz__feedback{min-height:1.4em;font-weight:600}
+  .ok{color:var(--color-mint)} .no{color:#FBBF24}
+  /* Worksheet */
+  .fsa-worksheet{background:var(--color-surface);border:1px solid var(--color-border);border-radius:8px;padding:18px 20px}
+  .fsa-worksheet__actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+  .fsa-worksheet__note{color:var(--color-muted);font-size:.85rem}
+  .fsa-worksheet__print{background:var(--color-bg);border:1px dashed var(--color-border-strong);border-radius:6px;padding:14px;margin-top:10px}
+  .fsa-worksheet__print table{width:100%;border-collapse:collapse;font-size:.9rem}
+  .fsa-worksheet__print td,.fsa-worksheet__print th{border:1px solid var(--color-border-strong);padding:6px}
+  /* Completion + bridge */
+  .completion{background:var(--color-elevated);border:1px solid var(--color-border);border-radius:8px;padding:18px 20px;text-align:center}
+  footer{padding:24px 0;color:#6B7280;font-size:.85rem;text-align:center}
+  /* ---- shared a11y defaults (mirror of a11y-css-snippet) ---- */
+  :where(a,button,input,[tabindex]):focus-visible{outline:2px solid var(--color-brand);outline-offset:2px;border-radius:2px}
+  @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important;scroll-behavior:auto!important}}
+  @media print{
+    .demo-banner,.hero .eyebrow,.calc,.scenario,.quiz,.completion,nav,.block-tag,.fsa-traps{display:none!important}
+    .fsa-worksheet,.fsa-worksheet__print{display:block!important}
+    body{background:#fff;color:#000}
+  }
+</style>
+</head>
+<body>
+<div class="demo-banner">Prototype / reference only. Not a live module. Demonstrates the redesigned FSA hybrid module template.</div>
+
+<!-- BLOCK 1: HERO -->
+<header class="hero"><div class="wrap">
+  <div class="eyebrow">Module 2 · Free course</div>
+  <h1>Emergency Funds &amp; Saving</h1>
+  <p>Build a small cushion that changes what happens in a bad week.</p>
+</div></header>
+
+<main>
+<!-- BLOCK 2: IS-THIS-FOR-YOU GATE (new) -->
+<section><div class="wrap">
+  <p class="block-tag">Block 2 · Gate (new)</p>
+  <div class="fsa-gate" aria-labelledby="gate-t">
+    <h2 id="gate-t" class="fsa-gate__title">Is this module for you?</h2>
+    <p>This module is for you if:</p>
+    <ul class="fsa-gate__list">
+      <li>you have little or no savings right now,</li>
+      <li>a surprise bill would put you into debt, or</li>
+      <li>money comes in unevenly.</li>
+    </ul>
+    <p class="fsa-gate__outcome"><strong>By the end you will:</strong> know your first cushion target, know where to keep it, and have a tracker to build it one step at a time.</p>
+  </div>
+</div></section>
+
+<!-- BLOCK 3: TEACHING (unchanged content, shortened for demo) -->
+<section><div class="wrap">
+  <p class="block-tag">Block 3 · Teaching</p>
+  <h2>A cushion is a shock absorber, not a wealth plan</h2>
+  <p>The first goal is not a big number. It is the first amount that changes what happens when something breaks. Even a small cushion changes your options in a bad week, because the most available money then is usually the most expensive.</p>
+</div></section>
+
+<!-- BLOCK 4: INTERACTIVE TOOL (online-only; accessible) -->
+<section><div class="wrap">
+  <p class="block-tag">Block 4 · Interactive tool (online-only)</p>
+  <h2>Emergency fund calculator</h2>
+  <div class="calc">
+    <label for="ef-exp">Your essential monthly expenses (example: 1800)</label>
+    <input id="ef-exp" type="number" inputmode="numeric" min="0" placeholder="e.g. 1800" aria-describedby="ef-out">
+    <button class="fsa-btn" type="button" onclick="calcEF()">Calculate my targets</button>
+    <p class="calc__result" id="ef-out" aria-live="polite" role="status"></p>
+  </div>
+</div></section>
+
+<!-- BLOCK 5: SCENARIO (branching; accessible) -->
+<section><div class="wrap">
+  <p class="block-tag">Block 5 · Real-life scenario (required)</p>
+  <h2>The car repair week</h2>
+  <p>Your car needs a $300 repair to get to work. What protects you best?</p>
+  <div class="scenario">
+    <div class="choices">
+      <button class="fsa-btn fsa-btn--secondary" type="button" onclick=" efScen('payday')">Take a payday loan</button>
+      <button class="fsa-btn fsa-btn--secondary" type="button" onclick="efScen('cushion')">Use a small cushion</button>
+      <button class="fsa-btn fsa-btn--secondary" type="button" onclick="efScen('skip')">Skip the repair</button>
+    </div>
+    <p class="scenario__outcome" id="ef-scen" aria-live="polite" role="status"></p>
+  </div>
+</div></section>
+
+<!-- BLOCK 6: TRAPS CALLOUT (standardized) -->
+<section><div class="wrap">
+  <p class="block-tag">Block 6 · Watch out for (standardized)</p>
+  <aside class="fsa-traps" role="note" aria-labelledby="traps-t">
+    <h3 id="traps-t" class="fsa-traps__title">Watch out for</h3>
+    <ul>
+      <li><strong>Keeping the cushion too easy to spend:</strong> keep it separate from daily money.</li>
+      <li><strong>Treating a want as an emergency:</strong> write your own one-line definition first.</li>
+      <li><strong>Using a credit card or payday loan as your "emergency fund":</strong> that is borrowing, not a cushion.</li>
+    </ul>
+  </aside>
+</div></section>
+
+<!-- BLOCK 7: QUIZ (accessible) -->
+<section><div class="wrap">
+  <p class="block-tag">Block 7 · Check your understanding</p>
+  <div class="quiz" role="group" aria-labelledby="q1">
+    <p class="quiz-q" id="q1"><strong>What is the best first emergency-fund goal?</strong></p>
+    <button class="quiz-option" type="button" onclick="ans(this,false)">One year of expenses</button>
+    <button class="quiz-option" type="button" onclick="ans(this,true)">A small starter amount you can reach soon</button>
+    <button class="quiz-option" type="button" onclick="ans(this,false)">Nothing until debt is gone</button>
+    <p class="quiz__feedback" id="q1fb" aria-live="polite" role="status"></p>
+  </div>
+</div></section>
+
+<!-- BLOCK 8: WORKSHEET / DOWNLOAD (new) -->
+<section><div class="wrap">
+  <p class="block-tag">Block 8 · Worksheet / download (new)</p>
+  <div class="fsa-worksheet" aria-labelledby="ws-t">
+    <h2 id="ws-t" class="fsa-worksheet__title">Take this with you</h2>
+    <p>A simple tracker to build your starter cushion, one rung at a time. Use it on paper or download the PDF.</p>
+    <div class="fsa-worksheet__print" aria-label="Starter cushion tracker preview">
+      <p><strong>Starter Cushion Tracker</strong> (preview of the printable worksheet)</p>
+      <table>
+        <tr><th>Rung</th><th>Target amount</th><th>Date</th><th>Done</th></tr>
+        <tr><td>1</td><td>$ ____</td><td>__/__</td><td>[ ]</td></tr>
+        <tr><td>2</td><td>$ ____</td><td>__/__</td><td>[ ]</td></tr>
+        <tr><td>3</td><td>$ ____</td><td>__/__</td><td>[ ]</td></tr>
+      </table>
+    </div>
+    <p class="fsa-worksheet__actions">
+      <a class="fsa-btn" href="/worksheets/pdf/module-02-starter-cushion-tracker-v0.1.pdf" download>Download the tracker (PDF)</a>
+      <button class="fsa-btn fsa-btn--secondary" type="button" onclick="window.print()">Print this worksheet</button>
+    </p>
+    <p class="fsa-worksheet__note">Free · PDF · Module 2 worksheet. Educational information, not financial advice.</p>
+  </div>
+</div></section>
+
+<!-- BLOCK 9: COMPLETION + BRIDGE -->
+<section><div class="wrap">
+  <p class="block-tag">Block 9 · Completion + bridge</p>
+  <div class="completion">
+    <p><strong>Module 2 complete.</strong> You have your cushion target and a tracker to build it.</p>
+    <p><a class="fsa-btn" href="#">Continue to Module 3: Banking Without Getting Robbed</a></p>
+  </div>
+</div></section>
+</main>
+
+<footer><div class="wrap">Prototype of the redesigned FSA module template · reference only · Educational information, not financial advice.</div></footer>
+
+<script>
+  // Self-contained demo logic (no live site JS). Results announced via aria-live regions.
+  function calcEF(){
+    var v=parseFloat(document.getElementById('ef-exp').value||'0');
+    var out=document.getElementById('ef-out');
+    if(!v||v<0){out.textContent='Enter your essential monthly expenses to see targets.';return;}
+    var starter=Math.max(25,Math.round(v*0.1));
+    out.innerHTML='Starter cushion (example): <b>$'+starter.toLocaleString()+'</b>. One-month cushion: <b>$'+Math.round(v).toLocaleString()+'</b>. Example figures.';
+  }
+  function efScen(k){
+    var o=document.getElementById('ef-scen');
+    if(k==='payday')o.textContent='A payday loan gets the car fixed but the fee and the next short check can restart the cycle. Most expensive option.';
+    else if(k==='cushion')o.textContent='A small cushion covers the repair, keeps you working, and no new debt. This is exactly what the cushion is for.';
+    else o.textContent='Skipping the repair can cost your job or transport. Protecting the way you earn usually comes first.';
+  }
+  function ans(btn,correct){
+    document.querySelectorAll('.quiz-option').forEach(function(b){b.setAttribute('aria-pressed','false')});
+    btn.setAttribute('aria-pressed','true');
+    var fb=document.getElementById('q1fb');
+    fb.textContent = correct ? 'Correct. Start small and reachable; the first rung changes your options.' : 'Not quite. The best first goal is a small amount you can reach soon.';
+    fb.className='quiz__feedback '+(correct?'ok':'no');
+  }
+</script>
+</body>
+</html>

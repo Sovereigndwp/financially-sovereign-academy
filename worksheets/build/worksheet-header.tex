@@ -1,0 +1,21 @@
+% FSA worksheet shared print header (Phase 0 scaffolding).
+% Black-and-white friendly, printable margins, page numbers, educational-use footer.
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[L]{\scriptsize Financially Sovereign Academy}
+\fancyfoot[C]{\small \thepage}
+\fancyfoot[R]{\scriptsize Educational information, not financial advice.}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0.2pt}
+
+% Sans headings for a clean worksheet look; no color dependency.
+\usepackage{sectsty}
+\allsectionsfont{\sffamily}
+
+% Tight, form-like spacing so a one-page worksheet stays on one page.
+\setlength{\parskip}{3pt}
+\setlength{\parindent}{0pt}
+
+% Simple fill-in line helper: \fillline{width}
+\newcommand{\fillline}[1]{\underline{\hspace{#1}}}

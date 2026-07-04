@@ -1,0 +1,25 @@
+<!-- FSA shared snippet: worksheet / download block (template block 8, "Take this with you").
+     REFERENCE ONLY. Not wired into any live module. Replace SLUG, NN, and the Title.
+     The print div receives the worksheet HTML generated from the same markdown source
+     (worksheets/src/module-NN-*.md), so online and paper stay aligned. Download is a
+     plain anchor so it works with JavaScript disabled. No email gate. -->
+<section class="fsa-worksheet" id="mod-SLUG__worksheet" aria-labelledby="mod-SLUG__worksheet-title">
+  <h2 id="mod-SLUG__worksheet-title" class="fsa-worksheet__title">Take this with you</h2>
+  <p class="fsa-worksheet__lead">PLACEHOLDER one-line framing: what the worksheet is for and when to use it.</p>
+
+  <!-- Print-friendly, on-page version (generated from the markdown source; not hand-copied). -->
+  <div class="fsa-worksheet__print" id="mod-SLUG__worksheet-print">
+    <!-- injected worksheet HTML goes here at build time -->
+  </div>
+
+  <p class="fsa-worksheet__actions">
+    <a class="fsa-btn fsa-btn--primary"
+       href="/worksheets/pdf/FSA-Module-NN-Worksheet-Title-v0.1.pdf"
+       download>Download the worksheet (PDF)</a>
+    <button type="button" class="fsa-btn fsa-btn--secondary" onclick="window.print()">Print this worksheet</button>
+  </p>
+
+  <p class="fsa-worksheet__note">
+    <small>Free · PDF · Module NN worksheet. Educational information, not financial advice.</small>
+  </p>
+</section>
