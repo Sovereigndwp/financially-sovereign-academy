@@ -14,17 +14,24 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500;1,700&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
 
-:root {
-  /* ---- Accent (emerald/mint): accent use only, never large fields ---- */
-  --color-brand:        #10B981;   /* emerald, primary accent / action */
-  --color-brand-soft:   #0D9668;   /* deeper emerald */
-  --color-brand-deep:   #047857;   /* deepest emerald (AA text on dark edge cases) */
-  --color-mint:         #6EE7B7;   /* bright accent: numbers, links, diamonds */
-  --color-mint-bright:  #A7F3D0;
+/* FSA token bridge: pull the vendored shared parent tokens (--fsa-emerald etc.).
+   Local, relative path so it resolves in served mode. Only the 5 byte-identical
+   emerald accent tokens below re-point to it; each keeps a literal fallback so a
+   missing import can never collapse the accent to an invalid value (PR4 lesson).
+   Neutrals, type, shadows, alerts stay FSA-specific and literal. */
+@import url('tsa-shared-tokens.css');
 
-  /* ---- Signature fade (B): teal -> emerald -> aqua-mint ---- */
-  --brand-gradient:            linear-gradient(135deg, #0F766E 0%, #10B981 50%, #5EEAD4 100%);
-  --brand-gradient-horizontal: linear-gradient(90deg,  #0F766E 0%, #10B981 50%, #5EEAD4 100%);
+:root {
+  /* ---- Accent (emerald/mint): bridged to shared --fsa-* with literal fallback ---- */
+  --color-brand:        var(--fsa-emerald, #10B981);   /* emerald, primary accent / action */
+  --color-brand-soft:   #0D9668;   /* FSA-specific (no shared equivalent) — keep literal */
+  --color-brand-deep:   var(--fsa-deep, #047857);      /* deepest emerald */
+  --color-mint:         var(--fsa-mint, #6EE7B7);      /* bright accent */
+  --color-mint-bright:  #A7F3D0;   /* FSA-specific — keep literal */
+
+  /* ---- Signature fade (B): teal -> emerald -> aqua-mint (bridged, with fallback) ---- */
+  --brand-gradient:            var(--fsa-fade,   linear-gradient(135deg, #0F766E 0%, #10B981 50%, #5EEAD4 100%));
+  --brand-gradient-horizontal: var(--fsa-fade-h, linear-gradient(90deg,  #0F766E 0%, #10B981 50%, #5EEAD4 100%));
 
   /* ---- Neutral dark surface system (no green tint) ---- */
   --color-bg:        #0E1013;   /* page background, near-black neutral */
