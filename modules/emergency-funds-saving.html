@@ -21,7 +21,7 @@
         }
 
         /* PR-M3: FSA brand typography */
-        body { font-family: var(--font-body); }
+        body { font-family: var(--font-sans); }   /* readable sans for body/UI/cards; serif reserved for major headings below */
         h1, h2 { font-family: var(--font-serif); }
 
         main {
@@ -34,14 +34,14 @@
             text-align: center;
             margin-bottom: 3rem;
             padding: 2rem;
-            background: var(--fsa-gradient-card);
+            background: var(--color-surface);
             border: 1px solid var(--color-border);
             border-radius: var(--radius-xl);
         }
 
         .module-header h1 {
             font-size: var(--font-size-4xl);
-            color: var(--fsa-green);
+            color: var(--color-text-strong);
             margin-bottom: 1rem;
         }
 
@@ -51,14 +51,14 @@
 
         .section-title {
             font-size: var(--font-size-3xl);
-            color: var(--fsa-green);
+            color: var(--color-text-strong);
             margin-bottom: 1.5rem;
             border-bottom: 3px solid var(--fsa-border-medium);
             padding-bottom: 0.5rem;
         }
 
         .content-block {
-            background: var(--fsa-bg-card);
+            background: var(--color-surface);
             border: 2px solid var(--fsa-border-subtle);
             border-radius: var(--radius-lg);
             padding: 2rem;
@@ -66,14 +66,14 @@
             line-height: 1.8;
         }
 
-        .content-block h3 {
-            color: var(--fsa-green-light);
+        .content-block h3 { font-family: var(--font-sans);
+            color: var(--color-text-strong);
             font-size: var(--font-size-xl);
             margin-bottom: 1rem;
         }
 
         .calculator {
-            background: var(--fsa-bg-secondary);
+            background: var(--color-elevated);
             border: 2px solid var(--fsa-border-medium);
             border-radius: var(--radius-xl);
             padding: 2rem;
@@ -88,14 +88,14 @@
         }
 
         .result-box {
-            background: var(--fsa-bg-dark);
+            background: var(--color-bg);
             border: 2px solid var(--fsa-border-medium);
             border-radius: var(--radius-lg);
             padding: 1.5rem;
             text-align: center;
         }
 
-        .result-label {
+        .result-label { font-family: var(--font-mono);
             font-size: var(--font-size-sm);
             color: var(--fsa-text-dim);
             text-transform: uppercase;
@@ -107,7 +107,7 @@
             font-size: var(--font-size-3xl);
             font-weight: var(--font-weight-extrabold);
             color: var(--fsa-green);
-            font-family: var(--font-family-mono);
+            font-family: var(--font-mono, monospace);
         }
 
         .result-desc {
@@ -118,7 +118,7 @@
         }
 
         .scenario {
-            background: var(--fsa-bg-card);
+            background: var(--color-surface);
             border: 2px solid var(--fsa-border-medium);
             border-radius: var(--radius-xl);
             padding: 2rem;
@@ -159,7 +159,7 @@
             font-weight: var(--font-weight-bold);
             font-size: var(--font-size-lg);
             margin-bottom: 0.5rem;
-            color: var(--fsa-green);
+            color: var(--color-text-strong);
         }
 
         .outcome {
@@ -203,7 +203,7 @@
         }
 
         .quiz {
-            background: var(--fsa-bg-card);
+            background: var(--color-surface);
             border: 2px solid var(--fsa-border-medium);
             border-radius: var(--radius-xl);
             padding: 2rem;
@@ -212,7 +212,7 @@
 
         .quiz-question {
             font-size: var(--font-size-xl);
-            color: var(--fsa-green);
+            color: var(--color-text-strong);
             margin-bottom: 1.5rem;
         }
 
@@ -276,7 +276,7 @@
         }
 
         .build-header {
-            background: var(--fsa-bg-card);
+            background: var(--color-surface);
             padding: 1.5rem;
             cursor: pointer;
             display: flex;
@@ -303,7 +303,7 @@
 
         .build-content {
             padding: 1.5rem;
-            background: var(--fsa-bg-secondary);
+            background: var(--color-elevated);
             border-top: 1px solid var(--fsa-border-subtle);
             display: none;
         }
@@ -330,15 +330,15 @@
         .reflection-question {
             margin: 2rem 0;
             padding: 2rem;
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(59, 130, 246, 0.05));
-            border-left: 4px solid #3b82f6;
+            background: var(--color-surface);
+            border-left: 4px solid var(--fsa-green, #10b981);
             border-radius: 0.5rem;
         }
 
         .reflection-question .question-header {
             font-size: 1.5rem;
             font-weight: 700;
-            color: #60a5fa;
+            color: var(--fsa-green, #10b981);
             margin-bottom: 1rem;
             font-style: italic;
         }
@@ -346,13 +346,13 @@
         .reflection-question .question-text {
             font-size: 1.15rem;
             line-height: 1.7;
-            color: rgba(255, 255, 255, 0.9);
+            color: var(--color-text);
             margin-bottom: 0.75rem;
         }
 
         .reflection-question .question-subtitle {
             font-size: 0.95rem;
-            color: rgba(255, 255, 255, 0.65);
+            color: var(--color-muted);
             font-style: italic;
         }
 
@@ -405,13 +405,84 @@
             <p class="subtitle">Build financial resilience: protect yourself from life's surprises</p>
         </div>
 
+        <!-- Hybrid-pilot scoped styles (module-local only; no global CSS touched) -->
+        <style id="fsa-hybrid-pilot-2">
+          .fsa-gate{background:var(--color-surface);border:1px solid var(--color-border,#2A2E35);border-radius:var(--radius-md,8px);padding:1.1rem 1.3rem;margin:1.25rem 0}
+          .fsa-gate__title{margin:0 0 .5rem;font-size:1.15rem;color:var(--color-text-strong)}
+          .fsa-gate ul{margin:.4rem 0 .4rem 1.1rem}
+          .fsa-gate__outcome{margin:.6rem 0 0}
+          .fsa-traps{background:var(--color-surface);border-left:3px solid var(--fsa-green,#10b981);border-radius:0 var(--radius-md,8px) var(--radius-md,8px) 0;padding:1rem 1.25rem;margin:1.5rem 0}
+          .fsa-traps__title{margin:0 0 .4rem;font-size:1.05rem;color:var(--color-text-strong)}
+          .fsa-traps ul{margin:.3rem 0 0 1.1rem}
+          .fsa-worksheet{background:var(--color-elevated);border:1px solid var(--color-border,#2A2E35);border-radius:var(--radius-md,8px);padding:1.25rem 1.4rem;margin:1.5rem 0}
+          .fsa-worksheet__title{margin:0 0 .4rem;color:var(--color-text-strong)}
+          .fsa-worksheet__print{background:var(--color-bg);border:1px dashed var(--color-border-strong,#3A3F47);border-radius:6px;padding:.9rem 1rem;margin:.8rem 0}
+          .fsa-worksheet__print table{width:100%;border-collapse:collapse;font-size:.9rem}
+          .fsa-worksheet__print th,.fsa-worksheet__print td{border:1px solid var(--color-border-strong,#3A3F47);padding:6px}
+          .fsa-worksheet__actions{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.9rem}
+          .fsa-worksheet__note{color:var(--color-muted,#A8B0B8);font-size:.85rem;margin-top:.5rem}
+          .fsa-ws-btn{display:inline-flex;align-items:center;gap:.4rem;min-height:44px;padding:0 1.1rem;font-weight:600;border-radius:2px;text-decoration:none;cursor:pointer;border:1.6px solid var(--fsa-green,#10b981);background:transparent;color:var(--fsa-green,#10b981)}
+          .fsa-ws-btn:hover{background:var(--color-surface)}
+          .fsa-ws-btn--secondary{background:transparent;border:1.5px solid var(--color-border-strong,#3A3F47);color:var(--color-muted,#A8B0B8)}
+          /* Local override: neutralize remaining green-wash cards (Key Insight, Live Financial Context) to neutral surfaces + emerald accent border only */
+          .highlight-tip{background:var(--color-elevated)!important;border:1px solid var(--color-border)!important;border-left:3px solid var(--fsa-green,#10b981)!important}
+          .fsa-live-banner{background:var(--color-surface)!important;border:1px solid var(--color-border)!important;border-left:3px solid var(--fsa-green,#10b981)!important}
+          /* Local override: functional buttons (Calculate My Target, Mark Complete) -> outline/ghost, no solid emerald fill, no gradient */
+          .btn-primary{background:transparent!important;border:1.6px solid var(--fsa-green,#10b981)!important;color:var(--fsa-green,#10b981)!important;box-shadow:none!important;background-image:none!important}
+          .btn-primary:hover{background:rgba(16,185,129,0.08)!important;border-color:var(--fsa-green,#10b981)!important;box-shadow:none!important}
+          /* Squared institutional buttons; de-fill secondary + plan "Save My Decisions" button (no solid emerald, no pill, no shadow, no gradient) */
+          .btn{border-radius:2px!important;box-shadow:none!important}
+          .btn-secondary{background:transparent!important;border:1.6px solid var(--fsa-green,#10b981)!important;color:var(--fsa-green,#10b981)!important;box-shadow:none!important;background-image:none!important}
+          .btn-secondary:hover{background:rgba(16,185,129,0.08)!important;box-shadow:none!important}
+          .fsa-plan-save-btn{background:transparent!important;border:1.6px solid var(--fsa-green,#10b981)!important;color:var(--fsa-green,#10b981)!important;border-radius:2px!important;box-shadow:none!important;background-image:none!important}
+          .fsa-plan-save-btn:hover{background:rgba(16,185,129,0.08)!important}
+          /* "My Plan: Emergency Funds & Saving" widget -> neutral surface, neutral headings, emerald accent only */
+          .fsa-plan-widget{background:var(--color-surface)!important;border:1px solid var(--color-border)!important;border-left:3px solid var(--fsa-green,#10b981)!important;border-radius:8px!important}
+          .fsa-plan-summary__header h3,.fsa-plan-export h4,.fsa-plan-section__title{color:var(--color-text-strong)!important}
+          /* "Steps to Build" cards -> neutral border (emerald as a small left accent), neutral heading */
+          .build-item{border:1px solid var(--color-border)!important;border-left:3px solid var(--fsa-green,#10b981)!important}
+          .build-header h3{color:var(--color-text-strong)!important}
+          /* One institutional button typography for every visible action button (family/size/weight/spacing/padding/radius) */
+          .btn,.fsa-ws-btn,.fsa-plan-save-btn{font-family:var(--font-sans)!important;font-size:0.95rem!important;font-weight:600!important;letter-spacing:0.01em!important;line-height:1.1!important;padding:0.7rem 1.25rem!important;border-radius:2px!important;min-height:44px!important}
+          /* Consistent card headings: neutral ink, sans, one size + weight (major section headings stay serif) */
+          .content-block h3,.build-header h3,.quiz-question,.fsa-gate__title,.fsa-traps__title,.fsa-worksheet__title,.fsa-plan-summary__header h3{font-family:var(--font-sans)!important;font-size:var(--font-size-xl)!important;font-weight:600!important;letter-spacing:0!important;color:var(--color-text-strong)!important}
+          /* Local accessibility defaults (module-scoped) */
+          .module-header ~ * :where(a,button,input,[tabindex]):focus-visible,
+          main :where(a,button,input,[tabindex]):focus-visible{outline:2px solid var(--fsa-green,#10b981);outline-offset:2px;border-radius:2px}
+          @media (prefers-reduced-motion: reduce){
+            *,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+          }
+          @media print{
+            /* Print only the worksheet. Hide everything else, incl. fixed Home/Calculators nav. */
+            body{background:#fff!important;color:#000!important}
+            body *{visibility:hidden!important}
+            .fsa-worksheet,.fsa-worksheet *{visibility:visible!important}
+            .fsa-worksheet__actions{display:none!important}
+            .fsa-worksheet{position:absolute;left:0;top:0;width:100%;border:0;background:#fff;color:#000}
+            .fsa-worksheet__title{color:#000!important}
+            .fsa-worksheet__print{border-color:#000}
+          }
+        </style>
+
+        <!-- Block: Is this for you? gate (hybrid pilot) -->
+        <section class="fsa-gate" aria-labelledby="fsa-gate-title-2">
+            <h2 id="fsa-gate-title-2" class="fsa-gate__title">Is this module for you?</h2>
+            <p>This module is for you if:</p>
+            <ul>
+                <li>you have little or no savings right now,</li>
+                <li>a surprise bill would put you into debt, or</li>
+                <li>money comes in unevenly.</li>
+            </ul>
+            <p class="fsa-gate__outcome"><strong>By the end you will:</strong> know your first cushion target, know where to keep it, and have a tracker to build it one step at a time.</p>
+        </section>
+
         <div id="fsa-live-banner-2"></div>
 
 
         <!-- Reflection Question -->
         <div class="reflection-question">
             <div class="question-header">
-                🤔 Before we begin...
+                Before we begin
             </div>
             <p class="question-text">
                 <strong>What happens to my choices when an emergency hits and I have no buffer?</strong>
@@ -441,7 +512,7 @@
             </div>
 
             <div class="highlight highlight-tip">
-                <strong>💡 Key Insight:</strong> An emergency fund isn't optional. It's the foundation of financial security.
+                <strong>Key Insight:</strong> An emergency fund isn't optional. It's the foundation of financial security.
             </div>
         </section>
 
@@ -486,7 +557,7 @@
 
                 <button class="btn btn-primary" onclick="calculateEmergencyFund()">Calculate My Target</button>
 
-                <div class="calculator-results hidden" id="calculator-results">
+                <div class="calculator-results hidden" id="calculator-results" aria-live="polite" role="status">
                     <div class="result-box">
                         <div class="result-label">Stage 1</div>
                         <div class="result-value" id="stage1">$1,000</div>
@@ -511,9 +582,9 @@
             </div>
 
             <div class="highlight highlight-success" style="margin-top: 2rem; padding: 1.5rem; background: var(--color-elevated); border: 1px solid rgba(16,185,129,0.35);">
-                <strong style="font-size: 1.1rem; color: var(--fsa-green);">💰 Plan Your Long-Term Wealth</strong>
+                <strong style="font-size: 1.1rem; color: var(--color-text-strong);">Plan Your Long-Term Wealth</strong>
                 <p style="margin: 0.5rem 0;">Once you've built your emergency fund, see how your continued savings can grow with our <strong>Compound Growth Calculator</strong>. Visualize different scenarios and timelines.</p>
-                <a href="../calculators/compound-growth-calculator.html?from=emergency-funds-saving" style="display: inline-block; margin-top: 0.75rem; padding: 0.75rem 1.5rem; background: linear-gradient(var(--color-bg), var(--color-bg)) padding-box, var(--brand-gradient) border-box; border: 1.5px solid transparent; color: var(--color-text); text-decoration: none; border-radius: var(--radius-md); font-weight: bold; transition: all 0.2s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 0 22px rgba(16,185,129,0.22)';" onmouseout="this.style.transform=''; this.style.boxShadow='';">Calculate Your Growth →</a>
+                <a href="../calculators/compound-growth-calculator.html?from=emergency-funds-saving" style="display: inline-flex; align-items: center; margin-top: 0.75rem; padding: 0.7rem 1.25rem; min-height: 44px; background: transparent; border: 1.6px solid var(--fsa-green, #10b981); color: var(--fsa-green, #10b981); text-decoration: none; border-radius: 2px; font-family: var(--font-sans); font-size: 0.95rem; font-weight: 600; letter-spacing: 0.01em; transition: background 0.2s;" onmouseover="this.style.background='rgba(16,185,129,0.08)';" onmouseout="this.style.background='transparent';">Calculate Your Growth →</a>
             </div>
         </section>
 
@@ -577,7 +648,7 @@
         <!-- Reflection Question -->
         <div class="reflection-question">
             <div class="question-header">
-                🤔 The harder question...
+                The harder question...
             </div>
             <p class="question-text">
                 <strong>Who profits when I'm forced into debt for emergencies?</strong>
@@ -737,6 +808,17 @@
             </div>
         </section>
 
+        <!-- Block: Watch out for (standardized traps/pressure callout) -->
+        <aside class="fsa-traps" role="note" aria-labelledby="fsa-traps-title-2">
+            <h3 id="fsa-traps-title-2" class="fsa-traps__title">Watch out for</h3>
+            <ul>
+                <li><strong>Keeping the cushion too easy to spend:</strong> keep it separate from your everyday money.</li>
+                <li><strong>Treating a want as an emergency:</strong> write your own one-line definition of a real emergency first.</li>
+                <li><strong>Using a credit card or a payday loan as your "emergency fund":</strong> that is borrowing, not a cushion. The most available money in a bad week is usually the most expensive.</li>
+                <li><strong>Losing the cushion to inflation is expected:</strong> a little lost purchasing power is the cost of keeping the money safe and reachable.</li>
+            </ul>
+        </aside>
+
         <!-- Section 6: Comprehension Quiz -->
         <section class="section">
             <h2 class="section-title">Check Your Understanding</h2>
@@ -770,6 +852,26 @@
                 </div>
                 <div class="quiz-feedback hidden" id="feedback-3"></div>
             </div>
+        </section>
+
+        <!-- Block: Worksheet / download (Starter Cushion Tracker) -->
+        <section class="fsa-worksheet" aria-labelledby="fsa-ws-title-2">
+            <h2 id="fsa-ws-title-2" class="fsa-worksheet__title">Take this with you</h2>
+            <p>A simple tracker to build your starter cushion, one rung at a time. Use it on paper or download the PDF.</p>
+            <div class="fsa-worksheet__print" aria-label="Starter Cushion Tracker preview">
+                <p style="margin:0 0 .5rem;"><strong>Starter Cushion Tracker</strong> (preview of the printable worksheet)</p>
+                <table>
+                    <tr><th>Rung</th><th>Target amount</th><th>Date</th><th>Done</th></tr>
+                    <tr><td>1</td><td>$ ____</td><td>__ / __</td><td>[ ]</td></tr>
+                    <tr><td>2</td><td>$ ____</td><td>__ / __</td><td>[ ]</td></tr>
+                    <tr><td>3</td><td>$ ____</td><td>__ / __</td><td>[ ]</td></tr>
+                </table>
+            </div>
+            <div class="fsa-worksheet__actions">
+                <a class="fsa-ws-btn" href="/worksheets/pdf/module-02-starter-cushion-tracker-v0.1.pdf" download>Download the Starter Cushion Tracker (PDF)</a>
+                <button type="button" class="fsa-ws-btn fsa-ws-btn--secondary" onclick="window.print()">Print this worksheet</button>
+            </div>
+            <p class="fsa-worksheet__note">Use this as a planning worksheet, not as financial advice.</p>
         </section>
 
         <!-- Module Complete -->
@@ -895,12 +997,8 @@
     </script>
 <script src="../js/lab-guide.js"></script>
 
-<!-- FSA Analytics & Email Capture -->
-<div style="margin: 2rem auto; max-width: 900px; padding: 0 1.5rem;">
-    <div data-fsa-email-capture="page-footer" data-title="📬 Level Up Your Finances" data-subtitle="Weekly money tips and financial strategies. No spam, ever."></div>
-</div>
+<!-- FSA Analytics (email-capture prompt removed from this module per brand cleanup) -->
 <script src="/js/analytics.js" defer></script>
-<script src="/js/email-capture.js" defer></script>
 
 <footer class="legal-footer">© 2026 The Sovereign Academy · Educational content only · Not financial advice</footer>
 
