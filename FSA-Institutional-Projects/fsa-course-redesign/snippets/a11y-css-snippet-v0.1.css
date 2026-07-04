@@ -1,0 +1,53 @@
+/* FSA shared accessibility defaults — REFERENCE SNIPPET ONLY.
+   Not imported into any live stylesheet. Consumes existing fsa-brand tokens
+   (var(--color-brand) etc.) with literal fallbacks; introduces NO new tokens.
+   Applied per module during its redesign, on a branch, verified in served mode.
+   Addresses the audit gaps: missing :focus (8/10), missing reduced-motion (9/10),
+   and print/tap-target defaults. */
+
+/* 1. Visible keyboard focus on every interactive element */
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-brand, #10b981);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* 2. Respect reduced-motion for all JS-driven reveals/animations */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* 3. Minimum tap-target size for interactive controls */
+.fsa-gate a,
+.fsa-traps a,
+.fsa-worksheet .fsa-btn,
+.lab-card,
+.quiz-option,
+button {
+  min-height: 44px;
+}
+
+/* 4. Print: show the worksheet + essential context, hide interactive chrome */
+@media print {
+  nav, .nav, .module-nav, .site-header, .site-footer,
+  .calculator, .quiz, .scenario, .completion-banner,
+  .lab-guide, .reflect-widget, .fsa-traps {
+    display: none !important;
+  }
+  .fsa-worksheet, .fsa-worksheet__print { display: block !important; }
+  html, body { background: #fff !important; color: #000 !important; }
+  * { box-shadow: none !important; text-shadow: none !important; }
+  a[href]::after { content: ""; }           /* no URL spam in print */
+  h1, h2, h3, tr, li { break-inside: avoid; }
+}
+
+/* Notes for wiring (do not rely on color alone, add text/icon for state):
+   - Calculator result container should be aria-live="polite".
+   - Quiz feedback should be aria-live and include a text/icon cue, not color only.
+   - Toggles use aria-expanded / aria-controls.
+   - Active lab card indicated with aria-current, not color only. */
