@@ -225,3 +225,42 @@
   font-weight: 600;
   letter-spacing: 0;
 }
+
+/* ============================================================================
+   LAYER 4 — ACCESSIBILITY (scoped).
+   Migrated from the Module-2 pilot's inline a11y rules.
+
+   Focus ring: `.fsa-course :where(...):focus-visible` is (0,2,0), which beats
+   the legacy `a:focus-visible` / `button:focus-visible` (0,1,1) in fsa-theme.css
+   and fsa-brand.css by specificity — so the emerald course ring wins without
+   depending on source order. `:where()` keeps the inner list at zero specificity.
+
+   Reduced motion: scoped to the course subtree (`.fsa-course *`). Whole-page
+   reduced-motion is ALSO guaranteed by the global blocks already in fsa-theme.css
+   and fsa-brand.css (which cover the out-of-<main> nav + footer), so scoping the
+   course copy is value-identical. `!important` here is the legitimate, defensive
+   a11y pattern (the one place it is allowed in the course layers).
+
+   Tap targets (≥44px) already come from the global fsa-theme.css control rule and
+   the Layer-3 scoped button rule, so no new tap-target rule is added (a broad one
+   would risk changing existing element sizes). aria-live/role=status on
+   #calculator-results and input <label>s stay in the module markup.
+   ============================================================================ */
+
+/* Visible emerald focus ring on every focusable control inside a course module. */
+.fsa-course :where(a, button, input, [tabindex]):focus-visible {
+  outline: 2px solid var(--fsa-green, #10b981);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Respect reduced-motion for course-subtree animation/transition/scroll. */
+@media (prefers-reduced-motion: reduce) {
+  .fsa-course *,
+  .fsa-course *::before,
+  .fsa-course *::after {
+    animation-duration: .001ms !important;
+    transition-duration: .001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

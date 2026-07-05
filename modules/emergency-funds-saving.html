@@ -416,12 +416,11 @@
              local component !importants). `.build-header h3` neutral ink is now
              covered by the Layer 2 card-heading rule. Only Layer 4 (a11y) and
              Layer 5 (print) remain below. */
-          /* Local accessibility defaults (module-scoped) */
-          .module-header ~ * :where(a,button,input,[tabindex]):focus-visible,
-          main :where(a,button,input,[tabindex]):focus-visible{outline:2px solid var(--fsa-green,#10b981);outline-offset:2px;border-radius:2px}
-          @media (prefers-reduced-motion: reduce){
-            *,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
-          }
+          /* Layer 4: focus-visible ring + reduced-motion moved to css/fsa-course.css
+             (.fsa-course-scoped). Whole-page reduced-motion is still covered by the
+             fsa-theme.css / fsa-brand.css globals. aria-live="polite"/role="status"
+             on #calculator-results and the input <label>s remain in the markup.
+             Only the Layer 5 print block remains below. */
           @media print{
             /* Print only the worksheet. Hide everything else, incl. fixed Home/Calculators nav. */
             body{background:#fff!important;color:#000!important}
