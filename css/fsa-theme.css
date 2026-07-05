@@ -16,11 +16,12 @@
     --fsa-green-dark: #059669;
     --fsa-green-hover: #0d9668;
     
-    /* Background Colors */
-    --fsa-bg-dark: #0a1f1a;
-    --fsa-bg-secondary: #0f2922;
-    --fsa-bg-card: #1a3a2e;
-    --fsa-bg-hover: #234a3c;
+    /* Background Colors — Layer 1: neutralized to the graphite scale (was green)
+       so legacy surfaces no longer clash with the graphite web skin. */
+    --fsa-bg-dark: var(--n-bg, #121316);            /* was #0a1f1a */
+    --fsa-bg-secondary: var(--n-surface, #191B1F);  /* was #0f2922 */
+    --fsa-bg-card: var(--n-elevated, #212429);      /* was #1a3a2e */
+    --fsa-bg-hover: var(--n-border, #2C2F36);       /* was #234a3c */
     
     /* Text Colors */
     --fsa-text-primary: #e0e0e0;
@@ -41,8 +42,9 @@
     
     /* Gradients */
     --fsa-gradient-primary: linear-gradient(135deg, var(--fsa-green), var(--fsa-green-light));
-    --fsa-gradient-bg: linear-gradient(135deg, var(--fsa-bg-dark) 0%, var(--fsa-bg-secondary) 100%);
-    --fsa-gradient-card: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(16, 185, 129, 0.05));
+    /* Layer 1: collapse green surface gradients to flat graphite neutrals (was green). */
+    --fsa-gradient-bg: var(--n-bg, #121316);        /* was green gradient */
+    --fsa-gradient-card: var(--n-surface, #191B1F); /* was rgba emerald gradient */
     
     /* Spacing Scale */
     --space-xs: 0.25rem;

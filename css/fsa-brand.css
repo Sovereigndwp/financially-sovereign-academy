@@ -33,19 +33,22 @@
   --brand-gradient:            var(--fsa-fade,   linear-gradient(135deg, #0F766E 0%, #10B981 50%, #5EEAD4 100%));
   --brand-gradient-horizontal: var(--fsa-fade-h, linear-gradient(90deg,  #0F766E 0%, #10B981 50%, #5EEAD4 100%));
 
-  /* ---- Neutral dark surface system (no green tint) ---- */
-  --color-bg:        #0E1013;   /* page background, near-black neutral */
-  --color-surface:   #16181C;   /* alt sections, panels */
-  --color-elevated:  #1C1F24;   /* cards */
-  --color-deepest:   #08090B;   /* dramatic / CTA bands */
-  --color-border:    #2A2E35;   /* default neutral border */
-  --color-border-strong: #3A3F47;
+  /* ---- Neutral dark surface system ----
+     Layer 1: aliased to the Token Sheet graphite scale (--n-*, from
+     tsa-shared-tokens.css). Names unchanged so every consumer follows. Literal
+     fallbacks = the graphite hex, so a missing import can never break the skin. */
+  --color-bg:        var(--n-bg, #121316);            /* was #0E1013 */
+  --color-surface:   var(--n-surface, #191B1F);       /* was #16181C */
+  --color-elevated:  var(--n-elevated, #212429);      /* was #1C1F24 */
+  --color-deepest:   var(--n-deepest, #0C0D0F);       /* was #08090B */
+  --color-border:    var(--n-border, #2C2F36);        /* was #2A2E35 */
+  --color-border-strong: var(--n-border-strong, #3C4047); /* was #3A3F47 */
 
-  /* ---- Text (white / neutral gray) ---- */
-  --color-text:        #F4F6F7;  /* body */
-  --color-text-strong: #FFFFFF;  /* headings emphasis */
-  --color-muted:       #A8B0B8;  /* supporting copy */
-  --color-faint:       #6B7280;  /* captions, disabled: never body text */
+  /* ---- Text ---- (Layer 1: aliased to graphite ink; warm ivory) */
+  --color-text:        var(--n-ink, #ECECE6);         /* was #F4F6F7 */
+  --color-text-strong: var(--n-ink-strong, #FBFBF7);  /* was #FFFFFF */
+  --color-muted:       var(--n-muted, #A7ABB3);       /* was #A8B0B8 */
+  --color-faint:       var(--n-faint, #6E727A);       /* was #6B7280 */
   --ink-on-brand:      #06231A;  /* dark ink for the rare on-emerald label */
 
   /* ---- Semantic alerts (solid, never gradient) ---- */
