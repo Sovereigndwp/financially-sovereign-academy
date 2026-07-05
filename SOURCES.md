@@ -74,6 +74,17 @@ This document lists the verifiable sources behind statistics, data points, and f
 **Source:** Federal Reserve Bank of Minneapolis — Consumer Price Index, 1913–  
 **URL:** https://www.minneapolisfed.org/about-us/monetary-policy/inflation-calculator/consumer-price-index-1913-
 
+### The Quiet Pay Cut lesson (learning-tools/quiet-pay-cut.html) — static dataset
+_All figures hardcoded in the page, last checked July 2026. Do not restamp with the current date._
+
+| Value | Figure | As of | Source |
+|---|---|---|---|
+| CPI-U all items, U.S. city average, NSA — May values 2016–2025 | 240.229 (2016) … 321.465 (2025) | retrieved Jul 2026 | BLS CPI Historical Table, U.S. City Average (bls.gov/regions/mid-atlantic/data/consumerpriceindexhistorical_us_table.htm) |
+| CPI-U May 2026 | 335.123, +4.2% y/y | May 2026 | BLS CPI news release, May 2026 (bls.gov/news.release/cpi.nr0.htm) |
+| Category y/y, 12 mo ending Mar 2026 (electricity +4.6%, gasoline +18.9%, food away from home +3.8%, food at home +1.9%) | — | Mar 2026 | BLS CPI Summary, USDL-26-0599 |
+| Typical salary-increase budget ~3% (2015–2021), ~4–4.4% (2022–23) | — | 2026 survey coverage | WorldatWork Salary Budget Survey coverage; Payscale 2026 forecast |
+| Starting paycheck $4,000/mo + basket line items | illustrative | — | Example household, not survey data (stated on page) |
+
 ---
 
 ## Emergency Funds & Savings

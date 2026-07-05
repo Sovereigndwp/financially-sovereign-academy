@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Quiet Pay Cut: Your Raise vs Ten Years of Inflation | Financially Sovereign Academy</title>
+<meta name="description" content="Interactive lesson: track a real paycheck against ten years of official U.S. inflation data and see why a yearly raise can still be a pay cut.">
+<link rel="stylesheet" href="../css/fsa-brand.css">
+<style>
+  /* Page components only — brand tokens come from fsa-brand.css (no page-local :root brand system) */
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--color-bg); color:var(--color-text);
+         font-family:var(--font-sans, Inter, system-ui, sans-serif); font-size:1.02rem; line-height:1.6; }
+  .wrap { max-width:1100px; margin:0 auto; padding:48px 26px; }
+  .back-link { display:inline-block; color:var(--color-brand); text-decoration:none; font-weight:600; margin-bottom:24px; }
+  .eyebrow { display:flex; align-items:center; gap:8px; font-family:var(--font-mono, monospace);
+    font-size:11px; font-weight:700; letter-spacing:0.22em; text-transform:uppercase; color:var(--color-muted); }
+  .eyebrow::before { content:"◆"; font-size:8px; color:var(--color-brand-deep); }
+  h1 { font-family:var(--font-serif, Georgia, serif); font-weight:700; font-size:clamp(2.1rem,5vw,3.2rem);
+       line-height:1.08; letter-spacing:-0.015em; color:var(--color-text-strong); margin:16px 0 0; max-width:760px; }
+  .fade-accent { font-style:italic; background:var(--brand-gradient);
+    -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:var(--color-mint, #6EE7B7); }
+  @supports not ((-webkit-background-clip:text) or (background-clip:text)) { .fade-accent { color:var(--color-mint); } }
+  h2 { font-family:var(--font-serif, Georgia, serif); font-weight:700; font-size:clamp(1.4rem,3vw,1.9rem);
+       color:var(--color-text-strong); letter-spacing:-0.01em; margin:0 0 6px; }
+  .lede { font-size:1.15rem; color:var(--color-muted); max-width:660px; margin:18px 0 0; }
+  section.block { margin-top:48px; }
+  .card { background:var(--color-elevated); border:1px solid var(--color-border); border-radius:var(--radius-lg, 8px);
+          padding:26px; box-shadow:var(--shadow-card, 0 14px 44px rgba(0,0,0,0.55)); }
+  .section-intro { color:var(--color-muted); max-width:70ch; margin:4px 0 18px; }
+
+  .controls { display:flex; flex-wrap:wrap; align-items:center; gap:14px 22px;
+    background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-md, 4px);
+    padding:14px 18px; margin-bottom:18px; }
+  .controls .lbl { font-family:var(--font-mono, monospace); font-size:12px; letter-spacing:0.08em;
+    text-transform:uppercase; color:var(--color-muted); }
+  .raise-val { font-family:var(--font-mono, monospace); font-size:1.15rem; font-weight:700; color:var(--color-brand); min-width:4.5ch; }
+  input[type="range"] { accent-color:var(--color-brand); width:min(260px,60vw); }
+  .presets { display:flex; gap:8px; flex-wrap:wrap; }
+  .presets button { font-family:var(--font-mono, monospace); font-size:12px; padding:6px 12px; cursor:pointer;
+    background:var(--color-elevated); color:var(--color-text); border:1px solid var(--color-border-strong);
+    border-radius:var(--radius-sm, 2px); transition:border-color 200ms; }
+  .presets button:hover { border-color:var(--color-brand); }
+  .presets button[aria-pressed="true"] { border-color:var(--color-brand); color:var(--color-brand); }
+  .hint { font-size:0.82rem; color:var(--color-faint); flex-basis:100%; }
+
+  .chart-box { position:relative; height:360px; }
+  .chart-cta { font-family:var(--font-mono, monospace); font-size:12px; color:var(--color-faint); margin-top:8px; }
+
+  .year-story { margin-top:14px; border-left:2px solid var(--color-brand); background:var(--color-surface);
+    border-radius:0; padding:14px 18px; display:none; }
+  .year-story.open { display:block; }
+  .year-story h3 { font-family:var(--font-mono, monospace); font-size:13px; letter-spacing:0.1em;
+    text-transform:uppercase; color:var(--color-brand); margin:0 0 6px; }
+  .year-story p { margin:0; color:var(--color-text); font-size:0.9rem; max-width:75ch; }
+
+  .readouts { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:12px; margin-top:18px; }
+  button.stat { text-align:left; cursor:pointer; background:var(--color-surface); border:1px solid var(--color-border);
+    border-radius:var(--radius-md, 4px); padding:14px 16px; color:var(--color-text);
+    transition:border-color 200ms; font-family:var(--font-sans, sans-serif); }
+  button.stat:hover { border-color:var(--color-border-strong); }
+  button.stat[aria-expanded="true"] { border-color:var(--color-brand); }
+  .stat .k { font-family:var(--font-mono, monospace); font-size:11px; letter-spacing:0.08em;
+    text-transform:uppercase; color:var(--color-muted); }
+  .stat .v { font-family:var(--font-mono, monospace); font-size:1.35rem; font-weight:700; margin-top:4px; color:var(--color-text-strong); }
+  .stat .why { font-size:11.5px; color:var(--color-faint); margin-top:6px; }
+  .neg { color:var(--color-error) !important; } .pos { color:var(--color-success) !important; }
+  .stat-explain { display:none; margin-top:12px; background:var(--color-surface); border:1px solid var(--color-border);
+    border-left:2px solid var(--color-brand); padding:14px 18px; font-size:0.9rem; color:var(--color-text); max-width:80ch; }
+  .stat-explain.open { display:block; }
+  .num { font-family:var(--font-mono, monospace); color:var(--color-text-strong); }
+
+  .baskets { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:16px; }
+  .basket h3 { font-family:var(--font-mono, monospace); font-size:14px; letter-spacing:0.06em; margin:0; color:var(--color-text-strong); }
+  .basket .sub { font-size:0.82rem; color:var(--color-muted); min-height:3em; margin-top:2px; }
+  .tiles { display:grid; grid-template-columns:repeat(3,1fr); gap:6px; margin-top:10px; }
+  button.tile { border:1px solid var(--color-border); border-radius:var(--radius-sm, 2px); padding:7px 8px;
+    font-size:11.5px; font-family:var(--font-mono, monospace); background:var(--color-surface); color:var(--color-text);
+    cursor:pointer; text-align:left; transition:border-color 200ms; }
+  button.tile:hover { border-color:var(--color-brand); }
+  button.tile.gone { color:var(--color-faint); border-style:dashed; text-decoration:line-through; }
+  button.tile.gone::after { content:" ✕"; text-decoration:none; color:var(--color-error); }
+  .tile-explain { display:none; margin-top:14px; background:var(--color-surface); border:1px solid var(--color-border);
+    border-left:2px solid var(--color-warning); padding:14px 18px; font-size:0.9rem; max-width:80ch; }
+  .tile-explain.open { display:block; }
+
+  details.learn { background:var(--color-elevated); border:1px solid var(--color-border); border-radius:var(--radius-md, 4px);
+    margin-top:10px; overflow:hidden; }
+  details.learn summary { cursor:pointer; padding:14px 18px; font-weight:600; color:var(--color-text-strong);
+    list-style:none; display:flex; justify-content:space-between; align-items:center; gap:12px; }
+  details.learn summary::-webkit-details-marker { display:none; }
+  details.learn summary::after { content:"+"; font-family:var(--font-mono, monospace); color:var(--color-brand); font-size:1.1rem; }
+  details.learn[open] summary::after { content:"–"; }
+  details.learn .body { padding:0 18px 16px; color:var(--color-muted); font-size:0.9rem; max-width:80ch; }
+  details.learn .body strong { color:var(--color-text); }
+
+  .quiz .option { display:block; width:100%; text-align:left; margin-top:10px; cursor:pointer;
+    background:var(--color-surface); border:1px solid var(--color-border-strong); border-radius:var(--radius-md, 4px);
+    padding:14px 18px; color:var(--color-text); font-size:1.02rem; font-family:var(--font-sans, sans-serif);
+    transition:border-color 200ms; }
+  .quiz .option:hover { border-color:var(--color-brand); }
+  .quiz .option[data-state="right"] { border-color:var(--color-success); }
+  .quiz .option[data-state="wrong"] { border-color:var(--color-error); }
+  .quiz-feedback { display:none; margin-top:14px; padding:14px 18px; background:var(--color-surface);
+    border:1px solid var(--color-border); border-left:2px solid var(--color-success); font-size:0.9rem; max-width:80ch; }
+  .quiz-feedback.open { display:block; }
+
+  ul.sources { font-size:0.82rem; color:var(--color-muted); padding-left:18px; margin:8px 0 0; }
+  ul.sources li { margin:5px 0; }
+  a { color:var(--color-mint); }
+  .back-link, .module-link { color:var(--color-brand); }
+  .fallback-table { display:none; }
+  .no-chart .fallback-table { display:block; overflow-x:auto; }
+  .fallback-table table { border-collapse:collapse; font-family:var(--font-mono, monospace); font-size:12px; width:100%; }
+  .fallback-table th, .fallback-table td { border:1px solid var(--color-border); padding:6px 10px; text-align:right; color:var(--color-text); }
+  .fallback-table th { color:var(--color-muted); font-weight:500; }
+
+  .next-steps { display:flex; gap:12px; flex-wrap:wrap; margin-top:18px; }
+  .next-steps a { display:inline-flex; align-items:center; min-height:44px; padding:10px 22px;
+    border-radius:var(--radius-sm, 2px); border:1.6px solid transparent; font-weight:600; font-size:0.95rem; text-decoration:none;
+    background:linear-gradient(var(--color-surface),var(--color-surface)) padding-box, var(--brand-gradient) border-box;
+    color:var(--color-text); }
+  .next-steps a.plain { background:none; border:1.5px solid var(--color-border-strong); }
+
+  :focus-visible { outline:2px solid var(--color-brand); outline-offset:2px; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration:0.001ms !important; transition-duration:0.001ms !important; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a href="/learning-tools/" class="back-link">← All learning tools</a>
+
+  <header>
+    <div class="eyebrow">FSA · Module 6 companion · Free learning tool</div>
+    <h1>The <span class="fade-accent">quiet pay cut</span> hiding inside a decade of raises</h1>
+    <p class="lede">A $4,000 take-home paycheck in May 2016, a raise every single year, and ten years of real U.S. price data. The paycheck never stops growing — and still falls behind the life it used to pay for. Move the slider, click a year, click a basket tile: everything on this page explains itself.</p>
+  </header>
+
+  <!-- ═══ Chart ═══ -->
+  <section class="block" aria-labelledby="chart-h">
+    <h2 id="chart-h">Wages vs prices: watch them diverge</h2>
+    <p class="section-intro">The rising dashed line is what your original 2016 basket of goods and services costs each May, priced by the official Consumer Price Index. The solid line is your paycheck. The story is the space between them: green while wages lead, red once prices lead.</p>
+    <div class="card">
+      <div class="controls">
+        <span class="lbl" id="raise-lbl">Your annual raise</span>
+        <span class="raise-val" id="raiseVal">3.0%</span>
+        <input type="range" id="raise" min="1" max="6" step="0.5" value="3" aria-labelledby="raise-lbl" aria-describedby="raise-hint">
+        <div class="presets" role="group" aria-label="Preset raises">
+          <button type="button" data-preset="2">2% · cautious employer</button>
+          <button type="button" data-preset="3" aria-pressed="true">3% · typical raise</button>
+          <button type="button" data-preset="4.4">4.4% · 2023 peak budget</button>
+        </div>
+        <span class="hint" id="raise-hint">U.S. salary-increase budgets held near 3% for most of 2015–2021, briefly reached ~4–4.4% in 2022–23 (WorldatWork).</span>
+        <span class="lbl">View</span>
+        <div class="presets" role="group" aria-label="Chart view">
+          <button type="button" data-view="dollars" aria-pressed="true">Dollars</button>
+          <button type="button" data-view="index" aria-pressed="false">Growth since 2016 (=100)</button>
+        </div>
+        <span class="hint">The indexed view starts both lines at 100 so the divergence itself is the picture.</span>
+      </div>
+      <div class="chart-box">
+        <canvas id="chart" role="img" aria-label="Line chart, 2016 to 2026: wages versus prices, with the area between them shaded green while wages lead and red once prices lead. With a 3 percent annual raise wages stay ahead until 2021, prices overtake in 2022, and the red gap keeps widening to 204 dollars per month by 2026."></canvas>
+      </div>
+      <div class="chart-box" style="height:150px;margin-top:14px">
+        <canvas id="gapChart" role="img" aria-label="Bar chart of the yearly gap between paycheck and the cost of the 2016 lifestyle: green bars above zero through 2021, peaking at 233 dollars in 2020, then red bars below zero from 2022 onward, reaching minus 204 dollars in 2026."></canvas>
+      </div>
+      <p class="chart-cta">↑ Click any year on either chart to see what happened to prices that year.</p>
+      <div class="year-story" id="yearStory" role="status" aria-live="polite"></div>
+      <div class="fallback-table" id="fallbackTable"></div>
+
+      <div class="readouts" id="readouts">
+        <button class="stat" type="button" data-explain="ex-pay" aria-expanded="false" aria-controls="ex-pay">
+          <div class="k">2026 paycheck</div><div class="v" id="stPay">–</div>
+          <div class="why">Why it grew — click</div>
+        </button>
+        <button class="stat" type="button" data-explain="ex-basket" aria-expanded="false" aria-controls="ex-basket">
+          <div class="k">2026 cost of 2016 life</div><div class="v" id="stBasket">–</div>
+          <div class="why">Where this number comes from — click</div>
+        </button>
+        <button class="stat" type="button" data-explain="ex-gap" aria-expanded="false" aria-controls="ex-gap">
+          <div class="k">Monthly gap in 2026</div><div class="v" id="stGap">–</div>
+          <div class="why">What the gap means — click</div>
+        </button>
+        <button class="stat" type="button" data-explain="ex-breakeven" aria-expanded="false" aria-controls="ex-breakeven">
+          <div class="k">Break-even raise</div><div class="v">3.39%/yr</div>
+          <div class="why">The most important number here — click</div>
+        </button>
+      </div>
+      <div class="stat-explain" id="ex-pay">Your paycheck compounds: each raise multiplies last year's pay. At 3%, $4,000 becomes <span class="num">$4,000 × 1.03¹⁰ = $5,376</span> by 2026 — up 34.4%. That <em>sounds</em> like getting ahead. Whether it <em>is</em> depends entirely on the dashed line.</div>
+      <div class="stat-explain" id="ex-basket">This is the same basket of goods and services $4,000 bought in May 2016, re-priced each year with the Consumer Price Index (CPI-U) — the U.S. government's measure of what urban households actually pay. The index rose from <span class="num">240.229</span> (May 2016) to <span class="num">335.123</span> (May 2026), so the basket costs <span class="num">$4,000 × 335.123 ÷ 240.229 = $5,580</span>. Prices as a whole rose 39.5% in ten years.</div>
+      <div class="stat-explain" id="ex-gap">The gap is your paycheck minus the cost of your 2016 life. When it's positive, raises are outrunning prices and you're building slack. When it turns negative — 2022, at a 3% raise — the same job and the same lifestyle stop fitting inside the same paycheck. Nobody cut your pay. The gap did it silently.</div>
+      <div class="stat-explain" id="ex-breakeven">Prices grew 39.5% over the decade, which averages <span class="num">3.39% per year</span> compounded. That is the break-even: any raise averaging less was a real-terms pay cut, every single year it happened, no matter how it felt. This is why "I got my 3% raise" and "I feel poorer" are both true at once — and why the first question to ask about any raise is <strong>"what did prices do this year?"</strong></div>
+    </div>
+  </section>
+
+  <!-- ═══ Basket ═══ -->
+  <section class="block" aria-labelledby="basket-h">
+    <h2 id="basket-h">What quietly leaves the basket</h2>
+    <p class="section-intro">Essentials — rent, groceries, utilities, transport, health care ($3,100 of the 2016 budget) — get paid first, and their prices rise with everything else. Whatever paycheck is left funds the rest of life. Each tile is $50 of 2016 buying power. <strong style="color:var(--color-text)">Click any tile</strong> to see why it survives or disappears.</p>
+    <div class="card">
+      <div class="baskets" id="baskets"></div>
+      <div class="tile-explain" id="tileExplain"></div>
+    </div>
+  </section>
+
+  <!-- ═══ Understand the ideas ═══ -->
+  <section class="block" aria-labelledby="learn-h">
+    <h2 id="learn-h">Understand the ideas behind the chart</h2>
+    <p class="section-intro">Five concepts explain everything you just saw. Open each one.</p>
+
+    <details class="learn">
+      <summary>What is inflation, really?</summary>
+      <div class="body">Inflation is not "some prices going up." It's the <strong>general</strong> rise in prices across the economy — which is the same thing as each dollar buying less. The Bureau of Labor Statistics tracks it by pricing a fixed basket of what households buy (rent, food, fuel, care, services) month after month: the <strong>Consumer Price Index</strong>. When the CPI rises 39.5% over a decade, the honest translation is: <em>the 2016 dollar now does about 72 cents of its old work</em>.</div>
+    </details>
+    <details class="learn">
+      <summary>Nominal vs real: the two versions of your paycheck</summary>
+      <div class="body">Your <strong>nominal</strong> pay is the number on the paystub — here it rises every year, from <span class="num">$4,000</span> to <span class="num">$5,376</span>. Your <strong>real</strong> pay is what that number buys. Divide the paycheck by how much prices have risen and this worker's real pay peaked in <strong>2020</strong> at <span class="num">$4,218</span> of 2016 buying power, then fell to <span class="num">$3,853</span> by 2026 — <strong>below where it started</strong>. Ten raises, negative progress. Any time you evaluate pay, a raise, or an offer: convert it to real first.</div>
+    </details>
+    <details class="learn">
+      <summary>Why doesn't it feel like a pay cut?</summary>
+      <div class="body">Because nothing visible happens. A real pay cut arrives as a meeting and a memo. Inflation arrives as <em>no meeting at all</em> — the paycheck grows, so the story you're told (and tell yourself) is "I'm doing better." The erosion shows up downstream and disguised: the grocery run that needs a second card tap, the savings transfer you skip "just this month," the vacation that becomes a weekend. The chart makes visible what the paystub hides.</div>
+    </details>
+    <details class="learn">
+      <summary>When inflation "comes down," why don't prices come back?</summary>
+      <div class="body">After the 2022 spike (prices up <span class="num">8.6%</span> in one year), headlines said inflation was "cooling." It was — the <strong>rate of increase</strong> slowed. But the price <strong>level</strong> stayed up and kept climbing from its new height: that's <em>disinflation</em>, not falling prices (<em>deflation</em>). Look at the dashed line after 2022 — it never bends down. This is why the gap that opened in 2022 never closed, even in the "cooler" years. Waiting for prices to return to normal is waiting for something that almost never happens.</div>
+    </details>
+    <details class="learn">
+      <summary>The break-even raise: your real negotiation floor</summary>
+      <div class="body">Over this decade prices compounded at <span class="num">3.39%/yr</span>. So a 3% raise — the one that feels responsible and normal — lost ground in seven of the ten years. The practical takeaways: <strong>(1)</strong> judge every raise against that year's inflation, not against zero; <strong>(2)</strong> a percent point of <em>recurring</em> raise compounds and is worth far more than a one-time bonus; <strong>(3)</strong> the years you accept "budgets are tight" during high inflation (2021–2023 here) create a gap that later normal raises never repair.</div>
+    </details>
+  </section>
+
+  <!-- ═══ Check your understanding ═══ -->
+  <section class="block quiz" aria-labelledby="quiz-h">
+    <h2 id="quiz-h">Check your understanding</h2>
+    <p class="section-intro">Two job offers, same work. Prices are rising about 3.4% a year, like the decade above. Which paycheck buys more groceries in 2026?</p>
+    <div class="card">
+      <button class="option" type="button" data-q="a">Job A — $4,000/month, with a 2% raise every year</button>
+      <button class="option" type="button" data-q="b">Job B — $3,900/month, with a 4% raise every year</button>
+      <div class="quiz-feedback" id="quizFeedback"></div>
+    </div>
+  </section>
+
+  <!-- ═══ Continue ═══ -->
+  <section class="block" aria-labelledby="next-h">
+    <h2 id="next-h">Continue the path</h2>
+    <div class="next-steps">
+      <a href="/modules/taxes-paychecks.html">Module 6: Taxes &amp; Paychecks</a>
+      <a class="plain" href="/calculators/budget-tracker.html">See where your money goes</a>
+      <a class="plain" href="/learning-tools/">All learning tools</a>
+    </div>
+  </section>
+
+  <!-- ═══ Method & sources ═══ -->
+  <section class="block" aria-labelledby="method-h">
+    <h2 id="method-h">Method, honesty notes &amp; sources</h2>
+    <details class="learn">
+      <summary>What this models — and what it doesn't</summary>
+      <div class="body">It models a worker who stays in the same job and receives the average U.S. salary-increase budget, which held near <span class="num">3%</span> for most of 2015–2021 and briefly reached <span class="num">~4–4.4%</span> in 2022–2023. Workers who switched jobs, were promoted, or won those larger increases did better than this line — use the slider to test other paths. The basket is a simplified example household, not survey data, and essentials are assumed to rise only at headline CPI, which is conservative: in the 12 months ending March 2026 alone, electricity rose 4.6%, food away from home 3.8%, and gasoline 18.9% (BLS). This page is education about how purchasing power works — not financial advice.</div>
+    </details>
+    <details class="learn">
+      <summary>Sources (every figure dated)</summary>
+      <div class="body">
+        <ul class="sources">
+          <li>CPI-U, all items, U.S. city average, not seasonally adjusted — May values 2016–2026: <a href="https://www.bls.gov/regions/mid-atlantic/data/consumerpriceindexhistorical_us_table.htm">BLS CPI Historical Table, U.S. City Average</a> (retrieved July 2026). May 2026 = 335.123, +4.2% y/y: <a href="https://www.bls.gov/news.release/cpi.nr0.htm">BLS CPI news release, May 2026</a>.</li>
+          <li>Category changes, 12 months ending March 2026: <a href="https://www.bls.gov/news.release/cpi.nr0.htm">BLS CPI Summary, March 2026 (USDL-26-0599)</a>.</li>
+          <li>Salary-increase budgets ~3% (2015–2021), ~4–4.4% (2022–23), ~3.5% projected 2026: <a href="https://worldatwork.org/publications/workspan-daily/examining-the-rise-in-salary-increase-budgets">WorldatWork Salary Budget Survey coverage</a>; <a href="https://worldatwork.org/publications/workspan-daily/payscale-u-s-employers-forecast-3-5-pay-increases-for-2026">Payscale 2026 forecast via WorldatWork</a>.</li>
+          <li>Starting paycheck ($4,000/mo take-home) and basket line items: illustrative example household. Figures are static baselines, last checked July 2026 — they do not auto-update.</li>
+        </ul>
+      </div>
+    </details>
+  </section>
+
+</div>
+
+<!-- FSA Analytics & Email Capture -->
+<div style="margin: 2rem auto; max-width: 900px; padding: 0 1.5rem;">
+  <div data-fsa-email-capture="page-footer" data-title="📬 Level Up Your Finances" data-subtitle="Weekly money tips and financial strategies. No spam, ever."></div>
+</div>
+<script src="/js/analytics.js" defer></script>
+<script src="/js/email-capture.js" defer></script>
+
+<footer class="legal-footer">© 2026 The Sovereign Academy · Educational content only · Not financial advice</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+var _vizStarted = false;
+function initViz() {
+  if (_vizStarted) return;
+  _vizStarted = true;
+  // BLS CPI-U all items, U.S. city average, NSA — May of each year (1982-84=100).
+  // 2016–Apr 2026: BLS historical table; May 2026: BLS May-2026 CPI news release. See SOURCES.md.
+  var CPI = {2016:240.229,2017:244.733,2018:251.588,2019:256.092,2020:256.394,
+             2021:269.195,2022:292.296,2023:304.127,2024:314.069,2025:321.465,2026:335.123};
+  // 12-month % change ending each May (same BLS table; 2026 from May-2026 release).
+  var YOY = {2016:1.0,2017:1.9,2018:2.8,2019:1.8,2020:0.1,2021:5.0,2022:8.6,2023:4.0,2024:3.3,2025:2.4,2026:4.2};
+  var STORIES = {
+    2016:"The starting point. Inflation is quiet (+1.0% over the prior year) and will stay quiet for four more years — the years that teach everyone the wrong lesson: that a 3% raise is always a real raise.",
+    2017:"Prices +1.9% this year. The raise wins again. Slack is building — this is what raises outrunning prices feels like: unremarkable.",
+    2018:"Prices +2.8%. The raise barely edges it out. Nobody notices either way.",
+    2019:"Prices +1.8%. Another comfortable year. The paycheck is now $107/mo ahead of the 2016 lifestyle.",
+    2020:"The pandemic freezes prices (+0.1%). Real buying power peaks: this paycheck is $233/mo ahead — its best year of the decade. It will never be this good again.",
+    2021:"Prices jump +5.0% — the first year the 3% raise loses. The gap starts closing fast, but the paystub still says 'raise,' so it doesn't feel like losing.",
+    2022:"+8.6% — the biggest one-year price rise since the early 1980s era. A 3% raise covers barely a third of it. The lines cross: the 2016 lifestyle now costs more than the paycheck.",
+    2023:"Inflation 'cools' to +4.0% — but cooling means prices rise more slowly from their new height, not that they come back down. The gap locks in.",
+    2024:"+3.3%, almost exactly the decade average — and still above the 3% raise. The gap widens a little more each year now, quietly.",
+    2025:"+2.4%, the calmest year since 2020. The only year after 2021 where a 3% raise gains ground — it recovers $28 of a $162 monthly hole.",
+    2026:"+4.2% and accelerating again (energy led: gasoline +18.9% y/y in March). The paycheck is $204/mo short of the life it paid for in 2016 — after ten raises in ten years."
+  };
+  var YEARS = Object.keys(CPI).map(Number);
+  var BASE = CPI[2016], PAY0 = 4000, ESSENTIALS = 3100, TILE = 50, TOTAL_DISC = 900;
+  // Cut order: first listed is first sacrificed when money runs short.
+  var TILES = [
+    {label:"Savings $50", group:"Emergency savings", n:8,
+     why:"Savings go first because skipping a transfer is invisible — no one calls, nothing is repossessed. That's exactly what makes it dangerous: the buffer against the next emergency erodes at the moment prices make emergencies more expensive."},
+    {label:"Dinner out $50", group:"Eating out", n:5,
+     why:"Restaurant meals are the classic quiet cut — and they've been inflating faster than groceries (food away from home +3.8% y/y vs food at home +1.9%, 12 months ending March 2026, BLS). Each $50 dinner of 2016 costs about $70 by 2026."},
+    {label:"Family outing $50", group:"Family fun", n:3,
+     why:"Outings survive longer because families protect them — but each one now costs ~40% more than in 2016, so 'we'll go next month' becomes the default."},
+    {label:"Kids' activity $50", group:"Kids' activities", n:2,
+     why:"Cut last, because parents cut everything else first. When these tiles go grey, the squeeze is no longer subtle."}
+  ];
+
+  function fmt(n){ return "$" + Math.round(n).toLocaleString("en-US"); }
+  function pay(y,r){ return PAY0 * Math.pow(1 + r/100, y - 2016); }
+  function basketCost(y){ return PAY0 * CPI[y] / BASE; }
+  function realPower(y,r){ return pay(y,r) * BASE / CPI[y]; }
+
+  var css = getComputedStyle(document.documentElement);
+  function tok(n,f){ var v = css.getPropertyValue(n).trim(); return v || f; }
+  var cBrand = tok("--color-brand","#10B981"), cError = tok("--color-error","#F87171"),
+      cMuted = tok("--color-muted","#A7ABB3"), cBorder = tok("--color-border","#2C2F36"),
+      mono = "'JetBrains Mono', monospace";
+  var reduced = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+
+  var view = "dollars"; // or "index" (2016 = 100)
+  function wageVal(y,r){ return view === "index" ? Math.pow(1+r/100, y-2016)*100 : pay(y,r); }
+  function priceVal(y){ return view === "index" ? CPI[y]/BASE*100 : basketCost(y); }
+  function fmtVal(v){ return view === "index" ? v.toFixed(1) : fmt(v) + "/mo"; }
+
+  var chart = null, gapChart = null;
+  if (window.Chart) {
+    var GREEN_FILL = "rgba(52, 211, 153, 0.16)", RED_FILL = "rgba(248, 113, 113, 0.20)";
+    function yearClick (c) {
+      return function (evt) {
+        var pts = c().getElementsAtEventForMode(evt, "index", { intersect:false }, true);
+        if (pts.length) showYear(YEARS[pts[0].index]);
+      };
+    }
+    chart = new Chart(document.getElementById("chart"), {
+      type: "line",
+      data: { labels: YEARS, datasets: [
+        { label:"Your wages", data:[], borderColor:cBrand, backgroundColor:cBrand,
+          borderWidth:2.5, pointRadius:4, pointHoverRadius:7, tension:0.25,
+          fill:{ target:1, above:GREEN_FILL, below:RED_FILL } },
+        { label:"Prices (cost of your 2016 lifestyle)", data:YEARS.map(priceVal), borderColor:cError,
+          backgroundColor:cError, borderDash:[7,5], borderWidth:2.5, pointRadius:4, pointHoverRadius:7, tension:0.25 }
+      ]},
+      options: {
+        responsive:true, maintainAspectRatio:false,
+        animation: reduced ? false : { duration:300 },
+        interaction:{ mode:"index", intersect:false },
+        onClick: yearClick(function(){ return chart; }),
+        plugins: {
+          legend:{ onClick:null, labels:{ color:cMuted, font:{ family:mono, size:11 }, usePointStyle:true } },
+          tooltip:{ callbacks:{
+            label:function(c){ return c.dataset.label + ": " + fmtVal(c.parsed.y); },
+            footer:function(items){
+              var i = items[0].dataIndex, r = parseFloat(document.getElementById("raise").value);
+              var d = wageVal(YEARS[i],r) - priceVal(YEARS[i]);
+              return (view === "index"
+                ? "Divergence: " + (d>=0?"+":"−") + Math.abs(d).toFixed(1) + " index points"
+                : "Gap: " + (d>=0?"+":"−") + fmt(Math.abs(d)) + "/mo") + " · click for this year's story";
+            }
+          } }
+        },
+        scales: {
+          x:{ ticks:{ color:cMuted, font:{ family:mono, size:11 } }, grid:{ color:cBorder } },
+          y:{ ticks:{ color:cMuted, font:{ family:mono, size:11 },
+              callback:function(v){ return view === "index" ? v : fmt(v); } }, grid:{ color:cBorder } }
+        }
+      }
+    });
+    gapChart = new Chart(document.getElementById("gapChart"), {
+      type: "bar",
+      data: { labels: YEARS, datasets: [
+        { label:"Wages minus prices ($/mo)", data:[], backgroundColor:[], borderRadius:2, maxBarThickness:36 }
+      ]},
+      options: {
+        responsive:true, maintainAspectRatio:false,
+        animation: reduced ? false : { duration:300 },
+        onClick: yearClick(function(){ return gapChart; }),
+        plugins: {
+          legend:{ display:false },
+          title:{ display:true, text:"Ahead or behind: wages minus prices, $/month", align:"start",
+            color:cMuted, font:{ family:mono, size:11, weight:"normal" }, padding:{ bottom:8 } },
+          tooltip:{ callbacks:{
+            label:function(c){ var v=c.parsed.y; return (v>=0?"Ahead +$":"Behind −$") + Math.abs(v).toLocaleString("en-US"); },
+            footer:function(){ return "Click for this year's story"; }
+          } }
+        },
+        scales: {
+          x:{ ticks:{ color:cMuted, font:{ family:mono, size:10 } }, grid:{ display:false } },
+          y:{ ticks:{ color:cMuted, font:{ family:mono, size:10 },
+              callback:function(v){ return (v>=0?"+$":"−$") + Math.abs(v); } },
+              grid:{ color:cBorder }, border:{ display:false } }
+        }
+      }
+    });
+  } else {
+    document.body.classList.add("no-chart");
+  }
+
+  function showYear(y) {
+    var r = parseFloat(document.getElementById("raise").value);
+    var gap = pay(y,r) - basketCost(y);
+    var el = document.getElementById("yearStory");
+    el.innerHTML = "<h3>" + y + " — prices " + (YOY[y]>=0?"+":"") + YOY[y].toFixed(1) +
+      "% vs a year earlier (BLS) · your gap: <span class='" + (gap>=0?"pos":"neg") + "'>" +
+      (gap>=0?"+":"−") + fmt(Math.abs(gap)) + "/mo</span></h3><p>" + STORIES[y] + "</p>";
+    el.classList.add("open");
+  }
+
+  function renderFallbackTable(r) {
+    if (chart) return;
+    var h = "<table><caption style='text-align:left;color:var(--color-muted);padding-bottom:8px'>Chart could not load — same data as a table.</caption>" +
+      "<tr><th>Year (May)</th><th>Paycheck</th><th>Cost of 2016 life</th><th>Gap</th></tr>";
+    YEARS.forEach(function(y){
+      var g = pay(y,r)-basketCost(y);
+      h += "<tr><td>"+y+"</td><td>"+fmt(pay(y,r))+"</td><td>"+fmt(basketCost(y))+"</td><td>"+(g>=0?"+":"−")+fmt(Math.abs(g))+"</td></tr>";
+    });
+    document.getElementById("fallbackTable").innerHTML = h + "</table>";
+  }
+
+  function renderBaskets(r) {
+    var snaps = [
+      {year:2016, note:"The starting point: everything fits, savings included."},
+      {year:2020, note:"Low-inflation years — the raise ran ahead of prices."},
+      {year:2026, note:"Same job, ten raises later."}
+    ];
+    var host = document.getElementById("baskets");
+    host.innerHTML = "";
+    snaps.forEach(function (s) {
+      var disc = realPower(s.year, r) - ESSENTIALS;
+      var surplus = disc - TOTAL_DISC;
+      var budget = Math.min(disc, TOTAL_DISC);
+      var col = document.createElement("div");
+      col.className = "basket";
+      var head = "<h3>" + s.year + "</h3><div class='sub'>" + s.note +
+        (surplus > 5 ? " <span class='pos'>+" + fmt(surplus) + "/mo to spare.</span>"
+         : surplus < -5 ? " <span class='neg'>" + fmt(-surplus) + "/mo short.</span>" : "") + "</div>";
+      var flat = [];
+      TILES.forEach(function (t) { for (var i=0;i<t.n;i++) flat.push(t); });
+      var remaining = budget, afford = new Array(flat.length).fill(false);
+      for (var i = flat.length-1; i >= 0; i--) if (remaining >= TILE) { afford[i]=true; remaining -= TILE; }
+      var tiles = "<div class='tiles' role='list' aria-label='Discretionary items in " + s.year + "'>";
+      flat.forEach(function (t, i) {
+        tiles += "<button type='button' class='tile" + (afford[i]?"":" gone") + "' role='listitem' " +
+          "data-group='" + t.group + "' data-afford='" + afford[i] + "' data-year='" + s.year + "' " +
+          "aria-label='" + t.group + ", " + (afford[i]?"still affordable":"no longer affordable") + " in " + s.year + ". Click to learn why.'>" +
+          t.label + "</button>";
+      });
+      col.innerHTML = head + tiles + "</div>";
+      host.appendChild(col);
+    });
+  }
+
+  function update() {
+    var r = parseFloat(document.getElementById("raise").value);
+    document.getElementById("raiseVal").textContent = r.toFixed(1) + "%";
+    document.querySelectorAll(".presets button[data-preset]").forEach(function (b) {
+      b.setAttribute("aria-pressed", String(parseFloat(b.dataset.preset) === r));
+    });
+    if (chart) {
+      chart.data.datasets[0].data = YEARS.map(function (y) { return wageVal(y,r); });
+      chart.data.datasets[1].data = YEARS.map(priceVal);
+      chart.update();
+      var gaps = YEARS.map(function (y) { return Math.round(pay(y,r) - basketCost(y)); });
+      gapChart.data.datasets[0].data = gaps;
+      gapChart.data.datasets[0].backgroundColor = gaps.map(function (g) { return g >= 0 ? cBrand : cError; });
+      gapChart.update();
+    }
+    var p26 = pay(2026,r), b26 = basketCost(2026), gap = p26-b26;
+    document.getElementById("stPay").textContent = fmt(p26);
+    document.getElementById("stBasket").textContent = fmt(b26);
+    var g = document.getElementById("stGap");
+    g.textContent = (gap>=0?"+":"−") + "$" + Math.round(Math.abs(gap)).toLocaleString("en-US");
+    g.className = "v " + (gap>=0?"pos":"neg");
+    renderBaskets(r);
+    renderFallbackTable(r);
+    var ys = document.getElementById("yearStory");
+    if (ys.classList.contains("open")) ys.classList.remove("open");
+  }
+
+  document.getElementById("raise").addEventListener("input", update);
+  document.querySelectorAll(".presets button[data-preset]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      document.getElementById("raise").value = b.dataset.preset; update();
+    });
+  });
+  document.querySelectorAll(".presets button[data-view]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      view = b.dataset.view;
+      document.querySelectorAll(".presets button[data-view]").forEach(function (o) {
+        o.setAttribute("aria-pressed", String(o.dataset.view === view));
+      });
+      update();
+    });
+  });
+
+  document.getElementById("readouts").addEventListener("click", function (e) {
+    var btn = e.target.closest("button.stat"); if (!btn) return;
+    var id = btn.dataset.explain, panel = document.getElementById(id);
+    var isOpen = panel.classList.contains("open");
+    document.querySelectorAll(".stat-explain").forEach(function (p) { p.classList.remove("open"); });
+    document.querySelectorAll("button.stat").forEach(function (b) { b.setAttribute("aria-expanded","false"); });
+    if (!isOpen) { panel.classList.add("open"); btn.setAttribute("aria-expanded","true"); }
+  });
+
+  document.getElementById("baskets").addEventListener("click", function (e) {
+    var t = e.target.closest("button.tile"); if (!t) return;
+    var def = TILES.filter(function (x) { return x.group === t.dataset.group; })[0];
+    var afford = t.dataset.afford === "true", year = t.dataset.year;
+    var cost = TILE * CPI[year] / BASE;
+    var el = document.getElementById("tileExplain");
+    el.innerHTML = "<strong>" + def.group + " · " + year + ":</strong> this $50 of 2016 spending costs <span class='num'>" +
+      fmt(cost) + "</span> at " + year + " prices (CPI). " +
+      (afford ? "Still inside the paycheck — for now. " : "The paycheck no longer stretches this far once essentials are paid. ") + def.why;
+    el.classList.add("open");
+    if (el.scrollIntoView) el.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "nearest" });
+  });
+
+  document.querySelectorAll(".quiz .option").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var right = b.dataset.q === "b";
+      document.querySelectorAll(".quiz .option").forEach(function (o) {
+        o.dataset.state = (o.dataset.q === "b") ? "right" : "wrong";
+      });
+      var fb = document.getElementById("quizFeedback");
+      fb.innerHTML = (right ? "<strong>Right.</strong> " : "<strong>It's Job B — here's why.</strong> ") +
+        "Job A starts $100 higher but compounds at 2%: $4,000 → <span class='num'>$4,876</span> by 2026. " +
+        "Job B compounds at 4%: $3,900 → <span class='num'>$5,773</span> — it passes Job A in year 2 and ends " +
+        "<span class='num'>$897/mo</span> ahead. Against prices rising ~3.4%/yr, only Job B clears the break-even: " +
+        "A loses buying power every year; B gains it. The recurring percentage beats the bigger starting number — that's compounding, " +
+        "and it works against you (prices) exactly the way it can work for you (raises, savings).";
+      fb.classList.add("open");
+    });
+  });
+
+  update();
+}
+// Start now if Chart.js arrived from the primary CDN; otherwise try a backup CDN,
+// and if that fails too, initViz still runs and shows the built-in data table.
+if (window.Chart) {
+  initViz();
+} else {
+  var _s = document.createElement("script");
+  _s.src = "https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js";
+  _s.onload = initViz;
+  _s.onerror = initViz;
+  document.head.appendChild(_s);
+  setTimeout(initViz, 4000);
+}
+</script>
+</body>
+</html>

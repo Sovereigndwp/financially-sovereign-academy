@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learning Tools | Financially Sovereign Academy</title>
+<meta name="description" content="Free interactive learning tools organized by the money question they answer: raises vs inflation, budgeting, debt payoff, investing, net worth, and more.">
+<link rel="stylesheet" href="../css/fsa-brand.css">
+<style>
+  /* Page components only — brand tokens come from fsa-brand.css */
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--color-bg); color:var(--color-text);
+         font-family:var(--font-sans, Inter, system-ui, sans-serif); line-height:1.6; }
+  .wrap { max-width:1100px; margin:0 auto; padding:48px 26px; }
+  .back-link { display:inline-block; color:var(--color-brand); text-decoration:none; font-weight:600; margin-bottom:24px; }
+  .eyebrow { display:flex; align-items:center; gap:8px; font-family:var(--font-mono, monospace);
+    font-size:11px; font-weight:700; letter-spacing:0.22em; text-transform:uppercase; color:var(--color-muted); }
+  .eyebrow::before { content:"◆"; font-size:8px; color:var(--color-brand-deep); }
+  h1 { font-family:var(--font-serif, Georgia, serif); font-weight:700; font-size:clamp(2.1rem,5vw,3.2rem);
+       line-height:1.08; letter-spacing:-0.015em; color:var(--color-text-strong); margin:16px 0 0; max-width:800px; }
+  .fade-accent { font-style:italic; background:var(--brand-gradient);
+    -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:var(--color-mint, #6EE7B7); }
+  @supports not ((-webkit-background-clip:text) or (background-clip:text)) { .fade-accent { color:var(--color-mint); } }
+  .lede { font-size:1.15rem; color:var(--color-muted); max-width:680px; margin:18px 0 0; }
+  h2 { font-family:var(--font-serif, Georgia, serif); font-weight:700; font-size:clamp(1.35rem,2.6vw,1.8rem);
+       color:var(--color-text-strong); letter-spacing:-0.01em; margin:48px 0 4px; }
+  .group-sub { color:var(--color-muted); font-size:0.95rem; margin:0 0 18px; max-width:70ch; }
+
+  .tool-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:16px; }
+  a.tool-card { display:block; background:var(--color-elevated); border:1px solid var(--color-border);
+    border-radius:var(--radius-lg, 8px); padding:22px; text-decoration:none; color:inherit;
+    transition:border-color 200ms, transform 200ms; position:relative; }
+  a.tool-card:hover { border-color:var(--color-brand); transform:translateY(-3px); }
+  .tool-q { font-family:var(--font-serif, Georgia, serif); font-style:italic; font-size:1.18rem;
+    color:var(--color-text-strong); line-height:1.35; margin:0; }
+  .tool-name { font-family:var(--font-mono, monospace); font-size:12px; letter-spacing:0.06em;
+    text-transform:uppercase; color:var(--color-brand); margin-top:12px; }
+  .tool-desc { font-size:0.9rem; color:var(--color-muted); margin-top:8px; }
+  .tool-module { font-size:0.8rem; color:var(--color-faint); margin-top:12px; }
+  .tool-module a { color:var(--color-faint); text-decoration:underline; }
+  .tool-module a:hover { color:var(--color-brand); }
+  .badge-new { position:absolute; top:16px; right:16px; font-family:var(--font-mono, monospace);
+    font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase;
+    color:var(--ink-on-brand, #06251c); background:var(--color-brand); border-radius:var(--radius-sm, 2px); padding:3px 8px; }
+
+  .start-band { margin-top:56px; background:var(--color-surface); border:1px solid var(--color-border);
+    border-radius:var(--radius-lg, 8px); padding:32px; text-align:center; }
+  .start-band h2 { margin:0 0 8px; }
+  .start-band p { color:var(--color-muted); max-width:56ch; margin:0 auto 20px; }
+  .btn { display:inline-flex; align-items:center; min-height:46px; padding:11px 24px;
+    border-radius:var(--radius-sm, 2px); border:1.6px solid transparent; font-weight:600; text-decoration:none;
+    background:linear-gradient(var(--color-surface),var(--color-surface)) padding-box, var(--brand-gradient) border-box;
+    color:var(--color-text); }
+  :focus-visible { outline:2px solid var(--color-brand); outline-offset:2px; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration:0.001ms !important; transition-duration:0.001ms !important; }
+    a.tool-card:hover { transform:none; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a href="/" class="back-link">← Back to Home</a>
+
+  <header>
+    <div class="eyebrow">FSA · Learning tools · All free</div>
+    <h1>Start with your <span class="fade-accent">question,</span> not with a tool</h1>
+    <p class="lede">Every tool here answers one real money question, teaches the idea behind the answer, and links back to the module where the full lesson lives. No signup, no upsell — pick the question that's yours.</p>
+  </header>
+
+  <h2>Your paycheck &amp; where it goes</h2>
+  <p class="group-sub">The money that arrives — and the two forces that quietly shrink it: deductions you can see, and inflation you can't.</p>
+  <div class="tool-grid">
+    <a class="tool-card" href="/learning-tools/quiet-pay-cut.html">
+      <span class="badge-new">New</span>
+      <p class="tool-q">"Is my raise actually a raise?"</p>
+      <div class="tool-name">The Quiet Pay Cut · interactive lesson</div>
+      <div class="tool-desc">Track a paycheck against ten years of real U.S. inflation data. Watch wages and prices diverge, see what leaves the basket, and learn your break-even raise.</div>
+      <div class="tool-module">From <a href="/modules/taxes-paychecks.html">Module 6 · Taxes &amp; Paychecks</a></div>
+    </a>
+    <a class="tool-card" href="/calculators/budget-tracker.html">
+      <p class="tool-q">"Where is my money actually going?"</p>
+      <div class="tool-name">Budget Tracker · calculator</div>
+      <div class="tool-desc">Track income and expenses by category, visualize the breakdown, and find the leaks.</div>
+      <div class="tool-module">From <a href="/modules/money-mindset-cash-flow.html">Module 1 · Money Mindset &amp; Cash Flow</a></div>
+    </a>
+    <a class="tool-card" href="/calculators/net-worth-tracker.html">
+      <p class="tool-q">"What am I actually worth on paper?"</p>
+      <div class="tool-name">Net Worth Tracker · calculator</div>
+      <div class="tool-desc">Assets minus liabilities, with historical snapshots so you can watch the trend, not the noise.</div>
+      <div class="tool-module">From <a href="/modules/financial-master-plan.html">Module 10 · Financial Master Plan</a></div>
+    </a>
+  </div>
+
+  <h2>Getting out of debt</h2>
+  <p class="group-sub">Debt is a math problem wearing an emotions costume. These make the math visible.</p>
+  <div class="tool-grid">
+    <a class="tool-card" href="/calculators/debt-payoff-calculator.html">
+      <p class="tool-q">"How fast could I actually be debt-free?"</p>
+      <div class="tool-name">Debt Payoff Calculator</div>
+      <div class="tool-desc">Avalanche vs snowball, side by side: your payoff date, total interest, and which order wins for you.</div>
+      <div class="tool-module">From <a href="/modules/debt-strategy.html">Module 5 · Debt Strategy</a></div>
+    </a>
+  </div>
+
+  <h2>Growing what you keep</h2>
+  <p class="group-sub">Saving protects money from emergencies. Investing protects it from inflation. These show both at work.</p>
+  <div class="tool-grid">
+    <a class="tool-card" href="/calculators/compound-growth-calculator.html">
+      <p class="tool-q">"What could my savings grow into?"</p>
+      <div class="tool-name">Compound Growth Calculator</div>
+      <div class="tool-desc">Contributions, time, and rate — with inflation adjustment so the answer is in real buying power.</div>
+      <div class="tool-module">From <a href="/modules/investing-fundamentals.html">Module 7 · Investing Fundamentals</a></div>
+    </a>
+    <a class="tool-card" href="/modules/investing-dca-simulator.html">
+      <p class="tool-q">"Does timing the market beat consistency?"</p>
+      <div class="tool-name">DCA Simulator · lab</div>
+      <div class="tool-desc">Run dollar-cost averaging against lump-sum and market-timing strategies and see what discipline is worth.</div>
+      <div class="tool-module">From <a href="/modules/investing-fundamentals.html">Module 7 · Investing Fundamentals</a></div>
+    </a>
+    <a class="tool-card" href="/modules/investing-fee-simulator.html">
+      <p class="tool-q">"How much do fees quietly cost me?"</p>
+      <div class="tool-name">Fee Simulator · lab</div>
+      <div class="tool-desc">A 1% fee sounds small. Compounded over decades, it isn't. See the exact cost in dollars.</div>
+      <div class="tool-module">From <a href="/modules/investing-fundamentals.html">Module 7 · Investing Fundamentals</a></div>
+    </a>
+    <a class="tool-card" href="/modules/investing-risk-tolerance.html">
+      <p class="tool-q">"How much risk can I actually stomach?"</p>
+      <div class="tool-name">Risk Tolerance Lab</div>
+      <div class="tool-desc">Live through simulated crashes and recoveries before your real money has to.</div>
+      <div class="tool-module">From <a href="/modules/investing-fundamentals.html">Module 7 · Investing Fundamentals</a></div>
+    </a>
+    <a class="tool-card" href="/modules/investing-scorecard-lab.html">
+      <p class="tool-q">"Is this investment any good?"</p>
+      <div class="tool-name">Scorecard Lab</div>
+      <div class="tool-desc">A structured scorecard for evaluating any investment before you commit a dollar.</div>
+      <div class="tool-module">From <a href="/modules/investing-fundamentals.html">Module 7 · Investing Fundamentals</a></div>
+    </a>
+    <a class="tool-card" href="/calculators/bitcoin-comparison-calculator.html">
+      <p class="tool-q">"How has Bitcoin compared to other assets?"</p>
+      <div class="tool-name">Bitcoin vs Traditional Assets · calculator</div>
+      <div class="tool-desc">Historical performance of Bitcoin, stocks, bonds, and savings accounts over the periods you choose.</div>
+      <div class="tool-module">From <a href="/modules/investing-fundamentals.html">Module 7 · Investing Fundamentals</a></div>
+    </a>
+  </div>
+
+  <h2>The long game</h2>
+  <p class="group-sub">Zoom out: when does work become optional, and what's the plan that ties it all together?</p>
+  <div class="tool-grid">
+    <a class="tool-card" href="/calculators/financial-freedom-timeline.html">
+      <p class="tool-q">"When could work become optional?"</p>
+      <div class="tool-name">Financial Freedom Timeline · calculator</div>
+      <div class="tool-desc">The 25x rule, year-by-year projections, and the levers that move your date closest.</div>
+      <div class="tool-module">From <a href="/modules/financial-master-plan.html">Module 10 · Financial Master Plan</a></div>
+    </a>
+    <a class="tool-card" href="/my-journey.html">
+      <p class="tool-q">"What should I work on next?"</p>
+      <div class="tool-name">My Journey · plan builder</div>
+      <div class="tool-desc">Your progress across all ten modules and a personal plan built from what you've completed.</div>
+      <div class="tool-module">Ties the whole <a href="/index.html">course</a> together</div>
+    </a>
+  </div>
+
+  <div class="start-band">
+    <h2>Not sure which question is yours?</h2>
+    <p>The 2-minute assessment finds where you are and points you at the module and tools that match.</p>
+    <a class="btn" href="/assessment.html">Take the 2-min assessment →</a>
+  </div>
+
+</div>
+
+<!-- FSA Analytics & Email Capture -->
+<div style="margin: 2rem auto; max-width: 900px; padding: 0 1.5rem;">
+  <div data-fsa-email-capture="page-footer" data-title="📬 Level Up Your Finances" data-subtitle="Weekly money tips and financial strategies. No spam, ever."></div>
+</div>
+<script src="/js/analytics.js" defer></script>
+<script src="/js/email-capture.js" defer></script>
+
+<footer class="legal-footer">© 2026 The Sovereign Academy · Educational content only · Not financial advice</footer>
+
+</body>
+</html>
