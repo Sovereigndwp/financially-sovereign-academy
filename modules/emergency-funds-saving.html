@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../css/fsa-brand.css">
     <link rel="stylesheet" href="../css/interactive-components.css">
     <link rel="stylesheet" href="../css/fsa-viz-kit.css">
+    <link rel="stylesheet" href="../css/fsa-course.css">
     <style>
         :root {
             /* PR4b bridge: neutralize old fsa-theme green background tokens to neutral FSA brand tokens (accents unchanged) */
@@ -20,9 +21,12 @@
             --fsa-gradient-card: var(--color-surface);
         }
 
-        /* PR-M3: FSA brand typography */
-        body { font-family: var(--font-sans); }   /* readable sans for body/UI/cards; serif reserved for major headings below */
-        h1, h2 { font-family: var(--font-serif); }
+        /* PR-M3: FSA brand typography.
+           Layer 2: h1/h2 serif + card-heading + mono-result roles moved to the
+           shared, .fsa-course-scoped css/fsa-course.css. This body rule stays as
+           the page-chrome parity guard: the fixed nav links + footer live OUTSIDE
+           <main class="fsa-course">, so body must still set sans for them. */
+        body { font-family: var(--font-sans); }
 
         main {
             max-width: 900px;
@@ -95,7 +99,7 @@
             text-align: center;
         }
 
-        .result-label { font-family: var(--font-mono);
+        .result-label {
             font-size: var(--font-size-sm);
             color: var(--fsa-text-dim);
             text-transform: uppercase;
@@ -107,7 +111,6 @@
             font-size: var(--font-size-3xl);
             font-weight: var(--font-weight-extrabold);
             color: var(--fsa-green);
-            font-family: var(--font-mono, monospace);
         }
 
         .result-desc {
@@ -399,9 +402,9 @@
         <span style="font-size: 1.2rem;">🧮</span>
         <span>Calculators</span>
     </a>
-    <main>
+    <main class="fsa-course">
         <div class="module-header">
-            <h1>Module 2: Emergency Funds & Saving</h1>
+            <h1>Module 2: <span class="fsa-signal">Emergency Funds</span> & Saving</h1>
             <p class="subtitle">Build financial resilience: protect yourself from life's surprises</p>
         </div>
 
@@ -444,8 +447,9 @@
           .build-header h3{color:var(--color-text-strong)!important}
           /* One institutional button typography for every visible action button (family/size/weight/spacing/padding/radius) */
           .btn,.fsa-ws-btn,.fsa-plan-save-btn{font-family:var(--font-sans)!important;font-size:0.95rem!important;font-weight:600!important;letter-spacing:0.01em!important;line-height:1.1!important;padding:0.7rem 1.25rem!important;border-radius:2px!important;min-height:44px!important}
-          /* Consistent card headings: neutral ink, sans, one size + weight (major section headings stay serif) */
-          .content-block h3,.build-header h3,.quiz-question,.fsa-gate__title,.fsa-traps__title,.fsa-worksheet__title,.fsa-plan-summary__header h3{font-family:var(--font-sans)!important;font-size:var(--font-size-xl)!important;font-weight:600!important;letter-spacing:0!important;color:var(--color-text-strong)!important}
+          /* Card headings (static) moved to css/fsa-course.css — .fsa-course-scoped, no !important.
+             Only the JS-injected plan-widget heading is kept here (Layer 3 will retire it). */
+          .fsa-plan-summary__header h3{font-family:var(--font-sans)!important;font-size:var(--font-size-xl)!important;font-weight:600!important;letter-spacing:0!important;color:var(--color-text-strong)!important}
           /* Local accessibility defaults (module-scoped) */
           .module-header ~ * :where(a,button,input,[tabindex]):focus-visible,
           main :where(a,button,input,[tabindex]):focus-visible{outline:2px solid var(--fsa-green,#10b981);outline-offset:2px;border-radius:2px}

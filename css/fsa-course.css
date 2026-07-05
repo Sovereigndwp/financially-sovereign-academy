@@ -1,0 +1,68 @@
+/* ============================================================================
+   fsa-course.css — Shared FSA course styles (Layer 2: TYPOGRAPHY ONLY).
+
+   Everything here is SCOPED under `.fsa-course` (added to a redesigned module's
+   <main>). Scoping means these rules only affect opted-in modules and win over
+   the legacy globals by specificity — so NO `!important` is needed and none is
+   used in this layer.
+
+   Layer 2 owns type ROLES (family / weight / role assignment) + the emerald-fade
+   selected-signal-text role. Font SIZES keep the existing scale. Component
+   visuals (surfaces, borders, button fills, cards) are Layer 3 and are NOT here.
+
+   Load order (per module): fsa-theme.css -> fsa-brand.css ->
+   interactive-components.css -> fsa-viz-kit.css -> [fsa-course.css] -> module.
+   Created: Layer 2, 2026-07-05. Branch: feat/fsa-layer-2-typography.
+   ============================================================================ */
+
+/* --- Base type role: sans for the course subtree (serif reserved for h1/h2) ---
+   Note: Module 2 also keeps a page-level `body { font-family: var(--font-sans) }`
+   so its fixed nav + footer chrome (which live OUTSIDE <main>) stay sans and the
+   page remains value-identical. This `.fsa-course` base makes the course subtree
+   self-sufficient for future modules that omit that page-level rule. */
+.fsa-course { font-family: var(--font-sans); }
+
+/* --- Major headings: the only serif --- */
+.fsa-course h1,
+.fsa-course h2 { font-family: var(--font-serif); }
+
+/* --- Card / section headings: sans, one size + weight, neutral ink.
+   Retires the Module-2 pilot's `!important` card-heading rule for STATIC
+   headings. (The JS-injected `.fsa-plan-summary__header h3` stays in the module
+   and is handled in Layer 3, to avoid disturbing the plan widget now.) --- */
+.fsa-course .content-block h3,
+.fsa-course .build-header h3,
+.fsa-course .quiz-question,
+.fsa-course .fsa-gate__title,
+.fsa-course .fsa-traps__title,
+.fsa-course .fsa-worksheet__title {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  letter-spacing: 0;
+  color: var(--color-text-strong);
+}
+
+/* --- Data / labels / calculation results: mono --- */
+.fsa-course .result-label,
+.fsa-course .result-value { font-family: var(--font-mono); }
+
+/* --- Selected-signal-text role: emerald fade on a SHORT phrase inside a major
+   heading only. Uses the existing token path --brand-gradient (-> --fsa-fade).
+   Solid emerald fallback via `color` and an @supports guard so the phrase is
+   never invisible where background-clip:text is unsupported.
+   NEVER apply to full headings, buttons, cards, large backgrounds, worksheets,
+   or print. --- */
+.fsa-course .fsa-signal {
+  color: var(--color-brand, #10B981); /* solid emerald fallback */
+  background: var(--brand-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+@supports not ((-webkit-background-clip: text) or (background-clip: text)) {
+  .fsa-course .fsa-signal {
+    color: var(--color-brand, #10B981);
+    -webkit-text-fill-color: currentColor;
+  }
+}
