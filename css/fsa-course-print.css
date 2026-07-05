@@ -1,0 +1,55 @@
+/* ============================================================================
+   fsa-course-print.css — Shared FSA course PRINT behavior (Layer 5).
+
+   Worksheet-only printing: when a course module is printed, hide the whole page
+   and reveal only the worksheet, rendered as a clean paper sheet.
+
+   Scope note: unlike the screen layers, these rules use GLOBAL selectors
+   (`body`, `body *`) on purpose — the visibility-based "hide everything, reveal
+   the worksheet subtree" pattern must be able to hide the fixed nav + footer that
+   live OUTSIDE <main>. Isolation comes from LOADING this file only on redesigned
+   modules (linked from Module 2 for now); non-course pages never load it, so
+   their print behavior is unchanged. The global fsa-theme.css / fsa-brand.css
+   print rules are left untouched.
+
+   Paper tokens (--p-*, added in Layer 1, print-only) supply the paper surface and
+   near-black ink so the sheet reads cleanly in black-and-white / grayscale.
+   Migrated from the Module-2 pilot's inline @media print block (Layer 5).
+   ============================================================================ */
+
+@media print {
+  /* Paper page: warm-white surface, near-black ink. */
+  body {
+    background: var(--p-bg, #FDFCF9) !important;
+    color: var(--p-ink, #1A1C1F) !important;
+  }
+
+  /* Hide the entire page, then reveal only the worksheet subtree. */
+  body * { visibility: hidden !important; }
+  .fsa-worksheet,
+  .fsa-worksheet * { visibility: visible !important; }
+
+  /* The on-screen download/print buttons never print. */
+  .fsa-worksheet__actions { display: none !important; }
+
+  /* Float the worksheet to the top of the sheet, full width, no card chrome. */
+  .fsa-worksheet {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    border: 0;
+    background: var(--p-bg, #FDFCF9);
+    color: var(--p-ink, #1A1C1F);
+  }
+  .fsa-worksheet__title { color: var(--p-ink, #1A1C1F) !important; }
+
+  /* Worksheet preview box + field lines: near-black on paper so they stay
+     clearly visible when printed in black-and-white. */
+  .fsa-worksheet__print {
+    background: var(--p-bg, #FDFCF9);
+    border-color: var(--p-ink, #1A1C1F);
+  }
+  .fsa-worksheet__print th,
+  .fsa-worksheet__print td { border-color: var(--p-ink, #1A1C1F); }
+}

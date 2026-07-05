@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../css/interactive-components.css">
     <link rel="stylesheet" href="../css/fsa-viz-kit.css">
     <link rel="stylesheet" href="../css/fsa-course.css">
+    <link rel="stylesheet" href="../css/fsa-course-print.css">
     <style>
         :root {
             /* PR4b bridge: neutralize old fsa-theme green background tokens to neutral FSA brand tokens (accents unchanged) */
@@ -409,29 +410,8 @@
         </div>
 
         <!-- Hybrid-pilot scoped styles (module-local only; no global CSS touched) -->
-        <style id="fsa-hybrid-pilot-2">
-          /* Layer 3: gate, traps, worksheet, neutral cards/highlights, outline/ghost
-             buttons, and plan-widget neutralization moved to css/fsa-course.css
-             (.fsa-course-scoped, no !important — specificity retires the pilot's
-             local component !importants). `.build-header h3` neutral ink is now
-             covered by the Layer 2 card-heading rule. Only Layer 4 (a11y) and
-             Layer 5 (print) remain below. */
-          /* Layer 4: focus-visible ring + reduced-motion moved to css/fsa-course.css
-             (.fsa-course-scoped). Whole-page reduced-motion is still covered by the
-             fsa-theme.css / fsa-brand.css globals. aria-live="polite"/role="status"
-             on #calculator-results and the input <label>s remain in the markup.
-             Only the Layer 5 print block remains below. */
-          @media print{
-            /* Print only the worksheet. Hide everything else, incl. fixed Home/Calculators nav. */
-            body{background:#fff!important;color:#000!important}
-            body *{visibility:hidden!important}
-            .fsa-worksheet,.fsa-worksheet *{visibility:visible!important}
-            .fsa-worksheet__actions{display:none!important}
-            .fsa-worksheet{position:absolute;left:0;top:0;width:100%;border:0;background:#fff;color:#000}
-            .fsa-worksheet__title{color:#000!important}
-            .fsa-worksheet__print{border-color:#000}
-          }
-        </style>
+        <!-- Module 2 pilot styles fully migrated: Layers 2–4 to css/fsa-course.css,
+             Layer 5 worksheet-only print to css/fsa-course-print.css (linked in <head>). -->
 
         <!-- Block: Is this for you? gate (hybrid pilot) -->
         <section class="fsa-gate" aria-labelledby="fsa-gate-title-2">
