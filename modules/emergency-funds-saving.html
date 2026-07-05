@@ -410,46 +410,12 @@
 
         <!-- Hybrid-pilot scoped styles (module-local only; no global CSS touched) -->
         <style id="fsa-hybrid-pilot-2">
-          .fsa-gate{background:var(--color-surface);border:1px solid var(--color-border,#2A2E35);border-radius:var(--radius-md,8px);padding:1.1rem 1.3rem;margin:1.25rem 0}
-          .fsa-gate__title{margin:0 0 .5rem;font-size:1.15rem;color:var(--color-text-strong)}
-          .fsa-gate ul{margin:.4rem 0 .4rem 1.1rem}
-          .fsa-gate__outcome{margin:.6rem 0 0}
-          .fsa-traps{background:var(--color-surface);border-left:3px solid var(--fsa-green,#10b981);border-radius:0 var(--radius-md,8px) var(--radius-md,8px) 0;padding:1rem 1.25rem;margin:1.5rem 0}
-          .fsa-traps__title{margin:0 0 .4rem;font-size:1.05rem;color:var(--color-text-strong)}
-          .fsa-traps ul{margin:.3rem 0 0 1.1rem}
-          .fsa-worksheet{background:var(--color-elevated);border:1px solid var(--color-border,#2A2E35);border-radius:var(--radius-md,8px);padding:1.25rem 1.4rem;margin:1.5rem 0}
-          .fsa-worksheet__title{margin:0 0 .4rem;color:var(--color-text-strong)}
-          .fsa-worksheet__print{background:var(--color-bg);border:1px dashed var(--color-border-strong,#3A3F47);border-radius:6px;padding:.9rem 1rem;margin:.8rem 0}
-          .fsa-worksheet__print table{width:100%;border-collapse:collapse;font-size:.9rem}
-          .fsa-worksheet__print th,.fsa-worksheet__print td{border:1px solid var(--color-border-strong,#3A3F47);padding:6px}
-          .fsa-worksheet__actions{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.9rem}
-          .fsa-worksheet__note{color:var(--color-muted,#A8B0B8);font-size:.85rem;margin-top:.5rem}
-          .fsa-ws-btn{display:inline-flex;align-items:center;gap:.4rem;min-height:44px;padding:0 1.1rem;font-weight:600;border-radius:2px;text-decoration:none;cursor:pointer;border:1.6px solid var(--fsa-green,#10b981);background:transparent;color:var(--fsa-green,#10b981)}
-          .fsa-ws-btn:hover{background:var(--color-surface)}
-          .fsa-ws-btn--secondary{background:transparent;border:1.5px solid var(--color-border-strong,#3A3F47);color:var(--color-muted,#A8B0B8)}
-          /* Local override: neutralize remaining green-wash cards (Key Insight, Live Financial Context) to neutral surfaces + emerald accent border only */
-          .highlight-tip{background:var(--color-elevated)!important;border:1px solid var(--color-border)!important;border-left:3px solid var(--fsa-green,#10b981)!important}
-          .fsa-live-banner{background:var(--color-surface)!important;border:1px solid var(--color-border)!important;border-left:3px solid var(--fsa-green,#10b981)!important}
-          /* Local override: functional buttons (Calculate My Target, Mark Complete) -> outline/ghost, no solid emerald fill, no gradient */
-          .btn-primary{background:transparent!important;border:1.6px solid var(--fsa-green,#10b981)!important;color:var(--fsa-green,#10b981)!important;box-shadow:none!important;background-image:none!important}
-          .btn-primary:hover{background:rgba(16,185,129,0.08)!important;border-color:var(--fsa-green,#10b981)!important;box-shadow:none!important}
-          /* Squared institutional buttons; de-fill secondary + plan "Save My Decisions" button (no solid emerald, no pill, no shadow, no gradient) */
-          .btn{border-radius:2px!important;box-shadow:none!important}
-          .btn-secondary{background:transparent!important;border:1.6px solid var(--fsa-green,#10b981)!important;color:var(--fsa-green,#10b981)!important;box-shadow:none!important;background-image:none!important}
-          .btn-secondary:hover{background:rgba(16,185,129,0.08)!important;box-shadow:none!important}
-          .fsa-plan-save-btn{background:transparent!important;border:1.6px solid var(--fsa-green,#10b981)!important;color:var(--fsa-green,#10b981)!important;border-radius:2px!important;box-shadow:none!important;background-image:none!important}
-          .fsa-plan-save-btn:hover{background:rgba(16,185,129,0.08)!important}
-          /* "My Plan: Emergency Funds & Saving" widget -> neutral surface, neutral headings, emerald accent only */
-          .fsa-plan-widget{background:var(--color-surface)!important;border:1px solid var(--color-border)!important;border-left:3px solid var(--fsa-green,#10b981)!important;border-radius:8px!important}
-          .fsa-plan-summary__header h3,.fsa-plan-export h4,.fsa-plan-section__title{color:var(--color-text-strong)!important}
-          /* "Steps to Build" cards -> neutral border (emerald as a small left accent), neutral heading */
-          .build-item{border:1px solid var(--color-border)!important;border-left:3px solid var(--fsa-green,#10b981)!important}
-          .build-header h3{color:var(--color-text-strong)!important}
-          /* One institutional button typography for every visible action button (family/size/weight/spacing/padding/radius) */
-          .btn,.fsa-ws-btn,.fsa-plan-save-btn{font-family:var(--font-sans)!important;font-size:0.95rem!important;font-weight:600!important;letter-spacing:0.01em!important;line-height:1.1!important;padding:0.7rem 1.25rem!important;border-radius:2px!important;min-height:44px!important}
-          /* Card headings (static) moved to css/fsa-course.css — .fsa-course-scoped, no !important.
-             Only the JS-injected plan-widget heading is kept here (Layer 3 will retire it). */
-          .fsa-plan-summary__header h3{font-family:var(--font-sans)!important;font-size:var(--font-size-xl)!important;font-weight:600!important;letter-spacing:0!important;color:var(--color-text-strong)!important}
+          /* Layer 3: gate, traps, worksheet, neutral cards/highlights, outline/ghost
+             buttons, and plan-widget neutralization moved to css/fsa-course.css
+             (.fsa-course-scoped, no !important — specificity retires the pilot's
+             local component !importants). `.build-header h3` neutral ink is now
+             covered by the Layer 2 card-heading rule. Only Layer 4 (a11y) and
+             Layer 5 (print) remain below. */
           /* Local accessibility defaults (module-scoped) */
           .module-header ~ * :where(a,button,input,[tabindex]):focus-visible,
           main :where(a,button,input,[tabindex]):focus-visible{outline:2px solid var(--fsa-green,#10b981);outline-offset:2px;border-radius:2px}

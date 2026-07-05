@@ -66,3 +66,162 @@
     -webkit-text-fill-color: currentColor;
   }
 }
+
+/* ============================================================================
+   LAYER 3 — COMPONENTS (scoped, no !important).
+   Migrated from the Module-2 pilot's inline `<style id="fsa-hybrid-pilot-2">`.
+   Every rule wins over the legacy globals + JS-injected class rules by
+   specificity: `.fsa-course .x` (0,2,0) beats interactive-components.css `.x`
+   (0,1,0) and the fsa-plan-builder.js / fsa-live-data.js injected `.x` (0,1,0)
+   rules — regardless of source/injection order — so the pilot's `!important`s
+   are retired. Type roles (family/size/weight) stay owned by Layer 2 above;
+   these rules set component surfaces/borders/spacing/button visuals only.
+   ============================================================================ */
+
+/* --- Gate --- */
+.fsa-course .fsa-gate {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border, #2A2E35);
+  border-radius: var(--radius-md, 8px);
+  padding: 1.1rem 1.3rem;
+  margin: 1.25rem 0;
+}
+.fsa-course .fsa-gate__title { margin: 0 0 .5rem; }
+.fsa-course .fsa-gate ul { margin: .4rem 0 .4rem 1.1rem; }
+.fsa-course .fsa-gate__outcome { margin: .6rem 0 0; }
+
+/* --- Traps / pressure callout (4px inner corners, emerald left signal) --- */
+.fsa-course .fsa-traps {
+  background: var(--color-surface);
+  border-left: 3px solid var(--fsa-green, #10b981);
+  border-radius: 0 var(--radius-md, 8px) var(--radius-md, 8px) 0;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+}
+.fsa-course .fsa-traps__title { margin: 0 0 .4rem; }
+.fsa-course .fsa-traps ul { margin: .3rem 0 0 1.1rem; }
+
+/* --- Worksheet block (on-screen surfaces; @media print stays in the module, Layer 5) --- */
+.fsa-course .fsa-worksheet {
+  background: var(--color-elevated);
+  border: 1px solid var(--color-border, #2A2E35);
+  border-radius: var(--radius-md, 8px);
+  padding: 1.25rem 1.4rem;
+  margin: 1.5rem 0;
+}
+.fsa-course .fsa-worksheet__title { margin: 0 0 .4rem; }
+.fsa-course .fsa-worksheet__print {
+  background: var(--color-bg);
+  border: 1px dashed var(--color-border-strong, #3A3F47);
+  border-radius: 6px;
+  padding: .9rem 1rem;
+  margin: .8rem 0;
+}
+.fsa-course .fsa-worksheet__print table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+.fsa-course .fsa-worksheet__print th,
+.fsa-course .fsa-worksheet__print td { border: 1px solid var(--color-border-strong, #3A3F47); padding: 6px; }
+.fsa-course .fsa-worksheet__actions { display: flex; gap: .6rem; flex-wrap: wrap; margin-top: .9rem; }
+.fsa-course .fsa-worksheet__note { color: var(--color-muted, #A8B0B8); font-size: .85rem; margin-top: .5rem; }
+
+/* --- Neutralized cards / highlights (emerald as a thin left accent only) --- */
+.fsa-course .highlight-tip {
+  background: var(--color-elevated);
+  border: 1px solid var(--color-border);
+  border-left: 3px solid var(--fsa-green, #10b981);
+}
+.fsa-course .fsa-live-banner {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-left: 3px solid var(--fsa-green, #10b981);
+}
+.fsa-course .build-item {
+  border: 1px solid var(--color-border);
+  border-left: 3px solid var(--fsa-green, #10b981);
+}
+
+/* --- Buttons: outline/ghost standard (no fills, no gradients, no pills, 2px) ---
+   Shared box + typography for every action button; per-variant colour below. */
+.fsa-course .btn,
+.fsa-course .fsa-ws-btn,
+.fsa-course .fsa-plan-save-btn {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  line-height: 1.1;
+  padding: 0.7rem 1.25rem;
+  border-radius: 2px;
+  min-height: 44px;
+}
+.fsa-course .btn { box-shadow: none; }
+.fsa-course .btn-primary {
+  background: transparent;
+  border: 1.6px solid var(--fsa-green, #10b981);
+  color: var(--fsa-green, #10b981);
+  box-shadow: none;
+  background-image: none;
+}
+.fsa-course .btn-primary:hover {
+  background: rgba(16, 185, 129, 0.08);
+  border-color: var(--fsa-green, #10b981);
+  box-shadow: none;
+}
+.fsa-course .btn-secondary {
+  background: transparent;
+  border: 1.6px solid var(--fsa-green, #10b981);
+  color: var(--fsa-green, #10b981);
+  box-shadow: none;
+  background-image: none;
+}
+.fsa-course .btn-secondary:hover {
+  background: rgba(16, 185, 129, 0.08);
+  box-shadow: none;
+}
+
+/* --- Worksheet download button (self-contained outline; box/type from the shared button rule) --- */
+.fsa-course .fsa-ws-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1.6px solid var(--fsa-green, #10b981);
+  background: transparent;
+  color: var(--fsa-green, #10b981);
+}
+.fsa-course .fsa-ws-btn:hover { background: var(--color-surface); }
+.fsa-course .fsa-ws-btn--secondary {
+  background: transparent;
+  border: 1.5px solid var(--color-border-strong, #3A3F47);
+  color: var(--color-muted, #A8B0B8);
+}
+
+/* --- Plan widget (JS-injected): neutral surface + outline save button + neutral headings.
+   Scoped 0,2,0 beats the fsa-plan-builder.js injected 0,1,0 rules. On Module 2 the
+   per-module renderWidget carries no inline styles on its "Save My Decisions" button,
+   so no !important is needed. The summary selectors are inert on Module 2 (that markup
+   renders on the master-plan page) and are kept here scoped for future course use. --- */
+.fsa-course .fsa-plan-widget {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-left: 3px solid var(--fsa-green, #10b981);
+  border-radius: 8px;
+}
+.fsa-course .fsa-plan-save-btn {
+  background: transparent;
+  border: 1.6px solid var(--fsa-green, #10b981);
+  color: var(--fsa-green, #10b981);
+  border-radius: 2px;
+  box-shadow: none;
+  background-image: none;
+}
+.fsa-course .fsa-plan-save-btn:hover { background: rgba(16, 185, 129, 0.08); }
+.fsa-course .fsa-plan-summary__header h3,
+.fsa-course .fsa-plan-export h4,
+.fsa-course .fsa-plan-section__title { color: var(--color-text-strong); }
+.fsa-course .fsa-plan-summary__header h3 {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  letter-spacing: 0;
+}
