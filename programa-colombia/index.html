@@ -1,103 +1,93 @@
 <!DOCTYPE html>
-<html lang="es-CO">
+<html lang="es-CO" data-platform="colombia">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Aprende cómo funciona tu plata · Programa gratuito de 10 semanas | Colombia</title>
 <meta name="description" content="2 horas y media en total. 10 semanas, 15 min por semana, por WhatsApp. Sin registro, sin vender productos. Para entender presupuesto, deuda, inflación, fraudes, banca digital y cómo crecer tu dinero en Colombia.">
-<meta name="theme-color" content="#0f1115">
+<meta name="theme-color" content="#121316">
 <meta property="og:title" content="Aprende cómo funciona tu plata · 10 semanas · Gratis · Colombia">
 <meta property="og:description" content="2½ horas en total. 15 min por semana. Sin registro ni email. Para entender presupuesto, deuda, inflación, fraudes y banca digital.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_CO">
 <link rel="canonical" href="https://financiallysovereign.academy/programa-colombia">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Crimson+Pro:wght@400;600&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/programa-colombia/programa-colombia-v3.css">
 <style>
-  :root{
-    --bg:#1a1a1a; --panel:#20232a; --panel2:#2a2e38; --line:#353a46;
-    --text:#e8ecf3; --muted:#aab2c0;
-    --accent:#FCD116;   /* Colombian flag yellow */
-    --accent2:#22c55e;  /* success green */
-    --flagred:#CE1126;
-    --flagblue:#003893;
-    --link:#7cc4ff;
-    --maxw:820px;
-  }
-  *{box-sizing:border-box}
-  body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
-  body::before{
-    content:"";display:block;height:3px;
-    background:linear-gradient(90deg,var(--accent) 0%,var(--accent) 50%,var(--flagblue) 50%,var(--flagblue) 75%,var(--flagred) 75%,var(--flagred) 100%);
-  }
-  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
-  header.hero{padding:56px 22px 24px;text-align:center;max-width:var(--maxw);margin:0 auto}
+  /* Page-local components (hub) — tokens only; shared chrome from programa-colombia-v3.css */
+  .wrap{max-width:820px;margin:0 auto;padding:0 22px}
+  header.hero{padding:56px 22px 24px;text-align:center;max-width:820px;margin:0 auto}
   .flag{font-size:38px}
-  .eyebrow{color:var(--accent);font-size:12px;letter-spacing:.14em;text-transform:uppercase;margin:10px 0 14px;font-weight:600}
-  h1{font-size:34px;line-height:1.18;margin:8px 0 14px;letter-spacing:-.01em}
-  h2{font-size:24px;margin:44px 0 14px;letter-spacing:-.005em}
-  h3{font-size:17px;margin:14px 0 6px}
-  p{margin:10px 0}
-  .lede{color:#cfd6e3;font-size:18px;max-width:620px;margin:0 auto 18px;line-height:1.5}
+  .hero h1{font-family:var(--font-serif);font-size:var(--fs-h1);line-height:1.08;letter-spacing:-.015em;color:var(--n-ink-strong);margin:8px 0 14px;font-weight:700}
+  .hero h1 .fade{background:var(--brand-fade);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:var(--brand)}
+  @supports not (background-clip:text){.hero h1 .fade{background:none;-webkit-text-fill-color:currentColor;color:var(--brand)}}
+  .wrap h2{font-family:var(--font-serif);font-size:var(--fs-h2);color:var(--n-ink-strong);letter-spacing:-.01em;margin:44px 0 14px;font-weight:700}
+  .wrap h3{font-family:var(--font-sans);font-size:var(--fs-h3);color:var(--n-ink-strong);margin:14px 0 6px;font-weight:600}
+  .wrap p{margin:10px 0;color:var(--n-muted)}
+  .lede{color:var(--n-muted);font-size:1.15rem;max-width:620px;margin:0 auto 18px;line-height:1.5}
   .lede em{color:var(--accent);font-style:normal}
-  .pills{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:18px 0 18px}
-  .pill{background:var(--panel);border:1px solid var(--line);padding:6px 12px;border-radius:999px;font-size:13px;color:var(--muted)}
-  .total{color:#cfd6e3;font-size:15px;margin:6px 0 18px}
-  .total b{color:var(--text)}
+  .pills{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:18px 0}
+  .pill{background:var(--n-surface);border:1px solid var(--n-border);padding:6px 12px;border-radius:var(--radius-pill,999px);font-family:var(--font-mono);font-size:.75rem;color:var(--n-muted)}
+  .total{color:var(--n-muted);font-size:.95rem;margin:6px 0 18px}
+  .total b{color:var(--n-ink)}
   .cta-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:18px 0}
-  .btn{display:inline-block;padding:14px 22px;border-radius:10px;text-decoration:none;font-weight:600;font-size:15px;border:1px solid transparent}
-  .btn-primary{background:var(--accent);color:#1a1300;box-shadow:0 4px 14px rgba(252,209,22,.18)}
-  .btn-secondary{background:transparent;color:var(--text);border-color:var(--line)}
-  .btn:hover{filter:brightness(1.06)}
-  .reassure{color:var(--muted);font-size:13px;margin-top:8px}
-  .note{background:var(--panel2);border-left:3px solid var(--accent);padding:14px 16px;border-radius:0 10px 10px 0;color:#d6dce8;font-size:14.5px;margin:18px 0}
-  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;margin:12px 0}
-  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-  @media(max-width:680px){.grid2{grid-template-columns:1fr}h1{font-size:28px}.lede{font-size:17px}}
+  .reassure{color:var(--n-faint);font-size:.82rem;margin-top:8px}
+  .card{background:var(--n-elevated);border:1px solid var(--n-border);border-radius:var(--radius-md);padding:18px;margin:12px 0;box-shadow:var(--shadow-1)}
   ul.clean{padding-left:18px;margin:8px 0}
-  ul.clean li{margin:6px 0}
-  .for-you{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;margin:24px 0}
-  .for-you h3{margin-top:0;color:var(--accent)}
-  .for-you .row{display:flex;gap:10px;margin:8px 0;align-items:flex-start}
-  .for-you .row span:first-child{flex:0 0 22px;color:var(--accent2);font-weight:700}
-  details.week{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:0;margin:8px 0;overflow:hidden}
-  details.week summary{padding:14px 16px;cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:10px}
+  ul.clean li{margin:6px 0;color:var(--n-muted)}
+  .for-you{background:var(--n-elevated);border:1px solid var(--n-border);border-radius:var(--radius-md);padding:18px;margin:24px 0;box-shadow:var(--shadow-1)}
+  .for-you h3{margin-top:0}
+  .for-you .row{display:flex;gap:10px;margin:8px 0;align-items:flex-start;color:var(--n-muted)}
+  .for-you .row span:first-child{flex:0 0 22px;color:var(--success);font-weight:700}
+  details.week{background:var(--n-surface);border:1px solid var(--n-border);border-radius:var(--radius-md);padding:0;margin:8px 0;overflow:hidden}
+  details.week summary{padding:14px 16px;cursor:pointer;font-family:var(--font-sans);font-weight:600;color:var(--n-ink);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:10px}
   details.week summary::-webkit-details-marker{display:none}
-  details.week summary .num{color:var(--accent);font-variant-numeric:tabular-nums;font-weight:700;flex:0 0 24px}
+  details.week summary .num{font-family:var(--font-mono);color:var(--n-faint);font-variant-numeric:tabular-nums;font-weight:700;flex:0 0 24px}
   details.week summary .title{flex:1}
-  details.week summary .chev{color:var(--muted);transition:transform .2s}
+  details.week summary .chev{color:var(--n-faint);transition:transform .2s}
   details.week[open] summary .chev{transform:rotate(90deg)}
-  details.week .body{padding:0 16px 14px;color:#d6dce8;font-size:14.5px;border-top:1px solid var(--line)}
-  details.week .tool{display:inline-block;background:var(--panel2);border:1px solid var(--line);border-radius:6px;padding:3px 9px;font-size:12px;color:var(--muted);margin-top:6px}
+  details.week[open]{border-color:var(--n-border-strong)}
+  details.week .body{padding:0 16px 14px;color:var(--n-muted);font-size:.92rem;border-top:1px solid var(--n-border)}
+  details.week .tool{display:inline-block;background:var(--n-elevated);border:1px solid var(--n-border);border-radius:var(--radius-sm);padding:3px 9px;font-family:var(--font-mono);font-size:.72rem;color:var(--n-muted);margin-top:6px}
   details.week ul{margin:8px 0;padding-left:18px}
-  details.week a{display:inline-block;margin-top:8px;color:var(--link);font-size:14px}
+  details.week a{display:inline-block;margin-top:8px;color:var(--accent);font-size:.88rem}
   .blocks{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
   @media(max-width:680px){.blocks{grid-template-columns:1fr}}
-  .block{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px;text-align:center}
+  .block{background:var(--n-surface);border:1px solid var(--n-border);border-radius:var(--radius-md);padding:14px;text-align:center}
   .block .ic{font-size:22px}
-  .block .lbl{font-size:13px;color:var(--muted);margin-top:4px}
-  .block .nm{font-weight:600;margin-top:4px}
-  .bridge{background:linear-gradient(180deg,#1d2330 0%,#161a22 100%);border:1px solid var(--line);border-radius:14px;padding:20px;margin:24px 0}
-  .bridge h3{color:var(--accent);margin-top:0}
-  .preview{background:#0b0d12;border:1px solid var(--line);border-radius:10px;padding:14px 16px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13.5px;color:#cfd6e3;margin:10px 0;line-height:1.55}
-  .preview .label{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.1em;display:block;margin-bottom:6px;font-family:-apple-system,sans-serif}
-  .close{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px;margin:30px 0 10px;text-align:center}
-  .close .punch{font-size:19px;line-height:1.5;color:#e8ecf3;max-width:580px;margin:0 auto 14px}
-  .small{font-size:13px;color:var(--muted)}
-  a{color:var(--link)}
-  footer{margin-top:36px;padding:28px 22px;text-align:center;color:var(--muted);font-size:13px;border-top:1px solid var(--line)}
+  .block .lbl{font-family:var(--font-mono);font-size:.72rem;color:var(--n-faint);margin-top:4px;text-transform:uppercase;letter-spacing:.08em}
+  .block .nm{font-family:var(--font-sans);font-weight:600;color:var(--n-ink);margin-top:4px}
+  /* the hub's one gradient-border feature card */
+  .bridge{border:2px solid transparent;border-radius:var(--radius-lg);background:linear-gradient(var(--n-surface),var(--n-surface)) padding-box,var(--brand-fade) border-box;padding:20px;margin:24px 0}
+  .bridge h3{margin-top:0}
+  .bridge a{color:var(--accent)}
+  .preview{background:var(--n-deepest);border:1px solid var(--n-border);border-radius:var(--radius-md);padding:14px 16px;font-family:var(--font-mono);font-size:.82rem;color:var(--n-muted);margin:10px 0;line-height:1.55}
+  .preview .label{color:var(--n-faint);font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;display:block;margin-bottom:6px;font-family:var(--font-sans)}
+  .preview b{color:var(--warning)}
+  .close{background:var(--n-deepest);border:1px solid var(--n-border);border-radius:var(--radius-md);padding:22px;margin:30px 0 10px;text-align:center;position:relative;overflow:hidden}
+  .close::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 70% 30%,rgba(252,209,22,.07) 0%,transparent 60%);pointer-events:none}
+  .close .punch{font-family:var(--font-serif);font-size:1.25rem;line-height:1.5;color:var(--n-ink-strong);max-width:580px;margin:0 auto 14px}
+  .small{font-size:.82rem;color:var(--n-faint)}
+  .wrap a, footer a{color:var(--accent)}
+  footer{margin-top:36px;padding:28px 22px;text-align:center;color:var(--n-faint);font-size:.82rem;border-top:1px solid var(--n-border)}
   .share{display:flex;gap:10px;justify-content:center;margin:10px 0}
-  .share a{background:var(--panel);border:1px solid var(--line);padding:8px 14px;border-radius:8px;color:var(--text);text-decoration:none;font-size:13px}
+  .share a{background:transparent;border:1.5px solid var(--n-border);padding:8px 14px;border-radius:var(--radius-sm);color:var(--n-ink);text-decoration:none;font-family:var(--font-sans);font-size:.82rem}
+  .share a:hover{border-color:var(--accent);color:var(--accent)}
+  @media(max-width:680px){.hero h1{font-size:1.8rem}.lede{font-size:1.05rem}}
 </style>
 </head>
-<body>
+<body class="pc-page">
 
 <header class="hero">
   <div class="flag">🇨🇴</div>
-  <div class="eyebrow">Programa gratuito · Colombia</div>
-  <h1>Algunas decisiones de plata se sienten bien hoy y te cobran caro mañana</h1>
+  <div class="week-eyebrow"><span class="diamond"></span> Programa gratuito · Colombia <span class="diamond"></span></div>
+  <h1>Algunas <span class="fade">decisiones de plata</span> se sienten bien hoy y te cobran caro mañana</h1>
   <p class="lede">Este programa de 10 semanas te ayuda a verlas antes — y a entender por qué tu salario, los precios y tus oportunidades cambian con el tiempo. <em>Sin asesores. Sin tecnicismos.</em></p>
   <div class="total"><b>2 horas y media en total.</b> 15 min por semana, por WhatsApp.</div>
   <div class="cta-row">
-    <a class="btn btn-primary" href="/programa-colombia/semana-1/">Empezar la Semana 1 →</a>
+    <a class="btn-primary" href="/programa-colombia/semana-1/">Empezar la Semana 1 →</a>
   </div>
   <p class="reassure">Sin registro. Sin pedir email. Sin vender productos. Si te sirve, compártelo. Eso es todo.</p>
 </header>
@@ -123,8 +113,8 @@
     💳 Cuotas tarjeta ...... $260.000  → 17%<br>
     🍔 Comer fuera .......... $190.000  → 13%  ← detectado<br>
     📺 Suscripciones ........ $ 75.000  →  5%  ← detectado<br>
-    <span style="color:#aab2c0">───────────────────────────────────────</span><br>
-    Gasto detectado: <b style="color:#f7b500">22% del salario en gastos que pasan desapercibidos.</b>
+    <span style="color:var(--n-faint)">───────────────────────────────────────</span><br>
+    Gasto detectado: <b>22% del salario en gastos que pasan desapercibidos.</b>
   </div>
   <p class="small">La calculadora real es interactiva. Esto es solo una muestra del resultado.</p>
 
@@ -243,7 +233,7 @@
 
   <section class="close">
     <p class="punch">Lo más caro que te puede pasar con la plata no es perderla en una mala decisión. Es no entender cómo funciona y pasar 30 años corrigiendo.</p>
-    <a class="btn btn-primary" href="/programa-colombia/semana-1/">Empezar la Semana 1 →</a>
+    <a class="btn-secondary" href="/programa-colombia/semana-1/">Empezar la Semana 1 →</a>
     <p class="reassure">2 horas y media en total. Empiezas hoy.</p>
   </section>
 
@@ -259,15 +249,15 @@
   <p class="small" style="text-align:center;margin-top:6px">
     Si quieres apoyar el proyecto con una propina en Bitcoin (Lightning):<br>
     <a href="lightning:sovereigndwp@getalby.com">⚡ sovereigndwp@getalby.com</a>
-    <span style="color:var(--muted)">·</span>
-    <span style="color:var(--muted)">Opcional, todo el contenido es gratis</span>
+    <span>·</span>
+    <span>Opcional, todo el contenido es gratis</span>
   </p>
 
 </main>
 
 <footer>
   Financially Sovereign Academy<br>
-  Contacto: <a href="mailto:dalia@thesovereign.academy" style="color:var(--link)">dalia@thesovereign.academy</a> · Propinas Lightning: <a href="lightning:sovereigndwp@getalby.com" style="color:var(--link)">⚡ sovereigndwp@getalby.com</a><br>
+  Contacto: <a href="mailto:dalia@thesovereign.academy">dalia@thesovereign.academy</a> · Propinas Lightning: <a href="lightning:sovereigndwp@getalby.com">⚡ sovereigndwp@getalby.com</a><br>
   © 2026 The Sovereign Academy · Contenido educativo · No es consejo financiero
 </footer>
 
