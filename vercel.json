@@ -45,28 +45,16 @@
       "destination": "/programa-colombia/semana-10/experimento-dos-economias/index.html"
     },
     {
-      "source": "/institutional/corporations/colombia",
-      "destination": "https://bitcoinsovereign.academy/institutional/corporations/colombia/"
-    },
-    {
-      "source": "/institutional/corporations/colombia/",
-      "destination": "https://bitcoinsovereign.academy/institutional/corporations/colombia/"
-    },
-    {
       "source": "/institutional/corporations/colombia/ruta-estabilidad-crecimiento",
-      "destination": "https://bitcoinsovereign.academy/programa-colombia/"
+      "destination": "/programa-colombia/index.html"
     },
     {
       "source": "/institutional/corporations/colombia/ruta-estabilidad-crecimiento/",
-      "destination": "https://bitcoinsovereign.academy/programa-colombia/"
+      "destination": "/programa-colombia/index.html"
     },
     {
       "source": "/institutional/corporations/colombia/ruta-estabilidad-crecimiento/:path*",
-      "destination": "https://bitcoinsovereign.academy/programa-colombia/"
-    },
-    {
-      "source": "/institutional/corporations/colombia/:path*",
-      "destination": "https://bitcoinsovereign.academy/institutional/corporations/colombia/:path*"
+      "destination": "/programa-colombia/index.html"
     },
     {
       "source": "/institutional/wealth-advisors/bitcoin-advisor-certification",
