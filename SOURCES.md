@@ -232,6 +232,54 @@ URLs:
 
 ---
 
+## Programa Colombia — Bre-B, Finanzas Abiertas y Estafas con IA (Semanas 6–7)
+
+Added July 2026. All claims verified against sources below as of 2026-07-06.
+
+### Bre-B (Semana 7)
+**Claim:** Bre-B in full operation since Oct 6, 2025; interoperates 5 payment systems (incl. Transfiya) via DICE + MOL; ~218 participating entities  
+**Source:** Banco de la República — blog "Bre-B, a Brief History" (Mar 2026) + news  
+**URL:** https://www.banrep.gov.co/en/blog/bre-b-brief-history-interoperated-instant-payment-system | https://www.banrep.gov.co/en/news/bre-b-continues-progress
+
+**Claim:** Llave types (cédula, celular, correo, @alfanumérica, código de comercio); llave needed only to receive; transfers arrive automatically with no acceptance step; per-transaction limit 1,000 UVB = COP $12.110.000 in 2026; entities set their own consumer fees (registration always free); disputes go to the user's own entity  
+**Source:** Banco de la República — Bre-B FAQ (participant list updated Mar 2, 2026)  
+**URL:** https://www.banrep.gov.co/es/bre-b/preguntas-frecuentes  
+**Note:** "Gratis en casi todas las entidades" reflects major entities' 2025–2026 P2P pricing; Banrep does not fix consumer prices. Do NOT cite the circulating "COP 6.46/tx from year 4" figure as a consumer fee — unverified (appears to be an entity-level infrastructure fee).
+
+**Claim:** Bre-B security rules (llaves registered only inside your entity's app; a llave is never a password; Bre-B has no own website/social accounts)  
+**Source:** Banco de la República — "Siete recomendaciones para la seguridad de Bre-B"  
+**URL:** https://www.banrep.gov.co/en/news/seven-security-recommendations-for-bre-b
+
+**Claim:** 4x1000 (GMF) applies normally to Bre-B transfers; exemption within 350 UVT/month  
+**Source:** DIAN GMF rules (general) — no Bre-B-specific DIAN concepto located; flagged as standard-rules inference corroborated by bank guidance  
+**URL:** https://www.dian.gov.co/impuestos/personas/Paginas/gravamen_movimientos_financieros.aspx
+
+### Finanzas abiertas (Semana 7)
+**Claim:** Open finance became mandatory via Decreto 0368 (April 7, 2026) for all SFC-supervised entities; consumer-facing effects expected ~2027 (12-month implementation after SFC technical standards); consent must be express, specific, and revocable  
+**Source:** Forbes Colombia (Apr 10, 2026); Brigard Urrutia legal analysis; SFC finanzas abiertas page  
+**URL:** https://forbes.co/2026/04/10/economia-y-finanzas/colombia-obligara-a-todos-los-bancos-a-compartir-datos-de-clientes | https://www.bu.com.co/en/insights/noticias/colombia-launches-its-mandatory-open-finance-system
+
+### Estafas con IA (Semana 6)
+**Claim:** Policía Nacional documents AI voice-cloning extortion in Colombia (Bolívar: 24 of 64 extortion denuncias in 2025 involved AI)  
+**Source:** Policía Nacional de Colombia (Sept 2025)  
+**URL:** https://www.policia.gov.co/index.php/noticia/inteligencia-artificial-nueva-arma-los-extorsionistas-en-departamento-bolivar  
+**Note:** Page states pattern qualitatively ("La Policía Nacional ya documenta esta modalidad"); the figures live here, not in the lesson.
+
+**Claim:** Bre-B fake-transfer scam script ("acéptalos ahora o será reversada" + phishing link); no acceptance step exists in Bre-B  
+**Source:** Colombia Fintech (Jul 31, 2025); Bancolombia warnings via press; Banco de la República FAQ  
+**URL:** https://colombiafintech.co/2025/07/31/bre-b-ya-es-un-blanco-las-estafas-no-se-hicieron-esperar/ | https://www.infobae.com/colombia/2025/07/24/bancolombia-alerto-por-estafas-digitales-con-llaves-bre-b-usuarios-alegan-que-les-llegan-mensajes-de-texto/
+
+**Claim:** Deepfake celebrity investment scams documented in Colombia (David Vélez/Nu network: 51 ads in 30 days); Superfinanciera publishes alerts on unauthorized platforms (e.g., SmartSTP, 20+ blocked-withdrawal complaints)  
+**Source:** Forbes Colombia investigation (Apr 9, 2026); Superintendencia Financiera alerts (Oct 2025)  
+**URL:** https://forbes.co/editors-picks/la-maquina-de-estafas-que-suplanta-el-rostro-de-david-velez | https://www.superfinanciera.gov.co/publicaciones/10115845/firma-extranjera-smartstp-no-cuenta-con-autorizacion-para-ofrecer-sus-productos-o-servicios-dentro-del-territorio-colombiano/
+
+**Claim:** WhatsApp account-takeover scams widespread (>3,000 CAI Virtual reports Mar–Jul 2025; 64,628 digital-scam denuncias in 2025); two-step verification recommended by Centro Cibernético Policial; GAULA anti-extortion line 165  
+**Source:** Noticias RCN citing Centro Cibernético (Dec 2025); Diario Occidente citing CAI Virtual; caivirtual.policia.gov.co  
+**URL:** https://www.noticiasrcn.com/economia/recomendaciones-estafas-digitales-colombia-por-policia-967224 | https://occidente.co/secciones/tecnologia/modalidades-de-estafa-cibernetica-mas-reportadas-en-colombia-2025/ | https://caivirtual.policia.gov.co/  
+**Note:** Do NOT attribute global vendor stats (McAfee/Sumsub voice-clone figures) as Colombian statistics; do NOT attribute Spain's "vota por mi hijo" scam to Colombia.
+
+---
+
 ## Adding New Sources
 
 When adding a new stat or data point to any FSA page:
