@@ -45,7 +45,7 @@
         /* Warning signs */
         .warning-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:0.75rem; margin-top:1.1rem; }
         .warning-pill { background:rgba(206,17,38,0.06); border:1px solid rgba(206,17,38,0.22); border-left:3px solid var(--red); border-radius:0.6rem; padding:0.75rem 1rem; }
-        .warning-pill-num { font-size:0.65rem; font-weight:700; text-transform:uppercase; letter-spacing:0.07em; color:rgba(206,17,38,0.65); margin-bottom:0.3rem; }
+        .warning-pill-num { font-size:0.65rem; font-weight:700; text-transform:uppercase; letter-spacing:0.07em; color:#F87171; margin-bottom:0.3rem; } /* a11y: was rgba flag-red at ~2:1 */
         .warning-pill-title { font-size:0.9rem; font-weight:700; color:var(--light); margin-bottom:0.2rem; }
         .warning-pill-desc { font-size:0.82rem; color:var(--dim); line-height:1.5; }
         .warning-pill-clue { font-size:0.82rem; color:var(--light); line-height:1.5; margin-top:0.4rem; }
@@ -69,7 +69,7 @@
         .scam-card-name { font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:rgba(252,209,22,0.6); margin-bottom:0.5rem; }
         .scam-scenario { color:var(--light); font-size:0.92rem; font-style:italic; line-height:1.65; margin-bottom:0.75rem; padding:0.65rem 0.9rem; background:rgba(255,255,255,0.03); border-radius:0.5rem; }
         .scam-flag { display:flex; align-items:flex-start; gap:0.45rem; margin-bottom:0.45rem; }
-        .scam-flag-text { font-size:0.88rem; color:rgba(206,17,38,0.9); font-weight:600; line-height:1.45; }
+        .scam-flag-text { font-size:0.88rem; color:#F87171; font-weight:600; line-height:1.45; } /* a11y: flag-red on dark was 2.8:1; #F87171 = 5.6:1 (WCAG AA) */
         .scam-rule { font-size:0.88rem; color:var(--dim); line-height:1.5; }
         .scam-rule strong { color:var(--light); }
 
@@ -553,7 +553,7 @@
                     : 'Revisa las explicaciones con calma. Reconocer las señales es lo que importa.';
                 banner.style.cssText = c >= 3
                     ? 'display:block; background:rgba(252,209,22,0.08); border:2px solid #fcd116; color:#fcd116; padding:1rem; border-radius:0.75rem; text-align:center; font-weight:700;'
-                    : 'display:block; background:rgba(206,17,38,0.06); border:2px solid rgba(206,17,38,0.5); color:rgba(206,17,38,0.9); padding:1rem; border-radius:0.75rem; text-align:center; font-weight:700;';
+                    : 'display:block; background:rgba(206,17,38,0.06); border:2px solid rgba(206,17,38,0.5); color:#F87171; padding:1rem; border-radius:0.75rem; text-align:center; font-weight:700;';
                 banner.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }, 600);
         }

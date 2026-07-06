@@ -1,174 +1,43 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-platform="colombia">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Semana 9: Mi historial crediticio | Ruta de Estabilidad y Crecimiento</title>
     <meta name="description" content="Entiende qué mira tu historial crediticio, revisa un ejercicio hipotético y sal con una forma más clara de revisarlo y fortalecerlo con el tiempo.">
-    <style>
-        :root {
-            --primary: #FCD116;
-            --dark: #1a1a1a;
-            --dark2: #2d2d2d;
-            --light: #e0e0e0;
-            --dim: #b3b3b3;
-            --red: #ef4444;
-            --yellow: #fcd116;
-            --blue: #3b82f6;
-            --green: #2ecc71;
-            --grad: #FCD116;
-        }
-        * { margin:0; padding:0; box-sizing:border-box; }
-        body { font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; background:var(--dark); color:var(--light); line-height:1.6; padding:1rem; }
-
-        .container { max-width:1000px; margin:0 auto; }
-        .back-link { display:inline-flex; align-items:center; gap:0.5rem; color:var(--primary); text-decoration:none; margin-bottom:2rem; font-weight:600; transition:transform 0.2s; }
-        .back-link:hover { transform:translateX(-4px); }
-        .header { text-align:center; margin-bottom:3rem; }
-        .week-badge { display:inline-block; background:rgba(252,209,22,0.15); border:1px solid var(--primary); border-radius:2rem; padding:0.3rem 1rem; font-size:0.85rem; color:var(--primary); margin-bottom:1rem; }
-        .week-title { font-size:2.4rem; color:var(--primary); margin-bottom:0.5rem; }
-        .week-subtitle { font-size:1.1rem; color:var(--dim); }
-
-        .section { margin-bottom:3rem; }
-        .section-card { background:var(--dark2); border:2px solid rgba(252,209,22,0.2); border-radius:1rem; padding:2rem; }
-        .section-title { font-size:1.5rem; color:var(--primary); margin-bottom:0.75rem; }
-        .section-text { color:var(--dim); font-size:1rem; line-height:1.8; margin-bottom:1rem; }
-        .section-text strong { color:var(--light); }
-
-        /* Signal cards */
-        .signal-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(165px, 1fr)); gap:0.9rem; margin-top:1.5rem; }
-        .signal-card { background:var(--dark); border:1px solid rgba(252,209,22,0.15); border-radius:0.85rem; padding:1rem; }
-        .signal-icon { font-size:1.35rem; margin-bottom:0.5rem; }
-        .signal-name { color:var(--light); font-weight:700; margin-bottom:0.35rem; line-height:1.4; }
-        .signal-desc { color:var(--dim); font-size:0.84rem; line-height:1.55; }
-
-        /* Score area */
-        .score-display { background:var(--dark); border:1px solid rgba(252,209,22,0.15); border-radius:1rem; padding:1.4rem; text-align:center; margin:1.5rem 0; }
-        .score-kicker { color:var(--primary); font-size:0.78rem; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; margin-bottom:0.5rem; }
-        .score-bar { height:16px; background:linear-gradient(to right, var(--red) 0%, var(--yellow) 45%, var(--yellow) 75%, var(--green) 100%); border-radius:8px; position:relative; margin:1rem 0 0.5rem; }
-        .score-pointer { position:absolute; top:-6px; width:4px; height:28px; background:white; border-radius:2px; transform:translateX(-50%); transition:left 0.8s ease; box-shadow:0 0 6px rgba(0,0,0,0.4); }
-        .score-pointer-label { position:absolute; top:-28px; transform:translateX(-50%); font-size:0.75rem; font-weight:700; color:white; white-space:nowrap; }
-        .score-number { font-size:2.2rem; font-weight:900; font-family:'Courier New',monospace; display:block; }
-        .score-label { font-size:0.9rem; color:var(--dim); }
-        .score-range { display:flex; justify-content:space-between; font-size:0.75rem; color:var(--dim); margin-top:0.25rem; }
-        .score-summary { margin-top:1.2rem; }
-        .action-ladder { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:0.9rem; margin-top:1rem; }
-        .ladder-card { background:var(--dark2); border:1px solid rgba(252,209,22,0.15); border-radius:0.85rem; padding:1rem; text-align:left; }
-        .ladder-card.start { border-left:4px solid var(--yellow); }
-        .ladder-card.watch { border-left:4px solid var(--blue); }
-        .ladder-card.time { border-left:4px solid var(--green); }
-        .ladder-label { font-size:0.75rem; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; margin-bottom:0.45rem; }
-        .ladder-card.start .ladder-label { color:var(--yellow); }
-        .ladder-card.watch .ladder-label { color:var(--blue); }
-        .ladder-card.time .ladder-label { color:var(--green); }
-        .ladder-title { color:var(--light); font-weight:700; font-size:1rem; line-height:1.45; margin-bottom:0.35rem; }
-        .ladder-text { color:var(--dim); font-size:0.88rem; line-height:1.65; }
-        .strength-note { color:var(--dim); font-size:0.9rem; line-height:1.7; margin-top:1rem; text-align:left; }
-
-        /* Score factors */
-        .factors-grid { display:grid; gap:0.75rem; margin-top:1.5rem; }
-        .factor-row { background:var(--dark); border:1px solid rgba(252,209,22,0.15); border-radius:0.75rem; padding:1.25rem; }
-        .factor-header { display:flex; align-items:center; justify-content:space-between; gap:1rem; margin-bottom:0.75rem; }
-        .factor-name { font-weight:700; color:var(--light); }
-        .factor-weight { font-size:0.75rem; color:var(--primary); font-weight:700; text-align:right; }
-        .factor-bar-track { background:rgba(255,255,255,0.05); border-radius:4px; height:8px; overflow:hidden; margin-top:0.6rem; }
-        .factor-bar-fill { height:100%; border-radius:4px; transition:width 0.5s; }
-        .factor-select { background:var(--dark2); border:2px solid rgba(252,209,22,0.2); border-radius:0.5rem; color:var(--light); padding:0.65rem 0.75rem; font-size:0.85rem; margin-top:0.25rem; width:100%; }
-        .factor-impact { font-size:0.8rem; margin-top:0.55rem; line-height:1.5; }
-        .factor-impact.positive { color:var(--yellow); }
-        .factor-impact.negative { color:var(--red); }
-        .factor-impact.neutral { color:var(--dim); }
-
-        /* What weighs most */
-        .weight-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem; margin-top:1.5rem; }
-        .weight-card { background:var(--dark); border:1px solid rgba(252,209,22,0.15); border-radius:0.85rem; padding:1.15rem; }
-        .weight-card.help { border-left:4px solid var(--yellow); }
-        .weight-card.watch { border-left:4px solid var(--red); }
-        .weight-card.review { border-left:4px solid var(--blue); }
-        .weight-label { font-size:0.8rem; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; margin-bottom:0.6rem; }
-        .weight-card.help .weight-label { color:var(--yellow); }
-        .weight-card.watch .weight-label { color:var(--red); }
-        .weight-card.review .weight-label { color:var(--blue); }
-        .weight-card ul { margin:0; padding-left:1.1rem; }
-        .weight-card li { color:var(--dim); font-size:0.9rem; line-height:1.65; margin-bottom:0.45rem; }
-        .weight-card li:last-child { margin-bottom:0; }
-
-        /* Practical steps */
-        .steps-grid { display:grid; gap:1rem; margin-top:1.5rem; }
-        .step-item { background:var(--dark); border-left:4px solid var(--primary); border-radius:0.25rem 0.75rem 0.75rem 0.25rem; padding:1.15rem; display:flex; gap:1rem; align-items:flex-start; }
-        .step-num-circle { background:rgba(252,209,22,0.15); color:var(--primary); border-radius:50%; width:32px; height:32px; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:0.9rem; flex-shrink:0; }
-        .step-content { flex:1; }
-        .step-title { font-weight:700; color:var(--light); margin-bottom:0.25rem; }
-        .step-desc { font-size:0.9rem; color:var(--dim); line-height:1.6; }
-        .step-url { color:var(--primary); font-size:0.85rem; margin-top:0.35rem; }
-        .details-card { margin-top:1rem; background:var(--dark); border:1px solid rgba(252,209,22,0.15); border-radius:0.85rem; overflow:hidden; }
-        .details-card summary { list-style:none; cursor:pointer; padding:1rem 1.1rem; color:var(--light); font-weight:700; }
-        .details-card summary::-webkit-details-marker { display:none; }
-        .details-card summary::after { content:'▾'; float:right; color:var(--primary); transition:transform 0.2s; }
-        .details-card[open] summary::after { transform:rotate(180deg); }
-        .details-body { border-top:1px solid rgba(252,209,22,0.12); padding:1rem 1.1rem 1.1rem; color:var(--dim); font-size:0.9rem; line-height:1.7; }
-        .details-body p { margin-bottom:0.75rem; }
-        .details-body p:last-child { margin-bottom:0; }
-
-        /* Myths */
-        .myths-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:0.9rem; margin-top:1.5rem; }
-        .myth-item { background:var(--dark); border:1px solid rgba(252,209,22,0.1); border-radius:0.75rem; padding:1rem; }
-        .myth-false { color:var(--red); font-size:0.74rem; font-weight:700; text-transform:uppercase; margin-bottom:0.35rem; }
-        .myth-text { color:var(--light); font-weight:700; font-size:0.95rem; line-height:1.45; margin-bottom:0.45rem; }
-        .myth-truth { color:var(--dim); font-size:0.85rem; line-height:1.55; }
-
-        .tip-box { background:rgba(252,209,22,0.08); border:2px solid rgba(252,209,22,0.4); border-radius:0.75rem; padding:1.25rem; margin:1.5rem 0; }
-        .tip-header { color:var(--yellow); font-weight:700; margin-bottom:0.4rem; }
-        .tip-text { color:var(--dim); font-size:0.9rem; line-height:1.65; }
-
-        .next-week { background:var(--dark2); border:2px solid var(--primary); border-radius:1rem; padding:2rem; text-align:center; }
-        .next-week h3 { color:var(--primary); margin-bottom:0.75rem; }
-        .next-week p { color:var(--dim); margin-bottom:1rem; }
-        .btn { padding:0.9rem 2rem; border:none; border-radius:0.75rem; font-weight:700; font-size:1rem; cursor:pointer; transition:all 0.3s; text-decoration:none; display:inline-block; }
-        .btn-primary { background:var(--grad); color:#1a1a1a; }
-        .btn-primary:hover { transform:translateY(-2px); box-shadow:0 8px 25px rgba(252,209,22,0.4); }
-        .next-week-btn { margin-top:0.5rem; }
-
-        @media (max-width:768px) {
-            .week-title { font-size:1.8rem; }
-            .section-card { padding:1.4rem; }
-            .factor-header { flex-direction:column; align-items:flex-start; }
-            .factor-weight { text-align:left; }
-        }
-
-        body::before { content:""; display:block; height:3px; background:linear-gradient(90deg, #FCD116, #003893 50%, #CE1126); }
-    </style>
-    <link rel="stylesheet" href="/programa-colombia/lesson-structure.css">
-    <link rel="stylesheet" href="/programa-colombia/programa-colombia-v2.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Crimson+Pro:wght@400;600&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/programa-colombia/programa-colombia-v3.css">
 </head>
-<body>
+<body class="pc-page">
     <div class="container">
         <a href="/programa-colombia/" class="back-link">← Volver al Programa</a>
 
         <div class="header">
-            <div class="week-badge">Semana 9 de 10</div>
-            <h1 class="week-title">Mi historial crediticio</h1>
+            <div class="week-eyebrow"><span class="diamond"></span> Semana 9 · 10 <span class="diamond"></span></div>
+            <h1 class="week-title">Mi <span class="fade">historial crediticio</span></h1>
             <p class="week-subtitle">Qué mira el sistema y qué puedes fortalecer con el tiempo</p>
         </div>
 
         <div class="section">
-            <div class="section-card">
-                <p class="section-text">
+            <div class="intro-card">
+                <p class="section-text" style="margin-bottom:0">
                     Quieres arrendar, sacar algo a cuotas, pedir un préstamo — y la respuesta no es la que esperabas. A veces no es solo sí o no: cambian la tasa, el cupo, las condiciones. Aparece la pregunta: <strong>¿qué está mostrando mi historial hoy?</strong>
                 </p>
             </div>
         </div>
 
-        <div class="program-lesson-section program-lesson-section--callout">
-            <div class="program-lesson-callout-title">Idea clave de la semana</div>
-            <div class="program-lesson-callout-text">El historial crediticio no es una etiqueta fija. Es una señal que cambia con hábitos repetidos y con el tiempo.</div>
+        <div class="idea-clave">
+            <div class="idea-clave-label">Idea clave de la semana</div>
+            <div class="idea-clave-text">El historial crediticio no es una etiqueta fija. Es una señal que cambia con hábitos repetidos y con el tiempo.</div>
         </div>
 
-        <div class="program-lesson-section program-lesson-section--soft">
-            <div class="program-lesson-kicker">¿Qué está mirando realmente el sistema?</div>
-            <h2 class="program-lesson-title program-lesson-title--small">Señales repetidas, no promesas</h2>
-            <p class="program-lesson-text"><strong>Una entidad no ve intenciones. Ve señales repetidas en el tiempo.</strong></p>
-            <p class="program-lesson-text">Por eso conviene mirar el historial como algo menos misterioso: pagos, uso del cupo, antigüedad, consultas y continuidad.</p>
+        <div class="soft-section">
+            <div class="kicker">¿Qué está mirando realmente el sistema?</div>
+            <h2 class="soft-title">Señales repetidas, no promesas</h2>
+            <p class="soft-text"><strong>Una entidad no ve intenciones. Ve señales repetidas en el tiempo.</strong></p>
+            <p class="soft-text">Por eso conviene mirar el historial como algo menos misterioso: pagos, uso del cupo, antigüedad, consultas y continuidad.</p>
         </div>
 
         <div class="section">
@@ -213,7 +82,7 @@
 
                 <div class="weight-grid">
                     <div class="weight-card help">
-                        <div class="weight-label">Lo que más ayuda</div>
+                        <div class="weight-label">✓ Lo que más ayuda</div>
                         <ul>
                             <li>pagar a tiempo</li>
                             <li>usar el cupo con cuidado</li>
@@ -221,7 +90,7 @@
                         </ul>
                     </div>
                     <div class="weight-card watch">
-                        <div class="weight-label">Lo que puede debilitarlo</div>
+                        <div class="weight-label">! Lo que puede debilitarlo</div>
                         <ul>
                             <li>moras</li>
                             <li>uso alto del cupo</li>
@@ -229,7 +98,7 @@
                         </ul>
                     </div>
                     <div class="weight-card review">
-                        <div class="weight-label">Lo que conviene revisar</div>
+                        <div class="weight-label">→ Lo que conviene revisar</div>
                         <ul>
                             <li>errores en el reporte</li>
                             <li>productos no reconocidos</li>
@@ -264,9 +133,7 @@
                             <div class="ladder-text" id="time-focus-text">Hay señales que mejoran con continuidad, no con un cambio rápido de un solo mes.</div>
                         </div>
                     </div>
-                    <div class="score-summary">
-                        <div class="strength-note" id="strength-summary">Cambia los selectores para ver qué señal ya ayuda y cuál conviene cuidar primero.</div>
-                    </div>
+                    <div class="strength-note" id="strength-summary">Cambia los selectores para ver qué señal ya ayuda y cuál conviene cuidar primero.</div>
                 </div>
 
                 <div class="factors-grid">
@@ -353,7 +220,7 @@
 
                 <div class="weight-grid">
                     <div class="weight-card help">
-                        <div class="weight-label">Qué suele mejorar primero</div>
+                        <div class="weight-label">✓ Qué suele mejorar primero</div>
                         <ul>
                             <li>pagar a tiempo</li>
                             <li>bajar el uso del cupo</li>
@@ -361,7 +228,7 @@
                         </ul>
                     </div>
                     <div class="weight-card review">
-                        <div class="weight-label">Qué tarda más</div>
+                        <div class="weight-label">→ Qué tarda más</div>
                         <ul>
                             <li>la antigüedad del historial</li>
                             <li>construir más contexto con el tiempo</li>
@@ -378,23 +245,23 @@
 
                 <div class="steps-grid">
                     <div class="step-item">
-                        <div class="step-num-circle">1</div>
-                        <div class="step-content">
+                        <div class="step-num">1</div>
+                        <div>
                             <div class="step-title">Entra al sitio oficial</div>
                             <div class="step-desc">Puedes revisar tu historial desde el portal oficial de DataCrédito en Colombia. <strong>Consultar tu propio historial no baja tu puntaje.</strong></div>
                             <div class="step-url">datacredito.com.co / midatacredito.com</div>
                         </div>
                     </div>
                     <div class="step-item">
-                        <div class="step-num-circle">2</div>
-                        <div class="step-content">
+                        <div class="step-num">2</div>
+                        <div>
                             <div class="step-title">Verifica que los productos sí sean tuyos</div>
                             <div class="step-desc">Mira con calma si las tarjetas, créditos o reportes que aparecen corresponden realmente a tu historia.</div>
                         </div>
                     </div>
                     <div class="step-item">
-                        <div class="step-num-circle">3</div>
-                        <div class="step-content">
+                        <div class="step-num">3</div>
+                        <div>
                             <div class="step-title">Marca cualquier dato que no entiendas o no reconozcas</div>
                             <div class="step-desc">A veces el primer avance no es corregir todo. Es saber qué punto necesita revisión o una pregunta adicional.</div>
                         </div>
@@ -417,22 +284,22 @@
                 <h2 class="section-title">Mitos que vale la pena soltar</h2>
                 <div class="myths-grid">
                     <div class="myth-item">
-                        <div class="myth-false">Mito</div>
+                        <div class="myth-false">✗ Mito</div>
                         <div class="myth-text">No tener ningún crédito siempre ayuda</div>
                         <div class="myth-truth">No necesariamente. Sin señales visibles, el sistema tiene menos contexto. Un producto bien manejado puede aportar más claridad.</div>
                     </div>
                     <div class="myth-item">
-                        <div class="myth-false">Mito</div>
+                        <div class="myth-false">✗ Mito</div>
                         <div class="myth-text">Consultar tu propio historial te perjudica</div>
                         <div class="myth-truth">No. Revisarlo por tu cuenta sirve para entenderlo mejor y detectar errores antes de necesitar un producto.</div>
                     </div>
                     <div class="myth-item">
-                        <div class="myth-false">Mito</div>
+                        <div class="myth-false">✗ Mito</div>
                         <div class="myth-text">“Estar en DataCrédito” significa estar mal</div>
                         <div class="myth-truth">No. Tener información allí solo significa que existe un rastro financiero. Lo importante es cómo se ven los pagos y los productos.</div>
                     </div>
                     <div class="myth-item">
-                        <div class="myth-false">Mito</div>
+                        <div class="myth-false">✗ Mito</div>
                         <div class="myth-text">Una deuda te marca para siempre</div>
                         <div class="myth-truth">No. El historial cambia con el tiempo. Pagar y ordenar la situación sí modifica la señal que queda visible.</div>
                     </div>
@@ -445,29 +312,21 @@
             <div class="tip-text">Si en el futuro podrías buscar vivienda, educación o crédito para un negocio, construir hábitos temprano suele abrir mejores opciones después.</div>
         </div>
 
-        <div class="program-lesson-section">
-            <h2 class="program-lesson-title program-lesson-title--small">Una pregunta para terminar</h2>
-            <div class="program-lesson-reflections">
-                <div class="program-lesson-question">
-                    <p class="program-lesson-text"><strong>¿Qué parte de tu historial sientes que sí puedes mejorar desde ahora?</strong><br>Nombrar una sola palanca vuelve el tema manejable.</p>
-                </div>
-            </div>
+        <div class="reflect">
+            <div class="kicker">Una pregunta para terminar</div>
+            <p><strong>¿Qué parte de tu historial sientes que sí puedes mejorar desde ahora?</strong><br>Nombrar una sola palanca vuelve el tema manejable.</p>
         </div>
 
         <div class="next-week">
             <h3>Semana 10: Hacer crecer mi dinero</h3>
             <p>Dónde poner cada ahorro según el tiempo, el propósito y el riesgo.</p>
-            <a href="/programa-colombia/semana-10/" class="btn btn-primary next-week-btn">Continuar a Semana 10 →</a>
+            <a href="/programa-colombia/semana-10/" class="btn-primary">Continuar a Semana 10 →</a>
         </div>
 
-        <p style="color:var(--dim); font-size:0.78rem; line-height:1.55; text-align:center; opacity:0.7; margin-top:1.5rem;">Los números y ejemplos son ilustrativos. No representan a ninguna persona en particular.</p>
+        <p class="footnote">Los números y ejemplos son ilustrativos. No representan a ninguna persona en particular.</p>
     </div>
 
     <script>
-        function fmt(n) {
-            return new Intl.NumberFormat('es-CO', { minimumFractionDigits:0 }).format(Math.round(n));
-        }
-
         const factorImpacts = {
             payments: {
                 100: 'Los pagos a tiempo repetidos suelen ser la señal más fuerte.',
@@ -499,18 +358,8 @@
             }
         };
 
-        const barColors = {
-            100: 'var(--green)',
-            70: 'var(--yellow)',
-            65: 'var(--yellow)',
-            60: 'var(--yellow)',
-            45: 'var(--red)',
-            40: 'var(--yellow)',
-            30: 'var(--red)',
-            20: 'var(--red)',
-            15: 'var(--red)',
-            0: 'var(--red)'
-        };
+        /* Semantic state colors (tokens) — replaces the old flag-color bar mapping */
+        function barColor(v) { return v >= 70 ? 'var(--success)' : v >= 40 ? 'var(--warning)' : 'var(--error)'; }
 
         const focusMessages = {
             payments: {
@@ -519,19 +368,19 @@
             },
             util: {
                 title: 'Baja el uso del cupo',
-                text: 'No se trata de dejar de usar el cr&#233;dito por completo. Se trata de no vivir pegado al tope del cupo.'
+                text: 'No se trata de dejar de usar el crédito por completo. Se trata de no vivir pegado al tope del cupo.'
             },
             inquiries: {
                 title: 'Frena nuevas solicitudes',
-                text: 'Comparar con calma suele ayudar m&#225;s que pedir varios productos seguidos en poco tiempo.'
+                text: 'Comparar con calma suele ayudar más que pedir varios productos seguidos en poco tiempo.'
             },
             products: {
                 title: 'Aclara y cuida lo que ya aparece',
-                text: 'A veces el primer paso no es abrir algo nuevo. Es entender bien qu&#233; producto ya est&#225; visible y manejarlo con continuidad.'
+                text: 'A veces el primer paso no es abrir algo nuevo. Es entender bien qué producto ya está visible y manejarlo con continuidad.'
             },
             age: {
                 title: 'Dale tiempo a la continuidad',
-                text: 'La antig&#252;edad no se acelera de golpe. Lo que s&#237; puedes hacer es sostener buenos h&#225;bitos el tiempo suficiente para que se vean.'
+                text: 'La antigüedad no se acelera de golpe. Lo que sí puedes hacer es sostener buenos hábitos el tiempo suficiente para que se vean.'
             }
         };
         const factorNames = {
@@ -555,7 +404,7 @@
                 const bar = document.getElementById(`bar-${key}`);
                 if (bar) {
                     bar.style.width = factors[key] + '%';
-                    bar.style.background = barColors[factors[key]] || 'var(--yellow)';
+                    bar.style.background = barColor(factors[key]);
                 }
 
                 const impactEl = document.getElementById(`impact-${key}`);

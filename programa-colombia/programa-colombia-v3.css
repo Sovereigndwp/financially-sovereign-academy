@@ -1,0 +1,187 @@
+/* ============================================================================
+   programa-colombia-v3.css — Programa Colombia on the TSA design system
+   Pilot: semana-9 (design/pc-visual-pilot). Approved direction:
+   ~/Documents/Claude/Projects/TSA/programa-colombia-visual-direction.md
+
+   Architecture: TSA graphite tokens (--n-*) + [data-platform="colombia"]
+   accent variant. Tokens are vendored from design-system/_pr1-staging/css/
+   tsa-design-tokens.css — when PR1 lands site-wide, replace the token block
+   below with the shared imports and keep only the variant + components.
+
+   Rules encoded here (do not violate in page markup):
+   - Yellow (--brand) on ≤5 surfaces/page: fade-word, gradient-border card,
+     selected/active state, one thin callout rule, one primary CTA.
+   - Tricolor (--co-tricolor) = identity mark only, ≤2/page: top rule +
+     eyebrow diamonds. Hard-stop, never blended, never on cards/buttons.
+   - Blue/red never standalone UI colors; states use --success/--warning/
+     --error/--info WITH glyphs (✓ ! → ✗), never color alone.
+   - Zero hex values in page files; everything reads tokens.
+   ========================================================================== */
+
+/* ─── TSA design tokens (vendored) ─── */
+:root{
+  --n-bg:#121316; --n-surface:#191B1F; --n-elevated:#212429; --n-deepest:#0C0D0F;
+  --n-border:#2C2F36; --n-border-strong:#3C4047;
+  --n-ink:#ECECE6; --n-ink-strong:#FBFBF7; --n-muted:#A7ABB3; --n-faint:#6E727A;
+  --success:#34D399; --warning:#F4B740; --error:#F87171; --info:#60A5FA;
+  --font-serif:'Playfair Display',Georgia,serif;
+  --font-body:'Crimson Pro',Georgia,Cambria,serif;
+  --font-sans:'Inter',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  --font-mono:'JetBrains Mono',ui-monospace,'SF Mono',monospace;
+  --fs-h1:clamp(2.3rem,5.2vw,3.4rem); --fs-h2:clamp(1.45rem,3vw,1.9rem);
+  --fs-h3:1.15rem; --fs-body:1.08rem; --fs-small:0.9rem; --fs-eyebrow:0.7rem; --fs-mono:0.85rem;
+  --radius-sm:2px; --radius-md:4px; --radius-lg:8px;
+  --shadow-1:0 2px 10px rgba(0,0,0,.40); --shadow-2:0 8px 24px rgba(0,0,0,.45);
+  --space-section:clamp(2.75rem,5vw,4rem);
+}
+
+/* ─── Programa Colombia platform variant (proposed 4th data-platform entry) ─── */
+[data-platform="colombia"]{
+  --brand:#FCD116;
+  --accent:#FFDF4D;
+  --brand-fade:linear-gradient(135deg,#E0A800 0%,#FCD116 55%,#FFE99A 100%);
+  --brand-fade-h:linear-gradient(90deg,#E0A800 0%,#FCD116 55%,#FFE99A 100%);
+  --brand-solid:#FCD116;
+  --co-tricolor:linear-gradient(90deg,#FCD116 0 50%,#003893 50% 75%,#CE1126 75% 100%);
+}
+
+/* ─── Base ─── */
+.pc-page *{margin:0;padding:0;box-sizing:border-box}
+body.pc-page{font-family:var(--font-body);background:var(--n-bg);color:var(--n-ink);line-height:1.65;font-size:var(--fs-body)}
+body.pc-page::before{content:"";display:block;height:3px;background:var(--co-tricolor)} /* identity mark 1/2 */
+
+.pc-page .container{max-width:820px;margin:0 auto;padding:1rem 1.25rem 3rem}
+.pc-page .back-link{display:inline-flex;align-items:center;gap:.5rem;color:var(--n-muted);text-decoration:none;margin:1.5rem 0 2.5rem;font-family:var(--font-sans);font-size:var(--fs-small);font-weight:600;transition:color .2s}
+.pc-page .back-link:hover{color:var(--accent)}
+.pc-page a:focus-visible,.pc-page button:focus-visible,.pc-page select:focus-visible,.pc-page summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* ─── Header ─── */
+.pc-page .header{text-align:center;margin-bottom:var(--space-section)}
+.pc-page .week-eyebrow{font-family:var(--font-mono);font-size:var(--fs-eyebrow);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--n-muted);display:inline-flex;align-items:center;gap:.6rem;margin-bottom:1.1rem}
+.pc-page .week-eyebrow .diamond{width:.55rem;height:.55rem;background:var(--co-tricolor);transform:rotate(45deg);display:inline-block} /* identity mark 2/2 */
+.pc-page .week-title{font-family:var(--font-serif);font-size:var(--fs-h1);font-weight:700;line-height:1.08;letter-spacing:-.015em;color:var(--n-ink-strong);margin-bottom:.75rem}
+.pc-page .week-title .fade{background:var(--brand-fade);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:var(--brand)} /* accent 1: one phrase max */
+@supports not (background-clip:text){.pc-page .week-title .fade{background:none;-webkit-text-fill-color:currentColor;color:var(--brand)}}
+.pc-page .week-subtitle{font-size:1.15rem;color:var(--n-muted)}
+
+/* ─── Sections & cards ─── */
+.pc-page .section{margin-bottom:var(--space-section)}
+.pc-page .section-card{background:var(--n-elevated);border:1px solid var(--n-border);border-radius:var(--radius-md);padding:2rem;box-shadow:var(--shadow-1)}
+.pc-page .section-title{font-family:var(--font-serif);font-size:var(--fs-h2);font-weight:700;color:var(--n-ink-strong);letter-spacing:-.01em;margin-bottom:.75rem}
+.pc-page .section-text{color:var(--n-muted);margin-bottom:1rem}
+.pc-page .section-text strong{color:var(--n-ink);font-weight:600}
+.pc-page .intro-card{background:var(--n-surface);border-radius:var(--radius-md);padding:1.75rem 2rem}
+
+/* accent 2: the ONE gradient-border featured card per page */
+.pc-page .idea-clave{border:2px solid transparent;border-radius:var(--radius-lg);background:linear-gradient(var(--n-surface),var(--n-surface)) padding-box,var(--brand-fade) border-box;padding:1.4rem 1.7rem;margin-bottom:var(--space-section)}
+.pc-page .idea-clave-label{font-family:var(--font-mono);font-size:var(--fs-eyebrow);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:.5rem}
+.pc-page .idea-clave-text{font-family:var(--font-sans);font-size:1.12rem;font-weight:600;color:var(--n-ink-strong);line-height:1.5}
+
+.pc-page .soft-section{background:var(--n-surface);border:1px solid var(--n-border);border-radius:var(--radius-md);padding:1.6rem 2rem;margin-bottom:var(--space-section)}
+.pc-page .kicker{font-family:var(--font-mono);font-size:var(--fs-eyebrow);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--n-faint);margin-bottom:.6rem}
+.pc-page .soft-title{font-family:var(--font-sans);font-size:var(--fs-h3);font-weight:600;color:var(--n-ink-strong);margin-bottom:.6rem}
+.pc-page .soft-text{color:var(--n-muted);margin-bottom:.5rem}
+.pc-page .soft-text strong{color:var(--n-ink)}
+
+.pc-page .signal-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:.9rem;margin-top:1.5rem}
+.pc-page .signal-card{background:var(--n-surface);border:1px solid var(--n-border);border-radius:var(--radius-md);padding:1.1rem}
+.pc-page .signal-icon{font-size:1.3rem;margin-bottom:.5rem}
+.pc-page .signal-name{font-family:var(--font-sans);color:var(--n-ink);font-weight:600;font-size:.95rem;margin-bottom:.35rem;line-height:1.4}
+.pc-page .signal-desc{color:var(--n-muted);font-size:.88rem;line-height:1.55}
+
+/* semantic state cards — color + glyph, never color alone */
+.pc-page .weight-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-top:1.5rem}
+.pc-page .weight-card{background:var(--n-surface);border:1px solid var(--n-border);border-radius:var(--radius-md);padding:1.15rem 1.3rem}
+.pc-page .weight-card.help{border-left:3px solid var(--success)}
+.pc-page .weight-card.watch{border-left:3px solid var(--warning)}
+.pc-page .weight-card.review{border-left:3px solid var(--info)}
+.pc-page .weight-label{font-family:var(--font-mono);font-size:var(--fs-eyebrow);font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.6rem}
+.pc-page .weight-card.help .weight-label{color:var(--success)}
+.pc-page .weight-card.watch .weight-label{color:var(--warning)}
+.pc-page .weight-card.review .weight-label{color:var(--info)}
+.pc-page .weight-card ul{margin:0;padding-left:1.1rem}
+.pc-page .weight-card li{color:var(--n-muted);font-size:.95rem;line-height:1.65;margin-bottom:.45rem}
+.pc-page .weight-card li:last-child{margin-bottom:0}
+
+/* ─── Simulator ─── */
+.pc-page .score-display{background:var(--n-deepest);border:1px solid var(--n-border);border-radius:var(--radius-md);padding:1.4rem;margin:1.5rem 0}
+.pc-page .score-kicker{font-family:var(--font-mono);font-size:var(--fs-eyebrow);font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--n-faint);margin-bottom:.9rem;text-align:center}
+.pc-page .action-ladder{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.9rem}
+.pc-page .ladder-card{background:var(--n-surface);border:1px solid var(--n-border);border-radius:var(--radius-md);padding:1rem 1.15rem;text-align:left}
+.pc-page .ladder-card.start{border-left:3px solid var(--brand)} /* accent 3: selected-state */
+.pc-page .ladder-card.watch{border-left:3px solid var(--info)}
+.pc-page .ladder-card.time{border-left:3px solid var(--n-border-strong)}
+.pc-page .ladder-label{font-family:var(--font-mono);font-size:var(--fs-eyebrow);font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.45rem}
+.pc-page .ladder-card.start .ladder-label{color:var(--brand)}
+.pc-page .ladder-card.watch .ladder-label{color:var(--info)}
+.pc-page .ladder-card.time .ladder-label{color:var(--n-faint)}
+.pc-page .ladder-title{font-family:var(--font-sans);color:var(--n-ink);font-weight:600;font-size:.98rem;line-height:1.45;margin-bottom:.35rem}
+.pc-page .ladder-text{color:var(--n-muted);font-size:.9rem;line-height:1.6}
+.pc-page .strength-note{color:var(--n-muted);font-size:.95rem;line-height:1.7;margin-top:1.1rem}
+
+.pc-page .factors-grid{display:grid;gap:.75rem;margin-top:1.5rem}
+.pc-page .factor-row{background:var(--n-surface);border:1px solid var(--n-border);border-radius:var(--radius-md);padding:1.25rem}
+.pc-page .factor-header{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:.5rem}
+.pc-page .factor-name{font-family:var(--font-sans);font-weight:600;color:var(--n-ink)}
+.pc-page .factor-weight{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;color:var(--n-faint);text-align:right}
+.pc-page .factor-bar-track{background:rgba(255,255,255,.05);border-radius:2px;height:6px;overflow:hidden;margin-top:.6rem}
+.pc-page .factor-bar-fill{height:100%;transition:width .5s}
+.pc-page .factor-select{background:var(--n-elevated);border:1px solid var(--n-border);border-radius:var(--radius-sm);color:var(--n-ink);padding:.65rem .75rem;font-family:var(--font-sans);font-size:.88rem;margin-top:.25rem;width:100%}
+.pc-page .factor-select:focus{outline:none;border-color:var(--brand)}
+.pc-page .factor-impact{font-size:.86rem;margin-top:.55rem;line-height:1.5;font-family:var(--font-sans)}
+.pc-page .factor-impact.positive{color:var(--success)}
+.pc-page .factor-impact.negative{color:var(--error)}
+.pc-page .factor-impact.neutral{color:var(--n-muted)}
+
+/* ─── Steps / details / myths ─── */
+.pc-page .steps-grid{display:grid;gap:1rem;margin-top:1.5rem}
+.pc-page .step-item{background:var(--n-surface);border:1px solid var(--n-border);border-radius:var(--radius-md);padding:1.15rem 1.3rem;display:flex;gap:1rem;align-items:flex-start}
+.pc-page .step-num{font-family:var(--font-mono);font-weight:700;color:var(--brand);border:1px solid var(--n-border-strong);border-radius:var(--radius-sm);width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0}
+.pc-page .step-title{font-family:var(--font-sans);font-weight:600;color:var(--n-ink);margin-bottom:.25rem}
+.pc-page .step-desc{font-size:.95rem;color:var(--n-muted);line-height:1.6}
+.pc-page .step-desc strong{color:var(--n-ink)}
+.pc-page .step-url{font-family:var(--font-mono);color:var(--n-muted);font-size:.8rem;margin-top:.35rem}
+.pc-page .details-card{margin-top:1rem;background:var(--n-surface);border:1px solid var(--n-border);border-radius:var(--radius-md);overflow:hidden}
+.pc-page .details-card summary{list-style:none;cursor:pointer;padding:1rem 1.1rem;color:var(--n-ink);font-family:var(--font-sans);font-weight:600;font-size:.95rem}
+.pc-page .details-card summary::-webkit-details-marker{display:none}
+.pc-page .details-card summary::after{content:'▾';float:right;color:var(--n-faint);transition:transform .2s}
+.pc-page .details-card[open] summary::after{transform:rotate(180deg)}
+.pc-page .details-body{border-top:1px solid var(--n-border);padding:1rem 1.1rem 1.1rem;color:var(--n-muted);font-size:.95rem;line-height:1.7}
+.pc-page .details-body p{margin-bottom:.75rem}
+.pc-page .details-body p:last-child{margin-bottom:0}
+
+.pc-page .myths-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.9rem;margin-top:1.5rem}
+.pc-page .myth-item{background:var(--n-surface);border:1px solid var(--n-border);border-radius:var(--radius-md);padding:1.1rem}
+.pc-page .myth-false{font-family:var(--font-mono);color:var(--error);font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.35rem}
+.pc-page .myth-text{font-family:var(--font-sans);color:var(--n-ink);font-weight:600;font-size:.95rem;line-height:1.45;margin-bottom:.45rem}
+.pc-page .myth-truth{color:var(--n-muted);font-size:.88rem;line-height:1.55}
+
+/* accent 4: thin gold rule on the tip callout */
+.pc-page .tip-box{background:var(--n-surface);border:1px solid var(--n-border);border-left:3px solid var(--brand);border-radius:0 var(--radius-md) var(--radius-md) 0;padding:1.25rem 1.4rem;margin:var(--space-section) 0}
+.pc-page .tip-header{font-family:var(--font-sans);color:var(--n-ink-strong);font-weight:600;margin-bottom:.4rem}
+.pc-page .tip-text{color:var(--n-muted);font-size:.98rem;line-height:1.65}
+
+.pc-page .reflect{background:var(--n-surface);border:1px solid var(--n-border);border-radius:var(--radius-md);padding:1.6rem 2rem;margin-bottom:var(--space-section)}
+.pc-page .reflect p{color:var(--n-muted)}
+.pc-page .reflect strong{color:var(--n-ink);font-family:var(--font-sans)}
+
+/* ─── Next-week band + accent 5: the ONE fade-outline primary CTA ─── */
+.pc-page .next-week{background:var(--n-deepest);border:1px solid var(--n-border);border-radius:var(--radius-md);padding:2.25rem 2rem;text-align:center;position:relative;overflow:hidden}
+.pc-page .next-week::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 70% 30%,rgba(252,209,22,.07) 0%,transparent 60%);pointer-events:none}
+.pc-page .next-week h3{font-family:var(--font-serif);font-size:1.4rem;color:var(--n-ink-strong);margin-bottom:.6rem}
+.pc-page .next-week p{color:var(--n-muted);margin-bottom:1.4rem}
+.pc-page .btn-primary{--btn-bg:var(--n-deepest);display:inline-block;padding:.85rem 1.7rem;border:1.6px solid transparent;border-radius:var(--radius-sm);background:linear-gradient(var(--btn-bg),var(--btn-bg)) padding-box,var(--brand-fade) border-box;color:var(--n-ink);font-family:var(--font-sans);font-weight:600;font-size:.95rem;text-decoration:none;transition:all .2s;position:relative}
+.pc-page .btn-primary:hover{color:var(--n-ink-strong);transform:translateY(-1px);box-shadow:var(--shadow-2)}
+.pc-page .btn-secondary{display:inline-block;padding:.85rem 1.6rem;border:1.5px solid var(--n-border);border-radius:var(--radius-sm);background:transparent;color:var(--n-ink);font-family:var(--font-sans);font-weight:600;font-size:.95rem;text-decoration:none;min-height:44px;transition:all .2s}
+.pc-page .btn-secondary:hover{border-color:var(--accent);color:var(--accent)}
+
+.pc-page .footnote{color:var(--n-faint);font-size:.8rem;line-height:1.55;text-align:center;margin-top:1.5rem}
+
+@media(max-width:768px){
+  .pc-page .section-card,.pc-page .soft-section,.pc-page .intro-card{padding:1.4rem}
+  .pc-page .factor-header{flex-direction:column;align-items:flex-start}
+  .pc-page .factor-weight{text-align:left}
+}
+@media(prefers-reduced-motion:reduce){
+  .pc-page *{transition:none!important}
+}
