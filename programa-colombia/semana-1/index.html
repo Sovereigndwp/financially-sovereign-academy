@@ -1,785 +1,163 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-platform="colombia">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Semana 1: Dónde se va mi dinero | Ruta de Estabilidad y Crecimiento</title>
     <meta name="description" content="Simulación práctica de quincena: distribuye $1.000.000 entre necesidades, deudas, gusticos y ahorro y mira cómo se aprieta en tiempo real.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Crimson+Pro:wght@400;600&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/programa-colombia/programa-colombia-v3.css">
     <style>
-        :root {
-            --primary: #FCD116;
-            --dark: #1a1a1a;
-            --dark2: #2d2d2d;
-            --light: #e0e0e0;
-            --dim: #b3b3b3;
-            --pressure: #CE1126;
-            --yellow: #fcd116;
-            --orange: #fb923c;
-            --green: #2ecc71;
-            --grad: #FCD116;
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: var(--dark);
-            color: var(--light);
-            line-height: 1.6;
-            padding: 1rem;
-        }
-        body::before {
-            content: "";
-            display: block;
-            height: 3px;
-            background: linear-gradient(90deg, #FCD116, #003893 50%, #CE1126);
-        }
-        .container {
-            max-width: 860px;
-            margin: 0 auto;
-        }
-        .back-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--primary);
-            text-decoration: none;
-            margin-bottom: 1.5rem;
-            font-weight: 600;
-        }
-        .back-link:hover {
-            opacity: 0.82;
-        }
-        .page-header {
-            margin-bottom: 1.5rem;
-        }
-        .page-header h1 {
-            font-size: clamp(1.7rem, 4vw, 2.3rem);
-            color: var(--primary);
-            margin-bottom: 0.35rem;
-        }
-        .page-header p {
-            color: var(--dim);
-            font-size: 0.98rem;
-        }
-        .step-overview {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.55rem;
-            margin: 0 0 2rem;
-        }
-        .overview-step {
-            padding: 0.45rem 0.9rem;
-            border-radius: 999px;
-            background: rgba(255,255,255,0.04);
-            color: var(--dim);
-            font-size: 0.83rem;
-            font-weight: 700;
-            border: 1px solid rgba(255,255,255,0.05);
-            transition: all 0.2s ease;
-        }
-        .overview-step.current {
-            background: rgba(252,209,22,0.12);
-            border-color: rgba(252,209,22,0.28);
-            color: var(--primary);
-        }
-        .overview-step.done {
-            background: rgba(252,209,22,0.08);
-            border-color: rgba(252,209,22,0.18);
-            color: #FDE68A;
-        }
-        .simulation-shell {
-            margin: 1.5rem 0 1rem;
-        }
-        .budget-shell {
-            position: sticky;
-            top: 0;
-            z-index: 35;
-            margin: 0 0 1.5rem;
-            padding: 1rem;
-            border-radius: 1rem;
-            background: rgba(26,26,26,0.96);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(252,209,22,0.16);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.18);
-        }
-        .budget-headline {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            gap: 1rem;
-            margin-bottom: 0.85rem;
-        }
-        .budget-title {
-            color: var(--light);
-            font-size: 1.03rem;
-            font-weight: 700;
-            margin-bottom: 0.2rem;
-        }
-        .budget-copy {
-            color: var(--dim);
-            font-size: 0.86rem;
-            line-height: 1.55;
-            max-width: 38rem;
-        }
-        .scenario-panel {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(252,209,22,0.14);
-            border-radius: 1rem;
-            padding: 1rem;
-            margin-top: 1rem;
-        }
-        .scenario-label {
-            color: var(--primary);
-            font-size: 0.76rem;
-            font-weight: 700;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-        }
-        .scenario-grid {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 0.7rem;
-            margin-top: 0.75rem;
-        }
-        .scenario-btn {
-            width: 100%;
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 0.9rem;
-            background: rgba(255,255,255,0.02);
-            color: inherit;
-            padding: 0.95rem 1rem;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 0.3rem;
-            text-align: left;
-            cursor: pointer;
-            transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
-        }
-        .scenario-btn:hover {
-            border-color: rgba(252,209,22,0.28);
-            transform: translateY(-1px);
-        }
-        .scenario-btn:focus-visible {
-            outline: 2px solid rgba(252,209,22,0.55);
-            outline-offset: 2px;
-        }
-        .scenario-btn.is-active {
-            border-color: rgba(252,209,22,0.55);
-            background: rgba(252,209,22,0.08);
-        }
-        .scenario-title {
-            color: var(--light);
-            font-size: 0.95rem;
-            font-weight: 700;
-        }
-        .scenario-copy {
-            color: var(--dim);
-            font-size: 0.84rem;
-            line-height: 1.5;
-        }
-        .scenario-note {
-            margin-top: 0.8rem;
-            color: #FDE68A;
-            font-size: 0.86rem;
-            line-height: 1.55;
-        }
-        .budget-grid {
-            display: grid;
-            grid-template-columns: repeat(4, minmax(0, 1fr));
-            gap: 0.75rem;
-        }
-        .budget-card {
-            background: var(--dark2);
-            border: 1px solid rgba(252,209,22,0.12);
-            border-radius: 0.9rem;
-            padding: 0.95rem 1rem;
-        }
-        .metric-label {
-            color: var(--dim);
-            font-size: 0.72rem;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            margin-bottom: 0.28rem;
-        }
-        .metric-value {
-            font-size: 1.28rem;
-            font-weight: 800;
-            font-family: 'Courier New', monospace;
-            color: var(--light);
-            transition: color 0.2s ease;
-        }
-        .metric-helper {
-            margin-top: 0.42rem;
-            color: var(--dim);
-            font-size: 0.77rem;
-            line-height: 1.5;
-        }
-        .meter-wrap {
-            margin-top: 0.85rem;
-        }
-        .meter-track {
-            height: 10px;
-            background: rgba(255,255,255,0.08);
-            border-radius: 999px;
-            overflow: hidden;
-        }
-        .meter-fill {
-            height: 100%;
-            width: 100%;
-            border-radius: 999px;
-            background: var(--green);
-            transition: width 0.2s ease, background 0.2s ease;
-        }
-        .meter-scale {
-            display: flex;
-            justify-content: space-between;
-            gap: 0.5rem;
-            margin-top: 0.45rem;
-            color: var(--dim);
-            font-size: 0.72rem;
-        }
-        .meter-note {
-            margin-top: 0.7rem;
-            color: var(--dim);
-            font-size: 0.85rem;
-            line-height: 1.5;
-        }
-        .flow-stack {
-            display: grid;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-        .flow-section {
-            background: var(--dark2);
-            border: 2px solid rgba(252,209,22,0.12);
-            border-radius: 1rem;
-            overflow: hidden;
-        }
-        .flow-section.is-open {
-            border-color: rgba(252,209,22,0.28);
-        }
-        .flow-toggle {
-            width: 100%;
-            border: none;
-            background: transparent;
-            color: inherit;
-            padding: 1rem 1.1rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 1rem;
-            text-align: left;
-            cursor: pointer;
-        }
-        .flow-toggle:hover {
-            background: rgba(255,255,255,0.02);
-        }
-        .flow-toggle:focus-visible {
-            outline: 2px solid rgba(252,209,22,0.55);
-            outline-offset: -2px;
-        }
-        .flow-toggle-main {
-            display: flex;
-            align-items: flex-start;
-            gap: 0.75rem;
-            min-width: 0;
-            flex: 1;
-        }
-        .flow-state {
-            width: 1.2rem;
-            flex-shrink: 0;
-            color: var(--primary);
-            font-weight: 800;
-            padding-top: 0.05rem;
-        }
-        .flow-copy {
-            display: flex;
-            flex-direction: column;
-            gap: 0.12rem;
-            min-width: 0;
-        }
-        .flow-title {
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--light);
-        }
-        .flow-helper {
-            font-size: 0.82rem;
-            color: var(--dim);
-        }
-        .flow-chevron {
-            color: var(--primary);
-            font-size: 0.85rem;
-            transition: transform 0.26s ease;
-            flex-shrink: 0;
-        }
-        .flow-section.is-open .flow-chevron {
-            transform: rotate(90deg);
-        }
-        .flow-panel {
-            max-height: 0;
-            overflow: hidden;
-            opacity: 0;
-            padding: 0 1.1rem;
-            transition: max-height 0.26s ease, opacity 0.26s ease, padding 0.26s ease;
-        }
-        .flow-section.is-open .flow-panel {
-            opacity: 1;
-            padding: 0 1.1rem 1.1rem;
-        }
-        .flow-panel-inner {
-            padding-top: 0.35rem;
-        }
-        .intro-note {
-            color: var(--dim);
-            font-size: 0.92rem;
-            margin-bottom: 1.35rem;
-            line-height: 1.65;
-        }
-        .section-title {
-            font-size: 1.18rem;
-            font-weight: 700;
-            color: var(--light);
-            margin-bottom: 0.3rem;
-        }
-        .section-sub {
-            color: var(--dim);
-            font-size: 0.88rem;
-            line-height: 1.55;
-            margin-bottom: 1.15rem;
-        }
-        .section-label {
-            font-size: 0.74rem;
-            font-weight: 700;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: var(--dim);
-            padding: 0.4rem 0 0.3rem;
-            border-bottom: 1px solid rgba(255,255,255,0.06);
-            margin: 1.25rem 0 0.75rem;
-        }
+        /* Page-local components (semana-1) — tokens only; shared chrome comes from programa-colombia-v3.css */
+
+        /* Step overview pills */
+        .step-overview { display: flex; flex-wrap: wrap; gap: 0.55rem; margin: 0 0 2rem; }
+        .overview-step { padding: 0.45rem 0.9rem; border-radius: 999px; background: var(--n-surface); color: var(--n-muted); font-family: var(--font-sans); font-size: 0.83rem; font-weight: 700; border: 1px solid var(--n-border); transition: all 0.2s ease; }
+        .overview-step.current { background: rgba(252,209,22,0.08); border-color: var(--brand); color: var(--brand); }
+        .overview-step.done { background: var(--n-surface); border-color: var(--n-border); color: var(--n-faint); }
+        .pc-page .soft-section.simulation-shell { margin: 1.5rem 0 1rem; }
+
+        /* Sticky budget panel */
+        .budget-shell { position: sticky; top: 0; z-index: 35; margin: 0 0 1.5rem; padding: 1rem; border-radius: var(--radius-md); background: rgba(12,13,15,0.94); backdrop-filter: blur(8px); border: 1px solid var(--n-border); box-shadow: var(--shadow-1); }
+        .budget-headline { display: flex; justify-content: space-between; align-items: flex-end; gap: 1rem; margin-bottom: 0.85rem; }
+        .budget-title { font-family: var(--font-sans); color: var(--n-ink); font-size: 1.03rem; font-weight: 700; margin-bottom: 0.2rem; }
+        .budget-copy { color: var(--n-muted); font-size: 0.86rem; line-height: 1.55; max-width: 38rem; }
+        .scenario-panel { background: rgba(255,255,255,0.03); border: 1px solid var(--n-border); border-radius: var(--radius-md); padding: 1rem; margin-top: 1rem; }
+        .scenario-label { font-family: var(--font-mono); color: var(--n-faint); font-size: 0.76rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+        .scenario-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.7rem; margin-top: 0.75rem; }
+        .scenario-btn { width: 100%; border: 1px solid var(--n-border); border-radius: var(--radius-md); background: rgba(255,255,255,0.02); color: inherit; font-family: inherit; padding: 0.95rem 1rem; display: flex; flex-direction: column; align-items: flex-start; gap: 0.3rem; text-align: left; cursor: pointer; transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease; }
+        .scenario-btn:hover { border-color: var(--n-border-strong); transform: translateY(-1px); }
+        .scenario-btn.is-active { border-color: var(--brand); background: rgba(252,209,22,0.08); }
+        .scenario-title { font-family: var(--font-sans); color: var(--n-ink); font-size: 0.95rem; font-weight: 700; }
+        .scenario-copy { color: var(--n-muted); font-size: 0.84rem; line-height: 1.5; }
+        .scenario-note { margin-top: 0.8rem; color: var(--n-ink); font-size: 0.86rem; line-height: 1.55; }
+        .budget-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.75rem; }
+        .budget-card { background: var(--n-surface); border: 1px solid var(--n-border); border-radius: var(--radius-md); padding: 0.95rem 1rem; }
+        .metric-label { font-family: var(--font-mono); color: var(--n-muted); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.28rem; }
+        .metric-value { font-size: 1.28rem; font-weight: 800; font-family: var(--font-mono); color: var(--n-ink-strong); transition: color 0.2s ease; }
+        .metric-helper { margin-top: 0.42rem; color: var(--n-muted); font-size: 0.77rem; line-height: 1.5; }
+        .meter-wrap { margin-top: 0.85rem; }
+        .meter-track { height: 10px; background: rgba(255,255,255,0.08); border-radius: 999px; overflow: hidden; }
+        .meter-fill { height: 100%; width: 100%; border-radius: 999px; background: var(--success); transition: width 0.2s ease, background 0.2s ease; }
+        .meter-scale { display: flex; justify-content: space-between; gap: 0.5rem; margin-top: 0.45rem; color: var(--n-muted); font-size: 0.72rem; }
+        .meter-note { margin-top: 0.7rem; color: var(--n-muted); font-size: 0.85rem; line-height: 1.5; }
+
+        /* Flow accordion */
+        .flow-stack { display: grid; gap: 1rem; margin-top: 1rem; }
+        .flow-section { background: var(--n-elevated); border: 1px solid var(--n-border); border-radius: var(--radius-md); overflow: hidden; }
+        .flow-section.is-open { border-color: var(--n-border-strong); }
+        .flow-toggle { width: 100%; border: none; background: transparent; color: inherit; font-family: inherit; padding: 1rem 1.1rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; text-align: left; cursor: pointer; }
+        .flow-toggle:hover { background: rgba(255,255,255,0.02); }
+        .flow-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+        .flow-toggle-main { display: flex; align-items: flex-start; gap: 0.75rem; min-width: 0; flex: 1; }
+        .flow-state { width: 1.2rem; flex-shrink: 0; font-family: var(--font-mono); color: var(--brand); font-weight: 800; padding-top: 0.05rem; }
+        .flow-copy { display: flex; flex-direction: column; gap: 0.12rem; min-width: 0; }
+        .flow-title { font-family: var(--font-sans); font-size: 1rem; font-weight: 700; color: var(--n-ink); }
+        .flow-helper { font-size: 0.82rem; color: var(--n-muted); }
+        .flow-chevron { color: var(--n-faint); font-size: 0.85rem; transition: transform 0.26s ease; flex-shrink: 0; }
+        .flow-section.is-open .flow-chevron { transform: rotate(90deg); }
+        .flow-panel { max-height: 0; overflow: hidden; opacity: 0; padding: 0 1.1rem; transition: max-height 0.26s ease, opacity 0.26s ease, padding 0.26s ease; }
+        .flow-section.is-open .flow-panel { opacity: 1; padding: 0 1.1rem 1.1rem; }
+        .flow-panel-inner { padding-top: 0.35rem; }
+        .intro-note { color: var(--n-muted); font-size: 0.92rem; margin-bottom: 1.35rem; line-height: 1.65; }
+        .section-sub { color: var(--n-muted); font-size: 0.88rem; line-height: 1.55; margin-bottom: 1.15rem; }
+
+        /* Category labels */
+        .section-label { font-family: var(--font-mono); font-size: 0.74rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--n-muted); padding: 0.4rem 0 0.3rem; border-bottom: 1px solid var(--n-border); margin: 1.25rem 0 0.75rem; }
         .section-label.needs-lbl,
         .section-label.wants-lbl,
-        .section-label.savings-lbl {
-            color: rgba(252,209,22,0.9);
-            border-bottom-color: rgba(252,209,22,0.16);
-        }
-        .section-label.pressure-lbl {
-            color: rgba(206,17,38,0.95);
-            border-bottom-color: rgba(206,17,38,0.2);
-        }
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 0.55rem;
-        }
-        .cards-grid--single {
-            grid-template-columns: 1fr;
-        }
-        .item-card {
-            display: flex;
-            align-items: center;
-            gap: 0.85rem;
-            padding: 0.9rem 1rem;
-            background: rgba(255,255,255,0.02);
-            border: 2px solid rgba(252,209,22,0.1);
-            border-radius: 0.9rem;
-            cursor: pointer;
-            user-select: none;
-            transition: border-color 0.15s ease, background 0.15s ease, transform 0.15s ease;
-        }
-        .item-card:hover {
-            border-color: rgba(252,209,22,0.28);
-            transform: translateY(-1px);
-        }
-        .item-card.selected {
-            border-color: var(--primary);
-            background: rgba(252,209,22,0.05);
-        }
-        .item-card.debt {
-            border-color: rgba(206,17,38,0.22);
-        }
-        .item-card.debt.selected {
-            border-color: rgba(206,17,38,0.85);
-            background: rgba(206,17,38,0.08);
-        }
-        .item-card.savings {
-            border-color: rgba(252,209,22,0.22);
-        }
-        .item-card.savings.selected {
-            border-color: #FDE68A;
-            background: rgba(252,209,22,0.08);
-        }
-        .item-card.cant-afford {
-            opacity: 0.38;
-            cursor: not-allowed;
-            transform: none;
-        }
-        .item-card.flash-no {
-            animation: flashNo 0.35s ease;
-        }
+        .section-label.savings-lbl { color: var(--n-faint); }
+        .section-label.pressure-lbl { color: var(--error); }
+
+        /* Item cards */
+        .cards-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.55rem; }
+        .cards-grid--single { grid-template-columns: 1fr; }
+        .item-card { display: flex; align-items: center; gap: 0.85rem; padding: 0.9rem 1rem; background: rgba(255,255,255,0.02); border: 1px solid var(--n-border); border-radius: var(--radius-md); cursor: pointer; user-select: none; transition: border-color 0.15s ease, background 0.15s ease, transform 0.15s ease; }
+        .item-card:hover { border-color: var(--n-border-strong); transform: translateY(-1px); }
+        .item-card.selected { border-color: var(--brand); background: rgba(252,209,22,0.08); }
+        .item-card.debt.selected { border-color: var(--error); background: rgba(248,113,113,0.08); }
+        .item-card.savings.selected { border-color: var(--success); background: rgba(52,211,153,0.08); }
+        .item-card.cant-afford { opacity: 0.38; cursor: not-allowed; transform: none; }
+        .item-card.flash-no { animation: flashNo 0.35s ease; }
         @keyframes flashNo {
             0%, 100% { transform: translateX(0); }
             25% { transform: translateX(-5px); }
             75% { transform: translateX(5px); }
         }
-        .item-icon {
-            width: 30px;
-            text-align: center;
-            flex-shrink: 0;
-            font-size: 1.22rem;
-        }
-        .item-body {
-            flex: 1;
-            min-width: 0;
-        }
-        .item-name {
-            color: var(--light);
-            font-size: 0.94rem;
-            font-weight: 700;
-        }
-        .item-desc {
-            color: var(--dim);
-            font-size: 0.81rem;
-            margin-top: 0.12rem;
-            line-height: 1.45;
-        }
-        .item-badge {
-            display: inline-block;
-            font-size: 0.68rem;
-            font-weight: 700;
-            padding: 0.14rem 0.45rem;
-            border-radius: 999px;
-            margin-top: 0.28rem;
-        }
+        .item-icon { width: 30px; text-align: center; flex-shrink: 0; font-size: 1.22rem; }
+        .item-body { flex: 1; min-width: 0; }
+        .item-name { font-family: var(--font-sans); color: var(--n-ink); font-size: 0.94rem; font-weight: 700; }
+        .item-desc { color: var(--n-muted); font-size: 0.81rem; margin-top: 0.12rem; line-height: 1.45; }
+        .item-badge { display: inline-block; font-family: var(--font-mono); font-size: 0.68rem; font-weight: 700; padding: 0.14rem 0.45rem; border-radius: 999px; margin-top: 0.28rem; }
         .badge-need,
         .badge-want,
-        .badge-save {
-            background: rgba(252,209,22,0.18);
-            color: #FDE68A;
-        }
-        .badge-debt {
-            background: rgba(206,17,38,0.16);
-            color: #ffb4bd;
-        }
-        .item-cost {
-            font-size: 1rem;
-            font-weight: 800;
-            font-family: 'Courier New', monospace;
-            color: var(--primary);
-            white-space: nowrap;
-            flex-shrink: 0;
-        }
-        .item-card.debt .item-cost {
-            color: #ffb4bd;
-        }
-        .item-card.savings .item-cost {
-            color: #FDE68A;
-        }
-        .checkbox {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            border: 2px solid rgba(252,209,22,0.3);
-            flex-shrink: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.15s ease;
-        }
-        .item-card.selected .checkbox {
-            background: var(--primary);
-            border-color: var(--primary);
-        }
-        .item-card.debt.selected .checkbox {
-            background: var(--pressure);
-            border-color: var(--pressure);
-        }
-        .item-card.savings.selected .checkbox {
-            background: #FDE68A;
-            border-color: #FDE68A;
-        }
-        .checkmark {
-            display: none;
-            color: white;
-            font-size: 0.72rem;
-            font-weight: 900;
-        }
-        .item-card.savings.selected .checkmark {
-            color: var(--dark);
-        }
-        .item-card.selected .checkmark {
-            display: block;
-        }
-        .savings-note {
-            background: rgba(252,209,22,0.06);
-            border: 1px solid rgba(252,209,22,0.2);
-            border-radius: 0.75rem;
-            padding: 0.8rem 1rem;
-            color: #FDE68A;
-            font-size: 0.85rem;
-            line-height: 1.55;
-            margin-bottom: 0.7rem;
-        }
-        .over-budget {
-            display: none;
-            background: rgba(206,17,38,0.1);
-            border: 1px solid rgba(206,17,38,0.32);
-            border-radius: 0.75rem;
-            padding: 0.75rem 1rem;
-            color: #ffb4bd;
-            font-size: 0.88rem;
-            font-weight: 700;
-            text-align: center;
-            margin: 1rem 0;
-        }
-        .over-budget.show {
-            display: block;
-        }
-        .btn {
-            padding: 0.85rem 2rem;
-            border: none;
-            border-radius: 999px;
-            font-weight: 700;
-            cursor: pointer;
-            font-size: 0.95rem;
-            transition: all 0.2s ease;
-        }
-        .btn-primary {
-            background: var(--grad);
-            color: #1a1a1a;
-            box-shadow: 0 4px 15px rgba(252,209,22,0.3);
-        }
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(252,209,22,0.42);
-        }
-        .btn-primary:disabled {
-            background: rgba(179,179,179,0.15);
-            color: rgba(179,179,179,0.5);
-            cursor: not-allowed;
-            box-shadow: none;
-            transform: none;
-        }
-        .btn-ghost {
-            background: transparent;
-            color: var(--primary);
-            border: 2px solid rgba(252,209,22,0.35);
-        }
-        .btn-ghost:hover {
-            background: rgba(252,209,22,0.08);
-        }
-        .phase-cta {
-            text-align: center;
-            margin: 1.75rem 0 0.25rem;
-        }
-        .phase-cta-note {
-            text-align: center;
-            color: var(--dim);
-            font-size: 0.82rem;
-            margin-top: 0.7rem;
-            line-height: 1.55;
-        }
-        .breakdown-grid {
-            display: grid;
-            grid-template-columns: repeat(4, minmax(0, 1fr));
-            gap: 0.75rem;
-            margin: 1.25rem 0 1.5rem;
-        }
-        .bk-card {
-            background: rgba(255,255,255,0.02);
-            border-radius: 0.85rem;
-            padding: 0.95rem;
-            text-align: center;
-            border: 1px solid rgba(252,209,22,0.08);
-        }
-        .bk-val {
-            font-size: 1.12rem;
-            font-weight: 800;
-            font-family: 'Courier New', monospace;
-            color: var(--light);
-        }
-        .bk-val.need { color: #FDE68A; }
-        .bk-val.want { color: var(--yellow); }
-        .bk-val.debt { color: #ffb4bd; }
-        .bk-val.save { color: #d8ffe9; }
-        .bk-lbl {
-            margin-top: 0.2rem;
-            color: var(--dim);
-            font-size: 0.74rem;
-        }
-        .event-card {
-            background: rgba(206,17,38,0.06);
-            border: 1px solid rgba(206,17,38,0.26);
-            border-radius: 1rem;
-            padding: 1.2rem;
-            margin: 1.35rem 0 1.5rem;
-        }
-        .event-kicker {
-            display: inline-block;
-            margin-bottom: 0.5rem;
-            color: #ffb4bd;
-            font-size: 0.74rem;
-            font-weight: 700;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-        }
-        .event-title {
-            color: var(--light);
-            font-size: 1.08rem;
-            margin-bottom: 0.45rem;
-        }
-        .event-text {
-            color: var(--dim);
-            font-size: 0.92rem;
-            line-height: 1.62;
-        }
-        .event-grid {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 0.7rem;
-            margin: 1rem 0;
-        }
-        .event-stat {
-            background: rgba(0,0,0,0.18);
-            border: 1px solid rgba(255,255,255,0.06);
-            border-radius: 0.8rem;
-            padding: 0.9rem;
-        }
-        .event-val {
-            font-size: 1rem;
-            font-weight: 800;
-            font-family: 'Courier New', monospace;
-            color: var(--light);
-        }
-        .event-val.cost {
-            color: #ffb4bd;
-        }
-        .event-lbl {
-            margin-top: 0.22rem;
-            color: var(--dim);
-            font-size: 0.74rem;
-        }
-        .event-result {
-            padding: 0.95rem 1rem;
-            border-radius: 0.8rem;
-            font-size: 0.9rem;
-            line-height: 1.55;
-            font-weight: 600;
-        }
-        .event-result.good {
-            background: rgba(46,204,113,0.12);
-            color: #d8ffe9;
-        }
-        .event-result.tight {
-            background: rgba(252,209,22,0.12);
-            color: #FDE68A;
-        }
-        .event-result.bad {
-            background: rgba(206,17,38,0.12);
-            color: #ffb4bd;
-        }
-        .consequence-list {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-            margin: 0.5rem 0 0;
-        }
-        .cq {
-            padding: 1rem 1.05rem;
-            border-radius: 0.85rem;
-            font-size: 0.91rem;
-            line-height: 1.55;
-        }
-        .cq-title {
-            font-weight: 700;
-            margin-bottom: 0.3rem;
-        }
-        .cq.danger {
-            background: rgba(206,17,38,0.08);
-            border-left: 4px solid var(--pressure);
-        }
-        .cq.danger .cq-title {
-            color: #ffb4bd;
-        }
-        .cq.warning {
-            background: rgba(252,209,22,0.08);
-            border-left: 4px solid var(--yellow);
-        }
-        .cq.warning .cq-title {
-            color: var(--yellow);
-        }
-        .cq.positive {
-            background: rgba(46,204,113,0.1);
-            border-left: 4px solid var(--green);
-        }
-        .cq.positive .cq-title {
-            color: #d8ffe9;
-        }
-        .cq.insight {
-            background: rgba(255,255,255,0.03);
-            border-left: 4px solid var(--primary);
-        }
-        .cq.insight .cq-title {
-            color: var(--primary);
-        }
-        .refl-list {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 0.9rem;
-            margin: 1rem 0 1.5rem;
-        }
-        .refl-item {
-            background: rgba(255,255,255,0.02);
-            border: 1px solid rgba(252,209,22,0.1);
-            border-radius: 0.95rem;
-            padding: 1.2rem;
-        }
-        .refl-q {
-            font-size: 0.97rem;
-            font-weight: 700;
-            color: var(--light);
-            margin-bottom: 0.35rem;
-            line-height: 1.45;
-        }
-        .refl-hint {
-            font-size: 0.87rem;
-            color: var(--dim);
-            line-height: 1.55;
-        }
-        .retry-box {
-            background: rgba(252,209,22,0.04);
-            border-radius: 0.85rem;
-            padding: 1.25rem;
-            text-align: center;
-            margin: 1.5rem 0;
-        }
-        .retry-box p {
-            color: var(--dim);
-            font-size: 0.88rem;
-            margin-bottom: 1rem;
-        }
-        .next-week {
-            background: var(--dark2);
-            border: 2px solid var(--primary);
-            border-radius: 1rem;
-            padding: 1.6rem;
-            margin-top: 1.5rem;
-            text-align: center;
-        }
-        .next-week h3 {
-            color: var(--primary);
-            margin-bottom: 0.55rem;
-            font-size: 1.08rem;
-        }
-        .next-week p {
-            color: var(--dim);
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-            line-height: 1.55;
-        }
+        .badge-save { background: var(--n-surface); border: 1px solid var(--n-border); color: var(--n-muted); }
+        .badge-debt { background: rgba(248,113,113,0.08); border: 1px solid var(--n-border); color: var(--error); }
+        .item-cost { font-size: 1rem; font-weight: 800; font-family: var(--font-mono); color: var(--n-ink-strong); white-space: nowrap; flex-shrink: 0; }
+        .item-card.debt .item-cost { color: var(--error); }
+        .item-card.savings .item-cost { color: var(--success); }
+        .checkbox { width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--n-border-strong); flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all 0.15s ease; }
+        .item-card.selected .checkbox { background: var(--brand); border-color: var(--brand); }
+        .item-card.debt.selected .checkbox { background: var(--error); border-color: var(--error); }
+        .item-card.savings.selected .checkbox { background: var(--success); border-color: var(--success); }
+        .checkmark { display: none; color: var(--n-deepest); font-size: 0.72rem; font-weight: 900; }
+        .item-card.selected .checkmark { display: block; }
+        .savings-note { background: var(--n-surface); border: 1px solid var(--n-border); border-radius: var(--radius-md); padding: 0.8rem 1rem; color: var(--n-muted); font-size: 0.85rem; line-height: 1.55; margin-bottom: 0.7rem; }
+        .over-budget { display: none; background: rgba(248,113,113,0.08); border: 1px solid var(--error); border-radius: var(--radius-md); padding: 0.75rem 1rem; color: var(--error); font-size: 0.88rem; font-weight: 700; text-align: center; margin: 1rem 0; }
+        .over-budget.show { display: block; }
+
+        /* In-tool action buttons use the v3 secondary style; the ONE primary CTA is the next-week link */
+        .pc-page button.btn-secondary { cursor: pointer; }
+        .pc-page .btn-secondary:disabled,
+        .pc-page .btn-secondary:disabled:hover { border-color: var(--n-border); color: var(--n-faint); cursor: not-allowed; }
+        .phase-cta { text-align: center; margin: 1.75rem 0 0.25rem; }
+        .phase-cta-note { text-align: center; color: var(--n-muted); font-size: 0.82rem; margin-top: 0.7rem; line-height: 1.55; }
+
+        /* Consequences breakdown */
+        .breakdown-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.75rem; margin: 1.25rem 0 1.5rem; }
+        .bk-card { background: var(--n-surface); border-radius: var(--radius-md); padding: 0.95rem; text-align: center; border: 1px solid var(--n-border); }
+        .bk-val { font-size: 1.12rem; font-weight: 800; font-family: var(--font-mono); color: var(--n-ink-strong); }
+        .bk-val.debt { color: var(--error); }
+        .bk-val.save { color: var(--success); }
+        .bk-lbl { margin-top: 0.2rem; color: var(--n-muted); font-size: 0.74rem; }
+        .event-card { background: var(--n-surface); border: 1px solid var(--n-border); border-left: 3px solid var(--error); border-radius: 0 var(--radius-md) var(--radius-md) 0; padding: 1.2rem; margin: 1.35rem 0 1.5rem; }
+        .event-kicker { display: inline-block; margin-bottom: 0.5rem; font-family: var(--font-mono); color: var(--error); font-size: 0.74rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+        .event-title { font-family: var(--font-sans); color: var(--n-ink); font-size: 1.08rem; margin-bottom: 0.45rem; }
+        .event-text { color: var(--n-muted); font-size: 0.92rem; line-height: 1.62; }
+        .event-text strong { color: var(--n-ink); }
+        .event-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.7rem; margin: 1rem 0; }
+        .event-stat { background: var(--n-deepest); border: 1px solid var(--n-border); border-radius: var(--radius-md); padding: 0.9rem; }
+        .event-val { font-size: 1rem; font-weight: 800; font-family: var(--font-mono); color: var(--n-ink); }
+        .event-val.cost { color: var(--error); }
+        .event-lbl { margin-top: 0.22rem; color: var(--n-muted); font-size: 0.74rem; }
+        .event-result { padding: 0.95rem 1rem; border-radius: var(--radius-md); font-size: 0.9rem; line-height: 1.55; font-weight: 600; font-family: var(--font-sans); }
+        .event-result.good { background: rgba(52,211,153,0.08); color: var(--success); }
+        .event-result.tight { background: rgba(244,183,64,0.08); color: var(--warning); }
+        .event-result.bad { background: rgba(248,113,113,0.08); color: var(--error); }
+
+        /* Consequence callouts — state color + title, on neutral cards */
+        .consequence-list { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; margin: 0.5rem 0 0; }
+        .cq { background: var(--n-surface); border: 1px solid var(--n-border); padding: 1rem 1.05rem; border-radius: 0 var(--radius-md) var(--radius-md) 0; font-size: 0.91rem; line-height: 1.55; color: var(--n-muted); }
+        .cq-title { font-family: var(--font-sans); font-weight: 700; margin-bottom: 0.3rem; }
+        .cq.danger { border-left: 3px solid var(--error); }
+        .cq.danger .cq-title { color: var(--error); }
+        .cq.warning { border-left: 3px solid var(--warning); }
+        .cq.warning .cq-title { color: var(--warning); }
+        .cq.positive { border-left: 3px solid var(--success); }
+        .cq.positive .cq-title { color: var(--success); }
+        .cq.insight { border-left: 3px solid var(--info); }
+        .cq.insight .cq-title { color: var(--info); }
+
+        /* Reflection */
+        .refl-list { list-style: none; display: flex; flex-direction: column; gap: 0.9rem; margin: 1rem 0 1.5rem; }
+        .refl-item { background: var(--n-surface); border: 1px solid var(--n-border); border-radius: var(--radius-md); padding: 1.2rem; }
+        .refl-q { font-family: var(--font-sans); font-size: 0.97rem; font-weight: 700; color: var(--n-ink); margin-bottom: 0.35rem; line-height: 1.45; }
+        .refl-hint { font-size: 0.87rem; color: var(--n-muted); line-height: 1.55; }
+        .retry-box { background: var(--n-surface); border: 1px solid var(--n-border); border-radius: var(--radius-md); padding: 1.25rem; text-align: center; margin: 1.5rem 0; }
+        .retry-box p { color: var(--n-muted); font-size: 0.88rem; margin-bottom: 1rem; }
+
         @media (max-width: 760px) {
             .scenario-grid,
             .budget-grid,
@@ -811,13 +189,13 @@
                 padding-bottom: 0.95rem;
             }
         }
-        .v2-link-anchor { display:none; }
+        .v2-link-anchor { display: none; }
         @media (prefers-reduced-motion: reduce) {
             .meter-fill,
             .flow-panel,
             .flow-chevron,
             .item-card,
-            .btn,
+            .btn-secondary,
             .metric-value {
                 transition: none;
             }
@@ -826,16 +204,15 @@
             }
         }
     </style>
-    <link rel="stylesheet" href="/programa-colombia/lesson-structure.css">
-    <link rel="stylesheet" href="/programa-colombia/programa-colombia-v2.css">
 </head>
-<body>
+<body class="pc-page">
     <div class="container">
         <a href="/programa-colombia/" class="back-link">← Volver al Programa</a>
 
-        <div class="page-header">
-            <h1>Semana 1: Dónde se va mi dinero</h1>
-            <p class="program-lesson-text program-lesson-spacer-top">Una simulación para ver qué pasa cuando una quincena tiene que alcanzar para todo.</p>
+        <div class="header">
+            <div class="week-eyebrow"><span class="diamond"></span> Semana 1 · 10 <span class="diamond"></span></div>
+            <h1 class="week-title">Dónde se va <span class="fade">mi dinero</span></h1>
+            <p class="week-subtitle">Una simulación para ver qué pasa cuando una quincena tiene que alcanzar para todo.</p>
         </div>
 
         <nav class="step-overview" aria-label="Etapas del ejercicio">
@@ -844,19 +221,21 @@
             <div class="overview-step" id="overview-reflect">3 · Reflexionar</div>
         </nav>
 
-        <div class="program-lesson-section">
-            <p class="program-lesson-text">Llega el pago y enseguida aparecen mercado, transporte, servicios, celular, almuerzos. Muchas veces no es que estés gastando mal — simplemente no alcanza para todo.</p>
+        <div class="section">
+            <div class="intro-card">
+                <p class="section-text" style="margin-bottom:0">Llega el pago y enseguida aparecen mercado, transporte, servicios, celular, almuerzos. Muchas veces no es que estés gastando mal — simplemente no alcanza para todo.</p>
+            </div>
         </div>
 
-        <div class="program-lesson-section program-lesson-section--callout">
-            <div class="program-lesson-callout-title">Idea clave de la semana</div>
-            <div class="program-lesson-callout-text">El primer paso no es cambiar tus gastos. Es ver con claridad a dónde se está yendo tu dinero.</div>
+        <div class="idea-clave">
+            <div class="idea-clave-label">Idea clave de la semana</div>
+            <div class="idea-clave-text">El primer paso no es cambiar tus gastos. Es ver con claridad a dónde se está yendo tu dinero.</div>
         </div>
 
-        <div class="program-lesson-section program-lesson-section--soft simulation-shell">
-            <div class="program-lesson-kicker">Simulación de una quincena</div>
-            <h2 class="program-lesson-title program-lesson-title--small">Así se aprieta una quincena cuando muchos gastos llegan juntos</h2>
-            <p class="program-lesson-text">Dos versiones. Ambas con <strong>$1.000.000</strong>: una arranca limpia, la otra ya llega corta.</p>
+        <div class="soft-section simulation-shell">
+            <div class="kicker">Simulación de una quincena</div>
+            <h2 class="soft-title">Así se aprieta una quincena cuando muchos gastos llegan juntos</h2>
+            <p class="soft-text">Dos versiones. Ambas con <strong>$1.000.000</strong>: una arranca limpia, la otra ya llega corta.</p>
             <section class="scenario-panel" aria-labelledby="scenario-label">
                 <div class="scenario-label" id="scenario-label">Elige una versión del ejercicio</div>
                 <div class="scenario-grid">
@@ -1106,7 +485,7 @@
                         <div class="over-budget" id="over-budget">⚠️ Te pasaste del dinero disponible para este ejercicio. Desmarca algo para continuar.</div>
 
                         <div class="phase-cta">
-                            <button class="btn btn-primary" id="btn-to-consequences" onclick="goToConsequences()">Ver consecuencias →</button>
+                            <button class="btn-secondary" id="btn-to-consequences" onclick="goToConsequences()">Ver consecuencias →</button>
                             <p class="phase-cta-note">Cualquier combinación sirve. Lo que importa es observar qué pasa.</p>
                         </div>
                     </div>
@@ -1161,7 +540,7 @@
                         <ul class="consequence-list" id="consequence-list"></ul>
 
                         <div class="phase-cta">
-                            <button class="btn btn-primary" onclick="goToReflection()">Pasar a reflexionar →</button>
+                            <button class="btn-secondary" onclick="goToReflection()">Pasar a reflexionar →</button>
                         </div>
                     </div>
                 </div>
@@ -1180,10 +559,10 @@
                 </button>
                 <div class="flow-panel" id="panel-reflect" role="region" aria-labelledby="toggle-reflect" aria-hidden="true">
                     <div class="flow-panel-inner">
-                        <div class="program-lesson-section program-lesson-section--soft">
-                            <div class="program-lesson-kicker">Un paso práctico</div>
-                            <h2 class="program-lesson-title program-lesson-title--small">Antes de tu próxima quincena, separa tres grupos</h2>
-                            <p class="program-lesson-text">Lo que no se puede mover, lo que sí podrías ajustar, y una cantidad pequeña como colchón. Tener eso claro antes de gastar cambia la sensación de apuro.</p>
+                        <div class="soft-section">
+                            <div class="kicker">Un paso práctico</div>
+                            <h2 class="soft-title">Antes de tu próxima quincena, separa tres grupos</h2>
+                            <p class="soft-text">Lo que no se puede mover, lo que sí podrías ajustar, y una cantidad pequeña como colchón. Tener eso claro antes de gastar cambia la sensación de apuro.</p>
                         </div>
 
                         <div class="section-title">Una pregunta para terminar</div>
@@ -1191,13 +570,13 @@
 
                         <div class="retry-box">
                             <p>¿Cómo cambia la historia si distribuyes distinto?</p>
-                            <button class="btn btn-ghost" onclick="resetSimulation()">Volver a distribuir</button>
+                            <button class="btn-secondary" onclick="resetSimulation()">Volver a distribuir</button>
                         </div>
 
                         <div class="next-week">
                             <h3>Semana 2: entender tu pago</h3>
                             <p>Ya viste en qué se va la quincena. Ahora toca entender cuánto entra de verdad.</p>
-                            <a href="/programa-colombia/semana-2/" class="btn btn-primary" style="text-decoration:none; display:inline-block;">Continuar a Semana 2 →</a>
+                            <a href="/programa-colombia/semana-2/" class="btn-primary">Continuar a Semana 2 →</a>
                         </div>
                     </div>
                 </div>
@@ -1316,7 +695,7 @@
             const scenario = getScenario();
             if (value < 0) {
                 return {
-                    color: 'var(--pressure)',
+                    color: 'var(--error)',
                     note: scenario.allowShortfall
                         ? `Aquí ya faltan ${fmt(Math.abs(value))}. Eso no siempre significa “gastar mal”; a veces muestra que el margen de entrada ya venía corto.`
                         : 'Te pasaste del dinero disponible para este ejercicio.'
@@ -1325,24 +704,24 @@
             const ratio = scenario.available > 0 ? value / scenario.available : 0;
             if (ratio > 0.55) {
                 return {
-                    color: 'var(--green)',
+                    color: 'var(--success)',
                     note: 'Todavía hay bastante aire, pero la quincena ya empezó a moverse.'
                 };
             }
             if (ratio >= 0.25) {
                 return {
-                    color: 'var(--yellow)',
+                    color: 'var(--warning)',
                     note: 'La quincena sigue manejable, pero los compromisos ya se sienten.'
                 };
             }
             if (ratio >= 0.08) {
                 return {
-                    color: 'var(--orange)',
+                    color: 'var(--warning)',
                     note: 'El margen ya está corto. Un gasto extra cambia bastante el panorama.'
                 };
             }
             return {
-                color: 'var(--pressure)',
+                color: 'var(--error)',
                 note: scenario.allowShortfall
                     ? 'Queda muy poco aire. Cualquier sorpresa deja la quincena todavía más corta.'
                     : 'Quedas casi sin colchón. Cualquier sorpresa aprieta de inmediato.'
@@ -1646,8 +1025,8 @@
 
             document.getElementById('event-before').textContent = fmt(data.remainingBeforeEvent);
             document.getElementById('event-after').textContent = fmt(data.remainingAfterEvent);
-            document.getElementById('event-before').style.color = data.remainingBeforeEvent >= 0 ? 'var(--light)' : 'var(--pressure)';
-            document.getElementById('event-after').style.color = data.remainingAfterEvent >= 0 ? 'var(--light)' : 'var(--pressure)';
+            document.getElementById('event-before').style.color = data.remainingBeforeEvent >= 0 ? 'var(--n-ink)' : 'var(--error)';
+            document.getElementById('event-after').style.color = data.remainingAfterEvent >= 0 ? 'var(--n-ink)' : 'var(--error)';
 
             const eventResult = document.getElementById('event-result');
             if (data.scenario.allowShortfall && data.remainingBeforeEvent < 0) {
@@ -1741,8 +1120,8 @@
             document.getElementById('bk-saved').textContent = '$0';
             document.getElementById('event-before').textContent = '$0';
             document.getElementById('event-after').textContent = '$0';
-            document.getElementById('event-before').style.color = 'var(--light)';
-            document.getElementById('event-after').style.color = 'var(--light)';
+            document.getElementById('event-before').style.color = 'var(--n-ink)';
+            document.getElementById('event-after').style.color = 'var(--n-ink)';
             document.getElementById('event-result').className = 'event-result tight';
             document.getElementById('event-result').textContent = 'Cuando veas tus consecuencias, aquí aparecerá qué tanto cambia la quincena con un gasto inesperado.';
             visitedSections.clear();

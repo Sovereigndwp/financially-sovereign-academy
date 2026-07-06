@@ -1,191 +1,158 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-platform="colombia">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Semana 10: Hacer crecer mi dinero | Programa Colombia</title>
     <meta name="description" content="Última semana. Cómo se comporta tu dinero en efectivo, bonos, finca raíz, acciones, oro y, opcionalmente, Bitcoin — comparado honestamente con la inflación colombiana.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Crimson+Pro:wght@400;600&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/programa-colombia/programa-colombia-v3.css">
     <style>
-        :root {
-            --primary: #FCD116; --dark: #1a1a1a; --dark2: #2d2d2d;
-            --light: #e0e0e0; --dim: #b3b3b3; --red: #CE1126; --blue: #003893;
-            --yellow: #fcd116; --grad: #FCD116;
-            --green: #22c55e; --orange: #fb923c;
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--dark); color: var(--light); line-height: 1.6; padding: 1rem; }
-        body::before { content: ""; display: block; height: 3px; background: linear-gradient(90deg, #FCD116, #003893 50%, #CE1126); }
-        .container { max-width: 900px; margin: 0 auto; }
-        .back-link { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--primary); text-decoration: none; margin-bottom: 2rem; font-weight: 600; transition: transform 0.2s; }
-        .back-link:hover { transform: translateX(-4px); }
-        .header { text-align: center; margin-bottom: 2.5rem; }
-        .week-badge { display: inline-block; background: linear-gradient(135deg, rgba(252,209,22,0.2), rgba(206,17,38,0.1)); border: 1px solid var(--red); border-radius: 2rem; padding: 0.3rem 1rem; font-size: 0.85rem; color: var(--red); font-weight: 700; margin-bottom: 1rem; }
-        .week-title { font-size: 2.3rem; color: var(--primary); margin-bottom: 0.5rem; }
-        .week-subtitle { font-size: 1.1rem; color: var(--light); font-weight: 600; }
+        /* ── Semana 10 page-unique components (tokens only) ── */
 
-        .section { margin-bottom: 2rem; }
-        .section-card { background: var(--dark2); border: 2px solid rgba(252,209,22,0.2); border-radius: 1rem; padding: 1.5rem; }
-        .section-title { font-size: 1.35rem; color: var(--primary); margin-bottom: 0.75rem; }
-        .section-text { color: var(--dim); font-size: 0.98rem; line-height: 1.75; margin-bottom: 0.8rem; }
-        .section-text:last-child { margin-bottom: 0; }
-        .section-text strong { color: var(--light); }
+        /* Honest math box */
+        .erosion-box { background: var(--n-deepest); border: 1px solid var(--n-border); border-radius: var(--radius-md); padding: 16px; font-family: var(--font-mono); font-size: 13.5px; color: var(--n-ink); line-height: 1.7; margin: 12px 0; }
+        .erosion-box .label { color: var(--n-muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 8px; font-family: var(--font-sans); }
+        .erosion-box b { color: var(--n-ink-strong); }
+        .erosion-box .red { color: var(--error); }
+        .erosion-box .green { color: var(--success); }
 
-        /* Idea clave */
-        .idea-clave { background: rgba(252,209,22,0.06); border: 1px solid rgba(252,209,22,0.25); border-left: 4px solid var(--primary); border-radius: 0 0.75rem 0.75rem 0; padding: 1.1rem 1.4rem; margin: 1.5rem 0; }
-        .idea-clave-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.09em; color: rgba(252,209,22,0.55); margin-bottom: 0.45rem; }
-        .idea-clave-text { font-size: 1.05rem; font-weight: 700; color: var(--light); line-height: 1.5; }
-
-        /* Honest math table */
-        .erosion-box { background: #0b0d12; border: 1px solid rgba(206,17,38,0.3); border-radius: 12px; padding: 16px; font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 13.5px; color: #cfd6e3; line-height: 1.7; margin: 12px 0; }
-        .erosion-box .label { color: var(--dim); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 8px; font-family: -apple-system, sans-serif; }
-        .erosion-box b { color: var(--primary); }
-        .erosion-box .red { color: #ff8888; }
-        .erosion-box .green { color: var(--green); }
-
-        /* Asset class cards */
-        .assets-intro { color: var(--dim); font-size: 0.98rem; line-height: 1.7; margin-bottom: 1.25rem; }
-        .asset-card { background: var(--dark2); border: 1px solid rgba(252,209,22,0.18); border-left: 4px solid var(--primary); border-radius: 0 14px 14px 0; padding: 18px 20px; margin: 14px 0; }
-        .asset-card.cash { border-left-color: var(--dim); }
-        .asset-card.bonds { border-left-color: var(--blue); }
-        .asset-card.realestate { border-left-color: var(--orange); }
-        .asset-card.equities { border-left-color: var(--green); }
-        .asset-card.gold { border-left-color: var(--primary); }
-        .asset-card.bitcoin { border-left-color: #f7931a; }
-        .asset-card h3 { color: var(--light); font-size: 1.1rem; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+        /* Asset class cards — semantic left rules */
+        .assets-intro { color: var(--n-muted); font-size: 0.98rem; line-height: 1.7; margin-bottom: 1.25rem; }
+        .asset-card { background: var(--n-elevated); border: 1px solid var(--n-border); border-left: 3px solid var(--n-border-strong); border-radius: 0 var(--radius-md) var(--radius-md) 0; padding: 18px 20px; margin: 14px 0; }
+        .asset-card.cash { border-left-color: var(--n-border-strong); }
+        .asset-card.bonds { border-left-color: var(--success); }
+        .asset-card.realestate { border-left-color: var(--warning); }
+        .asset-card.equities { border-left-color: var(--info); }
+        .asset-card.gold { border-left-color: var(--n-border-strong); }
+        .asset-card.bitcoin { border-left-color: var(--n-border-strong); }
+        .asset-card h3 { color: var(--n-ink); font-family: var(--font-sans); font-size: 1.1rem; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
         .asset-card h3 .icon { font-size: 1.4rem; }
-        .asset-card .tag { display: inline-block; font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 700; padding: 2px 8px; border-radius: 999px; margin-left: auto; }
-        .asset-card .tag.classic { background: rgba(252,209,22,0.12); color: var(--primary); }
-        .asset-card .tag.harder { background: rgba(247,147,26,0.12); color: #f7931a; }
-        .asset-card p { color: var(--dim); font-size: 0.94rem; line-height: 1.65; margin: 6px 0; }
-        .asset-card p strong { color: var(--light); }
+        .asset-card .tag { display: inline-block; font-family: var(--font-sans); font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 700; padding: 2px 8px; border-radius: 999px; margin-left: auto; background: var(--n-surface); border: 1px solid var(--n-border); }
+        .asset-card .tag.classic { color: var(--n-muted); }
+        .asset-card .tag.harder { color: var(--warning); }
+        .asset-card p { color: var(--n-muted); font-size: 0.94rem; line-height: 1.65; margin: 6px 0; }
+        .asset-card p strong { color: var(--n-ink); }
         .asset-card .row { display: grid; grid-template-columns: 110px 1fr; gap: 8px 12px; margin-top: 10px; font-size: 0.88rem; }
-        .asset-card .row .k { color: var(--dim); font-weight: 600; }
-        .asset-card .row .v { color: #d6dce8; }
+        .asset-card .row .k { color: var(--n-muted); font-family: var(--font-sans); font-weight: 600; }
+        .asset-card .row .v { color: var(--n-ink); }
 
         /* Matrix table */
-        .matrix { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 0.85rem; background: #0b0d12; border-radius: 10px; overflow: hidden; border: 1px solid rgba(252,209,22,0.15); }
-        .matrix th, .matrix td { padding: 9px 10px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .matrix th { color: var(--primary); font-weight: 700; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; background: rgba(252,209,22,0.04); }
-        .matrix td { color: var(--dim); }
-        .matrix td:first-child { color: var(--light); font-weight: 600; }
-        .matrix .l { color: var(--green); font-weight: 700; }
-        .matrix .m { color: var(--primary); font-weight: 700; }
-        .matrix .h { color: var(--orange); font-weight: 700; }
-        .matrix .x { color: #ff8888; font-weight: 700; }
-        .matrix-note { color: var(--dim); font-size: 0.78rem; margin-top: 8px; opacity: 0.75; }
+        .matrix { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 0.85rem; background: var(--n-deepest); border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--n-border); }
+        .matrix th, .matrix td { padding: 9px 10px; text-align: left; border-bottom: 1px solid var(--n-border); }
+        .matrix th { color: var(--n-faint); font-family: var(--font-sans); font-weight: 700; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; background: var(--n-surface); }
+        .matrix td { color: var(--n-muted); }
+        .matrix td:first-child { color: var(--n-ink); font-weight: 600; }
+        .matrix .l { color: var(--success); font-weight: 700; }
+        .matrix .m { color: var(--n-ink); font-weight: 700; }
+        .matrix .h { color: var(--warning); font-weight: 700; }
+        .matrix .x { color: var(--error); font-weight: 700; }
+        .matrix-note { color: var(--n-muted); font-size: 0.78rem; margin-top: 8px; }
 
         /* Reframe callout */
-        .reframe { background: linear-gradient(135deg, rgba(206,17,38,0.06), rgba(252,209,22,0.04)); border: 1px solid rgba(252,209,22,0.25); border-radius: 1rem; padding: 1.5rem; margin: 1.5rem 0; }
-        .reframe h3 { color: var(--primary); margin-bottom: 8px; }
-        .reframe p { color: var(--dim); font-size: 0.96rem; line-height: 1.7; margin: 8px 0; }
-        .reframe p strong { color: var(--light); }
+        .reframe { background: var(--n-surface); border: 1px solid var(--n-border); border-radius: var(--radius-md); padding: 1.5rem; margin: 1.5rem 0; }
+        .reframe h3 { color: var(--n-ink-strong); font-family: var(--font-serif); margin-bottom: 8px; }
+        .reframe p { color: var(--n-muted); font-size: 0.96rem; line-height: 1.7; margin: 8px 0; }
+        .reframe p strong { color: var(--n-ink); }
 
         /* Bucket cards (existing functionality preserved) */
         .bucket-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.85rem; margin-top: 1rem; }
-        .bucket-card { background: var(--dark); border: 2px solid rgba(252,209,22,0.18); border-radius: 1rem; padding: 1.15rem; width: 100%; text-align: left; cursor: pointer; color: inherit; font: inherit; appearance: none; transition: all 0.2s ease; }
-        .bucket-card:hover { border-color: rgba(252,209,22,0.38); transform: translateY(-2px); }
-        .bucket-card.active { border-color: var(--primary); background: rgba(252,209,22,0.08); }
-        .bucket-label { display: block; font-size: 0.74rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--primary); margin-bottom: 0.4rem; }
-        .bucket-title { display: block; color: var(--light); font-size: 1rem; font-weight: 700; margin-bottom: 0.35rem; }
-        .bucket-copy { display: block; color: var(--dim); font-size: 0.88rem; line-height: 1.6; }
-        .bucket-result { display: none; background: rgba(252,209,22,0.06); border-left: 4px solid var(--primary); border-radius: 0 0.9rem 0.9rem 0; padding: 1rem 1.1rem; margin-top: 1rem; }
+        .bucket-card { background: var(--n-surface); border: 1px solid var(--n-border); border-radius: var(--radius-md); padding: 1.15rem; width: 100%; text-align: left; cursor: pointer; color: inherit; font: inherit; appearance: none; transition: all 0.2s ease; }
+        .bucket-card:hover { border-color: var(--n-border-strong); transform: translateY(-2px); }
+        .bucket-card.active { border-color: var(--brand); background: rgba(252,209,22,.08); } /* selected state */
+        .bucket-label { display: block; font-family: var(--font-mono); font-size: var(--fs-eyebrow); font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--n-faint); margin-bottom: 0.4rem; }
+        .bucket-title { display: block; color: var(--n-ink); font-family: var(--font-sans); font-size: 1rem; font-weight: 700; margin-bottom: 0.35rem; }
+        .bucket-copy { display: block; color: var(--n-muted); font-size: 0.88rem; line-height: 1.6; }
+        .bucket-result { display: none; background: var(--n-surface); border: 1px solid var(--n-border); border-left: 3px solid var(--n-border-strong); border-radius: 0 var(--radius-md) var(--radius-md) 0; padding: 1rem 1.1rem; margin-top: 1rem; }
         .bucket-result.visible { display: block; }
-        .bucket-result-title { color: var(--light); font-weight: 700; margin-bottom: 0.35rem; }
-        .bucket-result-text { color: var(--dim); font-size: 0.9rem; line-height: 1.7; }
+        .bucket-result-title { color: var(--n-ink); font-family: var(--font-sans); font-weight: 700; margin-bottom: 0.35rem; }
+        .bucket-result-text { color: var(--n-muted); font-size: 0.9rem; line-height: 1.7; }
 
         /* Calculator */
-        .calculator-box { background: var(--dark2); border: 2px solid rgba(252,209,22,0.2); border-radius: 1rem; padding: 1.75rem; }
-        .calc-title { font-size: 1.2rem; color: var(--primary); margin-bottom: 0.5rem; font-weight: 700; }
-        .calc-desc { color: var(--dim); font-size: 0.94rem; margin-bottom: 1.5rem; line-height: 1.7; }
+        .calculator-box { background: var(--n-elevated); border: 1px solid var(--n-border); border-radius: var(--radius-md); padding: 1.75rem; box-shadow: var(--shadow-1); }
+        .calc-title { font-family: var(--font-serif); font-size: 1.2rem; color: var(--n-ink-strong); margin-bottom: 0.5rem; font-weight: 700; }
+        .calc-desc { color: var(--n-muted); font-size: 0.94rem; margin-bottom: 1.5rem; line-height: 1.7; }
         .calc-note { margin-top: 1rem; margin-bottom: 0; }
-        .calc-warning { color: rgba(206,17,38,0.85); font-size: 0.85rem; font-weight: 600; display: none; margin-top: 0.6rem; }
+        .calc-warning { color: var(--error); font-family: var(--font-sans); font-size: 0.85rem; font-weight: 600; display: none; margin-top: 0.6rem; }
         .calc-warning.visible { display: block; }
         .simulator-inputs { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 1rem; }
-        .s-label { display: block; color: var(--light); font-weight: 600; font-size: 0.88rem; margin-bottom: 0.4rem; }
-        .s-input, .s-select { width: 100%; padding: 0.65rem 0.75rem; background: var(--dark); border: 2px solid rgba(252,209,22,0.25); border-radius: 0.5rem; color: var(--light); font-size: 0.95rem; }
-        .s-input { font-family: 'Courier New', monospace; }
-        .s-input:focus, .s-select:focus { outline: none; border-color: var(--primary); }
-        .calc-btn { background: var(--grad); color: #1a1a1a; border: none; border-radius: 0.75rem; padding: 0.8rem 1.5rem; font-weight: 700; font-size: 0.95rem; cursor: pointer; transition: all 0.3s; width: 100%; }
-        .calc-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(252,209,22,0.35); }
-        .calc-btn:disabled { opacity: 0.55; cursor: not-allowed; }
+        .s-label { display: block; color: var(--n-ink); font-family: var(--font-sans); font-weight: 600; font-size: 0.88rem; margin-bottom: 0.4rem; }
+        .s-input, .s-select { width: 100%; padding: 0.65rem 0.75rem; background: var(--n-surface); border: 1px solid var(--n-border); border-radius: var(--radius-sm); color: var(--n-ink); font-family: var(--font-sans); font-size: 0.95rem; }
+        .s-input { font-family: var(--font-mono); }
+        .s-input:focus, .s-select:focus { outline: none; border-color: var(--brand); }
+        .calc-btn { background: transparent; color: var(--n-ink); border: 1.5px solid var(--n-border); border-radius: var(--radius-sm); padding: 0.8rem 1.5rem; font-family: var(--font-sans); font-weight: 600; font-size: 0.95rem; cursor: pointer; transition: all 0.2s; width: 100%; }
+        .calc-btn:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
+        .calc-btn:disabled { opacity: 0.45; cursor: not-allowed; }
         .comparison-grid { display: none; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.75rem; margin-top: 1.25rem; }
         .comparison-grid.visible { display: grid; }
-        .compare-card { background: var(--dark); border: 2px solid rgba(252,209,22,0.15); border-radius: 0.9rem; padding: 1rem; text-align: center; transition: all 0.2s; }
-        .compare-card.focus { border-color: var(--primary); background: rgba(252,209,22,0.06); transform: scale(1.02); }
+        .compare-card { background: var(--n-surface); border: 1px solid var(--n-border); border-radius: var(--radius-md); padding: 1rem; text-align: center; transition: all 0.2s; }
+        .compare-card.focus { border-color: var(--brand); background: rgba(252,209,22,.08); transform: scale(1.02); } /* selected state */
         .compare-card.dim { opacity: 0.55; }
         .compare-icon { font-size: 1.5rem; margin-bottom: 0.3rem; }
-        .compare-name { color: var(--light); font-weight: 700; font-size: 0.92rem; margin-bottom: 0.2rem; }
-        .compare-rate { color: var(--dim); font-size: 0.72rem; margin-bottom: 0.5rem; }
-        .compare-final { font-family: 'Courier New', monospace; font-weight: 800; font-size: 1rem; color: var(--primary); }
-        .compare-label { color: var(--dim); font-size: 0.72rem; margin-top: 0.15rem; }
-        .compare-real { color: var(--dim); font-size: 0.74rem; line-height: 1.55; margin-top: 0.45rem; padding-top: 0.45rem; border-top: 1px solid rgba(255,255,255,0.05); }
+        .compare-name { color: var(--n-ink); font-family: var(--font-sans); font-weight: 700; font-size: 0.92rem; margin-bottom: 0.2rem; }
+        .compare-rate { color: var(--n-muted); font-size: 0.72rem; margin-bottom: 0.5rem; }
+        .compare-final { font-family: var(--font-mono); font-weight: 700; font-size: 1rem; color: var(--n-ink-strong); }
+        .compare-label { color: var(--n-muted); font-size: 0.72rem; margin-top: 0.15rem; }
+        .compare-real { color: var(--n-muted); font-size: 0.74rem; line-height: 1.55; margin-top: 0.45rem; padding-top: 0.45rem; border-top: 1px solid var(--n-border); }
 
         /* Insights list */
-        .insight-list { list-style: none; display: grid; gap: 0.85rem; margin-top: 0.5rem; }
-        .insight-item { display: flex; gap: 0.85rem; align-items: flex-start; background: var(--dark); border-radius: 0.85rem; padding: 0.95rem 1.05rem; border: 1px solid rgba(252,209,22,0.1); }
+        .insight-list { list-style: none; display: grid; gap: 0.85rem; margin-top: 0.5rem; padding: 0; }
+        .insight-item { display: flex; gap: 0.85rem; align-items: flex-start; background: var(--n-surface); border-radius: var(--radius-md); padding: 0.95rem 1.05rem; border: 1px solid var(--n-border); }
         .insight-icon { font-size: 1.2rem; flex-shrink: 0; }
-        .insight-text { color: var(--dim); font-size: 0.92rem; line-height: 1.7; }
-        .insight-text strong { color: var(--light); }
+        .insight-text { color: var(--n-muted); font-size: 0.92rem; line-height: 1.7; }
+        .insight-text strong { color: var(--n-ink); }
 
         /* Principles */
         .principles-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0.85rem; margin-top: 0.85rem; }
-        .principle { background: var(--dark2); border: 1px solid rgba(252,209,22,0.15); border-radius: 12px; padding: 14px 16px; }
-        .principle .num { color: var(--primary); font-weight: 700; font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px; }
-        .principle .t { color: var(--light); font-weight: 700; font-size: 0.96rem; margin-bottom: 4px; }
-        .principle .d { color: var(--dim); font-size: 0.86rem; line-height: 1.6; }
+        .principle { background: var(--n-elevated); border: 1px solid var(--n-border); border-radius: var(--radius-md); padding: 14px 16px; }
+        .principle .num { color: var(--n-faint); font-family: var(--font-mono); font-weight: 700; font-size: var(--fs-eyebrow); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px; }
+        .principle .t { color: var(--n-ink); font-family: var(--font-sans); font-weight: 700; font-size: 0.96rem; margin-bottom: 4px; }
+        .principle .d { color: var(--n-muted); font-size: 0.86rem; line-height: 1.6; }
 
-        /* Bitcoin bridge */
-        .bitcoin-bridge { background: linear-gradient(180deg, rgba(247,147,26,0.06), rgba(247,147,26,0.02)); border: 1px solid rgba(247,147,26,0.3); border-radius: 14px; padding: 18px 20px; margin: 1.5rem 0; }
-        .bitcoin-bridge h3 { color: #f7931a; margin-bottom: 8px; }
-        .bitcoin-bridge p { color: var(--dim); font-size: 0.94rem; line-height: 1.7; margin: 8px 0; }
-        .bitcoin-bridge p strong { color: var(--light); }
+        /* Bitcoin bridge — neutral card with the page's one thin brand callout rule */
+        .bitcoin-bridge { background: var(--n-surface); border: 1px solid var(--n-border); border-left: 3px solid var(--brand); border-radius: 0 var(--radius-md) var(--radius-md) 0; padding: 18px 20px; margin: 1.5rem 0; }
+        .bitcoin-bridge h3 { color: var(--n-ink-strong); font-family: var(--font-sans); margin-bottom: 8px; }
+        .bitcoin-bridge p { color: var(--n-muted); font-size: 0.94rem; line-height: 1.7; margin: 8px 0; }
+        .bitcoin-bridge p strong { color: var(--n-ink); }
         .bitcoin-bridge .pills { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0; }
-        .bitcoin-bridge .pill { background: rgba(247,147,26,0.1); border: 1px solid rgba(247,147,26,0.3); color: #f7931a; padding: 4px 10px; border-radius: 999px; font-size: 0.78rem; font-weight: 600; }
-        .bitcoin-bridge a { display: inline-block; margin-top: 8px; color: #f7931a; font-weight: 700; text-decoration: none; }
+        .bitcoin-bridge .pill { background: var(--n-elevated); border: 1px solid var(--n-border); color: var(--n-muted); padding: 4px 10px; border-radius: 999px; font-family: var(--font-sans); font-size: 0.78rem; font-weight: 600; }
+        .bitcoin-bridge a { display: inline-block; margin-top: 8px; color: var(--n-ink-strong); font-family: var(--font-sans); font-weight: 700; text-decoration: none; }
         .bitcoin-bridge a:hover { text-decoration: underline; }
 
         /* Action box */
-        .action-result { display: none; background: rgba(252,209,22,0.06); border: 1px solid rgba(252,209,22,0.28); border-radius: 0.85rem; padding: 1rem; margin-top: 1rem; }
+        .action-result { display: none; background: var(--n-deepest); border: 1px solid var(--n-border); border-radius: var(--radius-md); padding: 1rem; margin-top: 1rem; }
         .action-result.visible { display: block; }
-        .action-result-title { color: var(--primary); font-weight: 700; margin-bottom: 0.4rem; }
-        .action-result-note { color: var(--light); font-size: 0.96rem; line-height: 1.7; }
-        .action-result-help { color: var(--dim); font-size: 0.84rem; line-height: 1.6; margin-top: 0.5rem; }
+        .action-result-title { color: var(--n-ink-strong); font-family: var(--font-sans); font-weight: 700; margin-bottom: 0.4rem; }
+        .action-result-note { color: var(--n-ink); font-size: 0.96rem; line-height: 1.7; }
+        .action-result-help { color: var(--n-muted); font-size: 0.84rem; line-height: 1.6; margin-top: 0.5rem; }
 
         /* Closure */
-        .closure-box { background: linear-gradient(135deg, rgba(252,209,22,0.08), rgba(252,209,22,0.04)); border: 2px solid var(--primary); border-radius: 1rem; padding: 1.75rem; text-align: center; }
-        .closure-title { font-size: 1.4rem; color: var(--primary); font-weight: 700; margin-bottom: 0.75rem; }
-        .closure-text { color: var(--light); font-size: 1.05rem; line-height: 1.75; margin-bottom: 1rem; }
-        .takeaway-list { list-style: none; text-align: left; max-width: 460px; margin: 1.2rem auto; }
-        .takeaway-item { color: var(--dim); font-size: 0.95rem; margin: 8px 0; padding-left: 1.4rem; position: relative; }
-        .takeaway-item::before { content: "✓"; position: absolute; left: 0; color: var(--green); font-weight: 700; }
+        .closure-box { background: var(--n-deepest); border: 1px solid var(--n-border); border-radius: var(--radius-md); padding: 1.75rem; text-align: center; }
+        .closure-title { font-family: var(--font-serif); font-size: 1.4rem; color: var(--n-ink-strong); font-weight: 700; margin-bottom: 0.75rem; }
+        .closure-text { color: var(--n-ink); font-size: 1.05rem; line-height: 1.75; margin-bottom: 1rem; }
+        .takeaway-list { list-style: none; text-align: left; max-width: 460px; margin: 1.2rem auto; padding: 0; }
+        .takeaway-item { color: var(--n-muted); font-size: 0.95rem; margin: 8px 0; padding-left: 1.4rem; position: relative; }
+        .takeaway-item::before { content: "✓"; position: absolute; left: 0; color: var(--success); font-weight: 700; }
         .final-buttons { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; margin-top: 1.25rem; }
-        .btn { padding: 0.75rem 1.4rem; border: none; border-radius: 0.7rem; font-weight: 700; font-size: 0.9rem; cursor: pointer; transition: all 0.3s; text-decoration: none; display: inline-block; text-align: center; }
-        .btn-primary { background: var(--grad); color: #1a1a1a; }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(252,209,22,0.4); }
-        .btn-ghost { background: rgba(255,255,255,0.05); color: var(--dim); border: 1px solid rgba(255,255,255,0.1); }
-        .btn-ghost:hover { background: rgba(255,255,255,0.09); color: var(--light); }
-
-        .footnote { color: var(--dim); font-size: 0.78rem; line-height: 1.55; text-align: center; opacity: 0.7; margin-top: 1.5rem; }
 
         @media (max-width: 768px) {
-            .week-title { font-size: 1.8rem; }
             .simulator-inputs { grid-template-columns: 1fr; }
             .final-buttons { flex-direction: column; }
-            .btn { width: 100%; }
-            .section-card, .calculator-box, .closure-box, .asset-card, .reframe, .bitcoin-bridge { padding: 1.2rem; }
+            .final-buttons .btn-primary, .final-buttons .btn-secondary { width: 100%; }
+            .calculator-box, .closure-box, .asset-card, .reframe, .bitcoin-bridge { padding: 1.2rem; }
             .asset-card .row { grid-template-columns: 100px 1fr; }
         }
     </style>
-    <link rel="stylesheet" href="/programa-colombia/lesson-structure.css">
-    <link rel="stylesheet" href="/programa-colombia/programa-colombia-v2.css">
 </head>
-<body>
+<body class="pc-page">
     <div class="container">
         <a href="/programa-colombia/" class="back-link">← Volver al Programa</a>
 
         <div class="header">
-            <div class="week-badge">Semana 10 de 10 — Última semana</div>
-            <h1 class="week-title">Hacer crecer mi dinero</h1>
+            <div class="week-eyebrow"><span class="diamond"></span> Semana 10 · 10 <span class="diamond"></span></div>
+            <h1 class="week-title">Hacer <span class="fade">crecer</span> mi dinero</h1>
             <p class="week-subtitle">Dónde puede vivir tu plata según el tiempo, el propósito y la honestidad de la matemática</p>
         </div>
 
@@ -217,8 +184,8 @@
                 🏦 Cuenta ahorros (2%) ... <span class="red">$619.000</span>  ← perdiste 38%<br>
                 📄 CDT (8%) .............. $1.097.000  ← apenas le ganas a la inflación<br>
                 📊 Acciones (10%)* ....... <span class="green">$1.318.000</span>  ← protegiste poder de compra<br>
-                <span style="color:var(--dim)">─────────────────────────────────────────────</span><br>
-                <b>Conclusión:</b> <span style="color:var(--light)">guardar en efectivo o cuenta de ahorros no es "seguro". Es perder valor lento.</span>
+                <span style="color:var(--n-faint)">─────────────────────────────────────────────</span><br>
+                <b>Conclusión:</b> <span style="color:var(--n-ink)">guardar en efectivo o cuenta de ahorros no es "seguro". Es perder valor lento.</span>
             </div>
             <p class="section-text" style="font-size:0.84rem; opacity:0.8;">*Rendimiento histórico aproximado del Colcap a largo plazo. No es una promesa: las acciones varían mucho de un año a otro.</p>
         </div>
@@ -551,8 +518,8 @@
                     <li class="takeaway-item">Sabes que "seguro" no significa "no pierdes nada"</li>
                 </ul>
                 <div class="final-buttons">
-                    <a href="/programa-colombia/" class="btn btn-primary">Volver al programa</a>
-                    <a href="/programa-colombia/semana-10/experimento-dos-economias/" class="btn btn-ghost">Probar la simulación de dos economías</a>
+                    <a href="/programa-colombia/" class="btn-primary">Volver al programa</a>
+                    <a href="/programa-colombia/semana-10/experimento-dos-economias/" class="btn-secondary">Probar la simulación de dos economías</a>
                 </div>
             </div>
         </div>
