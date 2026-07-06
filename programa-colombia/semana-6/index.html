@@ -323,6 +323,48 @@
                 </div>
             </details>
         </div>
+
+        <!-- Group 4: Estafas con IA -->
+        <div class="scam-group">
+            <details class="scam-group-details">
+                <summary>
+                    <div class="sg-inner">
+                        <span class="sg-icon">&#129302;</span>
+                        <div>
+                            <div class="sg-title">Estafas 2.0: con inteligencia artificial</div>
+                            <div class="sg-count">4 ejemplos &#183; documentadas en Colombia</div>
+                        </div>
+                    </div>
+                    <span class="sg-arrow">&#9654;</span>
+                </summary>
+                <div class="scam-group-body">
+                    <div class="scam-card">
+                        <div class="scam-card-name">El familiar en apuros 2.0 (voz clonada)</div>
+                        <div class="scam-scenario">Entra una llamada. En la pantalla aparece el n&#250;mero guardado de tu hijo, y se oye su voz llorando: &#8220;Mam&#225;, tuve un accidente. Necesito que consignes ya. No le digas a nadie.&#8221;</div>
+                        <div class="scam-flag">&#128681; <span class="scam-flag-text">La voz y el n&#250;mero que aparece en pantalla hoy se pueden falsificar con IA. La Polic&#237;a Nacional ya documenta esta modalidad en Colombia.</span></div>
+                        <div class="scam-rule"><strong>Regla:</strong> Cuelga y llama t&#250; al n&#250;mero guardado. Acuerden una palabra clave familiar, o haz una pregunta que solo la persona real sabr&#237;a: la IA imita voces, no recuerdos. L&#237;nea antiextorsi&#243;n del GAULA: 165.</div>
+                    </div>
+                    <div class="scam-card">
+                        <div class="scam-card-name">El c&#243;digo &#8220;que lleg&#243; por error&#8221;</div>
+                        <div class="scam-scenario">&#8220;Qu&#233; pena, escrib&#237; mal mi n&#250;mero y el c&#243;digo de WhatsApp te lleg&#243; a ti. &#191;Me lo reenv&#237;as?&#8221; Con ese c&#243;digo toman tu cuenta, y desde ella les piden plata prestada a todos tus contactos.</div>
+                        <div class="scam-flag">&#128681; <span class="scam-flag-text">Un c&#243;digo de verificaci&#243;n jam&#225;s se comparte, ni con &#8220;conocidos&#8221;.</span></div>
+                        <div class="scam-rule"><strong>Regla:</strong> Activa la verificaci&#243;n en dos pasos de WhatsApp. Y si un contacto te pide plata por chat, ll&#225;malo antes de mover un peso.</div>
+                    </div>
+                    <div class="scam-card">
+                        <div class="scam-card-name">La falsa transferencia Bre-B</div>
+                        <div class="scam-scenario">&#8220;Se le informa que Sof&#237;a te envi&#243; $200.000 por llave. Ac&#233;ptalos ahora o ser&#225;n reversados. Confirma aqu&#237;: [enlace]&#8221; &#8212; el enlace abre una p&#225;gina id&#233;ntica a la de tu banco y roba tu clave.</div>
+                        <div class="scam-flag">&#128681; <span class="scam-flag-text">En Bre-B la plata llega sola. Nunca existe un paso de &#8220;aceptar por enlace&#8221;.</span></div>
+                        <div class="scam-rule"><strong>Regla:</strong> Ninguna transferencia se acepta por enlace. C&#243;mo funciona Bre-B de verdad lo ves en la <a href="../semana-7/" style="color:var(--primary);">Semana 7</a>.</div>
+                    </div>
+                    <div class="scam-card">
+                        <div class="scam-card-name">El famoso que &#8220;regala&#8221; inversiones</div>
+                        <div class="scam-scenario">Un video con la cara y la voz de un empresario conocido, en formato de noticiero: &#8220;Los colombianos est&#225;n ganando millones a la semana con nuestra plataforma. Cupos limitados hasta hoy.&#8221; Al inicio dejan retirar ganancias peque&#241;as. Despu&#233;s bloquean los retiros.</div>
+                        <div class="scam-flag">&#128681; <span class="scam-flag-text">La cara y la voz del video est&#225;n hechas con IA. La Superintendencia Financiera publica alertas sobre estas plataformas.</span></div>
+                        <div class="scam-rule"><strong>Regla:</strong> Ninguna entidad vigilada garantiza rendimientos. Verifica en superfinanciera.gov.co si la firma est&#225; autorizada. Y recuerda: &#8220;no poder retirar&#8221; es el diagn&#243;stico definitivo.</div>
+                    </div>
+                </div>
+            </details>
+        </div>
     </div>
 
     <!-- 5. QUIZ -->
@@ -370,6 +412,19 @@
                 <div class="quiz-explanation" id="exp-3">No importa el activo. Si garantizan ganancia, esa promesa es la se&#241;al.</div>
             </div>
 
+            <!-- Q4 -->
+            <div class="quiz-item" id="q4">
+                <div class="quiz-q-label">Escenario 4</div>
+                <div class="quiz-scenario">Entra una llamada del n&#250;mero guardado de tu hija. Se oye su voz llorando: &#8220;Mam&#225;, necesito $800.000 ya para una gr&#250;a. No le digas a nadie, me da pena.&#8221;</div>
+                <div class="quiz-question-text">&#191;Cu&#225;l es la se&#241;al de alerta principal?</div>
+                <div class="quiz-options">
+                    <button class="quiz-option" onclick="responder(4,'A',false)">A) Que llame llorando en vez de escribir</button>
+                    <button class="quiz-option" onclick="responder(4,'B',true)">B) Urgencia + secreto + plata, aunque la voz y el n&#250;mero parezcan reales</button>
+                    <button class="quiz-option" onclick="responder(4,'C',false)">C) Que pida una suma tan exacta</button>
+                </div>
+                <div class="quiz-explanation" id="exp-4">La voz y el n&#250;mero en pantalla se pueden clonar con IA. Urgencia + secreto + plata = pare. Cuelga y llama t&#250; al n&#250;mero guardado.</div>
+            </div>
+
             <div class="score-banner" id="score-banner"></div>
         </div>
     </div>
@@ -412,7 +467,7 @@
     <!-- 8. PROTECTION ROUTINE -->
     <div class="section">
         <h2 class="section-heading">Rutina b&#225;sica de protecci&#243;n</h2>
-        <p class="section-body" style="margin-bottom:0.85rem;">Cuatro reglas. F&#225;ciles de recordar.</p>
+        <p class="section-body" style="margin-bottom:0.85rem;">Cinco reglas. F&#225;ciles de recordar.</p>
         <ul class="routine-list">
             <li class="routine-item">
                 <span class="routine-icon">&#9208;&#65039;</span>
@@ -429,6 +484,10 @@
             <li class="routine-item">
                 <span class="routine-icon">&#128203;</span>
                 <div class="routine-text"><strong>Sin leer, no firmes.</strong> Nunca firmes en blanco.</div>
+            </li>
+            <li class="routine-item">
+                <span class="routine-icon">&#128222;</span>
+                <div class="routine-text"><strong>La voz, el video y el n&#250;mero en pantalla ya no prueban nada.</strong> Se pueden clonar con IA. La &#250;nica prueba es el canal que t&#250; abres: llama t&#250; al n&#250;mero guardado o entra t&#250; a la app oficial.</div>
             </li>
         </ul>
     </div>
@@ -483,16 +542,16 @@
         if (isCorrect) quizState.correct++;
         document.getElementById('exp-' + num).classList.add('show');
 
-        if (Object.keys(quizState.answered).length === 3) {
+        if (Object.keys(quizState.answered).length === 4) {
             setTimeout(() => {
                 const banner = document.getElementById('score-banner');
                 const c = quizState.correct;
-                banner.textContent = c === 3
-                    ? 'Identificaste las tres señales correctamente.'
-                    : c === 2
-                    ? 'Bien. Identificaste dos de tres. Revisa la que no acertaste.'
+                banner.textContent = c === 4
+                    ? 'Identificaste las cuatro señales correctamente.'
+                    : c === 3
+                    ? 'Bien. Identificaste tres de cuatro. Revisa la que no acertaste.'
                     : 'Revisa las explicaciones con calma. Reconocer las señales es lo que importa.';
-                banner.style.cssText = c >= 2
+                banner.style.cssText = c >= 3
                     ? 'display:block; background:rgba(252,209,22,0.08); border:2px solid #fcd116; color:#fcd116; padding:1rem; border-radius:0.75rem; text-align:center; font-weight:700;'
                     : 'display:block; background:rgba(206,17,38,0.06); border:2px solid rgba(206,17,38,0.5); color:rgba(206,17,38,0.9); padding:1rem; border-radius:0.75rem; text-align:center; font-weight:700;';
                 banner.scrollIntoView({ behavior: 'smooth', block: 'center' });
