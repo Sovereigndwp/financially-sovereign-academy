@@ -721,11 +721,11 @@
             }
             .colombia-progress-title {
                 font-size: 1.15rem;
-                color: var(--light, #eaeaea);
+                color: var(--light, var(--n-ink));
                 margin: 0 0 0.35rem;
             }
             .colombia-progress-text {
-                color: var(--dim, #a0a0a0);
+                color: var(--dim, var(--n-muted));
                 font-size: 0.92rem;
                 line-height: 1.65;
                 margin: 0;
@@ -743,13 +743,13 @@
                 text-align: center;
             }
             .colombia-progress-value {
-                color: var(--light, #eaeaea);
+                color: var(--light, var(--n-ink));
                 font-size: 1.25rem;
                 font-weight: 800;
                 margin-bottom: 0.2rem;
             }
             .colombia-progress-label {
-                color: var(--dim, #a0a0a0);
+                color: var(--dim, var(--n-muted));
                 font-size: 0.76rem;
                 line-height: 1.45;
             }
@@ -772,28 +772,28 @@
             .colombia-week-status.is-visited {
                 background: rgba(59, 130, 246, 0.14);
                 border: 1px solid rgba(59, 130, 246, 0.28);
-                color: #93c5fd;
+                color: var(--info);
             }
             .colombia-week-status.is-complete {
                 background: rgba(252, 209, 22, 0.14);
                 border: 1px solid rgba(252, 209, 22, 0.28);
-                color: #fde68a;
+                color: var(--warning);
             }
             .colombia-autosave-note {
-                color: var(--dim, #a0a0a0);
+                color: var(--dim, var(--n-muted));
                 font-size: 0.82rem;
                 line-height: 1.6;
                 margin-bottom: 0.9rem;
             }
             .colombia-save-status {
-                color: var(--dim, #a0a0a0);
+                color: var(--dim, var(--n-muted));
                 font-size: 0.78rem;
                 line-height: 1.5;
                 margin-top: 0.4rem;
                 margin-bottom: 0.9rem;
             }
             .colombia-save-status.saved {
-                color: var(--primary, var(--co-yellow, #FCD116));
+                color: var(--primary, var(--co-yellow, var(--brand)));
             }
             .colombia-finish-summary {
                 margin: 1rem 0 1.1rem;
@@ -812,25 +812,25 @@
                 margin-bottom: 0.35rem;
             }
             .colombia-finish-copy {
-                color: var(--dim, #a0a0a0);
+                color: var(--dim, var(--n-muted));
                 font-size: 0.9rem;
                 line-height: 1.65;
             }
             .checklist-item[data-state="pending"] .checklist-check {
-                color: var(--dim, #a0a0a0);
+                color: var(--dim, var(--n-muted));
             }
             .checklist-item[data-state="visited"] .checklist-check {
-                color: #93c5fd;
+                color: var(--info);
             }
             .checklist-item[data-state="complete"] .checklist-check {
-                color: var(--red, #CE1126);
+                color: var(--error);
             }
 
             /* === NEW: carryover toast === */
             .colombia-carryover-note {
                 background: rgba(34, 197, 94, 0.08);
                 border: 1px solid rgba(34, 197, 94, 0.3);
-                color: #86efac;
+                color: var(--success);
                 border-radius: 8px;
                 padding: 0.6rem 0.9rem;
                 font-size: 0.85rem;
@@ -848,7 +848,7 @@
                 width: 100%;
                 padding: 0.95rem 1.25rem;
                 background: rgba(252, 209, 22, 0.08);
-                color: var(--primary, #FCD116);
+                color: var(--primary, var(--brand));
                 border: 1.5px solid rgba(252, 209, 22, 0.32);
                 border-radius: 0.85rem;
                 font-size: 0.96rem;
@@ -864,11 +864,11 @@
             }
             .colombia-copy-plan-btn.copied {
                 background: rgba(34, 197, 94, 0.12);
-                color: #86efac;
+                color: var(--success);
                 border-color: rgba(34, 197, 94, 0.4);
             }
             .colombia-copy-plan-helper {
-                color: var(--dim, #a0a0a0);
+                color: var(--dim, var(--n-muted));
                 font-size: 0.82rem;
                 line-height: 1.55;
                 margin-top: 0.5rem;
@@ -886,7 +886,7 @@
                 padding: 1rem;
             }
             .colombia-copy-fallback-card {
-                background: #1a1a1a;
+                background: var(--n-surface);
                 border: 1px solid rgba(252, 209, 22, 0.3);
                 border-radius: 12px;
                 padding: 1.25rem;
@@ -898,7 +898,7 @@
                 gap: 0.75rem;
             }
             .colombia-copy-fallback-title {
-                color: var(--primary, #FCD116);
+                color: var(--primary, var(--brand));
                 font-weight: 700;
                 font-size: 0.95rem;
             }
@@ -906,11 +906,11 @@
                 flex: 1;
                 min-height: 220px;
                 width: 100%;
-                background: #0b0d12;
+                background: var(--n-deepest);
                 border: 1px solid rgba(252, 209, 22, 0.2);
                 border-radius: 8px;
                 padding: 0.75rem;
-                color: #e8ecf3;
+                color: var(--n-ink);
                 font-family: ui-monospace, Menlo, Consolas, monospace;
                 font-size: 0.85rem;
                 line-height: 1.55;
@@ -919,7 +919,7 @@
             .colombia-copy-fallback-close {
                 align-self: flex-end;
                 background: rgba(252, 209, 22, 0.12);
-                color: var(--primary, #FCD116);
+                color: var(--primary, var(--brand));
                 border: 1px solid rgba(252, 209, 22, 0.3);
                 border-radius: 8px;
                 padding: 0.5rem 1rem;
