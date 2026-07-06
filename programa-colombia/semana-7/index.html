@@ -1,164 +1,126 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-platform="colombia">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Semana 7: Usar tu banco digital sin enredarte ni pagar de más | Ruta de Estabilidad y Crecimiento</title>
     <meta name="description" content="Aprende a elegir mejor tu herramienta digital, revisar cobros pequeños y usar tu banco desde el celular con más criterio.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Crimson+Pro:wght@400;600&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/programa-colombia/programa-colombia-v3.css">
     <style>
-        :root {
-            --primary: #FCD116;
-            --dark: #1a1a1a;
-            --dark2: #2d2d2d;
-            --light: #e0e0e0;
-            --dim: #b3b3b3;
-            --red: #ef4444;
-            --yellow: #fcd116;
-            --blue: #3b82f6;
-            --purple: #8b5cf6;
-            --grad: #FCD116;
-        }
-        * { margin:0; padding:0; box-sizing:border-box; }
-        body { font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; background:var(--dark); color:var(--light); line-height:1.6; padding:1rem; }
-
-        .container { max-width:1000px; margin:0 auto; }
-        .back-link { display:inline-flex; align-items:center; gap:0.5rem; color:var(--primary); text-decoration:none; margin-bottom:2rem; font-weight:600; transition:transform 0.2s; }
-        .back-link:hover { transform:translateX(-4px); }
-        .header { text-align:center; margin-bottom:3rem; }
-        .week-badge { display:inline-block; background:rgba(252,209,22,0.15); border:1px solid var(--primary); border-radius:2rem; padding:0.3rem 1rem; font-size:0.85rem; color:var(--primary); margin-bottom:1rem; }
-        .week-title { font-size:2.4rem; color:var(--primary); margin-bottom:0.5rem; }
-        .week-subtitle { font-size:1.1rem; color:var(--dim); }
-
-        .section { margin-bottom:3rem; }
-        .section-card { background:var(--dark2); border:2px solid rgba(252,209,22,0.2); border-radius:1rem; padding:2rem; }
-        .section-title { font-size:1.5rem; color:var(--primary); margin-bottom:0.75rem; }
-        .section-text { color:var(--dim); font-size:1rem; line-height:1.8; margin-bottom:1.25rem; }
+        /* Page-local components (semana-7) — tokens only; shared chrome comes from programa-colombia-v3.css */
 
         /* Tool comparison */
         .tools-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1.25rem; margin-top:1.5rem; }
-        .tool-card { background:var(--dark); border:2px solid rgba(252,209,22,0.15); border-radius:1rem; padding:1.5rem; transition:border-color 0.2s; display:flex; flex-direction:column; gap:0.9rem; }
-        .tool-card:hover { border-color:rgba(252,209,22,0.4); }
+        .tool-card { background:var(--n-surface); border:1px solid var(--n-border); border-radius:var(--radius-md); padding:1.5rem; transition:border-color 0.2s; display:flex; flex-direction:column; gap:0.9rem; }
+        .tool-card:hover { border-color:var(--n-border-strong); }
         .tool-header { display:flex; align-items:center; gap:0.75rem; margin-bottom:1rem; }
         .tool-icon { font-size:2rem; }
-        .tool-name { font-size:1.15rem; font-weight:700; }
-        .tool-owner { font-size:0.8rem; color:var(--dim); }
-        .tool-tag { display:inline-block; font-size:0.7rem; font-weight:700; padding:0.15rem 0.5rem; border-radius:1rem; margin-bottom:1rem; }
-        .tag-free { background:rgba(252,209,22,0.2); color:var(--yellow); }
-        .tag-popular { background:rgba(59,130,246,0.2); color:var(--blue); }
-        .tag-full { background:rgba(252,209,22,0.2); color:var(--primary); }
-        .tool-summary-block { background:var(--dark2); border:1px solid rgba(252,209,22,0.12); border-radius:0.75rem; padding:0.9rem; }
-        .tool-summary-label { font-size:0.74rem; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; color:var(--primary); margin-bottom:0.25rem; }
-        .tool-summary-text { font-size:0.9rem; color:var(--dim); line-height:1.6; }
+        .tool-name { font-family:var(--font-sans); font-size:1.15rem; font-weight:700; color:var(--n-ink); }
+        .tool-owner { font-size:0.8rem; color:var(--n-muted); }
+        .tool-tag { display:inline-block; align-self:flex-start; font-family:var(--font-mono); font-size:0.7rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; padding:0.15rem 0.5rem; border:1px solid var(--n-border); border-radius:var(--radius-sm); background:transparent; color:var(--n-muted); margin-bottom:1rem; }
+        .tool-summary-block { background:var(--n-elevated); border:1px solid var(--n-border); border-radius:var(--radius-md); padding:0.9rem; }
+        .tool-summary-label { font-family:var(--font-mono); font-size:0.74rem; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; color:var(--n-faint); margin-bottom:0.25rem; }
+        .tool-summary-text { font-size:0.9rem; color:var(--n-muted); line-height:1.6; }
 
         /* Decision tool */
-        .decision-tool { background:var(--dark); border:2px solid rgba(252,209,22,0.15); border-radius:1rem; padding:1.75rem; margin-top:1.5rem; }
-        .decision-title { color:var(--primary); font-weight:700; font-size:1.1rem; margin-bottom:1.25rem; }
+        .decision-tool { background:var(--n-surface); border:1px solid var(--n-border); border-radius:var(--radius-md); padding:1.75rem; margin-top:1.5rem; }
+        .decision-title { font-family:var(--font-sans); color:var(--n-ink-strong); font-weight:700; font-size:1.1rem; margin-bottom:1.25rem; }
         .decision-q { margin-bottom:1.25rem; }
-        .decision-q-text { color:var(--light); font-weight:600; font-size:0.95rem; margin-bottom:0.5rem; }
+        .decision-q-text { color:var(--n-ink); font-weight:600; font-size:0.95rem; margin-bottom:0.5rem; }
         .decision-options { display:flex; gap:0.75rem; flex-wrap:wrap; }
-        .decision-opt { background:var(--dark2); border:2px solid rgba(252,209,22,0.2); border-radius:0.5rem; padding:0.5rem 1rem; cursor:pointer; font-size:0.9rem; color:var(--dim); transition:all 0.2s; }
-        .decision-opt:hover { border-color:var(--primary); color:var(--light); }
-        .decision-opt.selected { border-color:var(--primary); color:var(--primary); background:rgba(252,209,22,0.1); }
-        .decision-result { display:none; background:rgba(252,209,22,0.08); border:2px solid var(--primary); border-radius:0.75rem; padding:1.25rem; margin-top:1rem; }
+        .decision-opt { background:var(--n-elevated); border:1px solid var(--n-border); border-radius:var(--radius-sm); padding:0.5rem 1rem; cursor:pointer; font-size:0.9rem; font-family:var(--font-sans); color:var(--n-muted); transition:all 0.2s; }
+        .decision-opt:hover { border-color:var(--n-border-strong); color:var(--n-ink); }
+        .decision-opt.selected { border-color:var(--brand); color:var(--brand); background:rgba(252,209,22,0.08); }
+        .decision-result { display:none; background:var(--n-elevated); border:1px solid var(--n-border); border-radius:var(--radius-md); padding:1.25rem; margin-top:1rem; }
         .decision-result.visible { display:block; }
-        .decision-recommendation { font-size:1.1rem; font-weight:700; color:var(--primary); margin-bottom:0.5rem; }
-        .decision-why { font-size:0.9rem; color:var(--dim); }
+        .decision-recommendation { font-family:var(--font-sans); font-size:1.1rem; font-weight:700; color:var(--n-ink-strong); margin-bottom:0.5rem; }
+        .decision-why { font-size:0.9rem; color:var(--n-muted); }
         .decision-example,
-        .decision-watch { font-size:0.85rem; color:var(--dim); line-height:1.6; margin-top:0.6rem; }
+        .decision-watch { font-size:0.85rem; color:var(--n-muted); line-height:1.6; margin-top:0.6rem; }
         .decision-example strong,
-        .decision-watch strong { color:var(--light); }
-        .security-bridge { background:rgba(59,130,246,0.07); border:1px solid rgba(59,130,246,0.25); border-left:3px solid var(--blue); border-radius:0.75rem; padding:1rem 1.1rem; margin-bottom:1.25rem; color:var(--dim); font-size:0.92rem; line-height:1.7; }
+        .decision-watch strong { color:var(--n-ink); }
+        .security-bridge { background:var(--n-surface); border:1px solid var(--n-border); border-left:3px solid var(--info); border-radius:0 var(--radius-md) var(--radius-md) 0; padding:1rem 1.1rem; margin-bottom:1.25rem; color:var(--n-muted); font-size:0.92rem; line-height:1.7; }
 
         /* Security quiz */
-        .quiz-container { }
-        .quiz-q { background:var(--dark); border:2px solid rgba(252,209,22,0.15); border-radius:1rem; padding:1.5rem; margin-bottom:1.25rem; }
-        .quiz-q-text { color:var(--light); font-weight:600; margin-bottom:0.5rem; }
-        .quiz-scenario-box { background:var(--dark2); border-left:3px solid rgba(252,209,22,0.4); padding:0.75rem 1rem; border-radius:0 0.5rem 0.5rem 0; margin:0.75rem 0; color:var(--dim); font-size:0.9rem; font-style:italic; }
+        .quiz-q { background:var(--n-surface); border:1px solid var(--n-border); border-radius:var(--radius-md); padding:1.5rem; margin-bottom:1.25rem; }
+        .quiz-q-text { font-family:var(--font-sans); color:var(--n-ink); font-weight:600; margin-bottom:0.5rem; }
+        .quiz-scenario-box { background:var(--n-elevated); border-left:3px solid var(--n-border-strong); padding:0.75rem 1rem; border-radius:0 var(--radius-sm) var(--radius-sm) 0; margin:0.75rem 0; color:var(--n-muted); font-size:0.9rem; font-style:italic; }
         .quiz-options-list { display:grid; gap:0.5rem; margin-top:0.75rem; }
-        .quiz-opt { background:var(--dark2); border:2px solid rgba(252,209,22,0.15); border-radius:0.5rem; padding:0.85rem 1rem; cursor:pointer; color:var(--dim); font-size:0.9rem; transition:all 0.2s; text-align:left; width:100%; }
-        .quiz-opt:hover:not(:disabled) { border-color:var(--primary); color:var(--light); }
-        .quiz-opt.correct { border-color:var(--yellow) !important; background:rgba(252,209,22,0.1); color:var(--yellow); }
-        .quiz-opt.incorrect { border-color:var(--red) !important; background:rgba(239,68,68,0.08); color:var(--red); }
+        .quiz-opt { background:var(--n-elevated); border:1px solid var(--n-border); border-radius:var(--radius-sm); padding:0.85rem 1rem; cursor:pointer; color:var(--n-muted); font-size:0.9rem; transition:all 0.2s; text-align:left; width:100%; font-family:inherit; }
+        .quiz-opt:hover:not(:disabled) { border-color:var(--n-border-strong); color:var(--n-ink); }
+        .quiz-opt.correct { border-color:var(--success) !important; background:rgba(52,211,153,0.08); color:var(--success); }
+        .quiz-opt.correct::after { content:" ✓"; font-weight:700; }
+        .quiz-opt.incorrect { border-color:var(--error) !important; background:rgba(248,113,113,0.08); color:var(--error); }
+        .quiz-opt.incorrect::after { content:" ✗"; font-weight:700; }
         .quiz-opt:disabled { cursor:not-allowed; }
-        .quiz-explanation { display:none; background:var(--dark2); border-left:3px solid var(--primary); padding:0.75rem 1rem; border-radius:0 0.5rem 0.5rem 0; margin-top:0.75rem; font-size:0.85rem; color:var(--dim); }
+        .quiz-explanation { display:none; background:var(--n-elevated); border-left:3px solid var(--n-border-strong); padding:0.75rem 1rem; border-radius:0 var(--radius-sm) var(--radius-sm) 0; margin-top:0.75rem; font-size:0.85rem; color:var(--n-muted); }
         .quiz-explanation.show { display:block; }
 
-        .quiz-score-bar { background:var(--dark); border:2px solid rgba(252,209,22,0.3); border-radius:1rem; padding:1.5rem; text-align:center; margin-top:1.5rem; display:none; }
+        .quiz-score-bar { background:var(--n-deepest); border:1px solid var(--n-border); border-radius:var(--radius-md); padding:1.5rem; text-align:center; margin-top:1.5rem; display:none; }
         .quiz-score-bar.visible { display:block; }
-        .score-big { font-size:3rem; font-weight:900; font-family:'Courier New',monospace; margin-bottom:0.5rem; }
-        .score-label { color:var(--dim); font-size:0.9rem; }
+        .score-big { font-size:3rem; font-weight:700; font-family:var(--font-mono); margin-bottom:0.5rem; }
+        .score-label { color:var(--n-muted); font-size:0.9rem; }
 
         /* Fee audit */
         .fee-table { width:100%; border-collapse:collapse; margin-top:1.25rem; }
-        .fee-table th { text-align:left; color:var(--dim); font-size:0.8rem; text-transform:uppercase; letter-spacing:0.05em; padding:0.5rem 0.75rem; border-bottom:1px solid rgba(252,209,22,0.2); }
+        .fee-table th { text-align:left; font-family:var(--font-mono); color:var(--n-faint); font-size:0.8rem; text-transform:uppercase; letter-spacing:0.05em; padding:0.5rem 0.75rem; border-bottom:1px solid var(--n-border); }
         .fee-table td { padding:0.75rem; border-bottom:1px solid rgba(255,255,255,0.04); font-size:0.9rem; }
         .fee-table tr:last-child td { border-bottom:none; }
-        .fee-name { color:var(--light); }
-        .fee-cost { font-family:'Courier New',monospace; font-weight:700; }
-        .fee-cost.free { color:var(--yellow); }
-        .fee-cost.low { color:var(--yellow); }
-        .fee-cost.high { color:var(--red); }
-        .fee-avoid { font-size:0.8rem; color:var(--dim); }
+        .fee-name { color:var(--n-ink); }
+        .fee-cost { font-family:var(--font-mono); font-weight:700; }
+        .fee-cost.free { color:var(--success); }
+        .fee-cost.low { color:var(--success); }
+        .fee-cost.high { color:var(--error); }
+        .fee-avoid { font-size:0.8rem; color:var(--n-muted); }
         .fee-tool { font-size:0.8rem; }
 
-        .monthly-fee-calc { background:var(--dark); border:2px solid rgba(252,209,22,0.15); border-radius:1rem; padding:1.5rem; margin-top:1.5rem; }
+        .monthly-fee-calc { background:var(--n-surface); border:1px solid var(--n-border); border-radius:var(--radius-md); padding:1.5rem; margin-top:1.5rem; }
         .fee-subsection { margin-bottom:1.5rem; }
         .fee-subsection:last-of-type { margin-bottom:1.25rem; }
-        .fee-subsection-title { color:var(--light); font-weight:700; margin-bottom:0.3rem; }
-        .fee-subsection-text { color:var(--dim); font-size:0.88rem; line-height:1.6; margin-bottom:0.85rem; }
+        .fee-subsection-title { font-family:var(--font-sans); color:var(--n-ink); font-weight:700; margin-bottom:0.3rem; }
+        .fee-subsection-text { color:var(--n-muted); font-size:0.88rem; line-height:1.6; margin-bottom:0.85rem; }
         .fee-inputs { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem; margin-bottom:1.5rem; }
         .usage-fee-list { display:grid; gap:0.85rem; }
-        .usage-fee-row { background:var(--dark2); border:1px solid rgba(252,209,22,0.12); border-radius:0.75rem; padding:1rem; }
-        .usage-fee-name { color:var(--light); font-weight:600; margin-bottom:0.75rem; }
+        .usage-fee-row { background:var(--n-elevated); border:1px solid var(--n-border); border-radius:var(--radius-md); padding:1rem; }
+        .usage-fee-name { font-family:var(--font-sans); color:var(--n-ink); font-weight:600; margin-bottom:0.75rem; }
         .usage-fee-inputs { display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:0.75rem; }
-        .fee-label { display:block; color:var(--light); font-weight:600; font-size:0.9rem; margin-bottom:0.4rem; }
-        .fee-input { width:100%; padding:0.6rem; background:var(--dark2); border:2px solid rgba(252,209,22,0.2); border-radius:0.5rem; color:var(--light); font-family:'Courier New',monospace; font-size:0.9rem; }
-        .fee-input:focus { outline:none; border-color:var(--primary); }
-        .fee-result-box { background:var(--dark2); border:2px solid var(--primary); border-radius:0.75rem; padding:1.25rem; text-align:center; }
-        .fee-result-label { color:var(--dim); font-size:0.8rem; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; margin-bottom:0.35rem; }
-        .fee-total-monthly { font-size:2rem; font-weight:900; font-family:'Courier New',monospace; color:var(--red); }
-        .fee-total-annual { color:var(--dim); font-size:0.9rem; margin-top:0.25rem; }
-        .calc-insight { color:var(--dim); font-size:0.85rem; margin-top:0.55rem; line-height:1.6; }
+        .fee-label { display:block; font-family:var(--font-sans); color:var(--n-ink); font-weight:600; font-size:0.9rem; margin-bottom:0.4rem; }
+        .fee-input { width:100%; padding:0.6rem; background:var(--n-elevated); border:1px solid var(--n-border); border-radius:var(--radius-sm); color:var(--n-ink); font-family:var(--font-mono); font-size:0.9rem; }
+        .fee-input:focus { outline:none; border-color:var(--brand); }
+        .fee-result-box { background:var(--n-deepest); border:1px solid var(--n-border); border-radius:var(--radius-md); padding:1.25rem; text-align:center; }
+        .fee-result-label { font-family:var(--font-mono); color:var(--n-faint); font-size:0.8rem; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; margin-bottom:0.35rem; }
+        .fee-total-monthly { font-size:2rem; font-weight:700; font-family:var(--font-mono); color:var(--error); }
+        .fee-total-annual { color:var(--n-muted); font-size:0.9rem; margin-top:0.25rem; }
+        .calc-insight { color:var(--n-muted); font-size:0.85rem; margin-top:0.55rem; line-height:1.6; }
 
-        /* Action steps */
-        .steps-grid { display:grid; gap:1rem; margin-top:1.5rem; }
-        .step-item { background:var(--dark); border-left:4px solid var(--primary); border-radius:0.25rem 0.75rem 0.75rem 0.25rem; padding:1.25rem; display:flex; gap:1rem; align-items:flex-start; }
-        .step-num-circle { background:rgba(252,209,22,0.15); color:var(--primary); border-radius:50%; width:32px; height:32px; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:0.9rem; flex-shrink:0; margin-top:0.1rem; }
+        /* Action steps (.steps-grid/.step-item/.step-title/.step-desc come from v3) */
+        .step-num-circle { font-family:var(--font-mono); font-weight:700; color:var(--brand); border:1px solid var(--n-border-strong); border-radius:var(--radius-sm); width:32px; height:32px; display:flex; align-items:center; justify-content:center; font-size:0.9rem; flex-shrink:0; margin-top:0.1rem; }
         .step-content { flex:1; }
-        .step-title { font-weight:700; color:var(--light); margin-bottom:0.25rem; }
-        .step-desc { font-size:0.9rem; color:var(--dim); line-height:1.6; }
 
-        .tip-box { background:rgba(252,209,22,0.08); border:2px solid rgba(252,209,22,0.4); border-radius:0.75rem; padding:1.25rem; margin:1.5rem 0; }
-        .tip-header { color:var(--yellow); font-weight:700; margin-bottom:0.4rem; }
-        .tip-text { color:var(--dim); font-size:0.9rem; }
+        /* Tip boxes: nested spacing + accent budget (only the first tip-box keeps the gold rule) */
+        .section-card .tip-box { margin:1.5rem 0; }
+        .tip-box.tip-plain { border-left-color:var(--n-border-strong); }
+
         .quick-check-list { list-style:none; display:grid; gap:0.6rem; margin-top:0.85rem; }
-        .quick-check-item { background:rgba(255,255,255,0.03); border:1px solid rgba(252,209,22,0.12); border-radius:0.6rem; padding:0.75rem 0.9rem; color:var(--dim); font-size:0.9rem; line-height:1.6; }
-        .quick-check-item strong { color:var(--light); }
-
-        .next-week { background:var(--dark2); border:2px solid var(--primary); border-radius:1rem; padding:2rem; text-align:center; }
-        .next-week h3 { color:var(--primary); margin-bottom:0.75rem; }
-        .next-week p { color:var(--dim); margin-bottom:1.5rem; }
-        .btn { padding:0.9rem 2rem; border:none; border-radius:0.75rem; font-weight:700; font-size:1rem; cursor:pointer; transition:all 0.3s; text-decoration:none; display:inline-block; }
-        .btn-primary { background:var(--grad); color:#1a1a1a; }
-        .btn-primary:hover { transform:translateY(-2px); box-shadow:0 8px 25px rgba(252,209,22,0.4); }
+        .quick-check-item { background:var(--n-surface); border:1px solid var(--n-border); border-radius:var(--radius-md); padding:0.75rem 0.9rem; color:var(--n-muted); font-size:0.9rem; line-height:1.6; }
+        .quick-check-item strong { color:var(--n-ink); }
 
         @media (max-width:768px) {
-            .week-title { font-size:1.8rem; }
             .tools-grid { grid-template-columns:1fr; }
             .fee-inputs { grid-template-columns:1fr; }
         }
-        body::before { content:""; display:block; height:3px; background:linear-gradient(90deg, #FCD116, #003893 50%, #CE1126); }
     </style>
-    <link rel="stylesheet" href="/programa-colombia/lesson-structure.css">
-    <link rel="stylesheet" href="/programa-colombia/programa-colombia-v2.css">
 </head>
-<body>
+<body class="pc-page">
     <div class="container">
         <a href="/programa-colombia/" class="back-link">← Volver al Programa</a>
 
         <div class="header">
-            <div class="week-badge">Semana 7 de 10</div>
-            <h1 class="week-title">Usar tu banco digital sin enredarte ni pagar de más</h1>
+            <div class="week-eyebrow"><span class="diamond"></span> Semana 7 · 10 <span class="diamond"></span></div>
+            <h1 class="week-title">Usar tu banco digital <span class="fade">sin enredarte</span> ni pagar de más</h1>
             <p class="week-subtitle">Las herramientas que ya existen para ti y cómo usarlas con más criterio</p>
         </div>
 
@@ -171,9 +133,9 @@
             </div>
         </div>
 
-        <div class="program-lesson-section program-lesson-section--callout">
-            <div class="program-lesson-callout-title">Idea clave de la semana</div>
-            <div class="program-lesson-callout-text">La mejor herramienta no es la más completa. Es la que entiendes, te cobra menos, y te deja mover tu plata con tranquilidad.</div>
+        <div class="idea-clave">
+            <div class="idea-clave-label">Idea clave de la semana</div>
+            <div class="idea-clave-text">La mejor herramienta no es la más completa. Es la que entiendes, te cobra menos, y te deja mover tu plata con tranquilidad.</div>
         </div>
 
         <div class="section">
@@ -183,7 +145,7 @@
                 <ul class="quick-check-list">
                     <li class="quick-check-item"><strong>Tipo de producto:</strong> una billetera o dep&#243;sito de bajo monto puede tener topes. Una cuenta de ahorros suele darte m&#225;s margen, pero tambi&#233;n puede cambiar c&#243;mo te aplica el 4x1000.</li>
                     <li class="quick-check-item"><strong>4x1000 y exenci&#243;n:</strong> por ley solo puedes tener una cuenta exenta. Si esa no es la que m&#225;s usas, mover la plata puede salirte m&#225;s caro de lo que parece.</li>
-                    <li class="quick-check-item"><strong>Pagos inmediatos y llaves:</strong> hoy muchas entidades ya te dejan mover plata al instante con llaves y Bre-B. Eso importa si env&#237;as o recibes plata entre bancos con frecuencia. <a href="#bre-b" style="color:var(--primary);">C&#243;mo funciona, m&#225;s abajo.</a></li>
+                    <li class="quick-check-item"><strong>Pagos inmediatos y llaves:</strong> hoy muchas entidades ya te dejan mover plata al instante con llaves y Bre-B. Eso importa si env&#237;as o recibes plata entre bancos con frecuencia. <a href="#bre-b" style="color:var(--accent);">C&#243;mo funciona, m&#225;s abajo.</a></li>
                 </ul>
                 <div class="tip-box">
                     <div class="tip-header">Regla práctica</div>
@@ -205,11 +167,11 @@
                     <li class="quick-check-item"><strong>4x1000:</strong> aplica igual que en cualquier transferencia. Si sale de tu cuenta exenta y dentro del tope mensual, no lo pagas.</li>
                     <li class="quick-check-item"><strong>Transfiya sigue existiendo</strong> por debajo, junto con otros sistemas: Bre-B los conecta. Lo que t&#250; ves y usas es la zona Bre-B y tu llave.</li>
                 </ul>
-                <div class="tip-box">
+                <div class="tip-box tip-plain">
                     <div class="tip-header">Reglas de uso seguro (del Banco de la Rep&#250;blica)</div>
-                    <div class="tip-text">Las llaves se registran <strong>solo dentro de la app o p&#225;gina de tu entidad</strong>, nunca por enlaces, llamadas o p&#225;ginas de terceros. Una llave <strong>nunca es una contrase&#241;a</strong>: nadie leg&#237;timo te pedir&#225; claves para &#8220;activarla&#8221;. Bre-B <strong>no tiene p&#225;gina propia ni redes sociales</strong> que te escriban. Y los reclamos se hacen ante tu propia entidad.<br><br>&#191;Te lleg&#243; un mensaje raro sobre tu llave o una &#8220;transferencia por aceptar&#8221;? Esos libretos de manipulaci&#243;n los practicaste en la <a href="/programa-colombia/semana-6/" style="color:var(--primary);">Semana 6</a>.</div>
+                    <div class="tip-text">Las llaves se registran <strong>solo dentro de la app o p&#225;gina de tu entidad</strong>, nunca por enlaces, llamadas o p&#225;ginas de terceros. Una llave <strong>nunca es una contrase&#241;a</strong>: nadie leg&#237;timo te pedir&#225; claves para &#8220;activarla&#8221;. Bre-B <strong>no tiene p&#225;gina propia ni redes sociales</strong> que te escriban. Y los reclamos se hacen ante tu propia entidad.<br><br>&#191;Te lleg&#243; un mensaje raro sobre tu llave o una &#8220;transferencia por aceptar&#8221;? Esos libretos de manipulaci&#243;n los practicaste en la <a href="/programa-colombia/semana-6/" style="color:var(--accent);">Semana 6</a>.</div>
                 </div>
-                <div class="tip-box">
+                <div class="tip-box tip-plain">
                     <div class="tip-header">Lo que viene: finanzas abiertas</div>
                     <div class="tip-text">Desde abril de 2026, una nueva norma obliga a bancos y billeteras a permitir que compartas tus datos financieros con otras entidades <strong>si t&#250; lo autorizas</strong> (por ejemplo, para que te ofrezcan mejor cr&#233;dito seg&#250;n tu historial real). Los efectos visibles llegar&#225;n hacia 2027. Lo que no cambia: tus datos son tuyos, la autorizaci&#243;n debe ser espec&#237;fica y revocable, y una app leg&#237;tima <strong>nunca</strong> te pide la clave de tu banco.</div>
                 </div>
@@ -221,7 +183,7 @@
             <div class="section-card">
                 <h2 class="section-title">Compara antes de elegir</h2>
                 <p class="section-text">La mejor opción depende de lo que haces más seguido, no de la marca ni de lo que usa otra persona.</p>
-                <div class="tip-box">
+                <div class="tip-box tip-plain">
                     <div class="tip-header">Regla simple</div>
                     <div class="tip-text">Primero decide qué estás priorizando: rapidez, menos cobros, mejor registro o más margen para movimientos formales. Después miras qué herramienta te ayuda mejor.</div>
                 </div>
@@ -297,7 +259,7 @@
                     </div>
                 </div>
 
-                <div class="tip-box">
+                <div class="tip-box tip-plain">
                     <div class="tip-header">Mini caso práctico</div>
                     <div class="tip-text">Te pagan por Nequi. Quieres usar una parte para gastos del día a día, dejar otra separada y además revisar mejor tus movimientos del mes.<br><br><strong>Pregunta:</strong> ¿Qué herramienta usarías para cada cosa y por qué?<br><br><strong>Idea para observar:</strong> No siempre necesitas una sola herramienta para todo. A veces una sirve mejor para lo cotidiano y otra para ver con más claridad tu cuenta completa.</div>
                 </div>
@@ -323,7 +285,7 @@
                     </div>
                 </div>
 
-                <div class="tip-box">
+                <div class="tip-box tip-plain">
                     <div class="tip-header">Error común</div>
                     <div class="tip-text">Usar una sola herramienta para todo puede hacerte pagar cobros que no necesitabas o enredarte más cuando quieres ver mejor tu cuenta.</div>
                 </div>
@@ -337,7 +299,7 @@
                 <p class="section-text">
                     La herramienta correcta no es solo la que funciona. También importa cuánto te cobra por acompañarte en lo cotidiano.
                 </p>
-                <h3 style="color:var(--primary); margin-bottom:0.75rem;">Cobros pequeños que vale la pena revisar</h3>
+                <h3 style="color:var(--n-ink-strong); margin-bottom:0.75rem;">Cobros pequeños que vale la pena revisar</h3>
                 <p class="section-text">A veces no es un cobro grande. Son varios cobros pequeños que se repiten y terminan quitando espacio a tu presupuesto.</p>
                 <p class="section-text">Si quieres comparar tarifas exactas de tu entidad, conviene revisar tambi&#233;n el simulador oficial de la Superfinanciera. Aqu&#237; usamos rangos orientativos (revisados en julio de 2026) para aprender a detectar d&#243;nde suele irse la plata.</p>
 
@@ -394,7 +356,7 @@
                 </table>
 
                 <div class="monthly-fee-calc">
-                    <div style="color:var(--primary); font-weight:700; margin-bottom:1rem;">Haz una cuenta rápida con tus cobros del mes</div>
+                    <div style="color:var(--n-ink-strong); font-family:var(--font-sans); font-weight:700; margin-bottom:1rem;">Haz una cuenta rápida con tus cobros del mes</div>
                     <p class="section-text" style="font-size:0.9rem; margin-bottom:1rem;">Primero anota los cobros fijos mensuales. Luego calcula los cobros por uso según cuántas veces los haces al mes. Si no usas algo, deja ese valor en cero.</p>
                     <div class="fee-subsection">
                         <div class="fee-subsection-title">Cobros fijos mensuales</div>
@@ -415,11 +377,11 @@
                         <div class="fee-total-monthly" id="fee-total-monthly">$0</div>
                         <div class="fee-total-annual">Total anual: <span id="fee-total-annual">$0</span></div>
                         <div class="calc-insight">Aunque parezcan pequeños, estos cobros pueden sumar bastante al cierre del año.</div>
-                        <div id="fee-advice" style="color:var(--dim); font-size:0.85rem; margin-top:0.75rem;"></div>
+                        <div id="fee-advice" style="color:var(--n-muted); font-size:0.85rem; margin-top:0.75rem;"></div>
                     </div>
                 </div>
 
-                <div class="tip-box">
+                <div class="tip-box tip-plain">
                     <div class="tip-header">Chequeo rápido de tu banco (3 minutos)</div>
                     <div class="tip-text">Abre tu app bancaria oficial y revisa esto:</div>
                     <ul class="quick-check-list">
@@ -436,7 +398,7 @@
             <div class="section-card">
                 <h2 class="section-title">Usarla bien también es usarla con cuidado</h2>
                 <div class="security-bridge">Elegir bien la herramienta y revisar cobros ayuda mucho. Pero todavía falta una parte: usarla sin regalar claves, códigos o accesos por descuido. Nunca entres a tu banco desde enlaces en mensajes. Abre la app oficial o escribe tú la página.</div>
-                <h3 style="color:var(--primary); margin-bottom:0.75rem;">Hagamos una prueba</h3>
+                <h3 style="color:var(--n-ink-strong); margin-bottom:0.75rem;">Hagamos una prueba</h3>
                 <p class="section-text">Pon a prueba tu criterio con situaciones que sí se parecen más a lo que suele pasar en mensajes, llamadas, actualizaciones y redes públicas. La idea no es memorizar trampas. Es reconocer señales reales antes de actuar con afán.</p>
 
                 <div class="quiz-container" id="security-quiz"></div>
@@ -478,22 +440,18 @@
             </div>
         </div>
 
-        <div class="program-lesson-section">
-            <h2 class="program-lesson-title program-lesson-title--small">Una pregunta para terminar</h2>
-            <div class="program-lesson-reflections">
-                <div class="program-lesson-question">
-                    <p class="program-lesson-text"><strong>¿Qué cobro pequeño vale la pena revisar este mes?</strong><br>Una comisión repetida explica más de lo que parece.</p>
-                </div>
-            </div>
+        <div class="reflect">
+            <div class="kicker">Una pregunta para terminar</div>
+            <p><strong>¿Qué cobro pequeño vale la pena revisar este mes?</strong><br>Una comisión repetida explica más de lo que parece.</p>
         </div>
 
         <div class="next-week">
             <h3>Semana 8: Metas de ahorro</h3>
             <p>Convierte esta claridad en un plan que sí se puede sostener.</p>
-            <a href="/programa-colombia/semana-8/" class="btn btn-primary" style="text-decoration:none; margin-top:0.5rem; display:inline-block;">Continuar a Semana 8 →</a>
+            <a href="/programa-colombia/semana-8/" class="btn-primary">Continuar a Semana 8 →</a>
         </div>
 
-        <p style="color:var(--dim); font-size:0.78rem; line-height:1.55; text-align:center; opacity:0.7; margin-top:1.5rem;">Los números y ejemplos son ilustrativos. No representan a ninguna persona en particular.</p>
+        <p class="footnote">Los números y ejemplos son ilustrativos. No representan a ninguna persona en particular.</p>
     </div>
 
     <script>
@@ -646,7 +604,7 @@
             const pct = Math.round((correctAnswers / quizData.length) * 100);
             const big = document.getElementById('score-big');
             big.textContent = `${correctAnswers}/${quizData.length}`;
-            big.style.color = pct >= 75 ? 'var(--yellow)' : pct >= 50 ? 'var(--yellow)' : 'var(--red)';
+            big.style.color = pct >= 75 ? 'var(--brand)' : pct >= 50 ? 'var(--brand)' : 'var(--error)';
 
             const messages = {
                 100: 'Buen criterio. La clave ahora es repetirlo también cuando haya afán.',
