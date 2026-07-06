@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What Your Bank Quietly Costs You: Savings vs Inflation | Financially Sovereign Academy</title>
+<meta name="description" content="Interactive lesson: compare checking, average savings, and high-yield savings against current U.S. inflation and see whether money parked at the bank is growing — or quietly shrinking.">
+<link rel="stylesheet" href="../css/fsa-brand.css">
+<style>
+  /* Page components only — brand tokens come from fsa-brand.css (no page-local :root brand system) */
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--color-bg); color:var(--color-text);
+         font-family:var(--font-sans, Inter, system-ui, sans-serif); font-size:1.02rem; line-height:1.6; }
+  .wrap { max-width:1100px; margin:0 auto; padding:48px 26px; }
+  .back-link { display:inline-block; color:var(--color-brand); text-decoration:none; font-weight:600; margin-bottom:24px; }
+  .eyebrow { display:flex; align-items:center; gap:8px; font-family:var(--font-mono, monospace);
+    font-size:11px; font-weight:700; letter-spacing:0.22em; text-transform:uppercase; color:var(--color-muted); }
+  .eyebrow::before { content:"◆"; font-size:8px; color:var(--color-brand-deep); }
+  h1 { font-family:var(--font-serif, Georgia, serif); font-weight:700; font-size:clamp(2.1rem,5vw,3.2rem);
+       line-height:1.08; letter-spacing:-0.015em; color:var(--color-text-strong); margin:16px 0 0; max-width:760px; }
+  .fade-accent { font-style:italic; background:var(--brand-gradient);
+    -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:var(--color-mint, #6EE7B7); }
+  @supports not ((-webkit-background-clip:text) or (background-clip:text)) { .fade-accent { color:var(--color-mint); } }
+  h2 { font-family:var(--font-serif, Georgia, serif); font-weight:700; font-size:clamp(1.4rem,3vw,1.9rem);
+       color:var(--color-text-strong); letter-spacing:-0.01em; margin:0 0 6px; }
+  .lede { font-size:1.15rem; color:var(--color-muted); max-width:660px; margin:18px 0 0; }
+  section.block { margin-top:48px; }
+  .card { background:var(--color-elevated); border:1px solid var(--color-border); border-radius:var(--radius-lg, 8px);
+          padding:26px; box-shadow:var(--shadow-card, 0 14px 44px rgba(0,0,0,0.55)); }
+  .section-intro { color:var(--color-muted); max-width:70ch; margin:4px 0 18px; }
+
+  .controls { display:flex; flex-wrap:wrap; align-items:center; gap:14px 22px;
+    background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-md, 4px);
+    padding:14px 18px; margin-bottom:18px; }
+  .controls .lbl { font-family:var(--font-mono, monospace); font-size:12px; letter-spacing:0.08em;
+    text-transform:uppercase; color:var(--color-muted); }
+  .ctl-val { font-family:var(--font-mono, monospace); font-size:1.15rem; font-weight:700; color:var(--color-brand); min-width:6ch; }
+  input[type="range"] { accent-color:var(--color-brand); width:min(260px,60vw); }
+  .presets { display:flex; gap:8px; flex-wrap:wrap; }
+  .presets button { font-family:var(--font-mono, monospace); font-size:12px; padding:6px 12px; cursor:pointer;
+    background:var(--color-elevated); color:var(--color-text); border:1px solid var(--color-border-strong);
+    border-radius:var(--radius-sm, 2px); transition:border-color 200ms; }
+  .presets button:hover { border-color:var(--color-brand); }
+  .presets button[aria-pressed="true"] { border-color:var(--color-brand); color:var(--color-brand); }
+  .hint { font-size:0.82rem; color:var(--color-faint); flex-basis:100%; }
+
+  .chart-box { position:relative; height:360px; }
+  .chart-cta { font-family:var(--font-mono, monospace); font-size:12px; color:var(--color-faint); margin-top:8px; }
+
+  .readouts { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:12px; margin-top:18px; }
+  button.stat { text-align:left; cursor:pointer; background:var(--color-surface); border:1px solid var(--color-border);
+    border-radius:var(--radius-md, 4px); padding:14px 16px; color:var(--color-text);
+    transition:border-color 200ms; font-family:var(--font-sans, sans-serif); }
+  button.stat:hover { border-color:var(--color-border-strong); }
+  button.stat[aria-expanded="true"] { border-color:var(--color-brand); }
+  .stat .k { font-family:var(--font-mono, monospace); font-size:11px; letter-spacing:0.08em;
+    text-transform:uppercase; color:var(--color-muted); }
+  .stat .v { font-family:var(--font-mono, monospace); font-size:1.35rem; font-weight:700; margin-top:4px; color:var(--color-text-strong); }
+  .stat .why { font-size:11.5px; color:var(--color-faint); margin-top:6px; }
+  .neg { color:var(--color-error) !important; } .pos { color:var(--color-success) !important; }
+  .stat-explain { display:none; margin-top:12px; background:var(--color-surface); border:1px solid var(--color-border);
+    border-left:2px solid var(--color-brand); padding:14px 18px; font-size:0.9rem; color:var(--color-text); max-width:80ch; }
+  .stat-explain.open { display:block; }
+  .num { font-family:var(--font-mono, monospace); color:var(--color-text-strong); }
+
+  .doors { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:16px; }
+  .door { background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-md, 4px); padding:16px 18px; }
+  .door h3 { font-family:var(--font-mono, monospace); font-size:14px; letter-spacing:0.06em; margin:0; color:var(--color-text-strong); }
+  .door .rate { font-family:var(--font-mono, monospace); font-size:11px; color:var(--color-muted); margin-top:2px; }
+  .door .out { font-family:var(--font-mono, monospace); font-size:1.3rem; font-weight:700; margin-top:10px; color:var(--color-text-strong); }
+  .door .real { font-size:0.85rem; color:var(--color-muted); margin-top:6px; }
+  .door .formula { font-family:var(--font-mono, monospace); font-size:11px; color:var(--color-faint); margin-top:8px; }
+
+  details.learn { background:var(--color-elevated); border:1px solid var(--color-border); border-radius:var(--radius-md, 4px);
+    margin-top:10px; overflow:hidden; }
+  details.learn summary { cursor:pointer; padding:14px 18px; font-weight:600; color:var(--color-text-strong);
+    list-style:none; display:flex; justify-content:space-between; align-items:center; gap:12px; }
+  details.learn summary::-webkit-details-marker { display:none; }
+  details.learn summary::after { content:"+"; font-family:var(--font-mono, monospace); color:var(--color-brand); font-size:1.1rem; }
+  details.learn[open] summary::after { content:"–"; }
+  details.learn .body { padding:0 18px 16px; color:var(--color-muted); font-size:0.9rem; max-width:80ch; }
+  details.learn .body strong { color:var(--color-text); }
+
+  .quiz .option { display:block; width:100%; text-align:left; margin-top:10px; cursor:pointer;
+    background:var(--color-surface); border:1px solid var(--color-border-strong); border-radius:var(--radius-md, 4px);
+    padding:14px 18px; color:var(--color-text); font-size:1.02rem; font-family:var(--font-sans, sans-serif);
+    transition:border-color 200ms; }
+  .quiz .option:hover { border-color:var(--color-brand); }
+  .quiz .option[data-state="right"] { border-color:var(--color-success); }
+  .quiz .option[data-state="wrong"] { border-color:var(--color-error); }
+  .quiz-feedback { display:none; margin-top:14px; padding:14px 18px; background:var(--color-surface);
+    border:1px solid var(--color-border); border-left:2px solid var(--color-success); font-size:0.9rem; max-width:80ch; }
+  .quiz-feedback.open { display:block; }
+
+  ul.sources { font-size:0.82rem; color:var(--color-muted); padding-left:18px; margin:8px 0 0; }
+  ul.sources li { margin:5px 0; }
+  a { color:var(--color-mint); }
+  .back-link, .module-link { color:var(--color-brand); }
+  .fallback-table { display:none; }
+  .no-chart .fallback-table { display:block; overflow-x:auto; }
+  .fallback-table table { border-collapse:collapse; font-family:var(--font-mono, monospace); font-size:12px; width:100%; }
+  .fallback-table th, .fallback-table td { border:1px solid var(--color-border); padding:6px 10px; text-align:right; color:var(--color-text); }
+  .fallback-table th { color:var(--color-muted); font-weight:500; }
+
+  .next-steps { display:flex; gap:12px; flex-wrap:wrap; margin-top:18px; }
+  .next-steps a { display:inline-flex; align-items:center; min-height:44px; padding:10px 22px;
+    border-radius:var(--radius-sm, 2px); border:1.6px solid transparent; font-weight:600; font-size:0.95rem; text-decoration:none;
+    background:linear-gradient(var(--color-surface),var(--color-surface)) padding-box, var(--brand-gradient) border-box;
+    color:var(--color-text); }
+  .next-steps a.plain { background:none; border:1.5px solid var(--color-border-strong); }
+
+  :focus-visible { outline:2px solid var(--color-brand); outline-offset:2px; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration:0.001ms !important; transition-duration:0.001ms !important; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a href="/learning-tools/" class="back-link">← All learning tools</a>
+
+  <header>
+    <div class="eyebrow">FSA · Module 3 companion · Free learning tool</div>
+    <h1>What your bank <span class="fade-accent">quietly costs you</span> while the balance sits still</h1>
+    <p class="lede">Your banking app shows a number that never goes down. So the money must be fine — right? Set a balance, pick the accounts you actually use, and race them against current U.S. inflation. The question this page answers: is money at your bank growing, or quietly shrinking? Every number is sourced, computed in front of you, or clearly labeled as an assumption.</p>
+  </header>
+
+  <!-- ═══ Chart ═══ -->
+  <section class="block" aria-labelledby="chart-h">
+    <h2 id="chart-h">Three doors for the same dollars: watch them separate</h2>
+    <p class="section-intro">The solid lines are what your deposit becomes in each type of account, at the national rates as of June 2026. The dashed red line is the balance your money would <em>need</em> to reach just to stand still — the deposit compounding at the current 4.2% inflation rate (BLS, May 2026). That line is an <strong style="color:var(--color-text)">illustrative assumption</strong>: it shows what happens <em>if current inflation persisted</em>, not a forecast. Green shading means an account is beating it; red means it's falling behind.</p>
+    <div class="card">
+      <div class="controls">
+        <span class="lbl" id="bal-lbl">Your balance</span>
+        <span class="ctl-val" id="balVal">$10,000</span>
+        <input type="range" id="bal" min="500" max="100000" step="500" value="10000" aria-labelledby="bal-lbl" aria-describedby="acct-hint">
+        <span class="lbl" id="yrs-lbl">Years parked</span>
+        <span class="ctl-val" id="yrsVal">5 yrs</span>
+        <input type="range" id="yrs" min="1" max="10" step="1" value="5" aria-labelledby="yrs-lbl">
+        <span class="lbl">Accounts (toggle to compare)</span>
+        <div class="presets" role="group" aria-label="Account types to compare">
+          <button type="button" data-acct="checking" aria-pressed="false">Checking (≈0%)</button>
+          <button type="button" data-acct="avg" aria-pressed="true">Average savings (0.38%)</button>
+          <button type="button" data-acct="hysa" aria-pressed="true">High-yield savings (4.15%)</button>
+        </div>
+        <span class="hint" id="acct-hint">Rates as of June 2026: average national savings APY 0.38% (FDIC), top high-yield savings APY 4.15% (Bankrate). Checking is shown as ≈0% — most checking accounts pay little or no interest, so it's modeled at zero, labeled as such. At least one account stays selected.</span>
+      </div>
+      <div class="chart-box">
+        <canvas id="chart" role="img" aria-label="Line chart, year 0 to year 5, starting at 10,000 dollars: average savings at 0.38 percent grows to about 10,191 dollars and high-yield savings at 4.15 percent grows to about 12,254 dollars, both solid lines. A dashed red reference line, the deposit compounding at 4.2 percent inflation, rises to about 12,284 dollars. The area between each account and the reference line is shaded red where the account falls below it — both accounts end below the line."></canvas>
+      </div>
+      <p class="chart-cta">↑ Solid lines: your balance. Dashed line: the balance that merely keeps its buying power (illustrative, assumes 4.2%/yr inflation persists). Click the stat cards below — each explains its own math.</p>
+      <div class="fallback-table" id="fallbackTable"></div>
+
+      <div class="readouts" id="readouts">
+        <button class="stat" type="button" data-explain="ex-nominal" aria-expanded="false" aria-controls="ex-nominal">
+          <div class="k" id="kNominal">Nominal balance after 5 yrs</div><div class="v" id="stNominal">–</div>
+          <div class="why">The number your app shows — click</div>
+        </button>
+        <button class="stat" type="button" data-explain="ex-real" aria-expanded="false" aria-controls="ex-real">
+          <div class="k" id="kReal">Real buying power after 5 yrs</div><div class="v" id="stReal">–</div>
+          <div class="why">The number your app hides — click</div>
+        </button>
+        <button class="stat" type="button" data-explain="ex-cost" aria-expanded="false" aria-controls="ex-cost">
+          <div class="k">The quiet cost</div><div class="v" id="stCost">–</div>
+          <div class="why">vs the high-yield door — click</div>
+        </button>
+        <button class="stat" type="button" data-explain="ex-breakeven" aria-expanded="false" aria-controls="ex-breakeven">
+          <div class="k">Break-even APY</div><div class="v">4.2%</div>
+          <div class="why">The bar every account must clear — click</div>
+        </button>
+      </div>
+      <div class="stat-explain" id="ex-nominal">This is the balance your banking app will show for <strong id="exNomAcct">average savings</strong>: <span class="num" id="exNomFormula">–</span>. Deposits compound: balance × (1 + APY)<sup>years</sup>. Notice it never goes down — nominal balances in an insured account don't. That's real safety against one kind of loss (bank failure), and it's exactly what makes the other kind of loss invisible.</div>
+      <div class="stat-explain" id="ex-real">Same account, same years — but converted into today's buying power by dividing out inflation: <span class="num" id="exRealFormula">–</span>. The <strong>nominal</strong> balance is the number on the screen; the <strong>real</strong> balance is what it buys. This uses the current 4.2% CPI rate held constant (illustrative assumption — actual future inflation will differ). It's the same nominal-vs-real distinction that makes a yearly raise feel fine while it quietly shrinks — see <a href="/learning-tools/quiet-pay-cut.html">The Quiet Pay Cut</a>.</div>
+      <div class="stat-explain" id="ex-cost">The gap between what <strong id="exCostAcct">average savings</strong> gives you and what the high-yield door (4.15% APY, Bankrate, Jun 2026) would have given the same deposit over the same years: <span class="num" id="exCostFormula">–</span>. Same money, same insurance category, same effort to deposit — different door. No one sends you a bill for this; it simply never arrives.</div>
+      <div class="stat-explain" id="ex-breakeven">Your account preserves buying power only if its APY ≥ inflation. With inflation at <span class="num">4.2%</span> (BLS CPI-U, May 2026), that's the break-even. The average savings account pays <span class="num">0.38%</span> (FDIC, Jun 2026), so each year it loses <span class="num">(1.0038 ÷ 1.042) − 1 ≈ −3.7%</span> of buying power — if current inflation persisted. Even the 4.15% high-yield account sits a hair <em>under</em> the bar. The lesson isn't "banks bad": it's that the break-even is a moving bar, and you can't know if you're clearing it without checking both numbers.</div>
+    </div>
+  </section>
+
+  <!-- ═══ Both true at once ═══ -->
+  <section class="block" aria-labelledby="doors-h">
+    <h2 id="doors-h">"My money is safe" and "my money is shrinking" — both true</h2>
+    <p class="section-intro">FDIC insurance covers <strong style="color:var(--color-text)">$250,000 per depositor, per insured bank, per ownership category</strong> (FDIC). That guarantee is about the <em>nominal</em> number: if the bank fails, you get your dollars back. It says nothing about what those dollars will buy. Worked example below: $10,000 parked for 5 years at the sourced June-2026 rates, with 4.2% inflation held constant (illustrative assumption).</p>
+    <div class="card">
+      <div class="doors">
+        <div class="door">
+          <h3>Checking</h3>
+          <div class="rate">modeled at ≈0% (labeled assumption)</div>
+          <div class="out">$10,000</div>
+          <div class="real">Real buying power: <span class="num neg">≈ $8,141</span> of today's dollars</div>
+          <div class="formula">$10,000 × 1.00⁵ = $10,000 · real = $10,000 ÷ 1.042⁵</div>
+        </div>
+        <div class="door">
+          <h3>Average savings</h3>
+          <div class="rate">0.38% APY · FDIC national rate, Jun 2026</div>
+          <div class="out">$10,191</div>
+          <div class="real">Real buying power: <span class="num neg">≈ $8,297</span> of today's dollars</div>
+          <div class="formula">$10,000 × 1.0038⁵ = $10,191 · real = ÷ 1.042⁵</div>
+        </div>
+        <div class="door">
+          <h3>High-yield savings</h3>
+          <div class="rate">4.15% APY · Bankrate top HYSA, Jun 2026</div>
+          <div class="out">$12,254</div>
+          <div class="real">Real buying power: <span class="num">≈ $9,976</span> — roughly treads water</div>
+          <div class="formula">$10,000 × 1.0415⁵ = $12,254 · real = ÷ 1.042⁵</div>
+        </div>
+      </div>
+      <p class="section-intro" style="margin:18px 0 0">All three balances are FDIC-safe. None of the three is inflation-safe — at 4.2%, keeping full buying power would take <span class="num">$10,000 × 1.042⁵ ≈ $12,284</span>. The high-yield account misses by about $30; the average account misses by about $2,093. Nominal safety and preserved value are two different promises, and only one of them is in the deposit agreement.</p>
+    </div>
+  </section>
+
+  <!-- ═══ Understand the ideas ═══ -->
+  <section class="block" aria-labelledby="learn-h">
+    <h2 id="learn-h">Understand the ideas behind the chart</h2>
+    <p class="section-intro">Five concepts explain everything you just saw. Open each one.</p>
+
+    <details class="learn">
+      <summary>APY vs APR: which way is compounding working?</summary>
+      <div class="body"><strong>APY</strong> (annual percentage yield) is what an account actually earns in a year <em>with compounding included</em> — interest earning interest on itself. <strong>APR</strong> (annual percentage rate) is the simple rate before compounding, and it's the number loans lead with. The direction matters: on savings, compounding works <em>for</em> you, so APY ≥ the stated rate. On debt, it works <em>against</em> you, so the true yearly cost of carrying a balance is higher than the APR suggests. Rule of thumb: banks advertise the flattering number in each direction — APY on deposits, APR on loans. Always compare like with like.</div>
+    </details>
+    <details class="learn">
+      <summary>Why does the average savings rate stay near zero?</summary>
+      <div class="body">Because most deposits don't move. Switching banks feels like work — direct deposits, autopays, the account you've had since sixteen — so large banks can pay almost nothing and keep the money anyway. Economists call this <strong>deposit stickiness</strong>. Banks that <em>do</em> compete for deposits (often online, with lower branch costs) pay dramatically more for the identical product: the June-2026 spread was <span class="num">0.38%</span> national average vs <span class="num">4.15%</span> at the top (FDIC; Bankrate). That's not a scandal — it's a market pricing your inertia. The only lever you control is being the depositor who checks.</div>
+    </details>
+    <details class="learn">
+      <summary>Nominal vs real: the two versions of your balance</summary>
+      <div class="body">Your <strong>nominal</strong> balance is the number on the screen. Your <strong>real</strong> balance is what that number buys — nominal divided by how much prices have risen. A bank statement only ever shows you the first one, which is why money can shrink while the app says it grew. The same split applies to paychecks, and it's the whole story of <a href="/learning-tools/quiet-pay-cut.html">The Quiet Pay Cut</a>: ten raises, rising nominal pay, falling real pay. Habit worth keeping: whenever you see a dollar amount across time, ask "nominal or real?" before you decide how to feel about it.</div>
+    </details>
+    <details class="learn">
+      <summary>FDIC insurance: what $250,000 of coverage does — and doesn't — protect</summary>
+      <div class="body">FDIC deposit insurance covers <strong>$250,000 per depositor, per insured bank, per ownership category</strong> (FDIC). If your insured bank fails, you get your deposits back — that protection is real, automatic, and has held since 1933. But read what it insures: the <em>dollar amount</em>. It protects you against bank failure, not against inflation. A fully insured account earning 0.38% while prices rise 4.2% is losing buying power with a government guarantee that the shrinking number will be delivered in full. Both facts are true; neither cancels the other.</div>
+    </details>
+    <details class="learn">
+      <summary>The six-withdrawal myth</summary>
+      <div class="body">You may have heard savings accounts allow only six withdrawals a month. That was <strong>Regulation D</strong>, a Federal Reserve rule — and the six-per-month limit was <strong>suspended in 2020</strong>. It hasn't applied as a federal requirement since. However, <strong>individual banks may still impose their own limits or fees</strong>, because the suspension made the cap optional rather than forbidden. So the accurate version is: no federal six-withdrawal rule exists today, but check your own bank's account terms before assuming unlimited access.</div>
+    </details>
+  </section>
+
+  <!-- ═══ Check your understanding ═══ -->
+  <section class="block quiz" aria-labelledby="quiz-h">
+    <h2 id="quiz-h">Check your understanding</h2>
+    <p class="section-intro">$10,000 parked for 5 years, no deposits or withdrawals: (A) a big-bank savings account at 0.38% APY, or (B) a high-yield savings account at 4.15% APY. How far apart do they end up?</p>
+    <div class="card">
+      <button class="option" type="button" data-q="a">A few hundred dollars — rates that small can't matter much over 5 years</button>
+      <button class="option" type="button" data-q="b">About $2,000 — and even the winner barely keeps its buying power</button>
+      <div class="quiz-feedback" id="quizFeedback"></div>
+    </div>
+  </section>
+
+  <!-- ═══ Continue ═══ -->
+  <section class="block" aria-labelledby="next-h">
+    <h2 id="next-h">Continue the path</h2>
+    <div class="next-steps">
+      <a href="/modules/banking-basics.html">Module 3: Banking Basics</a>
+      <a class="plain" href="/learning-tools/quiet-pay-cut.html">See what inflation does to a paycheck</a>
+      <a class="plain" href="/learning-tools/">All learning tools</a>
+    </div>
+  </section>
+
+  <!-- ═══ Method & sources ═══ -->
+  <section class="block" aria-labelledby="method-h">
+    <h2 id="method-h">Method, honesty notes &amp; sources</h2>
+    <details class="learn">
+      <summary>What this models — and what it doesn't</summary>
+      <div class="body">It models a single deposit compounding annually at each account's APY, against a reference line of the same deposit compounding at <span class="num">4.2%</span> — the U.S. CPI-U 12-month change as of May 2026 — <strong>held constant</strong> for the whole period. That constancy is an illustrative assumption, clearly not a forecast: real inflation moves every month, and so do savings rates. Checking is modeled at ≈0% because most checking accounts pay little or no interest; we deliberately do not hardcode a fake checking APY. This page compares account <strong>categories</strong> at national benchmark rates — it does not recommend any specific bank or product, and it is education about how interest and inflation interact, not financial advice. No bank is villainized here; the spread between 0.38% and 4.15% is public information, and the math is the same for everyone.</div>
+    </details>
+    <details class="learn">
+      <summary>Sources (every figure dated)</summary>
+      <div class="body">
+        <ul class="sources">
+          <li>Average national savings account APY, <span class="num">0.38%</span>: <a href="https://www.fdic.gov/bank/individual/financial/firates.html">FDIC National Rates and Rate Caps</a> (June 2026).</li>
+          <li>Top high-yield savings APY, <span class="num">4.15%</span>: Bankrate best high-yield savings accounts survey (June 2026).</li>
+          <li>U.S. inflation, <span class="num">4.2%</span> — CPI-U, all items, 12-month change, May 2026: <a href="https://www.bls.gov/news.release/cpi.nr0.htm">BLS CPI news release</a>.</li>
+          <li>Deposit insurance — $250,000 per depositor, per insured bank, per ownership category: <a href="https://www.fdic.gov/resources/deposit-insurance/">FDIC deposit insurance resources</a>.</li>
+          <li>Rates move. All figures are static baselines, last checked June 2026 — this page does not auto-update. Before acting on anything here, check today's rates yourself.</li>
+        </ul>
+      </div>
+    </details>
+  </section>
+
+</div>
+
+<!-- FSA Analytics & Email Capture -->
+<div style="margin: 2rem auto; max-width: 900px; padding: 0 1.5rem;">
+  <div data-fsa-email-capture="page-footer" data-title="📬 Level Up Your Finances" data-subtitle="Weekly money tips and financial strategies. No spam, ever."></div>
+</div>
+<script src="/js/analytics.js" defer></script>
+<script src="/js/email-capture.js" defer></script>
+
+<footer class="legal-footer">© 2026 The Sovereign Academy · Educational content only · Not financial advice</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+var _vizStarted = false;
+function initViz() {
+  if (_vizStarted) return;
+  _vizStarted = true;
+  // Sourced rates (static baselines, last checked June 2026 — see SOURCES.md / Method & sources):
+  //   avg savings APY 0.38% (FDIC National Rates, Jun 2026)
+  //   top HYSA APY 4.15% (Bankrate, Jun 2026)
+  //   inflation 4.2% (BLS CPI-U, all items, 12-mo change, May 2026)
+  // Checking is modeled at ≈0% as a labeled assumption — no invented checking APY.
+  var ACCTS = {
+    checking: { label: "Checking (≈0%)",             short: "checking",     apy: 0      },
+    avg:      { label: "Average savings (0.38%)",    short: "avg savings",  apy: 0.0038 },
+    hysa:     { label: "High-yield savings (4.15%)", short: "high-yield",   apy: 0.0415 }
+  };
+  var ORDER = ["checking", "avg", "hysa"];
+  var INFL = 0.042; // illustrative "if current inflation persisted" assumption
+  var selected = { checking: false, avg: true, hysa: true };
+
+  function fmt(n){ return "$" + Math.round(n).toLocaleString("en-US"); }
+  function nominal(bal, apy, y){ return bal * Math.pow(1 + apy, y); }
+  function inflTarget(bal, y){ return bal * Math.pow(1 + INFL, y); }
+  function real(bal, apy, y){ return nominal(bal, apy, y) / Math.pow(1 + INFL, y); }
+  function getBal(){ return parseFloat(document.getElementById("bal").value); }
+  function getYrs(){ return parseInt(document.getElementById("yrs").value, 10); }
+  function selectedKeys(){ return ORDER.filter(function(k){ return selected[k]; }); }
+  // The "focus" account for the stat cards: the lowest-APY selected account —
+  // the one most at risk, i.e. the one the learner is probably actually using.
+  function focusKey(){ return selectedKeys()[0]; }
+
+  var css = getComputedStyle(document.documentElement);
+  function tok(n,f){ var v = css.getPropertyValue(n).trim(); return v || f; }
+  var cBrand = tok("--color-brand","#10B981"), cError = tok("--color-error","#F87171"),
+      cMuted = tok("--color-muted","#A7ABB3"), cBorder = tok("--color-border","#2C2F36"),
+      cMint = tok("--color-mint","#6EE7B7"), cFaint = tok("--color-faint","#6B7078"),
+      mono = "'JetBrains Mono', monospace";
+  var LINE_COLORS = { checking: cFaint, avg: cBrand, hysa: cMint };
+  var reduced = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+
+  var GREEN_FILL = "rgba(52, 211, 153, 0.16)", RED_FILL = "rgba(248, 113, 113, 0.20)";
+
+  function yearLabels(N){
+    var out = [];
+    for (var i = 0; i <= N; i++) out.push(i === 0 ? "Now" : "Yr " + i);
+    return out;
+  }
+  function seriesFor(bal, apy, N){
+    var out = [];
+    for (var i = 0; i <= N; i++) out.push(nominal(bal, apy, i));
+    return out;
+  }
+  function inflSeries(bal, N){
+    var out = [];
+    for (var i = 0; i <= N; i++) out.push(inflTarget(bal, i));
+    return out;
+  }
+
+  function buildDatasets(bal, N){
+    // Dataset 0 is the inflation reference line; account lines fill against it.
+    var ds = [{
+      label: "Keeps its buying power (4.2%/yr inflation — illustrative)",
+      data: inflSeries(bal, N),
+      borderColor: cError, backgroundColor: cError,
+      borderDash: [7,5], borderWidth: 2.5, pointRadius: 3, pointHoverRadius: 6, tension: 0.25
+    }];
+    selectedKeys().forEach(function(k){
+      ds.push({
+        label: ACCTS[k].label,
+        data: seriesFor(bal, ACCTS[k].apy, N),
+        borderColor: LINE_COLORS[k], backgroundColor: LINE_COLORS[k],
+        borderWidth: 2.5, pointRadius: 3, pointHoverRadius: 6, tension: 0.25,
+        fill: { target: 0, above: GREEN_FILL, below: RED_FILL }
+      });
+    });
+    return ds;
+  }
+
+  var chart = null;
+  if (window.Chart) {
+    chart = new Chart(document.getElementById("chart"), {
+      type: "line",
+      data: { labels: yearLabels(getYrs()), datasets: buildDatasets(getBal(), getYrs()) },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        animation: reduced ? false : { duration: 300 },
+        interaction: { mode: "index", intersect: false },
+        plugins: {
+          legend: { onClick: null, labels: { color: cMuted, font: { family: mono, size: 11 }, usePointStyle: true } },
+          tooltip: { callbacks: {
+            label: function(c){ return c.dataset.label + ": " + fmt(c.parsed.y); },
+            footer: function(items){
+              var target = items.filter(function(it){ return it.datasetIndex === 0; })[0];
+              if (!target) return "";
+              var t = target.parsed.y, lines = [];
+              items.forEach(function(it){
+                if (it.datasetIndex === 0) return;
+                var d = it.parsed.y - t;
+                lines.push(it.dataset.label + ": " + (d >= 0 ? "+" : "−") + fmt(Math.abs(d)) + " vs standing still");
+              });
+              return lines;
+            }
+          } }
+        },
+        scales: {
+          x: { ticks: { color: cMuted, font: { family: mono, size: 11 } }, grid: { color: cBorder } },
+          y: { ticks: { color: cMuted, font: { family: mono, size: 11 },
+               callback: function(v){ return fmt(v); } }, grid: { color: cBorder } }
+        }
+      }
+    });
+  } else {
+    document.body.classList.add("no-chart");
+  }
+
+  function renderFallbackTable(bal, N) {
+    if (chart) return;
+    var keys = selectedKeys();
+    var h = "<table><caption style='text-align:left;color:var(--color-muted);padding-bottom:8px'>Chart could not load — same data as a table.</caption>" +
+      "<tr><th>Year</th>";
+    keys.forEach(function(k){ h += "<th>" + ACCTS[k].label + "</th>"; });
+    h += "<th>Needs, to keep buying power (4.2%/yr, illustrative)</th></tr>";
+    for (var i = 0; i <= N; i++) {
+      h += "<tr><td>" + i + "</td>";
+      keys.forEach(function(k){ h += "<td>" + fmt(nominal(bal, ACCTS[k].apy, i)) + "</td>"; });
+      h += "<td>" + fmt(inflTarget(bal, i)) + "</td></tr>";
+    }
+    document.getElementById("fallbackTable").innerHTML = h + "</table>";
+  }
+
+  function update() {
+    var bal = getBal(), N = getYrs();
+    document.getElementById("balVal").textContent = fmt(bal);
+    document.getElementById("yrsVal").textContent = N + (N === 1 ? " yr" : " yrs");
+    document.querySelectorAll(".presets button[data-acct]").forEach(function(b){
+      b.setAttribute("aria-pressed", String(!!selected[b.dataset.acct]));
+    });
+
+    if (chart) {
+      chart.data.labels = yearLabels(N);
+      chart.data.datasets = buildDatasets(bal, N);
+      chart.update();
+    }
+
+    var fk = focusKey(), acct = ACCTS[fk];
+    var nom = nominal(bal, acct.apy, N);
+    var rl = real(bal, acct.apy, N);
+    var hysaOut = nominal(bal, ACCTS.hysa.apy, N);
+    var cost = hysaOut - nom;
+    var yrWord = N + (N === 1 ? " yr" : " yrs");
+
+    document.getElementById("kNominal").textContent = "Nominal · " + acct.short + " · " + yrWord;
+    document.getElementById("stNominal").textContent = fmt(nom);
+    document.getElementById("kReal").textContent = "Real buying power · " + yrWord;
+    var rEl = document.getElementById("stReal");
+    rEl.textContent = fmt(rl);
+    rEl.className = "v " + (rl < bal - 0.5 ? "neg" : "pos");
+    var cEl = document.getElementById("stCost");
+    if (fk === "hysa") {
+      cEl.textContent = "$0";
+      cEl.className = "v";
+    } else {
+      cEl.textContent = "−" + fmt(cost);
+      cEl.className = "v neg";
+    }
+
+    document.getElementById("exNomAcct").textContent = acct.short;
+    document.getElementById("exNomFormula").textContent =
+      fmt(bal) + " × " + (1 + acct.apy).toFixed(4) + "^" + N + " = " + fmt(nom);
+    document.getElementById("exRealFormula").textContent =
+      fmt(nom) + " ÷ 1.042^" + N + " = " + fmt(rl) + " of today's dollars";
+    document.getElementById("exCostAcct").textContent = acct.short;
+    document.getElementById("exCostFormula").textContent = (fk === "hysa")
+      ? "you selected the high-yield door, so the gap is $0 — toggle another account to compare"
+      : fmt(hysaOut) + " − " + fmt(nom) + " = " + fmt(cost) + " over " + yrWord;
+
+    renderFallbackTable(bal, N);
+  }
+
+  document.getElementById("bal").addEventListener("input", update);
+  document.getElementById("yrs").addEventListener("input", update);
+  document.querySelectorAll(".presets button[data-acct]").forEach(function(b){
+    b.addEventListener("click", function(){
+      var k = b.dataset.acct;
+      if (selected[k] && selectedKeys().length === 1) return; // keep at least one account on
+      selected[k] = !selected[k];
+      update();
+    });
+  });
+
+  document.getElementById("readouts").addEventListener("click", function (e) {
+    var btn = e.target.closest("button.stat"); if (!btn) return;
+    var id = btn.dataset.explain, panel = document.getElementById(id);
+    var isOpen = panel.classList.contains("open");
+    document.querySelectorAll(".stat-explain").forEach(function (p) { p.classList.remove("open"); });
+    document.querySelectorAll("button.stat").forEach(function (b) { b.setAttribute("aria-expanded","false"); });
+    if (!isOpen) {
+      panel.classList.add("open"); btn.setAttribute("aria-expanded","true");
+      if (panel.scrollIntoView) panel.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "nearest" });
+    }
+  });
+
+  document.querySelectorAll(".quiz .option").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var right = b.dataset.q === "b";
+      document.querySelectorAll(".quiz .option").forEach(function (o) {
+        o.dataset.state = (o.dataset.q === "b") ? "right" : "wrong";
+      });
+      var fb = document.getElementById("quizFeedback");
+      fb.innerHTML = (right ? "<strong>Right.</strong> " : "<strong>It's B — here's the math.</strong> ") +
+        "Account A: <span class='num'>$10,000 × 1.0038⁵ ≈ $10,191</span>. Account B: <span class='num'>$10,000 × 1.0415⁵ ≈ $12,254</span>. " +
+        "That's about <span class='num'>$2,060</span> apart — same deposit, same five years, different door. " +
+        "Now the humbling part: at 4.2% inflation, keeping today's buying power would take <span class='num'>$10,000 × 1.042⁵ ≈ $12,284</span> — " +
+        "so <strong>neither</strong> account fully keeps pace. B roughly treads water; A quietly loses about a sixth of its buying power. " +
+        "The real lesson isn't \"pick B and relax\" — it's that the winning move still only gets you to even, and you can't see any of this on the balance screen.";
+      fb.classList.add("open");
+    });
+  });
+
+  update();
+}
+// Start now if Chart.js arrived from the primary CDN; otherwise try a backup CDN,
+// and if that fails too, initViz still runs and shows the built-in data table.
+if (window.Chart) {
+  initViz();
+} else {
+  var _s = document.createElement("script");
+  _s.src = "https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js";
+  _s.onload = initViz;
+  _s.onerror = initViz;
+  document.head.appendChild(_s);
+  setTimeout(initViz, 4000);
+}
+</script>
+</body>
+</html>

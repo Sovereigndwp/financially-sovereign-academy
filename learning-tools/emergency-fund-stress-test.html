@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Emergency Fund Stress Test: Could Your Money Survive a Surprise? | Financially Sovereign Academy</title>
+<meta name="description" content="Interactive lesson: give yourself a small saving plan, throw surprise expenses at it, and watch what a buffer — even a tiny one — changes about what a shock costs.">
+<link rel="stylesheet" href="../css/fsa-brand.css">
+<style>
+  /* Page components only — brand tokens come from fsa-brand.css (no page-local :root brand system) */
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--color-bg); color:var(--color-text);
+         font-family:var(--font-sans, Inter, system-ui, sans-serif); font-size:1.02rem; line-height:1.6; }
+  .wrap { max-width:1100px; margin:0 auto; padding:48px 26px; }
+  .back-link { display:inline-block; color:var(--color-brand); text-decoration:none; font-weight:600; margin-bottom:24px; }
+  .eyebrow { display:flex; align-items:center; gap:8px; font-family:var(--font-mono, monospace);
+    font-size:11px; font-weight:700; letter-spacing:0.22em; text-transform:uppercase; color:var(--color-muted); }
+  .eyebrow::before { content:"◆"; font-size:8px; color:var(--color-brand-deep); }
+  h1 { font-family:var(--font-serif, Georgia, serif); font-weight:700; font-size:clamp(2.1rem,5vw,3.2rem);
+       line-height:1.08; letter-spacing:-0.015em; color:var(--color-text-strong); margin:16px 0 0; max-width:760px; }
+  .fade-accent { font-style:italic; background:var(--brand-gradient);
+    -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:var(--color-mint, #6EE7B7); }
+  @supports not ((-webkit-background-clip:text) or (background-clip:text)) { .fade-accent { color:var(--color-mint); } }
+  h2 { font-family:var(--font-serif, Georgia, serif); font-weight:700; font-size:clamp(1.4rem,3vw,1.9rem);
+       color:var(--color-text-strong); letter-spacing:-0.01em; margin:0 0 6px; }
+  .lede { font-size:1.15rem; color:var(--color-muted); max-width:660px; margin:18px 0 0; }
+  section.block { margin-top:48px; }
+  .card { background:var(--color-elevated); border:1px solid var(--color-border); border-radius:var(--radius-lg, 8px);
+          padding:26px; box-shadow:var(--shadow-card, 0 14px 44px rgba(0,0,0,0.55)); }
+  .section-intro { color:var(--color-muted); max-width:70ch; margin:4px 0 18px; }
+
+  .controls { display:flex; flex-wrap:wrap; align-items:center; gap:14px 22px;
+    background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-md, 4px);
+    padding:14px 18px; margin-bottom:18px; }
+  .controls .lbl { font-family:var(--font-mono, monospace); font-size:12px; letter-spacing:0.08em;
+    text-transform:uppercase; color:var(--color-muted); }
+  .slider-val { font-family:var(--font-mono, monospace); font-size:1.15rem; font-weight:700; color:var(--color-brand); min-width:6.5ch; }
+  input[type="range"] { accent-color:var(--color-brand); width:min(260px,60vw); }
+  .ctl-row { display:flex; align-items:center; gap:14px; flex-wrap:wrap; flex-basis:100%; }
+  .presets { display:flex; gap:8px; flex-wrap:wrap; }
+  .presets button { font-family:var(--font-mono, monospace); font-size:12px; padding:6px 12px; cursor:pointer;
+    background:var(--color-elevated); color:var(--color-text); border:1px solid var(--color-border-strong);
+    border-radius:var(--radius-sm, 2px); transition:border-color 200ms; }
+  .presets button:hover { border-color:var(--color-brand); }
+  .presets button[aria-pressed="true"] { border-color:var(--color-brand); color:var(--color-brand); }
+  .presets button.clear { border-color:var(--color-border); color:var(--color-muted); }
+  .hint { font-size:0.82rem; color:var(--color-faint); flex-basis:100%; }
+
+  .chart-box { position:relative; height:360px; }
+  .chart-cta { font-family:var(--font-mono, monospace); font-size:12px; color:var(--color-faint); margin-top:8px; }
+
+  .shock-status { margin-top:14px; border-left:2px solid var(--color-brand); background:var(--color-surface);
+    border-radius:0; padding:14px 18px; }
+  .shock-status h3 { font-family:var(--font-mono, monospace); font-size:13px; letter-spacing:0.1em;
+    text-transform:uppercase; color:var(--color-brand); margin:0 0 6px; }
+  .shock-status p { margin:0; color:var(--color-text); font-size:0.9rem; max-width:75ch; }
+
+  .readouts { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:12px; margin-top:18px; }
+  button.stat { text-align:left; cursor:pointer; background:var(--color-surface); border:1px solid var(--color-border);
+    border-radius:var(--radius-md, 4px); padding:14px 16px; color:var(--color-text);
+    transition:border-color 200ms; font-family:var(--font-sans, sans-serif); }
+  button.stat:hover { border-color:var(--color-border-strong); }
+  button.stat[aria-expanded="true"] { border-color:var(--color-brand); }
+  .stat .k { font-family:var(--font-mono, monospace); font-size:11px; letter-spacing:0.08em;
+    text-transform:uppercase; color:var(--color-muted); }
+  .stat .v { font-family:var(--font-mono, monospace); font-size:1.35rem; font-weight:700; margin-top:4px; color:var(--color-text-strong); }
+  .stat .why { font-size:11.5px; color:var(--color-faint); margin-top:6px; }
+  .neg { color:var(--color-error) !important; } .pos { color:var(--color-success) !important; }
+  .stat-explain { display:none; margin-top:12px; background:var(--color-surface); border:1px solid var(--color-border);
+    border-left:2px solid var(--color-brand); padding:14px 18px; font-size:0.9rem; color:var(--color-text); max-width:80ch; }
+  .stat-explain.open { display:block; }
+  .num { font-family:var(--font-mono, monospace); color:var(--color-text-strong); }
+
+  details.learn { background:var(--color-elevated); border:1px solid var(--color-border); border-radius:var(--radius-md, 4px);
+    margin-top:10px; overflow:hidden; }
+  details.learn summary { cursor:pointer; padding:14px 18px; font-weight:600; color:var(--color-text-strong);
+    list-style:none; display:flex; justify-content:space-between; align-items:center; gap:12px; }
+  details.learn summary::-webkit-details-marker { display:none; }
+  details.learn summary::after { content:"+"; font-family:var(--font-mono, monospace); color:var(--color-brand); font-size:1.1rem; }
+  details.learn[open] summary::after { content:"–"; }
+  details.learn .body { padding:0 18px 16px; color:var(--color-muted); font-size:0.9rem; max-width:80ch; }
+  details.learn .body strong { color:var(--color-text); }
+
+  .quiz .option { display:block; width:100%; text-align:left; margin-top:10px; cursor:pointer;
+    background:var(--color-surface); border:1px solid var(--color-border-strong); border-radius:var(--radius-md, 4px);
+    padding:14px 18px; color:var(--color-text); font-size:1.02rem; font-family:var(--font-sans, sans-serif);
+    transition:border-color 200ms; }
+  .quiz .option:hover { border-color:var(--color-brand); }
+  .quiz .option[data-state="right"] { border-color:var(--color-success); }
+  .quiz .option[data-state="wrong"] { border-color:var(--color-error); }
+  .quiz-feedback { display:none; margin-top:14px; padding:14px 18px; background:var(--color-surface);
+    border:1px solid var(--color-border); border-left:2px solid var(--color-success); font-size:0.9rem; max-width:80ch; }
+  .quiz-feedback.open { display:block; }
+
+  ul.sources { font-size:0.82rem; color:var(--color-muted); padding-left:18px; margin:8px 0 0; }
+  ul.sources li { margin:5px 0; }
+  a { color:var(--color-mint); }
+  .back-link, .module-link { color:var(--color-brand); }
+  .fallback-table { display:none; }
+  .no-chart .fallback-table { display:block; overflow-x:auto; }
+  .fallback-table table { border-collapse:collapse; font-family:var(--font-mono, monospace); font-size:12px; width:100%; }
+  .fallback-table th, .fallback-table td { border:1px solid var(--color-border); padding:6px 10px; text-align:right; color:var(--color-text); }
+  .fallback-table th { color:var(--color-muted); font-weight:500; }
+
+  .next-steps { display:flex; gap:12px; flex-wrap:wrap; margin-top:18px; }
+  .next-steps a { display:inline-flex; align-items:center; min-height:44px; padding:10px 22px;
+    border-radius:var(--radius-sm, 2px); border:1.6px solid transparent; font-weight:600; font-size:0.95rem; text-decoration:none;
+    background:linear-gradient(var(--color-surface),var(--color-surface)) padding-box, var(--brand-gradient) border-box;
+    color:var(--color-text); }
+  .next-steps a.plain { background:none; border:1.5px solid var(--color-border-strong); }
+
+  :focus-visible { outline:2px solid var(--color-brand); outline-offset:2px; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration:0.001ms !important; transition-duration:0.001ms !important; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a href="/learning-tools/" class="back-link">← All learning tools</a>
+
+  <header>
+    <div class="eyebrow">FSA · Module 2 companion · Free learning tool</div>
+    <h1>Could your money <span class="fade-accent">survive a surprise?</span></h1>
+    <p class="lede">About 4 in 10 U.S. adults would not cover a $400 surprise expense with cash or its equivalent (Federal Reserve SHED). This page lets you find out where you'd land — safely. Set a small saving plan, throw surprise bills at it, and watch what happens over two years. Every amount you throw is illustrative; every result is computed live from your inputs.</p>
+  </header>
+
+  <!-- ═══ Stress test ═══ -->
+  <section class="block" aria-labelledby="chart-h">
+    <h2 id="chart-h">Two plans, same surprises</h2>
+    <p class="section-intro">The solid emerald line is you <em>with</em> a buffer plan: whatever you have saved today, plus a small deposit every month. The dashed red line is the same life with no buffer and no plan. Then you play fate: each shock button drops a surprise bill onto <strong style="color:var(--color-text)">both</strong> timelines. When a bill is bigger than the savings on hand, the shortfall goes on a credit card at 21.52% APR — the U.S. average rate on accounts assessed interest (Fed G.19, Q1 2026) — and compounds monthly until future saving pays it down.</p>
+    <div class="card">
+      <div class="controls">
+        <div class="ctl-row">
+          <span class="lbl" id="ess-lbl">Monthly essential expenses</span>
+          <span class="slider-val" id="essVal">$2,500</span>
+          <input type="range" id="ess" min="1000" max="6000" step="100" value="2500" aria-labelledby="ess-lbl">
+        </div>
+        <div class="ctl-row">
+          <span class="lbl" id="sav-lbl">Savings you have today</span>
+          <span class="slider-val" id="savVal">$400</span>
+          <input type="range" id="sav" min="0" max="10000" step="100" value="400" aria-labelledby="sav-lbl">
+        </div>
+        <div class="ctl-row">
+          <span class="lbl" id="mo-lbl">Saved per month</span>
+          <span class="slider-val" id="moVal">$25</span>
+          <input type="range" id="mo" min="0" max="500" step="5" value="25" aria-labelledby="mo-lbl" aria-describedby="mo-hint">
+        </div>
+        <span class="hint" id="mo-hint">The monthly slider is deliberately small on purpose: the point of this page is what even $25/month does.</span>
+        <span class="lbl">Throw a surprise (all amounts illustrative)</span>
+        <div class="presets" role="group" aria-label="Stress-test shocks">
+          <button type="button" data-shock="car" aria-pressed="false">Car repair $400</button>
+          <button type="button" data-shock="medical" aria-pressed="false">Medical bill $1,200</button>
+          <button type="button" data-shock="income" aria-pressed="false">Month of lost income (= your essentials)</button>
+          <button type="button" data-shock="appliance" aria-pressed="false">Appliance dies $700</button>
+          <button type="button" class="clear" id="clearShocks">Clear shocks</button>
+        </div>
+        <span class="hint">Shocks land at months 6, 12 and 18 of the timeline, in the order you click them — up to three.</span>
+      </div>
+      <div class="chart-box">
+        <canvas id="chart" role="img" aria-label="Line chart over 24 months comparing your net position with a small buffer plan against no plan at all. At the default settings the solid emerald plan line grows steadily from 400 dollars to 1,000 dollars, while the dashed red no-plan line sits at zero. Each stress-test shock makes both lines dip at months 6, 12 or 18; when a bill exceeds the savings on hand, the line goes below zero and 21.52 percent APR credit-card interest compounds monthly. The area between the lines is shaded green where the plan is ahead and red where it falls behind."></canvas>
+      </div>
+      <p class="chart-cta">↑ Use the shock buttons above to test both plans. The gap between the lines is what the buffer is buying you.</p>
+      <div class="shock-status" id="shockStatus" role="status" aria-live="polite"></div>
+      <div class="fallback-table" id="fallbackTable"></div>
+    </div>
+  </section>
+
+  <!-- ═══ Readouts ═══ -->
+  <section class="block" aria-labelledby="readout-h">
+    <h2 id="readout-h">What your plan is telling you</h2>
+    <p class="section-intro">Four numbers, all recomputed from your sliders and shocks. Each one explains its own math — click a card.</p>
+    <div class="card">
+      <div class="readouts" id="readouts">
+        <button class="stat" type="button" data-explain="ex-buffer" aria-expanded="false" aria-controls="ex-buffer">
+          <div class="k">Months of buffer today</div><div class="v" id="stBuffer">–</div>
+          <div class="why">A rule of thumb, not a law — click</div>
+        </button>
+        <button class="stat" type="button" data-explain="ex-survived" aria-expanded="false" aria-controls="ex-survived">
+          <div class="k">Shocks survived without borrowing</div><div class="v" id="stSurvived">–</div>
+          <div class="why">What "survived" means here — click</div>
+        </button>
+        <button class="stat" type="button" data-explain="ex-card" aria-expanded="false" aria-controls="ex-card">
+          <div class="k">Same shocks, on the card</div><div class="v" id="stCard">–</div>
+          <div class="why">The interest bill with no plan — click</div>
+        </button>
+        <button class="stat" type="button" data-explain="ex-year" aria-expanded="false" aria-controls="ex-year">
+          <div class="k">Your buffer one year from now</div><div class="v" id="stYear">–</div>
+          <div class="why">Just the deposits, no interest — click</div>
+        </button>
+      </div>
+      <div class="stat-explain" id="ex-buffer"></div>
+      <div class="stat-explain" id="ex-survived"></div>
+      <div class="stat-explain" id="ex-card"></div>
+      <div class="stat-explain" id="ex-year"></div>
+    </div>
+  </section>
+
+  <!-- ═══ Understand the ideas ═══ -->
+  <section class="block" aria-labelledby="learn-h">
+    <h2 id="learn-h">Understand the ideas behind the chart</h2>
+    <p class="section-intro">Five concepts explain everything you just tested. Open each one.</p>
+
+    <details class="learn">
+      <summary>What an emergency fund is actually for</summary>
+      <div class="body">Not growth — <strong>availability</strong>. An emergency fund has one job: to be there, in full, on the random Tuesday the transmission fails. That's why it lives in boring, instantly accessible savings rather than investments whose value moves around. Judged as an investment it looks unimpressive; judged as what it is — the thing standing between a surprise bill and a 21.52% APR balance — it may be the highest-stakes money you own. The chart above never pays your savings any interest at all, and the buffer still changes the whole picture.</div>
+    </details>
+    <details class="learn">
+      <summary>"Months of expenses" — a rule of thumb, not a law</summary>
+      <div class="body">You'll hear "three to six months of expenses" as if it were a legal requirement. It's a <strong>rule of thumb</strong>: a rough way to size a buffer against the risk of losing income for a while. Nobody fails at zero-point-nine months. The measure is useful because it scales to <em>your</em> life — $2,000 is two months of buffer for one household and ten days for another — not because any particular number is magic. On this page it's computed as savings ÷ monthly essentials, and the honest reading is directional: is the number growing?</div>
+    </details>
+    <details class="learn">
+      <summary>Why small-but-now beats big-but-later</summary>
+      <div class="body">The math of a head start: money saved <strong>now</strong> is on duty for every month that follows, while money you plan to save later protects nothing in the meantime. $25/week starting today is about <span class="num">$650</span> after six months — enough to fully absorb a $400 car repair. A bigger plan that starts in six months is <span class="num">$0</span> for exactly the six months in which a surprise would become card debt. And because shortfalls compound at card rates while savings just sit there safely, the cost of being uncovered early is larger than the reward for saving harder late. Small-but-now wins on both ends.</div>
+    </details>
+    <details class="learn">
+      <summary>Where people keep buffers — and what the account pays</summary>
+      <div class="body">A buffer needs to be liquid, but liquid accounts differ enormously in what they pay. The national average savings rate is <span class="num">0.38% APY</span> (FDIC National Rates, June 2026), while widely available high-yield savings accounts pay around <span class="num">4.15% APY</span> (Bankrate survey, June 2026) — both federally insured account types. Those are facts, not recommendations; the right account depends on your situation. But the gap between them is the subject of a whole companion tool: <a href="/learning-tools/bank-drain.html">What Your Bank Quietly Costs You</a>. For this page's math we assumed <strong>zero</strong> interest on savings, so nothing here depends on chasing a rate.</div>
+    </details>
+    <details class="learn">
+      <summary>The debt-spiral connection</summary>
+      <div class="body">A missing buffer doesn't make surprises cheaper — it changes <strong>who finances them</strong>. Without savings, a $700 appliance becomes a $700 balance at <span class="num">21.52% APR</span> (average rate on accounts assessed interest, Fed G.19, Q1 2026), and every month it lingers it grows by about 1.8%. If the payment you can afford is small, most of it goes to interest, which is exactly the trap dissected in <a href="/learning-tools/min-payment-trap.html">The Minimum Payment Trap</a>. Read the two tools together: this one shows how debt starts; that one shows why it stays.</div>
+    </details>
+  </section>
+
+  <!-- ═══ Check your understanding ═══ -->
+  <section class="block quiz" aria-labelledby="quiz-h">
+    <h2 id="quiz-h">Check your understanding</h2>
+    <p class="section-intro">Which protects you more over the next 12 months?</p>
+    <div class="card">
+      <button class="option" type="button" data-q="a">A — Saving $25/week, starting today</button>
+      <button class="option" type="button" data-q="b">B — Waiting 6 months until "things calm down," then saving $200/month</button>
+      <div class="quiz-feedback" id="quizFeedback"></div>
+    </div>
+  </section>
+
+  <!-- ═══ Continue ═══ -->
+  <section class="block" aria-labelledby="next-h">
+    <h2 id="next-h">Continue the path</h2>
+    <div class="next-steps">
+      <a href="/modules/emergency-funds-saving.html">Module 2: Emergency Funds &amp; Saving</a>
+      <a class="plain" href="/calculators/budget-tracker.html">Find the money to save</a>
+      <a class="plain" href="/learning-tools/">All learning tools</a>
+    </div>
+  </section>
+
+  <!-- ═══ Method & sources ═══ -->
+  <section class="block" aria-labelledby="method-h">
+    <h2 id="method-h">Method, honesty notes &amp; sources</h2>
+    <details class="learn">
+      <summary>What this models — and what it doesn't</summary>
+      <div class="body">The simulation is deliberately simple. Savings earn <strong>no interest</strong> (conservative — any real account would do slightly better). Each month the plan adds your monthly amount; if card debt exists, deposits pay the debt first. When a shock exceeds savings on hand, the shortfall becomes card debt at <span class="num">21.52% APR</span>, compounded monthly (≈1.79%/month). The shock amounts ($400 car repair, $1,200 medical bill, $700 appliance) and the shock timing (months 6, 12, 18) are <strong>illustrative</strong>, chosen to be ordinary-sized surprises — they are not statistics about what emergencies cost. The "no plan" line assumes shocks go entirely on a card and nothing is paid down within the window, which shows the pure cost of carrying; real people usually pay something, so their outcome lands between the two lines. This page is education about how buffers work — not financial advice.</div>
+    </details>
+    <details class="learn">
+      <summary>Sources (every figure dated)</summary>
+      <div class="body">
+        <ul class="sources">
+          <li>"About 4 in 10 U.S. adults would not cover a $400 surprise expense with cash or its equivalent": Federal Reserve, <a href="https://www.federalreserve.gov/consumerscommunities/shed.htm">Report on the Economic Well-Being of U.S. Households (SHED)</a>. The survey's exact share moves year to year; we deliberately keep the "about 4 in 10" precision of the finding (retrieved July 2026).</li>
+          <li>Credit-card rate, 21.52% APR — average on accounts assessed interest, Q1 2026: <a href="https://www.federalreserve.gov/releases/g19/">Federal Reserve G.19, Consumer Credit</a>.</li>
+          <li>National average savings account rate, 0.38% APY, June 2026: <a href="https://www.fdic.gov/bank/individual/financial/firates.html">FDIC National Rates and Rate Caps</a>.</li>
+          <li>Top widely available high-yield savings, ~4.15% APY, June 2026: Bankrate national survey of high-yield savings accounts.</li>
+          <li>Shock amounts, shock timing, and the example household are illustrative, not survey data. All figures are static baselines, last checked July 2026 — they do not auto-update.</li>
+        </ul>
+      </div>
+    </details>
+  </section>
+
+</div>
+
+<!-- FSA Analytics & Email Capture -->
+<div style="margin: 2rem auto; max-width: 900px; padding: 0 1.5rem;">
+  <div data-fsa-email-capture="page-footer" data-title="📬 Level Up Your Finances" data-subtitle="Weekly money tips and financial strategies. No spam, ever."></div>
+</div>
+<script src="/js/analytics.js" defer></script>
+<script src="/js/email-capture.js" defer></script>
+
+<footer class="legal-footer">© 2026 The Sovereign Academy · Educational content only · Not financial advice</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+var _vizStarted = false;
+function initViz() {
+  if (_vizStarted) return;
+  _vizStarted = true;
+
+  // Sourced constant: average APR on credit-card accounts assessed interest, Fed G.19, Q1 2026.
+  var CARD_APR = 0.2152, MRATE = CARD_APR / 12;
+  var MONTHS = []; for (var i = 0; i <= 24; i++) MONTHS.push(i);
+  var SLOTS = [6, 12, 18]; // illustrative shock timing
+  // Shock amounts are illustrative, labeled as such in the UI.
+  var SHOCK_DEFS = {
+    car:       { label: "Car repair",           amt: 400 },
+    medical:   { label: "Medical bill",         amt: 1200 },
+    income:    { label: "Month of lost income", amt: null }, // = current essentials
+    appliance: { label: "Appliance dies",       amt: 700 }
+  };
+  var shocks = []; // array of shock type keys, in click order; index -> SLOTS[index]
+
+  function fmt(n){ return "$" + Math.round(n).toLocaleString("en-US"); }
+  function sfmt(n){ return (n < 0 ? "−" : "") + fmt(Math.abs(n)); }
+  function inputs() {
+    return {
+      ess: parseFloat(document.getElementById("ess").value),
+      sav: parseFloat(document.getElementById("sav").value),
+      mo:  parseFloat(document.getElementById("mo").value)
+    };
+  }
+  function resolvedShocks(ess) {
+    return shocks.map(function (key, i) {
+      var d = SHOCK_DEFS[key];
+      return { key: key, month: SLOTS[i], label: d.label, amt: (d.amt === null ? ess : d.amt) };
+    });
+  }
+
+  // One pass over 24 months for both plans. Savings earn no interest (stated in method notes).
+  // Plan: deposit m each month (debt paid first); shock draws savings, shortfall -> card at 21.52% APR.
+  // No plan: zero savings, zero deposits; every shock lands on the card and compounds untouched.
+  function simulate(ess, s0, m) {
+    var list = resolvedShocks(ess), byMonth = {};
+    list.forEach(function (s) { byMonth[s.month] = s; });
+    var plan = [s0], noplan = [0];
+    var sav = s0, debt = 0, nDebt = 0, survived = 0, totalShock = 0;
+    for (var t = 1; t <= 24; t++) {
+      debt *= (1 + MRATE);
+      nDebt *= (1 + MRATE);
+      var dep = m;
+      if (debt > 0) { var pay = Math.min(debt, dep); debt -= pay; dep -= pay; }
+      sav += dep;
+      var s = byMonth[t];
+      if (s) {
+        totalShock += s.amt;
+        if (sav >= s.amt) { sav -= s.amt; survived++; }
+        else { debt += (s.amt - sav); sav = 0; }
+        nDebt += s.amt;
+      }
+      plan.push(sav - debt);
+      noplan.push(-nDebt);
+    }
+    return { plan: plan, noplan: noplan, survived: survived, total: list.length,
+             totalShock: totalShock, cardInterest: nDebt - totalShock, shockList: list };
+  }
+
+  var css = getComputedStyle(document.documentElement);
+  function tok(n,f){ var v = css.getPropertyValue(n).trim(); return v || f; }
+  var cBrand = tok("--color-brand","#10B981"), cError = tok("--color-error","#F87171"),
+      cMuted = tok("--color-muted","#A7ABB3"), cBorder = tok("--color-border","#2C2F36"),
+      mono = "'JetBrains Mono', monospace";
+  var reduced = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+
+  var chart = null;
+  if (window.Chart) {
+    var GREEN_FILL = "rgba(52, 211, 153, 0.16)", RED_FILL = "rgba(248, 113, 113, 0.20)";
+    chart = new Chart(document.getElementById("chart"), {
+      type: "line",
+      data: { labels: MONTHS, datasets: [
+        { label:"With your buffer plan", data:[], borderColor:cBrand, backgroundColor:cBrand,
+          borderWidth:2.5, pointRadius:[], pointHoverRadius:7, tension:0.2,
+          fill:{ target:1, above:GREEN_FILL, below:RED_FILL } },
+        { label:"No saving plan", data:[], borderColor:cError, backgroundColor:cError,
+          borderDash:[7,5], borderWidth:2.5, pointRadius:[], pointHoverRadius:7, tension:0.2 }
+      ]},
+      options: {
+        responsive:true, maintainAspectRatio:false,
+        animation: reduced ? false : { duration:300 },
+        interaction:{ mode:"index", intersect:false },
+        plugins: {
+          legend:{ onClick:null, labels:{ color:cMuted, font:{ family:mono, size:11 }, usePointStyle:true } },
+          tooltip:{ callbacks:{
+            title:function(items){ return "Month " + items[0].label; },
+            label:function(c){ return c.dataset.label + ": " + sfmt(c.parsed.y); },
+            footer:function(items){
+              var t = MONTHS[items[0].dataIndex], ins = inputs();
+              var hit = resolvedShocks(ins.ess).filter(function (s) { return s.month === t; })[0];
+              return hit ? "Shock this month: " + hit.label + " " + fmt(hit.amt) + " (illustrative)" : "";
+            }
+          } }
+        },
+        scales: {
+          x:{ title:{ display:true, text:"Month", color:cMuted, font:{ family:mono, size:10 } },
+              ticks:{ color:cMuted, font:{ family:mono, size:10 }, maxTicksLimit:13 }, grid:{ color:cBorder } },
+          y:{ ticks:{ color:cMuted, font:{ family:mono, size:11 },
+              callback:function(v){ return sfmt(v); } }, grid:{ color:cBorder } }
+        }
+      }
+    });
+  } else {
+    document.body.classList.add("no-chart");
+  }
+
+  function renderFallbackTable(sim) {
+    if (chart) return;
+    var rows = [0,3,6,9,12,15,18,21,24];
+    var h = "<table><caption style='text-align:left;color:var(--color-muted);padding-bottom:8px'>Chart could not load — same numbers as a table.</caption>" +
+      "<tr><th>Month</th><th>With your buffer plan</th><th>No saving plan</th><th>Shock (illustrative)</th></tr>";
+    rows.forEach(function (t) {
+      var hit = sim.shockList.filter(function (s) { return s.month === t; })[0];
+      h += "<tr><td>" + t + "</td><td>" + sfmt(sim.plan[t]) + "</td><td>" + sfmt(sim.noplan[t]) + "</td><td>" +
+        (hit ? hit.label + " " + fmt(hit.amt) : "—") + "</td></tr>";
+    });
+    document.getElementById("fallbackTable").innerHTML = h + "</table>";
+  }
+
+  function renderShockStatus(sim, ess) {
+    var el = document.getElementById("shockStatus");
+    if (!sim.shockList.length) {
+      el.innerHTML = "<h3>No shocks yet</h3><p>Your plan is untested. Click a surprise above — it lands on both lines at month 6, then 12, then 18 (illustrative timing).</p>";
+      return;
+    }
+    var parts = sim.shockList.map(function (s) {
+      return "month " + s.month + " — " + s.label + " " + fmt(s.amt) +
+        (s.key === "income" ? " (= your essentials slider)" : "");
+    });
+    el.innerHTML = "<h3>" + sim.shockList.length + " shock" + (sim.shockList.length > 1 ? "s" : "") + " queued" +
+      (sim.shockList.length >= SLOTS.length ? " · all slots full" : "") + "</h3><p>" + parts.join(" · ") +
+      ". All amounts illustrative. " +
+      (sim.survived === sim.total
+        ? "Your buffer absorbed every one without borrowing."
+        : "Where the emerald line dips below zero, a shortfall became card debt at 21.52% APR (Fed G.19, Q1 2026).") + "</p>";
+  }
+
+  function update() {
+    var ins = inputs();
+    var sim = simulate(ins.ess, ins.sav, ins.mo);
+    document.getElementById("essVal").textContent = fmt(ins.ess);
+    document.getElementById("savVal").textContent = fmt(ins.sav);
+    document.getElementById("moVal").textContent = fmt(ins.mo);
+
+    if (chart) {
+      var shockMonths = sim.shockList.map(function (s) { return s.month; });
+      var radii = MONTHS.map(function (t) { return shockMonths.indexOf(t) >= 0 ? 5 : 0; });
+      chart.data.datasets[0].data = sim.plan;
+      chart.data.datasets[0].pointRadius = radii;
+      chart.data.datasets[1].data = sim.noplan;
+      chart.data.datasets[1].pointRadius = radii;
+      chart.update();
+    }
+
+    // Stat cards — every number computed from inputs; formulas spelled out in the explain panels.
+    var months = ins.ess > 0 ? ins.sav / ins.ess : 0;
+    document.getElementById("stBuffer").textContent = months.toFixed(1) + " mo";
+    var sv = document.getElementById("stSurvived");
+    sv.textContent = sim.total ? sim.survived + " of " + sim.total : "–";
+    sv.className = "v " + (sim.total ? (sim.survived === sim.total ? "pos" : "neg") : "");
+    var cd = document.getElementById("stCard");
+    cd.textContent = sim.total ? "+" + fmt(sim.cardInterest) + " interest" : "$0";
+    cd.className = "v " + (sim.total ? "neg" : "");
+    document.getElementById("stYear").textContent = fmt(ins.sav + 12 * ins.mo);
+
+    document.getElementById("ex-buffer").innerHTML =
+      "Months of buffer = savings ÷ monthly essentials = <span class='num'>" + fmt(ins.sav) + " ÷ " + fmt(ins.ess) +
+      " = " + months.toFixed(2) + " months</span>. It's a rule-of-thumb measure of how long your money could carry the essentials with zero income — useful for scale, not a pass/fail grade. " +
+      "The common \"3–6 months\" target is a convention, not a law; the honest question is whether this number is moving up.";
+    document.getElementById("ex-survived").innerHTML = sim.total
+      ? "A shock counts as survived when the savings on hand at that moment cover the whole bill — no borrowing. With your settings, <span class='num'>" +
+        sim.survived + " of " + sim.total + "</span> shocks were fully absorbed. For the rest, the shortfall became card debt at <span class='num'>21.52% APR</span> " +
+        "(average on accounts assessed interest, Fed G.19, Q1 2026), and your future monthly saving goes to paying that down before it rebuilds the buffer."
+      : "Click a shock button first — this card counts how many of your surprises the buffer absorbed in full, with no borrowing.";
+    document.getElementById("ex-card").innerHTML = sim.total
+      ? "In the no-plan line, all <span class='num'>" + fmt(sim.totalShock) + "</span> of shocks go straight onto a card at <span class='num'>21.52% APR</span> " +
+        "(Fed G.19, Q1 2026) — about 1.79% per month, compounding, with nothing paid down inside the window. By month 24 the balance has grown to <span class='num'>" +
+        fmt(sim.totalShock + sim.cardInterest) + "</span>, of which <span class='num'>" + fmt(sim.cardInterest) +
+        "</span> is pure interest — the price of meeting the same surprises with no buffer. Real people usually pay something down, so a real outcome lands between the two lines."
+      : "Throw a shock at the plan first — this card computes the interest the same surprises would generate on a 21.52% APR card (Fed G.19, Q1 2026) if there were no buffer and no paydown for 24 months.";
+    document.getElementById("ex-year").innerHTML =
+      "Today's savings plus twelve deposits: <span class='num'>" + fmt(ins.sav) + " + 12 × " + fmt(ins.mo) + " = " + fmt(ins.sav + 12 * ins.mo) +
+      "</span>. We assume <strong>no interest at all</strong> — deliberately. At the average savings rate (0.38% APY, FDIC, June 2026) interest would add only a few dollars in a year; " +
+      "it's the deposits doing the work. What the account pays matters more as the balance grows — see <a href='/learning-tools/bank-drain.html'>What Your Bank Quietly Costs You</a>.";
+
+    document.querySelectorAll(".presets button[data-shock]").forEach(function (b) {
+      b.setAttribute("aria-pressed", String(shocks.indexOf(b.dataset.shock) >= 0));
+    });
+    renderShockStatus(sim, ins.ess);
+    renderFallbackTable(sim);
+  }
+
+  ["ess","sav","mo"].forEach(function (id) {
+    document.getElementById(id).addEventListener("input", update);
+  });
+  document.querySelectorAll(".presets button[data-shock]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      if (shocks.length >= SLOTS.length) {
+        var el = document.getElementById("shockStatus");
+        el.innerHTML = "<h3>All three slots are full</h3><p>Shocks land at months 6, 12 and 18 — there's no room for a fourth. Click \"Clear shocks\" to reset and test a different storm.</p>";
+        return;
+      }
+      shocks.push(b.dataset.shock);
+      update();
+    });
+  });
+  document.getElementById("clearShocks").addEventListener("click", function () {
+    shocks = [];
+    update();
+  });
+
+  document.getElementById("readouts").addEventListener("click", function (e) {
+    var btn = e.target.closest("button.stat"); if (!btn) return;
+    var id = btn.dataset.explain, panel = document.getElementById(id);
+    var isOpen = panel.classList.contains("open");
+    document.querySelectorAll(".stat-explain").forEach(function (p) { p.classList.remove("open"); });
+    document.querySelectorAll("button.stat").forEach(function (b) { b.setAttribute("aria-expanded","false"); });
+    if (!isOpen) {
+      panel.classList.add("open"); btn.setAttribute("aria-expanded","true");
+      if (panel.scrollIntoView) panel.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "nearest" });
+    }
+  });
+
+  document.querySelectorAll(".quiz .option").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var right = b.dataset.q === "a";
+      document.querySelectorAll(".quiz .option").forEach(function (o) {
+        o.dataset.state = (o.dataset.q === "a") ? "right" : "wrong";
+      });
+      var fb = document.getElementById("quizFeedback");
+      fb.innerHTML = (right ? "<strong>Right.</strong> " : "<strong>It's A — here's why.</strong> ") +
+        "Plan A has about <span class='num'>$650</span> saved by month 6 (26 weeks × $25) and <span class='num'>$1,300</span> by month 12 (52 × $25). " +
+        "Plan B has <span class='num'>$0</span> at month 6 and <span class='num'>$1,200</span> by month 12 (6 × $200). " +
+        "So A is ahead at <em>both</em> checkpoints — and the difference matters most in the first six months, when B's coverage is exactly zero and any surprise " +
+        "would land on a card at 21.52% APR. The bigger monthly number never catches the head start inside the year. Small-but-now beats big-but-later.";
+      fb.classList.add("open");
+    });
+  });
+
+  update();
+}
+// Start now if Chart.js arrived from the primary CDN; otherwise try a backup CDN,
+// and if that fails too, initViz still runs and shows the built-in data table.
+if (window.Chart) {
+  initViz();
+} else {
+  var _s = document.createElement("script");
+  _s.src = "https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js";
+  _s.onload = initViz;
+  _s.onerror = initViz;
+  document.head.appendChild(_s);
+  setTimeout(initViz, 4000);
+}
+</script>
+</body>
+</html>

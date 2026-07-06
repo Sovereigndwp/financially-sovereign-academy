@@ -85,6 +85,17 @@ _All figures hardcoded in the page, last checked July 2026. Do not restamp with 
 | Typical salary-increase budget ~3% (2015–2021), ~4–4.4% (2022–23) | — | 2026 survey coverage | WorldatWork Salary Budget Survey coverage; Payscale 2026 forecast |
 | Starting paycheck $4,000/mo + basket line items | illustrative | — | Example household, not survey data (stated on page) |
 
+### Learning-tools wave 2 (min-payment-trap.html, emergency-fund-stress-test.html, bank-drain.html) — static datasets
+_All figures hardcoded in the pages, last checked July 2026. User-input scenarios are computed live; shock amounts and example households are labeled illustrative on-page._
+
+| Value | Figure | As of | Source |
+|---|---|---|---|
+| Avg credit card APR (accounts assessed interest) | 21.52% | Q1 2026 | Federal Reserve G.19 (federalreserve.gov/releases/g19/) |
+| Typical issuer minimum-payment formula (1% of balance + interest, floor ~$25; varies by issuer) | — | retrieved Jul 2026 | CFPB Reg Z Appendix M1 (consumerfinance.gov/rules-policy/regulations/1026/m1/); NerdWallet issuer-minimum explainer |
+| "$400 surprise" resilience stat — phrased "about 4 in 10 U.S. adults" | ~4 in 10 | latest SHED | Federal Reserve SHED (federalreserve.gov/consumerscommunities/shed.htm) |
+| Avg savings APY 0.38% / top HYSA 4.15% / CPI 4.2% | — | Jun 2026 / Jun 2026 / May 2026 | FDIC National Rates / Bankrate / BLS CPI (same as Live-Data Baselines) |
+| FDIC deposit insurance limit | $250,000 per depositor, per bank, per ownership category | standing | FDIC (fdic.gov/resources/deposit-insurance/) |
+
 ---
 
 ## Emergency Funds & Savings

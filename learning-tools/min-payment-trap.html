@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Minimum Payment Trap: What "Just the Minimum" Actually Costs | Financially Sovereign Academy</title>
+<meta name="description" content="Interactive lesson: set a balance and APR, pay only the issuer minimum, and watch what 'just the minimum' actually costs — nearly 15 years and more interest than the original debt at typical rates.">
+<link rel="stylesheet" href="../css/fsa-brand.css">
+<style>
+  /* Page components only — brand tokens come from fsa-brand.css (no page-local :root brand system) */
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--color-bg); color:var(--color-text);
+         font-family:var(--font-sans, Inter, system-ui, sans-serif); font-size:1.02rem; line-height:1.6; }
+  .wrap { max-width:1100px; margin:0 auto; padding:48px 26px; }
+  .back-link { display:inline-block; color:var(--color-brand); text-decoration:none; font-weight:600; margin-bottom:24px; }
+  .eyebrow { display:flex; align-items:center; gap:8px; font-family:var(--font-mono, monospace);
+    font-size:11px; font-weight:700; letter-spacing:0.22em; text-transform:uppercase; color:var(--color-muted); }
+  .eyebrow::before { content:"◆"; font-size:8px; color:var(--color-brand-deep); }
+  h1 { font-family:var(--font-serif, Georgia, serif); font-weight:700; font-size:clamp(2.1rem,5vw,3.2rem);
+       line-height:1.08; letter-spacing:-0.015em; color:var(--color-text-strong); margin:16px 0 0; max-width:760px; }
+  .fade-accent { font-style:italic; background:var(--brand-gradient);
+    -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:var(--color-mint, #6EE7B7); }
+  @supports not ((-webkit-background-clip:text) or (background-clip:text)) { .fade-accent { color:var(--color-mint); } }
+  h2 { font-family:var(--font-serif, Georgia, serif); font-weight:700; font-size:clamp(1.4rem,3vw,1.9rem);
+       color:var(--color-text-strong); letter-spacing:-0.01em; margin:0 0 6px; }
+  .lede { font-size:1.15rem; color:var(--color-muted); max-width:660px; margin:18px 0 0; }
+  section.block { margin-top:48px; }
+  .card { background:var(--color-elevated); border:1px solid var(--color-border); border-radius:var(--radius-lg, 8px);
+          padding:26px; box-shadow:var(--shadow-card, 0 14px 44px rgba(0,0,0,0.55)); }
+  .section-intro { color:var(--color-muted); max-width:70ch; margin:4px 0 18px; }
+
+  .controls { display:flex; flex-wrap:wrap; align-items:center; gap:14px 22px;
+    background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-md, 4px);
+    padding:14px 18px; margin-bottom:18px; }
+  .controls .lbl { font-family:var(--font-mono, monospace); font-size:12px; letter-spacing:0.08em;
+    text-transform:uppercase; color:var(--color-muted); }
+  .ctl-val { font-family:var(--font-mono, monospace); font-size:1.15rem; font-weight:700; color:var(--color-brand); min-width:6ch; }
+  input[type="range"] { accent-color:var(--color-brand); width:min(260px,60vw); }
+  .presets { display:flex; gap:8px; flex-wrap:wrap; }
+  .presets button { font-family:var(--font-mono, monospace); font-size:12px; padding:6px 12px; cursor:pointer;
+    background:var(--color-elevated); color:var(--color-text); border:1px solid var(--color-border-strong);
+    border-radius:var(--radius-sm, 2px); transition:border-color 200ms; }
+  .presets button:hover { border-color:var(--color-brand); }
+  .presets button[aria-pressed="true"] { border-color:var(--color-brand); color:var(--color-brand); }
+  .hint { font-size:0.82rem; color:var(--color-faint); flex-basis:100%; }
+  .amount-wrap { display:none; align-items:center; gap:14px 22px; flex-basis:100%; flex-wrap:wrap; }
+  .amount-wrap.show { display:flex; }
+
+  .chart-box { position:relative; height:360px; }
+  .chart-cta { font-family:var(--font-mono, monospace); font-size:12px; color:var(--color-faint); margin-top:8px; }
+
+  .stall { margin-top:14px; border-left:2px solid var(--color-error); background:var(--color-surface);
+    border-radius:0; padding:14px 18px; display:none; }
+  .stall.open { display:block; }
+  .stall h3 { font-family:var(--font-mono, monospace); font-size:13px; letter-spacing:0.1em;
+    text-transform:uppercase; color:var(--color-error); margin:0 0 6px; }
+  .stall p { margin:0; color:var(--color-text); font-size:0.9rem; max-width:75ch; }
+
+  .readouts { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:12px; margin-top:18px; }
+  button.stat { text-align:left; cursor:pointer; background:var(--color-surface); border:1px solid var(--color-border);
+    border-radius:var(--radius-md, 4px); padding:14px 16px; color:var(--color-text);
+    transition:border-color 200ms; font-family:var(--font-sans, sans-serif); }
+  button.stat:hover { border-color:var(--color-border-strong); }
+  button.stat[aria-expanded="true"] { border-color:var(--color-brand); }
+  .stat .k { font-family:var(--font-mono, monospace); font-size:11px; letter-spacing:0.08em;
+    text-transform:uppercase; color:var(--color-muted); }
+  .stat .v { font-family:var(--font-mono, monospace); font-size:1.35rem; font-weight:700; margin-top:4px; color:var(--color-text-strong); }
+  .stat .why { font-size:11.5px; color:var(--color-faint); margin-top:6px; }
+  .neg { color:var(--color-error) !important; } .pos { color:var(--color-success) !important; }
+  .stat-explain { display:none; margin-top:12px; background:var(--color-surface); border:1px solid var(--color-border);
+    border-left:2px solid var(--color-brand); padding:14px 18px; font-size:0.9rem; color:var(--color-text); max-width:80ch; }
+  .stat-explain.open { display:block; }
+  .num { font-family:var(--font-mono, monospace); color:var(--color-text-strong); }
+
+  details.learn { background:var(--color-elevated); border:1px solid var(--color-border); border-radius:var(--radius-md, 4px);
+    margin-top:10px; overflow:hidden; }
+  details.learn summary { cursor:pointer; padding:14px 18px; font-weight:600; color:var(--color-text-strong);
+    list-style:none; display:flex; justify-content:space-between; align-items:center; gap:12px; }
+  details.learn summary::-webkit-details-marker { display:none; }
+  details.learn summary::after { content:"+"; font-family:var(--font-mono, monospace); color:var(--color-brand); font-size:1.1rem; }
+  details.learn[open] summary::after { content:"–"; }
+  details.learn .body { padding:0 18px 16px; color:var(--color-muted); font-size:0.9rem; max-width:80ch; }
+  details.learn .body strong { color:var(--color-text); }
+
+  .quiz .option { display:block; width:100%; text-align:left; margin-top:10px; cursor:pointer;
+    background:var(--color-surface); border:1px solid var(--color-border-strong); border-radius:var(--radius-md, 4px);
+    padding:14px 18px; color:var(--color-text); font-size:1.02rem; font-family:var(--font-sans, sans-serif);
+    transition:border-color 200ms; }
+  .quiz .option:hover { border-color:var(--color-brand); }
+  .quiz .option[data-state="right"] { border-color:var(--color-success); }
+  .quiz .option[data-state="wrong"] { border-color:var(--color-error); }
+  .quiz-feedback { display:none; margin-top:14px; padding:14px 18px; background:var(--color-surface);
+    border:1px solid var(--color-border); border-left:2px solid var(--color-success); font-size:0.9rem; max-width:80ch; }
+  .quiz-feedback.open { display:block; }
+
+  ul.sources { font-size:0.82rem; color:var(--color-muted); padding-left:18px; margin:8px 0 0; }
+  ul.sources li { margin:5px 0; }
+  a { color:var(--color-mint); }
+  .back-link, .module-link { color:var(--color-brand); }
+  .fallback-table { display:none; }
+  .no-chart .fallback-table { display:block; overflow-x:auto; }
+  .fallback-table table { border-collapse:collapse; font-family:var(--font-mono, monospace); font-size:12px; width:100%; }
+  .fallback-table th, .fallback-table td { border:1px solid var(--color-border); padding:6px 10px; text-align:right; color:var(--color-text); }
+  .fallback-table th { color:var(--color-muted); font-weight:500; }
+
+  .next-steps { display:flex; gap:12px; flex-wrap:wrap; margin-top:18px; }
+  .next-steps a { display:inline-flex; align-items:center; min-height:44px; padding:10px 22px;
+    border-radius:var(--radius-sm, 2px); border:1.6px solid transparent; font-weight:600; font-size:0.95rem; text-decoration:none;
+    background:linear-gradient(var(--color-surface),var(--color-surface)) padding-box, var(--brand-gradient) border-box;
+    color:var(--color-text); }
+  .next-steps a.plain { background:none; border:1.5px solid var(--color-border-strong); }
+
+  :focus-visible { outline:2px solid var(--color-brand); outline-offset:2px; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration:0.001ms !important; transition-duration:0.001ms !important; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a href="/learning-tools/" class="back-link">← All learning tools</a>
+
+  <header>
+    <div class="eyebrow">FSA · Module 5 companion · Free learning tool</div>
+    <h1>The <span class="fade-accent">minimum payment</span> is working for someone. Not you.</h1>
+    <p class="lede">Every credit card statement offers you a small, reasonable-looking number. Pay it and you stay in good standing — which is exactly what it's designed to do. Set a balance and an APR, pick a payment strategy, and watch what "just the minimum" actually costs. Every number on this page explains itself.</p>
+  </header>
+
+  <!-- ═══ Chart ═══ -->
+  <section class="block" aria-labelledby="chart-h">
+    <h2 id="chart-h">One debt, month by month: watch the balance fall — or not</h2>
+    <p class="section-intro">The dashed red line is your balance if you pay only the issuer minimum. The solid line is your chosen strategy. The space between them is money that stays yours instead of becoming interest — green when your strategy beats the minimum, red if it falls behind.</p>
+    <div class="card">
+      <div class="controls">
+        <span class="lbl" id="bal-lbl">Balance</span>
+        <span class="ctl-val" id="balVal">$3,000</span>
+        <input type="range" id="bal" min="500" max="20000" step="100" value="3000" aria-labelledby="bal-lbl">
+        <span class="lbl" id="apr-lbl">APR</span>
+        <span class="ctl-val" id="aprVal">21.52%</span>
+        <input type="range" id="apr" min="15" max="30" step="0.25" value="21.52" aria-labelledby="apr-lbl" aria-describedby="apr-hint">
+        <span class="hint" id="apr-hint">21.52% = U.S. average APR on credit card accounts assessed interest (Federal Reserve G.19, Q1 2026).</span>
+        <span class="lbl">Strategy</span>
+        <div class="presets" role="group" aria-label="Payment strategy">
+          <button type="button" data-strategy="min" aria-pressed="true">Issuer minimum</button>
+          <button type="button" data-strategy="plus50" aria-pressed="false">Minimum + $50</button>
+          <button type="button" data-strategy="fixed" aria-pressed="false">Fixed amount</button>
+        </div>
+        <div class="amount-wrap" id="fixedWrap">
+          <span class="lbl" id="fixed-lbl">Fixed payment</span>
+          <span class="ctl-val" id="fixedVal">$150</span>
+          <input type="range" id="fixed" min="25" max="1000" step="5" value="150" aria-labelledby="fixed-lbl">
+        </div>
+        <span class="hint">Issuer minimum here = 1% of the balance + that month's interest, with a $25 floor (or the remaining balance if less) — the typical large-issuer formula (CFPB repayment-disclosure rules, Regulation Z Appendix M1; NerdWallet). Exact formulas vary by issuer.</span>
+      </div>
+      <div class="chart-box">
+        <canvas id="chart" role="img" aria-label="Line chart of credit card balance over time. Default scenario: 3,000 dollars at 21.52 percent APR. Paying only the issuer minimum, the balance takes 179 payments — almost 15 years — to reach zero, and the 4,325 dollars of interest paid along the way exceeds the original 3,000 dollar balance. Extra payments bend the curve down sharply."></canvas>
+      </div>
+      <p class="chart-cta">↑ Hover either line to read the exact balance in any month. Click any card below to see where its number comes from.</p>
+      <div class="stall" id="stallMsg" role="status" aria-live="polite"></div>
+      <div class="fallback-table" id="fallbackTable"></div>
+
+      <div class="readouts" id="readouts">
+        <button class="stat" type="button" data-explain="ex-months" aria-expanded="false" aria-controls="ex-months">
+          <div class="k">Months to payoff</div><div class="v" id="stMonths">–</div>
+          <div class="why">How the simulator counts — click</div>
+        </button>
+        <button class="stat" type="button" data-explain="ex-year" aria-expanded="false" aria-controls="ex-year">
+          <div class="k">Debt-free year</div><div class="v" id="stYear">–</div>
+          <div class="why">Where this date comes from — click</div>
+        </button>
+        <button class="stat" type="button" data-explain="ex-interest" aria-expanded="false" aria-controls="ex-interest">
+          <div class="k">Total interest</div><div class="v" id="stInterest">–</div>
+          <div class="why">What you pay for the loan — click</div>
+        </button>
+        <button class="stat" type="button" data-explain="ex-paid" aria-expanded="false" aria-controls="ex-paid">
+          <div class="k">Total paid</div><div class="v" id="stPaid">–</div>
+          <div class="why">Borrowed vs handed back — click</div>
+        </button>
+        <button class="stat" type="button" data-explain="ex-pct" aria-expanded="false" aria-controls="ex-pct">
+          <div class="k">Interest vs original balance</div><div class="v" id="stPct">–</div>
+          <div class="why">The markup on your debt — click</div>
+        </button>
+      </div>
+      <div class="stat-explain" id="ex-months"></div>
+      <div class="stat-explain" id="ex-year"></div>
+      <div class="stat-explain" id="ex-interest"></div>
+      <div class="stat-explain" id="ex-paid"></div>
+      <div class="stat-explain" id="ex-pct"></div>
+    </div>
+  </section>
+
+  <!-- ═══ Strategy comparison ═══ -->
+  <section class="block" aria-labelledby="cmp-h">
+    <h2 id="cmp-h">What an extra $50 actually buys</h2>
+    <p class="section-intro">Same balance, same APR — the only thing that changes is dollars above the minimum. The bars below recompute from your sliders. The first extra dollars are the most powerful ones you will ever put toward this debt, because each one permanently stops its share of the balance from compounding against you.</p>
+    <div class="card">
+      <div class="chart-box" style="height:220px">
+        <canvas id="cmpChart" role="img" aria-label="Bar chart of total interest on the default 3,000 dollar balance at 21.52 percent APR: 4,325 dollars paying the issuer minimum only; 1,172 dollars adding 50 per month; 695 dollars adding 100; 392 dollars adding 200. More above the minimum means dramatically less interest."></canvas>
+      </div>
+      <p class="chart-cta" id="cmpNote"></p>
+    </div>
+  </section>
+
+  <!-- ═══ Understand the ideas ═══ -->
+  <section class="block" aria-labelledby="learn-h">
+    <h2 id="learn-h">Understand the ideas behind the chart</h2>
+    <p class="section-intro">Five concepts explain everything you just saw. Open each one.</p>
+
+    <details class="learn">
+      <summary>What APR really means, month by month</summary>
+      <div class="body">APR is a yearly rate, but cards charge you monthly: each month costs roughly <strong>APR ÷ 12</strong> of whatever you owe. At the Q1 2026 U.S. average of <span class="num">21.52%</span> (Fed G.19), that's about <span class="num">1.79% per month</span> — <span class="num">$53.80</span> on a $3,000 balance in the first month alone. The balance doesn't feel expensive because the meter runs in small monthly ticks. Add the ticks up — the "Total interest" card above does — and the price appears.</div>
+    </details>
+    <details class="learn">
+      <summary>How the minimum is set — and why it's set low</summary>
+      <div class="body">A typical large-issuer minimum is <strong>1% of the balance plus that month's interest</strong>, with a floor around $25 (CFPB Regulation Z repayment-disclosure rules; NerdWallet's issuer survey — formulas vary). Read that formula slowly: the interest part just covers the issuer's monthly charge, and the 1% part shrinks your debt by one cent on the dollar. It's calibrated to keep your account <em>current</em> — and to keep the balance alive as long as possible, because the balance is what earns the issuer interest. "In good standing" and "making progress" are two different things, and the minimum is engineered to give you the first without the second.</div>
+    </details>
+    <details class="learn">
+      <summary>Compounding, working against you</summary>
+      <div class="body">You've probably seen compound growth praised as the engine of investing. A credit card balance is the same engine in reverse: any interest you don't pay off joins the balance, and next month you pay interest <strong>on the interest</strong>. The mirror is exact — the same math that doubles savings can double a debt. That's why the "Interest vs original balance" card can pass <span class="num">100%</span>: given enough time at card rates, the borrowing cost outgrows the thing you bought.</div>
+    </details>
+    <details class="learn">
+      <summary>The warning box already on your statement</summary>
+      <div class="body">Federal law (CFPB Regulation Z, the "minimum payment warning") requires your statement to disclose how long minimum-only payoff takes, what it costs in total, and the monthly amount that would clear the debt in <strong>3 years</strong>. It's usually a small table near the top of the statement. Most people never read it — but it's the issuer telling you, in regulator-mandated print, exactly what this page just showed you. Find it on your next statement and compare it to the simulator.</div>
+    </details>
+    <details class="learn">
+      <summary>Avalanche vs snowball, in one line</summary>
+      <div class="body">With several debts, <strong>avalanche</strong> (highest APR first) minimizes total interest, while <strong>snowball</strong> (smallest balance first) maximizes early wins — the math favors avalanche, follow-through favors whichever you'll actually stick to. To run your own list of debts, use the <a href="/calculators/debt-payoff-calculator.html">Debt Payoff Calculator</a>.</div>
+    </details>
+  </section>
+
+  <!-- ═══ Check your understanding ═══ -->
+  <section class="block quiz" aria-labelledby="quiz-h">
+    <h2 id="quiz-h">Check your understanding</h2>
+    <p class="section-intro">You have $3,000 on a card at 21.5% APR and a spare $100 every month. Which builds wealth faster?</p>
+    <div class="card">
+      <button class="option" type="button" data-q="a">A — Put the $100 toward the card each month, on top of the minimum</button>
+      <button class="option" type="button" data-q="b">B — Pay the minimum and put the $100/month in a savings account earning 4.15%</button>
+      <div class="quiz-feedback" id="quizFeedback"></div>
+    </div>
+  </section>
+
+  <!-- ═══ Continue ═══ -->
+  <section class="block" aria-labelledby="next-h">
+    <h2 id="next-h">Continue the path</h2>
+    <div class="next-steps">
+      <a href="/modules/debt-strategy.html">Module 5: Debt Strategy</a>
+      <a class="plain" href="/calculators/debt-payoff-calculator.html">Plan your payoff order</a>
+      <a class="plain" href="/learning-tools/">All learning tools</a>
+    </div>
+  </section>
+
+  <!-- ═══ Method & sources ═══ -->
+  <section class="block" aria-labelledby="method-h">
+    <h2 id="method-h">Method, honesty notes &amp; sources</h2>
+    <details class="learn">
+      <summary>What this models — and what it doesn't</summary>
+      <div class="body">The simulator replays a single card, month by month: interest = balance × (APR ÷ 12), then your payment, then the new balance — capped at 50 years. It assumes a <strong>fixed APR, no new purchases, and no fees</strong> (no annual, late, or over-limit fees), all of which makes real minimum-only payoff <em>look better here than it usually is</em>. The minimum formula (1% of balance + interest, $25 floor) is the typical large-issuer version, not universal — some issuers use 2% of the balance, or interest + fees + 1% — so treat the output as the shape of the problem, not a quote. If you set a fixed payment below the real issuer minimum, the math still runs, but in real life that means late fees, penalty APRs, and credit damage on top of what you see. The Fed's 21.52% is an average across accounts assessed interest; your card's APR is on your statement. This page is education about how minimum payments work — not financial advice, and not a personalized debt recommendation.</div>
+    </details>
+    <details class="learn">
+      <summary>Sources (every figure dated)</summary>
+      <div class="body">
+        <ul class="sources">
+          <li>Average APR on credit card accounts assessed interest, 21.52% (Q1 2026): <a href="https://www.federalreserve.gov/releases/g19/">Federal Reserve G.19, Consumer Credit</a> (retrieved July 2026).</li>
+          <li>Minimum-payment repayment disclosures, including the statement warning and 3-year payoff amount: <a href="https://www.consumerfinance.gov/rules-policy/regulations/1026/m1/">CFPB Regulation Z, Appendix M1</a>.</li>
+          <li>Typical issuer minimum-payment formulas (1% + interest and variants): <a href="https://www.nerdwallet.com/credit-cards/learn/credit-card-issuer-minimum-payment">NerdWallet, "How Credit Card Issuers Calculate Minimum Payments"</a> (retrieved July 2026). Formulas vary by issuer; this page uses the 1%-plus-interest version and labels it typical, not universal.</li>
+          <li>Quiz savings rate (4.15% APY): illustrative of competitive high-yield savings accounts as of mid-2026 — an assumption of the exercise, not a quote or recommendation.</li>
+          <li>Payoff dates assume the first payment lands next month from a July 2026 baseline. All other numbers on this page are computed live from your slider inputs by the formulas above. Figures are static baselines, last checked July 2026 — they do not auto-update.</li>
+        </ul>
+      </div>
+    </details>
+  </section>
+
+</div>
+
+<!-- FSA Analytics & Email Capture -->
+<div style="margin: 2rem auto; max-width: 900px; padding: 0 1.5rem;">
+  <div data-fsa-email-capture="page-footer" data-title="📬 Level Up Your Finances" data-subtitle="Weekly money tips and financial strategies. No spam, ever."></div>
+</div>
+<script src="/js/analytics.js" defer></script>
+<script src="/js/email-capture.js" defer></script>
+
+<footer class="legal-footer">© 2026 The Sovereign Academy · Educational content only · Not financial advice</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+var _vizStarted = false;
+function initViz() {
+  if (_vizStarted) return;
+  _vizStarted = true;
+
+  // ── Model ─────────────────────────────────────────────────────────────
+  // Issuer minimum: 1% of balance + that month's interest, $25 floor,
+  // or the full remaining balance (with interest) if that's less.
+  // Typical large-issuer formula per CFPB Reg Z disclosures & NerdWallet; varies by issuer.
+  // Desk check (defaults $3,000 @ 21.52% APR), verified against a node run:
+  //   m1: interest $53.80, min payment $83.80, new balance $2,970.00
+  //   m2: interest $53.26, min payment $82.96, new balance $2,940.30
+  //   m3: interest $52.73, min payment $82.13, new balance $2,910.90
+  //   → minimum-only payoff: 179 months (14.9 yr), $4,325 total interest (144% of principal).
+  var CAP_MONTHS = 600;            // 50-year simulation cap
+  var START_YEAR = 2026, START_MONTH_IDX = 6; // July 2026 baseline; first payment next month
+
+  function issuerMin(b, r) {
+    var interest = b * r;
+    return Math.min(Math.max(25, 0.01 * b + interest), b + interest);
+  }
+  // mode: "min" | "plus" (min + amt extra) | "fixed" (flat amt)
+  function simulate(b0, apr, mode, amt) {
+    var r = apr / 100 / 12;
+    var b = b0, months = 0, ti = 0, tp = 0, balances = [b0], stalled = false;
+    while (b > 0.005 && months < CAP_MONTHS) {
+      var interest = b * r;
+      var pay = mode === "min" ? issuerMin(b, r)
+              : mode === "plus" ? Math.min(issuerMin(b, r) + amt, b + interest)
+              : Math.min(amt, b + interest);
+      if (pay <= interest + 0.005) { stalled = true; break; } // balance never falls
+      ti += interest; tp += pay;
+      b = b + interest - pay;
+      if (b < 0.005) b = 0;
+      months++;
+      balances.push(b);
+    }
+    return { months: months, interest: ti, paid: tp, balances: balances,
+             stalled: stalled, capped: !stalled && b > 0.005 };
+  }
+
+  function fmt(n){ return "$" + Math.round(n).toLocaleString("en-US"); }
+  function fmtC(n){ return "$" + n.toFixed(2); }
+  function yrs(m){ return (m / 12).toFixed(1); }
+  function payoffYear(months){ return START_YEAR + Math.floor((START_MONTH_IDX + months) / 12); }
+
+  // ── Theme tokens ──────────────────────────────────────────────────────
+  var css = getComputedStyle(document.documentElement);
+  function tok(n,f){ var v = css.getPropertyValue(n).trim(); return v || f; }
+  var cBrand = tok("--color-brand","#10B981"), cError = tok("--color-error","#F87171"),
+      cMuted = tok("--color-muted","#A7ABB3"), cBorder = tok("--color-border","#2C2F36"),
+      mono = "'JetBrains Mono', monospace";
+  var reduced = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+
+  // ── State ─────────────────────────────────────────────────────────────
+  var strategy = "min"; // "min" | "plus50" | "fixed"
+  function currentInputs() {
+    return {
+      bal: parseFloat(document.getElementById("bal").value),
+      apr: parseFloat(document.getElementById("apr").value),
+      fixed: parseFloat(document.getElementById("fixed").value)
+    };
+  }
+  function simChosen(inp) {
+    if (strategy === "plus50") return simulate(inp.bal, inp.apr, "plus", 50);
+    if (strategy === "fixed")  return simulate(inp.bal, inp.apr, "fixed", inp.fixed);
+    return simulate(inp.bal, inp.apr, "min", 0);
+  }
+
+  // ── Charts ────────────────────────────────────────────────────────────
+  var chart = null, cmpChart = null;
+  var GREEN_FILL = "rgba(52, 211, 153, 0.16)", RED_FILL = "rgba(248, 113, 113, 0.20)";
+  var EXTRAS = [0, 50, 100, 200];
+  var CMP_LABELS = ["Minimum only", "Min + $50/mo", "Min + $100/mo", "Min + $200/mo"];
+
+  if (window.Chart) {
+    chart = new Chart(document.getElementById("chart"), {
+      type: "line",
+      data: { labels: [], datasets: [
+        { label:"Your strategy", data:[], borderColor:cBrand, backgroundColor:cBrand,
+          borderWidth:2.5, pointRadius:0, pointHoverRadius:5, tension:0.15,
+          fill:{ target:1, below:GREEN_FILL, above:RED_FILL } },
+        { label:"Minimum only (baseline)", data:[], borderColor:cError,
+          backgroundColor:cError, borderDash:[7,5], borderWidth:2.5, pointRadius:0, pointHoverRadius:5, tension:0.15 }
+      ]},
+      options: {
+        responsive:true, maintainAspectRatio:false,
+        animation: reduced ? false : { duration:300 },
+        interaction:{ mode:"index", intersect:false },
+        plugins: {
+          legend:{ onClick:null, labels:{ color:cMuted, font:{ family:mono, size:11 }, usePointStyle:true } },
+          tooltip:{ callbacks:{
+            title:function(items){
+              var m = items[0].dataIndex;
+              return m === 0 ? "Start" : "Month " + m + " (year " + Math.ceil(m/12) + ")";
+            },
+            label:function(c){ return c.dataset.label + ": " + fmt(c.parsed.y) + " still owed"; }
+          } }
+        },
+        scales: {
+          x:{ ticks:{ color:cMuted, font:{ family:mono, size:11 }, autoSkip:false, maxRotation:0,
+              callback:function(v,i){
+                var len = chart.data.labels.length;
+                var step = len > 360 ? 60 : len > 180 ? 24 : 12;
+                return i === 0 ? "Start" : (i % step === 0 ? "Yr " + (i/12) : "");
+              } }, grid:{ color:cBorder } },
+          y:{ beginAtZero:true, ticks:{ color:cMuted, font:{ family:mono, size:11 },
+              callback:function(v){ return fmt(v); } }, grid:{ color:cBorder } }
+        }
+      }
+    });
+    cmpChart = new Chart(document.getElementById("cmpChart"), {
+      type: "bar",
+      data: { labels: CMP_LABELS, datasets: [
+        { label:"Total interest", data:[], backgroundColor:[], borderRadius:2, maxBarThickness:64 }
+      ]},
+      options: {
+        responsive:true, maintainAspectRatio:false,
+        animation: reduced ? false : { duration:300 },
+        plugins: {
+          legend:{ display:false },
+          title:{ display:true, text:"Total interest paid, same debt, four payment levels", align:"start",
+            color:cMuted, font:{ family:mono, size:11, weight:"normal" }, padding:{ bottom:8 } },
+          tooltip:{ callbacks:{
+            label:function(c){ return fmt(c.parsed.y) + " interest"; },
+            footer:function(items){
+              var s = items[0].chart._simResults && items[0].chart._simResults[items[0].dataIndex];
+              if (!s) return "";
+              return s.stalled ? "Balance never falls at this payment"
+                   : (s.capped ? "Still unpaid at the 50-year cap" : "Paid off in " + s.months + " mo (" + yrs(s.months) + " yr)");
+            }
+          } }
+        },
+        scales: {
+          x:{ ticks:{ color:cMuted, font:{ family:mono, size:10 } }, grid:{ display:false } },
+          y:{ beginAtZero:true, ticks:{ color:cMuted, font:{ family:mono, size:10 },
+              callback:function(v){ return fmt(v); } }, grid:{ color:cBorder }, border:{ display:false } }
+        }
+      }
+    });
+  } else {
+    document.body.classList.add("no-chart");
+  }
+
+  // ── Fallback table (chart CDN unreachable) ────────────────────────────
+  function renderFallbackTable(inp, sC, sB, cmp) {
+    if (chart) return;
+    var maxLen = Math.max(sC.balances.length, sB.balances.length);
+    var h = "<table><caption style='text-align:left;color:var(--color-muted);padding-bottom:8px'>Chart could not load — same numbers as a table (" +
+      fmt(inp.bal) + " at " + inp.apr.toFixed(2) + "% APR; yearly snapshots).</caption>" +
+      "<tr><th>Year of payoff</th><th>Your strategy: still owed</th><th>Minimum only: still owed</th></tr>";
+    for (var m = 0; m < maxLen; m += 12) {
+      var vC = sC.stalled ? "never falls" : (m < sC.balances.length ? fmt(sC.balances[m]) : "$0");
+      var vB = m < sB.balances.length ? fmt(sB.balances[m]) : "$0";
+      h += "<tr><td>" + (m === 0 ? "Start" : "Yr " + (m/12)) + "</td><td>" + vC + "</td><td>" + vB + "</td></tr>";
+    }
+    h += "</table><table style='margin-top:14px'><tr><th>Strategy</th><th>Months</th><th>Total interest</th></tr>";
+    cmp.forEach(function (s, i) {
+      h += "<tr><td style='text-align:left'>" + CMP_LABELS[i] + "</td><td>" +
+        (s.stalled ? "never" : (s.capped ? "600+ (cap)" : s.months)) + "</td><td>" +
+        (s.stalled ? "grows forever" : (s.capped ? "≥" : "") + fmt(s.interest)) + "</td></tr>";
+    });
+    document.getElementById("fallbackTable").innerHTML = h + "</table>";
+  }
+
+  // ── Update ────────────────────────────────────────────────────────────
+  function update() {
+    var inp = currentInputs();
+    var r = inp.apr / 100 / 12;
+    document.getElementById("balVal").textContent = fmt(inp.bal);
+    document.getElementById("aprVal").textContent = inp.apr.toFixed(2) + "%";
+    document.getElementById("fixedVal").textContent = fmt(inp.fixed);
+    document.querySelectorAll(".presets button[data-strategy]").forEach(function (b) {
+      b.setAttribute("aria-pressed", String(b.dataset.strategy === strategy));
+    });
+    var fw = document.getElementById("fixedWrap");
+    fw.classList.toggle("show", strategy === "fixed");
+
+    var sC = simChosen(inp);
+    var sB = simulate(inp.bal, inp.apr, "min", 0);
+    var cmp = EXTRAS.map(function (e) { return simulate(inp.bal, inp.apr, "plus", e); });
+
+    // Month-1 arithmetic for the explainers
+    var int1 = inp.bal * r;
+    var pay1 = strategy === "fixed" ? Math.min(inp.fixed, inp.bal + int1)
+             : issuerMin(inp.bal, r) + (strategy === "plus50" ? 50 : 0);
+    var prin1 = pay1 - int1;
+
+    // Stall message ("brutal but true")
+    var stall = document.getElementById("stallMsg");
+    if (sC.stalled) {
+      stall.innerHTML = "<h3>At this payment, the balance never falls</h3><p>Your payment (" + fmt(pay1) +
+        ") doesn't cover even the first month's interest (" + fmtC(int1) + " on " + fmt(inp.bal) +
+        " at " + inp.apr.toFixed(2) + "% APR). The shortfall joins the balance, next month's interest is bigger, and the debt grows forever. " +
+        "This is exactly the bar the issuer-minimum formula is built to clear — by 1% of the balance, no more. " +
+        "In real life, paying below the issuer minimum also brings late fees, penalty APRs, and credit damage, which are not modeled here.</p>";
+      stall.classList.add("open");
+    } else {
+      stall.classList.remove("open");
+      stall.innerHTML = "";
+    }
+
+    // Main chart: chosen vs minimum-only, padded to a common length
+    if (chart) {
+      var chosenSeries = sC.balances.slice();
+      var maxLen;
+      if (sC.stalled) {
+        // Balance grows: replay the shortfall so the line rises honestly.
+        maxLen = Math.min(sB.balances.length, 121); // show up to 10 years of growth
+        chosenSeries = [inp.bal];
+        var gb = inp.bal;
+        for (var m = 1; m < maxLen; m++) {
+          gb = gb + gb * r - Math.min(pay1, gb + gb * r);
+          chosenSeries.push(gb);
+        }
+      } else {
+        maxLen = Math.max(sC.balances.length, sB.balances.length);
+        while (chosenSeries.length < maxLen) chosenSeries.push(0);
+      }
+      var baseSeries = sB.balances.slice(0, maxLen);
+      while (baseSeries.length < maxLen) baseSeries.push(0);
+      var labels = [];
+      for (var i = 0; i < maxLen; i++) labels.push(i);
+      chart.data.labels = labels;
+      chart.data.datasets[0].data = chosenSeries;
+      chart.data.datasets[1].data = baseSeries;
+      chart.update();
+
+      cmpChart.data.datasets[0].data = cmp.map(function (s) { return Math.round(s.interest); });
+      cmpChart.data.datasets[0].backgroundColor = cmp.map(function (s, i) { return i === 0 ? cError : cBrand; });
+      cmpChart._simResults = cmp;
+      cmpChart.update();
+    }
+
+    // Stat cards
+    var el = function (id) { return document.getElementById(id); };
+    if (sC.stalled) {
+      el("stMonths").textContent = "Never";
+      el("stYear").textContent = "—";
+      el("stInterest").textContent = "Grows forever";
+      el("stPaid").textContent = "—";
+      el("stPct").textContent = "—";
+      el("stMonths").className = "v neg"; el("stInterest").className = "v neg"; el("stPct").className = "v";
+    } else {
+      var capPrefix = sC.capped ? "≥" : "";
+      el("stMonths").textContent = (sC.capped ? "600+" : sC.months) + " mo (" + (sC.capped ? "50+" : yrs(sC.months)) + " yr)";
+      el("stYear").textContent = sC.capped ? "after 2076" : String(payoffYear(sC.months));
+      el("stInterest").textContent = capPrefix + fmt(sC.interest);
+      el("stPaid").textContent = capPrefix + fmt(sC.paid);
+      var pct = 100 * sC.interest / inp.bal;
+      el("stPct").textContent = capPrefix + Math.round(pct) + "%";
+      el("stMonths").className = "v";
+      el("stInterest").className = "v";
+      el("stPct").className = "v " + (pct >= 100 ? "neg" : "");
+    }
+
+    // Explainers — every number here is recomputed from your inputs
+    el("ex-months").innerHTML = sC.stalled
+      ? "The simulator replays your card month by month: interest = balance × (APR ÷ 12), then your payment. Here month one charges <span class='num'>" +
+        fmtC(int1) + "</span> of interest and your payment is <span class='num'>" + fmt(pay1) +
+        "</span> — the payment never gets past the interest, so the count never ends. Raise the payment until it clears the interest and the clock starts."
+      : "The simulator replays your card month by month. Each month: interest = balance × (APR ÷ 12) — at your settings, month one charges <span class='num'>" +
+        fmtC(int1) + "</span> on <span class='num'>" + fmt(inp.bal) + "</span>. Your payment (<span class='num'>" + fmtC(pay1) +
+        "</span> in month one) first covers that interest; only the remaining <span class='num'>" + fmtC(prin1) +
+        "</span> actually shrinks the debt. \"Months to payoff\" is simply how many repeats until the balance reaches zero" +
+        (sC.capped ? " — which hasn't happened by the 50-year simulation cap." : ".");
+    el("ex-year").innerHTML = sC.stalled
+      ? "There is no debt-free date at this payment — the balance rises instead of falling."
+      : "Calendar arithmetic, nothing more: this page's baseline month is July 2026, the first payment lands in August 2026, and " +
+        (sC.capped ? "the balance is still alive when the simulation stops in 2076." :
+        "<span class='num'>" + sC.months + "</span> monthly payments later the balance hits zero in <span class='num'>" +
+        payoffYear(sC.months) + "</span>. Nothing is forecast — it's today's date plus the simulated months.");
+    el("ex-interest").innerHTML = "The sum of every month's balance × (APR ÷ 12) across the whole payoff — each month's charge added up, nothing else. No fees or new purchases are modeled (real cards usually add both). Every dollar in this number bought you nothing: it is purely the price of carrying the balance over time.";
+    el("ex-paid").innerHTML = sC.stalled
+      ? "Open-ended: payments continue forever and the balance still grows, so there is no final total."
+      : "Original balance + total interest: you borrowed <span class='num'>" + fmt(inp.bal) +
+        "</span> and hand back <span class='num'>" + (sC.capped ? "at least " : "") + fmt(sC.paid) +
+        "</span>. The difference is the interest card to the left.";
+    el("ex-pct").innerHTML = sC.stalled
+      ? "Undefined here — interest accrues forever, so the ratio grows without limit."
+      : "Total interest ÷ original balance: <span class='num'>" + fmt(sC.interest) + " ÷ " + fmt(inp.bal) + " = " +
+        Math.round(100 * sC.interest / inp.bal) + "%</span>. Think of it as the markup on everything the balance originally bought. Past <span class='num'>100%</span>, the borrowing cost more than the purchases themselves.";
+
+    // Comparison note under the bar chart (computed from your sliders)
+    var note = document.getElementById("cmpNote");
+    if (!cmp[0].stalled && !cmp[1].stalled) {
+      var saved50 = cmp[0].interest - cmp[1].interest;
+      var faster50 = cmp[0].months - cmp[1].months;
+      note.textContent = "At your settings, $50/mo above the minimum " +
+        (cmp[0].capped ? "avoids at least " : "avoids ") + fmt(saved50) + " of interest and reaches zero " +
+        (cmp[0].capped ? "instead of never getting there within 50 years." : faster50 + " months sooner (" + yrs(faster50) + " years of payments that no longer exist).");
+    } else {
+      note.textContent = "";
+    }
+
+    renderFallbackTable(inp, sC, sB, cmp);
+  }
+
+  // ── Listeners ─────────────────────────────────────────────────────────
+  ["bal", "apr", "fixed"].forEach(function (id) {
+    document.getElementById(id).addEventListener("input", update);
+  });
+  document.querySelectorAll(".presets button[data-strategy]").forEach(function (b) {
+    b.addEventListener("click", function () { strategy = b.dataset.strategy; update(); });
+  });
+
+  document.getElementById("readouts").addEventListener("click", function (e) {
+    var btn = e.target.closest("button.stat"); if (!btn) return;
+    var id = btn.dataset.explain, panel = document.getElementById(id);
+    var isOpen = panel.classList.contains("open");
+    document.querySelectorAll(".stat-explain").forEach(function (p) { p.classList.remove("open"); });
+    document.querySelectorAll("button.stat").forEach(function (b) { b.setAttribute("aria-expanded","false"); });
+    if (!isOpen) {
+      panel.classList.add("open");
+      btn.setAttribute("aria-expanded","true");
+      if (panel.scrollIntoView) panel.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "nearest" });
+    }
+  });
+
+  // Quiz — every number computed live from the stated scenario:
+  // $3,000 at 21.5% APR, $100/mo spare, HYSA at 4.15% APY (illustrative).
+  document.querySelectorAll(".quiz .option").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var right = b.dataset.q === "a";
+      document.querySelectorAll(".quiz .option").forEach(function (o) {
+        o.dataset.state = (o.dataset.q === "a") ? "right" : "wrong";
+      });
+      var QB = 3000, QAPR = 21.5, QEXTRA = 100, QHYSA = 4.15;
+      var A = simulate(QB, QAPR, "plus", QEXTRA);
+      var BFull = simulate(QB, QAPR, "min", 0);
+      // Replay B's first A.months months: card interest paid, balance left, HYSA value.
+      var rB = QAPR / 100 / 12, hr = QHYSA / 100 / 12;
+      var bB = QB, tiB = 0, hysa = 0;
+      for (var m = 0; m < A.months; m++) {
+        var i2 = bB * rB;
+        tiB += i2;
+        bB = bB + i2 - issuerMin(bB, rB);
+        hysa = (hysa + QEXTRA) * (1 + hr);
+      }
+      var earned = hysa - QEXTRA * A.months;
+      var fb = document.getElementById("quizFeedback");
+      fb.innerHTML = (right ? "<strong>Right.</strong> " : "<strong>It's A — here's why.</strong> ") +
+        "The extra $100 clears the card in <span class='num'>" + A.months + " months</span> with <span class='num'>" +
+        fmt(A.interest) + "</span> of lifetime interest. The savings route keeps the debt alive: over those same " +
+        A.months + " months you'd pay <span class='num'>" + fmt(tiB) + "</span> in card interest, earn just <span class='num'>" +
+        fmt(earned) + "</span> in the HYSA, and still owe <span class='num'>" + fmt(bB) +
+        "</span> (minimum-only payoff runs <span class='num'>" + BFull.months + " months</span> and <span class='num'>" +
+        fmt(BFull.interest) + "</span> of interest in total). Paying down a 21.5% debt is a guaranteed, tax-free 21.5% return; " +
+        "saving at 4.15% while carrying it loses the ~17-point spread on every dollar, every year. " +
+        "Once the card is gone, the whole payment is free to become real savings — an emergency fund matters, but it's built fastest debt-free.";
+      fb.classList.add("open");
+    });
+  });
+
+  update();
+}
+// Start now if Chart.js arrived from the primary CDN; otherwise try a backup CDN,
+// and if that fails too, initViz still runs and shows the built-in data table.
+if (window.Chart) {
+  initViz();
+} else {
+  var _s = document.createElement("script");
+  _s.src = "https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js";
+  _s.onload = initViz;
+  _s.onerror = initViz;
+  document.head.appendChild(_s);
+  setTimeout(initViz, 4000);
+}
+</script>
+</body>
+</html>
