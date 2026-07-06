@@ -551,7 +551,9 @@
     }
 
     function weekHref(weekNumber) {
-        return isHubPage ? 'semana-' + weekNumber + '/' : '../semana-' + weekNumber + '/';
+        // Absolute FSA-local path: relative paths break because Vercel serves
+        // these pages without a trailing slash ("trailingSlash": false).
+        return '/programa-colombia/semana-' + weekNumber + '/';
     }
 
     function renderHubProgress(state) {
@@ -594,7 +596,7 @@
                 </div>
             </div>
             <div class="colombia-progress-actions">
-                <a href="${stats.allCompleted ? 'semana-10/' : 'semana-' + nextWeek + '/'}" class="btn-p">${stats.allCompleted ? 'Revisar la Semana 10' : (getWeekState(state, nextWeek).visited ? 'Continuar con la Semana ' + nextWeek : 'Empezar la Semana ' + nextWeek)}</a>
+                <a href="${stats.allCompleted ? weekHref(10) : weekHref(nextWeek)}" class="btn-p">${stats.allCompleted ? 'Revisar la Semana 10' : (getWeekState(state, nextWeek).visited ? 'Continuar con la Semana ' + nextWeek : 'Empezar la Semana ' + nextWeek)}</a>
             </div>
         `;
 
@@ -683,7 +685,7 @@
 
         if (primaryGhostButton) {
             if (stats.allCompleted) {
-                primaryGhostButton.href = '../';
+                primaryGhostButton.href = '/programa-colombia/';
                 primaryGhostButton.textContent = 'Repetir una semana clave';
             } else if (stats.nextWeek) {
                 primaryGhostButton.href = weekHref(stats.nextWeek);
