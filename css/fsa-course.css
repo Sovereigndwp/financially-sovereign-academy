@@ -264,3 +264,146 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* ============================================================================
+   LAYER 6 — DENSITY NORMALIZATION (scoped; MUST remain the last block).
+   Retighten migrated modules to the homepage editorial scale (16px / 1.6,
+   840px column = homepage --maxw). Shared, `.fsa-course`-scoped; overrides each
+   module's inline base sizing by specificity (`.fsa-course .x` (0,2,0) beats the
+   module's own `.x` (0,1,0); `.fsa-course` (0,1,0) beats bare `main`). No module
+   HTML/JS edits; no worksheet/print rules; no colour/gradient/button-fill changes.
+   Accessibility: Layer-3 button `min-height:44px` is untouched (tap targets stay
+   >=44px); calculator inputs (.form-input/.form-group) are NOT tightened.
+   Covers the repeated legacy card/heading/spacing selectors the first pass missed
+   (.outcome, .scenario-*, quiz-*, the build/bank/mindset/consolidation/myth
+   accordion families, result boxes, comparison tables). Single-module additions
+   (.insurance-card, .method-name, .stage-title, .cta-title) are grouped in, not
+   hacked per-module. See the report for the full selector audit.
+   ============================================================================ */
+
+/* Wider desktop workspace column (was a narrow 840; chosen 960 = calmer reading
+   margin than 1080 while still giving 2-3 column card grids). Reading text is
+   capped separately below so prose never stretches. */
+.fsa-course {
+  font-size: 16px;
+  line-height: 1.6;
+  max-width: 960px;
+  padding: 1.5rem 1.25rem;
+}
+
+/* Header + section rhythm — kills the big vertical gaps / excess scroll */
+.fsa-course .module-header { padding: 1.25rem; margin-bottom: 1.5rem; }
+.fsa-course .section { margin-bottom: 1.5rem; }
+.fsa-course .section-title { font-size: 1.4rem; margin-bottom: 0.85rem; padding-bottom: 0.3rem; }
+
+/* Repeated legacy CARD / CONTAINER surfaces (were 2rem / 1.5rem) -> ~1rem-1.15rem */
+.fsa-course .content-block,
+.fsa-course .calculator,
+.fsa-course .scenario,
+.fsa-course .scenario-container,
+.fsa-course .quiz,
+.fsa-course .outcome,
+.fsa-course .result-display,
+.fsa-course .scenario-choice,
+.fsa-course .result-box,
+.fsa-course .insurance-card {
+  padding: 1rem 1.15rem;
+}
+.fsa-course .content-block,
+.fsa-course .calculator,
+.fsa-course .scenario,
+.fsa-course .scenario-container,
+.fsa-course .quiz,
+.fsa-course .outcome,
+.fsa-course .result-display { margin-top: 1.25rem; margin-bottom: 1.25rem; }
+
+/* Accordion families (build / bank / mindset / consolidation / myth) — same pattern */
+.fsa-course .build-header, .fsa-course .bank-header, .fsa-course .mindset-header,
+.fsa-course .consolidation-header, .fsa-course .myth-header,
+.fsa-course .build-content, .fsa-course .bank-content, .fsa-course .mindset-content,
+.fsa-course .consolidation-content, .fsa-course .myth-content { padding: 0.9rem 1.1rem; }
+.fsa-course .build-item, .fsa-course .bank-item, .fsa-course .mindset-item,
+.fsa-course .consolidation-item, .fsa-course .myth-item { margin-bottom: 0.75rem; }
+
+/* Card body text ~0.95-1rem, tighter leading + inner margins */
+.fsa-course .content-block { line-height: 1.55; }
+.fsa-course .content-block p,
+.fsa-course .content-block li,
+.fsa-course .scenario-text { font-size: 0.98rem; line-height: 1.5; margin-bottom: 0.6rem; }
+.fsa-course .content-block ul,
+.fsa-course .content-block ol { margin-bottom: 0.6rem; }
+
+/* Card headings ~1-1.1rem (major section titles handled above) */
+.fsa-course .content-block h3,
+.fsa-course .build-header h3, .fsa-course .bank-header h3,
+.fsa-course .mindset-header h3, .fsa-course .consolidation-header h3,
+.fsa-course .myth-header h3,
+.fsa-course .quiz-question,
+.fsa-course .choice-title,
+.fsa-course .outcome-title,
+.fsa-course .method-name,
+.fsa-course .stage-title { font-size: 1.05rem; margin-bottom: 0.5rem; }
+.fsa-course .cta-title { font-size: 1.35rem; margin-bottom: 0.6rem; }
+
+/* Quiz / scenario option lists — tighter gaps */
+.fsa-course .quiz-options,
+.fsa-course .scenario-choices { gap: 0.6rem; margin-top: 1rem; }
+.fsa-course .quiz-feedback { margin-top: 0.6rem; }
+
+/* Comparison tables — tighter cells */
+.fsa-course .comparison-table th,
+.fsa-course .comparison-table td { padding: 0.6rem 0.75rem; }
+
+/* Buttons — less bulky (min-height:44px tap target preserved from Layer 3) */
+.fsa-course .btn,
+.fsa-course .fsa-ws-btn,
+.fsa-course .fsa-plan-save-btn { padding: 0.5rem 1rem; font-size: 0.9rem; }
+
+/* --- DESKTOP LAYOUT: use the wider column; keep reading text a comfortable measure ---
+   Container is 960px (above). All cards are full container width (uniform); only the
+   prose line-length is capped, so text-heavy and tool/grid cards line up. Grids fill
+   the width. Mobile is unaffected (grids are desktop-only; caps are max-widths). */
+
+/* Cards stay FULL container width (uniform with the tool/grid cards). Only the
+   PROSE line-length is capped so text stays readable in the wide column — cap the
+   text, not the card (this fixes the earlier narrow-card inconsistency where some
+   cards looked narrower AND larger than their siblings). */
+.fsa-course .content-block p,
+.fsa-course .content-block li,
+.fsa-course .scenario-text,
+.fsa-course .reflection-question .question-text,
+.fsa-course .build-content p, .fsa-course .bank-content p,
+.fsa-course .mindset-content p, .fsa-course .consolidation-content p,
+.fsa-course .myth-content p { max-width: 72ch; }
+
+/* Escaping card TYPOGRAPHY the first groups missed (local font-size on card
+   headings/body). Headings -> ~1.1rem, body -> ~1rem. Big stat NUMBERS
+   (.result-*, .flow-amount, .method-value, .factor-percentage) and accordion
+   toggle icons are intentionally left large. */
+.fsa-course .reflection-question .question-header,
+.fsa-course .pros h4, .fsa-course .cons h4,
+.fsa-course .scam-title,
+.fsa-course .protection-title,
+.fsa-course .calculator-title { font-size: 1.1rem; margin-bottom: 0.5rem; }
+/* Calculator headings are INLINE-styled (font-size: var(--font-size-2xl)) in 8 of
+   10 modules; an inline size can only be overridden with !important. This is the
+   single, intentional !important in the density pass — it normalizes the last
+   oversized card heading without any module HTML edit. */
+.fsa-course .calculator h3 { font-size: 1.1rem !important; }
+.fsa-course .reflection-question .question-text,
+.fsa-course .cta-feature,
+.fsa-course .cta-description,
+.fsa-course .flow-description { font-size: 1rem; }
+.fsa-course .module-header .subtitle { font-size: 1.05rem; }
+
+/* Keep calculator inputs a comfortable width inside the now-wider card */
+.fsa-course .calculator .form-group { max-width: 480px; }
+
+/* Option / decision lists become responsive grids on desktop; 1 column on mobile.
+   The module card grids (.calculator-results, .insurance-grid, .scam-grid,
+   .priority-grid, .protection-grid, .factors-grid, .result-breakdown) already use
+   auto-fit, so the wider container gives them more columns automatically. */
+@media (min-width: 760px) {
+  .fsa-course .quiz-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+  .fsa-course .scenario-choices { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+}
