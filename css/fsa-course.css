@@ -396,6 +396,24 @@
 .fsa-course .flow-description { font-size: 1rem; }
 .fsa-course .module-header .subtitle { font-size: 1.05rem; }
 
+/* Class-based reflection / narrative cards -> shared serious style: sans, upright,
+   neutral ink. Kills the legacy decorative italic + white/emerald on header + text.
+   NOTE: inline class-less narrative divs (e.g. "Alex's real question...") are NOT
+   reachable here — they carry inline font-style + a literal emoji and need the small
+   HTML cleanup called out in the report. */
+.fsa-course .reflection-question .question-header {
+  font-family: var(--font-sans); font-style: normal;
+  font-size: 1.1rem; color: var(--color-text-strong);
+}
+.fsa-course .reflection-question .question-text {
+  font-family: var(--font-sans); font-style: normal;
+  font-size: 1rem; line-height: 1.55; color: var(--color-text);
+}
+.fsa-course .reflection-question .question-subtitle {
+  font-family: var(--font-sans); font-style: normal;
+  font-size: 0.95rem; color: var(--color-muted);
+}
+
 /* Keep calculator inputs a comfortable width inside the now-wider card */
 .fsa-course .calculator .form-group { max-width: 480px; }
 
