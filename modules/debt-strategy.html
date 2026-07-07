@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../css/fsa-brand.css">
     <link rel="stylesheet" href="../css/interactive-components.css">
     <link rel="stylesheet" href="../css/fsa-viz-kit.css">
+    <link rel="stylesheet" href="../css/fsa-course.css">
     <style>
         :root {
             /* PR4b bridge: neutralize old fsa-theme green background tokens to neutral FSA brand tokens (accents unchanged) */
@@ -21,7 +22,8 @@
         }
 
         /* PR-M3: FSA brand typography */
-        body { font-family: var(--font-body); }
+        /* chrome-parity guard: body uses --font-sans to match shared course chrome; h1,h2 stay serif */
+        body { font-family: var(--font-sans); }
         h1, h2 { font-family: var(--font-serif); }
 
         main {
@@ -41,7 +43,7 @@
 
         .module-header h1 {
             font-size: var(--font-size-4xl);
-            color: var(--fsa-green);
+            color: var(--color-text-strong);
             margin-bottom: 1rem;
         }
 
@@ -51,7 +53,7 @@
 
         .section-title {
             font-size: var(--font-size-3xl);
-            color: var(--fsa-green);
+            color: var(--color-text-strong);
             margin-bottom: 1.5rem;
             border-bottom: 3px solid var(--fsa-border-medium);
             padding-bottom: 0.5rem;
@@ -113,7 +115,7 @@
         .method-name {
             font-size: var(--font-size-xl);
             font-weight: var(--font-weight-bold);
-            color: var(--fsa-green);
+            color: var(--color-text-strong);
             margin-bottom: 1rem;
         }
 
@@ -230,7 +232,7 @@
         }
 
         .consolidation-header h3 {
-            color: var(--fsa-green);
+            color: var(--color-text-strong);
             margin: 0;
             font-size: var(--font-size-lg);
         }
@@ -260,15 +262,16 @@
         .reflection-question {
             margin: 2rem 0;
             padding: 2rem;
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(59, 130, 246, 0.05));
-            border-left: 4px solid #3b82f6;
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-left: 3px solid var(--fsa-green, #10b981);
             border-radius: 0.5rem;
         }
 
         .reflection-question .question-header {
             font-size: 1.5rem;
             font-weight: 700;
-            color: #60a5fa;
+            color: var(--color-text-strong);
             margin-bottom: 1rem;
             font-style: italic;
         }
@@ -310,9 +313,9 @@
         <span style="font-size: 1.2rem;">🧮</span>
         <span>Calculators</span>
     </a>
-    <main>
+    <main class="fsa-course">
         <div class="module-header">
-            <h1>Module 5: Debt Strategy</h1>
+            <h1>Module 5: <span class="fsa-signal">Debt Strategy</span></h1>
             <p class="subtitle">Smart strategies to eliminate debt and build wealth</p>
         </div>
 
@@ -368,13 +371,13 @@
             </div>
 
             <!-- Interactive Lab: APR Translator -->
-            <div style="margin: 2rem 0; padding: 1.5rem; background: rgba(16, 185, 129, 0.1); border: 2px solid #10b981; border-radius: 0.75rem;">
-                <p style="color: #10b981; font-weight: 600; margin-bottom: 0.75rem;">📊 Before we talk payoff strategies, understand how APR actually works</p>
+            <div style="margin: 2rem 0; padding: 1.5rem; background: var(--color-surface); border: 1px solid var(--color-border); border-left: 3px solid var(--fsa-green,#10b981); border-radius: 0.75rem;">
+                <p style="color: var(--color-text-strong); font-weight: 600; margin-bottom: 0.75rem;">Before we talk payoff strategies, understand how APR actually works</p>
                 <button
                     onclick="PopupLabs.open('apr-translator')"
-                    style="background: linear-gradient(var(--color-bg), var(--color-bg)) padding-box, var(--brand-gradient) border-box; color: var(--color-text); border: 1.5px solid transparent; padding: 0.875rem 1.5rem; border-radius: 0.5rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease; width: 100%;"
-                    onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 0 22px rgba(16,185,129,0.22)';"
-                    onmouseout="this.style.transform=''; this.style.boxShadow='';">
+                    style="background: transparent; color: var(--fsa-green,#10b981); border: 1.6px solid var(--fsa-green,#10b981); border-radius: 2px; padding: 0.875rem 1.5rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease; width: 100%;"
+                    onmouseover="this.style.background='rgba(16,185,129,0.08)';"
+                    onmouseout="this.style.background='transparent';">
                     APR Translator: Why Interest Snowballs →
                 </button>
                 <p style="font-size: 0.85rem; color: #9ca3af; margin-top: 0.5rem; margin-bottom: 0;">See why "19.99% APR" means your debt compounds every month, not once per year</p>
@@ -429,7 +432,7 @@
             <h2 class="section-title">Debt Payoff Calculator</h2>
             
             <div class="calculator">
-                <h3 style="font-size: var(--font-size-2xl); color: var(--fsa-green); margin-bottom: 1.5rem; text-align: center;">Compare Avalanche vs Snowball</h3>
+                <h3 style="font-size: var(--font-size-2xl); color: var(--color-text-strong); margin-bottom: 1.5rem; text-align: center;">Compare Avalanche vs Snowball</h3>
                 
                 <p style="text-align: center; color: var(--fsa-text-secondary); margin-bottom: 1.5rem;">Enter your debts below (simplified example with 3 debts)</p>
 
@@ -459,7 +462,7 @@
 
                 <button class="btn btn-primary" onclick="compareStrategies()">Compare Strategies</button>
 
-                <div class="comparison-result hidden" id="comparison-result">
+                <div class="comparison-result hidden" id="comparison-result" aria-live="polite" role="status">
                     <div class="method-card" id="avalanche-card">
                         <div class="method-name">🏔️ Avalanche (Highest Interest First)</div>
                         <div class="method-stat">
@@ -489,7 +492,7 @@
             <div class="highlight highlight-success" style="margin-top: 2rem; padding: 1.5rem; background: var(--color-elevated); border: 1px solid rgba(16,185,129,0.35);">
                 <strong style="font-size: 1.1rem; color: var(--fsa-green);">⚖️ Need More Detailed Debt Analysis?</strong>
                 <p style="margin: 0.5rem 0;">Our <strong>Advanced Debt Payoff Calculator</strong> lets you add unlimited debts, see visual payoff timelines, and get personalized recommendations.</p>
-                <a href="../calculators/debt-payoff-calculator.html?from=debt-strategy" style="display: inline-block; margin-top: 0.75rem; padding: 0.75rem 1.5rem; background: linear-gradient(var(--color-bg), var(--color-bg)) padding-box, var(--brand-gradient) border-box; border: 1.5px solid transparent; color: var(--color-text); text-decoration: none; border-radius: var(--radius-md); font-weight: bold; transition: all 0.2s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 0 22px rgba(16,185,129,0.22)';" onmouseout="this.style.transform=''; this.style.boxShadow='';">Try Advanced Calculator →</a>
+                <a href="../calculators/debt-payoff-calculator.html?from=debt-strategy" style="display: inline-block; margin-top: 0.75rem; padding: 0.75rem 1.5rem; background: transparent; border: 1.6px solid var(--fsa-green,#10b981); color: var(--fsa-green,#10b981); text-decoration: none; border-radius: 2px; font-weight: 600; transition: all 0.2s;" onmouseover="this.style.background='rgba(16,185,129,0.08)';" onmouseout="this.style.background='transparent';">Try Advanced Calculator →</a>
             </div>
         </section>
 
