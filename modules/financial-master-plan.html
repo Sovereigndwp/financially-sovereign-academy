@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../css/fsa-brand.css">
     <link rel="stylesheet" href="../css/fsa-viz-kit.css">
     <link rel="stylesheet" href="../css/interactive-components.css">
+    <link rel="stylesheet" href="../css/fsa-course.css">
     <style>
         :root {
             /* PR4b bridge: neutralize old fsa-theme green background tokens to neutral FSA brand tokens (accents unchanged) */
@@ -21,7 +22,8 @@
         }
 
         /* PR-M3: FSA brand typography */
-        body { font-family: var(--font-body); }
+        /* Course-migration chrome parity: body uses sans, headings stay serif */
+        body { font-family: var(--font-sans); }
         h1, h2 { font-family: var(--font-serif); }
 
         main {
@@ -41,7 +43,7 @@
 
         .module-header h1 {
             font-size: var(--font-size-4xl);
-            color: var(--fsa-green);
+            color: var(--color-text-strong);
             margin-bottom: 1rem;
         }
 
@@ -51,7 +53,7 @@
 
         .section-title {
             font-size: var(--font-size-3xl);
-            color: var(--fsa-green);
+            color: var(--color-text-strong);
             margin-bottom: 1.5rem;
             border-bottom: 3px solid var(--fsa-border-medium);
             padding-bottom: 0.5rem;
@@ -67,7 +69,7 @@
         }
 
         .content-block h3 {
-            color: var(--fsa-green-light);
+            color: var(--color-text-strong);
             font-size: var(--font-size-xl);
             margin-bottom: 1rem;
         }
@@ -109,7 +111,7 @@
         .stage-title {
             display: inline-block;
             font-size: var(--font-size-2xl);
-            color: var(--fsa-green);
+            color: var(--color-text-strong);
             font-weight: var(--font-weight-bold);
             vertical-align: middle;
         }
@@ -187,7 +189,7 @@
 
         .cta-title {
             font-size: var(--font-size-3xl);
-            color: var(--fsa-green);
+            color: var(--color-text-strong);
             font-weight: var(--font-weight-bold);
             margin-bottom: 1rem;
         }
@@ -229,7 +231,7 @@
 
         .quiz-question {
             font-size: var(--font-size-xl);
-            color: var(--fsa-green);
+            color: var(--color-text-strong);
             margin-bottom: 1.5rem;
         }
 
@@ -347,18 +349,18 @@
         <span style="font-size: 1.2rem;">🧮</span>
         <span>Calculators</span>
     </a>
-    <main>
+    <main class="fsa-course">
         <div class="module-header">
-            <h1>Module 10: Financial Master Plan</h1>
+            <h1>Module 10: <span class="fsa-signal">Financial Master Plan</span></h1>
             <p class="subtitle">Your complete roadmap to financial sovereignty</p>
         </div>
 
         <div id="fsa-live-banner-10"></div>
 
         <!-- Reflection Question -->
-        <div style="margin: 2rem 0; padding: 2rem; background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(59, 130, 246, 0.05)); border-left: 4px solid #3b82f6; border-radius: 0.5rem;">
-            <div style="font-size: 1.5rem; font-weight: 700; color: #60a5fa; margin-bottom: 1rem; font-style: italic;">
-                🤔 The most important question of all...
+        <div style="margin: 2rem 0; padding: 2rem; background: var(--color-surface); border: 1px solid var(--color-border); border-left: 3px solid var(--fsa-green, #10b981); border-radius: 0.5rem;">
+            <div style="font-size: 1.5rem; font-weight: 700; color: var(--color-text-strong); margin-bottom: 1rem; font-style: italic;">
+                The most important question of all...
             </div>
             <p style="font-size: 1.15rem; line-height: 1.7; color: rgba(255, 255, 255, 0.9); margin-bottom: 0.75rem;">
                 <strong>Am I building wealth or just chasing survival?</strong>
@@ -380,7 +382,7 @@
         <section class="section">
             <h2 class="section-title">Your Assembled Plan</h2>
             <!-- Full Plan Summary — populated from FSAPlan across all modules -->
-            <div id="fsa-full-plan-summary"></div>
+            <div id="fsa-full-plan-summary" aria-live="polite" role="status"></div>
         </section>
 
         <section class="section">
@@ -600,12 +602,12 @@
                 </details>
             </div>
 
-            <div class="highlight highlight-success" style="margin-top: 2rem; padding: 2rem; background: var(--color-elevated); border: 1px solid rgba(16,185,129,0.35); box-shadow: none;">
+            <div class="highlight highlight-success" style="margin-top: 2rem; padding: 2rem; background: var(--color-surface); border: 1px solid var(--color-border); border-left: 3px solid var(--fsa-green, #10b981); box-shadow: none;">
                 <div style="text-align: center;">
-                    <strong style="font-size: 1.4rem; color: var(--fsa-green); display: block; margin-bottom: 1rem;">🎯 Estimate Your Financial Independence Timeline</strong>
+                    <strong style="font-size: 1.4rem; color: var(--color-text-strong); display: block; margin-bottom: 1rem;">Estimate Your Financial Independence Timeline</strong>
                     <p style="margin: 1rem 0; font-size: 1.05rem; line-height: 1.6;">Estimate your financial independence timeline. This interactive calculator uses the 25x rule of thumb to explore how your savings rate, expenses, and assumptions affect the timeline.</p>
                     <p style="margin: 1rem 0; font-size: 0.95rem; color: var(--fsa-text-secondary);">Explore how savings rate, expenses, and assumptions affect the timeline.</p>
-                    <a href="../calculators/financial-freedom-timeline.html?from=financial-master-plan" style="display: inline-block; margin-top: 1rem; padding: 1rem 2.5rem; background: linear-gradient(var(--color-bg), var(--color-bg)) padding-box, var(--brand-gradient) border-box; border: 1.5px solid transparent; color: var(--color-text); text-decoration: none; border-radius: var(--radius-md); font-weight: bold; font-size: 1.1rem; transition: all 0.2s; box-shadow: none;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 0 22px rgba(16,185,129,0.22)';" onmouseout="this.style.transform=''; this.style.boxShadow='none';">Estimate your timeline →</a>
+                    <a href="../calculators/financial-freedom-timeline.html?from=financial-master-plan" style="display: inline-block; margin-top: 1rem; padding: 1rem 2.5rem; background: transparent; border: 1.6px solid var(--fsa-green, #10b981); color: var(--fsa-green, #10b981); text-decoration: none; border-radius: 2px; font-weight: bold; font-size: 1.1rem; transition: all 0.2s; box-shadow: none;" onmouseover="this.style.transform='translateY(-3px)'; this.style.background='rgba(16,185,129,0.08)';" onmouseout="this.style.transform=''; this.style.background='transparent';">Estimate your timeline →</a>
                 </div>
             </div>
         </section>
@@ -621,29 +623,29 @@
 
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin: 2rem 0;">
                 <!-- Big Decision 1: Rent vs Buy -->
-                <div style="padding: 1.5rem; background: rgba(16, 185, 129, 0.1); border: 2px solid #10b981; border-radius: 0.75rem;">
+                <div style="padding: 1.5rem; background: var(--color-surface); border: 1px solid var(--color-border); border-left: 3px solid var(--fsa-green, #10b981); border-radius: 0.75rem;">
                     <div style="font-size: 2rem; margin-bottom: 0.75rem;">🏠</div>
-                    <h4 style="color: #10b981; font-size: 1.25rem; font-weight: 700; margin-bottom: 0.75rem;">Rent vs Buy</h4>
+                    <h4 style="color: var(--color-text-strong); font-size: 1.25rem; font-weight: 700; margin-bottom: 0.75rem;">Rent vs Buy</h4>
                     <p style="margin-bottom: 1rem; font-size: 0.95rem; color: rgba(255, 255, 255, 0.8);">Should you rent or buy? The math might surprise you.</p>
                     <button
                         onclick="PopupLabs.open('big-decision-rent-vs-buy')"
-                        style="background: linear-gradient(var(--color-bg), var(--color-bg)) padding-box, var(--brand-gradient) border-box; color: var(--color-text); border: 1.5px solid transparent; padding: 0.75rem 1.25rem; border-radius: 0.5rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease; width: 100%;"
-                        onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 0 22px rgba(16,185,129,0.22)';"
-                        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                        style="background: transparent; color: var(--fsa-green, #10b981); border: 1.6px solid var(--fsa-green, #10b981); padding: 0.75rem 1.25rem; border-radius: 2px; font-weight: 700; cursor: pointer; transition: all 0.2s ease; width: 100%;"
+                        onmouseover="this.style.transform='translateY(-2px)'; this.style.background='rgba(16,185,129,0.08)';"
+                        onmouseout="this.style.transform='translateY(0)'; this.style.background='transparent';">
                         Run the Numbers →
                     </button>
                 </div>
 
                 <!-- Big Decision 2: Car Cash vs Loan -->
-                <div style="padding: 1.5rem; background: rgba(16, 185, 129, 0.1); border: 2px solid #10b981; border-radius: 0.75rem;">
+                <div style="padding: 1.5rem; background: var(--color-surface); border: 1px solid var(--color-border); border-left: 3px solid var(--fsa-green, #10b981); border-radius: 0.75rem;">
                     <div style="font-size: 2rem; margin-bottom: 0.75rem;">🚗</div>
-                    <h4 style="color: #10b981; font-size: 1.25rem; font-weight: 700; margin-bottom: 0.75rem;">Car: Cash vs Loan</h4>
+                    <h4 style="color: var(--color-text-strong); font-size: 1.25rem; font-weight: 700; margin-bottom: 0.75rem;">Car: Cash vs Loan</h4>
                     <p style="margin-bottom: 1rem; font-size: 0.95rem; color: rgba(255, 255, 255, 0.8);">When does it make sense to finance vs pay cash?</p>
                     <button
                         onclick="PopupLabs.open('big-decision-car-cash-vs-loan')"
-                        style="background: linear-gradient(var(--color-bg), var(--color-bg)) padding-box, var(--brand-gradient) border-box; color: var(--color-text); border: 1.5px solid transparent; padding: 0.75rem 1.25rem; border-radius: 0.5rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease; width: 100%;"
-                        onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 0 22px rgba(16,185,129,0.22)';"
-                        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                        style="background: transparent; color: var(--fsa-green, #10b981); border: 1.6px solid var(--fsa-green, #10b981); padding: 0.75rem 1.25rem; border-radius: 2px; font-weight: 700; cursor: pointer; transition: all 0.2s ease; width: 100%;"
+                        onmouseover="this.style.transform='translateY(-2px)'; this.style.background='rgba(16,185,129,0.08)';"
+                        onmouseout="this.style.transform='translateY(0)'; this.style.background='transparent';">
                         Compare Options →
                     </button>
                 </div>
@@ -663,15 +665,15 @@
                 </div>
 
                 <!-- Big Decision 4: Negotiation Basics -->
-                <div style="padding: 1.5rem; background: rgba(16, 185, 129, 0.1); border: 2px solid #10b981; border-radius: 0.75rem;">
+                <div style="padding: 1.5rem; background: var(--color-surface); border: 1px solid var(--color-border); border-left: 3px solid var(--fsa-green, #10b981); border-radius: 0.75rem;">
                     <div style="font-size: 2rem; margin-bottom: 0.75rem;">💼</div>
-                    <h4 style="color: #10b981; font-size: 1.25rem; font-weight: 700; margin-bottom: 0.75rem;">Negotiation Basics</h4>
+                    <h4 style="color: var(--color-text-strong); font-size: 1.25rem; font-weight: 700; margin-bottom: 0.75rem;">Negotiation Basics</h4>
                     <p style="margin-bottom: 1rem; font-size: 0.95rem; color: rgba(255, 255, 255, 0.8);">Salary, bills, fees—learn when and how to negotiate.</p>
                     <button
                         onclick="PopupLabs.open('big-decision-negotiation-basics')"
-                        style="background: linear-gradient(var(--color-bg), var(--color-bg)) padding-box, var(--brand-gradient) border-box; color: var(--color-text); border: 1.5px solid transparent; padding: 0.75rem 1.25rem; border-radius: 0.5rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease; width: 100%;"
-                        onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 0 22px rgba(16,185,129,0.22)';"
-                        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                        style="background: transparent; color: var(--fsa-green, #10b981); border: 1.6px solid var(--fsa-green, #10b981); padding: 0.75rem 1.25rem; border-radius: 2px; font-weight: 700; cursor: pointer; transition: all 0.2s ease; width: 100%;"
+                        onmouseover="this.style.transform='translateY(-2px)'; this.style.background='rgba(16,185,129,0.08)';"
+                        onmouseout="this.style.transform='translateY(0)'; this.style.background='transparent';">
                         Learn to Negotiate →
                     </button>
                 </div>

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../css/fsa-brand.css">
     <link rel="stylesheet" href="../css/interactive-components.css">
     <link rel="stylesheet" href="../css/fsa-viz-kit.css">
+    <link rel="stylesheet" href="../css/fsa-course.css">
     <style>
         :root {
             /* PR4b bridge: neutralize old fsa-theme green background tokens to neutral FSA brand tokens (accents unchanged) */
@@ -21,7 +22,8 @@
         }
 
         /* PR-M3: FSA brand typography */
-        body { font-family: var(--font-body); }
+        /* body uses --font-sans as the shared-chrome parity guard */
+        body { font-family: var(--font-sans); }
         h1, h2 { font-family: var(--font-serif); }
 
         main {
@@ -41,7 +43,7 @@
 
         .module-header h1 {
             font-size: var(--font-size-4xl);
-            color: var(--fsa-green);
+            color: var(--color-text-strong);
             margin-bottom: 1rem;
         }
 
@@ -51,7 +53,7 @@
 
         .section-title {
             font-size: var(--font-size-3xl);
-            color: var(--fsa-green);
+            color: var(--color-text-strong);
             margin-bottom: 1.5rem;
             border-bottom: 3px solid var(--fsa-border-medium);
             padding-bottom: 0.5rem;
@@ -293,7 +295,7 @@
         }
 
         .build-header h3 {
-            color: var(--fsa-green);
+            color: var(--color-text-strong);
             margin: 0;
             font-size: var(--font-size-lg);
         }
@@ -333,15 +335,16 @@
         .reflection-question {
             margin: 2rem 0;
             padding: 2rem;
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(59, 130, 246, 0.05));
-            border-left: 4px solid #3b82f6;
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-left: 3px solid var(--fsa-green, #10b981);
             border-radius: 0.5rem;
         }
 
         .reflection-question .question-header {
             font-size: 1.5rem;
             font-weight: 700;
-            color: #60a5fa;
+            color: var(--color-text-strong);
             margin-bottom: 1rem;
             font-style: italic;
         }
@@ -402,9 +405,9 @@
         <span style="font-size: 1.2rem;">🧮</span>
         <span>Calculators</span>
     </a>
-    <main>
+    <main class="fsa-course">
         <div class="module-header">
-            <h1>Module 4: Credit Scores Decoded</h1>
+            <h1>Module 4: <span class="fsa-signal">Credit Scores</span> Decoded</h1>
             <p class="subtitle">Understand, build, and maintain a strong credit score</p>
         </div>
 
@@ -554,7 +557,7 @@
             <h2 class="section-title">Credit Score Simulator</h2>
             
             <div class="calculator">
-                <h3 style="font-size: var(--font-size-2xl); color: var(--fsa-green); margin-bottom: 1.5rem; text-align: center;">Estimate Your Credit Impact</h3>
+                <h3 style="font-size: var(--font-size-2xl); color: var(--color-text-strong); margin-bottom: 1.5rem; text-align: center;">Estimate Your Credit Impact</h3>
                 
                 <div class="form-group">
                     <label class="form-label" for="current-score">Current Credit Score</label>
@@ -574,7 +577,7 @@
 
                 <button class="btn btn-primary" onclick="simulateScore()">Estimate Impact</button>
 
-                <div class="score-result hidden" id="score-result">
+                <div class="score-result hidden" id="score-result" aria-live="polite" role="status">
                     <div style="font-size: var(--font-size-sm); color: var(--fsa-text-dim); text-transform: uppercase; letter-spacing: 1px;">Estimated Score</div>
                     <div class="result-score" id="estimated-score">720</div>
                     <div style="font-size: var(--font-size-base); color: var(--fsa-text-secondary); margin-top: 1rem;" id="score-advice"></div>
@@ -664,13 +667,13 @@
             </div>
 
             <!-- Interactive Lab: Minimum Payment Trap -->
-            <div style="margin: 2rem 0; padding: 1.5rem; background: rgba(239, 68, 68, 0.1); border: 2px solid #ef4444; border-radius: 0.75rem;">
-                <p style="color: #ef4444; font-weight: 600; margin-bottom: 0.75rem;">⚠️ Credit score is downstream. Interest is upstream.</p>
+            <div style="margin: 2rem 0; padding: 1.5rem; background: var(--color-surface); border: 1px solid var(--color-border); border-left: 3px solid var(--fsa-error, #ef4444); border-radius: 0.75rem;">
+                <p style="color: var(--fsa-error, #ef4444); font-weight: 600; margin-bottom: 0.75rem;">⚠️ Credit score is downstream. Interest is upstream.</p>
                 <button
                     onclick="PopupLabs.open('minimum-payment-trap')"
-                    style="background: linear-gradient(135deg, #ef4444, #f87171); color: white; border: none; padding: 0.875rem 1.5rem; border-radius: 0.5rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease; width: 100%;"
-                    onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(239, 68, 68, 0.4)';"
-                    onmouseout="this.style.transform=''; this.style.boxShadow='';">
+                    style="background: transparent; color: var(--fsa-error, #ef4444); border: 1.6px solid var(--fsa-error, #ef4444); border-radius: 2px; padding: 0.875rem 1.5rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease; width: 100%;"
+                    onmouseover="this.style.background='rgba(239, 68, 68, 0.08)';"
+                    onmouseout="this.style.background='transparent';">
                     Try the Minimum Payment Trap Calculator →
                 </button>
                 <p style="font-size: 0.85rem; color: #9ca3af; margin-top: 0.5rem; margin-bottom: 0;">See how minimum payments keep you in debt forever and cost thousands in interest</p>

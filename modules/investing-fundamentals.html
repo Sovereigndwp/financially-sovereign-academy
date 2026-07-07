@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../css/fsa-theme.css">
     <link rel="stylesheet" href="../css/fsa-brand.css">
     <link rel="stylesheet" href="../css/interactive-components.css">
+    <link rel="stylesheet" href="../css/fsa-course.css">
     <style>
         :root {
             /* PR4b bridge: neutralize old fsa-theme green background tokens to neutral FSA brand tokens (accents unchanged) */
@@ -20,7 +21,8 @@
         }
 
         /* PR-M3: FSA brand typography */
-        body { font-family: var(--font-body); }
+        /* chrome-parity: body sans matches shared fsa-course chrome; h1,h2 stay serif */
+        body { font-family: var(--font-sans); }
         h1, h2 { font-family: var(--font-serif); }
 
         main {
@@ -40,7 +42,7 @@
 
         .module-header h1 {
             font-size: var(--font-size-4xl);
-            color: var(--fsa-green);
+            color: var(--color-text-strong);
             margin-bottom: 1rem;
         }
 
@@ -50,7 +52,7 @@
 
         .section-title {
             font-size: var(--font-size-3xl);
-            color: var(--fsa-green);
+            color: var(--color-text-strong);
             margin-bottom: 1.5rem;
             border-bottom: 3px solid var(--fsa-border-medium);
             padding-bottom: 0.5rem;
@@ -108,7 +110,9 @@
         }
 
         .result-item {
-            background: rgba(16, 185, 129, 0.1);
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-left: 3px solid var(--fsa-green, #10b981);
             padding: 1rem;
             border-radius: var(--radius-md);
         }
@@ -144,7 +148,7 @@
 
         .comparison-row.header {
             font-weight: var(--font-weight-bold);
-            color: var(--fsa-green);
+            color: var(--color-text-strong);
         }
 
         .scenario-container {
@@ -259,9 +263,9 @@
         <span style="font-size: 1.2rem;">🧮</span>
         <span>Calculators</span>
     </a>
-    <main>
+    <main class="fsa-course">
         <div class="module-header">
-            <h1>Module 7: Investing Fundamentals</h1>
+            <h1>Module 7: <span class="fsa-signal">Investing</span> Fundamentals</h1>
             <p class="subtitle">Build wealth that outpaces inflation</p>
         </div>
 
@@ -269,8 +273,8 @@
 
 
         <!-- Reflection Question -->
-        <div style="margin: 2rem 0; padding: 2rem; background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(59, 130, 246, 0.05)); border-left: 4px solid #3b82f6; border-radius: 0.5rem;">
-            <div style="font-size: 1.5rem; font-weight: 700; color: #60a5fa; margin-bottom: 1rem; font-style: italic;">
+        <div style="margin: 2rem 0; padding: 2rem; background: var(--color-surface); border: 1px solid var(--color-border); border-left: 3px solid var(--fsa-green, #10b981); border-radius: 0.5rem;">
+            <div style="font-size: 1.5rem; font-weight: 700; color: var(--color-text-strong); margin-bottom: 1rem; font-style: italic;">
                 🤔 Your financial future depends on this...
             </div>
             <p style="font-size: 1.15rem; line-height: 1.7; color: rgba(255, 255, 255, 0.9); margin-bottom: 0.75rem;">
@@ -312,7 +316,7 @@
             <h2 class="section-title">Compound Interest Calculator</h2>
             
             <div class="calculator">
-                <h3 style="font-size: var(--font-size-2xl); color: var(--fsa-green); margin-bottom: 1.5rem; text-align: center;">See Your Money Grow</h3>
+                <h3 style="font-size: var(--font-size-2xl); color: var(--color-text-strong); margin-bottom: 1.5rem; text-align: center;">See Your Money Grow</h3>
                 
                 <div class="form-group">
                     <label class="form-label" for="initial-investment">Initial Investment</label>
@@ -337,7 +341,7 @@
 
                 <button class="btn btn-primary" onclick="calculateCompound()">Calculate Future Value</button>
 
-                <div class="result-display hidden" id="compound-result">
+                <div class="result-display hidden" id="compound-result" aria-live="polite" role="status">
                     <div class="result-label">Your investment will grow to:</div>
                     <div class="result-main" id="future-value">$1,144,818</div>
                     
@@ -367,7 +371,6 @@
             </div>
 
             <div class="content-block">
-<<<<<<< Updated upstream
                 <h3>401(k) / IRA (Tax-Advantaged Accounts)</h3>
                 <p>These are not investments themselves. They are <strong>account wrappers</strong> that hold your investments, like index funds. The wrapper mainly changes how the money is taxed, not what you put inside it.</p>
                 <p><strong>401(k):</strong> Usually offered through a job and funded from your paycheck while you work there. Contributions reduce taxable income, and many employers match part of what you put in.</p>
@@ -380,8 +383,6 @@
             </div>
 
             <div class="content-block">
-=======
->>>>>>> Stashed changes
                 <h3>Individual Stocks (High Risk)</h3>
                 <p><strong>What:</strong> Buying shares of specific companies</p>
                 <p><strong>Risk:</strong> Company can fail, stock can crash</p>
@@ -526,7 +527,7 @@
             <h2 class="section-title">Scenario: Market Crash</h2>
             
             <div class="scenario-container">
-                <h3 style="color: var(--fsa-green); margin-bottom: 1rem;">The stock market crashes 30%</h3>
+                <h3 style="color: var(--color-text-strong); margin-bottom: 1rem;">The stock market crashes 30%</h3>
                 <p>You've been investing $500/month in index funds. Your portfolio was $50,000 and is now $35,000.</p>
                 
                 <div class="scenario-choices">
