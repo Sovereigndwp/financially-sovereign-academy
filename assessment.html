@@ -100,6 +100,12 @@
             transform: translateX(8px);
         }
 
+        .option-card:focus-visible {
+            outline: 2px solid #10b981;
+            outline-offset: 2px;
+            border-color: #10b981;
+        }
+
         .option-card.selected {
             border-color: #10b981;
             background: rgba(16, 185, 129, 0.15);
@@ -415,7 +421,7 @@
                     
                     <div class="options-grid">
                         ${q.options.map(opt => `
-                            <div class="option-card" onclick="selectOption('${q.id}', '${opt.value}')">
+                            <div class="option-card" role="button" tabindex="0" onclick="selectOption('${q.id}', '${opt.value}', this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectOption('${q.id}', '${opt.value}', this);}">
                                 <div class="option-emoji">${opt.emoji}</div>
                                 <div>
                                     <div class="option-title">${opt.title}</div>
@@ -454,15 +460,15 @@
             }
         }
 
-        function selectOption(questionId, value) {
+        function selectOption(questionId, value, cardEl) {
             answers[questionId] = value;
-            
+
             // Visual feedback
             document.querySelectorAll('.option-card').forEach(card => {
                 card.classList.remove('selected');
             });
-            event.target.closest('.option-card').classList.add('selected');
-            
+            (cardEl || event.target.closest('.option-card')).classList.add('selected');
+
             // Enable next button
             document.getElementById('nextBtn').disabled = false;
         }
