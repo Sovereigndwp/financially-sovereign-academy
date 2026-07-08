@@ -100,6 +100,12 @@
             transform: translateX(8px);
         }
 
+        .option-card:focus-visible {
+            outline: 2px solid #10b981;
+            outline-offset: 2px;
+            border-color: #10b981;
+        }
+
         .option-card.selected {
             border-color: #10b981;
             background: rgba(16, 185, 129, 0.15);
@@ -362,39 +368,80 @@
             }
         ];
 
-        // Persona definitions
+        // Canonical module names and files (module 9 name matches the module page itself: "Consumer Protection")
+        const MODULE_NAMES = {
+            1: 'Money Mindset & Cash Flow',
+            2: 'Emergency Funds & Saving',
+            3: 'Banking Without Getting Robbed',
+            4: 'Credit Scores Decoded',
+            5: 'Debt Strategy',
+            6: 'Taxes & Paychecks Demystified',
+            7: 'Investing for Humans',
+            8: 'Protect What You\'ve Built',
+            9: 'Consumer Protection',
+            10: 'Your Financial Master Plan'
+        };
+        const MODULE_FILES = {
+            1: 'modules/money-mindset-cash-flow.html',
+            2: 'modules/emergency-funds-saving.html',
+            3: 'modules/banking-basics.html',
+            4: 'modules/credit-scores.html',
+            5: 'modules/debt-strategy.html',
+            6: 'modules/taxes-paychecks.html',
+            7: 'modules/investing-fundamentals.html',
+            8: 'modules/risk-insurance.html',
+            9: 'modules/consumer-protection.html',
+            10: 'modules/financial-master-plan.html'
+        };
+
+        // Persona definitions. priorityOrder is a *starting* emphasis, not a cap —
+        // buildSequence() below always fills in the remaining modules rather than
+        // truncating the course to these 5.
         const personas = {
             'debt-burdened': {
                 name: 'The Debt Eliminator',
                 desc: 'You\'re focused on breaking free from debt. We\'ll teach you proven strategies to pay down debt strategically, then build wealth.',
-                sequence: ['Module 5: Debt Strategy', 'Module 1: Cash Flow', 'Module 2: Emergency Funds', 'Module 4: Credit Scores', 'Module 7: Investing'],
-                startModule: 'modules/debt-strategy.html'
+                priorityOrder: [5, 1, 2, 4, 7]
             },
             'fresh-grad': {
                 name: 'The Fresh Start',
                 desc: 'You\'re early in your financial journey. We\'ll build strong fundamentals from the ground up.',
-                sequence: ['Module 1: Cash Flow', 'Module 6: Taxes', 'Module 2: Emergency Funds', 'Module 3: Banking', 'Module 7: Investing'],
-                startModule: 'modules/money-mindset-cash-flow.html'
+                priorityOrder: [1, 6, 2, 3, 7]
             },
             'mid-career': {
                 name: 'The Wealth Builder',
                 desc: 'You\'re earning well and ready to optimize. We\'ll focus on investment, protection, and long-term planning.',
-                sequence: ['Module 7: Investing', 'Module 2: Emergency Funds', 'Module 8: Insurance', 'Module 10: Master Plan', 'Module 6: Taxes'],
-                startModule: 'modules/investing-fundamentals.html'
+                priorityOrder: [7, 2, 8, 10, 6]
             },
             'pre-retiree': {
                 name: 'The Strategic Planner',
                 desc: 'You\'re thinking long-term. We\'ll help you integrate everything into a coherent financial plan.',
-                sequence: ['Module 10: Master Plan', 'Module 7: Investing', 'Module 8: Insurance', 'Module 6: Taxes', 'Module 2: Emergency Funds'],
-                startModule: 'modules/financial-master-plan.html'
+                priorityOrder: [10, 7, 8, 6, 2]
             },
             'entrepreneur': {
                 name: 'The Financial Sovereign',
                 desc: 'You value independence and control. We\'ll teach you to manage money like a business owner.',
-                sequence: ['Module 1: Cash Flow', 'Module 6: Taxes', 'Module 5: Debt Strategy', 'Module 2: Emergency Funds', 'Module 7: Investing'],
-                startModule: 'modules/money-mindset-cash-flow.html'
+                priorityOrder: [1, 6, 5, 2, 7]
             }
         };
+
+        // Build the full recommended sequence for a persona: the persona's priority
+        // modules first, then every remaining module in numeric order — nothing is
+        // dropped unless the assessment answers clearly indicate the learner won't
+        // benefit from it right now. Currently that applies only to Module 5 (Debt
+        // Strategy), and only when nothing in goal/situation/worry signals a debt
+        // concern. All 10 modules stay available directly from the homepage/module
+        // nav regardless of what the assessment recommends.
+        function buildSequence(priorityOrder, ans) {
+            const noDebtSignal = ans.goal !== 'debt' && ans.situation !== 'debt-heavy' && ans.worry !== 'debt';
+            const excluded = new Set(noDebtSignal ? [5] : []);
+
+            const seq = priorityOrder.filter(id => !excluded.has(id));
+            for (let id = 1; id <= 10; id++) {
+                if (!seq.includes(id) && !excluded.has(id)) seq.push(id);
+            }
+            return seq;
+        }
 
         // State
         let currentQuestion = 0;
@@ -415,7 +462,7 @@
                     
                     <div class="options-grid">
                         ${q.options.map(opt => `
-                            <div class="option-card" onclick="selectOption('${q.id}', '${opt.value}')">
+                            <div class="option-card" role="button" tabindex="0" onclick="selectOption('${q.id}', '${opt.value}', this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectOption('${q.id}', '${opt.value}', this);}">
                                 <div class="option-emoji">${opt.emoji}</div>
                                 <div>
                                     <div class="option-title">${opt.title}</div>
@@ -454,15 +501,15 @@
             }
         }
 
-        function selectOption(questionId, value) {
+        function selectOption(questionId, value, cardEl) {
             answers[questionId] = value;
-            
+
             // Visual feedback
             document.querySelectorAll('.option-card').forEach(card => {
                 card.classList.remove('selected');
             });
-            event.target.closest('.option-card').classList.add('selected');
-            
+            (cardEl || event.target.closest('.option-card')).classList.add('selected');
+
             // Enable next button
             document.getElementById('nextBtn').disabled = false;
         }
@@ -498,28 +545,30 @@
             }
             
             const personaData = personas[persona];
-            
+            const sequence = buildSequence(personaData.priorityOrder, answers);
+
             // Save to localStorage
             localStorage.setItem('fsa-persona', persona);
             localStorage.setItem('fsa-assessment-complete', 'true');
             localStorage.setItem('fsa-answers', JSON.stringify(answers));
-            
+            localStorage.setItem('fsa-sequence', JSON.stringify(sequence));
+
             // Hide questions, show results
             document.getElementById('questionContainer').style.display = 'none';
             document.getElementById('resultsScreen').style.display = 'block';
-            
+
             // Populate results
             document.getElementById('personaName').textContent = personaData.name;
             document.getElementById('personaDesc').textContent = personaData.desc;
-            
+
             const moduleList = document.getElementById('moduleList');
-            moduleList.innerHTML = personaData.sequence.map(m => `<li>${m}</li>`).join('');
+            moduleList.innerHTML = sequence.map(id => `<li>Module ${id}: ${MODULE_NAMES[id]}</li>`).join('');
         }
 
         function startPath() {
-            const persona = localStorage.getItem('fsa-persona');
-            const personaData = personas[persona];
-            window.location.href = personaData.startModule;
+            const sequence = JSON.parse(localStorage.getItem('fsa-sequence') || '[]');
+            const firstId = sequence[0] || 1;
+            window.location.href = MODULE_FILES[firstId];
         }
     </script>
 

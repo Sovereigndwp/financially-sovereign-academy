@@ -668,6 +668,7 @@
 
     <script src="../js/module-progress.js"></script>
     <script src="../js/progress-manager.js"></script>
+    <script src="../js/toast.js"></script>
     <script>
                 // FSA Live Data & Plan Builder
         FSALiveData.onReady(function() {
@@ -742,8 +743,9 @@
 
         function completeModule() {
             progressManager.setModuleComplete(7, { timeSpent: 0, score: 100 });
-            alert('Module 7 complete! Next: Module 8 - Risk & Insurance.');
-            window.location.href = 'risk-insurance.html';
+            showFsaToast('Module 7 complete! Next: Module 8 - Risk & Insurance.', {
+                onDismiss: function () { window.location.href = 'risk-insurance.html'; }
+            });
         }
     </script>
 <script src="../js/lab-guide.js"></script>

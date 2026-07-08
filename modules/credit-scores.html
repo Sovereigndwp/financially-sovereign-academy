@@ -780,6 +780,7 @@
 
     <script src="../js/module-progress.js"></script>
     <script src="../js/progress-manager.js"></script>
+    <script src="../js/toast.js"></script>
     <script>
                 // FSA Live Data & Plan Builder
         FSALiveData.onReady(function() {
@@ -857,8 +858,9 @@
 
         function completeModule() {
             progressManager.setModuleComplete(4, { timeSpent: 0, score: 100 });
-            alert('Module 4 complete! Next: Module 5 - Debt Strategy.');
-            window.location.href = 'debt-strategy.html';
+            showFsaToast('Module 4 complete! Next: Module 5 - Debt Strategy.', {
+                onDismiss: function () { window.location.href = 'debt-strategy.html'; }
+            });
         }
 
         // Accordion Toggle for Credit Myths

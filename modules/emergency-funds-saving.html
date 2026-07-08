@@ -859,6 +859,7 @@
 
     <script src="../js/module-progress.js"></script>
     <script src="../js/progress-manager.js"></script>
+    <script src="../js/toast.js"></script>
     <script>
                 // FSA Live Data & Plan Builder
         FSALiveData.onReady(function() {
@@ -927,8 +928,9 @@
 
         function completeModule() {
             progressManager.setModuleComplete(2, { timeSpent: 0, score: 100 });
-            alert('Module 2 complete! Moving on to Module 3: Banking Without Getting Robbed.');
-            window.location.href = 'banking-basics.html';
+            showFsaToast('Module 2 complete! Moving on to Module 3: Banking Without Getting Robbed.', {
+                onDismiss: function () { window.location.href = 'banking-basics.html'; }
+            });
         }
 
         // Accordion Toggle for Build Steps

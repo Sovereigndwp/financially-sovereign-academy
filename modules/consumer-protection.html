@@ -602,6 +602,7 @@
     <script src="../js/popups.js"></script>
     <script src="../js/module-progress.js"></script>
     <script src="../js/progress-manager.js"></script>
+    <script src="../js/toast.js"></script>
     <script>
                 // FSA Live Data & Plan Builder
         FSALiveData.onReady(function() {
@@ -673,8 +674,9 @@
 
         function completeModule() {
             progressManager.setModuleComplete(9, { timeSpent: 0, score: 100 });
-            alert('Module 9 complete! Next: Module 10 - Financial Master Plan (Final Module).');
-            window.location.href = 'financial-master-plan.html';
+            showFsaToast('Module 9 complete! Next: Module 10 - Financial Master Plan (Final Module).', {
+                onDismiss: function () { window.location.href = 'financial-master-plan.html'; }
+            });
         }
     </script>
 <script src="../js/lab-guide.js"></script>

@@ -14,7 +14,7 @@ class ModuleNavigation {
             { id: 6, title: 'Taxes & Paychecks Demystified', file: 'taxes-paychecks.html' },
             { id: 7, title: 'Investing for Humans', file: 'investing-fundamentals.html' },
             { id: 8, title: 'Protect What You\'ve Built', file: 'risk-insurance.html' },
-            { id: 9, title: 'Don\'t Get Scammed', file: 'consumer-protection.html' },
+            { id: 9, title: 'Consumer Protection', file: 'consumer-protection.html' },
             { id: 10, title: 'Your Financial Master Plan', file: 'financial-master-plan.html' }
         ];
     }

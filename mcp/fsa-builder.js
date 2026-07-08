@@ -152,7 +152,7 @@ const FSA_MODULES = [
   {
     id: 9,
     slug: 'consumer-protection',
-    title: 'Don\'t Get Scammed (Consumer Protection)',
+    title: 'Consumer Protection',
     duration: '20 min',
     description: 'Make smart spending decisions and avoid predatory practices',
     topics: ['comparison shopping', 'scam detection', 'contracts', 'digital security', '2FA'],
