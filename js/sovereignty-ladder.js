@@ -75,7 +75,7 @@
         { id: 6, name: 'Taxes & Paychecks Demystified', slug: 'taxes-paychecks', file: 'taxes-paychecks.html', time: '25 min' },
         { id: 7, name: 'Investing for Humans', slug: 'investing-fundamentals', file: 'investing-fundamentals.html', time: '35 min' },
         { id: 8, name: 'Protect What You\'ve Built', slug: 'risk-insurance', file: 'risk-insurance.html', time: '25 min' },
-        { id: 9, name: 'Don\'t Get Scammed', slug: 'consumer-protection', file: 'consumer-protection.html', time: '20 min' },
+        { id: 9, name: 'Consumer Protection', slug: 'consumer-protection', file: 'consumer-protection.html', time: '20 min' },
         { id: 10, name: 'Your Financial Master Plan', slug: 'financial-master-plan', file: 'financial-master-plan.html', time: '30 min' }
     ];
 

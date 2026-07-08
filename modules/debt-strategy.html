@@ -667,6 +667,7 @@
 
     <script src="../js/module-progress.js"></script>
     <script src="../js/progress-manager.js"></script>
+    <script src="../js/toast.js"></script>
     <script>
                 // FSA Live Data & Plan Builder
         FSALiveData.onReady(function() {
@@ -801,8 +802,9 @@
 
         function completeModule() {
             progressManager.setModuleComplete(5, { timeSpent: 0, score: 100 });
-            alert('Module 5 complete! Halfway there! Next: Module 6 - Taxes & Paychecks.');
-            window.location.href = 'taxes-paychecks.html';
+            showFsaToast('Module 5 complete! Halfway there! Next: Module 6 - Taxes & Paychecks.', {
+                onDismiss: function () { window.location.href = 'taxes-paychecks.html'; }
+            });
         }
 
         // Accordion Toggle for Debt Consolidation

@@ -875,6 +875,7 @@
     <script src="../js/popups.js"></script>
     <script src="../js/module-progress.js"></script>
     <script src="../js/progress-manager.js"></script>
+    <script src="../js/toast.js"></script>
     <script src="../js/module-navigation.js"></script>
     <script>
                 // FSA Live Data & Plan Builder
@@ -913,8 +914,10 @@
 
         function completeModule() {
             progressManager.setModuleComplete(10, { timeSpent: 0, score: 100 });
-            alert('🎉 CONGRATULATIONS! 🎉\n\nYou have completed Financially Sovereign Academy!\n\nYou are now equipped with the knowledge to achieve financial sovereignty.\n\nThe journey continues at Bitcoin Sovereign Academy (optional).');
-            window.location.href = '../index.html';
+            showFsaToast('🎉 CONGRATULATIONS! 🎉\n\nYou have completed Financially Sovereign Academy!\n\nYou are now equipped with the knowledge to achieve financial sovereignty.\n\nThe journey continues at Bitcoin Sovereign Academy (optional).', {
+                duration: 6000,
+                onDismiss: function () { window.location.href = '../index.html'; }
+            });
         }
     </script>
 <script src="../js/lab-guide.js"></script>

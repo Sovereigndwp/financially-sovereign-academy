@@ -959,6 +959,7 @@
 
     <script src="../js/module-progress.js"></script>
     <script src="../js/progress-manager.js"></script>
+    <script src="../js/toast.js"></script>
     <script>
                 // FSA Live Data & Plan Builder
         FSALiveData.onReady(function() {
@@ -1035,8 +1036,9 @@
 
         function completeModule() {
             progressManager.setModuleComplete(3, { timeSpent: 0, score: 100 });
-            alert('Module 3 complete! Next up: Module 4 - Credit Scores Decoded.');
-            window.location.href = 'credit-scores.html';
+            showFsaToast('Module 3 complete! Next up: Module 4 - Credit Scores Decoded.', {
+                onDismiss: function () { window.location.href = 'credit-scores.html'; }
+            });
         }
 
         // Accordion Toggle for Bank Types

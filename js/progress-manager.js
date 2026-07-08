@@ -277,6 +277,7 @@ class FSAProgressManager {
             localStorage.removeItem('fsa-assessment-complete');
             localStorage.removeItem('fsa-persona');
             localStorage.removeItem('fsa-answers');
+            localStorage.removeItem('fsa-sequence');
             
             this.cache = null;
             this.cacheExpiry = null;
