@@ -1,4 +1,4 @@
-# Sources — The Most Expensive Word in Personal Finance: “Later”
+# Sources: The Most Expensive Word in Personal Finance: “Later”
 
 - **Article ID:** FSA-ARTICLE-000
 - **Slug:** the-most-expensive-word-is-later

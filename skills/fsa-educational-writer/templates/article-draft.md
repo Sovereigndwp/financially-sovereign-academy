@@ -32,7 +32,7 @@ learnerOutcome: {{what the learner can do afterward}}
 editorialBrief: {{one-paragraph brief}}
 fsaModules: [{{canonical module names only}}]
 audiences: [{{from the audience vocabulary}}]
-formats: ["web"]               # add "print" when a print companion exists
+formats: ["web", "print"]      # every article ships the shared print stylesheet; a print *companion* packet is a separate artifact and does not change this
 publishedDate: null
 updatedDate: null
 canonicalPath: /articles/{{seriesSlug}}/{{slug}}.html

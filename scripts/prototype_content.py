@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-prototype_content.py — Drafted body for the prototype article
+prototype_content.py: Drafted body for the prototype article
 "Why Saving Money Feels So Hard" (FSA-ARTICLE-001).
 
 This is TEMPORARY DRAFT CONTENT used to test the system end to end. It is marked

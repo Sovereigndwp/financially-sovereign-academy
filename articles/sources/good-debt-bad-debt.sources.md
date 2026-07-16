@@ -1,4 +1,4 @@
-# Sources — Good Debt vs. Bad Debt Isn’t About the Loan
+# Sources: Good Debt vs. Bad Debt Isn’t About the Loan
 
 - **Article ID:** FSA-ARTICLE-016
 - **Slug:** good-debt-bad-debt

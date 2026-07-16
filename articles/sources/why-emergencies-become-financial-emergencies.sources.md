@@ -1,4 +1,4 @@
-# Sources — Why Emergencies Become Financial Emergencies
+# Sources: Why Emergencies Become Financial Emergencies
 
 - **Article ID:** FSA-ARTICLE-012
 - **Slug:** why-emergencies-become-financial-emergencies

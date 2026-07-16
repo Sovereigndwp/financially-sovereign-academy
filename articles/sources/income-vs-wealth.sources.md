@@ -1,4 +1,4 @@
-# Sources — Income Solves Different Problems Than Wealth
+# Sources: Income Solves Different Problems Than Wealth
 
 - **Article ID:** FSA-ARTICLE-015
 - **Slug:** income-vs-wealth

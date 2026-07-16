@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-build.py — Generate the FSA Money Ideas article library from library_data.py.
+build.py: Generate the FSA Money Ideas article library from library_data.py.
 
 Emits (into the repo-relative tree rooted at OUT):
   articles/article-library.json      canonical registry (26 records)
@@ -602,7 +602,7 @@ def render_home():
 def render_source(a):
     proto = (a["slug"] == PROTOTYPE["slug"])
     lines = []
-    lines.append("# Sources — %s\n" % a["title"])
+    lines.append("# Sources: %s\n" % a["title"])
     lines.append("- **Article ID:** %s" % a["id"])
     lines.append("- **Slug:** %s" % a["slug"])
     lines.append("- **Status:** %s" % a["status"])

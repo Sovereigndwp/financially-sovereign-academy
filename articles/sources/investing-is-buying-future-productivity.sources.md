@@ -1,4 +1,4 @@
-# Sources — Why Investing Is Buying Future Productivity
+# Sources: Why Investing Is Buying Future Productivity
 
 - **Article ID:** FSA-ARTICLE-018
 - **Slug:** investing-is-buying-future-productivity

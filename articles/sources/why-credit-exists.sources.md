@@ -1,4 +1,4 @@
-# Sources — Why Credit Exists
+# Sources: Why Credit Exists
 
 - **Article ID:** FSA-ARTICLE-010
 - **Slug:** why-credit-exists

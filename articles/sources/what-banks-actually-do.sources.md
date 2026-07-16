@@ -1,4 +1,4 @@
-# Sources — What Banks Actually Do
+# Sources: What Banks Actually Do
 
 - **Article ID:** FSA-ARTICLE-008
 - **Slug:** what-banks-actually-do

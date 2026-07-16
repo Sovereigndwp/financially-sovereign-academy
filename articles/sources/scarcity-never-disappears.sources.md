@@ -1,4 +1,4 @@
-# Sources — Scarcity Never Disappears
+# Sources: Scarcity Never Disappears
 
 - **Article ID:** FSA-ARTICLE-023
 - **Slug:** scarcity-never-disappears

@@ -1,4 +1,4 @@
-# FSA Money Ideas — Article Library
+# FSA Money Ideas: Article Library
 
 Short educational articles that help learners understand the ideas **beneath**
 personal finance: tradeoffs, incentives, time, risk, credit, prices, banking, and
@@ -12,7 +12,7 @@ how money decisions really work.*
 ```
 articles/
   index.html                       library homepage (generated)
-  article-library.json             canonical registry — 26 records (generated)
+  article-library.json             canonical registry: 26 records (generated)
   README.md                        this file
   series/*.html                    5 series pages (generated)
   foundations/ money-decisions/ …  article pages by series (generated)
@@ -42,7 +42,7 @@ skills/fsa-educational-writer/     the writing skill (drafts, never publishes)
 1. **Edit the record** in `scripts/library_data.py` (or add a new `A(...)` entry).
    Keep `id` and `slug` stable and unique. Set `status` (start at `planned`).
 2. **Write the body.** Use the FSA Educational Writer skill
-   (`skills/fsa-educational-writer/`) — it drafts to the 13-part structure and
+   (`skills/fsa-educational-writer/`): it drafts to the 13-part structure and
    stops at `status: drafted`. For the shape, see `scripts/prototype_content.py`.
    Wire drafted bodies into the generator the same way the prototype is wired.
 3. **Rebuild:** `python3 scripts/build.py`

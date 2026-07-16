@@ -1,4 +1,4 @@
-# Sources — Opportunity Cost Is Everywhere
+# Sources: Opportunity Cost Is Everywhere
 
 - **Article ID:** FSA-ARTICLE-020
 - **Slug:** opportunity-cost-is-everywhere

@@ -1,7 +1,7 @@
-# Skill Test (section 22): Mode 2 review of "Why Saving Money Feels So Hard"
+# Skill Test (section 22): Mode 3 audit of "Why Saving Money Feels So Hard"
 
-This is the skill's self-test. It runs the **fsa-educational-writer** skill in **Mode 2
-(audit / review)** against the existing prototype. It does **not** re-draft the article
+This is the skill's self-test. It runs the **fsa-educational-writer** skill in **Mode 3
+(article audit)** against the existing prototype. It does **not** re-draft the article
 prose. The draft under test is the already-written prototype:
 
 - rendered page: `articles/money-decisions/why-saving-money-feels-so-hard.html`
@@ -46,7 +46,7 @@ learnerOutcome: "The learner can identify how immediate rewards compete with fut
 fsaModules: ["Mindset & Cash Flow", "Emergency Funds"]
 audiences: ["general", "workforce", "reentry", "youth"]
 editorialBrief: "The prototype article. It reframes saving from a willpower problem into a competition between a vivid present and an abstract future, made harder by tight budgets and systems built to make spending easy. It respects learners under real financial pressure while still showing where personal design choices can tip the contest."
-formats: ["web"]
+formats: ["web", "print"]   # the page ships a print stylesheet; a print companion packet would be separate
 publishedDate: null
 updatedDate: null
 canonicalPath: /articles/money-decisions/why-saving-money-feels-so-hard.html
@@ -262,7 +262,9 @@ Per `templates/print-companion.md`, black and white, offline, pencil-and-paper:
    the "save first" rule should be checked against the learner's own numbers (the boundary
    case).
 
-Adding this companion would add `print` to the record's `formats`.
+The base page already prints via the shared print stylesheet, so `formats` already
+includes `print`. A print companion is an additional facilitator packet; producing it
+does not change the `formats` field.
 
 ---
 

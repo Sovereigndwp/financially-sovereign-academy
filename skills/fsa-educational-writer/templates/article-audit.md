@@ -1,8 +1,8 @@
 # Article Audit: {{ARTICLE TITLE}}
 
-Use in Mode 2 (audit / review) and Mode 6 (standards check). Record findings, then the
-rubric, then the audit-checklist results. Recommend changes; do not silently rewrite,
-and do not approve.
+Use in Mode 3 (article audit), including its fast standards-check variant. Record
+findings, then the rubric, then the audit-checklist results. Recommend changes; do not
+silently rewrite, and do not approve.
 
 - **Article ID:** FSA-ARTICLE-NNN
 - **Slug:** {{slug}}

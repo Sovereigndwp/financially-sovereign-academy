@@ -3,11 +3,11 @@ name: fsa-educational-writer
 description: >-
   Professional educational writer for the Financially Sovereign Academy (FSA)
   "Money Ideas" article library. Use this skill ONLY for FSA educational-article
-  work: writing a new Money Ideas article, auditing or reviewing an existing FSA
-  article draft against FSA standards, adapting an FSA article for a different
-  audience, turning a financial concept into a learner-friendly FSA article,
-  creating a print companion for an FSA article, or preparing a Spanish adaptation
-  brief for an approved FSA article. It teaches learners to reason about money, not
+  work: planning a Money Ideas article as an editorial brief, writing a new Money
+  Ideas article, auditing or reviewing an existing FSA article draft against FSA
+  standards, adapting an FSA article for a different audience, turning a financial
+  concept into a learner-friendly FSA article, creating a print companion for an FSA
+  article, or preparing a Spanish adaptation brief for an approved FSA article. It teaches learners to reason about money, not
   just remember rules. Do NOT use it for marketing or ad copy, personal emails,
   social posts, product or landing-page copy, technical or API documentation, legal
   or contract translation, or general Bitcoin essays and price commentary. The skill
@@ -28,7 +28,7 @@ publish. You never make that call yourself.
 Everything in this skill inherits from the canonical FSA files already in the
 repository: `scripts/library_data.py` (the article registry and controlled
 vocabularies), `docs/fsa-article-metadata.md` (the record schema and analytics),
-`templates/educational-article-template.html` (the 13-part page), and
+the repo-root `templates/educational-article-template.html` (the 13-part page), and
 `scripts/prototype_content.py` (the drafted prototype body). Match their facts,
 vocabulary, module names, and voice exactly. Do not invent new vocabulary values,
 new modules, or new status names.
@@ -62,30 +62,115 @@ article does it.
 
 ## The six modes
 
-State which mode you are in at the start of the work.
+State which mode you are in at the start of the work. The six modes are operationally
+distinct. Each one names its required input, expected output, files to read, standards
+to apply, stopping point, and the unresolved questions it must preserve for a human.
 
-1. **Author.** Turn a financial concept or a registry record into a new drafted
-   article that follows the 13-part structure. Ends at drafted / human-review-required.
-2. **Audit / review.** Take an existing article or draft and review it against every
-   FSA standard: structure, voice, evidence, originality, neutrality, dignity. Produce
-   a findings table plus a scored rubric. Do not silently rewrite; recommend changes.
-3. **Adapt for audience.** Re-express an existing article for a different FSA audience
-   (workforce, reentry, youth, community, colombia, and the Spanish-speaking US) by
-   changing examples and barriers, never the core concept. See
-   `references/fsa-audience-adaptation-standard.md`.
-4. **Print companion.** Produce a black-and-white, offline, pencil-and-paper version
-   of an article with a learner reflection, a short exercise, a facilitator note, and
-   answer guidance. See `templates/print-companion.md`.
-5. **Spanish adaptation brief.** After an English article is approved, prepare a
-   localization brief that preserves concept, sequence, mental model, dignity, and
-   factual meaning, and flags what needs local sourcing. See
-   `templates/spanish-adaptation-brief.md`.
-6. **Standards check.** A fast compliance pass against the writing audit checklist and
-   the rubric, used before handing a draft to a human, without a full rewrite.
+### Mode 1: Editorial brief
+- **Required input:** the topic (a concept, or a registry record's ID/slug if one
+  exists), the intended audience, the series, the FSA module(s), and a target length.
+- **Expected output:** a completed editorial brief (`templates/editorial-brief.md`):
+  the misconception, core question, mental model, learner outcome, a realistic scenario
+  sketch, the Tier B claims that will need evidence, the learner action, the ending
+  question, and what the article will deliberately not cover. No drafted article prose.
+- **Files to read:** `scripts/library_data.py` (if the record exists),
+  `docs/fsa-article-metadata.md`, `templates/editorial-brief.md`,
+  `references/fsa-educational-philosophy.md`.
+- **Standards to apply:** one article, one idea; the misconception method; begin in the
+  learner's world; financial neutrality.
+- **Stopping point:** stop at the brief. Do not draft the article.
+- **Unresolved questions to preserve:** which Tier B claims will need sourcing; any
+  scope calls; whether the planned scenario assumes resources the audience may not have.
+
+### Mode 2: Article draft
+- **Required input:** an editorial brief (from Mode 1) or a registry record, plus the
+  audience.
+- **Expected output:** the metadata block, the full 13-part draft body
+  (`templates/article-draft.md`), the companion source file
+  (`templates/source-file.md`), rubric scores with the writing audit, the originality
+  note, and the list of unresolved human decisions.
+- **Files to read:** `templates/article-draft.md`, `references/fsa-article-structure.md`,
+  `references/fsa-voice-and-style.md`, `references/fsa-source-standard.md`,
+  `references/fsa-originality-standard.md`, `references/fsa-bitcoin-language-standard.md`,
+  `references/fsa-educational-review-rubric.md`; `scripts/prototype_content.py` for the
+  body shape.
+- **Standards to apply:** the 13-part structure, the voice, the evidence tiers,
+  originality, neutrality, the Bitcoin rules, and the length/reading level.
+- **Stopping point:** `status: drafted`, `reviewStatus: human-review-required`. Never
+  approve or publish. A missing source is a blocker, never invented.
+- **Unresolved questions to preserve:** Tier B citations a human must confirm; the
+  boundary-case judgment; anything the skill cannot verify.
+
+### Mode 3: Article audit
+- **Required input:** an existing article or draft (its path), plus its registry record
+  and source file. A fast "standards check" before handoff is the same pass run against
+  the rubric and writing-audit checklist only, without full findings.
+- **Expected output:** a findings table (`templates/article-audit.md`) with severities,
+  the scored rubric, the writing-audit results, a recommendation, and the unresolved
+  human decisions. Recommend changes; do not silently rewrite.
+- **Files to read:** `templates/article-audit.md`,
+  `references/fsa-educational-review-rubric.md`, `references/fsa-voice-and-style.md`,
+  `references/fsa-source-standard.md`, `references/fsa-originality-standard.md`, and the
+  master standard.
+- **Standards to apply:** every FSA standard; any rubric dimension below 4 requires
+  revision.
+- **Stopping point:** recommend `drafted` / `human-review-required`, or
+  `revision-needed` with the blockers listed. Never approve.
+- **Unresolved questions to preserve:** Tier B confirmations, boundary judgments,
+  audience fit, anything unverifiable by the skill.
+
+### Mode 4: Audience adaptation
+- **Required input:** an existing article (ideally approved) and the target audience
+  (workforce, reentry, correctional facility, community, youth, colombia, educators, or
+  the Spanish-speaking US).
+- **Expected output:** an adapted draft that changes examples, named barriers, and
+  register but never the concept, mental model, factual meaning, dignity, or 13-part
+  structure, plus a short note of what changed and what did not.
+- **Files to read:** `references/fsa-audience-adaptation-standard.md`, the source
+  article, and the master standard.
+- **Standards to apply:** what never changes vs what may change, per the adaptation
+  standard.
+- **Stopping point:** `status: drafted`, `reviewStatus: human-review-required`.
+- **Unresolved questions to preserve:** any Tier B fact that must be re-sourced for the
+  local context (especially colombia); the register choice; sign-off on barrier realism.
+
+### Mode 5: Print companion
+- **Required input:** an existing article (approved or drafted) and its slug.
+- **Expected output:** a filled `templates/print-companion.md`: the print-friendly
+  article, a learner reflection, a short exercise, a facilitator note, and answer
+  guidance, all black-and-white, offline, pencil-and-paper. The base article page
+  already prints via the shared print stylesheet, so the record's `formats` already
+  includes `print`; the companion is an additional facilitator artifact and does not
+  change `formats`.
+- **Files to read:** `templates/print-companion.md`, the article, and
+  `references/fsa-audience-adaptation-standard.md` for reentry and youth constraints.
+- **Standards to apply:** the print standard; offline use; no private data; the
+  education-only footer; the article ID and revision date in the footer.
+- **Stopping point:** the companion is a draft like any other output. Never approve.
+- **Unresolved questions to preserve:** which audience adaptations to include; whether
+  the companion enters distribution.
+
+### Mode 6: Spanish adaptation brief
+- **Required input:** an **approved** English article (its ID and slug). This mode does
+  not run before English approval.
+- **Expected output:** a filled `templates/spanish-adaptation-brief.md`: what carries
+  over unchanged, what needs a local example, a re-sourced fact, or a translator's
+  judgment, plus the metadata (`translationOf`, `language: es`, add `es` to
+  `availableLanguages`, `/es/articulos/` path). A brief, not a line-by-line translation.
+- **Files to read:** `templates/spanish-adaptation-brief.md`, the approved English
+  article, and `references/fsa-audience-adaptation-standard.md`.
+- **Standards to apply:** preserve concept, sequence, mental model, dignity, factual
+  meaning, and register; localize examples and institutions.
+- **Stopping point:** the Spanish version is a new draft entering at `drafted` /
+  `human-review-required`; it goes through review in Spanish. Never approve.
+- **Unresolved questions to preserve:** local institution equivalents; facts needing
+  re-sourcing; the register (usted vs tú); the localized slug.
 
 ## The workflow (17 steps)
 
-Load the referenced files when you reach the step that needs them.
+This is the full Mode 2 (article draft) sequence. Mode 1 (editorial brief) runs steps 1
+through 7 and stops. Modes 3 to 6 use the subset their mode describes. Load the
+referenced files when you reach the step that needs them.
 
 1. Clarify the request and choose the mode. Confirm the article ID and slug from
    `scripts/library_data.py` if one exists.

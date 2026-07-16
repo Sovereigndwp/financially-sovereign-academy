@@ -1,4 +1,4 @@
-# Sources — Every Dollar Has Four Jobs
+# Sources: Every Dollar Has Four Jobs
 
 - **Article ID:** FSA-ARTICLE-002
 - **Slug:** every-dollar-has-four-jobs

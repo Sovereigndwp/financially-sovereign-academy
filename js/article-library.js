@@ -1,5 +1,5 @@
 /**
- * article-library.js — FSA Money Ideas homepage.
+ * article-library.js : FSA Money Ideas homepage.
  * Progressive enhancement only: the article grid is server-rendered and fully
  * usable with JavaScript disabled. This adds concept filtering + light analytics.
  * No hard-coded copy that a translation would need to change (labels come from
@@ -41,7 +41,7 @@
     });
   }
 
-  // Card clicks (navigation to an article) — useful funnel signal.
+  // Card clicks (navigation to an article) : useful funnel signal.
   cards.forEach(function (card) {
     card.addEventListener('click', function () {
       track('library_article_click', {

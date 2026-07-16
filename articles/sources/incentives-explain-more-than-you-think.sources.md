@@ -1,4 +1,4 @@
-# Sources — Incentives Explain More Than You Think
+# Sources: Incentives Explain More Than You Think
 
 - **Article ID:** FSA-ARTICLE-006
 - **Slug:** incentives-explain-more-than-you-think

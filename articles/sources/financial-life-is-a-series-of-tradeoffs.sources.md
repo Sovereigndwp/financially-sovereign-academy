@@ -1,4 +1,4 @@
-# Sources — Your Financial Life Is a Series of Tradeoffs
+# Sources: Your Financial Life Is a Series of Tradeoffs
 
 - **Article ID:** FSA-ARTICLE-005
 - **Slug:** financial-life-is-a-series-of-tradeoffs

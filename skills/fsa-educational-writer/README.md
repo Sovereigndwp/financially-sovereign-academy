@@ -33,13 +33,19 @@ skill triggers narrowly.
 
 ## The six modes
 
-1. **Author** a new drafted article (concept to draft).
-2. **Audit / review** an existing draft (findings table plus scored rubric).
-3. **Adapt** an article for a different audience (change examples and barriers, keep
-   the concept).
-4. **Print companion** (black-and-white, offline, pencil-and-paper).
-5. **Spanish adaptation brief** (localize after English approval).
-6. **Standards check** (fast compliance pass before human handoff).
+Each mode is operationally distinct and defines its own required input, expected output,
+files to read, standards, stopping point, and unresolved questions (see `SKILL.md`).
+
+1. **Editorial brief** plan an article before drafting (misconception, model, scenario,
+   source plan). Stops at the brief.
+2. **Article draft** concept or brief to a full 13-part draft, source file, rubric, and
+   originality note.
+3. **Article audit** review an existing draft (findings table plus scored rubric); a
+   fast standards check is the lightweight variant.
+4. **Audience adaptation** re-express for a different audience (change examples and
+   barriers, keep the concept).
+5. **Print companion** black-and-white, offline, pencil-and-paper facilitator packet.
+6. **Spanish adaptation brief** localize after English approval.
 
 ## How it fits the library
 
@@ -47,8 +53,8 @@ Article facts live in one place: `scripts/library_data.py`. The build script
 `scripts/build.py` renders pages from those records into `articles/<seriesSlug>/`,
 and `scripts/validate_articles.py` checks every field, including the rule that only
 `approved` and `published` render publicly. The schema, vocabularies, and analytics
-events are documented in `docs/fsa-article-metadata.md`. The shared page shape is
-`templates/educational-article-template.html`.
+events are documented in `docs/fsa-article-metadata.md`. The shared page shape is the
+repo-root `templates/educational-article-template.html`.
 
 This skill produces the human-readable inputs to that pipeline: the editorial brief,
 the drafted 13-part body, the companion source file, the audit, the print companion,

@@ -1,5 +1,5 @@
 /**
- * article-reading-progress.js — reading progress bar + article analytics.
+ * article-reading-progress.js : reading progress bar + article analytics.
  * Progressive enhancement: the article reads perfectly without this file.
  * Documented events (see docs/fsa-article-metadata.md):
  *   article_opened, article_completed, article_print_selected, article_exercise_expanded

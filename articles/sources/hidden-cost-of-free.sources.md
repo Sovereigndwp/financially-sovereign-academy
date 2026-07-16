@@ -1,4 +1,4 @@
-# Sources — The Hidden Cost of “Free”
+# Sources: The Hidden Cost of “Free”
 
 - **Article ID:** FSA-ARTICLE-003
 - **Slug:** hidden-cost-of-free

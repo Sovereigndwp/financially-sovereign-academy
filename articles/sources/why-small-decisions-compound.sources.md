@@ -1,4 +1,4 @@
-# Sources — Why Small Decisions Compound
+# Sources: Why Small Decisions Compound
 
 - **Article ID:** FSA-ARTICLE-014
 - **Slug:** why-small-decisions-compound

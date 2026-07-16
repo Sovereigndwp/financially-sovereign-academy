@@ -1,4 +1,4 @@
-# Sources — Risk Is More Than Losing Money
+# Sources: Risk Is More Than Losing Money
 
 - **Article ID:** FSA-ARTICLE-019
 - **Slug:** risk-is-more-than-losing-money

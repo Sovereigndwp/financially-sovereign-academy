@@ -1,4 +1,4 @@
-# Sources — Why Prices Matter More Than Cost
+# Sources: Why Prices Matter More Than Cost
 
 - **Article ID:** FSA-ARTICLE-004
 - **Slug:** why-prices-matter-more-than-cost

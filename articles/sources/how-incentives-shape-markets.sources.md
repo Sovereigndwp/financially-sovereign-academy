@@ -1,4 +1,4 @@
-# Sources — How Incentives Shape Markets
+# Sources: How Incentives Shape Markets
 
 - **Article ID:** FSA-ARTICLE-025
 - **Slug:** how-incentives-shape-markets

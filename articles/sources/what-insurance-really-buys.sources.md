@@ -1,4 +1,4 @@
-# Sources — What Insurance Really Buys
+# Sources: What Insurance Really Buys
 
 - **Article ID:** FSA-ARTICLE-011
 - **Slug:** what-insurance-really-buys

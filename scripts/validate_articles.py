@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-validate_articles.py — integrity checks for the FSA Money Ideas article library.
+validate_articles.py: integrity checks for the FSA Money Ideas article library.
 
 Usage:
     python3 scripts/validate_articles.py [REPO_ROOT]
@@ -147,7 +147,7 @@ def main():
                 err("broken link in %s -> %s" % (os.path.relpath(fp, root), target))
 
     # ---- report ----
-    print("FSA Money Ideas — library validation")
+    print("FSA Money Ideas: library validation")
     print("  root:        %s" % root)
     print("  articles:    %d" % len(arts))
     print("  html scanned:%d" % scanned)

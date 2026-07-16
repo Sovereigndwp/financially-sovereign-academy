@@ -1,4 +1,4 @@
-# Sources — Why We Buy Things We Don’t Need
+# Sources: Why We Buy Things We Don’t Need
 
 - **Article ID:** FSA-ARTICLE-007
 - **Slug:** why-we-buy-things-we-dont-need

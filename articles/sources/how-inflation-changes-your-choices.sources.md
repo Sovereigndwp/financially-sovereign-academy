@@ -1,4 +1,4 @@
-# Sources — How Inflation Changes Your Choices
+# Sources: How Inflation Changes Your Choices
 
 - **Article ID:** FSA-ARTICLE-017
 - **Slug:** how-inflation-changes-your-choices

@@ -1,4 +1,4 @@
-# Sources — {{ARTICLE TITLE}}
+# Sources: {{ARTICLE TITLE}}
 
 - **Article ID:** FSA-ARTICLE-NNN
 - **Slug:** {{slug}}
@@ -26,7 +26,7 @@ official guidance).
 **Preferred sources, in order:** government agencies; central banks where
 appropriate; academic papers; established nonprofit educational institutions;
 official regulatory materials; high-quality research organizations. Do not cite
-another educational article merely because it explains a concept well — cite the
+another educational article merely because it explains a concept well; cite the
 underlying primary or authoritative source.
 
 For U.S. personal-finance topics, common primary sources include: CFPB, FDIC,

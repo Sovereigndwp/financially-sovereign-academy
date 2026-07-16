@@ -1,4 +1,4 @@
-# Sources — Sunk Costs Trap Smart People
+# Sources: Sunk Costs Trap Smart People
 
 - **Article ID:** FSA-ARTICLE-021
 - **Slug:** sunk-costs-trap-smart-people

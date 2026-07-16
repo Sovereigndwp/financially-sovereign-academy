@@ -1,5 +1,5 @@
 /* ============================================================================
-   fsa-articles.css — FSA Money Ideas article library.
+   fsa-articles.css : FSA Money Ideas article library.
    Extends css/fsa-brand.css (canonical tokens). Introduces NO new design tokens
    and NO :root brand block: every color/space/font is a var(--…) from fsa-brand.
    All selectors are namespaced .mi-* so nothing here leaks into modules or tools.
@@ -229,7 +229,7 @@
 }
 
 /* ============================================================================
-   PRINT — black on white, minimal ink, no chrome, visible URLs, ID in footer.
+   PRINT : black on white, minimal ink, no chrome, visible URLs, ID in footer.
    Exercises and prose stay fully usable on paper. No hover-only content exists.
    ============================================================================ */
 @media print {

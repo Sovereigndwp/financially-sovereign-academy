@@ -1,4 +1,4 @@
-# Sources — Where Interest Comes From
+# Sources: Where Interest Comes From
 
 - **Article ID:** FSA-ARTICLE-009
 - **Slug:** where-interest-comes-from

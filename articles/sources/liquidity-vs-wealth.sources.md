@@ -1,4 +1,4 @@
-# Sources — The Difference Between Liquidity and Wealth
+# Sources: The Difference Between Liquidity and Wealth
 
 - **Article ID:** FSA-ARTICLE-013
 - **Slug:** liquidity-vs-wealth

@@ -1,7 +1,7 @@
 # FSA Article Structure (13 parts)
 
 Every Money Ideas article uses the same 13 parts, in this order. The parts map
-directly onto the slots in `templates/educational-article-template.html` and the keys
+directly onto the slots in the repo-root `templates/educational-article-template.html` and the keys
 in `scripts/prototype_content.py`. Default length is 900 to 1,400 words (650 to 900
 for a narrow concept). Reading grade 7 to 9 in plain adult language.
 

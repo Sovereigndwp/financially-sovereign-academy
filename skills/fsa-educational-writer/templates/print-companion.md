@@ -3,8 +3,9 @@
 A print companion is the article made usable with a pencil and no internet. It must
 read fully offline, work in black and white, and require no account, app, login, or
 private financial data. It suits facilitators, correctional and reentry settings, and
-anyone without reliable connectivity. When a print companion exists, add `print` to the
-record's `formats`.
+anyone without reliable connectivity. The base article page already prints via the
+shared print stylesheet, so the record's `formats` already includes `print`; this
+companion is an additional facilitator artifact and does not change the `formats` field.
 
 - **Article ID:** FSA-ARTICLE-NNN
 - **Slug:** {{slug}}

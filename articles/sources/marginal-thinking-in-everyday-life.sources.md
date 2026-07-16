@@ -1,4 +1,4 @@
-# Sources — Marginal Thinking in Everyday Life
+# Sources: Marginal Thinking in Everyday Life
 
 - **Article ID:** FSA-ARTICLE-022
 - **Slug:** marginal-thinking-in-everyday-life

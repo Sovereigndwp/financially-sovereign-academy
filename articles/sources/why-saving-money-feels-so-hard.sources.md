@@ -1,4 +1,4 @@
-# Sources — Why Saving Money Feels So Hard
+# Sources: Why Saving Money Feels So Hard
 
 - **Article ID:** FSA-ARTICLE-001
 - **Slug:** why-saving-money-feels-so-hard

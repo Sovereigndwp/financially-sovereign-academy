@@ -1,4 +1,4 @@
-# Sources — Every Financial Decision Has Winners and Losers
+# Sources: Every Financial Decision Has Winners and Losers
 
 - **Article ID:** FSA-ARTICLE-024
 - **Slug:** financial-decisions-have-winners-and-losers

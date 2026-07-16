@@ -1,5 +1,5 @@
 /**
- * article-related-content.js — analytics + optional enrichment for the
+ * article-related-content.js : analytics + optional enrichment for the
  * "Explore the idea further" block. Progressive enhancement only.
  *
  * The related list is server-rendered from article-library.json at build time,
