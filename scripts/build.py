@@ -21,7 +21,8 @@ from library_data import (ARTICLES, SERIES, MODULES, MODULE_NAMES, MODULE_FILE,
                           FORMAT_VALUES)
 from prototype_content import PROTOTYPE
 
-OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "articles")
+OUT = os.environ.get("FSA_ARTICLES_OUT") or os.path.join(
+    os.path.dirname(os.path.abspath(__file__)), "..", "articles")
 REVISION_DATE = "2026-07-16"   # static; the build date recorded in registry/footers
 
 def esc(s):
@@ -203,16 +204,14 @@ def related_learning(a):
 def sources_section(a):
     if a["slug"] == PROTOTYPE["slug"]:
         body = """
-      <p class="mi-muted">Sources are grouped by type. Stable concepts (present bias,
-      opportunity cost) rest on established research; this draft cites them at review time.
-      The scenarios are illustrations created by FSA, not evidence.</p>
+      <p class="mi-muted">Grouped by type; full citations are in the companion source file.</p>
       <dl class="mi-sources">
-        <dt>Research source</dt><dd>Present bias / hyperbolic discounting, from the behavioral economics literature (to be cited on review).</dd>
-        <dt>Illustrative example (FSA)</dt><dd>"A payday, up close" is an invented scenario for teaching. It is not a data point.</dd>
+        <dt>Established research</dt><dd>Present bias and time discounting are supported by established peer-reviewed research.</dd>
+        <dt>Supporting research</dt><dd>The point that making saving automatic increases saving is supported by research from an employer retirement-plan setting.</dd>
+        <dt>Illustrative example (FSA)</dt><dd>"A payday, up close" (Marcus) is an FSA illustration for teaching, not evidence.</dd>
       </dl>
-      <p class="mi-reviewnote"><strong>Review note:</strong> Draft. Behavioral claims must be
-      matched to named sources before approval. See
-      <a href="%s">the companion source file</a>.</p>""" % a["sourcesFile"]
+      <p class="mi-reviewnote"><strong>Review note:</strong> This article is under human review. See
+      <a href="%s">the companion source file</a> for full citations.</p>""" % a["sourcesFile"]
     else:
         body = """
       <p class="mi-muted">This article is planned. Its factual claims, source list, and the
@@ -691,10 +690,32 @@ def _count(records, key):
 # Write everything
 # ============================================================================
 def w(path, content):
+    """Always (re)write a generated file: pages, registry, series. These are
+    fully derived from library_data and are safe to overwrite every build."""
     full = os.path.join(OUT, path)
     os.makedirs(os.path.dirname(full), exist_ok=True)
     with open(full, "w", encoding="utf-8") as f:
         f.write(content)
+
+def write_source(path, content):
+    """Write a companion source file ONLY if it does not already exist.
+
+    Source files hold hand-researched citations that a human fills in after the
+    stub is first generated. A normal build must never overwrite one, or a rebuild
+    would silently destroy researched sources. We create the stub the first time
+    and preserve whatever is on disk thereafter. There is no migration and no
+    deletion: an existing file is left byte-for-byte untouched. The validator still
+    inspects existing files for stub markers on public articles.
+
+    Returns "created" or "preserved".
+    """
+    full = os.path.join(OUT, path)
+    os.makedirs(os.path.dirname(full), exist_ok=True)
+    if os.path.exists(full):
+        return "preserved"
+    with open(full, "w", encoding="utf-8") as f:
+        f.write(content)
+    return "created"
 
 def main():
     os.makedirs(OUT, exist_ok=True)
@@ -707,13 +728,21 @@ def main():
     for slug in SERIES_ORDER:
         w("series/%s.html" % slug, render_series(slug))
     w("series/foundations.html", render_foundations_series())
-    # article pages + sources
+    # article pages (always regenerated) + source stubs (created once, then preserved)
+    created, preserved = [], []
     for a in ARTICLES:
         rel = a["canonicalPath"].replace("/articles/", "", 1)
         w(rel, render_article(a))
-        w("sources/%s.sources.md" % a["slug"], render_source(a))
-    print("OK: %d articles, %d series pages, registry + sources written to %s"
+        result = write_source("sources/%s.sources.md" % a["slug"], render_source(a))
+        (created if result == "created" else preserved).append(a["slug"])
+    print("OK: %d articles, %d series pages, registry written to %s"
           % (len(ARTICLES), len(SERIES_ORDER) + 1, OUT))
+    print("Source files: %d created, %d preserved (existing source files are never overwritten)."
+          % (len(created), len(preserved)))
+    for s in created:
+        print("  [created]   sources/%s.sources.md" % s)
+    for s in preserved:
+        print("  [preserved] sources/%s.sources.md" % s)
 
 if __name__ == "__main__":
     main()

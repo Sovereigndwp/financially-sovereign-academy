@@ -27,7 +27,7 @@ PROTOTYPE = {
 
     # 4. What is actually happening
     "actually_html": """
-<p>Two things are working against a plan to save, and neither is a moral failing.</p>
+<p>One thing to say up front: this part of the article is about money that could go either way, the dollars a person could spend now or set aside. For some people, there is little or none of that because income is already committed to essential expenses. That is a real financial constraint, not a failure of willpower. The article returns to that situation near the end. When some room does exist, two other forces can still work against a plan to save, and neither is a moral failing.</p>
 <p>The first is inside us. A reward you can feel now is vivid. A benefit that arrives in six months is abstract, more idea than experience. When choosing one option means giving up another, we tend to weight the near thing more heavily than the far thing, even when we sincerely value the far thing more. Researchers call this present bias. You do not have to know the term to feel it. The savings goal is real, but the coffee, the ride, the small relief after a long shift are right here, and right here has a way of winning.</p>
 <p>The second is around us. Spending has been engineered to be smooth. Cards are saved, checkout is one tap, and money leaves without ceremony. Saving, by contrast, usually asks you to stop, log in, decide, and move something on purpose. One path is frictionless and the other has speed bumps. When the easy path and the rewarded-right-now path are the same path, "just be disciplined" is asking willpower to do a job that design should be doing.</p>
 """,
