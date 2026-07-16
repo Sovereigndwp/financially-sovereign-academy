@@ -1,0 +1,112 @@
+<!--
+  FSA MODULE INTEGRATION — "Explore the idea further"
+  ============================================================================
+  Purpose: link the relevant FSA Money Ideas articles from a module page as
+  ENRICHMENT, without interrupting the module's main learning path. Articles are
+  optional reinforcement, not a dependency the learner must leave the module to
+  complete.
+
+  WHY THIS IS A SNIPPET, NOT AN AUTOMATED EDIT:
+  The module pages are large, live, production files. This project has a history
+  of a production break from a broad templating change, so touching all ten
+  modules unattended is not worth the risk for optional enrichment. Paste this
+  block manually near the END of each module's main content (before the footer /
+  next-module nav), swap in that module's article list from the table below, and
+  eyeball the page before committing. It uses only existing .fsa-* / .mi-* classes
+  and links css/fsa-articles.css, so it inherits the canonical brand with no new
+  tokens.
+
+  If css/fsa-articles.css is not already linked on the module page, add this once
+  in <head>:  <link rel="stylesheet" href="/css/fsa-articles.css">
+  (It is namespaced .mi-* and will not affect existing module styles.)
+  ============================================================================
+-->
+
+<section class="fsa-section" aria-labelledby="explore-further-h">
+  <div class="fsa-wrap">
+    <div class="fsa-section-tag">Explore the idea further</div>
+    <h2 class="fsa-h3" id="explore-further-h">Short reads that go beneath this module</h2>
+    <p style="color:var(--color-muted);max-width:var(--width-prose)">
+      Optional four-to-eight-minute articles from
+      <a href="/articles/">FSA Money Ideas</a>. They are reinforcement, not
+      required to finish this module.
+    </p>
+    <ul class="mi-linklist mi-linklist--wrap">
+      <!-- Swap these for the current module's rows (see table below) -->
+      <li><a href="/articles/money-decisions/why-saving-money-feels-so-hard.html">Why Saving Money Feels So Hard</a></li>
+      <li><a href="/articles/foundations/the-most-expensive-word-is-later.html">The Most Expensive Word in Personal Finance: &ldquo;Later&rdquo;</a></li>
+    </ul>
+  </div>
+</section>
+
+<!--
+  ARTICLE-TO-MODULE MAP  (which articles to list on each module page)
+  Only the prototype + the featured intro are drafted today; the rest are planned
+  and carry robots:noindex, so linking them from a module is safe (they render a
+  clear "planned" placeholder). Enable rows as articles reach approved/published.
+
+  Mindset & Cash Flow  (modules/money-mindset-cash-flow.html)
+    - /articles/money-decisions/why-saving-money-feels-so-hard.html
+    - /articles/money-decisions/every-dollar-has-four-jobs.html
+    - /articles/money-decisions/why-prices-matter-more-than-cost.html
+    - /articles/money-decisions/financial-life-is-a-series-of-tradeoffs.html
+    - /articles/money-decisions/why-we-buy-things-we-dont-need.html
+    - /articles/economic-thinking/opportunity-cost-is-everywhere.html
+    - /articles/economic-thinking/sunk-costs-trap-smart-people.html
+    - /articles/economic-thinking/marginal-thinking-in-everyday-life.html
+    - /articles/economic-thinking/scarcity-never-disappears.html
+    - /articles/financial-independence/why-small-decisions-compound.html
+    - /articles/foundations/the-most-expensive-word-is-later.html
+
+  Emergency Funds  (modules/emergency-funds-saving.html)
+    - /articles/money-decisions/why-saving-money-feels-so-hard.html
+    - /articles/financial-systems/why-emergencies-become-financial-emergencies.html
+    - /articles/financial-systems/liquidity-vs-wealth.html
+    - /articles/foundations/the-most-expensive-word-is-later.html
+
+  Banking  (modules/banking-basics.html)
+    - /articles/financial-systems/what-banks-actually-do.html
+    - /articles/financial-systems/where-interest-comes-from.html
+    - /articles/money-decisions/hidden-cost-of-free.html
+    - /articles/economic-thinking/how-incentives-shape-markets.html
+
+  Credit Scores  (modules/credit-scores.html)
+    - /articles/financial-systems/why-credit-exists.html
+    - /articles/financial-independence/good-debt-bad-debt.html
+
+  Debt  (modules/debt-strategy.html)
+    - /articles/financial-systems/where-interest-comes-from.html
+    - /articles/financial-systems/why-credit-exists.html
+    - /articles/financial-independence/good-debt-bad-debt.html
+    - /articles/economic-thinking/sunk-costs-trap-smart-people.html
+
+  Taxes/Paychecks  (modules/taxes-paychecks.html)
+    - (no dedicated article yet; add when one is written)
+
+  Investing  (modules/investing-fundamentals.html)
+    - /articles/financial-independence/why-small-decisions-compound.html
+    - /articles/financial-independence/income-vs-wealth.html
+    - /articles/financial-independence/investing-is-buying-future-productivity.html
+    - /articles/financial-independence/how-inflation-changes-your-choices.html
+    - /articles/financial-systems/liquidity-vs-wealth.html
+    - /articles/economic-thinking/how-incentives-shape-markets.html
+
+  Risk/Insurance  (modules/risk-insurance.html)
+    - /articles/financial-systems/what-insurance-really-buys.html
+    - /articles/financial-systems/why-emergencies-become-financial-emergencies.html
+    - /articles/financial-independence/risk-is-more-than-losing-money.html
+
+  Consumer Protection  (modules/consumer-protection.html)
+    - /articles/money-decisions/hidden-cost-of-free.html
+    - /articles/money-decisions/incentives-explain-more-than-you-think.html
+    - /articles/money-decisions/why-we-buy-things-we-dont-need.html
+    - /articles/economic-thinking/financial-decisions-have-winners-and-losers.html
+    - /articles/economic-thinking/how-incentives-shape-markets.html
+
+  Master Plan  (modules/financial-master-plan.html)
+    - /articles/money-decisions/financial-life-is-a-series-of-tradeoffs.html
+    - /articles/financial-independence/income-vs-wealth.html
+    - /articles/financial-independence/how-inflation-changes-your-choices.html
+    - /articles/economic-thinking/financial-decisions-have-winners-and-losers.html
+    - /articles/foundations/the-most-expensive-word-is-later.html
+-->

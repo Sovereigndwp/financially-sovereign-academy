@@ -1,0 +1,267 @@
+/* ============================================================================
+   fsa-articles.css — FSA Money Ideas article library.
+   Extends css/fsa-brand.css (canonical tokens). Introduces NO new design tokens
+   and NO :root brand block: every color/space/font is a var(--…) from fsa-brand.
+   All selectors are namespaced .mi-* so nothing here leaks into modules or tools.
+   Screen styles first; a single @media print block at the end.
+   ============================================================================ */
+
+/* ---- Reading progress bar (progressive enhancement; JS sets width) -------- */
+.mi-progress {
+  position: fixed; top: 0; left: 0; height: 3px; width: 0;
+  background: var(--brand-gradient);
+  z-index: var(--z-fixed, 1200);
+  transition: width 90ms linear;
+}
+@media (prefers-reduced-motion: reduce) { .mi-progress { transition: none; } }
+
+/* ---- Top bar + breadcrumbs ------------------------------------------------ */
+.mi-topbar {
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-bg);
+}
+.mi-topbar__inner {
+  max-width: var(--width-default); margin: 0 auto;
+  padding: 0.85rem 1.5rem; display: flex; align-items: center;
+  justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+}
+.mi-wordmark {
+  font-family: var(--font-sans); font-weight: 700; font-size: 0.92rem;
+  letter-spacing: -0.01em; color: var(--color-text-strong); text-decoration: none;
+}
+.mi-topnav { display: flex; gap: 1.25rem; font-family: var(--font-sans); font-size: 0.9rem; }
+.mi-topnav a { color: var(--color-muted); }
+.mi-topnav a:hover, .mi-topnav a[aria-current] { color: var(--color-mint); text-decoration: none; }
+.mi-crumbs {
+  max-width: var(--width-default); margin: 0 auto; padding: 0.6rem 1.5rem 0.7rem;
+  font-family: var(--font-sans); font-size: 0.8rem; color: var(--color-faint);
+  display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center;
+}
+.mi-crumbs a { color: var(--color-muted); }
+.mi-crumbs__sep { color: var(--color-faint); }
+.mi-crumbs [aria-current] { color: var(--color-text); }
+
+/* ---- Article layout + prose ---------------------------------------------- */
+.mi-article { padding: 1.5rem 0 3rem; }
+.mi-prose {
+  max-width: var(--width-prose);      /* ~680px comfortable measure */
+  margin: 0 auto; padding: 0 1.5rem;
+}
+.mi-prose p { margin: 0 0 1.15rem; font-size: var(--fs-body); line-height: 1.7; }
+.mi-prose h2 { margin: 2.4rem 0 0.9rem; }
+.mi-prose h3 { margin: 1.8rem 0 0.7rem; }
+.mi-prose a { color: var(--color-mint); text-decoration: underline; text-underline-offset: 2px; }
+.mi-prose ul.fsa-list { margin: 0 0 1.3rem; }
+.mi-prose ul.fsa-list li { font-family: var(--font-body); font-size: var(--fs-body); }
+
+.mi-articlehead { margin-bottom: 1.6rem; }
+.mi-articlemeta {
+  display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center;
+  font-family: var(--font-sans); font-size: 0.8rem; color: var(--color-muted);
+  margin-bottom: 0.8rem; text-transform: none;
+}
+.mi-articlemeta .fsa-eyebrow { color: var(--color-mint); }
+.mi-articlehead .fsa-lede { margin-top: 0.8rem; }
+.mi-dot { color: var(--color-faint); }
+.mi-actions { margin-top: 1.1rem; }
+.mi-muted { color: var(--color-muted); }
+
+/* ---- Non-published notice (drafts + planned) ----------------------------- */
+.mi-devnote {
+  display: flex; gap: 0.75rem; align-items: baseline; flex-wrap: wrap;
+  border: 1px solid var(--color-warning);
+  border-left: 3px solid var(--color-warning);
+  background: color-mix(in srgb, var(--color-warning) 8%, transparent);
+  padding: 0.8rem 1rem; border-radius: var(--radius-sm);
+  margin-bottom: 1.6rem; font-family: var(--font-sans); font-size: 0.9rem;
+  color: var(--color-text);
+}
+.mi-devnote__tag {
+  font-family: var(--font-mono); font-weight: 700; font-size: 0.68rem;
+  letter-spacing: 0.16em; color: var(--color-warning);
+  border: 1px solid var(--color-warning); padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-sm); white-space: nowrap;
+}
+
+/* ---- Mental-model callout ------------------------------------------------- */
+.mi-model {
+  border-left: 3px solid var(--color-brand);
+  background: var(--color-surface);
+  padding: 1.1rem 1.3rem; border-radius: var(--radius-sm);
+  margin: 2rem 0;
+}
+.mi-model .fsa-eyebrow { display: block; margin-bottom: 0.4rem; }
+.mi-model__text { font-family: var(--font-serif); font-style: italic; font-size: 1.25rem;
+  line-height: 1.4; color: var(--color-text-strong); margin: 0; }
+
+/* ---- Exercises (look for this / try it) ---------------------------------- */
+.mi-exercise {
+  border: 1px solid var(--color-border); border-radius: var(--radius-md);
+  background: var(--color-elevated); padding: 1.2rem 1.4rem; margin: 1.8rem 0;
+}
+.mi-exercise__title { margin: 0 0 0.6rem; color: var(--color-mint); }
+.mi-exercise p:last-child, .mi-exercise ul:last-child { margin-bottom: 0; }
+
+/* ---- Closing question ----------------------------------------------------- */
+.mi-closing { margin: 2.2rem 0 0.5rem; padding-top: 1.4rem; border-top: 1px solid var(--color-border); }
+.mi-closing__q { font-family: var(--font-serif); font-size: 1.3rem; line-height: 1.4;
+  color: var(--color-text-strong); margin: 0.4rem 0 0; }
+
+/* ---- Placeholder brief + structure --------------------------------------- */
+.mi-brief { background: var(--color-surface); border: 1px solid var(--color-border);
+  border-radius: var(--radius-md); padding: 1.2rem 1.4rem; margin-bottom: 1.6rem; }
+.mi-briefmeta { margin: 0.8rem 0 0; }
+.mi-briefmeta dt { font-family: var(--font-sans); font-weight: 600; font-size: 0.78rem;
+  text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-mint); margin-top: 0.7rem; }
+.mi-briefmeta dd { margin: 0.1rem 0 0; color: var(--color-text); font-family: var(--font-body); }
+.mi-structure { list-style: none; counter-reset: step; margin: 0; padding: 0; }
+.mi-structure li { display: flex; gap: 0.9rem; align-items: baseline;
+  padding: 0.6rem 0; border-bottom: 1px solid var(--color-border); }
+.mi-structure li::before { counter-increment: step; content: counter(step, decimal-leading-zero);
+  font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-faint); min-width: 1.6rem; }
+.mi-structure__label { font-family: var(--font-sans); font-weight: 600; color: var(--color-text-strong);
+  min-width: 12rem; }
+.mi-structure__note { color: var(--color-muted); font-family: var(--font-body); }
+
+/* ---- Related learning + sources ------------------------------------------ */
+.mi-related, .mi-sourcesbox {
+  max-width: var(--width-prose); margin: 2.5rem auto 0; padding: 1.5rem;
+  border-top: 1px solid var(--color-border);
+}
+.mi-related__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 0.8rem; }
+.mi-linklist { list-style: none; margin: 0.4rem 0 0; padding: 0; }
+.mi-linklist li { padding: 0.3rem 0; border: 0; }
+.mi-linklist a { color: var(--color-mint); }
+.mi-linklist--wrap { display: flex; flex-wrap: wrap; gap: 0.5rem 1.3rem; }
+.mi-next { margin-top: 1.6rem; }
+.mi-next .fsa-eyebrow { display: block; margin-bottom: 0.5rem; }
+.mi-sources dt { font-family: var(--font-sans); font-weight: 600; color: var(--color-mint);
+  font-size: 0.85rem; margin-top: 0.6rem; }
+.mi-sources dd { margin: 0.1rem 0 0; color: var(--color-muted); }
+.mi-reviewnote { margin-top: 1rem; font-size: 0.92rem; color: var(--color-text); }
+.mi-print-meta { display: none; }   /* screen-hidden; print shows it */
+
+/* ============================================================================
+   Homepage + series
+   ============================================================================ */
+.mi-hero .fsa-h1 { margin-top: 0.4rem; }
+.mi-intro { max-width: var(--width-prose); color: var(--color-text); margin-top: 1rem; font-size: var(--fs-body); }
+.mi-eduonly { margin-top: 1rem; font-family: var(--font-sans); font-size: 0.8rem; color: var(--color-faint); }
+
+.mi-featured {
+  display: flex; justify-content: space-between; align-items: flex-end; gap: 1.5rem;
+  flex-wrap: wrap; text-decoration: none; color: var(--color-text); margin-top: 0.8rem;
+}
+.mi-featured:hover { text-decoration: none; }
+.mi-featured .fsa-h2 { margin: 0.3rem 0; }
+.mi-featured__sub { color: var(--color-muted); max-width: 46ch; }
+.mi-featured__go { font-family: var(--font-sans); font-weight: 600; color: var(--color-mint); white-space: nowrap; }
+
+.mi-seriesgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1rem; margin-top: 1.2rem; }
+.mi-seriescard { display: block; background: var(--color-elevated); border: 1px solid var(--color-border);
+  border-radius: var(--radius-md); padding: 1.3rem; text-decoration: none; color: var(--color-text);
+  transition: var(--transition-base); }
+.mi-seriescard:hover { border-color: var(--color-brand); transform: translateY(-2px);
+  box-shadow: var(--shadow-card); text-decoration: none; }
+.mi-seriescard__num, .mi-seriesnum { font-family: var(--font-mono); font-size: 0.8rem; font-weight: 700;
+  letter-spacing: 0.2em; color: var(--color-mint); }
+.mi-seriescard__count { font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-faint); }
+
+/* concept + module chips */
+.mi-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+.mi-chip { font-family: var(--font-sans); font-size: 0.82rem; font-weight: 500;
+  color: var(--color-muted); background: var(--color-surface);
+  border: 1px solid var(--color-border); padding: 0.4rem 0.85rem; border-radius: var(--radius-pill);
+  cursor: pointer; transition: var(--transition-base); }
+.mi-chip:hover { border-color: var(--color-mint); color: var(--color-mint); }
+.mi-chip.is-active { background: var(--color-elevated); border-color: var(--color-brand); color: var(--color-mint); }
+.mi-modrow { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+.mi-modchip { display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--font-sans);
+  font-size: 0.82rem; color: var(--color-text); background: var(--color-surface);
+  border: 1px solid var(--color-border); padding: 0.4rem 0.8rem; border-radius: var(--radius-sm);
+  text-decoration: none; transition: var(--transition-base); }
+.mi-modchip:hover { border-color: var(--color-mint); text-decoration: none; }
+.mi-modchip__n { font-family: var(--font-mono); font-size: 0.72rem; color: var(--color-faint); }
+
+/* article cards */
+.mi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem; margin-top: 1rem; }
+.mi-card { display: flex; flex-direction: column; gap: 0.5rem; background: var(--color-elevated);
+  border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 1.2rem;
+  text-decoration: none; color: var(--color-text); transition: var(--transition-base); }
+.mi-card:hover { border-color: var(--color-brand); transform: translateY(-2px);
+  box-shadow: var(--shadow-card); text-decoration: none; }
+.mi-card[hidden] { display: none; }
+.mi-card__top { display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; }
+.mi-card__series { font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--color-faint); }
+.mi-card__title { font-family: var(--font-serif); font-size: 1.12rem; line-height: 1.25;
+  color: var(--color-text-strong); margin: 0; }
+.mi-card__desc { color: var(--color-muted); font-size: 0.95rem; margin: 0; flex: 1; }
+.mi-card__foot { display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center;
+  font-family: var(--font-sans); font-size: 0.76rem; color: var(--color-faint); margin-top: 0.2rem; }
+
+/* status badges */
+.mi-badge { font-family: var(--font-mono); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; padding: 0.2rem 0.5rem; border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border); white-space: nowrap; }
+.mi-badge--live { color: var(--color-mint); border-color: var(--color-brand); }
+.mi-badge--draft { color: var(--color-warning); border-color: var(--color-warning); }
+.mi-badge--planned { color: var(--color-faint); border-color: var(--color-border); }
+
+.mi-gridhead { margin-top: 1rem; }
+.mi-legend { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; margin-top: 0.6rem;
+  font-family: var(--font-sans); font-size: 0.8rem; }
+.mi-noresult { color: var(--color-muted); font-family: var(--font-sans); margin-top: 1rem; }
+
+/* series page bits */
+.mi-serieshero .fsa-h1 { margin-top: 0.4rem; }
+.mi-framing { font-family: var(--font-serif); font-style: italic; font-size: 1.2rem;
+  color: var(--color-mint); margin-top: 1rem; max-width: var(--width-prose); }
+.mi-learn { max-width: var(--width-prose); color: var(--color-text); }
+.mi-starthere { margin-top: 1.2rem; }
+
+@media (max-width: 620px) {
+  .mi-related__grid { grid-template-columns: 1fr; }
+  .mi-structure__label { min-width: 0; }
+  .mi-structure li { flex-wrap: wrap; }
+}
+
+/* ============================================================================
+   PRINT — black on white, minimal ink, no chrome, visible URLs, ID in footer.
+   Exercises and prose stay fully usable on paper. No hover-only content exists.
+   ============================================================================ */
+@media print {
+  body { background: #fff !important; color: #000 !important; font-size: 11.5pt; }
+
+  /* Hide interactive chrome */
+  .mi-progress, .mi-topbar, .mi-crumbs, .mi-actions, .mi-topnav,
+  .fsa-skip-link, .fsa-no-print, .mi-featured__go { display: none !important; }
+
+  .mi-prose, .mi-related, .mi-sourcesbox { max-width: 100%; margin: 0; padding: 0; }
+  .mi-article { padding: 0; }
+
+  .mi-prose h1, .mi-prose h2, .mi-prose h3,
+  .mi-card__title, .mi-closing__q, .mi-model__text { color: #000 !important; }
+  .mi-prose a { color: #000 !important; text-decoration: underline; }
+
+  /* Show destination URLs for internal links so the paper copy is navigable */
+  .mi-linklist a[href]::after,
+  .mi-related a[href]::after { content: " (" attr(href) ")"; font-size: 9pt; color: #000; }
+
+  /* Boxes: outline only, no fills, so they read cleanly in grayscale */
+  .mi-model, .mi-exercise, .mi-brief, .mi-devnote, .mi-seriescard, .mi-card {
+    background: #fff !important; border: 1px solid #000 !important; box-shadow: none !important;
+    -webkit-print-color-adjust: exact; break-inside: avoid;
+  }
+  .mi-model { border-left: 3px solid #000 !important; }
+  .mi-devnote__tag, .mi-badge { color: #000 !important; border-color: #000 !important; }
+  .mi-exercise__title, .mi-model .fsa-eyebrow, .mi-closing .fsa-eyebrow,
+  .mi-articlemeta .fsa-eyebrow, .fsa-eyebrow { color: #000 !important; }
+
+  /* Article ID + revision date in the footer */
+  .mi-print-meta { display: block !important; color: #000; font-family: monospace;
+    font-size: 9pt; margin-top: 0.5rem; }
+  .fsa-legal-footer { color: #000 !important; border-top: 1px solid #000; }
+}

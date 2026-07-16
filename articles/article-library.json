@@ -1,0 +1,1631 @@
+{
+  "$schema": "./article-library.schema.md",
+  "library": "FSA Money Ideas",
+  "generated": "2026-07-16",
+  "counts": {
+    "total": 26,
+    "byStatus": {
+      "planned": 25,
+      "drafted": 1
+    },
+    "public": 0
+  },
+  "vocab": {
+    "status": [
+      "idea",
+      "outlined",
+      "drafted",
+      "fact-checked",
+      "educational-review",
+      "accessibility-review",
+      "approved",
+      "published",
+      "revision-needed",
+      "archived",
+      "planned"
+    ],
+    "publicStatuses": [
+      "approved",
+      "published"
+    ],
+    "reviewStatus": [
+      "not-started",
+      "educational-review-required",
+      "human-review-required",
+      "in-review",
+      "approved"
+    ],
+    "difficulty": [
+      "foundational",
+      "intermediate",
+      "advanced"
+    ],
+    "audiences": [
+      "general",
+      "workforce",
+      "reentry",
+      "youth",
+      "community",
+      "educators",
+      "colombia"
+    ],
+    "formats": [
+      "web",
+      "print"
+    ],
+    "concepts": [
+      "saving",
+      "spending",
+      "tradeoffs",
+      "incentives",
+      "credit",
+      "banking",
+      "insurance",
+      "risk",
+      "inflation",
+      "investing",
+      "wealth",
+      "opportunity cost",
+      "scarcity",
+      "compounding"
+    ],
+    "modules": [
+      "Mindset & Cash Flow",
+      "Emergency Funds",
+      "Banking",
+      "Credit Scores",
+      "Debt",
+      "Taxes/Paychecks",
+      "Investing",
+      "Risk/Insurance",
+      "Consumer Protection",
+      "Master Plan"
+    ],
+    "series": {
+      "money-decisions": "How Money Decisions Work",
+      "financial-systems": "Understanding Financial Systems",
+      "financial-independence": "Building Financial Independence",
+      "economic-thinking": "Thinking Like an Economist",
+      "foundations": "Foundations"
+    }
+  },
+  "articles": [
+    {
+      "id": "FSA-ARTICLE-000",
+      "slug": "the-most-expensive-word-is-later",
+      "title": "The Most Expensive Word in Personal Finance: “Later”",
+      "subtitle": "How a small, sensible-sounding word quietly reshapes a financial life.",
+      "series": null,
+      "seriesSlug": "foundations",
+      "seriesOrder": 0,
+      "collection": "Foundations",
+      "seriesPosition": "introductory",
+      "status": "planned",
+      "featured": true,
+      "initialCollection": true,
+      "language": "en",
+      "translationOf": null,
+      "availableLanguages": [
+        "en"
+      ],
+      "readingMinutes": 6,
+      "difficulty": "foundational",
+      "primaryConcept": "delay",
+      "concepts": [
+        "saving",
+        "compounding",
+        "tradeoffs"
+      ],
+      "supportingConcepts": [
+        "time",
+        "compounding",
+        "avoidance",
+        "financial consequences"
+      ],
+      "misconception": "“Later” is a neutral choice, it just moves a decision to a better time.",
+      "coreQuestion": "What does it actually cost to postpone a money decision?",
+      "mentalModel": "“Later” is not free; it quietly borrows from your future self.",
+      "learnerOutcome": "The learner can notice when “later” is doing the work of a decision, and ask what the delay costs.",
+      "editorialBrief": "An introduction to the whole library. Most money problems do not arrive as dramatic mistakes; they arrive as a series of reasonable-sounding postponements. This piece names the pattern, the small, respectable word 'later', and shows how delay changes who pays and how much, without shaming anyone for using it. It sets up the four series that follow.",
+      "fsaModules": [
+        "Mindset & Cash Flow",
+        "Emergency Funds"
+      ],
+      "audiences": [
+        "general",
+        "workforce",
+        "reentry",
+        "youth"
+      ],
+      "formats": [
+        "web",
+        "print"
+      ],
+      "publishedDate": null,
+      "updatedDate": null,
+      "canonicalPath": "/articles/foundations/the-most-expensive-word-is-later.html",
+      "relatedArticles": [],
+      "sourcesFile": "/articles/sources/the-most-expensive-word-is-later.sources.md",
+      "reviewStatus": "not-started"
+    },
+    {
+      "id": "FSA-ARTICLE-001",
+      "slug": "why-saving-money-feels-so-hard",
+      "title": "Why Saving Money Feels So Hard",
+      "subtitle": "",
+      "series": "How Money Decisions Work",
+      "seriesSlug": "money-decisions",
+      "seriesOrder": 1,
+      "collection": null,
+      "seriesPosition": null,
+      "status": "drafted",
+      "featured": true,
+      "initialCollection": true,
+      "language": "en",
+      "translationOf": null,
+      "availableLanguages": [
+        "en"
+      ],
+      "readingMinutes": 6,
+      "difficulty": "foundational",
+      "primaryConcept": "present bias",
+      "concepts": [
+        "saving",
+        "tradeoffs",
+        "opportunity cost"
+      ],
+      "supportingConcepts": [
+        "opportunity cost",
+        "delayed gratification",
+        "habit formation"
+      ],
+      "misconception": "People fail to save mainly because they lack discipline.",
+      "coreQuestion": "Why can saving feel difficult even when we understand why it matters?",
+      "mentalModel": "Today competes with tomorrow.",
+      "learnerOutcome": "The learner can identify how immediate rewards compete with future goals, and how their environment shapes the contest.",
+      "editorialBrief": "The prototype article. It reframes saving from a willpower problem into a competition between a vivid present and an abstract future, made harder by tight budgets and systems built to make spending easy. It respects learners under real financial pressure while still showing where personal design choices can tip the contest.",
+      "fsaModules": [
+        "Mindset & Cash Flow",
+        "Emergency Funds"
+      ],
+      "audiences": [
+        "general",
+        "workforce",
+        "reentry",
+        "youth"
+      ],
+      "formats": [
+        "web",
+        "print"
+      ],
+      "publishedDate": null,
+      "updatedDate": null,
+      "canonicalPath": "/articles/money-decisions/why-saving-money-feels-so-hard.html",
+      "relatedArticles": [
+        "every-dollar-has-four-jobs",
+        "the-most-expensive-word-is-later"
+      ],
+      "sourcesFile": "/articles/sources/why-saving-money-feels-so-hard.sources.md",
+      "reviewStatus": "educational-review-required"
+    },
+    {
+      "id": "FSA-ARTICLE-002",
+      "slug": "every-dollar-has-four-jobs",
+      "title": "Every Dollar Has Four Jobs",
+      "subtitle": "",
+      "series": "How Money Decisions Work",
+      "seriesSlug": "money-decisions",
+      "seriesOrder": 2,
+      "collection": null,
+      "seriesPosition": null,
+      "status": "planned",
+      "featured": true,
+      "initialCollection": true,
+      "language": "en",
+      "translationOf": null,
+      "availableLanguages": [
+        "en"
+      ],
+      "readingMinutes": 6,
+      "difficulty": "foundational",
+      "primaryConcept": "money allocation",
+      "concepts": [
+        "spending",
+        "saving",
+        "tradeoffs"
+      ],
+      "supportingConcepts": [
+        "budgeting",
+        "tradeoffs",
+        "priorities"
+      ],
+      "misconception": "A budget is mainly about restricting spending.",
+      "coreQuestion": "If a dollar can only do one thing at a time, how do you decide which?",
+      "mentalModel": "A dollar spent on one job can’t do the other three.",
+      "learnerOutcome": "The learner can see spending, saving, protecting, and growing as competing jobs and choose deliberately among them.",
+      "editorialBrief": "Reframes budgeting away from restriction and toward assignment: every dollar can do one of a few jobs, cover now, hold for later, protect against surprises, or grow, and choosing one means declining the others. Gives learners a simple, non-judgmental way to see where their money is actually pointed.",
+      "fsaModules": [
+        "Mindset & Cash Flow"
+      ],
+      "audiences": [
+        "general",
+        "workforce",
+        "youth"
+      ],
+      "formats": [
+        "web",
+        "print"
+      ],
+      "publishedDate": null,
+      "updatedDate": null,
+      "canonicalPath": "/articles/money-decisions/every-dollar-has-four-jobs.html",
+      "relatedArticles": [
+        "hidden-cost-of-free",
+        "why-saving-money-feels-so-hard",
+        "the-most-expensive-word-is-later"
+      ],
+      "sourcesFile": "/articles/sources/every-dollar-has-four-jobs.sources.md",
+      "reviewStatus": "not-started"
+    },
+    {
+      "id": "FSA-ARTICLE-003",
+      "slug": "hidden-cost-of-free",
+      "title": "The Hidden Cost of “Free”",
+      "subtitle": "",
+      "series": "How Money Decisions Work",
+      "seriesSlug": "money-decisions",
+      "seriesOrder": 3,
+      "collection": null,
+      "seriesPosition": null,
+      "status": "planned",
+      "featured": false,
+      "initialCollection": false,
+      "language": "en",
+      "translationOf": null,
+      "availableLanguages": [
+        "en"
+      ],
+      "readingMinutes": 6,
+      "difficulty": "foundational",
+      "primaryConcept": "hidden cost",
+      "concepts": [
+        "spending",
+        "incentives",
+        "tradeoffs"
+      ],
+      "supportingConcepts": [
+        "incentives",
+        "opportunity cost",
+        "attention"
+      ],
+      "misconception": "Free means it costs you nothing.",
+      "coreQuestion": "If no money changes hands, why does ‘free’ still cost something?",
+      "mentalModel": "Free usually changes who pays, when they pay, or what they give up.",
+      "learnerOutcome": "The learner can identify the non-money cost hidden inside a 'free' offer before accepting it.",
+      "editorialBrief": "Examines what 'free' actually means in money terms, free checking, free trials, free financing. The point is not that free is a trap, but that the price simply moved: to your time, your attention, your data, or a later bill. Teaches learners to ask where the cost went instead of assuming it vanished.",
+      "fsaModules": [
+        "Consumer Protection",
+        "Banking"
+      ],
+      "audiences": [
+        "general",
+        "workforce",
+        "youth"
+      ],
+      "formats": [
+        "web",
+        "print"
+      ],
+      "publishedDate": null,
+      "updatedDate": null,
+      "canonicalPath": "/articles/money-decisions/hidden-cost-of-free.html",
+      "relatedArticles": [
+        "why-prices-matter-more-than-cost",
+        "every-dollar-has-four-jobs",
+        "the-most-expensive-word-is-later"
+      ],
+      "sourcesFile": "/articles/sources/hidden-cost-of-free.sources.md",
+      "reviewStatus": "not-started"
+    },
+    {
+      "id": "FSA-ARTICLE-004",
+      "slug": "why-prices-matter-more-than-cost",
+      "title": "Why Prices Matter More Than Cost",
+      "subtitle": "",
+      "series": "How Money Decisions Work",
+      "seriesSlug": "money-decisions",
+      "seriesOrder": 4,
+      "collection": null,
+      "seriesPosition": null,
+      "status": "planned",
+      "featured": true,
+      "initialCollection": true,
+      "language": "en",
+      "translationOf": null,
+      "availableLanguages": [
+        "en"
+      ],
+      "readingMinutes": 7,
+      "difficulty": "foundational",
+      "primaryConcept": "price vs cost",
+      "concepts": [
+        "spending",
+        "tradeoffs"
+      ],
+      "supportingConcepts": [
+        "total cost of ownership",
+        "tradeoffs",
+        "value"
+      ],
+      "misconception": "The cheaper option is the one with the lower price.",
+      "coreQuestion": "Why can the lower price sometimes be the more expensive choice?",
+      "mentalModel": "A low price and a low cost are not always the same.",
+      "learnerOutcome": "The learner can separate the sticker price of a choice from what it costs over time.",
+      "editorialBrief": "Draws the line between price (what you pay at the register) and cost (what the choice takes from you over its whole life). Uses ordinary examples, cheap shoes, a low monthly payment, the nearest store, to show why the lowest price sometimes carries the highest cost, without pretending the expensive option is always right.",
+      "fsaModules": [
+        "Mindset & Cash Flow",
+        "Consumer Protection"
+      ],
+      "audiences": [
+        "general",
+        "workforce",
+        "reentry"
+      ],
+      "formats": [
+        "web",
+        "print"
+      ],
+      "publishedDate": null,
+      "updatedDate": null,
+      "canonicalPath": "/articles/money-decisions/why-prices-matter-more-than-cost.html",
+      "relatedArticles": [
+        "financial-life-is-a-series-of-tradeoffs",
+        "hidden-cost-of-free",
+        "the-most-expensive-word-is-later"
+      ],
+      "sourcesFile": "/articles/sources/why-prices-matter-more-than-cost.sources.md",
+      "reviewStatus": "not-started"
+    },
+    {
+      "id": "FSA-ARTICLE-005",
+      "slug": "financial-life-is-a-series-of-tradeoffs",
+      "title": "Your Financial Life Is a Series of Tradeoffs",
+      "subtitle": "",
+      "series": "How Money Decisions Work",
+      "seriesSlug": "money-decisions",
+      "seriesOrder": 5,
+      "collection": null,
+      "seriesPosition": null,
+      "status": "planned",
+      "featured": true,
+      "initialCollection": true,
+      "language": "en",
+      "translationOf": null,
+      "availableLanguages": [
+        "en"
+      ],
+      "readingMinutes": 6,
+      "difficulty": "foundational",
+      "primaryConcept": "tradeoffs",
+      "concepts": [
+        "tradeoffs",
+        "opportunity cost"
+      ],
+      "supportingConcepts": [
+        "opportunity cost",
+        "priorities",
+        "constraints"
+      ],
+      "misconception": "Good financial decisions are about finding the option with no downside.",
+      "coreQuestion": "What if there is no option without a downside, only different downsides?",
+      "mentalModel": "Every choice closes another door.",
+      "learnerOutcome": "The learner can name what is given up in a decision, not only what is gained.",
+      "editorialBrief": "Reframes money decisions as choosing between downsides rather than searching for a flawless option. Shows that naming the tradeoff, what each path costs you, leads to clearer decisions than chasing a 'right answer,' and that different people can rationally choose differently.",
+      "fsaModules": [
+        "Mindset & Cash Flow",
+        "Master Plan"
+      ],
+      "audiences": [
+        "general",
+        "workforce",
+        "reentry",
+        "youth"
+      ],
+      "formats": [
+        "web",
+        "print"
+      ],
+      "publishedDate": null,
+      "updatedDate": null,
+      "canonicalPath": "/articles/money-decisions/financial-life-is-a-series-of-tradeoffs.html",
+      "relatedArticles": [
+        "incentives-explain-more-than-you-think",
+        "why-prices-matter-more-than-cost",
+        "the-most-expensive-word-is-later"
+      ],
+      "sourcesFile": "/articles/sources/financial-life-is-a-series-of-tradeoffs.sources.md",
+      "reviewStatus": "not-started"
+    },
+    {
+      "id": "FSA-ARTICLE-006",
+      "slug": "incentives-explain-more-than-you-think",
+      "title": "Incentives Explain More Than You Think",
+      "subtitle": "",
+      "series": "How Money Decisions Work",
+      "seriesSlug": "money-decisions",
+      "seriesOrder": 6,
+      "collection": null,
+      "seriesPosition": null,
+      "status": "planned",
+      "featured": false,
+      "initialCollection": false,
+      "language": "en",
+      "translationOf": null,
+      "availableLanguages": [
+        "en"
+      ],
+      "readingMinutes": 6,
+      "difficulty": "foundational",
+      "primaryConcept": "incentives",
+      "concepts": [
+        "incentives",
+        "banking"
+      ],
+      "supportingConcepts": [
+        "motivation",
+        "conflict of interest",
+        "design"
+      ],
+      "misconception": "If a company or program does something that hurts customers, it must be because the people are bad.",
+      "coreQuestion": "When a system produces a bad outcome, where should you look first?",
+      "mentalModel": "Follow the incentive before you judge the person.",
+      "learnerOutcome": "The learner can ask who is rewarded for what before accepting advice or a product.",
+      "editorialBrief": "Introduces incentives as a lens: much of what looks like malice or stupidity is people responding to what they're rewarded for. Applies it to fees, sales advice, and free offers so learners can predict behavior and read a situation before trusting it, without becoming cynical about everyone.",
+      "fsaModules": [
+        "Consumer Protection"
+      ],
+      "audiences": [
+        "general",
+        "workforce",
+        "community"
+      ],
+      "formats": [
+        "web",
+        "print"
+      ],
+      "publishedDate": null,
+      "updatedDate": null,
+      "canonicalPath": "/articles/money-decisions/incentives-explain-more-than-you-think.html",
+      "relatedArticles": [
+        "why-we-buy-things-we-dont-need",
+        "financial-life-is-a-series-of-tradeoffs",
+        "the-most-expensive-word-is-later"
+      ],
+      "sourcesFile": "/articles/sources/incentives-explain-more-than-you-think.sources.md",
+      "reviewStatus": "not-started"
+    },
+    {
+      "id": "FSA-ARTICLE-007",
+      "slug": "why-we-buy-things-we-dont-need",
+      "title": "Why We Buy Things We Don’t Need",
+      "subtitle": "",
+      "series": "How Money Decisions Work",
+      "seriesSlug": "money-decisions",
+      "seriesOrder": 7,
+      "collection": null,
+      "seriesPosition": null,
+      "status": "planned",
+      "featured": false,
+      "initialCollection": false,
+      "language": "en",
+      "translationOf": null,
+      "availableLanguages": [
+        "en"
+      ],
+      "readingMinutes": 6,
+      "difficulty": "foundational",
+      "primaryConcept": "emotional spending",
+      "concepts": [
+        "spending",
+        "incentives"
+      ],
+      "supportingConcepts": [
+        "marketing",
+        "identity",
+        "friction"
+      ],
+      "misconception": "People overspend because they are irresponsible.",
+      "coreQuestion": "Why do smart, careful people still buy things they later regret?",
+      "mentalModel": "Spending is designed to be easy; wanting is manufactured on purpose.",
+      "learnerOutcome": "The learner can spot the moment a purchase is being engineered rather than freely chosen.",
+      "editorialBrief": "Looks at the everyday machinery, one-click checkout, targeted ads, social comparison, stress, that turns wanting into buying. Frames overspending as a predictable response to a designed environment, not a character flaw, and gives learners friction they can add back on their own side.",
+      "fsaModules": [
+        "Mindset & Cash Flow",
+        "Consumer Protection"
+      ],
+      "audiences": [
+        "general",
+        "workforce",
+        "youth"
+      ],
+      "formats": [
+        "web",
+        "print"
+      ],
+      "publishedDate": null,
+      "updatedDate": null,
+      "canonicalPath": "/articles/money-decisions/why-we-buy-things-we-dont-need.html",
+      "relatedArticles": [
+        "incentives-explain-more-than-you-think",
+        "the-most-expensive-word-is-later"
+      ],
+      "sourcesFile": "/articles/sources/why-we-buy-things-we-dont-need.sources.md",
+      "reviewStatus": "not-started"
+    },
+    {
+      "id": "FSA-ARTICLE-008",
+      "slug": "what-banks-actually-do",
+      "title": "What Banks Actually Do",
+      "subtitle": "",
+      "series": "Understanding Financial Systems",
+      "seriesSlug": "financial-systems",
+      "seriesOrder": 1,
+      "collection": null,
+      "seriesPosition": null,
+      "status": "planned",
+      "featured": false,
+      "initialCollection": false,
+      "language": "en",
+      "translationOf": null,
+      "availableLanguages": [
+        "en"
+      ],
+      "readingMinutes": 7,
+      "difficulty": "foundational",
+      "primaryConcept": "financial intermediation",
+      "concepts": [
+        "banking",
+        "saving"
+      ],
+      "supportingConcepts": [
+        "deposits",
+        "lending",
+        "trust"
+      ],
+      "misconception": "A bank keeps your money in a drawer with your name on it.",
+      "coreQuestion": "If a bank lends out deposits, where is your money when you’re not using it?",
+      "mentalModel": "A bank is a hub that moves money between savers and borrowers, not a vault.",
+      "learnerOutcome": "The learner can explain, in plain terms, how a bank uses deposits and why that matters to them.",
+      "editorialBrief": "Explains what a bank does with deposits, connecting savers and borrowers, running the payment rails, and keeping enough on hand for withdrawals, and why deposit insurance exists. Aimed at learners who use banks daily but were never told how they work, without drifting into ideology.",
+      "fsaModules": [
+        "Banking"
+      ],
+      "audiences": [
+        "general",
+        "workforce",
+        "reentry",
+        "community"
+      ],
+      "formats": [
+        "web",
+        "print"
+      ],
+      "publishedDate": null,
+      "updatedDate": null,
+      "canonicalPath": "/articles/financial-systems/what-banks-actually-do.html",
+      "relatedArticles": [
+        "where-interest-comes-from",
+        "the-most-expensive-word-is-later"
+      ],
+      "sourcesFile": "/articles/sources/what-banks-actually-do.sources.md",
+      "reviewStatus": "not-started"
+    },
+    {
+      "id": "FSA-ARTICLE-009",
+      "slug": "where-interest-comes-from",
+      "title": "Where Interest Comes From",
+      "subtitle": "",
+      "series": "Understanding Financial Systems",
+      "seriesSlug": "financial-systems",
+      "seriesOrder": 2,
+      "collection": null,
+      "seriesPosition": null,
+      "status": "planned",
+      "featured": false,
+      "initialCollection": false,
+      "language": "en",
+      "translationOf": null,
+      "availableLanguages": [
+        "en"
+      ],
+      "readingMinutes": 7,
+      "difficulty": "foundational",
+      "primaryConcept": "interest",
+      "concepts": [
+        "banking",
+        "credit",
+        "investing"
+      ],
+      "supportingConcepts": [
+        "time value of money",
+        "risk",
+        "lending"
+      ],
+      "misconception": "Interest is just a fee the bank invented to make money.",
+      "coreQuestion": "Why would anyone pay extra to use money now, or accept extra to lend it?",
+      "mentalModel": "Interest is the price of time and risk.",
+      "learnerOutcome": "The learner can read an interest rate as a price for time and risk, on both sides of a loan.",
+      "editorialBrief": "Unpacks interest as the price of two things, waiting (time) and the chance of not being repaid (risk), rather than an arbitrary charge. Shows why the same person earns interest as a saver and pays it as a borrower, and why rates differ so much between products.",
+      "fsaModules": [
+        "Banking",
+        "Debt"
+      ],
+      "audiences": [
+        "general",
+        "workforce",
+        "community"
+      ],
+      "formats": [
+        "web",
+        "print"
+      ],
+      "publishedDate": null,
+      "updatedDate": null,
+      "canonicalPath": "/articles/financial-systems/where-interest-comes-from.html",
+      "relatedArticles": [
+        "why-credit-exists",
+        "what-banks-actually-do",
+        "the-most-expensive-word-is-later"
+      ],
+      "sourcesFile": "/articles/sources/where-interest-comes-from.sources.md",
+      "reviewStatus": "not-started"
+    },
+    {
+      "id": "FSA-ARTICLE-010",
+      "slug": "why-credit-exists",
+      "title": "Why Credit Exists",
+      "subtitle": "",
+      "series": "Understanding Financial Systems",
+      "seriesSlug": "financial-systems",
+      "seriesOrder": 3,
+      "collection": null,
+      "seriesPosition": null,
+      "status": "planned",
+      "featured": false,
+      "initialCollection": false,
+      "language": "en",
+      "translationOf": null,
+      "availableLanguages": [
+        "en"
+      ],
+      "readingMinutes": 6,
+      "difficulty": "foundational",
+      "primaryConcept": "credit",
+      "concepts": [
+        "credit",
+        "banking",
+        "tradeoffs"
+      ],
+      "supportingConcepts": [
+        "trust",
+        "future income",
+        "risk pricing"
+      ],
+      "misconception": "Credit exists to trap people in debt.",
+      "coreQuestion": "What problem is credit actually trying to solve?",
+      "mentalModel": "Credit moves future income into the present, for a price.",
+      "learnerOutcome": "The learner can see credit as a tool that trades future money for present money, and judge when that trade helps or hurts.",
+      "editorialBrief": "Explains the underlying purpose of credit, letting people use future income today when timing, not total resources, is the constraint, and why lenders price it by risk. Neither demonizes nor romanticizes borrowing; helps learners tell a useful use of credit from a costly one.",
+      "fsaModules": [
+        "Credit Scores",
+        "Debt"
+      ],
+      "audiences": [
+        "general",
+        "workforce",
+        "reentry"
+      ],
+      "formats": [
+        "web",
+        "print"
+      ],
+      "publishedDate": null,
+      "updatedDate": null,
+      "canonicalPath": "/articles/financial-systems/why-credit-exists.html",
+      "relatedArticles": [
+        "what-insurance-really-buys",
+        "where-interest-comes-from",
+        "the-most-expensive-word-is-later"
+      ],
+      "sourcesFile": "/articles/sources/why-credit-exists.sources.md",
+      "reviewStatus": "not-started"
+    },
+    {
+      "id": "FSA-ARTICLE-011",
+      "slug": "what-insurance-really-buys",
+      "title": "What Insurance Really Buys",
+      "subtitle": "",
+      "series": "Understanding Financial Systems",
+      "seriesSlug": "financial-systems",
+      "seriesOrder": 4,
+      "collection": null,
+      "seriesPosition": null,
+      "status": "planned",
+      "featured": false,
+      "initialCollection": false,
+      "language": "en",
+      "translationOf": null,
+      "availableLanguages": [
+        "en"
+      ],
+      "readingMinutes": 6,
+      "difficulty": "foundational",
+      "primaryConcept": "risk transfer",
+      "concepts": [
+        "insurance",
+        "risk"
+      ],
+      "supportingConcepts": [
+        "pooling",
+        "catastrophic loss",
+        "peace of mind"
+      ],
+      "misconception": "Insurance is a bad deal because most years you pay and get nothing back.",
+      "coreQuestion": "If you usually 'lose' on insurance, why buy it at all?",
+      "mentalModel": "Insurance buys protection from the loss you can’t recover from, not a return.",
+      "learnerOutcome": "The learner can decide which risks are worth insuring and which are cheaper to carry.",
+      "editorialBrief": "Reframes insurance from 'a bet you usually lose' to 'transferring the rare, ruinous loss to a pool.' Clarifies that the goal is not to come out ahead on average but to survive the low-probability, high-damage event, and that some small risks are better self-insured.",
+      "fsaModules": [
+        "Risk/Insurance"
+      ],
+      "audiences": [
+        "general",
+        "workforce",
+        "community"
+      ],
+      "formats": [
+        "web",
+        "print"
+      ],
+      "publishedDate": null,
+      "updatedDate": null,
+      "canonicalPath": "/articles/financial-systems/what-insurance-really-buys.html",
+      "relatedArticles": [
+        "why-emergencies-become-financial-emergencies",
+        "why-credit-exists",
+        "the-most-expensive-word-is-later"
+      ],
+      "sourcesFile": "/articles/sources/what-insurance-really-buys.sources.md",
+      "reviewStatus": "not-started"
+    },
+    {
+      "id": "FSA-ARTICLE-012",
+      "slug": "why-emergencies-become-financial-emergencies",
+      "title": "Why Emergencies Become Financial Emergencies",
+      "subtitle": "",
+      "series": "Understanding Financial Systems",
+      "seriesSlug": "financial-systems",
+      "seriesOrder": 5,
+      "collection": null,
+      "seriesPosition": null,
+      "status": "planned",
+      "featured": false,
+      "initialCollection": false,
+      "language": "en",
+      "translationOf": null,
+      "availableLanguages": [
+        "en"
+      ],
+      "readingMinutes": 6,
+      "difficulty": "foundational",
+      "primaryConcept": "liquidity shock",
+      "concepts": [
+        "risk",
+        "saving",
+        "banking"
+      ],
+      "supportingConcepts": [
+        "cash buffer",
+        "timing",
+        "cascading costs"
+      ],
+      "misconception": "A financial emergency means you didn’t earn enough.",
+      "coreQuestion": "Why can the same $400 surprise be a shrug for one household and a spiral for another?",
+      "mentalModel": "It’s rarely the size of the shock, it’s whether cash is there when it hits.",
+      "learnerOutcome": "The learner can distinguish an income problem from a timing problem, and see how small buffers stop cascades.",
+      "editorialBrief": "Shows how an ordinary event (a car repair, a missed shift) becomes a financial emergency through timing and cascading late fees, not just low income. Names the mechanism, no cash on hand at the moment of the shock, and why even a small buffer changes the outcome, while acknowledging that building one is genuinely hard on a tight budget.",
+      "fsaModules": [
+        "Emergency Funds",
+        "Risk/Insurance"
+      ],
+      "audiences": [
+        "general",
+        "workforce",
+        "reentry",
+        "community"
+      ],
+      "formats": [
+        "web",
+        "print"
+      ],
+      "publishedDate": null,
+      "updatedDate": null,
+      "canonicalPath": "/articles/financial-systems/why-emergencies-become-financial-emergencies.html",
+      "relatedArticles": [
+        "liquidity-vs-wealth",
+        "what-insurance-really-buys",
+        "the-most-expensive-word-is-later"
+      ],
+      "sourcesFile": "/articles/sources/why-emergencies-become-financial-emergencies.sources.md",
+      "reviewStatus": "not-started"
+    },
+    {
+      "id": "FSA-ARTICLE-013",
+      "slug": "liquidity-vs-wealth",
+      "title": "The Difference Between Liquidity and Wealth",
+      "subtitle": "",
+      "series": "Understanding Financial Systems",
+      "seriesSlug": "financial-systems",
+      "seriesOrder": 6,
+      "collection": null,
+      "seriesPosition": null,
+      "status": "planned",
+      "featured": false,
+      "initialCollection": false,
+      "language": "en",
+      "translationOf": null,
+      "availableLanguages": [
+        "en"
+      ],
+      "readingMinutes": 6,
+      "difficulty": "intermediate",
+      "primaryConcept": "liquidity",
+      "concepts": [
+        "wealth",
+        "saving",
+        "risk"
+      ],
+      "supportingConcepts": [
+        "cash flow",
+        "assets",
+        "access"
+      ],
+      "misconception": "Being wealthy means always having money available.",
+      "coreQuestion": "How can someone own a lot and still not be able to pay this week’s bill?",
+      "mentalModel": "Wealth is what you own; liquidity is what you can use right now.",
+      "learnerOutcome": "The learner can tell the difference between owning value and being able to spend it, and why both matter.",
+      "editorialBrief": "Separates two ideas people blur, how much you own versus how much you can actually reach today. Explains why house-rich, cash-poor situations happen, why liquidity has its own value, and how the mix between the two shifts as circumstances change.",
+      "fsaModules": [
+        "Emergency Funds",
+        "Investing"
+      ],
+      "audiences": [
+        "general",
+        "workforce",
+        "community"
+      ],
+      "formats": [
+        "web",
+        "print"
+      ],
+      "publishedDate": null,
+      "updatedDate": null,
+      "canonicalPath": "/articles/financial-systems/liquidity-vs-wealth.html",
+      "relatedArticles": [
+        "why-emergencies-become-financial-emergencies",
+        "the-most-expensive-word-is-later"
+      ],
+      "sourcesFile": "/articles/sources/liquidity-vs-wealth.sources.md",
+      "reviewStatus": "not-started"
+    },
+    {
+      "id": "FSA-ARTICLE-014",
+      "slug": "why-small-decisions-compound",
+      "title": "Why Small Decisions Compound",
+      "subtitle": "",
+      "series": "Building Financial Independence",
+      "seriesSlug": "financial-independence",
+      "seriesOrder": 1,
+      "collection": null,
+      "seriesPosition": null,
+      "status": "planned",
+      "featured": false,
+      "initialCollection": false,
+      "language": "en",
+      "translationOf": null,
+      "availableLanguages": [
+        "en"
+      ],
+      "readingMinutes": 6,
+      "difficulty": "foundational",
+      "primaryConcept": "compounding",
+      "concepts": [
+        "compounding",
+        "saving",
+        "investing"
+      ],
+      "supportingConcepts": [
+        "habits",
+        "time",
+        "feedback loops"
+      ],
+      "misconception": "Small amounts are too small to matter.",
+      "coreQuestion": "Why does the same small habit feel pointless at first and powerful later?",
+      "mentalModel": "Small, repeated choices don’t add up, they multiply.",
+      "learnerOutcome": "The learner can recognize where compounding is working for or against them, in money and in habits.",
+      "editorialBrief": "Explains compounding as a shape, not a formula: repeated small actions grow slowly, then steeply, which is why they feel useless early and decisive late. Applies it to both savings and debt so learners see the same curve working for and against them, using simple, verifiable math.",
+      "fsaModules": [
+        "Investing",
+        "Mindset & Cash Flow"
+      ],
+      "audiences": [
+        "general",
+        "workforce",
+        "youth"
+      ],
+      "formats": [
+        "web",
+        "print"
+      ],
+      "publishedDate": null,
+      "updatedDate": null,
+      "canonicalPath": "/articles/financial-independence/why-small-decisions-compound.html",
+      "relatedArticles": [
+        "income-vs-wealth",
+        "the-most-expensive-word-is-later"
+      ],
+      "sourcesFile": "/articles/sources/why-small-decisions-compound.sources.md",
+      "reviewStatus": "not-started"
+    },
+    {
+      "id": "FSA-ARTICLE-015",
+      "slug": "income-vs-wealth",
+      "title": "Income Solves Different Problems Than Wealth",
+      "subtitle": "",
+      "series": "Building Financial Independence",
+      "seriesSlug": "financial-independence",
+      "seriesOrder": 2,
+      "collection": null,
+      "seriesPosition": null,
+      "status": "planned",
+      "featured": false,
+      "initialCollection": false,
+      "language": "en",
+      "translationOf": null,
+      "availableLanguages": [
+        "en"
+      ],
+      "readingMinutes": 6,
+      "difficulty": "intermediate",
+      "primaryConcept": "income vs wealth",
+      "concepts": [
+        "wealth",
+        "investing",
+        "saving"
+      ],
+      "supportingConcepts": [
+        "cash flow",
+        "assets",
+        "security"
+      ],
+      "misconception": "A high income and wealth are basically the same thing.",
+      "coreQuestion": "Why can a high earner feel financially fragile while a modest saver feels secure?",
+      "mentalModel": "Income pays this month’s problems; wealth buys options for the future.",
+      "learnerOutcome": "The learner can tell which of their goals need more income and which need accumulated wealth.",
+      "editorialBrief": "Distinguishes the flow (income) from the stock (wealth) and shows they solve different problems: income covers recurring needs, wealth provides resilience and choice. Explains why the two can move independently and why building one doesn't automatically build the other.",
+      "fsaModules": [
+        "Investing",
+        "Master Plan"
+      ],
+      "audiences": [
+        "general",
+        "workforce",
+        "community"
+      ],
+      "formats": [
+        "web",
+        "print"
+      ],
+      "publishedDate": null,
+      "updatedDate": null,
+      "canonicalPath": "/articles/financial-independence/income-vs-wealth.html",
+      "relatedArticles": [
+        "good-debt-bad-debt",
+        "why-small-decisions-compound",
+        "the-most-expensive-word-is-later"
+      ],
+      "sourcesFile": "/articles/sources/income-vs-wealth.sources.md",
+      "reviewStatus": "not-started"
+    },
+    {
+      "id": "FSA-ARTICLE-016",
+      "slug": "good-debt-bad-debt",
+      "title": "Good Debt vs. Bad Debt Isn’t About the Loan",
+      "subtitle": "",
+      "series": "Building Financial Independence",
+      "seriesSlug": "financial-independence",
+      "seriesOrder": 3,
+      "collection": null,
+      "seriesPosition": null,
+      "status": "planned",
+      "featured": false,
+      "initialCollection": false,
+      "language": "en",
+      "translationOf": null,
+      "availableLanguages": [
+        "en"
+      ],
+      "readingMinutes": 7,
+      "difficulty": "intermediate",
+      "primaryConcept": "debt quality",
+      "concepts": [
+        "credit",
+        "tradeoffs",
+        "risk"
+      ],
+      "supportingConcepts": [
+        "return on borrowing",
+        "cash flow",
+        "terms"
+      ],
+      "misconception": "Some kinds of loans are always good and others are always bad.",
+      "coreQuestion": "What actually makes one debt helpful and another harmful?",
+      "mentalModel": "Debt is good or bad based on what it does for you, not what it’s called.",
+      "learnerOutcome": "The learner can evaluate a specific debt by its terms, purpose, and effect on their options, not its label.",
+      "editorialBrief": "Challenges the neat 'mortgage good, credit card bad' framing. Argues the same loan type can be either, depending on rate, purpose, and whether it expands or shrinks your future options. Gives learners a way to judge a debt in front of them rather than sorting by category.",
+      "fsaModules": [
+        "Debt",
+        "Credit Scores"
+      ],
+      "audiences": [
+        "general",
+        "workforce",
+        "reentry"
+      ],
+      "formats": [
+        "web",
+        "print"
+      ],
+      "publishedDate": null,
+      "updatedDate": null,
+      "canonicalPath": "/articles/financial-independence/good-debt-bad-debt.html",
+      "relatedArticles": [
+        "how-inflation-changes-your-choices",
+        "income-vs-wealth",
+        "the-most-expensive-word-is-later"
+      ],
+      "sourcesFile": "/articles/sources/good-debt-bad-debt.sources.md",
+      "reviewStatus": "not-started"
+    },
+    {
+      "id": "FSA-ARTICLE-017",
+      "slug": "how-inflation-changes-your-choices",
+      "title": "How Inflation Changes Your Choices",
+      "subtitle": "",
+      "series": "Building Financial Independence",
+      "seriesSlug": "financial-independence",
+      "seriesOrder": 4,
+      "collection": null,
+      "seriesPosition": null,
+      "status": "planned",
+      "featured": false,
+      "initialCollection": false,
+      "language": "en",
+      "translationOf": null,
+      "availableLanguages": [
+        "en"
+      ],
+      "readingMinutes": 7,
+      "difficulty": "intermediate",
+      "primaryConcept": "inflation",
+      "concepts": [
+        "inflation",
+        "saving",
+        "investing",
+        "wealth"
+      ],
+      "supportingConcepts": [
+        "purchasing power",
+        "real vs nominal",
+        "cash"
+      ],
+      "misconception": "Inflation just means prices go up.",
+      "coreQuestion": "If your account balance is the same, how can you be poorer a year later?",
+      "mentalModel": "Inflation doesn’t change your number, it changes what your number buys.",
+      "learnerOutcome": "The learner can think in purchasing power, not just dollar amounts, when making money decisions.",
+      "editorialBrief": "Moves inflation from a headline number to a lived experience: the quiet erosion of what a fixed amount buys, and how it reshapes decisions about holding cash, borrowing, and saving. Uses dated, sourced figures and, where relevant, notes how Bitcoin enters this conversation as one response among several, without endorsing it as a guaranteed answer.",
+      "fsaModules": [
+        "Investing",
+        "Master Plan"
+      ],
+      "audiences": [
+        "general",
+        "workforce",
+        "community",
+        "colombia"
+      ],
+      "formats": [
+        "web",
+        "print"
+      ],
+      "publishedDate": null,
+      "updatedDate": null,
+      "canonicalPath": "/articles/financial-independence/how-inflation-changes-your-choices.html",
+      "relatedArticles": [
+        "investing-is-buying-future-productivity",
+        "good-debt-bad-debt",
+        "the-most-expensive-word-is-later"
+      ],
+      "sourcesFile": "/articles/sources/how-inflation-changes-your-choices.sources.md",
+      "reviewStatus": "not-started"
+    },
+    {
+      "id": "FSA-ARTICLE-018",
+      "slug": "investing-is-buying-future-productivity",
+      "title": "Why Investing Is Buying Future Productivity",
+      "subtitle": "",
+      "series": "Building Financial Independence",
+      "seriesSlug": "financial-independence",
+      "seriesOrder": 5,
+      "collection": null,
+      "seriesPosition": null,
+      "status": "planned",
+      "featured": false,
+      "initialCollection": false,
+      "language": "en",
+      "translationOf": null,
+      "availableLanguages": [
+        "en"
+      ],
+      "readingMinutes": 7,
+      "difficulty": "intermediate",
+      "primaryConcept": "investing",
+      "concepts": [
+        "investing",
+        "wealth",
+        "risk"
+      ],
+      "supportingConcepts": [
+        "ownership",
+        "productivity",
+        "patience"
+      ],
+      "misconception": "Investing is a form of gambling on prices.",
+      "coreQuestion": "What are you actually buying when you invest, beyond a number that moves?",
+      "mentalModel": "Investing is buying a share of future work getting done.",
+      "learnerOutcome": "The learner can distinguish owning productive assets from speculating on price moves.",
+      "editorialBrief": "Reframes investing as buying a claim on future production, ownership of businesses and assets that do work over time, rather than betting on short-term price direction. Distinguishes patient ownership from speculation and is honest that ownership carries real risk and no guarantee.",
+      "fsaModules": [
+        "Investing"
+      ],
+      "audiences": [
+        "general",
+        "workforce",
+        "community"
+      ],
+      "formats": [
+        "web",
+        "print"
+      ],
+      "publishedDate": null,
+      "updatedDate": null,
+      "canonicalPath": "/articles/financial-independence/investing-is-buying-future-productivity.html",
+      "relatedArticles": [
+        "risk-is-more-than-losing-money",
+        "how-inflation-changes-your-choices",
+        "the-most-expensive-word-is-later"
+      ],
+      "sourcesFile": "/articles/sources/investing-is-buying-future-productivity.sources.md",
+      "reviewStatus": "not-started"
+    },
+    {
+      "id": "FSA-ARTICLE-019",
+      "slug": "risk-is-more-than-losing-money",
+      "title": "Risk Is More Than Losing Money",
+      "subtitle": "",
+      "series": "Building Financial Independence",
+      "seriesSlug": "financial-independence",
+      "seriesOrder": 6,
+      "collection": null,
+      "seriesPosition": null,
+      "status": "planned",
+      "featured": false,
+      "initialCollection": false,
+      "language": "en",
+      "translationOf": null,
+      "availableLanguages": [
+        "en"
+      ],
+      "readingMinutes": 6,
+      "difficulty": "intermediate",
+      "primaryConcept": "risk",
+      "concepts": [
+        "risk",
+        "investing",
+        "insurance"
+      ],
+      "supportingConcepts": [
+        "volatility",
+        "ruin",
+        "time horizon"
+      ],
+      "misconception": "The riskiest choice is always the one that could lose the most money.",
+      "coreQuestion": "Is the bigger risk losing money, or running out of it at the wrong time?",
+      "mentalModel": "Real risk is not being able to recover, not just going down.",
+      "learnerOutcome": "The learner can weigh several kinds of risk, loss, timing, and inability to recover, instead of only one.",
+      "editorialBrief": "Broadens 'risk' beyond the chance of a dollar loss to include the risk of needing money at the wrong moment, the risk of not recovering, and the risk of doing nothing while inflation bites. Helps learners match the kind of risk they're actually exposed to with the response that fits.",
+      "fsaModules": [
+        "Risk/Insurance",
+        "Investing"
+      ],
+      "audiences": [
+        "general",
+        "workforce",
+        "community"
+      ],
+      "formats": [
+        "web",
+        "print"
+      ],
+      "publishedDate": null,
+      "updatedDate": null,
+      "canonicalPath": "/articles/financial-independence/risk-is-more-than-losing-money.html",
+      "relatedArticles": [
+        "investing-is-buying-future-productivity",
+        "the-most-expensive-word-is-later"
+      ],
+      "sourcesFile": "/articles/sources/risk-is-more-than-losing-money.sources.md",
+      "reviewStatus": "not-started"
+    },
+    {
+      "id": "FSA-ARTICLE-020",
+      "slug": "opportunity-cost-is-everywhere",
+      "title": "Opportunity Cost Is Everywhere",
+      "subtitle": "",
+      "series": "Thinking Like an Economist",
+      "seriesSlug": "economic-thinking",
+      "seriesOrder": 1,
+      "collection": null,
+      "seriesPosition": null,
+      "status": "planned",
+      "featured": false,
+      "initialCollection": false,
+      "language": "en",
+      "translationOf": null,
+      "availableLanguages": [
+        "en"
+      ],
+      "readingMinutes": 6,
+      "difficulty": "foundational",
+      "primaryConcept": "opportunity cost",
+      "concepts": [
+        "opportunity cost",
+        "tradeoffs"
+      ],
+      "supportingConcepts": [
+        "alternatives",
+        "time",
+        "decision-making"
+      ],
+      "misconception": "The cost of something is the money you hand over for it.",
+      "coreQuestion": "What are you really giving up when you say yes to something?",
+      "mentalModel": "The true cost of a choice is the best thing you didn’t choose.",
+      "learnerOutcome": "The learner can name the next-best alternative they gave up in a decision, including with time.",
+      "editorialBrief": "Introduces opportunity cost as the foundational economist's tool: the real cost of any choice is the best alternative you set aside, whether the currency is money, time, or attention. Kept concrete and non-technical, with an exercise learners can run on a decision they already made today.",
+      "fsaModules": [
+        "Mindset & Cash Flow"
+      ],
+      "audiences": [
+        "general",
+        "workforce",
+        "youth"
+      ],
+      "formats": [
+        "web",
+        "print"
+      ],
+      "publishedDate": null,
+      "updatedDate": null,
+      "canonicalPath": "/articles/economic-thinking/opportunity-cost-is-everywhere.html",
+      "relatedArticles": [
+        "sunk-costs-trap-smart-people",
+        "the-most-expensive-word-is-later"
+      ],
+      "sourcesFile": "/articles/sources/opportunity-cost-is-everywhere.sources.md",
+      "reviewStatus": "not-started"
+    },
+    {
+      "id": "FSA-ARTICLE-021",
+      "slug": "sunk-costs-trap-smart-people",
+      "title": "Sunk Costs Trap Smart People",
+      "subtitle": "",
+      "series": "Thinking Like an Economist",
+      "seriesSlug": "economic-thinking",
+      "seriesOrder": 2,
+      "collection": null,
+      "seriesPosition": null,
+      "status": "planned",
+      "featured": false,
+      "initialCollection": false,
+      "language": "en",
+      "translationOf": null,
+      "availableLanguages": [
+        "en"
+      ],
+      "readingMinutes": 6,
+      "difficulty": "foundational",
+      "primaryConcept": "sunk cost",
+      "concepts": [
+        "opportunity cost",
+        "tradeoffs"
+      ],
+      "supportingConcepts": [
+        "loss aversion",
+        "commitment",
+        "decision-making"
+      ],
+      "misconception": "Money or time already spent should count in what you decide next.",
+      "coreQuestion": "Why is it so hard to walk away from something you’ve already put money into?",
+      "mentalModel": "Money already spent is gone; only what happens next is your decision.",
+      "learnerOutcome": "The learner can make a forward-looking choice without being anchored by past spending.",
+      "editorialBrief": "Explains the sunk cost trap, letting unrecoverable past spending drive future decisions, and why it snares careful, committed people especially. Gives learners a clean test: decide from where you are now, not from what you've already paid, while acknowledging the emotional pull that makes this hard.",
+      "fsaModules": [
+        "Mindset & Cash Flow",
+        "Debt"
+      ],
+      "audiences": [
+        "general",
+        "workforce",
+        "community"
+      ],
+      "formats": [
+        "web",
+        "print"
+      ],
+      "publishedDate": null,
+      "updatedDate": null,
+      "canonicalPath": "/articles/economic-thinking/sunk-costs-trap-smart-people.html",
+      "relatedArticles": [
+        "marginal-thinking-in-everyday-life",
+        "opportunity-cost-is-everywhere",
+        "the-most-expensive-word-is-later"
+      ],
+      "sourcesFile": "/articles/sources/sunk-costs-trap-smart-people.sources.md",
+      "reviewStatus": "not-started"
+    },
+    {
+      "id": "FSA-ARTICLE-022",
+      "slug": "marginal-thinking-in-everyday-life",
+      "title": "Marginal Thinking in Everyday Life",
+      "subtitle": "",
+      "series": "Thinking Like an Economist",
+      "seriesSlug": "economic-thinking",
+      "seriesOrder": 3,
+      "collection": null,
+      "seriesPosition": null,
+      "status": "planned",
+      "featured": false,
+      "initialCollection": false,
+      "language": "en",
+      "translationOf": null,
+      "availableLanguages": [
+        "en"
+      ],
+      "readingMinutes": 6,
+      "difficulty": "intermediate",
+      "primaryConcept": "marginal thinking",
+      "concepts": [
+        "tradeoffs",
+        "opportunity cost"
+      ],
+      "supportingConcepts": [
+        "one more unit",
+        "diminishing returns",
+        "decisions"
+      ],
+      "misconception": "Big decisions should be made all-or-nothing.",
+      "coreQuestion": "Is the real question whether to do something, or how much of it?",
+      "mentalModel": "Most good decisions are about the next unit, not the whole thing.",
+      "learnerOutcome": "The learner can turn an all-or-nothing question into a 'how much more or less' question.",
+      "editorialBrief": "Introduces thinking at the margin, asking about the next hour, the next dollar, the next unit rather than the whole choice at once. Shows how this dissolves false all-or-nothing framing in decisions about work, spending, and saving, with everyday, low-stakes examples.",
+      "fsaModules": [
+        "Mindset & Cash Flow"
+      ],
+      "audiences": [
+        "general",
+        "workforce"
+      ],
+      "formats": [
+        "web",
+        "print"
+      ],
+      "publishedDate": null,
+      "updatedDate": null,
+      "canonicalPath": "/articles/economic-thinking/marginal-thinking-in-everyday-life.html",
+      "relatedArticles": [
+        "scarcity-never-disappears",
+        "sunk-costs-trap-smart-people",
+        "the-most-expensive-word-is-later"
+      ],
+      "sourcesFile": "/articles/sources/marginal-thinking-in-everyday-life.sources.md",
+      "reviewStatus": "not-started"
+    },
+    {
+      "id": "FSA-ARTICLE-023",
+      "slug": "scarcity-never-disappears",
+      "title": "Scarcity Never Disappears",
+      "subtitle": "",
+      "series": "Thinking Like an Economist",
+      "seriesSlug": "economic-thinking",
+      "seriesOrder": 4,
+      "collection": null,
+      "seriesPosition": null,
+      "status": "planned",
+      "featured": false,
+      "initialCollection": false,
+      "language": "en",
+      "translationOf": null,
+      "availableLanguages": [
+        "en"
+      ],
+      "readingMinutes": 6,
+      "difficulty": "foundational",
+      "primaryConcept": "scarcity",
+      "concepts": [
+        "scarcity",
+        "tradeoffs",
+        "opportunity cost"
+      ],
+      "supportingConcepts": [
+        "limits",
+        "priorities",
+        "time"
+      ],
+      "misconception": "If you just had more money, the hard choices would go away.",
+      "coreQuestion": "Do financial tradeoffs actually end once you have 'enough'?",
+      "mentalModel": "More resources move the tradeoffs; they don’t remove them.",
+      "learnerOutcome": "The learner can see scarcity as a permanent condition to manage, not a temporary problem to escape.",
+      "editorialBrief": "Argues that scarcity, limited money, time, and attention, is a constant, not a phase you outgrow with a raise. More money changes which tradeoffs you face, not whether you face them. Framed to reduce shame (scarcity isn't a personal failing) while keeping agency (you still choose how to allocate).",
+      "fsaModules": [
+        "Mindset & Cash Flow"
+      ],
+      "audiences": [
+        "general",
+        "workforce",
+        "community"
+      ],
+      "formats": [
+        "web",
+        "print"
+      ],
+      "publishedDate": null,
+      "updatedDate": null,
+      "canonicalPath": "/articles/economic-thinking/scarcity-never-disappears.html",
+      "relatedArticles": [
+        "financial-decisions-have-winners-and-losers",
+        "marginal-thinking-in-everyday-life",
+        "the-most-expensive-word-is-later"
+      ],
+      "sourcesFile": "/articles/sources/scarcity-never-disappears.sources.md",
+      "reviewStatus": "not-started"
+    },
+    {
+      "id": "FSA-ARTICLE-024",
+      "slug": "financial-decisions-have-winners-and-losers",
+      "title": "Every Financial Decision Has Winners and Losers",
+      "subtitle": "",
+      "series": "Thinking Like an Economist",
+      "seriesSlug": "economic-thinking",
+      "seriesOrder": 5,
+      "collection": null,
+      "seriesPosition": null,
+      "status": "planned",
+      "featured": false,
+      "initialCollection": false,
+      "language": "en",
+      "translationOf": null,
+      "availableLanguages": [
+        "en"
+      ],
+      "readingMinutes": 6,
+      "difficulty": "intermediate",
+      "primaryConcept": "distribution of gains",
+      "concepts": [
+        "incentives",
+        "tradeoffs"
+      ],
+      "supportingConcepts": [
+        "who benefits",
+        "second-order effects",
+        "fees"
+      ],
+      "misconception": "A financial product or policy is either good or bad for everyone.",
+      "coreQuestion": "When something is 'a great deal,' a great deal for whom?",
+      "mentalModel": "Ask who gains and who pays, the answer is rarely 'everyone.'",
+      "learnerOutcome": "The learner can identify who benefits and who bears the cost in a financial arrangement.",
+      "editorialBrief": "Teaches learners to map the winners and losers inside any financial arrangement, a rewards card, a subsidy, a 'free' service, because gains and costs usually land on different people. Sharpens judgment about deals and advice by asking who is on each side, without assuming bad intent.",
+      "fsaModules": [
+        "Consumer Protection",
+        "Master Plan"
+      ],
+      "audiences": [
+        "general",
+        "workforce",
+        "community"
+      ],
+      "formats": [
+        "web",
+        "print"
+      ],
+      "publishedDate": null,
+      "updatedDate": null,
+      "canonicalPath": "/articles/economic-thinking/financial-decisions-have-winners-and-losers.html",
+      "relatedArticles": [
+        "how-incentives-shape-markets",
+        "scarcity-never-disappears",
+        "the-most-expensive-word-is-later"
+      ],
+      "sourcesFile": "/articles/sources/financial-decisions-have-winners-and-losers.sources.md",
+      "reviewStatus": "not-started"
+    },
+    {
+      "id": "FSA-ARTICLE-025",
+      "slug": "how-incentives-shape-markets",
+      "title": "How Incentives Shape Markets",
+      "subtitle": "",
+      "series": "Thinking Like an Economist",
+      "seriesSlug": "economic-thinking",
+      "seriesOrder": 6,
+      "collection": null,
+      "seriesPosition": null,
+      "status": "planned",
+      "featured": false,
+      "initialCollection": false,
+      "language": "en",
+      "translationOf": null,
+      "availableLanguages": [
+        "en"
+      ],
+      "readingMinutes": 7,
+      "difficulty": "intermediate",
+      "primaryConcept": "market incentives",
+      "concepts": [
+        "incentives",
+        "investing",
+        "banking"
+      ],
+      "supportingConcepts": [
+        "prices as signals",
+        "competition",
+        "unintended effects"
+      ],
+      "misconception": "Prices are set by someone deciding what things should cost.",
+      "coreQuestion": "If no one is in charge of prices, what makes them move?",
+      "mentalModel": "Prices are signals; incentives are the current underneath them.",
+      "learnerOutcome": "The learner can read a price change as information about incentives and scarcity, not just a number.",
+      "editorialBrief": "Connects the series' ideas at the level of markets: how countless individual incentives, transmitted through prices, coordinate behavior no one is centrally directing. Gives learners a mental model for why prices move and what they reveal, staying practical rather than ideological.",
+      "fsaModules": [
+        "Consumer Protection",
+        "Investing"
+      ],
+      "audiences": [
+        "general",
+        "workforce",
+        "community"
+      ],
+      "formats": [
+        "web",
+        "print"
+      ],
+      "publishedDate": null,
+      "updatedDate": null,
+      "canonicalPath": "/articles/economic-thinking/how-incentives-shape-markets.html",
+      "relatedArticles": [
+        "financial-decisions-have-winners-and-losers",
+        "the-most-expensive-word-is-later"
+      ],
+      "sourcesFile": "/articles/sources/how-incentives-shape-markets.sources.md",
+      "reviewStatus": "not-started"
+    }
+  ]
+}
