@@ -42,6 +42,10 @@ The accessibility review gate checks that the article works for everyone who wil
 
 An article that fails either gate goes back to the author, not forward. Neither gate can be skipped, and the writing process cannot pass itself through either one.
 
+## The Reader Experience Review (final editorial pass)
+
+After an article has completed the six-stage pipeline, run one pass, the Reader Experience Review (`skills/fsa-educational-writer/references/fsa-reader-experience-review.md`). It optimizes for the reader, not the prose: remove anything that momentarily reminds the reader they are reading something written, and confirm the article leaves the reader understanding and remembering. Three lenses, instinct-first, never a checklist: Friction (the former Voice Audit, removing only writing that becomes visible), Anchor (identify but never manufacture the one observation a reader might keep), and the Publisher test (did they learn something new, will one idea stay, did the writing disappear behind the idea). It is not a rewrite, does not add a formal state, and may conclude change nothing. The educational architecture always takes priority over stylistic perfection, and the stop condition is being proud to publish it under your own name. A human approves any change.
+
 ## The public-visibility rule
 
 Only approved and published articles render on the public site. Every other state is treated as unfinished and is protected from public exposure in two ways at once: it carries a visible status banner that names its state, and it is served with a robots noindex directive so search engines do not surface it. This is a hard rule with no exceptions. An article that is not approved or published must never appear to a reader or a crawler as finished work.

@@ -5,8 +5,8 @@
   "counts": {
     "total": 26,
     "byStatus": {
-      "planned": 25,
-      "drafted": 1
+      "drafted": 2,
+      "planned": 24
     },
     "public": 0
   },
@@ -100,7 +100,7 @@
       "seriesOrder": 0,
       "collection": "Foundations",
       "seriesPosition": "introductory",
-      "status": "planned",
+      "status": "drafted",
       "featured": true,
       "initialCollection": true,
       "language": "en",
@@ -145,9 +145,11 @@
       "publishedDate": null,
       "updatedDate": null,
       "canonicalPath": "/articles/foundations/the-most-expensive-word-is-later.html",
-      "relatedArticles": [],
+      "relatedArticles": [
+        "why-saving-money-feels-so-hard"
+      ],
       "sourcesFile": "/articles/sources/the-most-expensive-word-is-later.sources.md",
-      "reviewStatus": "not-started"
+      "reviewStatus": "human-review-required"
     },
     {
       "id": "FSA-ARTICLE-001",
@@ -208,7 +210,7 @@
         "the-most-expensive-word-is-later"
       ],
       "sourcesFile": "/articles/sources/why-saving-money-feels-so-hard.sources.md",
-      "reviewStatus": "educational-review-required"
+      "reviewStatus": "human-review-required"
     },
     {
       "id": "FSA-ARTICLE-002",

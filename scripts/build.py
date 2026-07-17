@@ -20,6 +20,7 @@ from library_data import (ARTICLES, SERIES, MODULES, MODULE_NAMES, MODULE_FILE,
                           REVIEW_STATUS_VALUES, DIFFICULTY_VALUES, AUDIENCE_VALUES,
                           FORMAT_VALUES)
 from prototype_content import PROTOTYPE
+from later_content import LATER
 
 OUT = os.environ.get("FSA_ARTICLES_OUT") or os.path.join(
     os.path.dirname(os.path.abspath(__file__)), "..", "articles")
@@ -257,6 +258,16 @@ def sources_section(a):
       </dl>
       <p class="mi-reviewnote"><strong>Review note:</strong> This article is under human review. See
       <a href="%s">the companion source file</a> for full citations.</p>""" % a["sourcesFile"]
+    elif a["slug"] == LATER["slug"]:
+        body = """
+      <p class="mi-muted">Grouped by type; full citations are in the companion source file.</p>
+      <dl class="mi-sources">
+        <dt>Established research</dt><dd>Present bias, time discounting, and present-biased procrastination are supported by established peer-reviewed research.</dd>
+        <dt>Concept and arithmetic</dt><dd>How interest compounds on a debt, and how starting earlier gives savings longer to grow, are stable mathematical relationships shown with rounded illustrative numbers, not cited statistics.</dd>
+        <dt>Illustrative example (FSA)</dt><dd>"A small later, one season long" (Rosa and the twelve-dollar app) is an FSA illustration for teaching, not evidence.</dd>
+      </dl>
+      <p class="mi-reviewnote"><strong>Review note:</strong> This article is under human review. See
+      <a href="%s">the companion source file</a> for full citations.</p>""" % a["sourcesFile"]
     else:
         body = """
       <p class="mi-muted">This article is planned. Its factual claims, source list, and the
@@ -333,6 +344,31 @@ def render_article(a):
         parts.append(exercise_box("Try it yourself", PROTOTYPE["try_html"]))
         # 11 closing question
         parts.append(closing_box(PROTOTYPE["closing_question"]))
+    elif a["slug"] == LATER["slug"]:
+        # 2 opening
+        parts.append(LATER["opening"])
+        # 3 common belief
+        parts.append('    <h2 class="fsa-h2">The common belief</h2>')
+        parts.append(LATER["common_belief_html"])
+        # 4 what's actually happening
+        parts.append('    <h2 class="fsa-h2">What&rsquo;s actually happening</h2>')
+        parts.append(LATER["actually_html"])
+        # 5 scenario
+        parts.append(LATER["scenario_html"])
+        # 6 mental model callout
+        parts.append(mental_model_box(LATER["mental_model"]))
+        # 7 boundary
+        parts.append('    <h2 class="fsa-h2">When waiting is the right call</h2>')
+        parts.append(LATER["boundary_html"])
+        # 8 why matters
+        parts.append('    <h2 class="fsa-h2">Why this matters</h2>')
+        parts.append(LATER["why_html"])
+        # 9 look for this today
+        parts.append(exercise_box("Look for this today", LATER["look_html"]))
+        # 10 try it
+        parts.append(exercise_box("Try it yourself", LATER["try_html"]))
+        # 11 closing question
+        parts.append(closing_box(LATER["closing_question"]))
     else:
         parts.append(placeholder_body(a))
 

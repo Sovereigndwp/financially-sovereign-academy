@@ -1,140 +1,80 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Most Expensive Word in Personal Finance: “Later” | FSA Money Ideas</title>
-  <meta name="description" content="How a small, sensible-sounding word quietly reshapes a financial life.">
-  <link rel="canonical" href="https://financiallysovereign.academy/articles/foundations/the-most-expensive-word-is-later.html">
-  <meta name="robots" content="noindex, follow">
-  <link rel="stylesheet" href="/css/fsa-brand.css">
-  <link rel="stylesheet" href="/css/fsa-articles.css">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "The Most Expensive Word in Personal Finance: “Later”", "description": "How a small, sensible-sounding word quietly reshapes a financial life.", "author": {"@type": "Person", "name": "Dalia Platt"}, "publisher": {"@type": "EducationalOrganization", "name": "Financially Sovereign Academy", "url": "https://financiallysovereign.academy"}, "inLanguage": "en", "isAccessibleForFree": true, "keywords": "delay, saving, compounding, tradeoffs"}</script>
-</head>
-<body>
-<div class="mi-progress" id="mi-progress" aria-hidden="true"></div>
+# -*- coding: utf-8 -*-
+"""
+later_content.py: Drafted body for the Foundations intro article
+"The Most Expensive Word in Personal Finance: 'Later'" (FSA-ARTICLE-000).
 
-<a class="fsa-skip-link" href="#main">Skip to content</a>
-<header class="mi-topbar">
-  <div class="mi-topbar__inner">
-    <a class="mi-wordmark" href="/">Financially Sovereign Academy</a>
-    <nav class="mi-topnav" aria-label="Primary">
-      <a href="/articles/">Money Ideas</a>
-      <a href="/#modules">Modules</a>
-    </nav>
-  </div>
-  <nav class="mi-crumbs" aria-label="Breadcrumb"><a href="/articles/">Money Ideas</a><span class="mi-crumbs__sep" aria-hidden="true">/</span><a href="/articles/series/foundations.html">Foundations</a><span class="mi-crumbs__sep" aria-hidden="true">/</span><span aria-current="page">The Most Expensive Word in Personal Finance: “Later”</span></nav>
-</header>
-<main id="main" class="mi-article">
-  <article class="mi-prose">
+This mirrors scripts/prototype_content.py exactly (same key shape, same slot
+mapping) rather than introducing a content registry. Keeping a second concrete
+body module, instead of generalizing build.py, is deliberate: it proves the
+educational model on two articles before any architecture change, and the small
+duplication it creates is the evidence the Pilot retrospective will weigh when
+deciding whether a registry is worth it.
 
-  <div class="mi-devnote" role="note">
-    <span class="mi-devnote__tag">DRAFTED</span>
-    <span>This is a working draft using temporary content. It is pending educational review and is <strong>not approved or published</strong>.</span>
-  </div>
-    <header class="mi-articlehead">
-      <div class="mi-articlemeta"><span class="fsa-eyebrow">Foundations</span><span class="mi-dot" aria-hidden="true">&middot;</span><span>6 min read</span><span class="mi-dot" aria-hidden="true">&middot;</span><span>foundational</span></div>
-      <h1 class="fsa-h1">The Most Expensive Word in Personal Finance: “Later”</h1>
-      <p class="fsa-lede">How a small, sensible-sounding word quietly reshapes a financial life.</p>
-      <div class="mi-actions fsa-no-print"><button type="button" class="fsa-chip" onclick="window.print()">Print / PDF</button></div>
-    </header>
+status: drafted / reviewStatus: human-review-required. NOT approved.
+FSA voice rules apply: plain language, no em dashes, no decorative emojis.
+Each key maps to a slot in the shared 13-part article template.
+"""
 
+LATER = {
+    "slug": "the-most-expensive-word-is-later",
+
+    # 2. Opening tension (no heading; runs right under the title/meta)
+    "opening": """
 <p>There is a word that turns up in almost every money decision, and it rarely sounds like a decision at all. You will get to the savings account later. You will cancel the unused subscription later. You will open the letter from the insurer, compare the two loan offers, update the beneficiary, deal with the credit card later. Each "later" feels small and reasonable. None of them feels like the moment anything is actually decided.</p>
 <p>That is what makes the word worth a closer look. Most money trouble does not arrive as one dramatic mistake. It arrives as a long run of sensible-sounding postponements, each easy to defend on its own. So instead of the usual question, "Why am I so behind on all this?", it is worth asking a fairer and more useful one: what does "later" actually cost, and who ends up paying for it?</p>
+""",
 
-    <h2 class="fsa-h2">The common belief</h2>
-
+    # 3. The common belief
+    "common_belief_html": """
 <p>The comfortable belief is that "later" is neutral. It does not cancel a decision; it just reschedules it to a better time, when there is more money, more information, or more energy to deal with it. Nothing is really lost by waiting, the thinking goes. The choice is parked, waiting for you to come back to it.</p>
 <p>That is partly true. Some decisions genuinely should wait, and rushing a big financial commitment before you understand it is often worse than pausing. Timing matters, and "not yet" can be the wise answer. But "later" as a general setting hides two things at once: many of those parked decisions are being made anyway, by default, and when money is involved, the waiting itself usually carries a price.</p>
+""",
 
-    <h2 class="fsa-h2">What&rsquo;s actually happening</h2>
-
+    # 4. What is actually happening
+    "actually_html": """
 <p>Start with why "later" feels so weightless in the moment. A cost or effort you would face right now is vivid: the ten minutes on hold, the awkward call, the money leaving your account today. The benefit of acting sits in the future, and the future is abstract, more idea than experience. When the effort is now and the payoff is later, we put a heavy thumb on the scale for right now. Researchers call this present bias, but you do not need the term to know the feeling. Putting off exactly the tasks whose cost is immediate and whose reward is delayed even has its own name, procrastination, and it collects on precisely the decisions that "later" is made of.</p>
 <p>Here is the first cost. While a decision sits in "later," the world does not politely pause. The subscription keeps charging. The high-interest balance keeps growing. The insurance you did not compare renews at whatever price it defaults to. Not deciding is not the same as freezing the situation; it hands the choice to whatever happens automatically. "Later" quietly votes for the default.</p>
 <p>The second cost is easier to miss, and it is specific to money, because money and time interact. A debt left for later does not just wait; interest compounds, so what you owe grows on top of what already grew. Saving or investing you postpone does not just start late; it misses the earliest stretch of time, which is the stretch where small amounts have the longest to grow. In both directions, delay changes the size of the number, not only its date. That is why the same choice can cost almost nothing this month and a surprising amount over a year.</p>
+""",
 
-
+    # 5. Concrete scenario
+    "scenario_html": """
 <h2 class="fsa-h2">A small "later," one season long</h2>
 <p>Rosa signed up for a twelve-dollar-a-month app over the winter and stopped opening it in March. She notices the charge now and then and means to cancel. It is a two-minute job. But two minutes of a dull task, right now, competes with everything else in front of her, so it becomes a "later." Taken one month at a time, the charge is always small enough to wave off.</p>
 <p>She finally cancels in November. By then the app she stopped using in March has collected about ninety-six dollars, eight months at twelve. The money did not go to an emergency, or even to something she enjoyed. It went to a decision she never quite made. Nothing dramatic happened along the way. "Later" simply kept voting for the charge, month after month, on her behalf.</p>
+""",
 
+    # 6. Mental model (rendered as the callout)
+    "mental_model": "\"Later\" is not free. It quietly borrows from your future self, and your future self usually has less room to pay it back than you do right now.",
 
-    <aside class="mi-model" aria-label="The mental model">
-      <span class="fsa-eyebrow">The mental model</span>
-      <p class="mi-model__text">&quot;Later&quot; is not free. It quietly borrows from your future self, and your future self usually has less room to pay it back than you do right now.</p>
-    </aside>
-    <h2 class="fsa-h2">When waiting is the right call</h2>
-
+    # 7. Boundary case
+    "boundary_html": """
 <p>None of this makes "later" the enemy. Sometimes waiting is exactly right, and turning "act now" into a universal rule would be its own mistake.</p>
 <p>The difference is between a wait you have chosen and a wait that just happens. Deciding not to buy something today so you can sleep on it, holding off on a commitment until you understand the terms, waiting for a due date so your cash is there to cover it, these are decisions, not avoided ones. The tell is whether you have named what you are waiting for and when you will act. "I will decide after Friday's paycheck" is a plan. "Later" with no date attached is usually the default winning in disguise.</p>
 <p>And for some people, "just handle it now" is not a question of willpower at all. If the money to act simply is not there this week, being told to act immediately misses the real constraint, which is room, not character. The honest move then is often about timing: doing the free part now, the two-minute cancellation, the phone call, the written-down date, and scheduling the part that costs money for when there is some slack, without carrying shame for a gap that belongs to the math. Before following any rule, including "do not delay," it is worth checking the actual numbers and the real situation in front of you.</p>
+""",
 
-    <h2 class="fsa-h2">Why this matters</h2>
-
+    # 8. Why this matters
+    "why_html": """
 <p>Seeing "later" as a decision, rather than the absence of one, changes the question you ask yourself, from "Why am I so behind, and what is wrong with me?" to "Which of my laters is deciding for me right now, and what is each one costing?" That version has answers you can act on, and it does not require becoming a different, more disciplined person overnight.</p>
 <p>The rest of this library is really a closer look at one family of "later" or another: how everyday money decisions actually work, and why they sometimes fight our own goals; what the systems around us, banks, credit, insurance, are really doing while we wait; how small, repeated choices compound into independence or away from it; and a few thinking tools that make any of these decisions clearer. You do not have to read them in order, and none of them will hand you a rule to obey. They are here to help you see the choice you are actually making, especially the ones hiding inside a word as small as "later."</p>
+""",
 
-
-    <section class="mi-exercise" aria-label="Look for this today">
-      <h2 class="fsa-h3 mi-exercise__title">Look for this today</h2>
-      
+    # 9. Look for this today
+    "look_html": """
 <p>Before the day is over, catch one "later" as it happens. It might be a charge you keep meaning to question, a form you have not filled out, a small amount you plan to move "soon," or a call you are avoiding. You do not have to do anything about it. Just notice the moment you file it under later, and ask one quiet question: if I never come back to this, what happens on its own, and who pays for it?</p>
+""",
 
-    </section>
-
-    <section class="mi-exercise" aria-label="Try it yourself">
-      <h2 class="fsa-h3 mi-exercise__title">Try it yourself</h2>
-      
+    # 10. Try it yourself
+    "try_html": """
 <p>On paper, or just in your head, make a short list of two or three money "laters" you are carrying right now, the decisions you keep meaning to get to. For each one, answer two questions:</p>
 <ul class="fsa-list">
   <li>If I never actually decide this, what happens by default, and who ends up paying for it?</li>
   <li>When would this be easiest to handle, and what is the smallest first step that costs nothing, a two-minute cancellation, one phone call, or writing down the date I will act?</li>
 </ul>
 <p>You are not committing to fixing everything today. You are just making the hidden decisions visible, so you can start choosing them on purpose instead of by default.</p>
+""",
 
-    </section>
-
-    <section class="mi-closing" aria-label="One question to carry with you">
-      <span class="fsa-eyebrow">One question to carry with you</span>
-      <p class="mi-closing__q">Of all the choices you think you are only postponing, how many have you quietly already made?</p>
-    </section>
-  </article>
-
-  <section class="mi-related" aria-labelledby="related-h">
-    <h2 class="fsa-h3" id="related-h">Explore the idea further</h2>
-    <div class="mi-related__grid">
-      <div>
-        <span class="fsa-eyebrow">Related articles</span>
-        <ul class="mi-linklist"><li><a href="/articles/money-decisions/why-saving-money-feels-so-hard.html">Why Saving Money Feels So Hard</a></li></ul>
-      </div>
-      <div>
-        <span class="fsa-eyebrow">Related FSA modules</span>
-        <ul class="mi-linklist"><li><a href="/modules/money-mindset-cash-flow.html">Mindset &amp; Cash Flow module</a></li><li><a href="/modules/emergency-funds-saving.html">Emergency Funds module</a></li></ul>
-      </div>
-    </div>
-    
-  </section>
-
-  <section class="mi-sourcesbox" aria-labelledby="sources-h">
-    <h2 class="fsa-h3" id="sources-h">Sources and review note</h2>
-      <p class="mi-muted">Grouped by type; full citations are in the companion source file.</p>
-      <dl class="mi-sources">
-        <dt>Established research</dt><dd>Present bias, time discounting, and present-biased procrastination are supported by established peer-reviewed research.</dd>
-        <dt>Concept and arithmetic</dt><dd>How interest compounds on a debt, and how starting earlier gives savings longer to grow, are stable mathematical relationships shown with rounded illustrative numbers, not cited statistics.</dd>
-        <dt>Illustrative example (FSA)</dt><dd>"A small later, one season long" (Rosa and the twelve-dollar app) is an FSA illustration for teaching, not evidence.</dd>
-      </dl>
-      <p class="mi-reviewnote"><strong>Review note:</strong> This article is under human review. See
-      <a href="/articles/sources/the-most-expensive-word-is-later.sources.md">the companion source file</a> for full citations.</p>
-  </section>
-</main>
-
-<footer class="fsa-legal-footer">
-  Created by Dalia &middot; financiallysovereign.academy &middot; Educational content only &middot; Not financial, legal, tax, or investment advice.
-  <p class="mi-print-meta">FSA-ARTICLE-000 &middot; Revision 2026-07-16</p>
-</footer>
-<script>window.MI_ARTICLE={"id": "FSA-ARTICLE-000", "slug": "the-most-expensive-word-is-later", "series": "foundations"};</script>
-<script src="/js/analytics.js" defer></script>
-<script src="/js/article-reading-progress.js" defer></script>
-<script src="/js/article-related-content.js" defer></script>
-</body>
-</html>
+    # 11. One question to carry with you
+    "closing_question": "Of all the choices you think you are only postponing, how many have you quietly already made?",
+}

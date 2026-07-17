@@ -3,7 +3,7 @@
 - **Article ID:** FSA-ARTICLE-001
 - **Slug:** why-saving-money-feels-so-hard
 - **Status:** drafted
-- **Review status:** educational-review-required
+- **Review status:** human-review-required
 - **Last updated:** 2026-07-16
 
 > Every quantitative or factual claim in the published article must appear below with a

@@ -112,7 +112,7 @@ ARTICLES = [
         series=None, seriesSlug="foundations", seriesOrder=0,
         collection="Foundations", featured=True, initialCollection=True,
         seriesPosition="introductory",
-        status="planned", reviewStatus="not-started",
+        status="drafted", reviewStatus="human-review-required",
         readingMinutes=6, difficulty="foundational",
         primaryConcept="delay",
         concepts=["saving", "compounding", "tradeoffs"],
@@ -124,6 +124,7 @@ ARTICLES = [
         fsaModules=["Mindset & Cash Flow", "Emergency Funds"],
         audiences=["general", "workforce", "reentry", "youth"],
         brief="An introduction to the whole library. Most money problems do not arrive as dramatic mistakes; they arrive as a series of reasonable-sounding postponements. This piece names the pattern, the small, respectable word 'later', and shows how delay changes who pays and how much, without shaming anyone for using it. It sets up the four series that follow.",
+        relatedArticles=["why-saving-money-feels-so-hard"],
     ),
 
     # ================= Series 1: How Money Decisions Work =================
@@ -134,7 +135,7 @@ ARTICLES = [
         subtitle="",
         series="How Money Decisions Work", seriesSlug="money-decisions", seriesOrder=1,
         collection=None, featured=True, initialCollection=True, seriesPosition=None,
-        status="drafted", reviewStatus="educational-review-required",
+        status="drafted", reviewStatus="human-review-required",
         readingMinutes=6, difficulty="foundational",
         primaryConcept="present bias",
         concepts=["saving", "tradeoffs", "opportunity cost"],
