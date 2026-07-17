@@ -60,6 +60,14 @@ skills/fsa-educational-writer/     the writing skill (drafts, never publishes)
   page-local `:root` brand block. All classes are `.fsa-*` or `.mi-*`.
 - No decorative emoji. No em dashes in body prose.
 - Reading works with JavaScript disabled; every script here is enhancement only.
+- **Public visibility:** the homepage and series pages show only `approved`/`published`
+  articles and never expose a planned card or link. To preview planned content, build
+  with `FSA_DEV_MODE=1 python3 scripts/build.py` (dev builds are served `noindex` and
+  show a development-mode banner). The default build is production; rebuild without the
+  flag before committing generated pages.
+- Source files are created once as a stub, then **preserved** on every build; a
+  hand-filled source file is never overwritten. Run `python3 scripts/test_source_persistence.py`
+  and `python3 scripts/test_public_visibility.py` to check both behaviors.
 - Every article can later gain a Spanish version under `/es/articulos/` with
   `translationOf` set; reusable JS holds no hard-coded learner copy.
 - Local preview: `python3 -m http.server 8000` from the repo root, then open

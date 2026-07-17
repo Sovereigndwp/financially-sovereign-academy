@@ -25,11 +25,52 @@ OUT = os.environ.get("FSA_ARTICLES_OUT") or os.path.join(
     os.path.dirname(os.path.abspath(__file__)), "..", "articles")
 REVISION_DATE = "2026-07-16"   # static; the build date recorded in registry/footers
 
+# Development mode: when set, index/series/foundations pages show ALL articles
+# (planned included) with status badges and are served noindex. The DEFAULT
+# (production) build shows only approved/published articles on those pages, and
+# never exposes a planned card or a link to a planned article. Set FSA_DEV_MODE=1
+# for a local preview build.
+DEV_MODE = bool(os.environ.get("FSA_DEV_MODE"))
+
 def esc(s):
     return html.escape(s or "", quote=True)
 
 def is_public(a):
     return a["status"] in PUBLIC_STATUSES
+
+def _dedupe(seq):
+    """Order-preserving de-duplication (used for JSON-LD keywords)."""
+    seen, out = set(), []
+    for x in seq:
+        if x and x not in seen:
+            seen.add(x)
+            out.append(x)
+    return out
+
+def public_only(arts):
+    """Articles that may appear on public library/series pages. In dev mode,
+    everything is shown; in production, only approved/published."""
+    return list(arts) if DEV_MODE else [a for a in arts if is_public(a)]
+
+def dev_banner():
+    if not DEV_MODE:
+        return ""
+    return ("""
+  <div class="mi-devnote" role="note" style="margin:1rem 1.5rem 0">
+    <span class="mi-devnote__tag">DEVELOPMENT MODE</span>
+    <span>This preview lists planned articles that are <strong>not published</strong>. """
+            """It is not the public view, and this page is served noindex.</span>
+  </div>""")
+
+def empty_state(kind="series"):
+    where = "this series" if kind == "series" else "the library"
+    return ("""
+  <section class="fsa-section">
+    <div class="fsa-wrap">
+      <p class="mi-muted">Articles for %s are in preparation and will appear here once they
+      pass review. Nothing is published yet.</p>
+    </div>
+  </section>""" % where)
 
 # ---- enrich records with computed fields -----------------------------------
 BY_SLUG = {a["slug"]: a for a in ARTICLES}
@@ -163,21 +204,25 @@ def reading_meta(a):
             '</div>') % (esc(series_label), a["readingMinutes"], esc(a["difficulty"]))
 
 def related_learning(a):
-    # related articles
+    # When the CURRENT article is public, its related links are filtered to public
+    # articles only, so a published page never links out to planned content. A
+    # non-public preview page (itself noindex) keeps its links, and dev mode shows all.
+    show_all = DEV_MODE or (not is_public(a))
     art_links = []
     for slug in a["relatedArticles"]:
         r = BY_SLUG.get(slug)
-        if r:
+        if r and (show_all or is_public(r)):
             art_links.append('<li><a href="%s">%s</a></li>' % (r["canonicalPath"], esc(r["title"])))
-    # next in series
+    # next in series (shown when the current page may link it, per show_all)
     sibs = BY_SERIES.get(a["seriesSlug"], [])
     idx = next((i for i, s in enumerate(sibs) if s["slug"] == a["slug"]), None)
     nxt = ""
     if idx is not None and idx + 1 < len(sibs):
         n = sibs[idx + 1]
-        nxt = ('<p class="mi-next"><span class="fsa-eyebrow">Next in this series</span>'
-               '<a class="fsa-btn fsa-btn--secondary" href="%s">%s &rarr;</a></p>'
-               % (n["canonicalPath"], esc(n["title"])))
+        if show_all or is_public(n):
+            nxt = ('<p class="mi-next"><span class="fsa-eyebrow">Next in this series</span>'
+                   '<a class="fsa-btn fsa-btn--secondary" href="%s">%s &rarr;</a></p>'
+                   % (n["canonicalPath"], esc(n["title"])))
     # modules
     mod_links = []
     for m in a["fsaModules"]:
@@ -236,7 +281,7 @@ def render_article(a):
                       "name": "Financially Sovereign Academy", "url": SITE},
         "inLanguage": "en",
         "isAccessibleForFree": True,
-        "keywords": ", ".join([a["primaryConcept"]] + a.get("concepts", [])),
+        "keywords": ", ".join(_dedupe([a["primaryConcept"]] + a.get("concepts", []))),
     }
     crumbs = [("Money Ideas", "/articles/")]
     if a["series"]:
@@ -335,7 +380,8 @@ def placeholder_body(a):
         ("What&rsquo;s actually happening", "Explain the underlying idea (%s) in plain language." % esc(a["primaryConcept"])),
         ("A concrete scenario", "A realistic, numerically simple example from ordinary life."),
         ("The mental model", "&ldquo;%s&rdquo;" % esc(a["mentalModel"])),
-        ("A boundary case", "Show where the idea changes with circumstances. Avoid one universal rule."),
+        ("A boundary case", esc(a["boundaryCase"]) if a.get("boundaryCase")
+         else "Show where the idea changes with circumstances. Avoid one universal rule."),
         ("Why this matters", "Connect the concept to real financial decisions."),
         ("Look for this today", "One observation exercise the reader can do before the day ends."),
         ("Try it yourself", "One short reflection, comparison, or calculation."),
@@ -396,27 +442,36 @@ def article_card(a, context="home"):
         ('<span class="mi-dot" aria-hidden="true">&middot;</span><span>%s</span>' % esc(modline)) if modline else "")
 
 def render_series(slug):
+    """Renders a series page (including Foundations). Production shows only
+    approved/published articles; dev mode shows all with badges + noindex.
+    Foundations shares this path so it never accidentally omits the framing
+    question, the connected-modules section, or the analytics script."""
+    is_foundations = (slug == "foundations")
     meta = SERIES[slug]
-    arts = BY_SERIES.get(slug, [])
-    start = arts[0] if arts else None
+    all_arts = BY_SERIES.get(slug, [])
+    visible = public_only(all_arts)
+    start = visible[0] if visible else None
+    label = "Foundations" if is_foundations else "Series"
     crumbs = [("Money Ideas", "/articles/"), (meta["title"], None)]
     canonical = "/articles/series/%s.html" % slug
     parts = [head(meta["title"] + " | FSA Money Ideas",
-                  meta["purpose"], canonical, noindex=False)]
+                  meta["purpose"], canonical, noindex=DEV_MODE)]
     parts.append("<body>")
     parts.append(site_header(crumbs=crumbs))
     parts.append('<main id="main">')
+    parts.append(dev_banner())
     parts.append("""
   <header class="fsa-section--deep fsa-section--glow mi-serieshero">
     <div class="fsa-wrap">
       <div class="mi-seriesnum">%s</div>
-      <div class="fsa-eyebrow">FSA Money Ideas &middot; Series</div>
+      <div class="fsa-eyebrow">FSA Money Ideas &middot; %s</div>
       <h1 class="fsa-h1">%s</h1>
       <p class="fsa-lede">%s</p>
       <p class="mi-framing">%s</p>
     </div>
-  </header>""" % (series_num(slug), esc(meta["title"]), esc(meta["purpose"]), esc(meta["question"])))
-    # what you'll learn + start here
+  </header>""" % (series_num(slug), label, esc(meta["title"]),
+                  esc(meta["purpose"]), esc(meta["question"])))
+    # what you'll learn + start here (start points only at a public/visible article)
     start_html = ""
     if start:
         start_html = ('<a class="fsa-btn fsa-btn--primary" href="%s">Start here: %s &rarr;</a>'
@@ -429,22 +484,28 @@ def render_series(slug):
       <div class="mi-starthere">%s</div>
     </div>
   </section>""" % (esc(meta["learn"]), start_html))
-    # article cards in recommended order
-    cards = "".join(article_card(a) for a in arts)
-    parts.append("""
+    # article cards (visible only). No public articles -> empty state, no planned cards.
+    if visible:
+        cards = "".join(article_card(a) for a in visible)
+        parts.append("""
   <section class="fsa-section fsa-section--alt">
     <div class="fsa-wrap">
       <div class="fsa-section-tag">Articles &middot; recommended order</div>
       <div class="mi-grid">%s</div>
     </div>
   </section>""" % cards)
-    # connected modules (union)
+    else:
+        parts.append(empty_state("series"))
+    # connected modules, derived from visible articles only (so a series with no
+    # public articles does not reveal the planned set through its module links)
     mods = []
-    for a in arts:
+    for a in visible:
         for m in a["fsaModules"]:
-            if m not in mods: mods.append(m)
-    modlis = "".join('<li><a href="/modules/%s">%s</a></li>' % (MODULE_FILE[m], esc(m)) for m in mods)
-    parts.append("""
+            if m not in mods:
+                mods.append(m)
+    if mods:
+        modlis = "".join('<li><a href="/modules/%s">%s</a></li>' % (MODULE_FILE[m], esc(m)) for m in mods)
+        parts.append("""
   <section class="fsa-section">
     <div class="fsa-wrap">
       <div class="fsa-section-tag">Connected FSA modules</div>
@@ -457,48 +518,20 @@ def render_series(slug):
     parts.append("</body>\n</html>\n")
     return "\n".join(parts)
 
-def render_foundations_series():
-    """Foundations 'series' page hosts the intro article link."""
-    slug = "foundations"
-    meta = SERIES[slug]
-    arts = BY_SERIES.get(slug, [])
-    crumbs = [("Money Ideas", "/articles/"), ("Foundations", None)]
-    canonical = "/articles/series/foundations.html"
-    parts = [head("Foundations | FSA Money Ideas", meta["purpose"], canonical, noindex=False)]
-    parts.append("<body>")
-    parts.append(site_header(crumbs=crumbs))
-    parts.append('<main id="main">')
-    parts.append("""
-  <header class="fsa-section--deep fsa-section--glow mi-serieshero">
-    <div class="fsa-wrap">
-      <div class="mi-seriesnum">00</div>
-      <div class="fsa-eyebrow">FSA Money Ideas &middot; Foundations</div>
-      <h1 class="fsa-h1">Foundations</h1>
-      <p class="fsa-lede">%s</p>
-    </div>
-  </header>
-  <section class="fsa-section">
-    <div class="fsa-wrap">
-      <div class="mi-grid">%s</div>
-    </div>
-  </section>""" % (esc(meta["purpose"]), "".join(article_card(a) for a in arts)))
-    parts.append('</main>')
-    parts.append(site_footer())
-    parts.append("</body>\n</html>\n")
-    return "\n".join(parts)
-
 # ============================================================================
 # Homepage
 # ============================================================================
 def render_home():
     intro = BY_SLUG["the-most-expensive-word-is-later"]
+    visible_all = public_only(ARTICLES)
     canonical = "/articles/"
     parts = [head("FSA Money Ideas | Financially Sovereign Academy",
                   "Short articles for understanding how money decisions really work.",
-                  canonical, noindex=False)]
+                  canonical, noindex=DEV_MODE)]
     parts.append("<body>")
     parts.append(site_header(active="library"))
     parts.append('<main id="main">')
+    parts.append(dev_banner())
     # hero
     parts.append("""
   <header class="fsa-section--deep fsa-section--glow mi-hero">
@@ -513,8 +546,9 @@ def render_home():
       <p class="mi-eduonly">Educational content only. Not financial, legal, tax, or investment advice.</p>
     </div>
   </header>""")
-    # featured intro
-    parts.append("""
+    # featured intro: only when the featured article is itself public/visible
+    if DEV_MODE or is_public(intro):
+        parts.append("""
   <section class="fsa-section">
     <div class="fsa-wrap">
       <div class="fsa-section-tag">Start here</div>
@@ -529,18 +563,19 @@ def render_home():
     </div>
   </section>""" % (intro["canonicalPath"], intro["readingMinutes"],
                    esc(intro["title"]), esc(intro["subtitle"])))
-    # browse by series
+    # browse by series: counts reflect only public/visible articles
     series_cards = []
     for slug in SERIES_ORDER:
         meta = SERIES[slug]
-        n = len(BY_SERIES.get(slug, []))
+        n = len(public_only(BY_SERIES.get(slug, [])))
+        count_label = ("%d article%s" % (n, "" if n == 1 else "s")) if n else "In preparation"
         series_cards.append("""
         <a class="mi-seriescard" href="/articles/series/%s.html">
           <span class="mi-seriescard__num">%s</span>
           <h3 class="mi-card__title">%s</h3>
           <p class="mi-card__desc">%s</p>
-          <span class="mi-seriescard__count">%d articles</span>
-        </a>""" % (slug, series_num(slug), esc(meta["title"]), esc(meta["purpose"]), n))
+          <span class="mi-seriescard__count">%s</span>
+        </a>""" % (slug, series_num(slug), esc(meta["title"]), esc(meta["purpose"]), count_label))
     parts.append("""
   <section class="fsa-section fsa-section--alt">
     <div class="fsa-wrap">
@@ -549,23 +584,29 @@ def render_home():
       <div class="mi-seriesgrid">%s</div>
     </div>
   </section>""" % "".join(series_cards))
-    # browse by concept (chips -> filter grid via JS; no-JS: labels only)
-    chips = "".join('<button type="button" class="mi-chip" data-concept="%s">%s</button>'
-                    % (esc(c), esc(c)) for c in CONCEPTS)
-    # browse by module
-    mod_counts = {m: 0 for m in MODULE_NAMES}
-    for a in ARTICLES:
-        for m in a["fsaModules"]:
-            mod_counts[m] += 1
-    mod_lis = "".join(
-        '<a class="mi-modchip" href="/modules/%s" data-module="%s"><span>%s</span>'
-        '<span class="mi-modchip__n">%d</span></a>' % (MODULE_FILE[m], esc(m), esc(m), mod_counts[m])
-        for m in MODULE_NAMES)
-    # article grid (all, server-rendered; JS filters)
-    all_cards = "".join(article_card(a) for a in
-                        sorted(ARTICLES, key=lambda x: (x["seriesOrder"] == 0 and -1 or x["seriesOrder"],
-                                                        x["seriesSlug"])))
-    parts.append("""
+    # browse-by-concept / module / article grid: only over public/visible articles.
+    # With nothing public yet, show an honest in-preparation notice instead, and
+    # never render a planned card.
+    if visible_all:
+        chips = "".join('<button type="button" class="mi-chip" data-concept="%s">%s</button>'
+                        % (esc(c), esc(c)) for c in CONCEPTS)
+        mod_counts = {m: 0 for m in MODULE_NAMES}
+        for a in visible_all:
+            for m in a["fsaModules"]:
+                mod_counts[m] += 1
+        mod_lis = "".join(
+            '<a class="mi-modchip" href="/modules/%s" data-module="%s"><span>%s</span>'
+            '<span class="mi-modchip__n">%d</span></a>' % (MODULE_FILE[m], esc(m), esc(m), mod_counts[m])
+            for m in MODULE_NAMES)
+        all_cards = "".join(article_card(a) for a in
+                            sorted(visible_all, key=lambda x: (x["seriesOrder"] == 0 and -1 or x["seriesOrder"],
+                                                               x["seriesSlug"])))
+        legend = ("""<p class="mi-legend"><span class="mi-badge mi-badge--live">Available</span>
+        <span class="mi-badge mi-badge--draft">Draft</span>
+        <span class="mi-badge mi-badge--planned">Planned</span>
+        <span class="mi-muted">Development preview: planned articles are not published.</span></p>"""
+                  if DEV_MODE else "")
+        parts.append("""
   <section class="fsa-section">
     <div class="fsa-wrap">
       <div class="fsa-section-tag">Browse by concept</div>
@@ -579,15 +620,14 @@ def render_home():
 
       <div class="mi-gridhead">
         <div class="fsa-section-tag" style="margin-top:2rem">All articles</div>
-        <p class="mi-legend"><span class="mi-badge mi-badge--live">Available</span>
-        <span class="mi-badge mi-badge--draft">Draft</span>
-        <span class="mi-badge mi-badge--planned">Planned</span>
-        <span class="mi-muted">The library is being written. Planned articles show their brief.</span></p>
+        %s
       </div>
       <div class="mi-grid" id="mi-grid" data-total="%d">%s</div>
       <p class="mi-noresult" id="mi-noresult" hidden>No articles match that filter yet.</p>
     </div>
-  </section>""" % (chips, mod_lis, len(ARTICLES), all_cards))
+  </section>""" % (chips, mod_lis, legend, len(visible_all), all_cards))
+    else:
+        parts.append(empty_state("library"))
     parts.append('</main>')
     parts.append(site_footer())
     parts.append('<script src="/js/analytics.js" defer></script>')
@@ -654,6 +694,7 @@ def build_registry():
             "supportingConcepts": a["supportingConcepts"],
             "misconception": a["misconception"], "coreQuestion": a["coreQuestion"],
             "mentalModel": a["mentalModel"], "learnerOutcome": a["learnerOutcome"],
+            "boundaryCase": a.get("boundaryCase"),
             "editorialBrief": a["brief"],
             "fsaModules": a["fsaModules"], "audiences": a["audiences"],
             "formats": a["formats"], "publishedDate": a["publishedDate"],
@@ -724,10 +765,10 @@ def main():
         json.dump(build_registry(), f, ensure_ascii=False, indent=2)
     # homepage
     w("index.html", render_home())
-    # series pages
+    # series pages (Foundations shares the same renderer)
     for slug in SERIES_ORDER:
         w("series/%s.html" % slug, render_series(slug))
-    w("series/foundations.html", render_foundations_series())
+    w("series/foundations.html", render_series("foundations"))
     # article pages (always regenerated) + source stubs (created once, then preserved)
     created, preserved = [], []
     for a in ARTICLES:

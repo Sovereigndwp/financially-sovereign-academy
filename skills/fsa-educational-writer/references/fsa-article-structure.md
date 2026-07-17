@@ -48,8 +48,10 @@ Where the idea changes with circumstances. This part protects the reader from tu
 the mental model into a rigid rule. It must include at least one case where the obvious
 recommendation may not be the right one for a given person (for saving: someone with
 high-interest debt for whom "save first" can be the wrong call). Present it as
-"check the numbers in front of you," not as a new universal rule. See
-`examples/boundary-case-example.md`.
+"check the numbers in front of you," not as a new universal rule. If the article's
+registry record sets a `boundaryCase` field, the drafted boundary case must satisfy it
+(for example, "How Incentives Shape Markets" requires a case where a price carries
+incomplete or biased information). See `examples/boundary-case-example.md`.
 
 ## 8. Why this matters
 Connect the idea back to real financial decisions and to the learner's agency. Show how

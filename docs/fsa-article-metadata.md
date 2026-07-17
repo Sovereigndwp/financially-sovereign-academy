@@ -35,6 +35,7 @@ Titles are display strings and must never be used as identifiers.
 | `coreQuestion` | string | The single question the article answers. |
 | `mentalModel` | string | The reusable takeaway. |
 | `learnerOutcome` | string | What the learner can do afterward. |
+| `boundaryCase` | string \| null | Optional. A required boundary case the article must include (e.g. where a price is not a complete or unbiased signal). Shown on the placeholder page and honored by the writer skill. |
 | `editorialBrief` | string | One-paragraph brief (shown on placeholder pages). |
 | `fsaModules` | string[] | Canonical module names (below). |
 | `audiences` | string[] | Audience vocabulary (below). |
@@ -53,6 +54,18 @@ Titles are display strings and must never be used as identifiers.
 `revision-needed`, `archived`. Plus `planned` as the pre-draft registry state.
 **Only `approved` and `published` render publicly.** Everything else carries a
 visible status banner and `robots: noindex`.
+
+**Public visibility of library and series pages.** The homepage (`index.html`), the
+series pages, and the Foundations page show **only** `approved`/`published` articles
+in a production build. They never render a planned card or a link to a planned
+article, and a series with no public articles shows an in-preparation notice instead
+of planned cards. A published article's "Explore the idea further" links are likewise
+filtered to public articles. Individual article pages are still generated for every
+record, but non-public ones carry `robots: noindex` and a status banner. To preview
+planned content, build in development mode: `FSA_ARTICLES_OUT` unchanged, set
+`FSA_DEV_MODE=1`. Dev builds show all articles with badges, add a "development mode"
+banner, and are served `noindex` so a preview can never be mistaken for the public
+site. The default build (no `FSA_DEV_MODE`) is production.
 
 **reviewStatus:** `not-started`, `educational-review-required`,
 `human-review-required`, `in-review`, `approved`. Public articles must be `approved`.
