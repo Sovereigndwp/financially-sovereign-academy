@@ -9,7 +9,8 @@ Dalia — solo operator of **The Sovereign Academy** family. Email: dalia@thesov
 
 ## Identity
 - **What:** universal, practical financial education (paycheck, budgeting, debt, inflation, banking, saving) — LATAM / Colombia-fluent.
-- **Mission-driven, for the underbanked. Explicitly NOT monetized.** Do not add paywalls, upsells, or Bitcoin-custody intake funnels here.
+- **Mission-driven, for the underbanked. Core education is never monetized.** The 10 modules, calculators, and assessment are free permanently. Do not add paywalls over them, and do not add Bitcoin-custody intake funnels here.
+- **One narrow exception, added 2026-07-25 under MVP-001:** `/kits/` sells printable application kits for a single household decision each. Rules that make it an exception rather than a paywall: the full explainer for every kit is published free on its own page before anything is for sale; no free material is withheld or degraded to sell one; 30-day no-questions refunds; independence and no-advice disclaimers on every surface. See `docs/kits-commerce-runbook.md`. The homepage "no upsell" promise and FAQ were rewritten in the same change rather than left contradicting the site.
 - **Boundary:** FSA teaches money foundations and can bridge to BSA, but is **not** a Bitcoin custody/inheritance/advice funnel and never replaces BSA or TBA.
 - **Domain:** financiallysovereign.academy. **Remote:** `github.com/Sovereigndwp/financially-sovereign-academy`.
 

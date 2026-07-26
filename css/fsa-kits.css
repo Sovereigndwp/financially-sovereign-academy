@@ -1,0 +1,215 @@
+/* ============================================================================
+   fsa-kits.css — shared styling for the /kits/ storefront.
+   Consumes existing canonical tokens from css/fsa-brand.css. Defines no new
+   design tokens, per the FSA rule: extend, never introduce.
+   Created 2026-07-25 for MVP-001 (commercial delivery architecture).
+   ============================================================================ */
+
+:root {
+  --kits-maxw: 840px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font: 16px/1.65 var(--font-body), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+body::before {
+  content: "";
+  display: block;
+  height: 2px;
+  background: var(--brand-gradient-horizontal);
+}
+
+.wrap { max-width: var(--kits-maxw); margin: 0 auto; padding: 0 22px; }
+
+/* --- Skip link --- */
+.skip-link {
+  position: absolute; left: -9999px; top: 0;
+  background: var(--color-elevated); color: var(--color-text);
+  padding: 10px 16px; border-radius: 0 0 8px 0; z-index: 50;
+}
+.skip-link:focus { left: 0; }
+
+/* --- Nav --- */
+nav.top {
+  display: flex; justify-content: space-between; align-items: center; gap: 14px;
+  padding: 14px 22px; max-width: var(--kits-maxw); margin: 0 auto; flex-wrap: wrap;
+  font-family: var(--font-sans);
+}
+nav.top .brand { font-weight: 700; font-size: 15px; color: var(--color-text); text-decoration: none; }
+nav.top .brand b { color: var(--color-mint); }
+nav.top ul { list-style: none; display: flex; gap: 14px; padding: 0; margin: 0; flex-wrap: wrap; font-size: 13.5px; }
+nav.top a { color: var(--color-muted); text-decoration: none; padding: 6px 0; }
+nav.top a:hover, nav.top a:focus-visible { color: var(--color-text); }
+
+/* --- Typography --- */
+h1 { font-family: var(--font-serif); font-size: 34px; line-height: 1.18; margin: 0 0 14px; letter-spacing: -.01em; }
+h2 { font-family: var(--font-serif); font-size: 24px; margin: 42px 0 12px; letter-spacing: -.005em; }
+h3 { font-size: 17px; margin: 18px 0 6px; }
+p { margin: 10px 0; }
+a { color: var(--color-mint); }
+.eyebrow {
+  color: var(--color-mint); font-size: 12px; letter-spacing: .14em;
+  text-transform: uppercase; margin: 0 0 14px; font-weight: 600; font-family: var(--font-sans);
+}
+.lede { color: var(--color-text); font-size: 18px; line-height: 1.5; margin: 0 0 16px; }
+.small { font-size: 13.5px; color: var(--color-muted); }
+ul.clean { padding-left: 18px; margin: 8px 0; }
+ul.clean li { margin: 7px 0; }
+
+header.hero { padding: 30px 22px 6px; max-width: var(--kits-maxw); margin: 0 auto; }
+
+/* --- Language switch --- */
+.langswitch {
+  display: inline-flex; gap: 8px; align-items: center;
+  font-family: var(--font-sans); font-size: 13px; margin: 0 0 18px;
+}
+.langswitch a {
+  border: 1px solid var(--color-border); border-radius: 8px;
+  padding: 5px 11px; text-decoration: none; color: var(--color-text);
+}
+.langswitch a[aria-current="true"] { border-color: var(--color-mint); color: var(--color-mint); }
+
+/* --- Cards and callouts --- */
+.card {
+  background: var(--color-surface); border: 1px solid var(--color-border);
+  border-radius: 14px; padding: 18px; margin: 14px 0;
+}
+.card h3 { margin-top: 0; }
+
+.disclaimer {
+  background: var(--color-elevated); border: 1px solid var(--color-border-strong);
+  border-left: 4px solid var(--color-warning); border-radius: 10px;
+  padding: 15px 17px; margin: 18px 0; font-size: 14.5px;
+}
+.disclaimer strong { color: var(--color-text-strong); }
+
+.note {
+  background: var(--color-surface); border: 1px solid var(--color-border);
+  border-left: 4px solid var(--color-mint); border-radius: 10px;
+  padding: 15px 17px; margin: 18px 0; font-size: 14.5px;
+}
+
+/* --- Buttons --- */
+.cta-row { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0; }
+.btn {
+  display: inline-block; padding: 14px 22px; border-radius: 10px; text-decoration: none;
+  font-weight: 600; font-size: 15px; font-family: var(--font-sans);
+  border: 1px solid transparent; cursor: pointer;
+}
+.btn-primary {
+  background: linear-gradient(var(--color-bg), var(--color-bg)) padding-box, var(--brand-gradient) border-box;
+  border: 1.6px solid transparent; color: var(--color-text);
+}
+.btn-primary:hover, .btn-primary:focus-visible { filter: brightness(1.12); }
+.btn-secondary { border: 1px solid var(--color-border); color: var(--color-text); background: transparent; }
+.btn-secondary:hover, .btn-secondary:focus-visible { border-color: var(--color-mint); color: var(--color-mint); }
+.btn.is-pending {
+  opacity: .6; cursor: not-allowed;
+  background: transparent; border: 1px dashed var(--color-border-strong); color: var(--color-muted);
+}
+
+/* --- Price block --- */
+.pricebox {
+  background: var(--color-surface); border: 1px solid var(--color-border-strong);
+  border-radius: 16px; padding: 22px; margin: 20px 0;
+}
+.pricebox .amount {
+  font-family: var(--font-sans); font-size: 40px; font-weight: 700;
+  color: var(--color-text-strong); line-height: 1.1;
+}
+.pricebox .terms { font-size: 14px; color: var(--color-muted); margin-top: 4px; }
+.pricebox ul.clean li { font-size: 15px; }
+
+/* --- Accordion --- */
+details.qa {
+  background: var(--color-surface); border: 1px solid var(--color-border);
+  border-radius: 10px; margin: 8px 0; overflow: hidden;
+}
+details.qa summary {
+  padding: 14px 16px; cursor: pointer; font-weight: 600;
+  list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 10px;
+  font-family: var(--font-sans); font-size: 15.5px;
+}
+details.qa summary::-webkit-details-marker { display: none; }
+details.qa summary .chev { color: var(--color-muted); }
+details.qa[open] summary .chev { transform: rotate(90deg); display: inline-block; }
+details.qa .body {
+  padding: 2px 16px 14px; color: var(--color-text);
+  font-size: 15px; border-top: 1px solid var(--color-border);
+}
+details.qa .body .src { font-size: 13px; color: var(--color-muted); margin-top: 10px; }
+
+/* --- Contents grid --- */
+.contents { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 14px 0; }
+@media (max-width: 680px) { .contents { grid-template-columns: 1fr; } }
+.item {
+  background: var(--color-surface); border: 1px solid var(--color-border);
+  border-radius: 12px; padding: 14px 16px;
+}
+.item .nm { font-weight: 600; margin-bottom: 3px; }
+.item .lbl { font-size: 13.5px; color: var(--color-muted); }
+
+/* --- Kit index cards --- */
+.kitcard {
+  display: block; background: var(--color-surface); border: 1px solid var(--color-border);
+  border-radius: 14px; padding: 20px; margin: 12px 0; text-decoration: none; color: var(--color-text);
+}
+.kitcard:hover, .kitcard:focus-visible { border-color: var(--color-mint); }
+.kitcard .nm { font-weight: 700; font-size: 18px; margin-bottom: 4px; }
+.kitcard .lbl { color: var(--color-muted); font-size: 14.5px; }
+.kitcard .tag {
+  display: inline-block; margin-top: 10px; font-size: 12px; font-family: var(--font-sans);
+  letter-spacing: .08em; text-transform: uppercase; color: var(--color-mint);
+}
+
+/* --- Email capture --- */
+.emailbox {
+  background: var(--color-surface); border: 1px solid var(--color-border);
+  border-radius: 14px; padding: 20px; margin: 22px 0;
+}
+.emailbox form { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
+.emailbox label { display: block; font-size: 14px; margin-bottom: 6px; color: var(--color-text); }
+.emailbox input[type="email"] {
+  flex: 1; min-width: 220px; padding: 12px 14px;
+  border: 1px solid var(--color-border-strong); border-radius: 10px;
+  background: var(--color-deepest); color: var(--color-text); font-size: 16px;
+}
+.emailbox input[type="email"]:focus-visible { outline: 2px solid var(--color-mint); outline-offset: 1px; }
+.emailbox .status { margin-top: 10px; font-size: 14.5px; }
+
+/* --- Steps --- */
+ol.steps { padding-left: 20px; margin: 10px 0; }
+ol.steps li { margin: 9px 0; }
+
+/* --- Footer --- */
+footer {
+  margin-top: 40px; padding: 28px 22px; text-align: center;
+  color: var(--color-muted); font-size: 13px; border-top: 1px solid var(--color-border);
+}
+footer a { color: var(--color-mint); text-decoration: none; }
+footer .net { margin-top: 10px; display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+/* --- Focus visibility everywhere --- */
+a:focus-visible, button:focus-visible, summary:focus-visible, .btn:focus-visible {
+  outline: 2px solid var(--color-mint);
+  outline-offset: 2px;
+}
+
+@media (max-width: 680px) {
+  h1 { font-size: 27px; }
+  .lede { font-size: 17px; }
+  .pricebox .amount { font-size: 34px; }
+  nav.top ul { order: 3; width: 100%; justify-content: flex-start; gap: 10px; font-size: 12.5px; }
+  .btn { width: 100%; text-align: center; }
+}
+
+@media print {
+  nav.top, .cta-row, .emailbox, .langswitch { display: none; }
+  body { background: #fff; color: #000; }
+}
