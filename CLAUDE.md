@@ -2,6 +2,8 @@
 
 > **Canonical context — read first.** The brain of The Sovereign Academy lives in the **TSA** repo (`~/Documents/Claude/Projects/TSA`). Before working here, read `TSA/MEMORY.md` (canonical facts, incl. resolved conflicts) and `TSA/standards/content-operating-system.md` (operating rules), and follow that standard. This repo inherits from TSA; it does not redefine it. FSA already runs the canonical TSA design style.
 
+> **Filing rule (ecosystem-wide, 2026-08-14).** Code lives ONLY in `~/projects/`; the TSA brain lives ONLY in `~/Documents/Claude/Projects/TSA`. One repo = one remote = one local path — no `-canonical`/`-latest`/`-clone`/`-backup` copies. This repo is the canonical home for the **live FSA site** (financiallysovereign.academy) — the single copy; the former `~/Documents/Claude/Projects` duplicate was removed. Full rules: `TSA/registry/FILING-RULES.md`.
+
 Live site for practical, LATAM-fluent financial education. Sister property to BSA; mostly mirrors BSA conventions.
 
 ## Me
