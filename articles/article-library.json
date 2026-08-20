@@ -5,8 +5,8 @@
   "counts": {
     "total": 26,
     "byStatus": {
-      "drafted": 2,
-      "planned": 24
+      "drafted": 3,
+      "planned": 23
     },
     "public": 0
   },
@@ -215,14 +215,14 @@
     {
       "id": "FSA-ARTICLE-002",
       "slug": "every-dollar-has-four-jobs",
-      "title": "Every Dollar Has Four Jobs",
+      "title": "Every Dollar Has Four Jobs. Which One Is Yours Doing?",
       "subtitle": "",
       "series": "How Money Decisions Work",
       "seriesSlug": "money-decisions",
       "seriesOrder": 2,
       "collection": null,
       "seriesPosition": null,
-      "status": "planned",
+      "status": "drafted",
       "featured": true,
       "initialCollection": true,
       "language": "en",
@@ -239,22 +239,26 @@
         "tradeoffs"
       ],
       "supportingConcepts": [
-        "budgeting",
-        "tradeoffs",
-        "priorities"
+        "opportunity cost",
+        "priorities",
+        "constraints"
       ],
-      "misconception": "A budget is mainly about restricting spending.",
-      "coreQuestion": "If a dollar can only do one thing at a time, how do you decide which?",
-      "mentalModel": "A dollar spent on one job can’t do the other three.",
-      "learnerOutcome": "The learner can see spending, saving, protecting, and growing as competing jobs and choose deliberately among them.",
+      "misconception": "Managing money well means splitting it across saving, paying debt, and investing.",
+      "coreQuestion": "If a dollar can do only one job at a time, which job does your next free dollar need most?",
+      "mentalModel": "A dollar holds one job at a time, and for many people most dollars already have one.",
+      "learnerOutcome": "The learner can name the job each of their dollars is already doing, and decide where a free dollar would do the most good, without feeling behind for not doing all four.",
       "boundaryCase": null,
-      "editorialBrief": "Reframes budgeting away from restriction and toward assignment: every dollar can do one of a few jobs, cover now, hold for later, protect against surprises, or grow, and choosing one means declining the others. Gives learners a simple, non-judgmental way to see where their money is actually pointed.",
+      "editorialBrief": "Reframes money management away from splitting a surplus and toward assignment under constraint: a dollar holds one of four jobs at a time, Live, Prepare, Protect, or Grow, and for many households most dollars are already claimed by the first. The skill the article teaches is naming what each dollar is doing and choosing the job for the next free one, without shame for the months when the only honest answer is Live.",
       "fsaModules": [
-        "Mindset & Cash Flow"
+        "Mindset & Cash Flow",
+        "Emergency Funds",
+        "Debt",
+        "Investing"
       ],
       "audiences": [
         "general",
         "workforce",
+        "reentry",
         "youth"
       ],
       "formats": [
@@ -270,7 +274,7 @@
         "the-most-expensive-word-is-later"
       ],
       "sourcesFile": "/articles/sources/every-dollar-has-four-jobs.sources.md",
-      "reviewStatus": "not-started"
+      "reviewStatus": "human-review-required"
     },
     {
       "id": "FSA-ARTICLE-003",
