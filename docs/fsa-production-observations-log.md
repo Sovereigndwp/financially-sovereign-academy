@@ -24,6 +24,33 @@ Format: date · article/context · observation · why it might matter · status.
   If the registry refactor ever happens, headings should move next to the prose. Status:
   observation, contingent on the registry item above.
 
+- 2026-07-18 · "Four Jobs" (FSA-ARTICLE-002) · The THIRD hardcoded body module
+  (`four_jobs_content.py` + a third parallel `elif` in `build.py`) has now been added. The
+  pilot retrospective named exactly this moment ("the moment we would write a third elif")
+  as the trigger to decide on the `slug -> body` registry refactor. The engine was NOT
+  changed in this pass (v1.0 freeze); the trigger condition is now met and the decision is
+  due at the next engine review. Status: trigger reached, decision pending.
+- 2026-07-18 · "Four Jobs" · Roadmap ambiguity surfaced at intake: the retrospective's
+  "only then begin Economic Thinking" pointed one way while `initialCollection` and the
+  existing proposed brief pointed at FSA-ARTICLE-002. A human had to adjudicate. Possible:
+  a single explicit "next up" marker (registry field or a one-line roadmap note) so the
+  institution names its own next asset. Status: observation only.
+- 2026-07-18 · "Four Jobs" · Production decisions made in conversation (taxonomy
+  Live/Prepare/Protect/Grow; Tier B statistic excluded; brief adoption) have no canonical
+  on-repo home. They are recorded in the draft audit and the source file's review note,
+  but a reader of the repo alone cannot find "decisions made and why" in one place.
+  Possible: a small append-only decisions log next to this file. Status: observation only.
+- 2026-07-18 · "Four Jobs" · `docs/proposed-briefs/` has no lifecycle: an adopted brief
+  (002) stays labeled "proposed" with no adopted/rejected/superseded marker, so the
+  registry record and the brief can silently disagree about which is current. Status:
+  observation only.
+- 2026-07-18 · "Four Jobs" · The canonical-context pointer in `CLAUDE.md`
+  (`~/Documents/Claude/Projects/TSA`: `TSA/MEMORY.md`, `standards/content-operating-system.md`)
+  could not be reached from this production session, and the TSA monorepo's own
+  `memory/projects/fsa.md` predates the entire Money Ideas library (still says
+  "Folder: properties/fsa/", "build second"). FSA-local docs were sufficient to produce the
+  article, but the cross-repo memory chain did not participate. Status: observation only.
+
 ## Reviewed / promoted to v2.0
 
 - (none yet)
