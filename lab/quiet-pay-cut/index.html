@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Can a raise make you poorer? A 60-second money lab</title>
+<meta name="description" content="Ten raises in ten years, and this paycheck still came up $204 a month short. Guess first, then find out why. Sixty seconds, no signup.">
+<link rel="canonical" href="https://financiallysovereign.academy/lab/quiet-pay-cut/">
+
+<!-- Link preview: this is what Substack, X, LinkedIn and WhatsApp render -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="The Sovereign Academy">
+<meta property="og:url" content="https://financiallysovereign.academy/lab/quiet-pay-cut/">
+<meta property="og:title" content="Can a raise make you poorer? A 60-second money lab">
+<meta property="og:description" content="Ten raises in ten years, and this paycheck still came up $204 a month short. Guess first, then find out why. Sixty seconds, no signup.">
+<meta property="og:image" content="https://financiallysovereign.academy/lab/quiet-pay-cut/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Paycheck in 2026, $5,376. The same life in 2026, $5,580.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Can a raise make you poorer? A 60-second money lab">
+<meta name="twitter:description" content="Ten raises in ten years, and this paycheck still came up $204 a month short. Guess first, then find out why. Sixty seconds, no signup.">
+<meta name="twitter:image" content="https://financiallysovereign.academy/lab/quiet-pay-cut/og.png">
+
+<meta name="theme-color" content="#FDFCF9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121316" media="(prefers-color-scheme: dark)">
+<style>*{margin:0;padding:0;box-sizing:border-box}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+
+<style>
+/* ── TSA Token Sheet v0.1 ─────────────────────────────────────────────
+   Light = paper scale (canonical). Dark = graphite web skin.
+   Signal = FSA emerald; on graphite the fade is lifted to clear 4.5:1. */
+:root{
+  --bg:#FDFCF9; --surface:#F5F3EE; --border:#D9D6CE;
+  --muted:#5A5E66; --ink:#1A1C1F;
+  --signal:#0F766E; --sig-a:#134E4A; --sig-b:#0F766E; --sig-c:#10B981;
+  --wash:rgba(15,118,110,.07); --shade:#8C9099;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#121316; --surface:#191B1F; --border:#2C2F36;
+    --muted:#A7ABB3; --ink:#ECECE6;
+    --signal:#34D399; --sig-a:#10B981; --sig-b:#34D399; --sig-c:#5EEAD4;
+    --wash:rgba(52,211,153,.10); --shade:#6E737B;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121316; --surface:#191B1F; --border:#2C2F36;
+  --muted:#A7ABB3; --ink:#ECECE6;
+  --signal:#34D399; --sig-a:#10B981; --sig-b:#34D399; --sig-c:#5EEAD4;
+  --wash:rgba(52,211,153,.10); --shade:#6E737B;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:'Inter',system-ui,-apple-system,sans-serif;
+  font-size:17px; line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  min-height:100vh; display:flex; flex-direction:column; align-items:center;
+  padding:0 20px 40px;
+}
+.wrap{width:100%; max-width:620px; display:flex; flex-direction:column; flex:1}
+
+/* ── rail: six steps, and this really is a sequence ─────────────────── */
+header{padding:26px 0 20px; display:flex; flex-direction:column; gap:14px}
+.brandline{display:flex; justify-content:space-between; align-items:baseline; gap:16px}
+.eyebrow{
+  font-family:'JetBrains Mono',ui-monospace,monospace; font-weight:700;
+  font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--signal);
+}
+.clock{
+  font-family:'JetBrains Mono',ui-monospace,monospace; font-weight:500;
+  font-size:11px; letter-spacing:.14em; color:var(--muted);
+  font-variant-numeric:tabular-nums;
+}
+.rail{display:flex; gap:5px}
+.rail i{
+  flex:1; height:3px; border-radius:2px; background:var(--border);
+  transition:background .45s ease;
+}
+.rail i.done{background:linear-gradient(90deg,var(--sig-a),var(--sig-b),var(--sig-c))}
+
+/* ── steps ──────────────────────────────────────────────────────────── */
+main{flex:1; display:flex; flex-direction:column; justify-content:center; padding:8px 0 32px}
+.step{display:none; flex-direction:column; gap:26px}
+.step.live{display:flex; animation:rise .42s cubic-bezier(.2,.7,.3,1) both}
+@keyframes rise{from{opacity:0; transform:translateY(14px)} to{opacity:1; transform:none}}
+
+.tag{
+  font-family:'JetBrains Mono',ui-monospace,monospace; font-weight:700;
+  font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--signal);
+}
+h1{
+  font-family:'Playfair Display',Georgia,serif; font-weight:700;
+  font-size:clamp(30px,7.4vw,44px); line-height:1.08; letter-spacing:-.012em;
+  text-wrap:balance;
+}
+h1 em,h2 em{font-style:normal; color:var(--signal)}
+h2{
+  font-family:'Playfair Display',Georgia,serif; font-weight:700;
+  font-size:clamp(24px,5.6vw,32px); line-height:1.14; letter-spacing:-.01em;
+  text-wrap:balance;
+}
+p{color:var(--muted); max-width:52ch}
+p b,p strong{color:var(--ink); font-weight:600}
+.lede{font-size:clamp(17px,4.4vw,19px)}
+
+/* ── choices: fade border, never hue-filled ─────────────────────────── */
+.choices{display:flex; flex-direction:column; gap:10px}
+.choices.row{flex-direction:row; flex-wrap:wrap}
+.choices.row .opt{flex:1 1 calc(50% - 5px); min-width:0}
+.opt{
+  position:relative; text-align:left; cursor:pointer;
+  background:var(--surface); color:var(--ink);
+  border:2px solid var(--border); border-radius:2px;
+  padding:16px 18px; min-height:56px;
+  font-family:inherit; font-size:16px; font-weight:500; line-height:1.35;
+  display:flex; align-items:center; gap:12px;
+  transition:border-color .18s ease, background .18s ease, transform .12s ease;
+}
+.opt .key{
+  font-family:'JetBrains Mono',ui-monospace,monospace; font-weight:700;
+  font-size:12px; letter-spacing:.1em; color:var(--muted); flex:none;
+}
+.opt:hover:not(:disabled){border-color:var(--signal)}
+.opt:active:not(:disabled){transform:translateY(1px)}
+.opt:focus-visible{outline:3px solid var(--signal); outline-offset:3px}
+.opt[aria-pressed="true"]{
+  border-color:transparent;
+  background-image:linear-gradient(var(--surface),var(--surface)),
+    linear-gradient(90deg,var(--sig-a),var(--sig-b),var(--sig-c));
+  background-origin:border-box; background-clip:padding-box,border-box;
+  box-shadow:inset 0 0 0 999px var(--wash);
+}
+.opt[aria-pressed="true"] .key{color:var(--signal)}
+.opt:disabled{cursor:default; opacity:.55}
+.opt[aria-pressed="true"]:disabled{opacity:1}
+
+/* ── ledger + gap chart ─────────────────────────────────────────────── */
+.ledger{display:flex; flex-direction:column; gap:20px}
+.line{padding-left:16px; border-left:3px solid var(--border)}
+.line.sig{border-left-color:var(--signal)}
+.line.gapline{border-left:none; padding-left:19px; position:relative}
+.line.gapline::before{
+  content:''; position:absolute; left:0; top:0; bottom:0; width:3px;
+  background:linear-gradient(180deg,var(--sig-a),var(--sig-b),var(--sig-c));
+}
+.lab{
+  font-family:'JetBrains Mono',ui-monospace,monospace; font-weight:500;
+  font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted);
+  display:block; margin-bottom:4px;
+}
+.num{
+  font-family:'JetBrains Mono',ui-monospace,monospace; font-weight:700;
+  font-size:clamp(32px,8.6vw,44px); letter-spacing:-.02em; line-height:1.1;
+  font-variant-numeric:tabular-nums;
+}
+.num.sig{color:var(--signal)}
+.stats{display:flex; gap:22px; flex-wrap:wrap}
+.stat{flex:1 1 130px; border-top:3px solid var(--border); padding-top:12px}
+.stat.sig{border-top-color:var(--signal)}
+.stat .n{
+  font-family:'JetBrains Mono',ui-monospace,monospace; font-weight:700;
+  font-size:clamp(28px,7vw,36px); font-variant-numeric:tabular-nums; line-height:1;
+}
+.stat.sig .n{color:var(--signal)}
+.stat .t{
+  font-family:'JetBrains Mono',ui-monospace,monospace; font-weight:500;
+  font-size:11px; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--muted); margin-top:8px;
+}
+
+/* ── verdict callout: severity by structure, not colour alone ───────── */
+.callout{
+  background:var(--surface); border-radius:4px; padding:16px 18px;
+  border-left:3px solid var(--signal);
+}
+.callout.miss{
+  border-left:none; padding-left:21px; position:relative;
+}
+.callout.miss::before{
+  content:''; position:absolute; left:0; top:0; bottom:0; width:3px;
+  background:linear-gradient(180deg,var(--sig-a),var(--sig-b),var(--sig-c));
+}
+.callout .verdict{
+  font-family:'JetBrains Mono',ui-monospace,monospace; font-weight:700;
+  font-size:11px; letter-spacing:.2em; text-transform:uppercase;
+  color:var(--signal); display:block; margin-bottom:6px;
+}
+.callout p{font-size:16px; max-width:none}
+
+/* ── next / exits ───────────────────────────────────────────────────── */
+.next{
+  align-self:flex-start; cursor:pointer; font-family:inherit;
+  font-size:15px; font-weight:600; color:var(--ink); background:transparent;
+  border:2px solid transparent; border-radius:2px; padding:13px 22px;
+  background-image:linear-gradient(var(--bg),var(--bg)),
+    linear-gradient(90deg,var(--sig-a),var(--sig-b),var(--sig-c));
+  background-origin:border-box; background-clip:padding-box,border-box;
+  transition:transform .12s ease;
+}
+.next:active{transform:translateY(1px)}
+.next:focus-visible{outline:3px solid var(--signal); outline-offset:3px}
+.exits{display:flex; flex-direction:column; gap:10px}
+a.exit{
+  text-decoration:none; color:var(--ink); background:var(--surface);
+  border:2px solid var(--border); border-radius:2px; padding:16px 18px;
+  display:flex; justify-content:space-between; align-items:center; gap:14px;
+  font-weight:600; font-size:16px; transition:border-color .18s ease;
+}
+a.exit:hover{border-color:var(--signal)}
+a.exit:focus-visible{outline:3px solid var(--signal); outline-offset:3px}
+a.exit .sm{
+  display:block; font-weight:400; font-size:14px; color:var(--muted); margin-top:2px;
+}
+a.exit .arrow{color:var(--signal); font-family:'JetBrains Mono',monospace; flex:none}
+
+footer{
+  border-top:1px solid var(--border); padding-top:16px;
+  display:flex; justify-content:space-between; align-items:baseline;
+  gap:16px; flex-wrap:wrap;
+  font-family:'JetBrains Mono',ui-monospace,monospace; font-weight:700;
+  font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted);
+}
+footer .src{font-weight:500; letter-spacing:.08em; text-transform:none; font-size:11px}
+footer a{color:var(--signal); text-decoration:none}
+footer a:hover{text-decoration:underline}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms !important; transition-duration:.001ms !important}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <div class="brandline">
+      <span class="eyebrow">&#9670; 60-Second Money Lab &middot; 01</span>
+      <span class="clock" id="clock">0:00</span>
+    </div>
+    <div class="rail" id="rail" aria-hidden="true">
+      <i class="done"></i><i></i><i></i><i></i><i></i><i></i>
+    </div>
+  </header>
+
+  <main>
+    <!-- 1 ─ GUESS ─────────────────────────────────────────────────── -->
+    <section class="step live" id="s1">
+      <div>
+        <span class="tag">Guess first</span>
+        <h1 style="margin-top:10px">Can you get a raise every single year and still end up <em>poorer?</em></h1>
+      </div>
+      <p class="lede">Commit to an answer. Being wrong here is the fastest way to learn this.</p>
+      <div class="choices row" role="group" aria-label="Yes or no">
+        <button class="opt" data-pick="yes"><span class="key">A</span>Yes</button>
+        <button class="opt" data-pick="no"><span class="key">B</span>No</button>
+      </div>
+    </section>
+
+    <!-- 2 ─ PREDICT ───────────────────────────────────────────────── -->
+    <section class="step" id="s2">
+      <div>
+        <span class="tag">The setup</span>
+        <h2 style="margin-top:10px">Here is the whole situation.</h2>
+      </div>
+      <div class="ledger">
+        <div class="line">
+          <span class="lab">May 2016 &middot; take-home</span>
+          <span class="num">$4,000<span style="font-size:.45em;color:var(--muted)"> / month</span></span>
+        </div>
+        <div class="line sig">
+          <span class="lab">Every year after that</span>
+          <span class="num sig">+3.0%</span>
+          <p style="font-size:15px;margin-top:4px">A raise. Every single year. Ten of them.</p>
+        </div>
+      </div>
+      <p class="lede"><b>May 2026. Where does this person stand?</b></p>
+      <div class="choices" role="group" aria-label="Your prediction">
+        <button class="opt" data-pick="ahead"><span class="key">A</span>Ahead &mdash; the raises outran prices</button>
+        <button class="opt" data-pick="even"><span class="key">B</span>About even</button>
+        <button class="opt" data-pick="behind"><span class="key">C</span>Behind &mdash; they can buy less than in 2016</button>
+      </div>
+    </section>
+
+    <!-- 3 ─ REVEAL ────────────────────────────────────────────────── -->
+    <section class="step" id="s3">
+      <div>
+        <span class="tag">The answer</span>
+        <h2 style="margin-top:10px" id="revealHead">Behind. By more than you would guess.</h2>
+      </div>
+      <div class="ledger">
+        <div class="line sig">
+          <span class="lab">Their paycheck in 2026</span>
+          <span class="num sig" id="n1">$4,000</span>
+        </div>
+        <div class="line">
+          <span class="lab">The same 2016 life, priced in 2026</span>
+          <span class="num" id="n2">$4,000</span>
+        </div>
+        <div class="line gapline">
+          <span class="lab">Short, every month</span>
+          <span class="num" id="n3">&minus;$0</span>
+          <p style="font-size:15px;margin-top:4px">$2,452 over a year, out of a life that did not get any bigger.</p>
+        </div>
+      </div>
+      <div class="callout" id="verdict">
+        <span class="verdict" id="verdictTag">You said behind</span>
+        <p id="verdictBody">Right. Ten raises, and the same life still costs more than the paycheck covers.</p>
+      </div>
+      <button class="next" data-next>Why did that happen?</button>
+    </section>
+
+    <!-- 4 ─ WHY ───────────────────────────────────────────────────── -->
+    <section class="step" id="s4">
+      <div>
+        <span class="tag">Why</span>
+        <h2 style="margin-top:10px">Two growth rates. Only one of them shows up in the email from HR.</h2>
+      </div>
+      <div class="stats">
+        <div class="stat sig"><div class="n">34.4%</div><div class="t">Their pay grew</div></div>
+        <div class="stat"><div class="n">39.5%</div><div class="t">Prices grew</div></div>
+      </div>
+      <p class="lede">A raise tells you what happened to <b>your dollars</b>. Inflation tells you what happened to <b>what those dollars buy</b>. A raise is only good news relative to the second number.</p>
+      <button class="next" data-next>So what raise would have worked?</button>
+    </section>
+
+    <!-- 5 ─ TRY AGAIN ─────────────────────────────────────────────── -->
+    <section class="step" id="s5">
+      <div>
+        <span class="tag">Try again</span>
+        <h2 style="margin-top:10px">What annual raise would have kept them exactly even?</h2>
+      </div>
+      <p>Prices rose 39.5% over the ten years. Careful: the answer is not 3.95%.</p>
+      <div class="choices row" role="group" aria-label="Break-even raise">
+        <button class="opt" data-pick="2"><span class="key">A</span>2.0%</button>
+        <button class="opt" data-pick="3"><span class="key">B</span>3.0%</button>
+        <button class="opt" data-pick="339"><span class="key">C</span>3.39%</button>
+        <button class="opt" data-pick="395"><span class="key">D</span>3.95%</button>
+      </div>
+      <div class="callout" id="beVerdict" hidden>
+        <span class="verdict" id="beTag">3.39%</span>
+        <p id="beBody"></p>
+      </div>
+      <button class="next" data-next hidden id="beNext">One last question</button>
+    </section>
+
+    <!-- 6 ─ TRANSFER ──────────────────────────────────────────────── -->
+    <section class="step" id="s6">
+      <div>
+        <span class="tag">Your turn</span>
+        <h2 style="margin-top:10px">Your boss offers you a 4% raise next year. What is the first number you would want?</h2>
+      </div>
+      <div class="choices" role="group" aria-label="What to check first">
+        <button class="opt" data-pick="tenure"><span class="key">A</span>How long you have been at the company</button>
+        <button class="opt" data-pick="peers"><span class="key">B</span>What your colleagues are getting</button>
+        <button class="opt" data-pick="cpi"><span class="key">C</span>How much prices rose over the same year</button>
+        <button class="opt" data-pick="profit"><span class="key">D</span>How profitable the company was</button>
+      </div>
+      <div class="callout" id="tVerdict" hidden>
+        <span class="verdict" id="tTag"></span>
+        <p id="tBody"></p>
+      </div>
+      <button class="next" data-next hidden id="tNext">Finish</button>
+    </section>
+
+    <!-- 7 ─ DONE ──────────────────────────────────────────────────── -->
+    <section class="step" id="s7">
+      <div>
+        <span class="tag">Lesson complete</span>
+        <h2 style="margin-top:10px">One idea, <em id="doneTime">in under a minute</em>.</h2>
+      </div>
+      <p class="lede">A raise is a number about your dollars. Whether it is <b>good news</b> is a comparison, and the other half of that comparison never arrives in the same email.</p>
+      <div class="exits">
+        <a class="exit" href="https://financiallysovereign.academy/learning-tools/quiet-pay-cut" target="_blank" rel="noopener">
+          <span>Run the ten-year experiment<span class="sm">Drag the raise from 2% to 4.4% and find the year the lines cross.</span></span>
+          <span class="arrow">&rarr;</span>
+        </a>
+        <a class="exit" href="https://financiallysovereign.academy/learning-tools/" target="_blank" rel="noopener">
+          <span>Another 60-second lab<span class="sm">Savings yield, fee drag, the true cost of a loan.</span></span>
+          <span class="arrow">&rarr;</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>A Sovereign Academy property</span>
+    <span class="src">Figures from the <a href="https://financiallysovereign.academy/learning-tools/quiet-pay-cut" target="_blank" rel="noopener">Quiet Pay Cut</a> tool, CPI, May 2016&ndash;May 2026.</span>
+  </footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var PAY = 5376, BASKET = 5580, GAP = 204, START = 4000;
+  var picks = {}, step = 1, t0 = Date.now(), stopped = false;
+
+  var clock = document.getElementById('clock');
+  var rail = document.getElementById('rail').children;
+
+  function tick(){
+    if (stopped) return;
+    var s = Math.floor((Date.now() - t0)/1000);
+    clock.textContent = Math.floor(s/60) + ':' + String(s%60).padStart(2,'0');
+    setTimeout(tick, 500);
+  }
+  tick();
+
+  function go(n){
+    var cur = document.getElementById('s'+step);
+    var nxt = document.getElementById('s'+n);
+    if (!nxt) return;
+    cur.classList.remove('live');
+    nxt.classList.add('live');
+    step = n;
+    for (var i=0;i<rail.length;i++) rail[i].classList.toggle('done', i < Math.min(n,6));
+    window.scrollTo({top:0, behavior:'smooth'});
+    if (n === 3) reveal();
+    if (n === 7) finish();
+  }
+
+  function lock(section){
+    section.querySelectorAll('.opt').forEach(function(b){ b.disabled = true; });
+  }
+
+  function money(v){ return '$' + Math.round(v).toLocaleString('en-US'); }
+
+  function reveal(){
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var head = document.getElementById('revealHead');
+    var tag = document.getElementById('verdictTag');
+    var body = document.getElementById('verdictBody');
+    var box = document.getElementById('verdict');
+
+    if (picks.predict === 'behind'){
+      tag.textContent = 'You said behind';
+      body.textContent = 'Right, and you were right for a reason worth keeping: ten raises say nothing on their own. What they buy is a separate question.';
+      box.className = 'callout';
+    } else if (picks.predict === 'even'){
+      tag.textContent = 'You said about even';
+      body.textContent = 'Close, and closer than most people get. But 3% a year did not quite keep up, and the shortfall compounds every month it continues.';
+      box.className = 'callout miss';
+    } else {
+      tag.textContent = 'You said ahead';
+      body.textContent = 'Not this decade. The paycheck did grow, which is why this is so easy to miss. It just grew more slowly than the price of the same life.';
+      box.className = 'callout miss';
+    }
+    head.textContent = 'Behind. Every month, quietly.';
+
+    var n1 = document.getElementById('n1'), n2 = document.getElementById('n2'), n3 = document.getElementById('n3');
+    function paint(p){
+      n1.textContent = money(START + (PAY-START)*p);
+      n2.textContent = money(START + (BASKET-START)*p);
+      n3.textContent = '−' + money(GAP*p);
+    }
+    if (reduce){ paint(1); return; }
+
+    paint(0);
+    var t = 0, dur = 900, s0 = Date.now();
+    (function anim(){
+      t = Math.min(1, (Date.now()-s0)/dur);
+      paint(1 - Math.pow(1-t, 3));
+      if (t < 1) requestAnimationFrame(anim);
+    })();
+  }
+
+  var BE = {
+    '2':   ['Too low', '2% a year gets the paycheck to $4,876. The same life costs $5,580. That is a $704 hole every month, and it opened without a single bad year.'],
+    '3':   ['That is the raise they got', 'And it is exactly why they fell behind. 3% compounded for ten years is a real raise. It was still not enough.'],
+    '339': ['Correct', 'Break-even is 3.39%, not 3.95%. Compounding is why: a raise you keep earns raises of its own, so a slightly smaller yearly number catches a larger total. Below 3.39% you lose ground while your paycheck goes up.'],
+    '395': ['The intuitive trap', 'Dividing 39.5% by ten years feels right, but raises compound. The true break-even is 3.39% a year, because each raise sits on top of the last one.']
+  };
+
+  var T = {
+    'cpi':    ['That is the one', 'Inflation over the same period is the other half of the comparison. 4% against 2% inflation is a real raise. 4% against 5% is a pay cut with a congratulations attached.'],
+    'tenure': ['Useful, but not first', 'Tenure is an argument for asking for more. It tells you nothing about whether 4% keeps your buying power whole. Check what prices did over the same year first.'],
+    'peers':  ['Useful, but not first', 'What colleagues get tells you about fairness inside the company. Inflation tells you whether the raise is real at all, and that question comes first.'],
+    'profit': ['Useful, but not first', 'Company profit is leverage for the negotiation. It still does not tell you whether 4% covers what your life now costs. Start with inflation over the same year.']
+  };
+
+  document.addEventListener('click', function(e){
+    var opt = e.target.closest('.opt');
+    if (opt && !opt.disabled){
+      var sec = opt.closest('.step');
+      sec.querySelectorAll('.opt').forEach(function(b){ b.setAttribute('aria-pressed','false'); });
+      opt.setAttribute('aria-pressed','true');
+      var v = opt.dataset.pick;
+
+      if (sec.id === 's1'){ picks.guess = v; lock(sec); setTimeout(function(){ go(2); }, 380); }
+      else if (sec.id === 's2'){ picks.predict = v; lock(sec); setTimeout(function(){ go(3); }, 380); }
+      else if (sec.id === 's5'){
+        picks.be = v; lock(sec);
+        var d = BE[v], box = document.getElementById('beVerdict');
+        document.getElementById('beTag').textContent = d[0];
+        document.getElementById('beBody').textContent = d[1];
+        box.className = v === '339' ? 'callout' : 'callout miss';
+        box.hidden = false; document.getElementById('beNext').hidden = false;
+      }
+      else if (sec.id === 's6'){
+        picks.transfer = v; lock(sec);
+        var d2 = T[v], box2 = document.getElementById('tVerdict');
+        document.getElementById('tTag').textContent = d2[0];
+        document.getElementById('tBody').textContent = d2[1];
+        box2.className = v === 'cpi' ? 'callout' : 'callout miss';
+        box2.hidden = false; document.getElementById('tNext').hidden = false;
+      }
+      return;
+    }
+    var nb = e.target.closest('[data-next]');
+    if (nb) go(step + 1);
+  });
+
+  function finish(){
+    stopped = true;
+    var s = Math.max(1, Math.floor((Date.now()-t0)/1000));
+    var txt = s < 90 ? ('in ' + s + ' seconds') : ('in ' + Math.round(s/60) + ' minutes');
+    document.getElementById('doneTime').textContent = txt;
+    clock.textContent = 'Done · ' + Math.floor(s/60) + ':' + String(s%60).padStart(2,'0');
+  }
+})();
+</script>
+
+</body>
+</html>

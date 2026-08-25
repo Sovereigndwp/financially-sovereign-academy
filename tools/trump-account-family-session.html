@@ -1,0 +1,1559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trump Accounts: a family decision session | Financially Sovereign Academy</title>
+<meta name="description" content="Answer one connected set of questions about your household and see the arithmetic: eligibility, the $5,000 cap, what the lock-up buys, and five accounts compared against your own answers. Free, English and Spanish. Not affiliated with the U.S. government.">
+<link rel="canonical" href="https://financiallysovereign.academy/tools/trump-account-family-session">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="Trump Accounts: a family decision session">
+<meta property="og:description" content="One connected set of questions, then the arithmetic. Free, English and Spanish. Independent.">
+<meta property="og:type" content="website">
+
+<!--
+  FSA — Trump Accounts Family Decision Session
+  Built from templates/fsa-program-page.html. Brand: /css/fsa-brand.css.
+  Page-local <style> is LAYOUT ONLY. No :root, no colors except brand tokens.
+  Run scripts/fsa-style-check.sh on this file before shipping.
+
+  Baseline date is static and declared (BASELINE_YEAR / BASELINE_LABEL).
+  Never new Date() — a projection horizon that drifts silently is a bug.
+-->
+
+<link rel="stylesheet" href="/css/fsa-brand.css">
+
+<style>
+  /* LAYOUT ONLY. Colors come from brand tokens; no page-local brand system. */
+  [data-lang-panel][hidden] { display: none; }
+
+  .ta-langswitch { display: flex; gap: .5rem; justify-content: flex-end; padding: .75rem 0 0; }
+  .ta-langswitch button {
+    font: inherit; font-size: var(--fs-small); cursor: pointer;
+    background: transparent; color: var(--color-muted);
+    border: 1px solid var(--color-border); border-radius: var(--radius-sm);
+    padding: .25rem .6rem; min-height: 32px;
+  }
+  .ta-langswitch button[aria-pressed="true"] { color: var(--color-text-strong); border-color: var(--color-border-strong); }
+
+  .ta-form fieldset { border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 1.25rem; margin: 0 0 1.25rem; }
+  .ta-form legend { font-family: var(--font-sans); font-weight: 700; padding: 0 .5rem; color: var(--color-text-strong); }
+  .ta-q { display: block; font-family: var(--font-sans); font-weight: 600; margin: 1.1rem 0 .45rem; }
+  .ta-form fieldset > .ta-q:first-of-type { margin-top: .25rem; }
+  .ta-help { font-size: var(--fs-small); color: var(--color-muted); margin: .3rem 0 0; }
+  .ta-radios { display: flex; flex-wrap: wrap; gap: .5rem; }
+  .ta-radios label {
+    display: inline-flex; align-items: center; gap: .45rem;
+    border: 1px solid var(--color-border); border-radius: var(--radius-md);
+    padding: .5rem .75rem; min-height: 44px; cursor: pointer; font-size: var(--fs-small);
+  }
+  .ta-radios label:has(input:checked) { border-color: var(--color-brand); color: var(--color-text-strong); }
+  .ta-money { display: inline-flex; align-items: center; gap: .35rem; }
+  .ta-money > span { color: var(--color-muted); }
+  .ta-money input, .ta-form select {
+    font: inherit; background: var(--color-surface); color: var(--color-text);
+    border: 1px solid var(--color-border); border-radius: var(--radius-md);
+    padding: .5rem .6rem; min-height: 44px; max-width: 12rem;
+  }
+  .ta-chips { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .5rem; }
+  .ta-chips button {
+    font: inherit; font-size: var(--fs-small); cursor: pointer; min-height: 36px;
+    background: transparent; color: var(--color-muted);
+    border: 1px dashed var(--color-border); border-radius: var(--radius-pill); padding: .3rem .7rem;
+  }
+  .ta-actions { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; margin-top: 1rem; }
+  .ta-remember { display: flex; align-items: center; gap: .5rem; font-size: var(--fs-small); color: var(--color-muted); margin-top: .9rem; }
+
+  .ta-restore { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; }
+
+  /* Stacked cap bar — semantic tokens only. */
+  .ta-bar { display: flex; height: 30px; width: 100%; border: 1px solid var(--color-border-strong); border-radius: var(--radius-md); overflow: hidden; margin: 1rem 0 .5rem; background: var(--color-elevated); }
+  .ta-bar i { display: block; height: 100%; }
+  .ta-bar i.emp   { background: var(--color-brand-deep); }
+  .ta-bar i.you   { background: var(--color-brand); }
+  .ta-bar i.free  { background: var(--color-elevated); border-left: 1px solid var(--color-border); }
+  .ta-bar i.over  { background: var(--color-error); }
+  .ta-key { display: flex; flex-wrap: wrap; gap: 1rem; font-size: var(--fs-small); color: var(--color-muted); }
+  .ta-key span { display: inline-flex; align-items: center; gap: .4rem; }
+  .ta-key b { display: inline-block; width: 12px; height: 12px; border-radius: 2px; border: 1px solid var(--color-border); }
+
+  .ta-scroll { overflow-x: auto; }
+  .ta-table { width: 100%; border-collapse: collapse; font-size: var(--fs-small); }
+  .ta-table th, .ta-table td { text-align: left; padding: .55rem .5rem; border-bottom: 1px solid var(--color-border); vertical-align: top; }
+  .ta-table td.num { text-align: right; font-family: var(--font-mono); white-space: nowrap; }
+  .ta-table tr.total td { font-weight: 700; color: var(--color-text-strong); border-bottom: 2px solid var(--color-border-strong); }
+  .ta-table td.warn { color: var(--color-warning); }
+
+  #cmp { min-width: 62rem; }
+  #cmp th { font-family: var(--font-sans); color: var(--color-text-strong); border-bottom: 2px solid var(--color-border-strong); }
+  #cmp th[scope="row"] { white-space: nowrap; }
+  #cmp caption { caption-side: bottom; text-align: left; padding-top: 1rem; color: var(--color-muted); font-size: var(--fs-small); }
+  .ta-ann { list-style: none; margin: .5rem 0 0; padding: 0; }
+  .ta-ann li { font-size: var(--fs-small); padding-left: 1.1rem; position: relative; margin-top: .3rem; }
+  .ta-ann li::before { content: "\25C6"; position: absolute; left: 0; color: var(--color-muted); font-size: .7em; top: .35em; }
+  .ta-ann li.unavailable { color: var(--color-warning); }
+  .ta-ann li.unavailable::before { color: var(--color-warning); }
+  .ta-ann li.notmodeled { color: var(--color-muted); }
+
+  .ta-rates { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1rem 0; }
+  .ta-rates button {
+    font: inherit; font-size: var(--fs-small); cursor: pointer; min-height: 44px;
+    background: transparent; color: var(--color-muted);
+    border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: .5rem .85rem;
+  }
+  .ta-rates button[aria-pressed="true"] { color: var(--color-text-strong); border-color: var(--color-brand); }
+
+  .ta-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); gap: .75rem; margin: 1rem 0; }
+  .ta-stat { border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: .85rem; background: var(--color-surface); }
+  .ta-stat .k { font-size: var(--fs-small); color: var(--color-muted); }
+  .ta-stat .v { font-family: var(--font-mono); font-size: 1.35rem; color: var(--color-text-strong); margin-top: .2rem; }
+
+  .ta-chartbox { border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: .75rem; background: var(--color-surface); margin: 1rem 0; }
+  .ta-chartbox svg { display: block; width: 100%; height: auto; }
+
+  .ta-gate[hidden] { display: none; }
+  .ta-gate { border: 1px solid var(--color-border-strong); border-left: 3px solid var(--color-warning); border-radius: var(--radius-md); padding: 1rem 1.1rem; margin: 1.25rem 0; background: var(--color-surface); }
+  .ta-gate h3 { font-family: var(--font-sans); font-size: var(--fs-h4); margin: 0 0 .4rem; color: var(--color-text-strong); }
+
+  .ta-learn { border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: .75rem 1rem; margin: 1rem 0; background: var(--color-surface); }
+  .ta-learn summary { cursor: pointer; font-family: var(--font-sans); font-weight: 600; color: var(--color-text-strong); min-height: 32px; }
+  .ta-learn > div { margin-top: .75rem; }
+
+  .ta-srcs { font-size: var(--fs-small); color: var(--color-muted); }
+  .ta-srcs li { margin-top: .35rem; }
+  .ta-mono { font-family: var(--font-mono); }
+
+  @media print {
+    .ta-langswitch, .ta-rates, .ta-actions, .ta-remember, .ta-chips, #r-offer { display: none; }
+    .ta-learn > div { display: block !important; }
+  }
+</style>
+</head>
+<body>
+
+<a class="fsa-skip-link" href="#main">Skip to content</a>
+
+<div class="fsa-wrap">
+  <div class="ta-langswitch" role="group" aria-label="Language / Idioma">
+    <button type="button" data-lang-btn="en" aria-pressed="true">English</button>
+    <button type="button" data-lang-btn="es" aria-pressed="false" lang="es">Español</button>
+  </div>
+</div>
+
+<header class="fsa-section--deep fsa-section--glow">
+  <div class="fsa-wrap" style="padding-top:2.5rem;padding-bottom:2.25rem">
+    <div class="fsa-eyebrow">Financially Sovereign Academy &middot; Free tool</div>
+
+    <div data-lang-panel="en">
+      <h1 class="fsa-h1">A thousand dollars arrived. Nobody agrees on <em>what to do next</em>.</h1>
+      <p class="fsa-lede">Your employer says they will add something. A relative wants to help. Someone forwarded a message about an October deadline. And the two adults in the house do not agree on whether to put your own money in.</p>
+      <p class="fsa-lede">This page asks one connected set of questions, once, and shows you the arithmetic your household is actually standing in. It does not tell you what to do with your money, and it never will.</p>
+    </div>
+
+    <div data-lang-panel="es" lang="es" hidden>
+      <h1 class="fsa-h1">Llegaron mil dólares. Nadie se pone de acuerdo en <em>qué sigue</em>.</h1>
+      <p class="fsa-lede">Su empleador dice que va a aportar algo. Un familiar quiere ayudar. Alguien reenvió un mensaje sobre una fecha límite en octubre. Y las dos personas adultas de la casa no están de acuerdo en si poner dinero propio.</p>
+      <p class="fsa-lede">Esta página hace un solo conjunto de preguntas conectadas, una vez, y le muestra la aritmética real en la que está parado su hogar. No le dice qué hacer con su dinero, y nunca lo va a hacer.</p>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="fsa-section">
+    <div class="fsa-wrap">
+      <div class="fsa-panel" role="note">
+        <div class="fsa-panel__label">Baseline</div>
+        <p data-lang-panel="en" style="margin:.4rem 0 0">Every figure on this page was verified on <strong>24 August 2026</strong> and is dated on purpose, so you can tell when it went stale. Nothing you type here leaves your browser. Independent: no affiliation with the U.S. government, the Treasury, or the IRS.</p>
+        <p data-lang-panel="es" lang="es" hidden style="margin:.4rem 0 0">Cada cifra de esta página se verificó el <strong>24 de agosto de 2026</strong> y lleva fecha a propósito, para que usted pueda saber cuándo quedó vieja. Nada de lo que escriba aquí sale de su navegador. Independiente: sin relación con el gobierno de Estados Unidos, el Tesoro ni el IRS.</p>
+      </div>
+
+      <div class="fsa-panel ta-restore" id="restore-prompt" hidden>
+        <p data-lang-panel="en" style="margin:0">We found answers you entered earlier on this device.</p>
+        <p data-lang-panel="es" lang="es" hidden style="margin:0">Encontramos respuestas que usted escribió antes en este dispositivo.</p>
+        <button type="button" class="fsa-btn fsa-btn--secondary" id="do-restore">
+          <span data-lang-panel="en">Restore them</span><span data-lang-panel="es" lang="es" hidden>Restaurarlas</span>
+        </button>
+        <button type="button" class="fsa-btn fsa-btn--secondary" id="do-fresh">
+          <span data-lang-panel="en">Start fresh</span><span data-lang-panel="es" lang="es" hidden>Empezar de nuevo</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ THE SESSION ============================ -->
+  <section class="fsa-section" id="session" aria-labelledby="session-h">
+    <div class="fsa-wrap">
+      <div class="fsa-section-tag">Ten questions</div>
+      <h2 class="fsa-h2" id="session-h">
+        <span data-lang-panel="en">About your <em>household</em></span>
+        <span data-lang-panel="es" lang="es" hidden>Sobre su <em>hogar</em></span>
+      </h2>
+      <p data-lang-panel="en" style="color:var(--color-muted)">Nothing here is asked that is not used. Every answer feeds at least two parts of the result.</p>
+      <p data-lang-panel="es" lang="es" hidden style="color:var(--color-muted)">Aquí no se pregunta nada que no se use. Cada respuesta alimenta al menos dos partes del resultado.</p>
+
+      <form class="ta-form" id="ta-form" novalidate>
+
+        <fieldset id="fs-child">
+          <legend><span data-lang-panel="en">The child</span><span data-lang-panel="es" lang="es" hidden>El niño o la niña</span></legend>
+
+          <label class="ta-q" for="birthYear"><span data-lang-panel="en">What year was the child born?</span><span data-lang-panel="es" lang="es" hidden>¿En qué año nació?</span></label>
+          <select id="birthYear">
+            <option value="before">— before 2025 / antes de 2025</option>
+            <option value="2025">2025</option>
+            <option value="2026" selected>2026</option>
+            <option value="2027">2027</option>
+            <option value="2028">2028</option>
+            <option value="after">— 2029 or later / 2029 o después</option>
+            <option value="unsure">— not sure / no estoy seguro</option>
+          </select>
+          <p class="ta-help"><span data-lang-panel="en">This is the eligibility window, the lock date, and the projection horizon, all at once.</span><span data-lang-panel="es" lang="es" hidden>Esto define la ventana de elegibilidad, la fecha del bloqueo y el horizonte de la proyección, todo a la vez.</span></p>
+
+          <span class="ta-q" id="q-cit"><span data-lang-panel="en">Is the child a U.S. citizen?</span><span data-lang-panel="es" lang="es" hidden>¿Es ciudadano o ciudadana de Estados Unidos?</span></span>
+          <div class="ta-radios" role="radiogroup" aria-labelledby="q-cit">
+            <label><input type="radio" name="citizen" value="yes" checked> <span data-lang-panel="en">Yes</span><span data-lang-panel="es" lang="es" hidden>Sí</span></label>
+            <label><input type="radio" name="citizen" value="no"> <span data-lang-panel="en">No</span><span data-lang-panel="es" lang="es" hidden>No</span></label>
+            <label><input type="radio" name="citizen" value="unsure"> <span data-lang-panel="en">Not sure</span><span data-lang-panel="es" lang="es" hidden>No estoy seguro</span></label>
+          </div>
+
+          <span class="ta-q" id="q-ssn"><span data-lang-panel="en">Does the child have a Social Security number?</span><span data-lang-panel="es" lang="es" hidden>¿Tiene número de Seguro Social?</span></span>
+          <div class="ta-radios" role="radiogroup" aria-labelledby="q-ssn">
+            <label><input type="radio" name="ssn" value="yes" checked> <span data-lang-panel="en">Yes</span><span data-lang-panel="es" lang="es" hidden>Sí</span></label>
+            <label><input type="radio" name="ssn" value="notyet"> <span data-lang-panel="en">Not yet</span><span data-lang-panel="es" lang="es" hidden>Todavía no</span></label>
+            <label><input type="radio" name="ssn" value="unsure"> <span data-lang-panel="en">Not sure</span><span data-lang-panel="es" lang="es" hidden>No estoy seguro</span></label>
+          </div>
+
+          <span class="ta-q" id="q-seed"><span data-lang-panel="en">Has the $1,000 federal deposit landed?</span><span data-lang-panel="es" lang="es" hidden>¿Ya llegó el depósito federal de $1,000?</span></span>
+          <div class="ta-radios" role="radiogroup" aria-labelledby="q-seed">
+            <label><input type="radio" name="seed" value="received"> <span data-lang-panel="en">Received</span><span data-lang-panel="es" lang="es" hidden>Ya llegó</span></label>
+            <label><input type="radio" name="seed" value="waiting" checked> <span data-lang-panel="en">Claimed, still waiting</span><span data-lang-panel="es" lang="es" hidden>Reclamado, esperando</span></label>
+            <label><input type="radio" name="seed" value="none"> <span data-lang-panel="en">Not eligible / not claimed</span><span data-lang-panel="es" lang="es" hidden>No califica / sin reclamar</span></label>
+          </div>
+        </fieldset>
+
+        <fieldset id="fs-money">
+          <legend><span data-lang-panel="en">The money moving this year</span><span data-lang-panel="es" lang="es" hidden>El dinero que se mueve este año</span></legend>
+
+          <label class="ta-q" for="employerYear"><span data-lang-panel="en">How much will an employer contribute for this child this year?</span><span data-lang-panel="es" lang="es" hidden>¿Cuánto va a aportar un empleador por este niño este año?</span></label>
+          <div class="ta-money"><span>$</span><input type="number" id="employerYear" value="0" min="0" step="100" inputmode="numeric"></div>
+          <p class="ta-help"><span data-lang-panel="en">If two employers contribute for the same child, enter the total. The $2,500 limit is per employee; the $5,000 cap is per child.</span><span data-lang-panel="es" lang="es" hidden>Si dos empleadores aportan por el mismo niño, escriba el total. El límite de $2,500 es por empleado; el tope de $5,000 es por niño.</span></p>
+
+          <label class="ta-q" for="alreadyYear"><span data-lang-panel="en">How much has your household already contributed this calendar year?</span><span data-lang-panel="es" lang="es" hidden>¿Cuánto ha aportado ya su hogar este año calendario?</span></label>
+          <div class="ta-money"><span>$</span><input type="number" id="alreadyYear" value="0" min="0" step="100" inputmode="numeric"></div>
+
+          <label class="ta-q" for="annualIntent"><span data-lang-panel="en">Going forward, what could your household add each year without straining?</span><span data-lang-panel="es" lang="es" hidden>De aquí en adelante, ¿cuánto podría aportar su hogar cada año sin apretarse?</span></label>
+          <div class="ta-money"><span>$</span><input type="number" id="annualIntent" value="0" min="0" step="100" inputmode="numeric"></div>
+          <div class="ta-chips" role="group" aria-label="Quick amounts">
+            <button type="button" data-intent="0">$0</button>
+            <button type="button" data-intent="600">$600</button>
+            <button type="button" data-intent="1200">$1,200</button>
+            <button type="button" data-intent="2400">$2,400</button>
+            <button type="button" data-intent="rest"><span data-lang-panel="en">Fill the cap</span><span data-lang-panel="es" lang="es" hidden>Llenar el tope</span></button>
+          </div>
+          <p class="ta-help"><span data-lang-panel="en">On top of what is already in — not including it. This is also the number the projection uses.</span><span data-lang-panel="es" lang="es" hidden>Encima de lo que ya está adentro, sin incluirlo. Este es también el número que usa la proyección.</span></p>
+
+          <details class="ta-learn">
+            <summary><span data-lang-panel="en">The rule constants, if they change</span><span data-lang-panel="es" lang="es" hidden>Las constantes de la regla, si cambian</span></summary>
+            <div>
+              <p data-lang-panel="en" style="margin-top:0">Editable so this page stays correct when the numbers move, and so you can see which rule produced your result. The annual cap is indexed for inflation after 2027.</p>
+              <p data-lang-panel="es" lang="es" hidden style="margin-top:0">Editables para que esta página siga correcta cuando cambien los números, y para que usted vea qué regla produjo su resultado. El tope anual se ajusta por inflación después de 2027.</p>
+              <label class="ta-q" for="cap"><span data-lang-panel="en">Annual cap per child</span><span data-lang-panel="es" lang="es" hidden>Tope anual por niño</span></label>
+              <div class="ta-money"><span>$</span><input type="number" id="cap" value="5000" min="0" step="100" inputmode="numeric"></div>
+              <label class="ta-q" for="employerMax"><span data-lang-panel="en">Employer maximum per employee</span><span data-lang-panel="es" lang="es" hidden>Máximo del empleador por empleado</span></label>
+              <div class="ta-money"><span>$</span><input type="number" id="employerMax" value="2500" min="0" step="100" inputmode="numeric"></div>
+            </div>
+          </details>
+        </fieldset>
+
+        <fieldset id="fs-house">
+          <legend><span data-lang-panel="en">Your household</span><span data-lang-panel="es" lang="es" hidden>Su hogar</span></legend>
+
+          <label class="ta-q" for="goal"><span data-lang-panel="en">What is this money for?</span><span data-lang-panel="es" lang="es" hidden>¿Para qué es este dinero?</span></label>
+          <select id="goal">
+            <option value="school">school / estudios</option>
+            <option value="home">a first home / una primera vivienda</option>
+            <option value="start">a start in adulthood / un arranque en la vida adulta</option>
+            <option value="undecided" selected>undecided / sin decidir</option>
+          </select>
+
+          <span class="ta-q" id="q-cush"><span data-lang-panel="en">How much does the household have set aside for an emergency?</span><span data-lang-panel="es" lang="es" hidden>¿Cuánto tiene el hogar apartado para una emergencia?</span></span>
+          <div class="ta-radios" role="radiogroup" aria-labelledby="q-cush">
+            <label><input type="radio" name="cushion" value="lt1"> <span data-lang-panel="en">Less than a month</span><span data-lang-panel="es" lang="es" hidden>Menos de un mes</span></label>
+            <label><input type="radio" name="cushion" value="1to3"> <span data-lang-panel="en">One to three months</span><span data-lang-panel="es" lang="es" hidden>De uno a tres meses</span></label>
+            <label><input type="radio" name="cushion" value="gt3"> <span data-lang-panel="en">Three months or more</span><span data-lang-panel="es" lang="es" hidden>Tres meses o más</span></label>
+            <label><input type="radio" name="cushion" value="unsure" checked> <span data-lang-panel="en">Not sure</span><span data-lang-panel="es" lang="es" hidden>No estoy seguro</span></label>
+          </div>
+
+          <span class="ta-q" id="q-earn"><span data-lang-panel="en">Does the child have earned income from paid work?</span><span data-lang-panel="es" lang="es" hidden>¿El niño tiene ingreso ganado por trabajo pagado?</span></span>
+          <div class="ta-radios" role="radiogroup" aria-labelledby="q-earn">
+            <label><input type="radio" name="earned" value="yes"> <span data-lang-panel="en">Yes</span><span data-lang-panel="es" lang="es" hidden>Sí</span></label>
+            <label><input type="radio" name="earned" value="no" checked> <span data-lang-panel="en">No</span><span data-lang-panel="es" lang="es" hidden>No</span></label>
+          </div>
+        </fieldset>
+
+        <div class="ta-actions">
+          <button type="submit" class="fsa-btn fsa-btn--primary" id="go">
+            <span data-lang-panel="en">Show me the arithmetic &rarr;</span><span data-lang-panel="es" lang="es" hidden>Muéstreme la aritmética &rarr;</span>
+          </button>
+        </div>
+        <label class="ta-remember">
+          <input type="checkbox" id="remember">
+          <span data-lang-panel="en">Keep my answers on this device so I can come back</span><span data-lang-panel="es" lang="es" hidden>Guardar mis respuestas en este dispositivo para volver después</span>
+        </label>
+        <div class="ta-actions">
+          <button type="button" class="fsa-btn fsa-btn--secondary" id="clear">
+            <span data-lang-panel="en">Clear my answers</span><span data-lang-panel="es" lang="es" hidden>Borrar mis respuestas</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ============================ THE RESULT ============================ -->
+  <div id="result" hidden>
+
+    <!-- R1 verdict -->
+    <section class="fsa-section fsa-section--alt" id="r-verdict" aria-labelledby="verdict-h">
+      <div class="fsa-wrap">
+        <div class="fsa-section-tag">1 &middot; <span data-lang-panel="en">Where you stand</span><span data-lang-panel="es" lang="es" hidden>Dónde está usted</span></div>
+        <div class="fsa-card" aria-live="polite">
+          <h2 class="fsa-h2" id="verdict-h" data-slot="verdict-title"></h2>
+          <p data-slot="verdict-body" style="margin-bottom:0"></p>
+        </div>
+        <h3 class="fsa-h3" style="margin-top:1.5rem"><span data-lang-panel="en">What to gather before you start</span><span data-lang-panel="es" lang="es" hidden>Qué reunir antes de empezar</span></h3>
+        <ul class="fsa-list" data-slot="verdict-list"></ul>
+
+        <div class="ta-gate" id="gate-legal" hidden>
+          <div data-lang-panel="en">
+            <h3>This one needs a person, not a web page</h3>
+            <p>You answered that the child's citizenship or Social Security number is not settled. Those two facts decide eligibility, and they are not something to resolve from a website — including this one.</p>
+            <p>If the question is about immigration status, the Department of Justice publishes a list of free and low-cost legal providers by state. If the question is only about filing, IRS-certified VITA and TCE sites prepare returns at no charge and are used to mixed-status households.</p>
+            <p style="margin-bottom:0">Nothing is being sold to you inside this box, and nothing on this page is contingent on how that question resolves.</p>
+          </div>
+          <div data-lang-panel="es" lang="es" hidden>
+            <h3>Esto necesita una persona, no una página web</h3>
+            <p>Usted respondió que la ciudadanía o el número de Seguro Social del niño no están resueltos. Esos dos hechos deciden la elegibilidad, y no son algo que se resuelva desde un sitio web, incluido este.</p>
+            <p>Si la pregunta es sobre estatus migratorio, el Departamento de Justicia publica por estado una lista de proveedores legales gratuitos y de bajo costo. Si la pregunta es solo sobre declarar impuestos, los sitios VITA y TCE certificados por el IRS preparan declaraciones sin costo y están acostumbrados a hogares de estatus mixto.</p>
+            <p style="margin-bottom:0">Aquí adentro no se le está vendiendo nada, y nada de esta página depende de cómo se resuelva esa pregunta.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- R2 cap -->
+    <section class="fsa-section" id="r-cap" aria-labelledby="cap-h">
+      <div class="fsa-wrap">
+        <div class="fsa-section-tag">2 &middot; <span data-lang-panel="en">The number people quote</span><span data-lang-panel="es" lang="es" hidden>El número que la gente repite</span></div>
+        <h2 class="fsa-h2" id="cap-h">
+          <span data-lang-panel="en">Where families get <em>caught</em></span>
+          <span data-lang-panel="es" lang="es" hidden>Donde las familias se <em>enredan</em></span>
+        </h2>
+        <p data-lang-panel="en">Almost every article says the same two numbers: five thousand a year, and up to twenty-five hundred from an employer. Read together, they sound like seventy-five hundred. They are not.</p>
+        <p data-lang-panel="es" lang="es" hidden>Casi todos los artículos dicen los mismos dos números: cinco mil al año, y hasta dos mil quinientos del empleador. Leídos juntos, suenan a siete mil quinientos. No lo son.</p>
+
+        <p class="fsa-lede" data-slot="cap-consequence"></p>
+
+        <div class="ta-bar" id="cap-bar" role="img" aria-describedby="cap-bar-desc"></div>
+        <p id="cap-bar-desc" class="fsa-sr-only" data-slot="cap-bar-alt"></p>
+        <div class="ta-key">
+          <span><b style="background:var(--color-brand-deep)"></b><span data-lang-panel="en">Employer</span><span data-lang-panel="es" lang="es" hidden>Empleador</span></span>
+          <span><b style="background:var(--color-brand)"></b><span data-lang-panel="en">Your household</span><span data-lang-panel="es" lang="es" hidden>Su hogar</span></span>
+          <span><b style="background:var(--color-elevated)"></b><span data-lang-panel="en">Room left</span><span data-lang-panel="es" lang="es" hidden>Cupo que queda</span></span>
+        </div>
+
+        <div class="ta-scroll" style="margin-top:1rem">
+          <table class="ta-table"><tbody data-slot="cap-rows"></tbody></table>
+        </div>
+
+        <p style="color:var(--color-muted);font-size:var(--fs-small)">
+          <span data-lang-panel="en">Change the employer figure to $0 and back, and watch this whole section move. That is the point.</span>
+          <span data-lang-panel="es" lang="es" hidden>Cambie la cifra del empleador a $0 y de vuelta, y vea moverse toda esta sección. De eso se trata.</span>
+        </p>
+
+        <div class="ta-gate" id="gate-overcap" hidden>
+          <div data-lang-panel="en">
+            <h3>This one needs a tax professional</h3>
+            <p data-slot="overcap-body"></p>
+            <p style="margin-bottom:0">Contributing above the annual cap has correction and reporting consequences that depend on your specific situation and on timing. This is not something to resolve from a web page, and it is not something we will guess at.</p>
+          </div>
+          <div data-lang-panel="es" lang="es" hidden>
+            <h3>Esto necesita un profesional de impuestos</h3>
+            <p data-slot="overcap-body-es"></p>
+            <p style="margin-bottom:0">Aportar por encima del tope anual tiene consecuencias de corrección y de reporte que dependen de su situación específica y del momento. Esto no se resuelve desde una página web, y no lo vamos a adivinar.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- R3 projection -->
+    <section class="fsa-section fsa-section--alt" id="r-grow" aria-labelledby="grow-h">
+      <div class="fsa-wrap">
+        <div class="fsa-section-tag">3 &middot; <span data-lang-panel="en">What the lock-up buys</span><span data-lang-panel="es" lang="es" hidden>Qué compra el bloqueo</span></div>
+        <h2 class="fsa-h2" id="grow-h">
+          <span data-lang-panel="en">Locked until eighteen, and what that <em>is worth</em></span>
+          <span data-lang-panel="es" lang="es" hidden>Bloqueado hasta los dieciocho, y cuánto <em>vale eso</em></span>
+        </h2>
+        <p data-lang-panel="en">Money that cannot be touched is money that cannot be interrupted. That is the whole trade. Here is that trade in your household's own numbers — and then the same numbers under three different assumptions, which is the part worth sitting with.</p>
+        <p data-lang-panel="es" lang="es" hidden>El dinero que no se puede tocar es dinero que no se puede interrumpir. Ese es todo el intercambio. Aquí está ese intercambio con los números de su propio hogar, y después los mismos números bajo tres supuestos distintos, que es la parte que vale la pena mirar con calma.</p>
+
+        <div class="ta-rates" role="group" aria-label="Assumed annual return">
+          <button type="button" data-rate="4" aria-pressed="false">4% &mdash; <span data-lang-panel="en">keeps pace with prices</span><span data-lang-panel="es" lang="es" hidden>solo sigue a los precios</span></button>
+          <button type="button" data-rate="7" aria-pressed="true">7% &mdash; <span data-lang-panel="en">the exercise's assumption</span><span data-lang-panel="es" lang="es" hidden>el supuesto del ejercicio</span></button>
+          <button type="button" data-rate="10" aria-pressed="false">10% &mdash; <span data-lang-panel="en">the long-run average</span><span data-lang-panel="es" lang="es" hidden>el promedio de largo plazo</span></button>
+        </div>
+
+        <div class="ta-chartbox"><div data-slot="grow-chart"></div></div>
+
+        <div class="ta-stats" data-slot="grow-stats"></div>
+        <p data-slot="grow-explain"></p>
+        <p class="fsa-lede" data-slot="grow-three"></p>
+
+        <div class="fsa-panel">
+          <div class="fsa-panel__label"><span data-lang-panel="en">Sending to the calculator</span><span data-lang-panel="es" lang="es" hidden>Lo que se envía a la calculadora</span></div>
+          <p data-slot="grow-handoff" style="margin:.4rem 0 .9rem"></p>
+          <a class="fsa-btn fsa-btn--primary" id="grow-link" href="/calculators/compound-growth-calculator.html">
+            <span data-lang-panel="en">Open this in the compound growth calculator &rarr;</span><span data-lang-panel="es" lang="es" hidden>Abrir esto en la calculadora de crecimiento compuesto &rarr;</span>
+          </a>
+        </div>
+
+        <details class="ta-learn">
+          <summary><span data-lang-panel="en">What this projection is not</span><span data-lang-panel="es" lang="es" hidden>Lo que esta proyección no es</span></summary>
+          <div data-lang-panel="en">
+            <p><strong>It is a projection, not a promise.</strong> It is one formula, run on numbers you typed, at a rate you chose from three.</p>
+            <p><strong>Half of it has not happened.</strong> The stat cards above split what your household would put in from what is arithmetic on an assumption. The first number is real. The second is not yet anything.</p>
+            <p><strong>Order matters and this ignores it.</strong> The same average delivered in a different sequence produces a different ending number. This formula applies the same rate every month, which no market does.</p>
+            <p><strong>It is a pre-tax number.</strong> Withdrawals are taxed as ordinary income, not at capital-gains rates (IRS Notice 2025-68), so what the household keeps is smaller and depends on a tax situation two decades away.</p>
+            <p><strong>No fees are subtracted.</strong> The statute caps annual fees and expenses at 0.1 percent of the balance; the calculator subtracts nothing, so treat the figure as slightly generous.</p>
+            <p style="margin-bottom:0"><strong>Employer money is not guaranteed.</strong> The projection assumes the same amount every year, employer contribution included. That is an assumption about a benefit that can be changed, and the caps are not indexed until after 2027.</p>
+          </div>
+          <div data-lang-panel="es" lang="es" hidden>
+            <p><strong>Es una proyección, no una promesa.</strong> Es una fórmula, corrida sobre números que usted escribió, a una tasa que usted eligió entre tres.</p>
+            <p><strong>La mitad no ha ocurrido.</strong> Las tarjetas de arriba separan lo que su hogar pondría de lo que es aritmética sobre un supuesto. El primer número es real. El segundo todavía no es nada.</p>
+            <p><strong>El orden importa y esto lo ignora.</strong> El mismo promedio entregado en otra secuencia produce un número final distinto. Esta fórmula aplica la misma tasa todos los meses, cosa que ningún mercado hace.</p>
+            <p><strong>Es un número antes de impuestos.</strong> Los retiros tributan como ingreso ordinario, no a tasas de ganancia de capital (Aviso del IRS 2025-68), así que lo que el hogar se queda es menos y depende de una situación fiscal a veinte años.</p>
+            <p><strong>No se restan comisiones.</strong> La ley limita las comisiones y gastos anuales al 0.1 por ciento del saldo; la calculadora no resta nada, así que trate la cifra como algo generosa.</p>
+            <p style="margin-bottom:0"><strong>El dinero del empleador no está garantizado.</strong> La proyección supone el mismo monto todos los años, incluido el del empleador. Eso es un supuesto sobre un beneficio que puede cambiar, y los topes no se ajustan sino hasta después de 2027.</p>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <!-- R4 comparison -->
+    <section class="fsa-section" id="r-compare" aria-labelledby="cmp-h">
+      <div class="fsa-wrap">
+        <div class="fsa-section-tag">4 &middot; <span data-lang-panel="en">Five accounts</span><span data-lang-panel="es" lang="es" hidden>Cinco cuentas</span></div>
+        <h2 class="fsa-h2" id="cmp-h">
+          <span data-lang-panel="en">The same five accounts, against <em>your answers</em></span>
+          <span data-lang-panel="es" lang="es" hidden>Las mismas cinco cuentas, frente a <em>sus respuestas</em></span>
+        </h2>
+        <p data-lang-panel="en">Nothing here is ranked and no row is highlighted, on purpose. Under each row are notes generated from what you told us: what is mechanically available, your own arithmetic, and the timing against your child's age.</p>
+        <p data-lang-panel="es" lang="es" hidden>Aquí nada está ordenado por preferencia y ninguna fila está resaltada, a propósito. Debajo de cada fila hay notas generadas con lo que usted nos dijo: qué está disponible mecánicamente, su propia aritmética, y el calendario frente a la edad de su hijo.</p>
+
+        <div class="ta-scroll">
+          <table class="ta-table" id="cmp">
+            <caption data-slot="cmp-caption"></caption>
+            <thead>
+              <tr>
+                <th scope="col"><span data-lang-panel="en">Account</span><span data-lang-panel="es" lang="es" hidden>Cuenta</span></th>
+                <th scope="col"><span data-lang-panel="en">Who can contribute, and the annual limit</span><span data-lang-panel="es" lang="es" hidden>Quién aporta y el límite anual</span></th>
+                <th scope="col"><span data-lang-panel="en">When it can be reached</span><span data-lang-panel="es" lang="es" hidden>Cuándo se puede tocar</span></th>
+                <th scope="col"><span data-lang-panel="en">How growth is taxed coming out</span><span data-lang-panel="es" lang="es" hidden>Cómo tributa el crecimiento al salir</span></th>
+                <th scope="col"><span data-lang-panel="en">Who controls it at majority</span><span data-lang-panel="es" lang="es" hidden>Quién controla al llegar a la mayoría</span></th>
+              </tr>
+            </thead>
+            <tbody data-slot="cmp-rows"></tbody>
+          </table>
+        </div>
+
+        <h3 class="fsa-h3" style="margin-top:1.5rem"><span data-lang-panel="en">What this table did not weigh</span><span data-lang-panel="es" lang="es" hidden>Lo que esta tabla no pesó</span></h3>
+        <ul class="fsa-list" data-lang-panel="en">
+          <li>Your state's treatment of any of these accounts, including any state deduction and any state age of majority.</li>
+          <li>College financial aid. Trump Account treatment has not been clarified, and the other four are treated differently from one another.</li>
+          <li>Your marginal tax rate now against your child's decades from now, which is the whole question underneath "deferred or not."</li>
+          <li>Everything else the household is already saving toward, and everything it owes.</li>
+          <li>Whether anyone in the household will still be tracking this in ten years.</li>
+        </ul>
+        <ul class="fsa-list" data-lang-panel="es" lang="es" hidden>
+          <li>El tratamiento que su estado le da a cualquiera de estas cuentas, incluida cualquier deducción estatal y la edad de mayoría de edad de su estado.</li>
+          <li>La ayuda financiera universitaria. El tratamiento de la Cuenta Trump no se ha aclarado, y las otras cuatro se tratan distinto entre sí.</li>
+          <li>Su tasa marginal de impuestos hoy frente a la de su hijo dentro de décadas, que es toda la pregunta que hay debajo de "diferido o no".</li>
+          <li>Todo lo demás para lo que el hogar ya está ahorrando, y todo lo que debe.</li>
+          <li>Si alguien en la casa va a seguir llevando la cuenta de esto dentro de diez años.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- R5 questions -->
+    <section class="fsa-section fsa-section--alt" id="r-questions" aria-labelledby="q2-h">
+      <div class="fsa-wrap">
+        <div class="fsa-section-tag">5 &middot; <span data-lang-panel="en">Where arithmetic stops</span><span data-lang-panel="es" lang="es" hidden>Donde se acaba la aritmética</span></div>
+        <h2 class="fsa-h2" id="q2-h">
+          <span data-lang-panel="en">The question this <em>raises</em></span>
+          <span data-lang-panel="es" lang="es" hidden>La pregunta que esto <em>abre</em></span>
+        </h2>
+        <p class="fsa-lede" data-slot="q2-big"></p>
+        <ul class="fsa-list" data-slot="q2-list"></ul>
+
+        <div class="ta-gate" id="gate-cushion" hidden>
+          <div data-lang-panel="en">
+            <h3>One thing worth naming first</h3>
+            <p>You said the household has less than a month of expenses set aside, and that you are planning to contribute. Money that goes into this account cannot come back out before the year your child turns eighteen, for any reason a household normally faces.</p>
+            <p style="margin-bottom:0">That is not a reason to stop, and nobody here can see your situation. It is a factor to weigh before the money is locked rather than after, and it is the one factor this page can see that argues in the other direction.</p>
+          </div>
+          <div data-lang-panel="es" lang="es" hidden>
+            <h3>Una cosa que vale la pena nombrar primero</h3>
+            <p>Usted dijo que el hogar tiene menos de un mes de gastos apartado, y que está pensando aportar. El dinero que entra a esta cuenta no puede salir antes del año en que su hijo cumpla dieciocho, por ninguna razón de las que un hogar enfrenta normalmente.</p>
+            <p style="margin-bottom:0">Eso no es una razón para parar, y nadie aquí puede ver su situación. Es un factor que conviene pesar antes de que el dinero quede bloqueado y no después, y es el único factor que esta página alcanza a ver que empuja en la dirección contraria.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- R6 free next steps -->
+    <section class="fsa-section" id="r-free" aria-labelledby="free-h">
+      <div class="fsa-wrap">
+        <div class="fsa-section-tag">6 &middot; <span data-lang-panel="en">What to do next, free</span><span data-lang-panel="es" lang="es" hidden>Qué sigue, gratis</span></div>
+        <h2 class="fsa-h2" id="free-h">
+          <span data-lang-panel="en">Everything you need to act is <em>above this line</em></span>
+          <span data-lang-panel="es" lang="es" hidden>Todo lo que necesita para actuar está <em>arriba de esta línea</em></span>
+        </h2>
+
+        <div data-lang-panel="en">
+          <ul class="fsa-list">
+            <li><a href="/kits/trump-account-family-decision-guide">The full explainer</a> — eleven questions answered in full, every claim linked to primary guidance. Free, permanently.</li>
+            <li><a href="/tools/contribution-cap-planner">The contribution cap planner</a> — if you want to run the cap arithmetic on its own, or share it with the other adult.</li>
+            <li><a href="/tools/guia-cuentas-trump">La guía de decisión, en español</a> — the eligibility and troubleshooting path, including what ID.me actually asks for.</li>
+            <li><a href="/calculators/compound-growth-calculator.html">The compound growth calculator</a> — free, and it will take any numbers, not only these.</li>
+            <li>Start at official addresses typed by hand: <span class="ta-mono">irs.gov/trumpaccounts</span> and <span class="ta-mono">trumpaccounts.gov</span>. No legitimate part of claiming the $1,000 asks you to pay a third party or hand over bank passwords.</li>
+          </ul>
+          <h3 class="fsa-h3" style="margin-top:1.75rem">The first conversation, free</h3>
+          <p data-slot="talk-when"></p>
+          <div class="fsa-panel">
+            <div class="fsa-panel__label">Under eight &mdash; the "it exists" conversation</div>
+            <p style="margin:.5rem 0 0">Say: <em>"There is an account with your name on it. It is for when you are grown up. We are not going to use it before then."</em></p>
+            <p style="margin:.5rem 0 0">Do not say a dollar amount to a young child; it becomes a number they repeat and compare. Ask them one question — <em>"What do you think grown-ups use money for?"</em> — and listen without correcting.</p>
+            <p style="margin:.5rem 0 0;color:var(--color-muted)">Goal: they know it exists and that it is not for now. Nothing else.</p>
+          </div>
+        </div>
+
+        <div data-lang-panel="es" lang="es" hidden>
+          <ul class="fsa-list">
+            <li><a href="/kits/guia-familiar-cuentas-trump">La explicación completa</a> — once preguntas respondidas completas, cada dato enlazado a la guía oficial. Gratis, siempre.</li>
+            <li><a href="/tools/contribution-cap-planner">El planificador del límite de aportes</a> — si quiere correr la aritmética del tope por separado, o compartirla con la otra persona adulta.</li>
+            <li><a href="/tools/guia-cuentas-trump">La guía de decisión en español</a> — la ruta de elegibilidad y de qué hacer si algo sale mal, incluido qué le pide ID.me de verdad.</li>
+            <li><a href="/calculators/compound-growth-calculator.html">La calculadora de crecimiento compuesto</a> — gratis, y acepta cualquier número, no solo estos.</li>
+            <li>Empiece por direcciones oficiales escritas a mano: <span class="ta-mono">irs.gov/trumpaccounts</span> y <span class="ta-mono">trumpaccounts.gov</span>. Ninguna parte legítima del proceso le pide pagarle a un tercero ni entregar contraseñas bancarias.</li>
+          </ul>
+          <h3 class="fsa-h3" style="margin-top:1.75rem">La primera conversación, gratis</h3>
+          <p data-slot="talk-when-es"></p>
+          <div class="fsa-panel">
+            <div class="fsa-panel__label">Menos de ocho años &mdash; la conversación de "existe"</div>
+            <p style="margin:.5rem 0 0">Diga: <em>"Hay una cuenta con tu nombre. Es para cuando seas grande. No la vamos a usar antes."</em></p>
+            <p style="margin:.5rem 0 0">No le diga un monto a un niño pequeño; se convierte en un número que repite y compara. Hágale una pregunta —<em>"¿Para qué crees que los grandes usan el dinero?"</em>— y escuche sin corregir.</p>
+            <p style="margin:.5rem 0 0;color:var(--color-muted)">Objetivo: que sepa que existe y que no es para ahora. Nada más.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- R7 optional artifacts -->
+    <section class="fsa-section--deep" id="r-offer" aria-labelledby="offer-h">
+      <div class="fsa-wrap" style="padding-top:2.5rem;padding-bottom:2.5rem">
+        <div class="fsa-section-tag"><span data-lang-panel="en">Optional</span><span data-lang-panel="es" lang="es" hidden>Opcional</span></div>
+        <h2 class="fsa-h2" id="offer-h">
+          <span data-lang-panel="en">The four things a web page <em>cannot</em> do for you</span>
+          <span data-lang-panel="es" lang="es" hidden>Las cuatro cosas que una página web <em>no puede</em> hacer por usted</span>
+        </h2>
+
+        <div data-lang-panel="en">
+          <p>Everything needed to decide and to act is above. This is the paperwork that carries your household's own answers out of the browser and into the world — an optional set of documents generated from what you entered here, not a second version of what you just read.</p>
+          <ul class="fsa-list">
+            <li><strong>Your comparison, filled in.</strong> The table above with your child's age, your employer's figure and your goal written into the rows, on paper, for the conversation with the other adult.</li>
+            <li><strong>The employer letter</strong>, with your own numbers already in it, written to hand to HR as-is. <span data-slot="offer-employer"></span></li>
+            <li><strong>Conversation scripts matched to your children's ages.</strong> Written for the parent. The first one is published free above; this is the full sequence.</li>
+            <li><strong>The seventeen-year record</strong>, opened with your decision and your reasoning and running to <span data-slot="offer-lockyear"></span>.</li>
+          </ul>
+          <p style="color:var(--color-muted)">Not available yet. It is a one-time generated set, not a subscription, and there is nothing to buy on this page today. If you want to be told when it exists, write to <a href="mailto:dalia@thesovereign.academy?subject=Trump%20Accounts%20artifact%20set">dalia@thesovereign.academy</a> — there is deliberately no signup box anywhere on this page.</p>
+        </div>
+
+        <div data-lang-panel="es" lang="es" hidden>
+          <p>Todo lo necesario para decidir y para actuar está arriba. Esto es el papeleo que saca las respuestas de su propio hogar del navegador y las lleva al mundo: un conjunto opcional de documentos generado con lo que usted escribió aquí, no una segunda versión de lo que acaba de leer.</p>
+          <ul class="fsa-list">
+            <li><strong>Su hoja comparativa, ya llena.</strong> La tabla de arriba con la edad de su hijo, la cifra de su empleador y su objetivo escritos en las filas, en papel, para la conversación con la otra persona adulta.</li>
+            <li><strong>La carta para el empleador</strong>, ya con sus propios números adentro, escrita para entregarla tal cual. <span data-slot="offer-employer-es"></span></li>
+            <li><strong>Guiones de conversación según la edad de sus hijos.</strong> Escritos para el padre o la madre. El primero está publicado gratis arriba; esto es la secuencia completa.</li>
+            <li><strong>El registro de diecisiete años</strong>, abierto con su decisión y su razonamiento, y que llega hasta <span data-slot="offer-lockyear-es"></span>.</li>
+          </ul>
+          <p style="color:var(--color-muted)">Todavía no está disponible. Es un conjunto generado una sola vez, no una suscripción, y hoy no hay nada que comprar en esta página. Si quiere que le avisemos cuando exista, escriba a <a href="mailto:dalia@thesovereign.academy?subject=Kit%20Cuentas%20Trump">dalia@thesovereign.academy</a> — a propósito no hay ninguna casilla de registro en toda esta página.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- R8 limits and sources -->
+    <section class="fsa-section" id="r-sources" aria-labelledby="src-h">
+      <div class="fsa-wrap">
+        <div class="fsa-section-tag">7 &middot; <span data-lang-panel="en">Method and sources</span><span data-lang-panel="es" lang="es" hidden>Método y fuentes</span></div>
+        <h2 class="fsa-h2" id="src-h"><span data-lang-panel="en">Check any of it</span><span data-lang-panel="es" lang="es" hidden>Verifique lo que quiera</span></h2>
+
+        <details class="ta-learn" open>
+          <summary><span data-lang-panel="en">What this page does not do</span><span data-lang-panel="es" lang="es" hidden>Lo que esta página no hace</span></summary>
+          <div data-lang-panel="en">
+            <ul class="fsa-list">
+              <li>It does not tell you whether to contribute, how much, or which account to prefer.</li>
+              <li>It does not model your state's treatment of any account, and does not ask for your state, because asking and then not using it would be worse.</li>
+              <li>It does not model financial aid, your marginal tax rate, or anything else your household is saving toward.</li>
+              <li>It does not know your situation. Where it says a qualified professional may be needed, that is the page working correctly.</li>
+              <li>It is not affiliated with the U.S. government, the Department of the Treasury, or the Internal Revenue Service.</li>
+            </ul>
+          </div>
+          <div data-lang-panel="es" lang="es" hidden>
+            <ul class="fsa-list">
+              <li>No le dice si aportar, cuánto, ni qué cuenta preferir.</li>
+              <li>No modela el tratamiento que su estado le da a ninguna cuenta, y no le pregunta su estado, porque preguntarlo y después no usarlo sería peor.</li>
+              <li>No modela ayuda financiera, ni su tasa marginal, ni nada más para lo que su hogar esté ahorrando.</li>
+              <li>No conoce su situación. Cuando dice que puede hacer falta un profesional calificado, es la página funcionando bien.</li>
+              <li>No tiene relación con el gobierno de Estados Unidos, el Departamento del Tesoro ni el Servicio de Impuestos Internos.</li>
+            </ul>
+          </div>
+        </details>
+
+        <ul class="ta-srcs fsa-list">
+          <li><strong>26 U.S.C. &sect;530A</strong> &mdash; the annual cap, the lock until the year the beneficiary turns 18, and the investment restrictions: annual fees and expenses no greater than 0.1 percent of the balance, a qualified index, primarily United States companies, and no industry or sector-specific index. <span class="ta-mono">uscode.house.gov</span></li>
+          <li><strong>IRS Notice 2025-68</strong> &mdash; $5,000 annual limit indexed after 2027; traditional-IRA tax treatment; the 10% early-distribution charge. <span class="ta-mono">irs.gov/pub/irs-drop/n-25-68.pdf</span></li>
+          <li><strong>DOL Technical Release 2026-02</strong> &mdash; employer contributions up to $2,500 per employee per year, counted inside the $5,000 cap. <span class="ta-mono">dol.gov/agencies/ebsa</span></li>
+          <li><strong>IRS, Instructions for Form 4547</strong> &mdash; no published deadline; cannot be attached to Form 1040-X; non-filers may submit separately; the identity-verification step. <span class="ta-mono">irs.gov/pub/irs-pdf/i4547.pdf</span></li>
+          <li><strong>IRS Rev. Proc. 2026-25</strong> (29 June 2026) &mdash; gift tax safe harbor, present-interest treatment, annual exclusion $19,000 for 2026. <span class="ta-mono">irs.gov/pub/irs-drop/rp-26-25.pdf</span></li>
+          <li><strong>Proposed rule, Federal Register 2026-08-21, RIN 1545-BS14</strong> &mdash; four additions only: an ESG-index exclusion, a 90% U.S.-company safe harbor, an Investment Company Act registration requirement, and a definition of leverage. Comments close 20 October 2026. <span class="ta-mono">federalregister.gov</span></li>
+          <li><strong>Shiller online data</strong> &mdash; long-run nominal U.S. equity average, the basis for the 10% assumption. <span class="ta-mono">See SOURCES.md, "Investing".</span></li>
+          <li><strong>BLS, CPI-U all items</strong> &mdash; 4.2% twelve-month change, May 2026, the basis for the 4% assumption. <span class="ta-mono">bls.gov</span></li>
+          <li><strong>The 7% figure is not sourced.</strong> It is the long-run nominal average less current inflation, rounded, and it is an assumption of this exercise rather than a measured number. It is the default here only because it is the middle of three.</li>
+        </ul>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="fsa-legal-footer">
+  <div class="fsa-wrap">
+    <p data-lang-panel="en">&copy; 2026 The Sovereign Academy LLC &middot; Financially Sovereign Academy &middot; Educational content only &mdash; not individualized financial, investment, legal, or tax advice &middot; <strong>Not affiliated with or endorsed by the U.S. government, the Department of the Treasury, or the Internal Revenue Service.</strong> &middot; <a href="https://thesovereign.academy/legal/disclaimer/">Disclaimer &amp; Limitations</a></p>
+    <p data-lang-panel="es" lang="es" hidden>&copy; 2026 The Sovereign Academy LLC &middot; Financially Sovereign Academy &middot; Contenido educativo únicamente &mdash; no es asesoría financiera, de inversión, legal ni fiscal individualizada &middot; <strong>Sin relación ni respaldo del gobierno de Estados Unidos, el Departamento del Tesoro ni el Servicio de Impuestos Internos.</strong> &middot; <a href="https://thesovereign.academy/legal/disclaimer/">Descargo de responsabilidad</a></p>
+    <p id="privacy-line" style="color:var(--color-muted)">
+      <span data-lang-panel="en" data-slot="privacy"></span>
+      <span data-lang-panel="es" lang="es" hidden data-slot="privacy-es"></span>
+    </p>
+  </div>
+</footer>
+
+<script src="/js/analytics.js" defer></script>
+<script>
+(function () {
+  "use strict";
+
+  /* ---------------------------------------------------------------- constants
+     Static dated baselines. Never new Date(): a horizon that drifts silently
+     would change every projection on this page without anyone noticing.      */
+  var ASSET_ID      = "CRE-tool-ta-family-session";
+  var OFFER_ID      = "OFR-ta-family-session-artifacts";
+  var BASELINE_YEAR = 2026;
+  var LOCK_AGE      = 18;
+  var RATES         = [4, 7, 10];
+  var STORE_KEY     = "fsa.ta-session.v1";
+  var CALC_PATH     = "/calculators/compound-growth-calculator.html";
+
+  /* Calculator slider constraints — see calculators/compound-growth-calculator.html.
+     m steps by 50, y is 1..40, u MUST be sent as 0 or the calculator silently
+     escalates contributions 3%/yr past the cap. */
+  var M_STEP = 50, M_MAX = 2000, Y_MIN = 1, Y_MAX = 40, P_MAX = 100000;
+
+  var $  = function (id) { return document.getElementById(id); };
+  var $$ = function (sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); };
+
+  /* -------------------------------------------------------------- analytics */
+  var started = false, completed = false, firedGates = {};
+  function TSA_EVENT(name, props) {
+    var p = Object.assign({ event: name, asset_id: ASSET_ID }, props || {});
+    try {
+      if (window.fsaAnalytics && typeof window.fsaAnalytics.track === "function") {
+        window.fsaAnalytics.track(name, p);
+      }
+    } catch (e) {}
+    if (window.console && console.log) console.log("[TSA_EVENT] " + JSON.stringify(p));
+  }
+
+  /* ------------------------------------------------------------------ i18n */
+  var lang = "en";
+
+  function pickLang() {
+    var q;
+    try { q = new URLSearchParams(location.search).get("lang"); } catch (e) { q = null; }
+    if (q === "es" || q === "en") return q;
+    var n = (navigator.language || "en").toLowerCase();
+    return n.indexOf("es") === 0 ? "es" : "en";
+  }
+
+  function applyLang(next) {
+    lang = (next === "es") ? "es" : "en";
+    $$("[data-lang-panel]").forEach(function (el) {
+      el.hidden = (el.getAttribute("data-lang-panel") !== lang);
+    });
+    document.documentElement.lang = lang;
+    document.title = (lang === "es")
+      ? "Cuentas Trump: sesión de decisión familiar | Financially Sovereign Academy"
+      : "Trump Accounts: a family decision session | Financially Sovereign Academy";
+    $$("[data-lang-btn]").forEach(function (b) {
+      b.setAttribute("aria-pressed", String(b.getAttribute("data-lang-btn") === lang));
+    });
+  }
+
+  /* Write a computed value into BOTH language panels, so switching language can
+     never leave a stale string behind. */
+  function slot(name, en, es) {
+    var nodes = $$('[data-slot="' + name + '"]');
+    nodes.forEach(function (n) { n.innerHTML = en; });
+    var esNodes = $$('[data-slot="' + name + '-es"]');
+    if (esNodes.length) { esNodes.forEach(function (n) { n.innerHTML = es; }); return; }
+    // Single-slot form: pick by current language.
+    nodes.forEach(function (n) { n.innerHTML = (lang === "es") ? es : en; });
+  }
+
+  /* ------------------------------------------------------------- formatting */
+  function usd(n) { var r = Math.round(n); if (Object.is(r, -0)) r = 0; return "$" + r.toLocaleString("en-US"); }
+  function num(id) { var v = parseFloat($(id).value); return (isNaN(v) || v < 0) ? 0 : v; }
+  function radio(name) { var el = document.querySelector('input[name="' + name + '"]:checked'); return el ? el.value : null; }
+  function clamp(lo, hi, v) { return Math.max(lo, Math.min(hi, v)); }
+  function floorStep(v, step) { return Math.floor(v / step) * step; }
+  function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+
+  /* ------------------------------------------------------------- read state */
+  function readForm() {
+    return {
+      v: 1,
+      child: {
+        birthYear: $("birthYear").value,
+        citizen:   radio("citizen"),
+        ssn:       radio("ssn"),
+        seed:      radio("seed")
+      },
+      money: {
+        employerYear: num("employerYear"),
+        alreadyYear:  num("alreadyYear"),
+        annualIntent: num("annualIntent")
+      },
+      household: {
+        goal:    $("goal").value,
+        cushion: radio("cushion"),
+        earned:  radio("earned")
+      },
+      rules: { cap: num("cap"), employerMax: num("employerMax") },
+      view:  { rate: viewRate }
+    };
+  }
+
+  function writeForm(S) {
+    if (!S || S.v !== 1) return false;
+    try {
+      $("birthYear").value = S.child.birthYear;
+      $("goal").value = S.household.goal;
+      ["citizen", "ssn", "seed", "cushion", "earned"].forEach(function (k) {
+        var v = S.child[k] || S.household[k];
+        var el = document.querySelector('input[name="' + k + '"][value="' + v + '"]');
+        if (el) el.checked = true;
+      });
+      $("employerYear").value = S.money.employerYear;
+      $("alreadyYear").value  = S.money.alreadyYear;
+      $("annualIntent").value = S.money.annualIntent;
+      $("cap").value = S.rules.cap;
+      $("employerMax").value = S.rules.employerMax;
+      viewRate = (RATES.indexOf(S.view.rate) >= 0) ? S.view.rate : 7;
+      return true;
+    } catch (e) { return false; }
+  }
+
+  /* --------------------------------------------------------- persistence
+     sessionStorage by default: it survives the round trip to the calculator
+     and dies with the tab. localStorage ONLY on explicit opt-in, because every
+     sibling tool on this site promises that nothing typed is stored.        */
+  function persist(S) {
+    var json = JSON.stringify(S);
+    try { sessionStorage.setItem(STORE_KEY, json); } catch (e) {}
+    try {
+      if ($("remember").checked) localStorage.setItem(STORE_KEY, json);
+      else localStorage.removeItem(STORE_KEY);
+    } catch (e) {}
+    renderPrivacy();
+  }
+
+  function readSaved(store) {
+    try {
+      var raw = store.getItem(STORE_KEY);
+      if (!raw) return null;
+      var o = JSON.parse(raw);
+      return (o && o.v === 1) ? o : null;
+    } catch (e) { return null; }
+  }
+
+  function clearSaved() {
+    try { sessionStorage.removeItem(STORE_KEY); } catch (e) {}
+    try { localStorage.removeItem(STORE_KEY); } catch (e) {}
+  }
+
+  function renderPrivacy() {
+    var kept = false;
+    try { kept = !!$("remember").checked; } catch (e) {}
+    slot("privacy",
+      kept
+        ? "Your answers are being kept in this browser, on this device only, because you asked. They are never sent anywhere. Use “Clear my answers” to remove them."
+        : "Nothing you type here is stored or sent anywhere. Your answers live in this tab only and disappear when you close it.",
+      kept
+        ? "Sus respuestas se están guardando en este navegador, solo en este dispositivo, porque usted lo pidió. Nunca se envían a ningún lado. Use “Borrar mis respuestas” para quitarlas."
+        : "Nada de lo que escriba aquí se guarda ni se envía. Sus respuestas viven solo en esta pestaña y desaparecen al cerrarla."
+    );
+  }
+
+  /* ============================== DERIVE ==============================
+     Pure. No DOM. This is the contract with the artifact generator: the
+     paid document must print the figures this function produced, or the
+     free page was a teaser.                                              */
+
+  /* A specific year only where the learner gave one. "before", "after" and
+     "unsure" decide eligibility but must never produce a fabricated lock date —
+     a made-up year would print into the projection and the record. */
+  function birthYearNum(by) {
+    if (by === "2025" || by === "2026" || by === "2027" || by === "2028") return parseInt(by, 10);
+    return null;
+  }
+  function windowState(by) {
+    if (by === "before" || by === "after") return "outside";
+    if (by === "unsure") return "unknown";
+    return "inside";
+  }
+
+  function projectFV(p, m, ratePct, years) {
+    var fv = p, r = ratePct / 100 / 12, n = Math.round(years * 12), i;
+    for (i = 1; i <= n; i++) fv = fv * (1 + r) + m;
+    return fv;
+  }
+  /* Desk check, hand-verified 2026-08-24 and matched against the calculator:
+     p=1000 m=400 r=7 y=18  ->  FV ~= 175,813 ; put in 87,400 ; growth 88,413
+     same at r=4 -> ~128,292 ; at r=10 -> ~246,235                          */
+
+  function derive(S) {
+    var D = {};
+    var by = birthYearNum(S.child.birthYear);
+    var win = windowState(S.child.birthYear);
+    D.birthYearNum = by;
+    D.inWindow = (win === "inside");
+    D.unsureYear = (win === "unknown");
+    D.yearUnknown = (by === null);
+
+    /* verdict */
+    var unsure = D.unsureYear || S.child.citizen === "unsure" || S.child.ssn === "unsure";
+    var outOfWindow = (win === "outside");
+    if (outOfWindow || S.child.citizen === "no") D.category = "not-eligible-published";
+    else if (unsure || S.child.ssn === "notyet") D.category = "verify-requirement";
+    else D.category = "eligible";
+
+    /* horizon */
+    D.lockYear = (by !== null) ? (by + LOCK_AGE) : null;
+    D.defaultHorizon = (D.lockYear === null);
+    D.yearsRaw = (D.lockYear !== null) ? (D.lockYear - BASELINE_YEAR) : 18;
+    D.years = clamp(Y_MIN, Y_MAX, D.yearsRaw);
+    D.yearsClamped = (D.yearsRaw !== D.years);
+
+    /* cap arithmetic */
+    var cap = S.rules.cap, empMax = S.rules.employerMax;
+    var empRaw = S.money.employerYear;
+    var emp = Math.min(empRaw, empMax);
+    D.cap = cap; D.empMax = empMax;
+    D.empRaw = empRaw; D.emp = emp; D.empCapped = empRaw > empMax;
+    D.already = S.money.alreadyYear;
+    D.intent = S.money.annualIntent;
+    D.used = emp + D.already;
+    D.headroomBefore = Math.max(0, cap - D.used);
+    var totalPlanned = D.used + D.intent;
+    D.over = Math.max(0, totalPlanned - cap);
+    D.headroom = Math.max(0, cap - totalPlanned);
+    D.capCategory = D.over > 0 ? "over-cap"
+                  : D.headroom === 0 ? "at-cap"
+                  : emp === 0 ? "no-employer-contribution"
+                  : "headroom-remaining";
+
+    /* the amount that can actually go in this year */
+    D.annualUsable = Math.min(D.used + D.intent, cap);
+
+    /* projection inputs, always rounded so the projection gets smaller */
+    D.seedAmount = (S.child.seed === "none") ? 0 : 1000;
+    D.p = clamp(0, P_MAX, D.seedAmount);
+    D.mExact = D.annualUsable / 12;
+    D.m = clamp(0, M_MAX, floorStep(D.mExact, M_STEP));
+    D.mRounded = (D.m !== Math.round(D.mExact * 100) / 100);
+    D.rate = S.view.rate;
+
+    D.fv = {};
+    RATES.forEach(function (r) { D.fv[r] = projectFV(D.p, D.m, r, D.years); });
+    D.fvNow = D.fv[D.rate];
+    D.putIn = D.p + (D.m * 12 * D.years);
+    D.growth = Math.max(0, D.fvNow - D.putIn);
+    D.growthPct = D.fvNow > 0 ? (D.growth / D.fvNow) * 100 : 0;
+
+    /* year-by-year schedule — this IS the seventeen-year record */
+    D.schedule = [];
+    var cum = D.p, y;
+    for (y = 0; y < D.years; y++) {
+      var yearLabel = BASELINE_YEAR + y;
+      var employerPart = Math.min(D.emp, D.annualUsable);
+      var householdPart = Math.max(0, D.annualUsable - employerPart);
+      cum += (D.m * 12);
+      D.schedule.push({ year: yearLabel, employer: employerPart, household: householdPart, cumulative: cum });
+    }
+
+    /* gates */
+    D.gates = {
+      legal:   (S.child.citizen !== "yes") || (S.child.ssn !== "yes"),
+      overcap: D.over > 0,
+      employer: D.emp > 0,
+      cushion: (S.household.cushion === "lt1") && D.intent > 0
+    };
+
+    D.calcHref = CALC_PATH + "#p=" + D.p + "&m=" + D.m + "&r=" + D.rate +
+                 "&y=" + D.years + "&i=0&ir=4&b=0&u=0";
+    return D;
+  }
+
+  /* ============================== STRINGS ============================== */
+
+  var STR = {
+    verdictTitle: {
+      "eligible": ["On your answers, the published requirements are met.",
+                   "Con sus respuestas, se cumplen los requisitos publicados."],
+      "verify-requirement": ["One requirement still has to be confirmed.",
+                             "Falta confirmar un requisito."],
+      "not-eligible-published": ["On your answers, the published requirements are not met.",
+                                 "Con sus respuestas, no se cumplen los requisitos publicados."]
+    },
+    verdictBody: {
+      "eligible": [
+        "The requirements that are actually published attach to the child: a U.S. citizen with a valid Social Security number, born 2025 through 2028. You answered yes to all three. The claim is made on Form 4547, and there is no published deadline, whatever the messages going around say.",
+        "Los requisitos que efectivamente están publicados recaen sobre el niño: ciudadano estadounidense, con número de Seguro Social válido, nacido entre 2025 y 2028. Usted respondió que sí a los tres. El reclamo se hace con el Formulario 4547, y no hay fecha límite publicada, digan lo que digan los mensajes que circulan."
+      ],
+      "verify-requirement": [
+        "Nothing here says you do not qualify. One of the three published requirements is unconfirmed, and confirming it is a specific, finite task rather than an open question. The arithmetic below still runs, because it does not depend on how this resolves.",
+        "Nada aquí dice que usted no califique. Uno de los tres requisitos publicados está sin confirmar, y confirmarlo es una tarea concreta y acotada, no una pregunta abierta. La aritmética de abajo sigue corriendo, porque no depende de cómo se resuelva esto."
+      ],
+      "not-eligible-published": [
+        "The pilot contribution attaches to children who are U.S. citizens with a valid Social Security number, born 2025 through 2028. On what you entered, one of those does not hold. Everything below still applies to the other four accounts, and those have no birth-year window at all.",
+        "La contribución piloto recae sobre niños ciudadanos estadounidenses con número de Seguro Social válido, nacidos entre 2025 y 2028. Con lo que usted escribió, uno de esos puntos no se cumple. Todo lo de abajo sigue aplicando a las otras cuatro cuentas, y esas no tienen ninguna ventana de año de nacimiento."
+      ]
+    }
+  };
+
+  function T(pair) { return lang === "es" ? pair[1] : pair[0]; }
+
+  /* ============================== RENDER ============================== */
+
+  function renderVerdict(S, D) {
+    slot("verdict-title", STR.verdictTitle[D.category][0], STR.verdictTitle[D.category][1]);
+    slot("verdict-body", STR.verdictBody[D.category][0], STR.verdictBody[D.category][1]);
+
+    var en = [], es = [];
+    en.push("The child's Social Security card, and the number checked digit by digit against it.");
+    es.push("La tarjeta de Seguro Social del niño, y el número revisado dígito por dígito contra ella.");
+    en.push("Form 4547 and its instructions, from <span class='ta-mono'>irs.gov</span> typed by hand — never from a link in a message.");
+    es.push("El Formulario 4547 y sus instrucciones, desde <span class='ta-mono'>irs.gov</span> escrito a mano, nunca desde un enlace en un mensaje.");
+
+    if (S.child.ssn === "notyet") {
+      en.unshift("An SSN application for the child. Until that number exists, the claim cannot be completed — this is a Social Security Administration errand, not a tax question.");
+      es.unshift("Una solicitud de SSN para el niño. Hasta que ese número exista, el reclamo no se puede completar — es un trámite del Seguro Social, no una pregunta de impuestos.");
+    }
+    if (S.child.seed === "waiting") {
+      en.push("The date you submitted Form 4547. Delays of up to about four weeks were widely reported in July 2026; a wait is not evidence that anything is wrong.");
+      es.push("La fecha en que presentó el Formulario 4547. En julio de 2026 se reportaron ampliamente demoras de hasta unas cuatro semanas; esperar no es prueba de que algo esté mal.");
+    }
+    if (S.child.seed === "none") {
+      en.push("If a claim was rejected, the rejection notice and the reason given. Press coverage in July 2026 described rejections corrected in about an hour by phone through the program hotline. Call before assuming the answer is no.");
+      es.push("Si le rechazaron una solicitud, el aviso de rechazo y la razón que dieron. La prensa de julio de 2026 describió rechazos corregidos en cerca de una hora por teléfono con la línea del programa. Llame antes de dar por hecho que la respuesta es no.");
+    }
+    en.push("If you already filed a return, note that Form 4547 cannot be attached to a Form 1040-X. It goes in separately.");
+    es.push("Si ya declaró, tenga en cuenta que el Formulario 4547 no se puede adjuntar a un Formulario 1040-X. Va por separado.");
+    if (D.gates.employer) {
+      en.push("Your employer's written confirmation of the amount actually contributed, and the date. That figure is the one most likely to push a household over the cap without anyone noticing.");
+      es.push("La confirmación por escrito de su empleador del monto efectivamente aportado, y la fecha. Esa cifra es la que con más frecuencia empuja a un hogar por encima del tope sin que nadie se dé cuenta.");
+    }
+
+    var li = function (a) { return a.map(function (x) { return "<li>" + x + "</li>"; }).join(""); };
+    slot("verdict-list", li(en), li(es));
+  }
+
+  function renderCap(S, D) {
+    /* the sentence that carries the whole section */
+    var enC, esC;
+    if (D.emp > 0) {
+      enC = "Your employer's " + usd(D.emp) + " did not add " + usd(D.emp) + " of room. It used " +
+            usd(D.emp) + " of the room you already had. Your headroom went from " + usd(D.cap) +
+            " to " + usd(D.cap - D.emp) + " the moment you entered it.";
+      esC = "Los " + usd(D.emp) + " de su empleador no agregaron " + usd(D.emp) + " de cupo. Usaron " +
+            usd(D.emp) + " del cupo que usted ya tenía. Su cupo pasó de " + usd(D.cap) + " a " +
+            usd(D.cap - D.emp) + " en el momento en que lo escribió.";
+    } else {
+      enC = "With no employer contribution entered, the whole " + usd(D.cap) +
+            " is your household's to use. Put a number in the employer field and watch what happens to it.";
+      esC = "Sin aporte del empleador, los " + usd(D.cap) +
+            " completos son de su hogar. Escriba un número en el campo del empleador y vea qué le pasa.";
+    }
+    if (D.empCapped) {
+      enC += " (You entered " + usd(D.empRaw) + ". The employer limit is " + usd(D.empMax) +
+             " per employee per year, so " + usd(D.emp) + " is what counts here.)";
+      esC += " (Usted escribió " + usd(D.empRaw) + ". El límite del empleador es " + usd(D.empMax) +
+             " por empleado al año, así que lo que cuenta aquí son " + usd(D.emp) + ".)";
+    }
+    slot("cap-consequence", enC, esC);
+
+    /* bar */
+    var total = Math.max(D.cap, D.used + D.intent);
+    var seg = function (cls, val) {
+      return val <= 0 ? "" : '<i class="' + cls + '" style="width:' + (100 * val / total) + '%"></i>';
+    };
+    $("cap-bar").innerHTML = seg("emp", D.emp) + seg("you", Math.min(D.already + D.intent, Math.max(0, D.cap - D.emp))) +
+                             seg("free", D.headroom) + seg("over", D.over);
+    slot("cap-bar-alt",
+      "Of a " + usd(D.cap) + " annual cap: " + usd(D.emp) + " employer, " + usd(D.already) +
+      " already contributed, " + usd(D.intent) + " planned, leaving " + usd(D.headroom) +
+      (D.over > 0 ? " and " + usd(D.over) + " over the cap." : "."),
+      "De un tope anual de " + usd(D.cap) + ": " + usd(D.emp) + " del empleador, " + usd(D.already) +
+      " ya aportados, " + usd(D.intent) + " planeados, quedando " + usd(D.headroom) +
+      (D.over > 0 ? " y " + usd(D.over) + " por encima del tope." : "."));
+
+    /* table */
+    var rowsEn = [
+      ["Annual cap for this child", D.cap, ""],
+      ["Employer contribution, counted inside the cap", -D.emp, ""],
+      ["Already contributed this year", -D.already, ""],
+      ["Planned on top of that", -D.intent, ""]
+    ];
+    var rowsEs = [
+      ["Tope anual para este niño", D.cap, ""],
+      ["Aporte del empleador, contado dentro del tope", -D.emp, ""],
+      ["Ya aportado este año", -D.already, ""],
+      ["Planeado encima de eso", -D.intent, ""]
+    ];
+    function build(rows, overLbl, leftLbl, seedLbl) {
+      var html = rows.map(function (r) {
+        var v = r[1];
+        return "<tr><td>" + r[0] + "</td><td class='num'>" +
+               (v < 0 ? "&minus; " + usd(-v) : usd(v)) + "</td></tr>";
+      }).join("");
+      html += "<tr class='total'><td>" + (D.over > 0 ? overLbl : leftLbl) +
+              "</td><td class='num" + (D.over > 0 ? " warn" : "") + "'>" +
+              usd(D.over > 0 ? D.over : D.headroom) + "</td></tr>";
+      html += "<tr><td style='padding-top:14px;color:var(--color-muted)'>" + seedLbl +
+              "</td><td class='num' style='padding-top:14px;color:var(--color-muted)'>" +
+              usd(D.seedAmount) + "</td></tr>";
+      return html;
+    }
+    slot("cap-rows",
+      build(rowsEn, "Over the cap by", "Room left this year",
+            "The $1,000 pilot contribution, which sits outside the cap"),
+      build(rowsEs, "Por encima del tope en", "Cupo que queda este año",
+            "La contribución piloto de $1,000, que queda fuera del tope"));
+
+    slot("overcap-body",
+      "On these numbers you would be " + usd(D.over) + " over the " + usd(D.cap) + " annual cap for this child.",
+      "Con estos números usted quedaría " + usd(D.over) + " por encima del tope anual de " + usd(D.cap) + " para este niño.");
+  }
+
+  function svgChart(D) {
+    /* Inline SVG. No CDN, no fallback needed, works offline and in print.
+       Two stacked areas: money put in, and growth on top of it. */
+    var W = 720, H = 260, PAD_L = 8, PAD_R = 8, PAD_T = 12, PAD_B = 22;
+    var n = Math.max(1, D.years);
+    var maxV = Math.max(1, D.fv[10] > 0 ? D.fv[Math.max.apply(null, RATES)] : 1, D.fvNow);
+    var x = function (i) { return PAD_L + (i / n) * (W - PAD_L - PAD_R); };
+    var y = function (v) { return PAD_T + (1 - (v / maxV)) * (H - PAD_T - PAD_B); };
+
+    var inPts = [], totPts = [], i, fv = D.p, put = D.p;
+    inPts.push([x(0), y(put)]); totPts.push([x(0), y(fv)]);
+    for (i = 1; i <= n; i++) {
+      fv = projectFV(D.p, D.m, D.rate, i);
+      put = D.p + D.m * 12 * i;
+      inPts.push([x(i), y(put)]);
+      totPts.push([x(i), y(fv)]);
+    }
+    var path = function (pts, close) {
+      var d = "M" + pts.map(function (p) { return p[0].toFixed(1) + "," + p[1].toFixed(1); }).join("L");
+      if (close) d += "L" + x(n).toFixed(1) + "," + y(0).toFixed(1) + "L" + x(0).toFixed(1) + "," + y(0).toFixed(1) + "Z";
+      return d;
+    };
+    var lblIn  = lang === "es" ? "Lo que su hogar pone" : "What your household puts in";
+    var lblGrow = lang === "es" ? "Crecimiento supuesto" : "Assumed growth";
+    var alt = lang === "es"
+      ? "Área apilada: aportes acumulados abajo, crecimiento supuesto encima, a lo largo de " + n + " años."
+      : "Stacked area: cumulative contributions below, assumed growth above, over " + n + " years.";
+
+    return '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + esc(alt) + '">' +
+      '<path d="' + path(totPts, true) + '" fill="var(--color-brand)" opacity="0.28"></path>' +
+      '<path d="' + path(inPts, true) + '" fill="var(--color-brand-deep)" opacity="0.85"></path>' +
+      '<path d="' + path(totPts, false) + '" fill="none" stroke="var(--color-mint)" stroke-width="2"></path>' +
+      '<line x1="' + PAD_L + '" y1="' + y(0) + '" x2="' + (W - PAD_R) + '" y2="' + y(0) +
+        '" stroke="var(--color-border-strong)" stroke-width="1"></line>' +
+      '<text x="' + PAD_L + '" y="' + (H - 6) + '" fill="var(--color-muted)" font-size="12">' + BASELINE_YEAR + '</text>' +
+      '<text x="' + (W - PAD_R) + '" y="' + (H - 6) + '" fill="var(--color-muted)" font-size="12" text-anchor="end">' +
+        (D.lockYear || (BASELINE_YEAR + n)) + '</text>' +
+      '<text x="' + (PAD_L + 6) + '" y="' + (PAD_T + 14) + '" fill="var(--color-muted)" font-size="12">' +
+        esc(lblGrow) + ' &#183; ' + esc(lblIn) + '</text>' +
+      '</svg>';
+  }
+
+  function renderProjection(S, D) {
+    $$("[data-rate]").forEach(function (b) {
+      b.setAttribute("aria-pressed", String(parseInt(b.getAttribute("data-rate"), 10) === D.rate));
+    });
+
+    slot("grow-chart", svgChart(D), svgChart(D));
+
+    var statsEn =
+      stat("At " + D.rate + "%, after " + D.years + " years", usd(D.fvNow)) +
+      stat("Money your household would put in", usd(D.putIn)) +
+      stat("Growth that has not happened", usd(D.growth)) +
+      stat("Reachable in", D.lockYear ? String(D.lockYear) : "not yet known");
+    var statsEs =
+      stat("Al " + D.rate + "%, después de " + D.years + " años", usd(D.fvNow)) +
+      stat("Lo que su hogar pondría", usd(D.putIn)) +
+      stat("Crecimiento que no ha ocurrido", usd(D.growth)) +
+      stat("Disponible en", D.lockYear ? String(D.lockYear) : "todavía no se sabe");
+    slot("grow-stats", statsEn, statsEs);
+
+    slot("grow-explain",
+      "Of the " + usd(D.fvNow) + " above, " + usd(D.putIn) + " is money your household would actually put in and " +
+      usd(D.growth) + " is growth that has not happened. The first number is real. The second is arithmetic on an assumption, and it is " +
+      Math.round(D.growthPct) + "% of the total.",
+      "De los " + usd(D.fvNow) + " de arriba, " + usd(D.putIn) + " es dinero que su hogar efectivamente pondría y " +
+      usd(D.growth) + " es crecimiento que no ha ocurrido. El primer número es real. El segundo es aritmética sobre un supuesto, y es el " +
+      Math.round(D.growthPct) + "% del total.");
+
+    slot("grow-three",
+      "The same household, three assumptions: " + usd(D.fv[4]) + " at 4%, " + usd(D.fv[7]) + " at 7%, " +
+      usd(D.fv[10]) + " at 10%. Nothing about your household changed between those three numbers. Only an assumption did.",
+      "El mismo hogar, tres supuestos: " + usd(D.fv[4]) + " al 4%, " + usd(D.fv[7]) + " al 7%, " +
+      usd(D.fv[10]) + " al 10%. Nada de su hogar cambió entre esos tres números. Solo cambió un supuesto.");
+
+    var roundNoteEn = D.mRounded
+      ? " Your actual " + usd(D.mExact) + " a month does not fit the calculator's $" + M_STEP +
+        " steps, so we rounded down. The figure is therefore slightly conservative."
+      : "";
+    var roundNoteEs = D.mRounded
+      ? " Sus " + usd(D.mExact) + " reales al mes no caben en los pasos de $" + M_STEP +
+        " de la calculadora, así que redondeamos hacia abajo. La cifra queda entonces algo conservadora."
+      : "";
+    var clampNoteEn = D.yearsClamped ? " The horizon was capped at " + D.years + " years, which is the calculator's maximum." : "";
+    var clampNoteEs = D.yearsClamped ? " El horizonte se limitó a " + D.years + " años, que es el máximo de la calculadora." : "";
+    var horizonNoteEn = D.defaultHorizon
+      ? " You did not give a specific birth year, so this uses a stand-in horizon of " + D.years +
+        " years. Pick a year above and the whole projection moves."
+      : "";
+    var horizonNoteEs = D.defaultHorizon
+      ? " Usted no dio un año de nacimiento específico, así que esto usa un horizonte provisional de " + D.years +
+        " años. Elija un año arriba y toda la proyección cambia."
+      : "";
+    var notAvailNoteEn = (D.category === "not-eligible-published")
+      ? " On your answers a Trump Account is not available, so read this as what the same contributions do in any account, not as a projection of this one."
+      : "";
+    var notAvailNoteEs = (D.category === "not-eligible-published")
+      ? " Con sus respuestas no hay Cuenta Trump disponible, así que lea esto como lo que hacen los mismos aportes en cualquier cuenta, no como una proyección de esta."
+      : "";
+
+    slot("grow-handoff",
+      "Starting amount <strong>" + usd(D.p) + "</strong>, monthly <strong>" + usd(D.m) + "</strong>, rate <strong>" +
+      D.rate + "%</strong>, <strong>" + D.years + " years</strong>, contribution increase <strong>0%</strong>." +
+      roundNoteEn + clampNoteEn + horizonNoteEn + notAvailNoteEn,
+      "Monto inicial <strong>" + usd(D.p) + "</strong>, mensual <strong>" + usd(D.m) + "</strong>, tasa <strong>" +
+      D.rate + "%</strong>, <strong>" + D.years + " años</strong>, aumento de aporte <strong>0%</strong>." +
+      roundNoteEs + clampNoteEs + horizonNoteEs + notAvailNoteEs);
+
+    $("grow-link").setAttribute("href", D.calcHref);
+  }
+
+  function stat(k, v) {
+    return '<div class="ta-stat"><div class="k">' + k + '</div><div class="v">' + v + '</div></div>';
+  }
+
+  /* --------------------------------------------------- comparison table
+     Annotations are keys plus variables. Prose lives here, in both
+     languages, so the banned-word lint is mechanical and the two
+     languages cannot drift.                                            */
+
+  var ROWS = [
+    { id: "ta",   en: "Trump Account",              es: "Cuenta Trump" },
+    { id: "p529", en: "529 plan",                   es: "Plan 529" },
+    { id: "roth", en: "Custodial Roth IRA",         es: "Roth de custodia" },
+    { id: "utma", en: "UTMA / UGMA",                es: "UTMA / UGMA" },
+    { id: "tax",  en: "Taxable brokerage",          es: "Cuenta de inversión común" }
+  ];
+
+  var CELLS = {
+    ta: {
+      en: ["Parents, relatives, and an employer up to $2,500. $5,000 combined per child per year, indexed after 2027.",
+           "Not before 1 January of the year the child turns 18, with narrow exceptions.",
+           "Ordinary income, under traditional-IRA rules. A 10% early-distribution charge can apply.",
+           "The beneficiary, under IRA rules."],
+      es: ["Padres, familiares y un empleador hasta $2,500. $5,000 combinados por niño al año, ajustado después de 2027.",
+           "No antes del 1 de enero del año en que el niño cumple 18, con excepciones limitadas.",
+           "Ingreso ordinario, bajo reglas de IRA tradicional. Puede aplicar un cargo del 10% por distribución anticipada.",
+           "El beneficiario, bajo reglas de IRA."]
+    },
+    p529: {
+      en: ["Anyone. No federal annual dollar limit; contributions are gifts, and the 2026 annual exclusion is $19,000 per giver per child.",
+           "Any time, but non-qualified withdrawals are penalized on the earnings.",
+           "Tax-free if used for qualified education.",
+           "The account owner keeps control."],
+      es: ["Cualquiera. Sin tope anual federal en dólares; los aportes son donaciones, y la exclusión anual de 2026 es de $19,000 por donante por niño.",
+           "Cuando sea, pero los retiros no calificados llevan penalidad sobre la ganancia.",
+           "Libre de impuestos si se usa para educación calificada.",
+           "El titular de la cuenta mantiene el control."]
+    },
+    roth: {
+      en: ["Anyone, but never more than the child's own earned income for the year.",
+           "Contributions any time; earnings are restricted.",
+           "Qualified withdrawals can be tax-free.",
+           "The child, at majority."],
+      es: ["Cualquiera, pero nunca más que el ingreso ganado del propio niño en el año.",
+           "Los aportes cuando sea; las ganancias tienen restricciones.",
+           "Los retiros calificados pueden ser libres de impuestos.",
+           "El niño, al llegar a la mayoría de edad."]
+    },
+    utma: {
+      en: ["Anyone. No cap; gift-tax rules apply.",
+           "Any time, for the child's benefit.",
+           "Taxed as it goes, at the child's rates, under kiddie-tax rules.",
+           "The child, automatically, at the state's age of majority. The transfer is irrevocable."],
+      es: ["Cualquiera. Sin tope; aplican reglas de donaciones.",
+           "Cuando sea, en beneficio del niño.",
+           "Tributa sobre la marcha, a las tasas del niño, bajo reglas del kiddie tax.",
+           "El niño, automáticamente, a la edad de mayoría de su estado. La transferencia es irrevocable."]
+    },
+    tax: {
+      en: ["Anyone. No limit, no eligibility rule.",
+           "Any time. No access rule at all.",
+           "Taxed each year on dividends, and on gains when sold.",
+           "Whoever owns the account."],
+      es: ["Cualquiera. Sin límite, sin regla de elegibilidad.",
+           "Cuando sea. Sin ninguna regla de acceso.",
+           "Tributa cada año sobre dividendos, y sobre ganancias al vender.",
+           "Quien sea titular de la cuenta."]
+    }
+  };
+
+  function annotations(id, S, D) {
+    var a = [];
+    var goalWordEn = { school: "school", home: "a first home", start: "a start in adulthood", undecided: "undecided" }[S.household.goal];
+    var goalWordEs = { school: "estudios", home: "una primera vivienda", start: "un arranque en la vida adulta", undecided: "sin decidir" }[S.household.goal];
+
+    if (id === "ta") {
+      if (D.category === "eligible") {
+        a.push(["availability", "On your answers, the published requirements are met.",
+                                "Con sus respuestas, se cumplen los requisitos publicados."]);
+      } else if (D.category === "not-eligible-published") {
+        a.push(["unavailable", "Not available on your answers. The pilot contribution attaches to U.S.-citizen children with a valid Social Security number, born 2025 through 2028.",
+                               "No disponible con sus respuestas. La contribución piloto recae sobre niños ciudadanos estadounidenses con número de Seguro Social válido, nacidos entre 2025 y 2028."]);
+      } else {
+        a.push(["availability", "One published requirement is still unconfirmed on your answers.",
+                                "Con sus respuestas, un requisito publicado sigue sin confirmar."]);
+      }
+      a.push(["your-numbers",
+        "This year, " + usd(D.emp) + " from an employer plus " + usd(D.already + D.intent) +
+          " from your household is " + usd(D.used + D.intent) + " of the " + usd(D.cap) + " cap. " +
+          (D.over > 0 ? usd(D.over) + " has nowhere to go in this account." : usd(D.headroom) + " is left."),
+        "Este año, " + usd(D.emp) + " de un empleador más " + usd(D.already + D.intent) +
+          " de su hogar son " + usd(D.used + D.intent) + " del tope de " + usd(D.cap) + ". " +
+          (D.over > 0 ? usd(D.over) + " no tiene dónde ir en esta cuenta." : "Quedan " + usd(D.headroom) + ".")]);
+      if (D.lockYear) {
+        a.push(["timing", "Reachable 1 January " + D.lockYear + ", the year your child turns 18.",
+                          "Disponible el 1 de enero de " + D.lockYear + ", el año en que su hijo cumple 18."]);
+      }
+      a.push(["factor", "One factor to consider is that earnings leave this account as ordinary income, not at capital-gains rates (IRS Notice 2025-68).",
+                        "Un factor a considerar es que las ganancias salen de esta cuenta como ingreso ordinario, no a tasas de ganancia de capital (Aviso del IRS 2025-68)."]);
+      a.push(["not-modeled", "Financial aid treatment has not been clarified and is not modeled here.",
+                             "El tratamiento para ayuda financiera no se ha aclarado y aquí no se modela."]);
+    }
+
+    if (id === "p529") {
+      a.push(["availability", "Available. No birth-year window.",
+                              "Disponible. Sin ventana de año de nacimiento."]);
+      if (D.intent > 0) {
+        a.push(["your-numbers", "The " + usd(D.intent) + " a year you described would go here instead, not in addition. It is the same " + usd(D.intent) + ".",
+                                "Los " + usd(D.intent) + " al año que usted describió irían aquí en vez de allá, no además. Son los mismos " + usd(D.intent) + "."]);
+      }
+      if (S.household.goal === "school" && D.lockYear) {
+        a.push(["timing", "You said the money is for " + goalWordEn + ". Qualified education withdrawals are available when the expense occurs, and no age rule gates them.",
+                          "Usted dijo que el dinero es para " + goalWordEs + ". Los retiros calificados de educación están disponibles cuando ocurre el gasto, y ninguna regla de edad los bloquea."]);
+      }
+      a.push(["not-modeled", "Your state's deduction and its treatment of these accounts is not modeled here.",
+                             "La deducción de su estado y su tratamiento de estas cuentas no se modelan aquí."]);
+    }
+
+    if (id === "roth") {
+      if (S.household.earned === "no") {
+        a.push(["unavailable", "Not available on your answers. A Roth IRA contribution cannot exceed the child's own earned income for the year, and you said there is none yet.",
+                               "No disponible con sus respuestas. Un aporte a una Roth no puede exceder el ingreso ganado del propio niño en el año, y usted dijo que todavía no hay."]);
+      } else {
+        a.push(["availability", "Available up to the child's own earned income for the year, and no further.",
+                                "Disponible hasta el ingreso ganado del propio niño en el año, y no más."]);
+      }
+      a.push(["professional", "A qualified professional may be needed when documenting a minor's earned income.",
+                              "Puede hacer falta un profesional calificado para documentar el ingreso ganado de un menor."]);
+    }
+
+    if (id === "utma") {
+      a.push(["availability", "Available in every state.",
+                              "Disponible en todos los estados."]);
+      a.push(["timing", "Control transfers to the child at your state's age of majority, typically 18 or 21, and the transfer is irrevocable.",
+                        "El control pasa al niño a la edad de mayoría de su estado, típicamente 18 o 21, y la transferencia es irrevocable."]);
+      a.push(["professional", "A qualified professional may be needed when an irrevocable transfer of control does not match what the family expected.",
+                              "Puede hacer falta un profesional calificado cuando una transferencia irrevocable de control no coincide con lo que la familia esperaba."]);
+      a.push(["not-modeled", "Your state's age of majority is not modeled here.",
+                             "La edad de mayoría de su estado no se modela aquí."]);
+    }
+
+    if (id === "tax") {
+      a.push(["availability", "Available. No limit, no lock, no eligibility rule.",
+                              "Disponible. Sin límite, sin bloqueo, sin regla de elegibilidad."]);
+      if (D.intent > 0) {
+        a.push(["your-numbers", "The same " + usd(D.intent) + " a year, taxed each year on dividends and on gains when sold.",
+                                "Los mismos " + usd(D.intent) + " al año, con impuestos cada año sobre dividendos y sobre ganancias al vender."]);
+      }
+      if (S.household.cushion === "lt1") {
+        a.push(["factor", "One factor to consider is that you said the household has less than one month of expenses set aside. This is the only row above with no access rule attached to it.",
+                          "Un factor a considerar es que usted dijo que el hogar tiene menos de un mes de gastos apartado. Esta es la única fila de arriba sin ninguna regla de acceso."]);
+      }
+    }
+    return a;
+  }
+
+  function renderCompare(S, D) {
+    function build(L) {
+      return ROWS.map(function (r) {
+        var cells = CELLS[r.id][L];
+        var ann = annotations(r.id, S, D).map(function (x) {
+          var cls = x[0] === "unavailable" ? "unavailable" : (x[0] === "not-modeled" ? "notmodeled" : "");
+          return '<li class="' + cls + '">' + (L === "es" ? x[2] : x[1]) + "</li>";
+        }).join("");
+        return "<tr><th scope='row'>" + r[L] + "</th>" +
+               cells.map(function (c) { return "<td>" + c + "</td>"; }).join("") +
+               "</tr><tr><td colspan='5' style='border-bottom:2px solid var(--color-border-strong)'>" +
+               "<ul class='ta-ann'>" + ann + "</ul></td></tr>";
+      }).join("");
+    }
+    slot("cmp-rows", build("en"), build("es"));
+
+    slot("cmp-caption",
+      "The better choice depends on facts this page never asked for: your marginal tax rate now against your child's decades from now, your state's treatment, whether financial aid is in play, and what else the household is already saving toward. This table shows what each account is, against what you told us. It does not rank them, and no row is highlighted, on purpose.",
+      "Cuál conviene depende de hechos que esta página nunca preguntó: su tasa marginal hoy frente a la de su hijo dentro de décadas, el tratamiento de su estado, si hay ayuda financiera de por medio, y para qué más está ahorrando el hogar. Esta tabla muestra qué es cada cuenta, frente a lo que usted nos dijo. No las ordena por preferencia, y ninguna fila está resaltada, a propósito.");
+  }
+
+  function renderQuestions(S, D) {
+    var bigEn, bigEs;
+    if (D.over > 0) {
+      bigEn = "You have more you are willing to put away than this account can take. That is a good problem, and it is a different question from the one this page answers.";
+      bigEs = "Usted tiene más de lo que esta cuenta puede recibir. Ese es un buen problema, y es una pregunta distinta de la que esta página responde.";
+    } else if (D.intent === 0) {
+      bigEn = "You have not put a number in for what your household could add. That is a legitimate answer, and the $1,000 is unaffected by it either way.";
+      bigEs = "Usted no escribió un número para lo que su hogar podría aportar. Esa es una respuesta legítima, y los $1,000 no dependen de eso.";
+    } else if (S.household.goal === "undecided") {
+      bigEn = "You have a number but not yet a purpose. The purpose is what decides which of the five accounts the number belongs in.";
+      bigEs = "Usted tiene un número pero todavía no un propósito. El propósito es lo que decide en cuál de las cinco cuentas va ese número.";
+    } else {
+      bigEn = "The arithmetic is settled. What is left is a question about your household, and this page cannot see your household.";
+      bigEs = "La aritmética está resuelta. Lo que queda es una pregunta sobre su hogar, y esta página no puede ver su hogar.";
+    }
+    slot("q2-big", bigEn, bigEs);
+
+    var en = [], es = [];
+    en.push("Can both adults in the house explain the lock-up and the tax treatment without reading it off a page? If not, that is worth fixing before any money moves.");
+    es.push("¿Pueden ambas personas adultas de la casa explicar el bloqueo y el tratamiento fiscal sin leerlo de una hoja? Si no, eso conviene resolverlo antes de que se mueva dinero.");
+    en.push("If your household hit a serious emergency in the next " + D.years + " years, would you wish this money back?");
+    es.push("Si su hogar tuviera una emergencia seria en los próximos " + D.years + " años, ¿desearía tener este dinero de vuelta?");
+    if (D.gates.employer) {
+      en.push("How will you find out, in time, what your employer actually contributed? That figure moves your cap and it usually arrives without an announcement.");
+      es.push("¿Cómo se va a enterar, a tiempo, de cuánto aportó de verdad su empleador? Esa cifra mueve su tope y suele llegar sin aviso.");
+    }
+    en.push("Whose money is this at eighteen — the child's, unconditionally? Has anyone in the house said that out loud?");
+    es.push("¿De quién es este dinero a los dieciocho: del niño, sin condiciones? ¿Alguien en la casa lo ha dicho en voz alta?");
+    en.push("If a relative contributes, who is keeping the running total? Several people each assuming they are under the limit is how an excess contribution happens.");
+    es.push("Si un familiar aporta, ¿quién lleva el total? Que varias personas supongan cada una que van por debajo del límite es como se produce un exceso.");
+
+    var li = function (a) { return a.map(function (x) { return "<li>" + x + "</li>"; }).join(""); };
+    slot("q2-list", li(en), li(es));
+  }
+
+  function renderFreeAndOffer(S, D) {
+    var by = D.birthYearNum;
+    if (by) {
+      slot("talk-when",
+        "Your child reaches eight around <strong>" + (by + 8) + "</strong>. Until then, this is the whole conversation.",
+        "Su hijo cumple ocho alrededor de <strong>" + (by + 8) + "</strong>. Hasta entonces, esta es toda la conversación.");
+    } else {
+      slot("talk-when",
+        "This is the whole conversation for a child under eight.",
+        "Esta es toda la conversación para un niño menor de ocho años.");
+    }
+
+    slot("offer-employer",
+      D.gates.employer
+        ? "Relevant to you: you entered " + usd(D.empRaw) + " of employer money, which is the figure most likely to move your cap without warning."
+        : "",
+      D.gates.employer
+        ? "Relevante para usted: escribió " + usd(D.empRaw) + " de dinero del empleador, que es la cifra que más probablemente mueva su tope sin avisar."
+        : "");
+
+    slot("offer-lockyear",
+      D.lockYear ? String(D.lockYear) : (lang === "es" ? "el año en que su hijo cumpla dieciocho" : "the year your child turns eighteen"),
+      D.lockYear ? String(D.lockYear) : "el año en que su hijo cumpla dieciocho");
+  }
+
+  function renderGates(S, D) {
+    var map = { legal: "gate-legal", overcap: "gate-overcap", cushion: "gate-cushion" };
+    Object.keys(map).forEach(function (k) {
+      var on = !!D.gates[k];
+      $(map[k]).hidden = !on;
+      if (on && !firedGates[k]) {
+        firedGates[k] = true;
+        if (k === "legal") {
+          TSA_EVENT("high_intent_detected", { signal: "identity-unconfirmed", route: "legal-aid-or-vita" });
+        } else if (k === "overcap") {
+          TSA_EVENT("high_intent_detected", { signal: "over-cap", route: "tax-professional" });
+          TSA_EVENT("boundary_gate_shown", { offer_id: OFFER_ID, signal: "over-cap" });
+        } else if (k === "cushion") {
+          TSA_EVENT("second_question_view", { question_id: "thin-cushion" });
+        }
+      }
+    });
+  }
+
+  /* --------------------------------------------------- single render entry */
+  var viewRate = 7;
+
+  function update() {
+    var S = readForm();
+    var D = derive(S);
+    renderVerdict(S, D);
+    renderCap(S, D);
+    renderProjection(S, D);
+    renderCompare(S, D);
+    renderQuestions(S, D);
+    renderFreeAndOffer(S, D);
+    renderGates(S, D);
+    persist(S);
+    return D;
+  }
+
+  /* ------------------------------------------------------------------ init */
+  function init() {
+    applyLang(pickLang());
+    renderPrivacy();
+    TSA_EVENT("asset_view", { lane: "B", lang: lang });
+
+    $$("[data-lang-btn]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        applyLang(b.getAttribute("data-lang-btn"));
+        if (completed) update();
+      });
+    });
+
+    var form = $("ta-form");
+    form.addEventListener("input", function () {
+      if (!started) { started = true; TSA_EVENT("tool_start"); }
+      if (completed) update();
+    });
+    form.addEventListener("change", function () {
+      if (!started) { started = true; TSA_EVENT("tool_start"); }
+      if (completed) update();
+    });
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var D = update();
+      completed = true;
+      $("result").hidden = false;
+      TSA_EVENT("tool_complete", { result_category: D.category, cap_category: D.capCategory });
+      $("r-verdict").scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+
+    $$("[data-intent]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var v = b.getAttribute("data-intent");
+        if (v === "rest") {
+          var S = readForm(), D = derive(S);
+          $("annualIntent").value = Math.max(0, D.cap - D.used);
+        } else {
+          $("annualIntent").value = v;
+        }
+        if (!started) { started = true; TSA_EVENT("tool_start"); }
+        if (completed) update();
+      });
+    });
+
+    $$("[data-rate]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        viewRate = parseInt(b.getAttribute("data-rate"), 10);
+        TSA_EVENT("tool_step", { step: "rate-" + viewRate });
+        if (completed) update();
+      });
+    });
+
+    $("grow-link").addEventListener("click", function () {
+      TSA_EVENT("tool_step", { step: "calc-handoff" });
+    });
+
+    $("remember").addEventListener("change", function () {
+      if (completed) update(); else { renderPrivacy(); }
+    });
+
+    $("clear").addEventListener("click", function () {
+      clearSaved();
+      $("remember").checked = false;
+      form.reset();
+      viewRate = 7;
+      completed = false;
+      $("result").hidden = true;
+      firedGates = {};
+      renderPrivacy();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    $$("details.ta-learn").forEach(function (d) {
+      d.addEventListener("toggle", function () {
+        if (d.open) {
+          var s = d.querySelector("summary");
+          TSA_EVENT("tool_step", { step: s ? s.textContent.trim().slice(0, 60) : "details" });
+        }
+      });
+    });
+
+    /* Restore path: prompt, never auto-reveal. Discovery before instruction
+       has to survive coming back to the page. */
+    var saved = readSaved(localStorage) || readSaved(sessionStorage);
+    if (saved) {
+      $("restore-prompt").hidden = false;
+      $("do-restore").addEventListener("click", function () {
+        if (writeForm(saved)) {
+          $("remember").checked = !!readSaved(localStorage);
+          $("restore-prompt").hidden = true;
+          renderPrivacy();
+        }
+      });
+      $("do-fresh").addEventListener("click", function () {
+        clearSaved();
+        $("restore-prompt").hidden = true;
+        renderPrivacy();
+      });
+    }
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
+  else init();
+
+  /* Exposed for the future artifact generator: same derive(), same figures. */
+  window.FSATrumpSession = { derive: derive, readForm: readForm, projectFV: projectFV };
+})();
+</script>
+</body>
+</html>
