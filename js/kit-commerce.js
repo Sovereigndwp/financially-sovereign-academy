@@ -27,9 +27,9 @@
         'trump-account-family-decision-guide': {
             // Paste the public Payment Link here, e.g. 'https://buy.stripe.com/xxxxxxxxxxxx'
             paymentLink: PLACEHOLDER,
-            price: 39,
+            price: 49,
             currency: 'USD',
-            priceDisplay: '$39 USD'
+            priceDisplay: '$49 USD'
         }
     };
 

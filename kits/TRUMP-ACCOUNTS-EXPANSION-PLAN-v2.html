@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trump Accounts — FSA Expansion &amp; Monetization Plan (v2)</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+  :root{
+    --ink:#141414; --ink-2:#3a3a3a; --muted:#6b6b6b; --line:#e4e0d8;
+    --paper:#faf8f3; --card:#ffffff; --emerald:#0f6d54; --emerald-soft:#e6f2ee;
+    --gold:#b8892b; --gold-soft:#f7efdd; --red:#a23a2e; --red-soft:#f7e7e4;
+    --blue:#2a5b7a; --blue-soft:#e6eef4;
+    --serif:"Playfair Display",Georgia,serif; --slab:"Crimson Pro",Georgia,serif;
+    --sans:Inter,-apple-system,"Segoe UI",system-ui,sans-serif;
+    --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.55;font-size:15.5px;-webkit-font-smoothing:antialiased}
+  a{color:var(--emerald);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+  header.hero{background:linear-gradient(160deg,#101d18 0%,#16332a 60%,#1c4536 100%);color:#f3efe6;padding:46px 0 40px}
+  header.hero .wrap{position:relative}
+  .kicker{font-family:var(--mono);font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:#8fd6bd;margin:0 0 14px}
+  header.hero h1{font-family:var(--serif);font-weight:800;font-size:39px;line-height:1.08;margin:0 0 12px;letter-spacing:-.5px}
+  header.hero p.lede{font-family:var(--slab);font-size:19px;max-width:760px;color:#dfe8e2;margin:0 0 6px}
+  .meta-row{margin-top:20px;display:flex;flex-wrap:wrap;gap:10px}
+  .chip{font-family:var(--mono);font-size:11px;letter-spacing:.05em;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.18);color:#cfe6dd;padding:5px 11px;border-radius:20px}
+  nav.toc{position:sticky;top:0;z-index:20;background:rgba(250,248,243,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  nav.toc .wrap{display:flex;gap:6px;flex-wrap:wrap;padding-top:9px;padding-bottom:9px}
+  nav.toc a{font-family:var(--mono);font-size:11px;letter-spacing:.03em;color:var(--ink-2);padding:5px 9px;border-radius:6px;text-transform:uppercase}
+  nav.toc a:hover{background:var(--emerald-soft);text-decoration:none;color:var(--emerald)}
+  section{padding:38px 0 8px}
+  h2{font-family:var(--serif);font-weight:700;font-size:26px;margin:0 0 4px;letter-spacing:-.3px;display:flex;align-items:baseline;gap:12px}
+  h2 .num{font-family:var(--mono);font-size:13px;color:var(--gold);font-weight:600}
+  h3{font-family:var(--sans);font-weight:700;font-size:16px;margin:26px 0 8px;color:var(--ink)}
+  .sub{color:var(--muted);font-family:var(--slab);font-size:17px;margin:0 0 18px}
+  p{margin:0 0 12px}
+  .grid{display:grid;gap:14px}
+  .g2{grid-template-columns:1fr 1fr}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g4{grid-template-columns:repeat(4,1fr)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 17px}
+  .card h4{margin:0 0 6px;font-size:14.5px;font-weight:700}
+  .card p{font-size:13.6px;color:var(--ink-2);margin:0}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:15px 16px;position:relative;overflow:hidden}
+  .kpi .v{font-family:var(--serif);font-weight:800;font-size:27px;color:var(--emerald);line-height:1}
+  .kpi .l{font-size:12.4px;color:var(--muted);margin-top:6px}
+  .kpi.gold .v{color:var(--gold)} .kpi.blue .v{color:var(--blue)} .kpi.red .v{color:var(--red)}
+  .callout{border-left:4px solid var(--emerald);background:var(--emerald-soft);padding:13px 16px;border-radius:0 10px 10px 0;margin:16px 0;font-size:14px}
+  .callout.gold{border-color:var(--gold);background:var(--gold-soft)}
+  .callout.red{border-color:var(--red);background:var(--red-soft)}
+  .callout.blue{border-color:var(--blue);background:var(--blue-soft)}
+  .callout strong{font-weight:700}
+  table{width:100%;border-collapse:collapse;font-size:13.4px;margin:8px 0 6px;background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  th{background:#f1ede4;text-align:left;padding:9px 11px;font-weight:700;font-size:12px;letter-spacing:.02em;text-transform:uppercase;color:var(--ink-2);border-bottom:1px solid var(--line)}
+  td{padding:9px 11px;border-bottom:1px solid var(--line);vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  .tag{display:inline-block;font-family:var(--mono);font-size:10px;padding:2px 7px;border-radius:5px;letter-spacing:.03em;font-weight:600;text-transform:uppercase}
+  .t-free{background:var(--emerald-soft);color:var(--emerald)}
+  .t-paid{background:var(--gold-soft);color:var(--gold)}
+  .t-hi{background:var(--red-soft);color:var(--red)}
+  .t-own{background:var(--blue-soft);color:var(--blue)}
+  .badge{font-family:var(--mono);font-size:10.5px;font-weight:600;padding:2px 8px;border-radius:20px;border:1px solid var(--line);color:var(--muted)}
+  .built{background:var(--emerald);color:#fff;border-color:var(--emerald)}
+  .ladder{display:grid;gap:10px}
+  .rung{display:grid;grid-template-columns:130px 1fr auto;gap:14px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:13px 16px;border-left:5px solid var(--gold)}
+  .rung.free{border-left-color:var(--emerald)}
+  .rung .price{font-family:var(--serif);font-weight:800;font-size:20px;color:var(--gold)}
+  .rung.free .price{color:var(--emerald);font-size:16px}
+  .rung .name{font-weight:700;font-size:14.5px;margin-bottom:2px}
+  .rung .desc{font-size:12.8px;color:var(--muted)}
+  .rung .rt{font-family:var(--mono);font-size:10px;color:var(--muted);text-align:right;max-width:150px}
+  .timeline{position:relative;margin:10px 0 4px;padding-left:26px}
+  .timeline::before{content:"";position:absolute;left:8px;top:6px;bottom:6px;width:2px;background:var(--line)}
+  .phase{position:relative;margin-bottom:16px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:13px 16px}
+  .phase::before{content:"";position:absolute;left:-22px;top:18px;width:12px;height:12px;border-radius:50%;background:var(--emerald);border:2px solid var(--paper)}
+  .phase .wk{font-family:var(--mono);font-size:11px;color:var(--gold);font-weight:600;letter-spacing:.05em}
+  .phase h4{margin:2px 0 6px;font-size:15px;font-weight:700}
+  .phase ul{margin:6px 0 0;padding-left:18px}
+  .phase li{font-size:13.2px;margin-bottom:3px;color:var(--ink-2)}
+  ul.clean{list-style:none;padding:0;margin:8px 0}
+  ul.clean li{padding:6px 0 6px 24px;position:relative;font-size:14px;border-bottom:1px dotted var(--line)}
+  ul.clean li::before{content:"→";position:absolute;left:2px;color:var(--emerald);font-weight:700}
+  ul.clean li:last-child{border-bottom:none}
+  .assume{background:#fbf6ea;border:1px dashed var(--gold);border-radius:8px;padding:4px 9px;font-size:12.5px;color:#7a5c17;display:inline-block;margin:2px 0}
+  .two-col{columns:2;column-gap:26px}
+  .two-col p{break-inside:avoid}
+  footer{margin-top:34px;background:#101d18;color:#cfe6dd;padding:26px 0 34px;font-size:12.5px}
+  footer a{color:#8fd6bd}
+  .srcgrid{columns:2;column-gap:22px;font-size:12px;line-height:1.5}
+  .srcgrid a{display:block;break-inside:avoid;margin-bottom:5px;color:#9fdcc7}
+  .disc{font-size:11.5px;color:var(--muted);font-style:italic;border-top:1px solid var(--line);margin-top:26px;padding-top:14px}
+  @media(max-width:820px){.g2,.g3,.g4{grid-template-columns:1fr 1fr}.two-col,.srcgrid{columns:1}.rung{grid-template-columns:90px 1fr}.rung .rt{display:none}header.hero h1{font-size:30px}}
+  @media(max-width:520px){.g2,.g3,.g4{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="kicker">Financially Sovereign Academy · Product-Line Expansion Plan</p>
+    <h1>Trump Accounts: Educational Monetization &amp; Expansion Plan</h1>
+    <p class="lede">Version 2. Product development is frozen for 30 days. The plan now runs one falsifiable distribution test instead of five build phases, because the product already sold and the constraint is almost certainly reach, not readiness.</p>
+    <div class="meta-row">
+      <span class="chip">Prepared for Dalia · The Sovereign Academy</span>
+      <span class="chip">v2 · Revised 24 Aug 2026 (v1: 19 Aug)</span>
+      <span class="chip">Facts re-verified 24 Aug incl. 21 Aug proposed investment regs</span>
+      <span class="chip">Boundary-compliant (free core / paid application)</span>
+    </div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="wrap">
+    <a href="#tldr">TL;DR</a>
+    <a href="#reuse">1 · Reuse</a>
+    <a href="#profile">2 · Profile</a>
+    <a href="#facts">3 · The Law</a>
+    <a href="#seo">4 · SEO</a>
+    <a href="#money">5 · Offer Ladder</a>
+    <a href="#roadmap">6 · Roadmap</a>
+    <a href="#metrics">Metrics</a>
+    <a href="#sources">Sources</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<!-- ===================== TL;DR ===================== -->
+<section id="tldr">
+  <h2><span class="num">◆</span> The one-screen version</h2>
+  <p class="sub">v1 said "you are ~70% built, now finish it." That was wrong in one important way: the product was already finished enough to sell, and it did.</p>
+
+  <div class="callout gold">
+    <strong>What changed since v1.</strong> The kit was taken to market between 26 and 30 July: <strong>51 firms contacted</strong> across email and website contact forms, from a researched list of 59 with a personalization point written for each. It produced <strong>one paid founding licence, bought two hours and forty-one minutes after the email landed</strong>, with no call and no follow-up. That is roughly <strong>2.3% cold-email-to-purchase on delivered mail</strong>. One recipient issued a formal opt-out; four addresses bounced. The campaign then stopped. It was not a failed test. It was a working channel switched off after one cycle.
+  </div>
+
+  <div class="grid g4" style="margin-top:16px">
+    <div class="kpi"><div class="v">51</div><div class="l">Firms contacted, July 2026 — verified in Gmail, not from a tracker</div></div>
+    <div class="kpi gold"><div class="v">2.3%</div><div class="l">Cold email to purchase, on delivered mail. No call, no demo, no follow-up</div></div>
+    <div class="kpi blue"><div class="v">EN+ES</div><div class="l">Bilingual client material. No official Spanish-language client material has been found</div></div>
+    <div class="kpi red"><div class="v">20 Oct</div><div class="l">Comments close on the 21 Aug proposed investment regs — a real external deadline</div></div>
+  </div>
+
+  <div class="callout red">
+    <strong>The single question this plan now tests, for 30 days from 24 Aug 2026:</strong> can someone other than Dalia repeatedly put this product in front of the people who need it, and will those people buy? <strong>Those are two questions and they fail differently.</strong> A partner who distributes to an audience that does not buy is a <em>product</em> signal. A partner who will not distribute at all is a <em>slot</em> problem. No reply is neither, and means move to the next channel.
+  </div>
+
+  <h3>The revised moves, in order</h3>
+  <ul class="clean">
+    <li><strong>Done, 24 Aug — Freshness.</strong> Kit reissued as v2 against the 21 August proposed investment regulations and Rev. Proc. 2026-25. Three defects corrected, gift-tax and foreign-donor answers added.</li>
+    <li><strong>Now — Channel experiment one.</strong> Latino Tax Pro. Not another 57 cold emails: the organisation that already has thousands of bilingual tax professionals' attention. Target shape is an annual member benefit, with a Latino Tax Fest session as the wedge.</li>
+    <li><strong>On a 14-day timer — Channel experiment two.</strong> Finhabits. Roughly 900,000 Latino users, opens accounts on an ITIN, bilingual. Released only if experiment one goes quiet.</li>
+    <li><strong>Continuous — Maintain, don't build.</strong> The kit is sold as maintained rather than static. Weekly source review; a revised kit ships when a material change lands. This is the renewal mechanism and the reason a partner keeps carrying it.</li>
+    <li><strong>Paused — interactive tools, employer pack, SEO cluster build-out.</strong> All three require new artifacts before any new evidence exists. They resume when a channel answers.</li>
+  </ul>
+</section>
+
+<!-- ===================== 1 REUSE ===================== -->
+<section id="reuse">
+  <h2><span class="num">01</span> What already exists — harness, don't rebuild</h2>
+  <p class="sub">Every row below is a real asset in the TSA/FSA repos, mapped to its role in this plan.</p>
+
+  <table>
+    <thead><tr><th style="width:30%">Existing asset</th><th>Reuse in the Trump Accounts line</th><th style="width:12%">State</th></tr></thead>
+    <tbody>
+      <tr><td><strong>kit-ta-communication/</strong> — finished, sourced, bilingual Trump Accounts kit (EN/ES client handout, FAQ, source &amp; caveat sheet, one-practice license) + <strong>OFFER-AND-CHECKOUT.md</strong> (Stripe copy, $99)</td><td>Ships as the paid <strong>Firm/Family kit</strong> on day one. Corrects three live misinformation points (no Oct-15 deadline; employer $ counts inside the $5k cap; tax-deferred ≠ tax-free).</td><td><span class="badge built">Built</span></td></tr>
+      <tr><td><strong>MVP-001-REVISED-ARCHITECTURE-PROPOSAL.md</strong> — free-vs-paid matrix + named paid tools</td><td>The blueprint for the interactive layer: contribution planner, employer-cap planner, 529/Roth-applied-to-you, liquidity scenario, personalized family summary, 12-mo updates.</td><td><span class="badge">Spec'd</span></td></tr>
+      <tr><td><strong>CLIENT-READY-LICENSE-CANDIDATE</strong> (spec'd at $149/firm; <strong>shipped and sold at $99</strong>) &amp; <strong>EMPLOYER-PACK-CANDIDATE</strong> ($99 / $249 founding)</td><td>The two B2B SKUs — CPA/RIA white-label + employer rollout pack with bilingual employee FAQ, with real prospect lists attached.</td><td><span class="badge built">Built</span></td></tr>
+      <tr><td><strong>Prospect-List-and-Evidence-Tracker.xlsx</strong> + OUTREACH batches</td><td>The sales engine — segmented CPAs, RIAs, bilingual pros. Feeds firm + employer launch. Extendable with Apollo.</td><td><span class="badge built">Built</span></td></tr>
+      <tr><td><strong>education-intelligence:build-interactive</strong> skill</td><td>Produces the paid planners/scenario tools (each must teach a tradeoff — passes Deep-Dive standard).</td><td><span class="badge">Skill</span></td></tr>
+      <tr><td><strong>audit-claims</strong> + <strong>content-radar-workflow-v2</strong></td><td>Keeps §530A claims fresh as regs finalize — <em>this is literally the "12 months of updates" recurring value.</em></td><td><span class="badge">Skill</span></td></tr>
+      <tr><td><strong>essay-evidence-brief</strong> → <strong>substack-writer</strong> → <strong>my-writing-style</strong></td><td>The distribution essay in Dalia's voice: the sovereignty/tradeoff hook that SEO can't replicate.</td><td><span class="badge">Skill</span></td></tr>
+      <tr><td><strong>searchfit-seo</strong> (keyword-cluster, content-brief, schema-markup, on-page)</td><td>Builds &amp; ships the SEO topic clusters in §4.</td><td><span class="badge">Skill</span></td></tr>
+      <tr><td><strong>FSA module template</strong> + worksheet-download system + <strong>design-system</strong> twins (Playfair/Crimson print shells)</td><td>Free explainer drops into the module format; branded PDFs/pages reuse the existing token twins.</td><td><span class="badge">Built</span></td></tr>
+      <tr><td><strong>BSA engine</strong>: Stripe / entitlements / referrals plumbing + agent kit</td><td>Hosts the paid interactive tools &amp; the updates subscription. "Hard monetization plumbing is done."</td><td><span class="badge built">Built</span></td></tr>
+      <tr><td><strong>offers.json / boundaries.json</strong> ontology objects</td><td>Wire one <span style="font-family:var(--mono);font-size:12px">Trump-Accounts</span> offer; reuse BND-education-not-advice, BND-no-paywalled-core-education, BND-fsa-not-bitcoin-funnel verbatim.</td><td><span class="badge">Config</span></td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout red">
+    <strong>Two guardrail items the repo itself flags — fix before any paid tool ships:</strong> (1) the legacy line <em>"Keep the 1–2% fee. Own the knowledge."</em> contradicts the free-core boundary; (2) nine live surfaces say "everything stays free" — that copy must be narrowed to "core education stays free; applied tools are paid" so the paid layer is honest, not a bait-and-switch.
+  </div>
+</section>
+
+<!-- ===================== 2 PROFILE ===================== -->
+<section id="profile">
+  <h2><span class="num">02</span> Audience &amp; positioning</h2>
+  <p class="sub">Now grounded in one real buyer rather than inference alone.</p>
+
+  <div class="callout blue">
+    <strong>Positioning is now evidence-backed, not inferred.</strong> The buyer who actually paid is a bilingual CPA practice serving families on both sides of the border. That is one observation, but it is the only one there is, and it points at the same segment the research pointed at: Spanish-serving practices whose clients ask questions no official material answers.
+  </div>
+
+  <h3>Positioning FSA can uniquely own</h3>
+  <p>Banks, brokers and CPAs are publishing Trump Account explainers to sell their own products (529s, managed accounts, the 1–2% fee). FSA's edge is the opposite posture: <strong>first-principles, product-neutral money education</strong> that tells families the honest tradeoffs — including the parts the promoters skip (money is locked until 18; gains are taxed as <em>ordinary income</em>, not capital gains; "tax-deferred" is not "tax-free"). Add the <strong>bilingual + mixed-status</strong> treatment, including the cross-border gifting question no competitor answers, and the <strong>sovereignty frame</strong> ("who actually controls your child's account, and what are you trading away?"), and FSA owns a lane competitors structurally can't enter.</p>
+
+  <h3>Audience segments (assumptions labeled)</h3>
+  <div class="grid g3">
+    <div class="card"><h4>New parents (2025–2028 births)</h4><p>Seed-eligible &amp; time-sensitive. Highest-intent, highest-volume. Entry point = free explainer → family kit.</p></div>
+    <div class="card"><h4>Grandparents / gifters</h4><p>Estate &amp; legacy motive; higher willingness-to-pay. Cross-sells to Family Continuity kit.</p></div>
+    <div class="card"><h4>Mixed-status / Spanish-speaking families</h4><p><strong>Unique lane.</strong> Needs the citizenship/SSN nuance handled with care. Bilingual = the moat.</p></div>
+    <div class="card"><h4>CPAs / RIAs / tax pros</h4><p>Buy the $99 firm licence to serve clients. They self-identify by publishing their own Trump Accounts explainer — which is exactly how the list was built, and how the one buyer was found.</p></div>
+    <div class="card"><h4>Employers / HR / PEOs / brokers</h4><p>Employer pack, timed to open enrollment. $2,500 exclusion is a live 2026 benefits question.</p></div>
+    <div class="card"><h4>Financial-literacy teachers / schools</h4><p><strong>Institutions pay; learners don't</strong> (Doctrine D4). Curriculum-license route, not retail.</p></div>
+  </div>
+</section>
+
+<!-- ===================== 3 FACTS ===================== -->
+<section id="facts">
+  <h2><span class="num">03</span> The law, verified (Aug 2026)</h2>
+  <p class="sub">Every figure below is traceable to a primary source in §Sources. Flagged items are still pending rulemaking.</p>
+
+  <div class="grid g4">
+    <div class="kpi"><div class="v">$1,000</div><div class="l">Federal seed, US-citizen children born 1 Jan 2025 – 31 Dec 2028 (with SSN)</div></div>
+    <div class="kpi gold"><div class="v">$5,000</div><div class="l">Combined annual contribution cap / child (after-tax); indexed after 2027. Seed sits on top</div></div>
+    <div class="kpi blue"><div class="v">$2,500</div><div class="l">Max employer contribution / employee / yr (§128) — excluded from income, inside the $5k cap</div></div>
+    <div class="kpi red"><div class="v">Age 18</div><div class="l">"Growth period" locks funds until Jan 1 of the year the child turns 18</div></div>
+  </div>
+
+  <h3>How it works</h3>
+  <div class="two-col">
+    <p><strong>What it is.</strong> A custodial-style <em>traditional</em> IRA for minors, created under the 2025 "Working Families Tax Cuts" (OBBBA), new IRC §530A. Launched <strong>July 4, 2026</strong>. One account per child.</p>
+    <p><strong>Opening it.</strong> File IRS <strong>Form 4547</strong> with the 2025 return, or enroll online at <strong>TrumpAccounts.gov</strong> (app built with Robinhood). Enroll by the year before the child turns 18. <em>No October-15 deadline exists</em> — a widely repeated myth.</p>
+    <p><strong>Who can fund it.</strong> Parents, guardians, grandparents, others — up to $5,000/yr combined, no income limit on contributors. Employers up to $2,500 (counts inside the $5k). A Dell Foundation program adds $250 charitable deposits for up to 25M kids ≤10 in qualifying ZIP codes.</p>
+    <p><strong>The tax truth (the misinformation zone).</strong> Funds grow <strong>tax-deferred, not tax-free.</strong> No distributions during the growth period (except rollovers, excess-contribution, death). From Jan 1 of the age-18 year it's treated as a traditional IRA: contributions (after-tax) come out tax-free, but <strong>gains are taxed as ordinary income</strong> — losing the preferential capital-gains treatment a plain taxable account would get — and a 10% §72(t) early-withdrawal tax applies before 59½ unless an exception (qualified higher education, first home) applies.</p>
+    <p><strong>Traction.</strong> Per the IRS, ~4M children signed up and ~1M have claimed the $1,000 pilot contribution.</p>
+  </div>
+
+  <div class="callout red">
+    <strong>Still pending / uncertain — flag on every asset:</strong> <strong>Update 21 Aug 2026:</strong> Treasury and IRS published proposed regulations on <em>eligible investments</em> (RIN 1545-BS14, Federal Register 21 Aug 2026, <strong>comments close 20 Oct 2026</strong>): index mutual funds or ETFs replicating an index, no leverage or derivatives materially increasing risk of loss, primarily US equity indexes under a 90% safe harbor, no sector-specific or ESG indexes, and <strong>total annual fees and expenses capped at 0.1% of net assets</strong>. Separately, <strong>Rev. Proc. 2026-25 (29 Jun 2026)</strong> gives a transfer-tax safe harbor treating cash contributions for a child under 18 as present-interest gifts eligible for the annual exclusion, removing a Form 709 filing requirement, subject to conditions. Final §530A regulations are still <em>not</em> published (proposed regs apply to tax years beginning on/after 1 Jan 2026; final regs intended within 18 months of enactment). Employer-contribution &amp; nondiscrimination rules are <strong>proposed</strong> (REG-101355-26, under OMB review). DOL Technical Release 2026-02 says Trump Accounts generally aren't ERISA pension plans — but that too can evolve. State tax conformity varies. <strong>This uncertainty is the product:</strong> it is exactly why a 12-month "updates" subscription has real value.</p>
+  </div>
+
+  <h3>Trump Account vs the alternatives (this is the free comparison table families need)</h3>
+  <table>
+    <thead><tr><th>Account</th><th>Best for</th><th>Tax on growth</th><th>Access</th><th>Annual limit</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Trump Account</strong></td><td>Early retirement head-start; the free $1,000</td><td>Deferred; <strong>gains taxed as ordinary income</strong> at withdrawal</td><td>Locked until age 18, then IRA rules (10% penalty pre-59½ w/ exceptions)</td><td>$5,000 combined</td></tr>
+      <tr><td><strong>529 plan</strong></td><td>College &amp; K-12 / education</td><td><strong>Tax-free</strong> for qualified education</td><td>Anytime for qualified education</td><td>~$19k (single) / $38k (married) gift</td></tr>
+      <tr><td><strong>Custodial Roth IRA</strong></td><td>A teen with a real job</td><td>Tax-free in retirement</td><td>Contributions anytime; earnings 59½</td><td>Up to earned income / IRA cap</td></tr>
+      <tr><td><strong>UTMA / UGMA custodial</strong></td><td>Flexible, non-education goals</td><td>Taxable (kiddie-tax rules)</td><td>Anytime; child controls at majority</td><td>No federal cap (gift-tax applies)</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:12.5px;color:var(--muted)">The honest FSA line: <em>rarely either/or.</em> Most families coordinate a Trump Account alongside a 529 or custodial Roth rather than pick one. That neutrality is the trust asset.</p>
+</section>
+
+<!-- ===================== 4 SEO ===================== -->
+<section id="seo">
+  <h2><span class="num">04</span> SEO &amp; content landscape</h2>
+  <p class="sub">Competitors (Chase, Fidelity, Acorns, CNBC, Wells Fargo, savingforcollege) own the generic explainers. FSA wins the decision, tax-truth, bilingual and sovereignty clusters they structurally avoid.</p>
+
+  <div class="grid g2">
+    <div class="card"><h4>Where competitors are strong (don't fight head-on)</h4><p>Big banks &amp; brokers dominate "what is a trump account", "how to open", "eligibility". They have domain authority and a product to cross-sell. Match with one canonical pillar, then differentiate.</p></div>
+    <div class="card"><h4>The gaps they leave open (FSA's lane)</h4><p>Honest tradeoff/decision content, the ordinary-income tax truth, "is it worth locking money to 18", <strong>Spanish-language</strong> authority, mixed-status guidance, and product-neutral sovereignty framing. Nobody owns these.</p></div>
+  </div>
+
+  <h3>Prioritized keyword / topic clusters</h3>
+  <table>
+    <thead><tr><th>Cluster</th><th>Representative queries</th><th>Intent</th><th>Priority</th></tr></thead>
+    <tbody>
+      <tr><td><strong>C · Decision &amp; comparison</strong> <span class="tag t-own">FSA-owns</span></td><td>trump account vs 529 · vs custodial roth · vs UTMA · is a trump account worth it · pros and cons · best savings account for kids 2026</td><td>High — mid-funnel, ready to act</td><td><span class="tag t-hi">P0</span></td></tr>
+      <tr><td><strong>D · Tax &amp; mechanics</strong> <span class="tag t-own">FSA-owns</span></td><td>are trump account withdrawals taxed · tax-deferred vs tax-free · contribution limit · withdrawal rules age 18 · ordinary income vs capital gains</td><td>High — where misinformation &amp; anxiety live</td><td><span class="tag t-hi">P0</span></td></tr>
+      <tr><td><strong>F · Bilingual + sovereignty</strong> <span class="tag t-own">Uncontested</span></td><td>cuentas trump · cuenta trump para niños · cómo abrir una cuenta trump · trump account mixed-status / immigrant families · who controls your child's account</td><td>Med volume, <strong>zero authoritative competition</strong></td><td><span class="tag t-hi">P0</span></td></tr>
+      <tr><td><strong>B · Action / how-to</strong></td><td>how to open a trump account · form 4547 · trumpaccounts.gov · claim $1000 · trump account app robinhood</td><td>Very high intent, high competition</td><td><span class="tag t-paid">P1</span></td></tr>
+      <tr><td><strong>E · Employer / professional</strong></td><td>trump accounts for employers · employer contribution rules · section 125 · payroll · for CPAs / advisors</td><td>Med volume, B2B, high value</td><td><span class="tag t-paid">P1</span></td></tr>
+      <tr><td><strong>A · Foundational</strong></td><td>trump account · what is a trump account · explained · rules · eligibility</td><td>Highest volume, awareness</td><td><span class="tag t-free">P2</span></td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <strong>SEO play:</strong> lead with <strong>one authoritative comparison pillar</strong> (Cluster C) + <strong>one tax-truth pillar</strong> (Cluster D), each with schema markup and an email-capture on the free comparison table. Then build the <strong>Spanish mirror</strong> (Cluster F) with hreflang — that alone can rank fast because the SERP is empty. Foundational (A) and how-to (B) are supporting spokes, not the spearhead.
+  </div>
+</section>
+
+<!-- ===================== 5 MONETIZATION ===================== -->
+<section id="money">
+  <h2><span class="num">05</span> The offer ladder</h2>
+  <p class="sub">Free education builds trust; money is charged only for <em>application, interactivity, organization, and updates</em> — never for basic understanding. Prices are founding-launch hypotheses to validate.</p>
+
+  <div class="ladder">
+    <div class="rung free">
+      <div class="price">Free</div>
+      <div><div class="name">Bilingual explainer + comparison table + "5 myths" + scam/activation guide <span class="tag t-free">must stay free</span></div><div class="desc">EN/ES. The lead magnet. Email capture on the downloadable comparison &amp; the 12-month-updates opt-in.</div></div>
+      <div class="rt">Route: must-remain-free · Value: information</div>
+    </div>
+    <div class="rung">
+      <div class="price">$49<span style="font-size:11px;color:var(--muted)"> · untested · built 2026-08-24</span></div>
+      <div><div class="name">Family Decision Kit <span class="tag t-paid">retail</span></div><div class="desc">Workbook + contribution planner + lock-up/liquidity scenario + 529/Roth-applied-to-your-household + personalized family summary + 12-mo updates.</div></div>
+      <div class="rt">Route: paid-template + readiness · Value: application/interactivity</div>
+    </div>
+    <div class="rung">
+      <div class="price">$99</div>
+      <div><div class="name">Firm Licence <span class="tag t-paid">B2B · the one that sold</span></div><div class="desc">Brandable bilingual client kit for CPAs, tax preparers and estate practices; unlimited distribution to that firm's clients; twelve months of material updates <strong>included in the price</strong>. Boundaries non-removable.</div></div>
+      <div class="rt">Price held at $99 · v1's $149 was an untested hypothesis</div>
+    </div>
+    <div class="rung">
+      <div class="price" style="color:var(--muted)">Paused</div>
+      <div><div class="name">Employer Decision &amp; Rollout Pack <span class="tag t-hi">paused 24 Aug</span></div><div class="desc">$99/employer; $249 founding broker/PEO license. Bilingual employee FAQ. Timed to open enrollment (Aug–Nov). $2,500 exclusion, §125, nondiscrimination, ERISA status.</div></div>
+      <div class="rt">Route: organizational-service · Seasonal window</div>
+    </div>
+    <div class="rung">
+      <div class="price" style="color:var(--muted)">Paused</div>
+      <div><div class="name">Live cohort / workshop <span class="tag t-hi">paused 24 Aug</span></div><div class="desc"><span class="assume">Assumption — validate demand first.</span> "Set up your child's account right" or a grandparents-gifting session. Uses build-curriculum.</div></div>
+      <div class="rt">Route: paid-workshop · Phase 4 test</div>
+    </div>
+    <div class="rung">
+      <div class="price">Route out</div>
+      <div><div class="name">Personalized custody / tax / estate questions <span class="tag t-hi">boundary</span></div><div class="desc">No personalized advice. These route to TBA or a qualified adviser — protects the brand and the learner.</div></div>
+      <div class="rt">Route: tba-referral · BND-education-not-advice</div>
+    </div>
+  </div>
+
+  <h3>The recurring engine</h3>
+  <p><strong>Decision, 24 Aug: do not build a subscription system. Make the existing product maintained rather than static, and include twelve months of updates in the $99.</strong> The purpose is to discover whether ongoing regulatory maintenance raises the product's value and makes partners more willing to distribute it. It is powered by the <strong>audit-claims</strong> workflow already in place, so the marginal cost is a weekly source review.</p>
+  <div class="callout gold"><strong>The terms are bounded, deliberately.</strong> A <em>material change</em> means a new IRS, Treasury or DOL instrument that changes what a client should actually do, or that makes a statement in the client material inaccurate; a proposed rule becoming final counts, commentary does not. The commitment is a <strong>review cadence, not a response time</strong>: sources reviewed weekly, revised kit issued and licensees emailed when something lands. Excluded: personalised advice, review of the firm's own materials, answers about an individual client. An open-ended promise is a liability, not a feature.</div>
+
+  <h3>Funnel &amp; distribution</h3>
+  <ul class="clean">
+    <li><strong>Top:</strong> SEO clusters C/D/F + a Substack sovereignty essay (essay-evidence-brief → substack-writer) drive the free bilingual explainer.</li>
+    <li><strong>Capture:</strong> email on the comparison-table download + updates opt-in.</li>
+    <li><strong>Nurture:</strong> a 4–5 email sequence (myths → "no Oct-15 deadline" reassurance → the tax truth → comparison → kit offer) via marketing:email-sequence.</li>
+    <li><strong>Convert:</strong> Family Kit on the existing Stripe Payment Link; instrument <span style="font-family:var(--mono);font-size:12px">kit_page_view / checkout_click / email_capture / purchase_confirmed</span>.</li>
+    <li><strong>Expand (B2B):</strong> firm + employer SKUs to the existing prospect tracker, enriched with Apollo; employer push timed to open enrollment.</li>
+  </ul>
+</section>
+
+<!-- ===================== 6 ROADMAP ===================== -->
+<section id="roadmap">
+  <h2><span class="num">06</span> The revised plan: three tracks, not five phases</h2>
+  <p class="sub">v1 was five sequential phases and about twenty deliverables for one person. That is the shape that gets abandoned. Tracks run in parallel only because they do not compete for the same scarce resource, which is judgment and voice, not execution.</p>
+
+  <div class="callout">
+    <strong>Why this parallelises honestly.</strong> The freshness audit discharged three obligations at once: it unblocked the firm-facing page, it produced the update owed to the founding licensee, and it was the first live proof that "maintained" means something. The gain is not doing more things at once. It is finding the work that settles several debts in one pass.
+  </div>
+
+  <div class="timeline">
+    <div class="phase">
+      <div class="wk">TRACK A · ONLY DALIA · ~1 HOUR PER WEEK</div>
+      <h4>Conversations, judgment and relationships</h4>
+      <ul>
+        <li>Send the Latino Tax Pro approach. Ask how they normally get a resource in front of members before proposing any model.</li>
+        <li>Answer every reply personally. A reply is the highest-priority item in any week.</li>
+        <li>Deliver kit v2 to the founding licensee with a short note. This is the proof, not a courtesy.</li>
+        <li>Release the Finhabits approach if experiment one is silent after 14 days.</li>
+      </ul>
+      <p style="margin:6px 0 0;font-size:12px;color:var(--muted)"><strong>Cannot be delegated.</strong> <strong>Rule:</strong> one offer per contact, ever. The 51 contacted firms are closed.</p>
+    </div>
+    <div class="phase">
+      <div class="wk">TRACK B · CLAUDE BUILDS · DALIA APPROVES IN BATCHES</div>
+      <h4>The distribution surface</h4>
+      <ul>
+        <li><strong>Done:</strong> kit reissued as v2 against the 21 Aug regulations; firm-facing page written with bounded maintenance terms; sitemaps rebuilt for both domains.</li>
+        <li>Publish the firm page once v2 has reached the existing licensee.</li>
+        <li>Fix the calculator pages that carry no server-rendered explanation, which is the same defect that keeps them out of Google's index and out of AI answers.</li>
+        <li>Instrument: analytics on all three domains, offer IDs on every payment link.</li>
+      </ul>
+      <p style="margin:6px 0 0;font-size:12px;color:var(--muted)"><strong>Review, do not supervise.</strong> Nothing here needs her attention daily.</p>
+    </div>
+    <div class="phase">
+      <div class="wk">TRACK C · AUTOMATED · EVERY MONDAY</div>
+      <h4>The part that remembers</h4>
+      <ul>
+        <li>Rebuilds campaign state from Gmail rather than from a spreadsheet, because the trackers lag reality and contact-form sends leave no trace.</li>
+        <li>Checks for new guidance weekly. This <em>is</em> the maintenance promise, enforced.</li>
+        <li>Drafts the next finished email into the drafts folder. One first touch per week, never a batch.</li>
+        <li>Counts down to 20 October and reports days remaining.</li>
+        <li>Refuses new product work during the freeze and names what it would displace.</li>
+      </ul>
+      <p style="margin:6px 0 0;font-size:12px;color:var(--muted)"><strong>Output:</strong> under 200 words. A quiet week is three lines plus one draft.</p>
+    </div>
+    <div class="phase">
+      <div class="wk">PAUSED UNTIL A CHANNEL ANSWERS</div>
+      <h4>What is deliberately not happening</h4>
+      <ul>
+        <li><strong>Interactive tools.</strong> Attractive, and another building project. No new evidence would come from them.</li>
+        <li><strong>Employer pack.</strong> Needs a new artifact and a new list, and the benefits firms are already contacted and closed. It gets dramatically easier once a channel relationship exists to extend.</li>
+        <li><strong>SEO cluster build-out.</strong> Resumes when there is something proven to send traffic to.</li>
+      </ul>
+      <p style="margin:6px 0 0;font-size:12px;color:var(--muted)">The cheap exception: publishing the freshness note publicly costs nothing extra and benefits brokers searching the August regulations will find it.</p>
+    </div>
+  </div>
+
+  <h3>Predeclared conditions — written before the reply arrives</h3>
+  <table>
+    <thead><tr><th style="width:26%">Outcome</th><th>What it means</th><th style="width:26%">What happens next</th></tr></thead>
+    <tbody>
+      <tr><td>No reply in 14 days</td><td>Nothing about the product. A cold approach to an organisation missed.</td><td>Release Finhabits. Find one more channel organisation.</td></tr>
+      <tr><td>Interested, no slot exists</td><td>The product is fine. They have nowhere to put it.</td><td>Ask who does. This is a referral question, not a rejection.</td></tr>
+      <tr><td>Declines: members get this free</td><td>The Flimp objection a second time. Two is a pattern. <strong>This is a product signal.</strong></td><td>Stop expanding the list. Rework the free-versus-paid line first.</td></tr>
+      <tr><td>Revenue share only</td><td>A yes that produces no activity. Looks like success, teaches nothing.</td><td>Decline, or accept only alongside a member benefit or a Tax Fest slot.</td></tr>
+      <tr><td>Offers a mechanism</td><td>The experiment succeeded.</td><td>Run it. Steer to an annual member benefit.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ===================== METRICS ===================== -->
+<section id="metrics">
+  <h2><span class="num">◆</span> Success metrics &amp; what to decide next</h2>
+  <div class="grid g4">
+    <div class="kpi"><div class="v">CVR</div><div class="l">Free-explainer → email capture; kit page → purchase (vs predeclared threshold)</div></div>
+    <div class="kpi gold"><div class="v">Rank</div><div class="l">Top-5 for ≥3 Cluster-C/D queries; page-1 for ≥5 Cluster-F Spanish queries</div></div>
+    <div class="kpi blue"><div class="v">B2B</div><div class="l">Firm licenses + employer packs sold in first outreach cycle</div></div>
+    <div class="kpi red"><div class="v">Retention</div><div class="l">12-month updates subscription renewal rate — the recurring signal</div></div>
+  </div>
+
+  <div class="callout gold" style="margin-top:18px">
+    <strong>Decisions taken 24 Aug 2026, no longer open:</strong> (1) firm licence holds at <strong>$99</strong> until something beats it; (2) twelve months of updates are <strong>bundled</strong>, not sold separately, and the terms are bounded; (3) distribution before building, for 30 days; (4) channel partnerships before more one-to-one outreach; (5) interactive tools, employer pack and SEO cluster build-out are paused. <strong>Still open:</strong> the family retail price, and whether a cohort has any demand at all — neither is being tested this month.
+  </div>
+</section>
+
+<!-- ===================== SOURCES ===================== -->
+<section id="sources">
+  <h2><span class="num">§</span> Sources — Trump Accounts facts</h2>
+  <p class="sub">Primary sources (IRS, Treasury, DOL, Federal Register, Congress/CRS) first; reputable finance press for market/comparison context.</p>
+  <div class="srcgrid">
+    <a href="https://www.federalregister.gov/documents/2026/08/21/2026-17123/guidance-on-eligible-investments-for-trump-accounts">Federal Register — Guidance on Eligible Investments (proposed, 21 Aug 2026, RIN 1545-BS14, comments close 20 Oct 2026)</a>
+    <a href="https://kpmg.com/us/en/taxnewsflash/news/2026/06/rev-proc-2026-25-trump-accounts-safe-harbor.html">Rev. Proc. 2026-25 — transfer tax safe harbor (29 Jun 2026)</a>
+    <a href="https://www.forbes.com/sites/virginialatorrejeker/2026/07/22/irs-clarifies-trump-account-gift-taxes-foreign-donors-must-take-care/">Forbes — foreign donors and the safe harbor (22 Jul 2026)</a>
+    <a href="https://www.irs.gov/trumpaccounts">IRS — Trump Accounts (program hub; note: last reviewed 7 Jul 2026, does not reflect the August proposal)</a>
+    <a href="https://www.irs.gov/newsroom/treasury-irs-issue-guidance-on-trump-accounts-established-under-the-working-families-tax-cuts-notice-announces-upcoming-regulations">IRS — Guidance & upcoming regulations notice</a>
+    <a href="https://www.irs.gov/pub/irs-drop/n-25-68.pdf">IRS Notice 2025-68 (intent to issue §530A regs)</a>
+    <a href="https://www.irs.gov/newsroom/treasury-irs-issue-proposed-regulations-for-trump-accounts-contribution-pilot-program-treasury-department-to-deposit-1000-into-the-account-of-each-eligible-child">IRS/Treasury — Proposed regs, pilot program ($1,000 deposit)</a>
+    <a href="https://www.irs.gov/newsroom/4-million-children-have-been-signed-up-for-trump-accounts-with-1-million-claiming-the-1000-pilot-program-contribution">IRS — 4M signed up / 1M claimed pilot</a>
+    <a href="https://www.irs.gov/instructions/i4547">IRS — Instructions for Form 4547</a>
+    <a href="https://www.federalregister.gov/documents/2026/03/09/2026-04534/trump-accounts-contribution-pilot-program">Federal Register — Contribution Pilot Program</a>
+    <a href="https://www.federalregister.gov/documents/2026/03/09/2026-04533/trump-accounts">Federal Register — Trump Accounts (proposed regs)</a>
+    <a href="https://www.congress.gov/crs-product/R48910">CRS R48910 — Overview & Policy Considerations (updated Jun 15 2026)</a>
+    <a href="https://www.dol.gov/agencies/ebsa/employers-and-advisers/guidance/technical-releases/26-02">DOL — Technical Release 2026-02 (ERISA status)</a>
+    <a href="https://www.planadviser.com/irs-treasury-seek-comments-on-employer-contributions-to-trump-accounts/">PLANADVISER — Employer contribution comments (REG-101355-26)</a>
+    <a href="https://www.mayerbrown.com/en/insights/publications/2026/07/dol-guidance-clarifies-erisa-status-of-trump-accounts">Mayer Brown — DOL ERISA clarification</a>
+    <a href="https://www.ropesgray.com/en/insights/alerts/2026/07/trump-accounts-are-live-what-employers-need-to-know-now">Ropes & Gray — What employers need to know</a>
+    <a href="https://www.fidelity.com/learning-center/personal-finance/trump-accounts-vs-529-utma-ugma-roth-IRA">Fidelity — Trump Accounts vs 529/UTMA/Roth</a>
+    <a href="https://www.cnbc.com/2026/07/01/trump-accounts-launch-july-4.html">CNBC — Launch July 4; what parents need to know</a>
+    <a href="https://www.chase.com/personal/investments/learning-and-insights/article/trump-accounts-for-kids-considerations-for-parents">Chase — Parent guide: rules & steps</a>
+    <a href="https://www.savingforcollege.com/article/trump-account-tax-deferred-savings-children">SavingForCollege — $1,000 for babies 2025–2028</a>
+    <a href="https://www.bankrate.com/retirement/how-the-1000-trump-accounts-for-american-babies-compare-to-529s-and-custodial-roth-iras">Bankrate — vs 529s & custodial Roth</a>
+    <a href="https://www.washingtonpost.com/politics/2026/07/04/trump-accounts-launch-with-1000-eligible-newborns/">Washington Post — Launch coverage</a>
+  </div>
+  <p class="disc">The Sovereign Academy is not affiliated with or endorsed by the U.S. government, the Treasury, the IRS, or the Trump Accounts program. This document is general education and planning, not personalized custody, legal, tax, or investment advice; rules vary and are still being finalized — verify against primary sources before acting. Prices and product details marked "assumption" are hypotheses to validate. Figures current as of 24 Aug 2026. Prices: the $99 firm licence is the only price with a real observation behind it; every other figure marked "assumption" remains a hypothesis.</p>
+</section>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    <p style="font-family:var(--serif);font-size:17px;color:#f3efe6;margin:0 0 6px">Trump Accounts — FSA Expansion &amp; Monetization Plan</p>
+    <p style="margin:0 0 4px">Built on existing TSA/FSA assets · boundary-compliant (free core / paid application) · claims traceable to primary sources.</p>
+    <p style="margin:0;color:#7fbfa8">v2 · 24 Aug 2026 · Next: send the Latino Tax Pro approach · deliver kit v2 to the founding licensee · hold everything else until a channel answers.</p>
+  </div>
+</footer>
+
+</body>
+</html>

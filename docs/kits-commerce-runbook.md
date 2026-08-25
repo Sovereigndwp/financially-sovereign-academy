@@ -48,7 +48,7 @@ Do this in **test mode first**, then repeat in live mode.
 1. **Product.** Products → Add product.
    - Name: `Trump Accounts: An Independent Family Decision Guide`
    - Description: `Printable decision workbook, English and Spanish. Delivered by email within 24 hours.`
-   - Price: `39.00 USD`, one time.
+   - Price: `49.00 USD`, one time.
 2. **Payment Link.** Payment Links → Create → select that price.
    - Quantity: fixed at 1, adjustable off.
    - **Collect customer email: on.** This is the delivery address, so it is not optional.
