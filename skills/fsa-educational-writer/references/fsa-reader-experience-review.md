@@ -35,7 +35,7 @@ second.
   normal RER touches a handful of sentences, and may correctly conclude "change nothing." It
   never advances status. A human approves any change.
 
-## The three lenses
+## The lenses
 
 ### Lens 1: Friction (the former Voice Audit)
 Remove only writing that becomes visible. Look for, and flag only when noticeable: repeated
@@ -45,6 +45,20 @@ assembled?), artificial balance (sentences that exist only to mirror another, e.
 being X and becomes Y"), and academic phrasing people rarely say aloud. Reduce toward
 intentionality, not elimination: if a word appears eight times, two or three of the strongest
 uses may be exactly right. Protect memorable observations; do not polish them away.
+
+### Lens 1B: Anti-template (run immediately after Lens 1)
+Lens 1 asks whether the writing has become visible. Lens 1B asks whether a sentence could
+have been produced by a machine that did not understand the topic. It catches constructions
+that simulate insight through form rather than content, which survive a Friction pass because
+none of them is a repeated word: negation-first theses, self-answered rhetorical questions,
+two-beat fragment pairs, balanced aphorisms, numbered-refrain scaffolding, meta-narration,
+drama adverbs and evaluative filler. The governing rule is the transplant test: if a sentence
+could move into a different article unchanged and still work, it is a template, not thought.
+Full rules, repair patterns and the output block are in `fsa-anti-template-audit.md`, which
+imports the anti-template rules from the author profile and is subordinate to it. Run the
+transplant test on four places every time: title, first two sentences, mental model, closing
+question. If Lens 1B returns more than roughly fifteen hits, the verdict is "upstream
+problem", not a list of fixes.
 
 ### Lens 2: Anchor (identify, do not invent)
 Ask: if the reader remembers only one sentence six months from now, which sentence do I hope
@@ -87,6 +101,8 @@ summary in this shape:
 ```
 Reader Experience Review
 - Friction: <minor edits recommended / none>
+- Anti-template: <n> hits (word / sentence / structure), transplant test on title, opening,
+  mental model and closing question: <pass or fail each>
 - Anchor: Editorial assessment suggests a natural conceptual anchor appears present ("<line>"),
   or: no clear anchor, likely an upstream sharpening opportunity.
 - Publisher test: <educational objective appears achieved / not yet>

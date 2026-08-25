@@ -1,0 +1,9 @@
+ articles/article-library.json                      |  32 +++---
+ .../every-dollar-has-four-jobs.html                | 110 ++++++++++++++-------
+ articles/money-decisions/hidden-cost-of-free.html  |   2 +-
+ .../why-saving-money-feels-so-hard.html            |   4 +-
+ .../sources/every-dollar-has-four-jobs.sources.md  |  45 ++++++---
+ docs/fsa-production-observations-log.md            |  27 +++++
+ scripts/build.py                                   |  36 +++++++
+ scripts/library_data.py                            |  24 +++--
+ 8 files changed, 209 insertions(+), 71 deletions(-)

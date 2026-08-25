@@ -1,0 +1,475 @@
+diff --git a/articles/article-library.json b/articles/article-library.json
+index af3a37c..b554dc7 100644
+--- a/articles/article-library.json
++++ b/articles/article-library.json
+@@ -5,8 +5,8 @@
+   "counts": {
+     "total": 26,
+     "byStatus": {
+-      "drafted": 2,
+-      "planned": 24
++      "drafted": 3,
++      "planned": 23
+     },
+     "public": 0
+   },
+@@ -215,14 +215,14 @@
+     {
+       "id": "FSA-ARTICLE-002",
+       "slug": "every-dollar-has-four-jobs",
+-      "title": "Every Dollar Has Four Jobs",
++      "title": "Every Dollar Has Four Jobs. Which One Is Yours Doing?",
+       "subtitle": "",
+       "series": "How Money Decisions Work",
+       "seriesSlug": "money-decisions",
+       "seriesOrder": 2,
+       "collection": null,
+       "seriesPosition": null,
+-      "status": "planned",
++      "status": "drafted",
+       "featured": true,
+       "initialCollection": true,
+       "language": "en",
+@@ -239,22 +239,26 @@
+         "tradeoffs"
+       ],
+       "supportingConcepts": [
+-        "budgeting",
+-        "tradeoffs",
+-        "priorities"
++        "opportunity cost",
++        "priorities",
++        "constraints"
+       ],
+-      "misconception": "A budget is mainly about restricting spending.",
+-      "coreQuestion": "If a dollar can only do one thing at a time, how do you decide which?",
+-      "mentalModel": "A dollar spent on one job can’t do the other three.",
+-      "learnerOutcome": "The learner can see spending, saving, protecting, and growing as competing jobs and choose deliberately among them.",
++      "misconception": "Managing money well means splitting it across saving, paying debt, and investing.",
++      "coreQuestion": "If a dollar can do only one job at a time, which job does your next free dollar need most?",
++      "mentalModel": "A dollar holds one job at a time, and for many people most dollars already have one.",
++      "learnerOutcome": "The learner can name the job each of their dollars is already doing, and decide where a free dollar would do the most good, without feeling behind for not doing all four.",
+       "boundaryCase": null,
+-      "editorialBrief": "Reframes budgeting away from restriction and toward assignment: every dollar can do one of a few jobs, cover now, hold for later, protect against surprises, or grow, and choosing one means declining the others. Gives learners a simple, non-judgmental way to see where their money is actually pointed.",
++      "editorialBrief": "Reframes money management away from splitting a surplus and toward assignment under constraint: a dollar holds one of four jobs at a time, Live, Prepare, Protect, or Grow, and for many households most dollars are already claimed by the first. The skill the article teaches is naming what each dollar is doing and choosing the job for the next free one, without shame for the months when the only honest answer is Live.",
+       "fsaModules": [
+-        "Mindset & Cash Flow"
++        "Mindset & Cash Flow",
++        "Emergency Funds",
++        "Debt",
++        "Investing"
+       ],
+       "audiences": [
+         "general",
+         "workforce",
++        "reentry",
+         "youth"
+       ],
+       "formats": [
+@@ -270,7 +274,7 @@
+         "the-most-expensive-word-is-later"
+       ],
+       "sourcesFile": "/articles/sources/every-dollar-has-four-jobs.sources.md",
+-      "reviewStatus": "not-started"
++      "reviewStatus": "human-review-required"
+     },
+     {
+       "id": "FSA-ARTICLE-003",
+diff --git a/articles/money-decisions/every-dollar-has-four-jobs.html b/articles/money-decisions/every-dollar-has-four-jobs.html
+index 0f3dddd..dda7137 100644
+--- a/articles/money-decisions/every-dollar-has-four-jobs.html
++++ b/articles/money-decisions/every-dollar-has-four-jobs.html
+@@ -3,13 +3,13 @@
+ <head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+-  <title>Every Dollar Has Four Jobs | FSA Money Ideas</title>
+-  <meta name="description" content="If a dollar can only do one thing at a time, how do you decide which?">
++  <title>Every Dollar Has Four Jobs. Which One Is Yours Doing? | FSA Money Ideas</title>
++  <meta name="description" content="If a dollar can do only one job at a time, which job does your next free dollar need most?">
+   <link rel="canonical" href="https://financiallysovereign.academy/articles/money-decisions/every-dollar-has-four-jobs.html">
+   <meta name="robots" content="noindex, follow">
+   <link rel="stylesheet" href="/css/fsa-brand.css">
+   <link rel="stylesheet" href="/css/fsa-articles.css">
+-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Every Dollar Has Four Jobs", "description": "If a dollar can only do one thing at a time, how do you decide which?", "author": {"@type": "Person", "name": "Dalia Platt"}, "publisher": {"@type": "EducationalOrganization", "name": "Financially Sovereign Academy", "url": "https://financiallysovereign.academy"}, "inLanguage": "en", "isAccessibleForFree": true, "keywords": "money allocation, spending, saving, tradeoffs"}</script>
++  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Every Dollar Has Four Jobs. Which One Is Yours Doing?", "description": "If a dollar can do only one job at a time, which job does your next free dollar need most?", "author": {"@type": "Person", "name": "Dalia Platt"}, "publisher": {"@type": "EducationalOrganization", "name": "Financially Sovereign Academy", "url": "https://financiallysovereign.academy"}, "inLanguage": "en", "isAccessibleForFree": true, "keywords": "money allocation, spending, saving, tradeoffs"}</script>
+ </head>
+ <body>
+ <div class="mi-progress" id="mi-progress" aria-hidden="true"></div>
+@@ -23,42 +23,81 @@
+       <a href="/#modules">Modules</a>
+     </nav>
+   </div>
+-  <nav class="mi-crumbs" aria-label="Breadcrumb"><a href="/articles/">Money Ideas</a><span class="mi-crumbs__sep" aria-hidden="true">/</span><a href="/articles/series/money-decisions.html">How Money Decisions Work</a><span class="mi-crumbs__sep" aria-hidden="true">/</span><span aria-current="page">Every Dollar Has Four Jobs</span></nav>
++  <nav class="mi-crumbs" aria-label="Breadcrumb"><a href="/articles/">Money Ideas</a><span class="mi-crumbs__sep" aria-hidden="true">/</span><a href="/articles/series/money-decisions.html">How Money Decisions Work</a><span class="mi-crumbs__sep" aria-hidden="true">/</span><span aria-current="page">Every Dollar Has Four Jobs. Which One Is Yours Doing?</span></nav>
+ </header>
+ <main id="main" class="mi-article">
+   <article class="mi-prose">
+ 
+   <div class="mi-devnote" role="note">
+-    <span class="mi-devnote__tag">PLANNED</span>
+-    <span>This article is <strong>planned but not yet written</strong>. The structure below is a placeholder for the FSA writing process.</span>
++    <span class="mi-devnote__tag">DRAFTED</span>
++    <span>This is a working draft using temporary content. It is pending educational review and is <strong>not approved or published</strong>.</span>
+   </div>
+     <header class="mi-articlehead">
+       <div class="mi-articlemeta"><span class="fsa-eyebrow">How Money Decisions Work</span><span class="mi-dot" aria-hidden="true">&middot;</span><span>6 min read</span><span class="mi-dot" aria-hidden="true">&middot;</span><span>foundational</span></div>
+-      <h1 class="fsa-h1">Every Dollar Has Four Jobs</h1>
++      <h1 class="fsa-h1">Every Dollar Has Four Jobs. Which One Is Yours Doing?</h1>
+       <div class="mi-actions fsa-no-print"><button type="button" class="fsa-chip" onclick="window.print()">Print / PDF</button></div>
+     </header>
+-    <div class="mi-brief">
+-      <p><span class="fsa-eyebrow">Editorial brief</span></p>
+-      <p class="mi-muted">Reframes budgeting away from restriction and toward assignment: every dollar can do one of a few jobs, cover now, hold for later, protect against surprises, or grow, and choosing one means declining the others. Gives learners a simple, non-judgmental way to see where their money is actually pointed.</p>
+-      <dl class="mi-briefmeta">
+-        <dt>Core question</dt><dd>If a dollar can only do one thing at a time, how do you decide which?</dd>
+-        <dt>Mental model</dt><dd>A dollar spent on one job can’t do the other three.</dd>
+-        <dt>Learner outcome</dt><dd>The learner can see spending, saving, protecting, and growing as competing jobs and choose deliberately among them.</dd>
+-        <dt>Supporting concepts</dt><dd>budgeting, tradeoffs, priorities</dd>
+-      </dl>
+-    </div>
+-    <ol class="mi-structure">
+-      <li><span class="mi-structure__label">Opening tension</span><span class="mi-structure__note">Open with a recognizable situation, contradiction, or question. Not a definition.</span></li>
+-      <li><span class="mi-structure__label">The common belief</span><span class="mi-structure__note">State the misconception this article examines: &ldquo;A budget is mainly about restricting spending.&rdquo;</span></li>
+-      <li><span class="mi-structure__label">What&rsquo;s actually happening</span><span class="mi-structure__note">Explain the underlying idea (money allocation) in plain language.</span></li>
+-      <li><span class="mi-structure__label">A concrete scenario</span><span class="mi-structure__note">A realistic, numerically simple example from ordinary life.</span></li>
+-      <li><span class="mi-structure__label">The mental model</span><span class="mi-structure__note">&ldquo;A dollar spent on one job can’t do the other three.&rdquo;</span></li>
+-      <li><span class="mi-structure__label">A boundary case</span><span class="mi-structure__note">Show where the idea changes with circumstances. Avoid one universal rule.</span></li>
+-      <li><span class="mi-structure__label">Why this matters</span><span class="mi-structure__note">Connect the concept to real financial decisions.</span></li>
+-      <li><span class="mi-structure__label">Look for this today</span><span class="mi-structure__note">One observation exercise the reader can do before the day ends.</span></li>
+-      <li><span class="mi-structure__label">Try it yourself</span><span class="mi-structure__note">One short reflection, comparison, or calculation.</span></li>
+-      <li><span class="mi-structure__label">One question to carry with you</span><span class="mi-structure__note">&ldquo;If a dollar can only do one thing at a time, how do you decide which?&rdquo;</span></li>
+-    </ol>
++
++<p>The advice comes from every direction, and most of it is reasonable. Save something every month. Pay down the card. Put a little toward the future. Each piece sounds right on its own. Then the paycheck arrives, and rent, groceries, the bus card, and the minimum payment claim it almost before it settles.</p>
++<p>What is left is a quiet feeling of being behind, of failing at three assignments at once. Plenty of people carry that feeling for years without ever being told the assumption hiding inside the advice: that after the bills there are spare dollars waiting to be divided up. For many households, most months, there are not.</p>
++<p>So it is worth trading the usual question, "why am I not saving, repaying, and investing all at once?", for a fairer one. What job is each of my dollars already doing, and when a free one finally shows up, which job does it need most?</p>
++
++    <h2 class="fsa-h2">The common belief</h2>
++
++<p>The belief goes something like this: handling money well means splitting it across the responsible jobs. Some to savings, some to the debt, some toward the future. A person who is doing all three is doing it right, and a person who is not is falling short somewhere, probably on discipline.</p>
++<p>There is real truth in it. Money does have distinct purposes, and being deliberate about them is a genuine skill. Giving a dollar a purpose beats letting it drift, and when income comfortably covers the essentials, working several at once genuinely builds stability. The belief is not wrong about what money can do. It is wrong about what it quietly assumes: that the dollars to divide are there in the first place.</p>
++
++    <h2 class="fsa-h2">What&rsquo;s actually happening</h2>
++
++<p>Start with something so plain it is easy to look past: a dollar can do only one job at a time. Spent on groceries, it cannot also sit in savings or shrink a debt. Every dollar you direct somewhere is a dollar declined everywhere else. Economists call the value of the best declined option opportunity cost, and it is running in your budget whether you look at it or not.</p>
++<p>In this library's terms, a dollar can hold one of four jobs. It can <strong>Live</strong>: cover what life costs right now, the housing, food, transport, and bills that are due this month. It can <strong>Prepare</strong>: wait as a buffer so a near-term surprise or goal does not turn into a crisis. It can <strong>Protect</strong>: defend what you already have, mostly by shrinking a debt that grows against you, or by keeping the coverage that stops one bad day from undoing years. Or it can <strong>Grow</strong>: buy a piece of the future through investing, ownership, or learning that raises what you can earn.</p>
++<p>Here is the part the standard advice skips. In many households, most dollars are hired by Live before the month even begins. Rent does not negotiate. Food does not wait. When nearly every dollar already has the first job, "split your money across the jobs" is not advice the situation can follow, and the shortfall it implies is not a discipline problem. It is arithmetic. The real skill is not dividing a surplus that is not there. It is knowing what each dollar is already doing, and deciding which job the next free dollar should take.</p>
++
++
++<h2 class="fsa-h2">One free forty dollars</h2>
++<p>Teresa's paycheck is spoken for. Rent, groceries, the bus card, and the minimum on one credit card take nearly all of it, and for months the four-jobs question has had one honest answer: Live. That is not a failure. That is her actual situation, doing what it costs to run.</p>
++<p>Then the phone she has been paying off in installments is finally hers, and forty dollars a month comes free. For the first time in a long while there is a dollar without a job, and all four line up to apply. The card balance creeps up a little each month, so Protect has a case. There is no cushion at all, so Prepare has one too: without it, one bad week goes straight back onto the card at card interest. Grow will matter someday, and it politely says so.</p>
++<p>Teresa looks at her numbers and starts with a small cushion, because in her month, a single surprise is the most expensive thing that can happen. A neighbor with a bigger card balance and steadier weeks might send the same forty to the card instead, and be just as right. The forty dollars is not the lesson. The lesson is that she went from "I should be doing more of everything" to one clear decision about one free dollar, made against her own numbers.</p>
++
++
++    <aside class="mi-model" aria-label="The mental model">
++      <span class="fsa-eyebrow">The mental model</span>
++      <p class="mi-model__text">A dollar holds one job at a time, and for many people most dollars already have one.</p>
++    </aside>
++    <h2 class="fsa-h2">When the obvious job is the wrong one</h2>
++
++<p>The four jobs are a lens, not a formula, and there are months and lives where the obvious move is not the right one.</p>
++<p>If no dollar comes free at all, the four-jobs question has not failed you. It simply does not apply yet, and that is about income and the timing of bills, not about character. The honest work in that season may be matching due dates to paydays and looking for what could raise income or lower a fixed cost, and no amount of assigning jobs to dollars replaces that.</p>
++<p>When a free dollar does exist, the tidy rules can point the wrong way. A debt growing at a high rate is a guaranteed cost, so sending the dollar to Protect can beat parking it in savings that earn far less. But someone with no cushion at all may be better off starting with a small Prepare anyway, because without one, the next surprise becomes new debt at a worse rate than the one they were fighting. And if an employer matches retirement contributions, a dollar sent to Grow can earn an immediate match that beats repaying a low-rate debt. Each of these flips on the numbers in front of the person, which is why none of them works as a universal rule. Check the actual rates, the actual cushion, and the actual month before following anyone's ranking of the jobs, including this article's.</p>
++
++    <h2 class="fsa-h2">Why this matters</h2>
++
++<p>Seeing money as jobs rather than a pile to divide changes the decision you are actually facing. "I should be doing more" is a weight with no handle: it cannot be finished, only carried. "Which job does my next free dollar need most?" is a question with an answer, and the answer is allowed to be different for you than for your neighbor, and different this year than last.</p>
++<p>It also changes how you hear advice. Save first, pay debt first, never leave the match on the table: each rule is really a claim about which job should win, and it depends on numbers the rule cannot see. Once you can name the four jobs, you can take any of those rules apart, check it against your own month, and keep the part that fits. And the quiet shame about the dollars that only ever Live loses its grip, because keeping a household running on a committed income is not the absence of money skill. It is the first job, done every month, under pressure.</p>
++
++
++    <section class="mi-exercise" aria-label="Look for this today">
++      <h2 class="fsa-h3 mi-exercise__title">Look for this today</h2>
++      
++<p>Sometime today, catch one dollar as it leaves, a purchase, a bill, an automatic charge, and name the job it just did: Live, Prepare, Protect, or Grow. You do not need to change anything or write anything down. Just notice how quickly you can tell which job it was, and whether that dollar was hired on purpose or by default.</p>
++
++    </section>
++
++    <section class="mi-exercise" aria-label="Try it yourself">
++      <h2 class="fsa-h3 mi-exercise__title">Try it yourself</h2>
++      
++<p>With a pencil and a scrap of paper, no balances and no apps required:</p>
++<ul class="fsa-list">
++  <li>Imagine ten dollars comes free this week, a canceled charge, a returned item, an extra shift. Write which single job it takes and one sentence on why. Then try the same with forty. If the answer changes with the amount, write down what changed it.</li>
++  <li>Write the four jobs in a column: Live, Prepare, Protect, Grow. Next to each, one word for how your ordinary month treats it: crowded, thin, or empty. No dollar figures, nothing to show anyone. The column is a picture of where your money is pointed, not a grade.</li>
++</ul>
++
++    </section>
++
++    <section class="mi-closing" aria-label="One question to carry with you">
++      <span class="fsa-eyebrow">One question to carry with you</span>
++      <p class="mi-closing__q">If most of your dollars already have a job, what would have to change for a few of them to take a different one?</p>
++    </section>
+   </article>
+ 
+   <section class="mi-related" aria-labelledby="related-h">
+@@ -70,7 +109,7 @@
+       </div>
+       <div>
+         <span class="fsa-eyebrow">Related FSA modules</span>
+-        <ul class="mi-linklist"><li><a href="/modules/money-mindset-cash-flow.html">Mindset &amp; Cash Flow module</a></li></ul>
++        <ul class="mi-linklist"><li><a href="/modules/money-mindset-cash-flow.html">Mindset &amp; Cash Flow module</a></li><li><a href="/modules/emergency-funds-saving.html">Emergency Funds module</a></li><li><a href="/modules/debt-strategy.html">Debt module</a></li><li><a href="/modules/investing-fundamentals.html">Investing module</a></li></ul>
+       </div>
+     </div>
+     <p class="mi-next"><span class="fsa-eyebrow">Next in this series</span><a class="fsa-btn fsa-btn--secondary" href="/articles/money-decisions/hidden-cost-of-free.html">The Hidden Cost of “Free” &rarr;</a></p>
+@@ -78,9 +117,14 @@
+ 
+   <section class="mi-sourcesbox" aria-labelledby="sources-h">
+     <h2 class="fsa-h3" id="sources-h">Sources and review note</h2>
+-      <p class="mi-muted">This article is planned. Its factual claims, source list, and the
+-      line between evidence and illustration will be recorded in the
+-      <a href="/articles/sources/every-dollar-has-four-jobs.sources.md">companion source file</a> during drafting.</p>
++      <p class="mi-muted">Grouped by type; full citations are in the companion source file.</p>
++      <dl class="mi-sources">
++        <dt>Established research</dt><dd>Opportunity cost is a foundational concept in economics, and the tendency to treat money as assigned to purposes is supported by established peer-reviewed research on mental accounting.</dd>
++        <dt>Concept</dt><dd>That a dollar allocated to one use is unavailable to others is a stable accounting relationship, shown with rounded illustrative numbers, not cited statistics. The article carries no dated statistical claim.</dd>
++        <dt>Illustrative example (FSA)</dt><dd>"One free forty dollars" (Teresa and the freed installment payment) is an FSA illustration for teaching, not evidence.</dd>
++      </dl>
++      <p class="mi-reviewnote"><strong>Review note:</strong> This article is under human review. See
++      <a href="/articles/sources/every-dollar-has-four-jobs.sources.md">the companion source file</a> for full citations.</p>
+   </section>
+ </main>
+ 
+diff --git a/articles/money-decisions/hidden-cost-of-free.html b/articles/money-decisions/hidden-cost-of-free.html
+index 3866115..fb0ce48 100644
+--- a/articles/money-decisions/hidden-cost-of-free.html
++++ b/articles/money-decisions/hidden-cost-of-free.html
+@@ -66,7 +66,7 @@
+     <div class="mi-related__grid">
+       <div>
+         <span class="fsa-eyebrow">Related articles</span>
+-        <ul class="mi-linklist"><li><a href="/articles/money-decisions/why-prices-matter-more-than-cost.html">Why Prices Matter More Than Cost</a></li><li><a href="/articles/money-decisions/every-dollar-has-four-jobs.html">Every Dollar Has Four Jobs</a></li><li><a href="/articles/foundations/the-most-expensive-word-is-later.html">The Most Expensive Word in Personal Finance: “Later”</a></li></ul>
++        <ul class="mi-linklist"><li><a href="/articles/money-decisions/why-prices-matter-more-than-cost.html">Why Prices Matter More Than Cost</a></li><li><a href="/articles/money-decisions/every-dollar-has-four-jobs.html">Every Dollar Has Four Jobs. Which One Is Yours Doing?</a></li><li><a href="/articles/foundations/the-most-expensive-word-is-later.html">The Most Expensive Word in Personal Finance: “Later”</a></li></ul>
+       </div>
+       <div>
+         <span class="fsa-eyebrow">Related FSA modules</span>
+diff --git a/articles/money-decisions/why-saving-money-feels-so-hard.html b/articles/money-decisions/why-saving-money-feels-so-hard.html
+index 7fda976..1d00d85 100644
+--- a/articles/money-decisions/why-saving-money-feels-so-hard.html
++++ b/articles/money-decisions/why-saving-money-feels-so-hard.html
+@@ -104,14 +104,14 @@
+     <div class="mi-related__grid">
+       <div>
+         <span class="fsa-eyebrow">Related articles</span>
+-        <ul class="mi-linklist"><li><a href="/articles/money-decisions/every-dollar-has-four-jobs.html">Every Dollar Has Four Jobs</a></li><li><a href="/articles/foundations/the-most-expensive-word-is-later.html">The Most Expensive Word in Personal Finance: “Later”</a></li></ul>
++        <ul class="mi-linklist"><li><a href="/articles/money-decisions/every-dollar-has-four-jobs.html">Every Dollar Has Four Jobs. Which One Is Yours Doing?</a></li><li><a href="/articles/foundations/the-most-expensive-word-is-later.html">The Most Expensive Word in Personal Finance: “Later”</a></li></ul>
+       </div>
+       <div>
+         <span class="fsa-eyebrow">Related FSA modules</span>
+         <ul class="mi-linklist"><li><a href="/modules/money-mindset-cash-flow.html">Mindset &amp; Cash Flow module</a></li><li><a href="/modules/emergency-funds-saving.html">Emergency Funds module</a></li></ul>
+       </div>
+     </div>
+-    <p class="mi-next"><span class="fsa-eyebrow">Next in this series</span><a class="fsa-btn fsa-btn--secondary" href="/articles/money-decisions/every-dollar-has-four-jobs.html">Every Dollar Has Four Jobs &rarr;</a></p>
++    <p class="mi-next"><span class="fsa-eyebrow">Next in this series</span><a class="fsa-btn fsa-btn--secondary" href="/articles/money-decisions/every-dollar-has-four-jobs.html">Every Dollar Has Four Jobs. Which One Is Yours Doing? &rarr;</a></p>
+   </section>
+ 
+   <section class="mi-sourcesbox" aria-labelledby="sources-h">
+diff --git a/articles/sources/every-dollar-has-four-jobs.sources.md b/articles/sources/every-dollar-has-four-jobs.sources.md
+index 583b679..81226bd 100644
+--- a/articles/sources/every-dollar-has-four-jobs.sources.md
++++ b/articles/sources/every-dollar-has-four-jobs.sources.md
+@@ -1,29 +1,52 @@
+-# Sources: Every Dollar Has Four Jobs
++# Sources: Every Dollar Has Four Jobs. Which One Is Yours Doing?
+ 
+ - **Article ID:** FSA-ARTICLE-002
+ - **Slug:** every-dollar-has-four-jobs
+-- **Status:** planned
+-- **Review status:** not-started
+-- **Last updated:** 2026-07-16
++- **Status:** drafted
++- **Review status:** human-review-required
++- **Last updated:** 2026-07-18
+ 
+-> Every quantitative or factual claim in the published article must appear below
+-> with a named, primary or authoritative source. Concepts (present bias, opportunity
++> Every quantitative or factual claim in the published article must appear below with a
++> named, primary or authoritative source. Stable concepts (present bias, opportunity
+ > cost, etc.) may rest on established research. FSA scenarios are illustrations, not
+ > evidence, and are labeled as such.
+ 
+ ## Claims requiring support
+ 
+-_None recorded yet. Fill this in during drafting, before the article can reach `approved`._
+-
+ | Claim | Type | Source | Org / author | Pub date | URL | Accessed | Primary? | Limitations |
+ |---|---|---|---|---|---|---|---|---|
+-| _example_ | factual / research / regulatory | | | | | | primary / secondary | |
++| A dollar directed to one use is unavailable to its alternatives, and the value of the best declined alternative is what economists call opportunity cost. | research (Tier A, stable concept) | "Opportunity Cost" (Economic Lowdown education resource) | Federal Reserve Education (Federal Reserve System) | undated education resource | https://www.federalreserveeducation.org/teaching-resources/economics/scarcity/opportunity-cost | 2026-07-18 | No, an authoritative central-bank educational summary of a foundational concept | An educational explainer, not original research. Used because the source standard prefers government and central-bank sources for stable concepts; the concept itself long predates any single citation. |
++| People tend to treat money as if it were assigned to purposes or accounts, rather than as fully interchangeable, which supports the article's "jobs" lens as a description of how people already think. | research (Tier A, stable concept: mental accounting) | "Mental Accounting and Consumer Choice," Marketing Science 4(3): 199-214 | Richard H. Thaler | 1985 | https://pubsonline.informs.org/doi/10.1287/mksc.4.3.199 | 2026-07-18 | Yes, primary peer-reviewed research | Describes a general tendency, not a rule about any one reader. The article uses the tendency as a teaching lens; it does not claim mental accounting is optimal. |
++| The same body of research also documents the limit the article names in the boundary section: money is in fact fungible, so the "jobs" framing is a lens, not a ledger. | research (Tier A, stable concept) | "Mental Accounting Matters," Journal of Behavioral Decision Making 12(3): 183-206 | Richard H. Thaler | 1999 | https://doi.org/10.1002/(SICI)1099-0771(199909)12:3<183::AID-BDM318>3.0.CO;2-F | 2026-07-18 | Yes, primary peer-reviewed review by the field's originating author | DOI link resolves through the publisher and was not directly loadable by the drafting pass (robots restrictions); a human should confirm the link at fact-check. The citation itself (author, journal, year) is established. |
++
++**Note on the boundary-case comparisons.** The article's boundary section says a
++high-rate debt is a guaranteed cost, that a match on retirement contributions is an
++immediate gain, and that a person with no cushion can end up in new, more expensive debt
++after a surprise. These are stated as directional relationships a reader can check against
++their own numbers, with no rate, threshold, or statistic quoted. They are arithmetic
++relationships, not Tier B claims. If a future revision quotes a specific rate, match
++percentage, or survey figure, that figure becomes Tier B and must be dated and sourced
++(for example to the Federal Reserve's Survey of Household Economics and Decisionmaking).
+ 
+ ## Illustrative examples created by FSA
+ 
+-- _List invented scenarios here so reviewers never mistake them for evidence._
++- "One free forty dollars" (Teresa, the paid-off phone installment, and the freed forty
++  dollars a month): an invented teaching scenario. Not a data point. Numbers are round
++  and for teaching only.
++- The unnamed neighbor who sends the same forty to a card balance: part of the same
++  illustration, included to show that the right job depends on the person's numbers.
+ 
+ ## Statistics requiring future updates
+ 
+-- _List any dated figure that will go stale, with its source and as-of date._
++- None. This article makes no dated numeric claim (no savings rate, fee, threshold,
++  match percentage, or survey figure). Per Dalia's decision of 2026-07-18, the
++  emergency-expense statistic contemplated by the editorial brief was deliberately
++  excluded: the scenario carries the point, and the article stays evergreen.
++
++## Review note
+ 
++The four-jobs taxonomy (Live / Prepare / Protect / Grow) was set by Dalia on 2026-07-18.
++This draft maps "repay debt" under Protect, alongside keeping insurance coverage, and
++flags that mapping as an unresolved human decision for the educational review gate. No
++Tier B claim is present, so the fact-check stage has nothing dated to confirm beyond the
++three Tier A citations above. This file does not itself approve or publish the article.
+diff --git a/docs/fsa-production-observations-log.md b/docs/fsa-production-observations-log.md
+index de261d4..c23e65a 100644
+--- a/docs/fsa-production-observations-log.md
++++ b/docs/fsa-production-observations-log.md
+@@ -24,6 +24,33 @@ Format: date · article/context · observation · why it might matter · status.
+   If the registry refactor ever happens, headings should move next to the prose. Status:
+   observation, contingent on the registry item above.
+ 
++- 2026-07-18 · "Four Jobs" (FSA-ARTICLE-002) · The THIRD hardcoded body module
++  (`four_jobs_content.py` + a third parallel `elif` in `build.py`) has now been added. The
++  pilot retrospective named exactly this moment ("the moment we would write a third elif")
++  as the trigger to decide on the `slug -> body` registry refactor. The engine was NOT
++  changed in this pass (v1.0 freeze); the trigger condition is now met and the decision is
++  due at the next engine review. Status: trigger reached, decision pending.
++- 2026-07-18 · "Four Jobs" · Roadmap ambiguity surfaced at intake: the retrospective's
++  "only then begin Economic Thinking" pointed one way while `initialCollection` and the
++  existing proposed brief pointed at FSA-ARTICLE-002. A human had to adjudicate. Possible:
++  a single explicit "next up" marker (registry field or a one-line roadmap note) so the
++  institution names its own next asset. Status: observation only.
++- 2026-07-18 · "Four Jobs" · Production decisions made in conversation (taxonomy
++  Live/Prepare/Protect/Grow; Tier B statistic excluded; brief adoption) have no canonical
++  on-repo home. They are recorded in the draft audit and the source file's review note,
++  but a reader of the repo alone cannot find "decisions made and why" in one place.
++  Possible: a small append-only decisions log next to this file. Status: observation only.
++- 2026-07-18 · "Four Jobs" · `docs/proposed-briefs/` has no lifecycle: an adopted brief
++  (002) stays labeled "proposed" with no adopted/rejected/superseded marker, so the
++  registry record and the brief can silently disagree about which is current. Status:
++  observation only.
++- 2026-07-18 · "Four Jobs" · The canonical-context pointer in `CLAUDE.md`
++  (`~/Documents/Claude/Projects/TSA`: `TSA/MEMORY.md`, `standards/content-operating-system.md`)
++  could not be reached from this production session, and the TSA monorepo's own
++  `memory/projects/fsa.md` predates the entire Money Ideas library (still says
++  "Folder: properties/fsa/", "build second"). FSA-local docs were sufficient to produce the
++  article, but the cross-repo memory chain did not participate. Status: observation only.
++
+ ## Reviewed / promoted to v2.0
+ 
+ - (none yet)
+diff --git a/scripts/build.py b/scripts/build.py
+index 0ca1a85..0a8f5dd 100644
+--- a/scripts/build.py
++++ b/scripts/build.py
+@@ -21,6 +21,7 @@ from library_data import (ARTICLES, SERIES, MODULES, MODULE_NAMES, MODULE_FILE,
+                           FORMAT_VALUES)
+ from prototype_content import PROTOTYPE
+ from later_content import LATER
++from four_jobs_content import FOUR_JOBS
+ 
+ OUT = os.environ.get("FSA_ARTICLES_OUT") or os.path.join(
+     os.path.dirname(os.path.abspath(__file__)), "..", "articles")
+@@ -268,6 +269,16 @@ def sources_section(a):
+       </dl>
+       <p class="mi-reviewnote"><strong>Review note:</strong> This article is under human review. See
+       <a href="%s">the companion source file</a> for full citations.</p>""" % a["sourcesFile"]
++    elif a["slug"] == FOUR_JOBS["slug"]:
++        body = """
++      <p class="mi-muted">Grouped by type; full citations are in the companion source file.</p>
++      <dl class="mi-sources">
++        <dt>Established research</dt><dd>Opportunity cost is a foundational concept in economics, and the tendency to treat money as assigned to purposes is supported by established peer-reviewed research on mental accounting.</dd>
++        <dt>Concept</dt><dd>That a dollar allocated to one use is unavailable to others is a stable accounting relationship, shown with rounded illustrative numbers, not cited statistics. The article carries no dated statistical claim.</dd>
++        <dt>Illustrative example (FSA)</dt><dd>"One free forty dollars" (Teresa and the freed installment payment) is an FSA illustration for teaching, not evidence.</dd>
++      </dl>
++      <p class="mi-reviewnote"><strong>Review note:</strong> This article is under human review. See
++      <a href="%s">the companion source file</a> for full citations.</p>""" % a["sourcesFile"]
+     else:
+         body = """
+       <p class="mi-muted">This article is planned. Its factual claims, source list, and the
+@@ -369,6 +380,31 @@ def render_article(a):
+         parts.append(exercise_box("Try it yourself", LATER["try_html"]))
+         # 11 closing question
+         parts.append(closing_box(LATER["closing_question"]))
++    elif a["slug"] == FOUR_JOBS["slug"]:
++        # 2 opening
++        parts.append(FOUR_JOBS["opening"])
++        # 3 common belief
++        parts.append('    <h2 class="fsa-h2">The common belief</h2>')
++        parts.append(FOUR_JOBS["common_belief_html"])
++        # 4 what's actually happening
++        parts.append('    <h2 class="fsa-h2">What&rsquo;s actually happening</h2>')
++        parts.append(FOUR_JOBS["actually_html"])
++        # 5 scenario
++        parts.append(FOUR_JOBS["scenario_html"])
++        # 6 mental model callout
++        parts.append(mental_model_box(FOUR_JOBS["mental_model"]))
++        # 7 boundary
++        parts.append('    <h2 class="fsa-h2">When the obvious job is the wrong one</h2>')
++        parts.append(FOUR_JOBS["boundary_html"])
++        # 8 why matters
++        parts.append('    <h2 class="fsa-h2">Why this matters</h2>')
++        parts.append(FOUR_JOBS["why_html"])
++        # 9 look for this today
++        parts.append(exercise_box("Look for this today", FOUR_JOBS["look_html"]))
++        # 10 try it
++        parts.append(exercise_box("Try it yourself", FOUR_JOBS["try_html"]))
++        # 11 closing question
++        parts.append(closing_box(FOUR_JOBS["closing_question"]))
+     else:
+         parts.append(placeholder_body(a))
+ 
+diff --git a/scripts/library_data.py b/scripts/library_data.py
+index 1bc67af..390c59d 100644
+--- a/scripts/library_data.py
++++ b/scripts/library_data.py
+@@ -151,22 +151,26 @@ ARTICLES = [
+     A(
+         id="FSA-ARTICLE-002",
+         slug="every-dollar-has-four-jobs",
+-        title="Every Dollar Has Four Jobs",
++        title="Every Dollar Has Four Jobs. Which One Is Yours Doing?",
+         subtitle="",
+         series="How Money Decisions Work", seriesSlug="money-decisions", seriesOrder=2,
+         collection=None, featured=True, initialCollection=True, seriesPosition=None,
+-        status="planned", reviewStatus="not-started",
++        # Drafted 2026-07-18 per the approved Mode 1 brief
++        # (docs/proposed-briefs/every-dollar-has-four-jobs.brief.md). Dalia adopted
++        # the brief's refinements and set the four-jobs taxonomy to
++        # Live / Prepare / Protect / Grow (decision recorded 2026-07-18).
++        status="drafted", reviewStatus="human-review-required",
+         readingMinutes=6, difficulty="foundational",
+         primaryConcept="money allocation",
+         concepts=["spending", "saving", "tradeoffs"],
+-        supportingConcepts=["budgeting", "tradeoffs", "priorities"],
+-        misconception="A budget is mainly about restricting spending.",
+-        coreQuestion="If a dollar can only do one thing at a time, how do you decide which?",
+-        mentalModel="A dollar spent on one job can’t do the other three.",
+-        learnerOutcome="The learner can see spending, saving, protecting, and growing as competing jobs and choose deliberately among them.",
+-        fsaModules=["Mindset & Cash Flow"],
+-        audiences=["general", "workforce", "youth"],
+-        brief="Reframes budgeting away from restriction and toward assignment: every dollar can do one of a few jobs, cover now, hold for later, protect against surprises, or grow, and choosing one means declining the others. Gives learners a simple, non-judgmental way to see where their money is actually pointed.",
++        supportingConcepts=["opportunity cost", "priorities", "constraints"],
++        misconception="Managing money well means splitting it across saving, paying debt, and investing.",
++        coreQuestion="If a dollar can do only one job at a time, which job does your next free dollar need most?",
++        mentalModel="A dollar holds one job at a time, and for many people most dollars already have one.",
++        learnerOutcome="The learner can name the job each of their dollars is already doing, and decide where a free dollar would do the most good, without feeling behind for not doing all four.",
++        fsaModules=["Mindset & Cash Flow", "Emergency Funds", "Debt", "Investing"],
++        audiences=["general", "workforce", "reentry", "youth"],
++        brief="Reframes money management away from splitting a surplus and toward assignment under constraint: a dollar holds one of four jobs at a time, Live, Prepare, Protect, or Grow, and for many households most dollars are already claimed by the first. The skill the article teaches is naming what each dollar is doing and choosing the job for the next free one, without shame for the months when the only honest answer is Live.",
+     ),
+     A(
+         id="FSA-ARTICLE-003",

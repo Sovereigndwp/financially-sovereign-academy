@@ -289,3 +289,36 @@ When adding a new stat or data point to any FSA page:
 3. Link the source URL directly in the HTML where the stat appears, or add a footnote
 4. If no reliable primary source exists, remove the specific number and replace with a qualitative statement
 5. Do not use secondary sources (news articles, blog posts) as the sole citation for a quantitative claim
+
+---
+
+## Trump Accounts (added 2026-08-24)
+
+Used by `tools/trump-account-family-session.html`, `tools/contribution-cap-planner.html`,
+`tools/guia-cuentas-trump.html`, `tools/employer-contribution-cost-model.html`, and both
+`/kits/` family pages. Every figure below is dated; anything newer than 2026-08-24 is newer
+than these pages.
+
+| Figure / claim | Authority | Locator |
+|---|---|---|
+| Investment restrictions — annual fees and expenses no greater than **0.1 percent of the balance of the investment**; must track **a qualified index**; **equity investments in primarily United States companies**; **"shall not include any industry or sector-specific index, but may include an index based on market capitalization"**; restriction runs **"before the first day of the calendar year in which the account beneficiary attains age 18."** These are **statute**, not proposal. | 26 U.S.C. §530A | `uscode.house.gov` — title 26, §530A |
+| Four **proposed** additions only: an ESG-index exclusion (ESG is not mentioned in the statute), a 90% U.S.-company safe harbor, an Investment Company Act of 1940 registration requirement, and a definition of leverage. Comments close **2026-10-20**. | IRS & Treasury, proposed rule, RIN 1545-BS14 | Federal Register, 2026-08-21 |
+| $5,000 combined annual contribution limit per child, indexed after 2027; lock until 1 January of the year the child turns 18; traditional-IRA tax treatment; 10% early-distribution charge | IRS Notice 2025-68 | `irs.gov/pub/irs-drop/n-25-68.pdf` |
+| Employer contributions up to $2,500 per employee per year, counted **inside** the $5,000 cap | DOL Technical Release 2026-02 | `dol.gov/agencies/ebsa/employers-and-advisers/guidance/technical-releases/26-02` |
+| $1,000 pilot contribution; program start 2026-07-04 | U.S. Treasury press release | `home.treasury.gov/news/press-releases/sb0554` |
+| Form 4547; no published deadline; cannot be attached to Form 1040-X; non-filers may submit separately; ID.me identity-verification step | IRS, Instructions for Form 4547 | `irs.gov/pub/irs-pdf/i4547.pdf` |
+| Gift tax safe harbor; present-interest treatment; 2026 annual exclusion $19,000 | IRS Rev. Proc. 2026-25, issued 2026-06-29 | `irs.gov/pub/irs-drop/rp-26-25.pdf` |
+| Foreign donors: gift tax treatment of cash transfers not fully settled, highly fact-specific | Forbes, Virginia La Torre Jeker, 2026-07-22 | `forbes.com/sites/virginialatorrejeker` |
+| Reported delays (roughly ten days, then up to about four weeks); rejections corrected in about an hour by phone through the program hotline | ABC7 / Associated Press, 2026-07-23 | `abc7ny.com` |
+
+### Projection assumptions in the family session
+
+| Rate | Basis | Status |
+|---|---|---|
+| **10%** | Long-run nominal U.S. equity average (Shiller online data; see "Investing" above) | Sourced. Labeled on the page as an average no single 18-year window is obliged to repeat. |
+| **4%** | CPI-U all items, 4.2% twelve-month change, May 2026 (BLS), snapped down to the calculator's 0.5 step | Sourced. |
+| **7%** | Long-run nominal less current inflation, rounded | **Not sourced.** Declared on the page as an assumption of the exercise. It is the default only because it is the middle of three. |
+
+The session reproduces the compound-growth calculator's engine exactly
+(`fv = fv * (1 + r/12) + m`, end-of-month contribution) so the two pages cannot disagree, and
+always rounds the monthly figure **down** to the calculator's $50 step so the projection errs small.

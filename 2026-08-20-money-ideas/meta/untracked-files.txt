@@ -1,0 +1,4 @@
+docs/fsa-article-002-draft-audit.md
+docs/governance-test-001-report.md
+modules/.claude/settings.local.json
+scripts/four_jobs_content.py

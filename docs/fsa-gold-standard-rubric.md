@@ -65,7 +65,12 @@ Status: v1, pending Dalia's calibration review. Update it after each series retr
     the education-only footer, `noindex` until approved, and all 13 parts present and in order.
 
 ## Writing-audit checklist (must all pass)
-No em dashes anywhere. No decorative emoji. No banned phrases. At most one or two rhetorical
+No em dashes anywhere. No decorative emoji. No banned phrases. No drama adverbs or
+intensifiers (quietly, simply, precisely, genuinely, actually, truly, merely) and no
+evaluative filler ("it is worth noting/asking", "worth a closer look"). No negation-first
+thesis, no self-answered rhetorical question, no meta-narration ("this article", "this part
+of the article"). Title, opening, mental model and closing question each pass the transplant
+test. See `skills/fsa-educational-writer/references/fsa-anti-template-audit.md`. At most one or two rhetorical
 questions in the prose (exercise and closing questions are structural parts, not counted). No
 hidden assumptions about a bank account, smartphone, spare cash, or internet in the exercises.
 Varied paragraph and sentence length. Term explained before it is named. No copied phrasing.

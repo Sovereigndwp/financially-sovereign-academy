@@ -1,0 +1,13 @@
+## feat/kits-mvp-001...origin/feat/kits-mvp-001
+ M articles/article-library.json
+ M articles/money-decisions/every-dollar-has-four-jobs.html
+ M articles/money-decisions/hidden-cost-of-free.html
+ M articles/money-decisions/why-saving-money-feels-so-hard.html
+ M articles/sources/every-dollar-has-four-jobs.sources.md
+ M docs/fsa-production-observations-log.md
+ M scripts/build.py
+ M scripts/library_data.py
+?? docs/fsa-article-002-draft-audit.md
+?? docs/governance-test-001-report.md
+?? modules/.claude/
+?? scripts/four_jobs_content.py

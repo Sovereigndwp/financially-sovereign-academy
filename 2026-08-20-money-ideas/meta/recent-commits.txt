@@ -1,0 +1,3 @@
+85fce0591e456cc3b857770a1018409ae63570b0 | 2026-08-19 08:42:14 -0400 | Sovereigndwp | Narrow free-vs-paid copy so paid kits don't read as bait-and-switch
+205eeb63aeebb94e696c3c9ab773f6fe68bab6e2 | 2026-08-14 10:51:04 -0400 | Sovereigndwp | docs: ecosystem two-root filing rule (2026-08-14)
+c2db854aec61beaacb563c6d27893daade0c279e | 2026-07-26 19:19:32 -0400 | Sovereigndwp | legal: canonical disclaimer link + LLC entity + footer legal bar
