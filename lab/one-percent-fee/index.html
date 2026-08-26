@@ -1,0 +1,559 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A 1% fee sounds small. What does it cost over 30 years? A 60-second money lab</title>
+<meta name="description" content="Ten thousand dollars, thirty years, and a fee of one percent a year. It takes about a quarter of the money. Guess first, then find out why.">
+<link rel="canonical" href="https://financiallysovereign.academy/lab/one-percent-fee/">
+
+<!-- Link preview: this is what Substack, X, LinkedIn and WhatsApp render -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="The Sovereign Academy">
+<meta property="og:url" content="https://financiallysovereign.academy/lab/one-percent-fee/">
+<meta property="og:title" content="A 1% fee sounds small. What does it cost over 30 years? A 60-second money lab">
+<meta property="og:description" content="Ten thousand dollars, thirty years, and a fee of one percent a year. It takes about a quarter of the money. Guess first, then find out why.">
+<meta property="og:image" content="https://financiallysovereign.academy/lab/one-percent-fee/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Without the fee, $76,123. With a 1% annual fee, $57,435. The fee took $18,688.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="A 1% fee sounds small. What does it cost over 30 years? A 60-second money lab">
+<meta name="twitter:description" content="Ten thousand dollars, thirty years, and a fee of one percent a year. It takes about a quarter of the money. Guess first, then find out why.">
+<meta name="twitter:image" content="https://financiallysovereign.academy/lab/one-percent-fee/og.png">
+
+<meta name="theme-color" content="#FDFCF9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121316" media="(prefers-color-scheme: dark)">
+<style>*{margin:0;padding:0;box-sizing:border-box}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+
+<style>
+/* ── TSA Token Sheet v0.1 ─────────────────────────────────────────────
+   Light = paper scale (canonical). Dark = graphite web skin.
+   Signal = FSA emerald; on graphite the fade is lifted to clear 4.5:1. */
+:root{
+  --bg:#FDFCF9; --surface:#F5F3EE; --border:#D9D6CE;
+  --muted:#5A5E66; --ink:#1A1C1F;
+  --signal:#0F766E; --sig-a:#134E4A; --sig-b:#0F766E; --sig-c:#10B981;
+  --wash:rgba(15,118,110,.07); --shade:#8C9099;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#121316; --surface:#191B1F; --border:#2C2F36;
+    --muted:#A7ABB3; --ink:#ECECE6;
+    --signal:#34D399; --sig-a:#10B981; --sig-b:#34D399; --sig-c:#5EEAD4;
+    --wash:rgba(52,211,153,.10); --shade:#6E737B;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121316; --surface:#191B1F; --border:#2C2F36;
+  --muted:#A7ABB3; --ink:#ECECE6;
+  --signal:#34D399; --sig-a:#10B981; --sig-b:#34D399; --sig-c:#5EEAD4;
+  --wash:rgba(52,211,153,.10); --shade:#6E737B;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:'Inter',system-ui,-apple-system,sans-serif;
+  font-size:17px; line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  min-height:100vh; display:flex; flex-direction:column; align-items:center;
+  padding:0 20px 40px;
+}
+.wrap{width:100%; max-width:620px; display:flex; flex-direction:column; flex:1}
+
+/* ── rail: six steps, and this really is a sequence ─────────────────── */
+header{padding:26px 0 20px; display:flex; flex-direction:column; gap:14px}
+.brandline{display:flex; justify-content:space-between; align-items:baseline; gap:16px}
+.eyebrow{
+  font-family:'JetBrains Mono',ui-monospace,monospace; font-weight:700;
+  font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--signal);
+}
+.clock{
+  font-family:'JetBrains Mono',ui-monospace,monospace; font-weight:500;
+  font-size:11px; letter-spacing:.14em; color:var(--muted);
+  font-variant-numeric:tabular-nums;
+}
+.rail{display:flex; gap:5px}
+.rail i{
+  flex:1; height:3px; border-radius:2px; background:var(--border);
+  transition:background .45s ease;
+}
+.rail i.done{background:linear-gradient(90deg,var(--sig-a),var(--sig-b),var(--sig-c))}
+
+/* ── steps ──────────────────────────────────────────────────────────── */
+main{flex:1; display:flex; flex-direction:column; justify-content:center; padding:8px 0 32px}
+.step{display:none; flex-direction:column; gap:26px}
+.step.live{display:flex; animation:rise .42s cubic-bezier(.2,.7,.3,1) both}
+@keyframes rise{from{opacity:0; transform:translateY(14px)} to{opacity:1; transform:none}}
+
+.tag{
+  font-family:'JetBrains Mono',ui-monospace,monospace; font-weight:700;
+  font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--signal);
+}
+h1{
+  font-family:'Playfair Display',Georgia,serif; font-weight:700;
+  font-size:clamp(30px,7.4vw,44px); line-height:1.08; letter-spacing:-.012em;
+  text-wrap:balance;
+}
+h1 em,h2 em{font-style:normal; color:var(--signal)}
+h2{
+  font-family:'Playfair Display',Georgia,serif; font-weight:700;
+  font-size:clamp(24px,5.6vw,32px); line-height:1.14; letter-spacing:-.01em;
+  text-wrap:balance;
+}
+p{color:var(--muted); max-width:52ch}
+p b,p strong{color:var(--ink); font-weight:600}
+.lede{font-size:clamp(17px,4.4vw,19px)}
+
+/* ── choices: fade border, never hue-filled ─────────────────────────── */
+.choices{display:flex; flex-direction:column; gap:10px}
+.choices.row{flex-direction:row; flex-wrap:wrap}
+.choices.row .opt{flex:1 1 calc(50% - 5px); min-width:0}
+.opt{
+  position:relative; text-align:left; cursor:pointer;
+  background:var(--surface); color:var(--ink);
+  border:2px solid var(--border); border-radius:2px;
+  padding:16px 18px; min-height:56px;
+  font-family:inherit; font-size:16px; font-weight:500; line-height:1.35;
+  display:flex; align-items:center; gap:12px;
+  transition:border-color .18s ease, background .18s ease, transform .12s ease;
+}
+.opt .key{
+  font-family:'JetBrains Mono',ui-monospace,monospace; font-weight:700;
+  font-size:12px; letter-spacing:.1em; color:var(--muted); flex:none;
+}
+.opt:hover:not(:disabled){border-color:var(--signal)}
+.opt:active:not(:disabled){transform:translateY(1px)}
+.opt:focus-visible{outline:3px solid var(--signal); outline-offset:3px}
+.opt[aria-pressed="true"]{
+  border-color:transparent;
+  background-image:linear-gradient(var(--surface),var(--surface)),
+    linear-gradient(90deg,var(--sig-a),var(--sig-b),var(--sig-c));
+  background-origin:border-box; background-clip:padding-box,border-box;
+  box-shadow:inset 0 0 0 999px var(--wash);
+}
+.opt[aria-pressed="true"] .key{color:var(--signal)}
+.opt:disabled{cursor:default; opacity:.55}
+.opt[aria-pressed="true"]:disabled{opacity:1}
+
+/* ── ledger + gap chart ─────────────────────────────────────────────── */
+.ledger{display:flex; flex-direction:column; gap:20px}
+.line{padding-left:16px; border-left:3px solid var(--border)}
+.line.sig{border-left-color:var(--signal)}
+.line.gapline{border-left:none; padding-left:19px; position:relative}
+.line.gapline::before{
+  content:''; position:absolute; left:0; top:0; bottom:0; width:3px;
+  background:linear-gradient(180deg,var(--sig-a),var(--sig-b),var(--sig-c));
+}
+.lab{
+  font-family:'JetBrains Mono',ui-monospace,monospace; font-weight:500;
+  font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted);
+  display:block; margin-bottom:4px;
+}
+.num{
+  font-family:'JetBrains Mono',ui-monospace,monospace; font-weight:700;
+  font-size:clamp(32px,8.6vw,44px); letter-spacing:-.02em; line-height:1.1;
+  font-variant-numeric:tabular-nums;
+}
+.num.sig{color:var(--signal)}
+.stats{display:flex; gap:22px; flex-wrap:wrap}
+.stat{flex:1 1 130px; border-top:3px solid var(--border); padding-top:12px}
+.stat.sig{border-top-color:var(--signal)}
+.stat .n{
+  font-family:'JetBrains Mono',ui-monospace,monospace; font-weight:700;
+  font-size:clamp(28px,7vw,36px); font-variant-numeric:tabular-nums; line-height:1;
+}
+.stat.sig .n{color:var(--signal)}
+.stat .t{
+  font-family:'JetBrains Mono',ui-monospace,monospace; font-weight:500;
+  font-size:11px; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--muted); margin-top:8px;
+}
+
+/* ── verdict callout: severity by structure, not colour alone ───────── */
+.callout{
+  background:var(--surface); border-radius:4px; padding:16px 18px;
+  border-left:3px solid var(--signal);
+}
+.callout.miss{
+  border-left:none; padding-left:21px; position:relative;
+}
+.callout.miss::before{
+  content:''; position:absolute; left:0; top:0; bottom:0; width:3px;
+  background:linear-gradient(180deg,var(--sig-a),var(--sig-b),var(--sig-c));
+}
+.callout .verdict{
+  font-family:'JetBrains Mono',ui-monospace,monospace; font-weight:700;
+  font-size:11px; letter-spacing:.2em; text-transform:uppercase;
+  color:var(--signal); display:block; margin-bottom:6px;
+}
+.callout p{font-size:16px; max-width:none}
+
+/* ── next / exits ───────────────────────────────────────────────────── */
+.next{
+  align-self:flex-start; cursor:pointer; font-family:inherit;
+  font-size:15px; font-weight:600; color:var(--ink); background:transparent;
+  border:2px solid transparent; border-radius:2px; padding:13px 22px;
+  background-image:linear-gradient(var(--bg),var(--bg)),
+    linear-gradient(90deg,var(--sig-a),var(--sig-b),var(--sig-c));
+  background-origin:border-box; background-clip:padding-box,border-box;
+  transition:transform .12s ease;
+}
+.next:active{transform:translateY(1px)}
+.next:focus-visible{outline:3px solid var(--signal); outline-offset:3px}
+.exits{display:flex; flex-direction:column; gap:10px}
+a.exit{
+  text-decoration:none; color:var(--ink); background:var(--surface);
+  border:2px solid var(--border); border-radius:2px; padding:16px 18px;
+  display:flex; justify-content:space-between; align-items:center; gap:14px;
+  font-weight:600; font-size:16px; transition:border-color .18s ease;
+}
+a.exit:hover{border-color:var(--signal)}
+a.exit:focus-visible{outline:3px solid var(--signal); outline-offset:3px}
+a.exit .sm{
+  display:block; font-weight:400; font-size:14px; color:var(--muted); margin-top:2px;
+}
+a.exit .arrow{color:var(--signal); font-family:'JetBrains Mono',monospace; flex:none}
+
+footer{
+  border-top:1px solid var(--border); padding-top:16px;
+  display:flex; justify-content:space-between; align-items:baseline;
+  gap:16px; flex-wrap:wrap;
+  font-family:'JetBrains Mono',ui-monospace,monospace; font-weight:700;
+  font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted);
+}
+footer .src{font-weight:500; letter-spacing:.08em; text-transform:none; font-size:11px}
+footer a{color:var(--signal); text-decoration:none}
+footer a:hover{text-decoration:underline}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms !important; transition-duration:.001ms !important}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <div class="brandline">
+      <span class="eyebrow">&#9670; 60-Second Money Lab &middot; 03</span>
+      <span class="clock" id="clock">0:00</span>
+    </div>
+    <div class="rail" id="rail" aria-hidden="true"><i class="done"></i><i></i><i></i><i></i><i></i><i></i></div>
+  </header>
+
+  <main>
+    <!-- 1 ─ GUESS ─────────────────────────────────────────────── -->
+    <section class="step live" id="s1">
+      <div>
+        <span class="tag">Guess first</span>
+        <h1 style="margin-top:10px">A fund charges 1% a year. Over 30 years, what share of your money does that <em>1%</em> take?</h1>
+      </div>
+      <p class="lede">Pick before you scroll. Most people are off by a factor of ten, and the reason why is the lesson.</p>
+      <div class="choices row" role="group" aria-label="Share taken by the fee">
+        <button class="opt" data-pick="1"><span class="key">A</span>About 1%</button>
+        <button class="opt" data-pick="10"><span class="key">B</span>About 10%</button>
+        <button class="opt" data-pick="25"><span class="key">C</span>About 25%</button>
+        <button class="opt" data-pick="50"><span class="key">D</span>About half</button>
+      </div>
+    </section>
+
+    <!-- 2 ─ PREDICT ───────────────────────────────────────────── -->
+    <section class="step" id="s2">
+      <div>
+        <span class="tag">The setup</span>
+        <h2 style="margin-top:10px">Here is the whole example.</h2>
+      </div>
+      <div class="ledger">
+        <div class="line">
+          <span class="lab">One deposit, then nothing</span>
+          <span class="num">$10,000</span>
+          <p style="font-size:15px;margin-top:4px">Nothing added and nothing taken out for thirty years.</p>
+        </div>
+        <div class="line sig">
+          <span class="lab">Growth before costs</span>
+          <span class="num sig">+7.0%</span>
+          <p style="font-size:15px;margin-top:4px">Every year, for thirty years.</p>
+        </div>
+        <div class="line">
+          <span class="lab">After thirty years</span>
+          <span class="num">?</span>
+        </div>
+      </div>
+      <p class="lede"><b>Before any fee: what does $10,000 become?</b></p>
+      <div class="choices row" role="group" aria-label="Your prediction">
+        <button class="opt" data-pick="30"><span class="key">A</span>About $30,000</button>
+        <button class="opt" data-pick="50"><span class="key">B</span>About $50,000</button>
+        <button class="opt" data-pick="76"><span class="key">C</span>About $76,000</button>
+        <button class="opt" data-pick="130"><span class="key">D</span>About $130,000</button>
+      </div>
+    </section>
+
+    <!-- 3 ─ REVEAL ────────────────────────────────────────────── -->
+    <section class="step" id="s3">
+      <div>
+        <span class="tag">The answer</span>
+        <h2 style="margin-top:10px">The fee took a quarter of it.</h2>
+      </div>
+      <div class="ledger">
+        <div class="line sig">
+          <span class="lab">Thirty years at 7%, no fee</span>
+          <span class="num sig" id="n1">$10,000</span>
+        </div>
+        <div class="line">
+          <span class="lab">The same thirty years, minus 1% a year</span>
+          <span class="num" id="n2">$10,000</span>
+        </div>
+        <div class="line gapline">
+          <span class="lab">What the fee took</span>
+          <span class="num" id="n3">&minus;$0</span>
+          <p style="font-size:15px;margin-top:4px">24.6% of the money, for a figure that appears on the page as &ldquo;1.00%.&rdquo;</p>
+        </div>
+      </div>
+      <div class="callout" id="verdict">
+        <span class="verdict" id="verdictTag"></span>
+        <p id="verdictBody"></p>
+      </div>
+      <button class="next" data-next>How does 1% become 25%?</button>
+    </section>
+
+    <!-- 4 ─ WHY ───────────────────────────────────────────────── -->
+    <section class="step" id="s4">
+      <div>
+        <span class="tag">Why</span>
+        <h2 style="margin-top:10px">The fee compounds against you, exactly the way returns compound for you.</h2>
+      </div>
+      <div class="stats">
+        <div class="stat sig"><div class="n">1.0%</div><div class="t">Charged each year</div></div>
+        <div class="stat"><div class="n">24.6%</div><div class="t">Taken over 30 years</div></div>
+      </div>
+      <p class="lede">The fee is a slice of the <b>whole balance</b> every year, not a slice of the gain. And each slice removes money that would otherwise have earned returns for all the remaining years. Thirty small subtractions, each one compounding, is what turns one percent into a quarter.</p>
+      <button class="next" data-next>What about a smaller fee?</button>
+    </section>
+
+    <!-- 5 ─ TRY AGAIN ─────────────────────────────────────────── -->
+    <section class="step" id="s5">
+      <div>
+        <span class="tag">Try again</span>
+        <h2 style="margin-top:10px">Same money, same thirty years, but a fee of 0.1% instead of 1%.</h2>
+      </div>
+      <p>One tenth of the fee. What does it cost over the thirty years?</p>
+      <div class="choices row" role="group" aria-label="Cost of a 0.1% fee">
+        <button class="opt" data-pick="190"><span class="key">A</span>About $190</button>
+        <button class="opt" data-pick="2100"><span class="key">B</span>About $2,100</button>
+        <button class="opt" data-pick="9300"><span class="key">C</span>About $9,300</button>
+        <button class="opt" data-pick="18700"><span class="key">D</span>About $18,700</button>
+      </div>
+      <div class="callout" id="beVerdict" hidden>
+        <span class="verdict" id="beTag"></span>
+        <p id="beBody"></p>
+      </div>
+      <button class="next" data-next hidden id="beNext">One last question</button>
+    </section>
+
+    <!-- 6 ─ TRANSFER ──────────────────────────────────────────── -->
+    <section class="step" id="s6">
+      <div>
+        <span class="tag">Your turn</span>
+        <h2 style="margin-top:10px">Where do you find this number for something you already hold?</h2>
+      </div>
+      <div class="choices" role="group" aria-label="Where to find the fee">
+        <button class="opt" data-pick="balance"><span class="key">A</span>Your account balance</button>
+        <button class="opt" data-pick="return"><span class="key">B</span>Last year&rsquo;s return</button>
+        <button class="opt" data-pick="factsheet"><span class="key">C</span>The fund&rsquo;s fact sheet or prospectus, under total annual fees and expenses</button>
+        <button class="opt" data-pick="statement"><span class="key">D</span>Your monthly statement</button>
+      </div>
+      <div class="callout" id="tVerdict" hidden>
+        <span class="verdict" id="tTag"></span>
+        <p id="tBody"></p>
+      </div>
+      <button class="next" data-next hidden id="tNext">Finish</button>
+    </section>
+
+    <!-- 7 ─ DONE ──────────────────────────────────────────────── -->
+    <section class="step" id="s7">
+      <div>
+        <span class="tag">Lesson complete</span>
+        <h2 style="margin-top:10px">One idea, <em id="doneTime">in under a minute</em>.</h2>
+      </div>
+      <p class="lede">A fee is not a slice off the end. It is charged every year on everything you hold, so it compounds against you for exactly as long as your money compounds for you. That is why the small-looking number matters more the longer you hold.</p>
+      <div class="exits">
+        <a class="exit" href="/calculators/compound-growth-calculator">
+          <span>Run your own numbers<span class="sm">Change the deposit, the years and the rate, and watch the same arithmetic.</span></span>
+          <span class="arrow">&rarr;</span>
+        </a>
+        <a class="exit" href="/lab/">
+          <span>Another 60-second lab<span class="sm">One question, one guess, one idea.</span></span>
+          <span class="arrow">&rarr;</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>A Sovereign Academy property</span>
+    <span class="src">Compound arithmetic on a stated example &mdash; $10,000, 30 years, 7% a year before costs. An illustration of how fees compound, not a forecast and not advice.</span>
+  </footer>
+</div>
+
+<script src="/js/analytics.js"></script>
+<script>
+(function(){
+  "use strict";
+  var LAB = 'one-percent-fee';
+  var SRC = 'direct';
+  try {
+    var q = new URLSearchParams(window.location.search).get('src');
+    if (q) SRC = q.slice(0, 40);
+  } catch (e) {}
+
+  // Existing FSA analytics service (js/analytics.js -> window.fsaAnalytics).
+  function ev(name, props){
+    try {
+      if (window.fsaAnalytics && typeof window.fsaAnalytics.track === 'function') {
+        window.fsaAnalytics.track(name, Object.assign({ lab: LAB, src: SRC }, props || {}));
+      }
+    } catch (e) {}
+  }
+  ev('lab_visit');
+
+  // Carry ?src= through to the next page rather than dropping it at the exit.
+  if (SRC !== 'direct') {
+    Array.prototype.forEach.call(document.querySelectorAll('a.exit[href^="/"]'), function(a){
+      a.href = a.getAttribute('href') + (a.getAttribute('href').indexOf('?') === -1 ? '?' : '&') + 'src=' + encodeURIComponent(SRC);
+    });
+  }
+
+  var picks = {}, step = 1, t0 = Date.now(), stopped = false, started = false;
+  var clock = document.getElementById('clock');
+  var rail = document.getElementById('rail').children;
+
+  function tick(){
+    if (stopped) return;
+    var s = Math.floor((Date.now() - t0)/1000);
+    clock.textContent = Math.floor(s/60) + ':' + String(s%60).padStart(2,'0');
+    setTimeout(tick, 500);
+  }
+  tick();
+
+  function go(n){
+    var cur = document.getElementById('s'+step);
+    var nxt = document.getElementById('s'+n);
+    if (!nxt) return;
+    cur.classList.remove('live');
+    nxt.classList.add('live');
+    step = n;
+    for (var i=0;i<rail.length;i++) rail[i].classList.toggle('done', i < Math.min(n,6));
+    window.scrollTo({top:0, behavior:'smooth'});
+    if (n === 3) reveal();
+    if (n === 7) finish();
+  }
+
+  function lock(section){
+    section.querySelectorAll('.opt').forEach(function(b){ b.disabled = true; });
+  }
+
+  function money(v){ return '$' + Math.round(v).toLocaleString('en-US'); }
+
+  var A = [10000, 76123, 'money0'], B = [10000, 57435, 'money0'], C = [0, 18688, 'money0'];
+
+  function fmt(v, kind){
+    if (kind === 'money2') return '$' + v.toLocaleString('en-US',{minimumFractionDigits:2, maximumFractionDigits:2});
+    if (kind === 'pct1') return v.toFixed(1) + '%';
+    return money(v);
+  }
+
+  var VER = {
+    '76':  ['You had the compounding right', 'Good — $76,123. Holding that number in your head is what makes the next one land, because the fee is measured against it.', true],
+    '30':  ['Lower than that', 'Thirty years of 7% is not three times the money, it is more than seven times it. $10,000 becomes $76,123. Compounding is the reason, and it is also the reason the fee hurts.', false],
+    '50':  ['Close, but under', 'The answer is $76,123. Worth noticing: the number you just guessed is almost exactly what the same money becomes once a 1% fee is taken out.', false],
+    '130': ['Higher than that', 'That would need about 9% a year. At 7%, $10,000 becomes $76,123 over thirty years.', false],
+    '_':   ['The answer', '$76,123.', false]
+  };
+  var STEP5 = {
+    '190':  ['Too small', 'About $190 is roughly what one year of a 0.1% fee costs near the start. Thirty of them, each compounding, come to far more.', false],
+    '2100': ['Correct', 'About $2,106 — roughly 2.8% of the balance. A tenth of the fee costs about a ninth of the money. That is the whole practical point of the number.', true],
+    '9300': ['Too big', 'A tenth of the fee does not cost half of what the 1% fee cost. Because the effect compounds, cutting the fee by ten cuts the damage by about nine.', false],
+    '18700':['That is the 1% answer', 'That is what the 1% fee took. The 0.1% fee costs about $2,106 — the same arithmetic, one decimal place over.', false]
+  };
+  var STEP6 = {
+    'balance':  ['That tells you where you are', 'Not what you are paying to be there. The balance already has the fee taken out of it, which is exactly why the fee is so easy to never see.', false],
+    'return':   ['Returns usually hide it', 'A published return is normally quoted after the fund has taken its own fees, so it folds the number in rather than showing it to you.', false],
+    'factsheet':['That is the one', 'It is published, it is a single number, and it is the number this whole lesson turns on. Comparing it between two funds is arithmetic you can do yourself in ten seconds.', true],
+    'statement':['Sometimes, but not reliably', 'Statements vary. Many show the balance and the change over the period without ever stating the annual cost of holding. The fact sheet states it in one place, always.', false]
+  };
+
+  function reveal(){
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var d = VER[picks.predict] || VER['_'];
+    var box = document.getElementById('verdict');
+    document.getElementById('verdictTag').textContent = d[0];
+    document.getElementById('verdictBody').textContent = d[1];
+    box.className = d[2] ? 'callout' : 'callout miss';
+
+    var n1 = document.getElementById('n1'), n2 = document.getElementById('n2'), n3 = document.getElementById('n3');
+    function paint(p){
+      n1.textContent = fmt(A[0] + (A[1]-A[0])*p, A[2]);
+      n2.textContent = fmt(B[0] + (B[1]-B[0])*p, B[2]);
+      n3.textContent = '−' + fmt(C[0] + (C[1]-C[0])*p, C[2]);
+    }
+    if (reduce){ paint(1); return; }
+    paint(0);
+    var dur = 900, s0 = Date.now();
+    (function anim(){
+      var t = Math.min(1, (Date.now()-s0)/dur);
+      paint(1 - Math.pow(1-t, 3));
+      if (t < 1) requestAnimationFrame(anim);
+    })();
+  }
+
+  document.addEventListener('click', function(e){
+    var opt = e.target.closest('.opt');
+    if (opt && !opt.disabled){
+      var sec = opt.closest('.step');
+      sec.querySelectorAll('.opt').forEach(function(b){ b.setAttribute('aria-pressed','false'); });
+      opt.setAttribute('aria-pressed','true');
+      var v = opt.dataset.pick;
+      if (!started){ started = true; ev('lab_start'); }
+
+      if (sec.id === 's1'){ picks.guess = v; lock(sec); setTimeout(function(){ go(2); }, 380); }
+      else if (sec.id === 's2'){ picks.predict = v; lock(sec); setTimeout(function(){ go(3); }, 380); }
+      else if (sec.id === 's5'){
+        picks.be = v; lock(sec);
+        var d = STEP5[v], b1 = document.getElementById('beVerdict');
+        document.getElementById('beTag').textContent = d[0];
+        document.getElementById('beBody').textContent = d[1];
+        b1.className = d[2] ? 'callout' : 'callout miss';
+        b1.hidden = false; document.getElementById('beNext').hidden = false;
+      }
+      else if (sec.id === 's6'){
+        picks.transfer = v; lock(sec);
+        var d2 = STEP6[v], b2 = document.getElementById('tVerdict');
+        document.getElementById('tTag').textContent = d2[0];
+        document.getElementById('tBody').textContent = d2[1];
+        b2.className = d2[2] ? 'callout' : 'callout miss';
+        b2.hidden = false; document.getElementById('tNext').hidden = false;
+      }
+      return;
+    }
+    var nb = e.target.closest('[data-next]');
+    if (nb) go(step + 1);
+  });
+
+  function finish(){
+    stopped = true;
+    var s = Math.max(1, Math.floor((Date.now()-t0)/1000));
+    var txt = s < 90 ? ('in ' + s + ' seconds') : ('in ' + Math.round(s/60) + ' minutes');
+    document.getElementById('doneTime').textContent = txt;
+    clock.textContent = 'Done \u00b7 ' + Math.floor(s/60) + ':' + String(s%60).padStart(2,'0');
+    ev('lab_complete', { seconds: s, guess: picks.guess || '', predict: picks.predict || '' });
+  }
+})();
+</script>
+
+</body>
+</html>
