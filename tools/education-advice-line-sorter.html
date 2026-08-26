@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="description" content="A free eight-item diagnostic for CPAs, RIAs and tax professionals: sort statements into education or advice, see where the line actually runs, and name the referral red flags most often missed. Nothing is collected.">
+<link rel="canonical" href="https://financiallysovereign.academy/tools/education-advice-line-sorter">
+<meta property="og:type" content="website">
+<meta property="og:title" content="The Education / Advice Line — a sorter for professionals">
+<meta property="og:description" content="Free tool for CPAs, RIAs and tax professionals. Eight statements. Where does education end and advice begin?">
+<meta property="og:url" content="https://financiallysovereign.academy/tools/education-advice-line-sorter">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Financially Sovereign Academy">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Education / Advice Line — a sorter for professionals">
+<meta name="twitter:description" content="Free tool for CPAs, RIAs and tax professionals. Eight statements. Where does education end and advice begin?">
+<meta name="theme-color" content="#121316">
+<title>The Education / Advice Line — a sorter for professionals</title>
+<style>
+:root{
+  --n-bg:#121316; --n-surface:#191B1F; --n-elevated:#212429; --n-deepest:#0C0D0F;
+  --n-border:#2C2F36; --n-border-strong:#3C4047;
+  --n-ink:#ECECE6; --n-ink-strong:#FBFBF7; --n-muted:#A7ABB3; --n-faint:#6E727A;
+  --tsa-silver:#C7CCD1; --tsa-platinum:#E5E7E9; --tsa-pewter:#8A9098;
+  --brand:var(--tsa-silver); --accent:var(--tsa-platinum);
+  --success:#34D399; --warning:#F4B740; --danger:#F87171;
+  --sans:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Inter,Helvetica,Arial,sans-serif;
+  --serif:"Crimson Pro",Georgia,"Times New Roman",serif;
+  --r:10px; --maxw:760px;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--n-bg);color:var(--n-ink);font-family:var(--sans);
+  font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:28px 20px 80px}
+a{color:var(--accent)}
+h1,h2,h3{font-family:var(--serif);color:var(--n-ink-strong);line-height:1.25;margin:0 0 .4em}
+h1{font-size:clamp(1.7rem,4.5vw,2.3rem)}
+h2{font-size:1.28rem;margin-top:2rem}
+h3{font-size:1.02rem;font-family:var(--sans);font-weight:650}
+.kicker{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);
+  font-weight:700;margin-bottom:.5rem}
+.lede{color:var(--n-muted);font-size:1.02rem;margin:0 0 1.6rem}
+.progress{height:3px;background:var(--n-elevated);border-radius:2px;margin-bottom:22px;overflow:hidden}
+.progress i{display:block;height:100%;background:var(--brand);transition:width .3s ease;width:0}
+.card{background:var(--n-surface);border:1px solid var(--n-border);border-radius:var(--r);
+  padding:22px;margin-bottom:16px}
+.qnum{font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--n-faint);
+  font-weight:700;margin-bottom:.8rem}
+.stmt{font-family:var(--serif);font-size:1.24rem;color:var(--n-ink-strong);line-height:1.45;
+  margin:0 0 1.4rem;border-left:2px solid var(--n-border-strong);padding-left:16px}
+.opts{display:grid;gap:10px}
+.opts button{text-align:left;background:var(--n-elevated);border:1px solid var(--n-border-strong);
+  color:var(--n-ink);border-radius:8px;padding:14px 16px;font-size:.96rem;font-weight:550;
+  cursor:pointer;line-height:1.45}
+.opts button:hover{border-color:var(--brand);background:#262A30}
+.opts button b{display:block;color:var(--n-ink-strong);font-weight:700;margin-bottom:2px;
+  font-size:.88rem;letter-spacing:.02em}
+.opts button span{color:var(--n-muted);font-size:.87rem;font-weight:400}
+.fb{display:none;border-radius:8px;padding:16px;margin-top:16px;font-size:.94rem;line-height:1.6}
+.fb.on{display:block;animation:fade .25s ease}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.fb.ok{background:rgba(52,211,153,.09);border:1px solid rgba(52,211,153,.4)}
+.fb.no{background:rgba(244,183,64,.09);border:1px solid rgba(244,183,64,.4)}
+.fb .verdict{font-weight:700;display:block;margin-bottom:6px;font-size:.8rem;
+  letter-spacing:.1em;text-transform:uppercase}
+.fb.ok .verdict{color:var(--success)}
+.fb.no .verdict{color:var(--warning)}
+.fb .why{color:var(--n-muted)}
+.fb .why strong{color:var(--n-ink)}
+button.next{font-family:var(--sans);font-size:.95rem;font-weight:650;cursor:pointer;
+  border-radius:8px;padding:12px 22px;border:1px solid var(--brand);background:var(--brand);
+  color:#141619;margin-top:16px}
+button.next:hover{background:var(--tsa-platinum)}
+.btn-ghost{background:transparent;color:var(--n-muted);border:1px solid var(--n-border-strong);
+  border-radius:8px;padding:12px 22px;font-size:.95rem;font-weight:650;cursor:pointer;
+  font-family:var(--sans)}
+.btn-ghost:hover{color:var(--n-ink);border-color:var(--n-ink)}
+button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.result{display:none}
+.result.on{display:block;animation:fade .3s ease}
+.score{background:var(--n-deepest);border:1px solid var(--n-border-strong);border-radius:var(--r);
+  padding:26px;text-align:center;margin-bottom:16px}
+.score .n{font-family:var(--serif);font-size:3.2rem;font-weight:700;line-height:1;
+  color:var(--n-ink-strong);display:block}
+.score .lbl{font-size:.76rem;letter-spacing:.13em;text-transform:uppercase;color:var(--n-faint);
+  font-weight:700;margin-top:8px;display:block}
+.score .band{margin-top:14px;font-size:1.05rem;color:var(--brand);font-weight:650}
+table{width:100%;border-collapse:collapse;font-size:.9rem;margin:8px 0}
+th,td{text-align:left;padding:10px 6px;border-bottom:1px solid var(--n-border);vertical-align:top}
+th{color:var(--n-faint);font-weight:600;font-size:.75rem;letter-spacing:.07em;text-transform:uppercase}
+td.mark{width:26px;font-weight:700}
+td.mark.y{color:var(--success)}
+td.mark.n{color:var(--warning)}
+.flags{background:var(--n-surface);border:1px solid var(--n-border);border-left:3px solid var(--danger);
+  border-radius:var(--r);padding:20px;margin:18px 0}
+.flags h3{color:#FCA5A5}
+.flags ol{margin:.5rem 0 0;padding-left:1.2rem;color:var(--n-muted);font-size:.93rem}
+.flags li{margin-bottom:.5rem}
+.flags li strong{color:var(--n-ink)}
+.q2{border:1px solid var(--brand);border-left:3px solid var(--brand);
+  background:rgba(199,204,209,.06);border-radius:var(--r);padding:20px;margin:22px 0}
+.q2 p.big{font-family:var(--serif);font-size:1.22rem;color:var(--n-ink-strong);margin:.3rem 0 .8rem;
+  line-height:1.4}
+.q2 ul{margin:.5rem 0 0;padding-left:1.1rem;color:var(--n-muted);font-size:.92rem}
+.q2 li{margin-bottom:.35rem}
+.limits{background:var(--n-deepest);border:1px solid var(--n-border);border-radius:var(--r);
+  padding:18px;margin:22px 0;font-size:.91rem;color:var(--n-muted)}
+.limits h3{color:var(--n-ink-strong)}
+.limits ul{margin:.4rem 0 0;padding-left:1.1rem}
+.limits li{margin-bottom:.4rem}
+.foot{margin-top:30px;padding-top:18px;border-top:1px solid var(--n-border);
+  font-size:.8rem;color:var(--n-faint);line-height:1.6}
+.foot strong{color:var(--n-muted)}
+@media(max-width:520px){.wrap{padding:20px 16px 60px}.card{padding:17px}.stmt{font-size:1.1rem}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<p class="kicker">Free tool · For CPAs, RIAs, and tax professionals</p>
+<h1>The education / advice line</h1>
+<p class="lede">Eight statements. For each one, decide whether you could say it to a client
+without crossing from education into advice. Most professionals miss at least two — and the two
+they miss are usually the same two.</p>
+
+<div class="progress" aria-hidden="true"><i id="pbar"></i></div>
+
+<div id="quiz"></div>
+
+<section id="out" class="result" aria-live="polite">
+  <div class="score">
+    <span class="n" id="s-n">0/8</span>
+    <span class="lbl">Statements sorted correctly</span>
+    <div class="band" id="s-band"></div>
+  </div>
+
+  <div class="card">
+    <h3>Where you landed</h3>
+    <table><thead><tr><th></th><th>Statement</th><th>The line</th></tr></thead>
+      <tbody id="s-tbl"></tbody></table>
+  </div>
+
+  <div class="flags">
+    <h3>The referral red flags</h3>
+    <p style="color:var(--n-muted);font-size:.93rem;margin:.2rem 0 0">
+      Any one of these means the conversation has left education, whatever words you use to
+      describe it. In order of how often they get missed:</p>
+    <ol>
+      <li><strong>"What should I do?"</strong> — the moment the question is about their
+        situation rather than the rules, the answer is advice regardless of how you phrase it.</li>
+      <li><strong>Anything touching key material.</strong> Where a seed phrase lives, who holds
+        it, how it's split, how it's backed up. Not a topic to be helpful about.</li>
+      <li><strong>An implementation ask.</strong> "Can you help me set it up?" Setting it up is
+        the thing that isn't education.</li>
+      <li><strong>A live, urgent situation.</strong> Loss, a death in the family, a device gone,
+        an access problem happening now. Urgency is the strongest referral signal there is.</li>
+      <li><strong>A specific dollar amount attached to a specific action.</strong> The number
+        turns a general question into a personal recommendation.</li>
+      <li><strong>Anything that would be wrong in a different state or country.</strong>
+        Jurisdiction-specific claims need current local sources or they don't get made.</li>
+    </ol>
+  </div>
+
+  <div class="q2">
+    <p class="kicker">The question this raises</p>
+    <p class="big" id="q2-big"></p>
+    <p style="color:var(--n-muted);font-size:.92rem;margin:0">Knowing the line and having a
+      process that holds it at scale are different problems. The second one is where
+      professionals actually get caught:</p>
+    <ul>
+      <li>A written scope statement your clients see before the conversation, not after</li>
+      <li>Standard language for the moment you decline — that doesn't sound like a brush-off</li>
+      <li>A referral route you trust, so declining doesn't mean abandoning</li>
+      <li>Client-facing material you didn't write yourself and don't have to maintain as rules change</li>
+      <li>A record of what you said, so a disagreement later is a document rather than a memory</li>
+    </ul>
+  </div>
+
+  <div class="limits">
+    <h3>What this tool does not do</h3>
+    <ul>
+      <li><strong>It is not legal or compliance advice</strong>, and it is not a substitute for
+        your firm's own compliance review or your regulator's guidance.</li>
+      <li><strong>It does not cover jurisdiction-specific rules.</strong> The education/advice
+        line is drawn differently by different regulators.</li>
+      <li><strong>It does not certify anything.</strong> A score is not a credential.</li>
+      <li><strong>It does not know your registration, your licences, or your firm's policies</strong>
+        — all of which can make the line stricter than this tool assumes, never looser.</li>
+    </ul>
+    <p style="margin:.9rem 0 0">Where your firm's policy is stricter than this tool, your firm's
+      policy wins. That is true every time and we would rather say so than imply otherwise.</p>
+  </div>
+
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:20px">
+    <button type="button" class="btn-ghost" id="again">Run it again</button>
+  </div>
+</section>
+
+<p class="foot">
+  <strong>General professional education. Not legal, compliance, tax, or investment advice.</strong><br>
+  The Sovereign Academy does not provide personalized custody, inheritance, or implementation
+  guidance. Client-specific implementation questions are referred to a qualified adviser.
+  Nothing you do here is stored or transmitted.
+</p>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var ASSET_ID = "CRE-tool-advice-line-sorter";
+  var started = false, q2seen = false;
+
+  function TSA_EVENT(name, props){
+    var p = Object.assign({event:name, asset_id:ASSET_ID, ts:Date.now()}, props||{});
+    if (window.fsaAnalytics && typeof window.fsaAnalytics.track === "function") {
+      window.fsaAnalytics.track(name, p);
+    }
+    console.log("[TSA_EVENT] " + JSON.stringify(p));
+  }
+  TSA_EVENT("asset_view", {lane:"B", lang:"en"});
+
+  // answer: "edu" | "advice"
+  var ITEMS = [
+    {
+      s: "“A Trump Account is a custodial-style traditional IRA for minors. Funds are locked until January 1 of the year the child turns 18.”",
+      a: "edu",
+      why: "A general statement of how the account works, true for everyone. No client facts are involved. This is the shape almost all safe statements take: <strong>a rule, stated generally.</strong>"
+    },
+    {
+      s: "“Given your income and the fact that you already max a 529, I’d put the $2,500 here instead.”",
+      a: "advice",
+      why: "Two client facts plus a recommended action with a number attached. <strong>This is the canonical form of advice</strong> and no amount of hedging language changes it."
+    },
+    {
+      s: "“Gains come out taxed as ordinary income rather than at capital-gains rates. ‘Tax-deferred’ and ‘tax-free’ are different promises.”",
+      a: "edu",
+      why: "A correction of a widespread misunderstanding, stated generally. Correcting a misconception is education even when — especially when — it works against a sale you could have made."
+    },
+    {
+      s: "“Write your seed phrase on the two backup cards and keep one at your mother’s house.”",
+      a: "advice",
+      why: "Key-management design for a specific person. This is the highest-risk category in the whole system and it is <strong>not education at any level of generality</strong>. It is also, in TSA’s case, outside the boundary entirely — referred, not answered."
+    },
+    {
+      s: "“Collaborative custody means a third party holds one key of a multi-key setup and cannot move funds alone.”",
+      a: "edu",
+      why: "A definition. Definitions are the safest thing you can say. Note how different this is from item 4 — same subject, opposite side of the line, because one describes a <em>model</em> and the other designs <em>their</em> setup."
+    },
+    {
+      s: "“Your situation is straightforward — you don’t really need a specialist for this.”",
+      a: "advice",
+      why: "The one almost everyone misses. <strong>Telling a client they don’t need professional help is itself a professional judgment about their situation</strong> — and it is the version of advice that carries the most downside, because it forecloses the referral instead of making one."
+    },
+    {
+      s: "“Employer contributions count inside the combined annual cap, not on top of it.”",
+      a: "edu",
+      why: "A rule, stated generally. Correct as of the current published guidance — and, because this program is still under active rulemaking, worth restating with its date rather than as timeless fact."
+    },
+    {
+      s: "“Don’t worry about the regulations — by the time your daughter turns 18 they’ll have sorted it out.”",
+      a: "advice",
+      why: "A prediction about unsettled rules, delivered as reassurance, applied to a named child. It fails three ways at once: it forecasts, it soothes, and it discourages the client from checking. <strong>Reassurance about uncertainty is advice wearing a friendly coat.</strong>"
+    }
+  ];
+
+  var i = 0, answers = [];
+  var quiz = document.getElementById("quiz"),
+      out = document.getElementById("out"),
+      pbar = document.getElementById("pbar");
+
+  function draw(){
+    if (i >= ITEMS.length) { finish(); return; }
+    var it = ITEMS[i];
+    pbar.style.width = (100 * i / ITEMS.length) + "%";
+    quiz.innerHTML =
+      '<div class="card">' +
+        '<div class="qnum">Statement ' + (i+1) + ' of ' + ITEMS.length + '</div>' +
+        '<p class="stmt">' + it.s + '</p>' +
+        '<div class="opts">' +
+          '<button type="button" data-v="edu"><b>Education</b>' +
+            '<span>I could say this to any client, unprompted, and it would still be true.</span></button>' +
+          '<button type="button" data-v="advice"><b>Advice — refer it</b>' +
+            '<span>This is about their situation, or it recommends an action.</span></button>' +
+        '</div>' +
+        '<div class="fb" id="fb"></div>' +
+      '</div>';
+
+    quiz.querySelectorAll(".opts button").forEach(function(b){
+      b.addEventListener("click", function(){
+        if (!started) { started = true; TSA_EVENT("tool_start"); }
+        var pick = b.getAttribute("data-v");
+        var ok = pick === it.a;
+        answers.push({idx:i, pick:pick, ok:ok});
+        quiz.querySelectorAll(".opts button").forEach(function(x){ x.disabled = true; x.style.opacity = ".55"; });
+        b.style.opacity = "1";
+        b.style.borderColor = ok ? "var(--success)" : "var(--warning)";
+        var fb = document.getElementById("fb");
+        fb.className = "fb on " + (ok ? "ok" : "no");
+        fb.innerHTML = '<span class="verdict">' +
+          (ok ? "Correct — " : "The line is here — ") +
+          (it.a === "edu" ? "education" : "advice, refer it") + '</span>' +
+          '<div class="why">' + it.why + '</div>' +
+          '<button type="button" class="next" id="nx">' +
+          (i === ITEMS.length - 1 ? "See my result" : "Next statement") + '</button>';
+        TSA_EVENT("tool_step", {step: i+1, total_steps: ITEMS.length, correct: ok});
+        document.getElementById("nx").addEventListener("click", function(){ i++; draw(); });
+        document.getElementById("nx").focus();
+      });
+    });
+    quiz.scrollIntoView({behavior:"smooth", block:"nearest"});
+  }
+
+  function finish(){
+    pbar.style.width = "100%";
+    quiz.innerHTML = "";
+    var right = answers.filter(function(a){ return a.ok; }).length;
+    var cat = right >= 7 ? "strong" : right >= 5 ? "developing" : "needs-boundary-work";
+    var band = {
+      "strong": "You have the line. The problem you have left is holding it at scale.",
+      "developing": "You have the shape of it. Two or three edges are still soft.",
+      "needs-boundary-work": "Worth slowing down here before the next client conversation."
+    }[cat];
+
+    document.getElementById("s-n").textContent = right + "/" + ITEMS.length;
+    document.getElementById("s-band").textContent = band;
+
+    document.getElementById("s-tbl").innerHTML = answers.map(function(a){
+      var it = ITEMS[a.idx];
+      var short = it.s.length > 92 ? it.s.slice(0, 92).trim() + "…”" : it.s;
+      return '<tr><td class="mark ' + (a.ok ? "y" : "n") + '">' + (a.ok ? "✓" : "•") +
+             '</td><td style="color:var(--n-muted)">' + short + '</td>' +
+             '<td style="white-space:nowrap;color:' + (it.a === "edu" ? "var(--success)" : "var(--warning)") +
+             '">' + (it.a === "edu" ? "Education" : "Advice") + '</td></tr>';
+    }).join("");
+
+    var big = {
+      "strong": "You can sort these. Now — how do you put a defensible version of this in front of forty clients without writing it yourself?",
+      "developing": "You know the line when you look at it. Does your client-facing material hold it when you’re not looking?",
+      "needs-boundary-work": "Before scale: what is your written scope, and have your clients seen it?"
+    }[cat];
+    document.getElementById("q2-big").textContent = big;
+
+    out.classList.add("on");
+    TSA_EVENT("tool_complete", {result_category: cat, score: right});
+    if (!q2seen) { q2seen = true; TSA_EVENT("second_question_view", {question_id: cat}); }
+    out.scrollIntoView({behavior:"smooth", block:"start"});
+  }
+
+  document.getElementById("again").addEventListener("click", function(){
+    i = 0; answers = []; q2seen = false;
+    out.classList.remove("on");
+    draw();
+    window.scrollTo({top:0, behavior:"smooth"});
+  });
+
+  draw();
+})();
+</script>
+</body>
+</html>

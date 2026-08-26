@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="description" content="Herramienta gratuita. Qué dice la regla sobre las Cuentas Trump, qué necesita reunir, y — con la misma claridad — qué preguntas no le puede contestar ninguna página web. Cada afirmación con su fuente oficial enlazada y fechada.">
+<link rel="canonical" href="https://financiallysovereign.academy/tools/guia-cuentas-trump">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Cuentas Trump: guía de decisión para su familia">
+<meta property="og:description" content="Qué dice la regla, qué reunir, y qué preguntas son para un abogado. Con fuentes oficiales.">
+<meta property="og:url" content="https://financiallysovereign.academy/tools/guia-cuentas-trump">
+<meta property="og:locale" content="es_US">
+<meta property="og:site_name" content="Financially Sovereign Academy">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Cuentas Trump: guía de decisión para su familia">
+<meta name="twitter:description" content="Qué dice la regla, qué reunir, y qué preguntas son para un abogado. Con fuentes oficiales.">
+<meta name="theme-color" content="#121316">
+<title>Cuentas Trump — Guía de decisión para su familia</title>
+<style>
+:root{
+  --n-bg:#121316; --n-surface:#191B1F; --n-elevated:#212429; --n-deepest:#0C0D0F;
+  --n-border:#2C2F36; --n-border-strong:#3C4047;
+  --n-ink:#ECECE6; --n-ink-strong:#FBFBF7; --n-muted:#A7ABB3; --n-faint:#6E727A;
+  --fsa-teal:#0F766E; --fsa-emerald:#10B981; --fsa-mint:#6EE7B7; --fsa-aqua:#5EEAD4;
+  --brand:var(--fsa-emerald); --accent:var(--fsa-aqua);
+  --success:#34D399; --warning:#F4B740; --danger:#F87171;
+  --sans:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Inter,Helvetica,Arial,sans-serif;
+  --serif:"Crimson Pro",Georgia,"Times New Roman",serif;
+  --r:10px; --maxw:760px;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--n-bg);color:var(--n-ink);font-family:var(--sans);
+  font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:28px 20px 80px}
+a{color:var(--accent)}
+h1,h2,h3{font-family:var(--serif);color:var(--n-ink-strong);line-height:1.25;margin:0 0 .4em}
+h1{font-size:clamp(1.7rem,4.5vw,2.3rem)}
+h2{font-size:1.3rem;margin-top:2.2rem}
+h3{font-size:1.02rem;font-family:var(--sans);font-weight:650}
+.kicker{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);
+  font-weight:700;margin-bottom:.5rem}
+.lede{color:var(--n-muted);font-size:1.04rem;margin:0 0 1.4rem}
+.banner{background:rgba(244,183,64,.09);border:1px solid rgba(244,183,64,.35);
+  border-left:3px solid var(--warning);border-radius:var(--r);padding:12px 14px;
+  font-size:.85rem;color:#F0D9A8;margin-bottom:1.4rem}
+.banner strong{color:var(--warning)}
+.card{background:var(--n-surface);border:1px solid var(--n-border);border-radius:var(--r);
+  padding:20px;margin-bottom:16px}
+fieldset{border:0;padding:0;margin:0 0 20px}
+legend{font-weight:650;color:var(--n-ink-strong);font-size:1rem;padding:0}
+.help{font-size:.84rem;color:var(--n-faint);margin:.3rem 0 .8rem}
+.q{display:block;font-weight:600;margin:18px 0 6px;font-size:.95rem}
+.radios{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.radios label{display:inline-flex;align-items:center;gap:7px;background:var(--n-elevated);
+  border:1px solid var(--n-border-strong);border-radius:999px;padding:9px 16px;cursor:pointer;
+  font-size:.9rem}
+.radios label:has(input:checked){border-color:var(--brand);background:rgba(16,185,129,.13);
+  color:var(--n-ink-strong)}
+.radios input{accent-color:var(--brand);margin:0}
+input[type=number]{width:150px;background:var(--n-elevated);color:var(--n-ink);
+  border:1px solid var(--n-border-strong);border-radius:8px;padding:11px 13px;font-size:1rem}
+input:focus,button:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+button{font-family:var(--sans);font-size:.95rem;font-weight:650;cursor:pointer;border-radius:8px;
+  padding:13px 22px;border:1px solid transparent}
+.btn-primary{background:var(--brand);color:#06231A;border-color:var(--brand)}
+.btn-primary:hover{background:var(--fsa-mint)}
+.btn-ghost{background:transparent;color:var(--n-muted);border-color:var(--n-border-strong)}
+.btn-ghost:hover{color:var(--n-ink);border-color:var(--n-ink)}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+.result{display:none}
+.result.on{display:block;animation:fade .3s ease}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.verdict{border-radius:var(--r);padding:22px;margin-bottom:16px;border:1px solid}
+.verdict h2{margin-top:0;font-size:1.35rem}
+.v-si{background:rgba(16,185,129,.1);border-color:var(--brand)}
+.v-si h2{color:var(--fsa-mint)}
+.v-no{background:rgba(248,113,113,.09);border-color:var(--danger)}
+.v-no h2{color:#FCA5A5}
+.v-check{background:rgba(244,183,64,.09);border-color:var(--warning)}
+.v-check h2{color:var(--warning)}
+.checklist{list-style:none;padding:0;margin:.6rem 0 0}
+.checklist li{padding:11px 0 11px 30px;position:relative;border-bottom:1px solid var(--n-border);
+  font-size:.95rem}
+.checklist li:last-child{border-bottom:0}
+.checklist li::before{content:"";position:absolute;left:4px;top:17px;width:11px;height:11px;
+  border-radius:3px;border:1.5px solid var(--n-border-strong)}
+.legal{border:1px solid var(--danger);border-left:3px solid var(--danger);
+  background:rgba(248,113,113,.07);border-radius:var(--r);padding:20px;margin:22px 0}
+.legal h3{color:#FCA5A5}
+.legal p{font-size:.94rem}
+.legal p:last-child{margin-bottom:0}
+.q2{border:1px solid var(--brand);border-left:3px solid var(--brand);
+  background:rgba(16,185,129,.07);border-radius:var(--r);padding:20px;margin:22px 0}
+.q2 p.big{font-family:var(--serif);font-size:1.22rem;color:var(--n-ink-strong);margin:.3rem 0 .8rem;
+  line-height:1.4}
+.q2 ul{margin:.5rem 0 0;padding-left:1.1rem;color:var(--n-muted);font-size:.92rem}
+.q2 li{margin-bottom:.35rem}
+details{background:var(--n-surface);border:1px solid var(--n-border);border-radius:var(--r);
+  margin-bottom:10px;overflow:hidden}
+summary{cursor:pointer;padding:15px 18px;font-weight:600;font-size:.97rem;color:var(--n-ink-strong);
+  list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"+";display:inline-block;width:18px;color:var(--brand);font-weight:700}
+details[open] summary::before{content:"–"}
+details .body{padding:0 18px 18px 36px;font-size:.94rem;color:var(--n-muted)}
+details .body p:first-child{margin-top:0}
+details .body strong{color:var(--n-ink)}
+.src{display:inline-block;font-size:.78rem;color:var(--warning);background:rgba(244,183,64,.1);
+  border:1px solid rgba(244,183,64,.3);border-radius:4px;padding:1px 7px;margin-left:4px;
+  white-space:nowrap}
+.limits{background:var(--n-deepest);border:1px solid var(--n-border);border-radius:var(--r);
+  padding:18px;margin:22px 0;font-size:.92rem;color:var(--n-muted)}
+.limits h3{color:var(--n-ink-strong)}
+.limits ul{margin:.4rem 0 0;padding-left:1.1rem}
+.limits li{margin-bottom:.4rem}
+.foot{margin-top:30px;padding-top:18px;border-top:1px solid var(--n-border);
+  font-size:.8rem;color:var(--n-faint);line-height:1.65}
+.foot strong{color:var(--n-muted)}
+@media(max-width:520px){.wrap{padding:20px 16px 60px}.card{padding:16px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<p class="kicker">Herramienta gratuita · Financially Sovereign Academy</p>
+<h1>Cuentas Trump: guía de decisión para su familia</h1>
+<p class="lede">Si todavía está decidiendo si vale la pena, esta guía es para usted. Le muestra
+qué dice la regla, qué necesita reunir, y — con la misma claridad — qué preguntas <em>no</em>
+le puede contestar ninguna página web.</p>
+
+<div class="banner">
+  <strong>Cada afirmaci&oacute;n de esta p&aacute;gina est&aacute; enlazada a su fuente oficial, verificada el
+  24 de agosto de 2026.</strong> Los reglamentos finales de la &sect;530A <em>todav&iacute;a no se publican</em>.
+  Donde la regla todav&iacute;a se est&aacute; escribiendo, lo decimos. Donde no encontramos una fuente oficial,
+  tambi&eacute;n lo decimos, en vez de contestarle de memoria.
+</div>
+
+<form id="f" class="card" novalidate>
+  <fieldset>
+    <legend>Sobre el niño o la niña</legend>
+    <p class="help">Estas preguntas son sobre los requisitos publicados del programa. No le
+      preguntamos su estatus migratorio ni el de nadie en su hogar, y nada de lo que escriba aquí
+      sale de su navegador.</p>
+
+    <span class="q" id="q-nac">¿En qué año nació?</span>
+    <div class="radios" role="radiogroup" aria-labelledby="q-nac">
+      <label><input type="radio" name="anio" value="dentro" checked> Entre 2025 y 2028</label>
+      <label><input type="radio" name="anio" value="antes"> Antes de 2025</label>
+      <label><input type="radio" name="anio" value="despues"> Después de 2028</label>
+      <label><input type="radio" name="anio" value="nosé"> No sé si califica</label>
+    </div>
+
+    <span class="q" id="q-ciu">¿Es ciudadano o ciudadana de Estados Unidos?</span>
+    <div class="radios" role="radiogroup" aria-labelledby="q-ciu">
+      <label><input type="radio" name="ciu" value="si" checked> Sí</label>
+      <label><input type="radio" name="ciu" value="no"> No</label>
+      <label><input type="radio" name="ciu" value="nosé"> No estoy segura</label>
+    </div>
+    <p class="help"><strong>Un dato que muchas familias no tienen claro:</strong> una niña o un
+      niño que nace en Estados Unidos es ciudadano estadounidense, sin importar el estatus
+      migratorio de sus padres. La Corte Suprema lo resolvi&oacute; el 30 de junio de 2026 en
+      <a href="https://www.supremecourt.gov/opinions/25pdf/25-365_4hdj.pdf"><em>Trump v.&nbsp;Barbara</em>, N.&deg;&nbsp;25&ndash;365</a>:
+      <em>&laquo;Children born in the United States to parents unlawfully or temporarily present are
+      &lsquo;subject to the jurisdiction&rsquo; of the United States and are citizens at birth under the
+      Fourteenth Amendment&rsquo;s Citizenship Clause&raquo;</em>.</p>
+    <p class="help">Para que lo sepa por nosotros y no por un rumor: existe una orden ejecutiva del
+      6 de agosto de 2026 (<a href="https://www.federalregister.gov/documents/2026/08/11/2026-16403/continuing-to-protect-the-meaning-and-value-of-american-citizenship">EO&nbsp;14418</a>) que fija excepciones espec&iacute;ficas y
+      limitadas. Esas excepciones no se activan por el hecho de que un padre o una madre sea
+      indocumentado. Si quiere saber c&oacute;mo aplica algo de esto a su familia, esa pregunta es para
+      una abogada o un abogado &mdash; no para esta p&aacute;gina.</p>
+
+    <span class="q" id="q-ssn">¿Tiene número de Seguro Social (SSN)?</span>
+    <div class="radios" role="radiogroup" aria-labelledby="q-ssn">
+      <label><input type="radio" name="ssn" value="si" checked> Sí</label>
+      <label><input type="radio" name="ssn" value="no"> No / todavía no</label>
+      <label><input type="radio" name="ssn" value="nosé"> No sé</label>
+    </div>
+
+    <span class="q" id="q-cta">¿Ya se abrió la cuenta?</span>
+    <div class="radios" role="radiogroup" aria-labelledby="q-cta">
+      <label><input type="radio" name="abierta" value="no" checked> Todavía no</label>
+      <label><input type="radio" name="abierta" value="si"> Sí, ya está abierta</label>
+      <label><input type="radio" name="abierta" value="nosé"> No estoy segura</label>
+    </div>
+  </fieldset>
+
+  <div class="actions">
+    <button type="submit" class="btn-primary">Ver qué sigue</button>
+  </div>
+</form>
+
+<section id="out" class="result" aria-live="polite">
+
+  <div class="verdict" id="verdict">
+    <h2 id="v-title"></h2>
+    <p id="v-body" style="margin-bottom:0"></p>
+  </div>
+
+  <div class="card">
+    <h3 id="lista-title">Qué reunir antes de empezar</h3>
+    <ul class="checklist" id="lista"></ul>
+  </div>
+
+  <div class="legal">
+    <h3>Lo que esta página no va a hacer, por respeto a usted</h3>
+    <p>Si su pregunta es si aceptar este dinero puede afectar un caso migratorio — el suyo, el de
+      su esposo, el de alguien de su familia — <strong>no se la vamos a contestar</strong>. No
+      porque no nos importe. Porque la respuesta depende del caso concreto, de la categoría, del
+      momento, y equivocarnos le costaría a usted, no a nosotros.</p>
+    <p>Esa pregunta es para una abogada o un abogado de inmigración. Si el costo es el obstáculo,
+      busque una organización sin fines de lucro acreditada por la
+      <strong>EOIR</strong> (Executive Office for Immigration Review) del Departamento de
+      Justicia; muchas ofrecen consulta gratuita o de bajo costo. El Departamento de Justicia publica y
+      actualiza la lista: <a href="https://www.justice.gov/eoir/list-pro-bono-legal-service-providers">Lista de proveedores de servicios legales pro bono</a>
+      (actualizada en julio de 2026), organizada por estado y por corte de inmigraci&oacute;n.</p>
+    <p>Lo que sí podemos decirle es qué llevar a esa cita, y eso está en la lista de arriba.</p>
+  </div>
+
+  <h2>Las preguntas que casi nadie contesta</h2>
+  <p style="color:var(--n-muted);font-size:.95rem;margin-top:0">Cuatro temas que aparecen una y
+    otra vez y que las páginas oficiales, los bancos y las casas de bolsa dejan sin tratar.</p>
+
+  <details>
+    <summary>«Carga pública»: ¿esto cuenta?</summary>
+    <div class="body">
+      <p><strong>Esta es la pregunta que tiene la mitad de las familias hispanas del país, y casi
+        ninguna página la menciona.</strong> Nosotros la mencionamos, y aquí es exactamente donde
+        vamos a ser más cuidadosos que en ninguna otra parte de esta guía.</p>
+      <p><strong>Lo primero, porque cambia pronto y casi nadie lo est&aacute; diciendo:</strong> el
+        marco de carga p&uacute;blica cambia el <strong>18 de septiembre de 2026</strong>. El
+        Departamento de Seguridad Nacional public&oacute; el 20 de julio de 2026 una
+        <a href="https://www.federalregister.gov/documents/2026/07/20/2026-14539/public-charge-ground-of-inadmissibility">regla final</a> que deroga el reglamento de 2022. Texto de la regla:
+        <em>&laquo;The final rule is effective on September 18, 2026&raquo;</em>.</p>
+      <p>La distinci&oacute;n con fecha, que es lo m&aacute;s &uacute;til que le podemos decir: la misma regla
+        establece que <em>&laquo;Receipt of means-tested public benefits before September 18, 2026 will
+        be considered consistently with the 2022 Final Rule&raquo;</em>. Es decir, los beneficios
+        recibidos <strong>antes</strong> de esa fecha se eval&uacute;an con el marco anterior. A partir de
+        esa fecha, el gobierno puede considerar la recepci&oacute;n de cualquier beneficio p&uacute;blico
+        sujeto a comprobaci&oacute;n de recursos.</p>
+      <p>Por eso <strong>no le vamos a dar una lista de beneficios que &laquo;no cuentan&raquo;</strong>. Esa
+        lista sale del reglamento que se est&aacute; derogando. Una p&aacute;gina que se la ofrezca hoy le
+        estar&iacute;a dando una tranquilidad con fecha de vencimiento.</p>
+      <p>Tampoco le decimos si esta cuenta entra o no entra en ese an&aacute;lisis, ni c&oacute;mo aplica a su
+        familia. Eso es una pregunta legal, depende del caso concreto, y equivocarnos le costar&iacute;a
+        a usted, no a nosotros. Es para una abogada o un abogado de inmigraci&oacute;n.</p>
+      <p class="help">Nota sobre las fuentes: la p&aacute;gina del manual de pol&iacute;ticas de USCIS todav&iacute;a
+        lleva fecha de febrero de 2025 y no refleja este cambio. Por eso enlazamos la regla misma y
+        no la p&aacute;gina de la agencia.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>ID.me: qué le van a pedir exactamente</summary>
+    <div class="body">
+      <p>ID.me es el servicio de verificación de identidad que se usa para entrar al portal. Se
+        menciona tres veces en la mayoría de las páginas y nunca se explica — y un paso de
+        verificación de identidad sin explicar es una puerta que se cierra sola.</p>
+      <p><strong>Qu&eacute; documentos pide:</strong> una identificaci&oacute;n oficial con foto &mdash; licencia de
+        conducir, pasaporte u otra identificaci&oacute;n gubernamental con foto; tambi&eacute;n acepta la tarjeta
+        de residente permanente &mdash; m&aacute;s un segundo documento, que puede ser la tarjeta del Seguro
+        Social, un W-2, un acta de nacimiento, un talonario de pago o una factura de servicios.
+        <a href="https://help.id.me/hc/en-us/articles/360017833054-Primary-and-secondary-identification-documents">Documentaci&oacute;n de ID.me</a>.</p>
+      <p><strong>S&iacute;, pide una foto del rostro</strong>, y la compara con la foto de su
+        identificaci&oacute;n: <em>&laquo;This helps confirm your photo matches your ID&raquo;</em>.
+        <a href="https://help.id.me/hc/en-us/articles/9198013708439-Verify-your-identity-with-ID-me-Self-Service">Documentaci&oacute;n de ID.me</a>.</p>
+      <p><strong>Si la verificaci&oacute;n falla</strong>, o si prefiere no usar el proceso autom&aacute;tico,
+        existe una v&iacute;a con una persona por videollamada, que se puede elegir <em>antes</em> de
+        empezar; tras varios intentos fallidos el sistema tambi&eacute;n lo env&iacute;a a un agente
+        (&laquo;Trusted Referee&raquo;) donde puede subir documentos alternativos y hablar por video.
+        <a href="https://www.irs.gov/help/accessibility-and-compatibility-features-for-signing-in-and-creating-an-account">P&aacute;gina del IRS sobre verificaci&oacute;n de identidad</a>, 27 de junio de 2026.</p>
+      <p><strong>Dos cosas que no pudimos documentar, y no se las vamos a inventar:</strong>
+        qui&eacute;n guarda la imagen de su rostro y por cu&aacute;nto tiempo; y si existe alguna v&iacute;a que no
+        requiera mostrar el rostro en ning&uacute;n momento &mdash; la videollamada tambi&eacute;n implica que un
+        agente lo vea. No encontramos documentaci&oacute;n oficial de una alternativa sin imagen del
+        rostro, as&iacute; que no le decimos que existe.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Hogares con estatus mixto: ¿quién declara?</summary>
+    <div class="body">
+      <p>En muchos hogares una persona declara con SSN y otra con ITIN. La pregunta práctica es
+        quién presenta la declaración con la que se solicita la cuenta, y qué pasa si el año
+        pasado declararon distinto de como piensan declarar este año.</p>
+      <p><strong>Esto es una pregunta tributaria concreta, no general.</strong> La respuesta
+        depende de cómo declararon, de la situación de cada persona y del año fiscal. Va con la
+        persona que les prepara los impuestos, o con una clínica de asistencia tributaria
+        gratuita (VITA / TCE) si el costo es un obst&aacute;culo. El IRS explica qui&eacute;n califica en
+        <a href="https://www.irs.gov/individuals/free-tax-return-preparation-for-qualifying-taxpayers">Preparaci&oacute;n gratuita de declaraciones</a> (actualizada el 12 de agosto de
+        2026) y publica el <a href="https://freetaxassistance.for.irs.gov/s/sitelocator">localizador de sitios</a>.</p>
+      <p>Lo que sí es general y sí podemos decir: el requisito publicado se refiere al
+        <em>niño</em> — ciudadanía y número de Seguro Social. Es sobre la criatura, no sobre quién
+        contribuye.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>La verdad tributaria que los promotores se saltan</summary>
+    <div class="body">
+      <p><strong>«Impuestos diferidos» no es «libre de impuestos».</strong> Son dos promesas
+        distintas y se confunden todo el tiempo.</p>
+      <p>El dinero crece sin pagar impuestos <em>mientras está adentro</em>. Cuando sale, las
+        ganancias se gravan como <strong>ingreso ordinario</strong> — no a la tasa preferencial
+        de ganancias de capital que tendr&iacute;a una cuenta de inversi&oacute;n com&uacute;n.
+        <a href="https://www.irs.gov/pub/irs-drop/n-25-68.pdf">Aviso 2025-68 del IRS</a>: <em>&laquo;all other amounts, including all earnings
+        of the account, would be included in gross income upon distribution&raquo;</em>.</p>
+      <p>El dinero queda bloqueado hasta el 1.º de enero del año en que la criatura cumple 18.
+        Después aplican las reglas de una IRA tradicional, incluido un impuesto adicional por
+        retiro anticipado antes de los 59 a&ntilde;os y medio, salvo excepciones.
+        <a href="https://www.irs.gov/pub/irs-drop/n-25-68.pdf">Aviso 2025-68 del IRS</a>, que define ese periodo como el que
+        <em>&laquo;ends before January 1 of the calendar year in which the account beneficiary attains
+        age 18&raquo;</em>.</p>
+      <p>Nada de esto significa que la cuenta sea mala. Significa que quien se la presenta como
+        «gratis y libre de impuestos» le está contando la mitad.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>No existe una fecha límite del 15 de octubre</summary>
+    <div class="body">
+      <p>Está circulando mucho y no aparece en ninguna fuente oficial.</p>
+      <p>Se lo decimos porque una fecha límite inventada es la herramienta favorita de quien
+        quiere apurarla. Nosotros no tenemos ninguna prisa que ofrecerle.</p>
+    </div>
+  </details>
+
+  <div class="q2" id="q2">
+    <p class="kicker">La pregunta que sigue</p>
+    <p class="big" id="q2-big"></p>
+    <p style="color:var(--n-muted);font-size:.92rem;margin:0">Esta guía le dice qué dice la regla.
+      No le dice qué le conviene a su familia, porque eso depende de cosas que no vemos:</p>
+    <ul id="q2-list"></ul>
+  </div>
+
+  <div class="card" style="margin-top:18px">
+    <p style="margin:0 0 6px;font-weight:700">Esta es una parte de una sesión más larga.</p>
+    <p style="margin:0">Lo de arriba resuelve la elegibilidad. La decisión completa incluye el tope de $5,000,
+    qué compra el bloqueo hasta los dieciocho, y cinco cuentas comparadas frente a sus propias respuestas.
+    <a href="/tools/trump-account-family-session?lang=es">La sesión de decisión familiar</a> hace las diez
+    preguntas conectadas una sola vez y le pasa sus números a la calculadora de crecimiento compuesto.
+    Gratis, en español e inglés.</p>
+  </div>
+
+  <div class="limits">
+    <h3>Lo que esta herramienta no hace</h3>
+    <ul>
+      <li><strong>No contesta preguntas migratorias.</strong> Ninguna, de nadie, por ningún precio.</li>
+      <li><strong>No le dice si le conviene.</strong> Le dice qué dice la regla y qué preguntar.</li>
+      <li><strong>No compara cuentas</strong> ni proyecta rendimientos.</li>
+      <li><strong>No conoce su estado.</strong> El tratamiento estatal varía y todavía no está resuelto.</li>
+      <li><strong>No guarda ni envía nada.</strong> No hay cuenta, no hay rastreo, no hay cookies.</li>
+    </ul>
+    <p style="margin:.9rem 0 0">Preferimos decirle lo que no sabemos. Una guía que aparenta
+      saberlo todo es una guía en la que no debería confiar — incluida esta.</p>
+  </div>
+
+  <div class="actions" style="margin-top:22px">
+    <button type="button" class="btn-ghost" id="again">Cambiar mis respuestas</button>
+  </div>
+</section>
+
+<p class="foot">
+  <strong>The Sovereign Academy no está afiliada al gobierno de Estados Unidos, al Departamento
+  del Tesoro, al IRS ni al programa de Cuentas Trump, ni cuenta con su respaldo.</strong><br>
+  Esto es educación general. No es asesoría tributaria, legal, migratoria ni financiera
+  personalizada. Las reglas todavía se están finalizando y varían por estado: verifique con las
+  fuentes oficiales antes de actuar.
+</p>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var ASSET_ID = "CRE-tool-cuentas-trump-es";
+  var started = false, q2seen = false;
+
+  function TSA_EVENT(name, props){
+    var p = Object.assign({event:name, asset_id:ASSET_ID, ts:Date.now()}, props||{});
+    if (window.fsaAnalytics && typeof window.fsaAnalytics.track === "function") {
+      window.fsaAnalytics.track(name, p);
+    }
+    console.log("[TSA_EVENT] " + JSON.stringify(p));
+  }
+  TSA_EVENT("asset_view", {lane:"B", lang:"es"});
+
+  var $ = function(id){ return document.getElementById(id); };
+  var f = $("f"), out = $("out");
+  var val = function(n){
+    var el = f.querySelector('input[name="' + n + '"]:checked');
+    return el ? el.value : null;
+  };
+
+  f.addEventListener("change", function(){
+    if (!started) { started = true; TSA_EVENT("tool_start"); }
+  });
+
+  document.querySelectorAll("details").forEach(function(d){
+    d.addEventListener("toggle", function(){
+      if (d.open) TSA_EVENT("tool_step", {step: d.querySelector("summary").textContent.trim()});
+    });
+  });
+
+  var BASE = [
+    "El acta de nacimiento de la criatura",
+    "El número de Seguro Social de la criatura",
+    "Su identificación con foto, vigente",
+    "La declaración de impuestos más reciente del hogar",
+    "Anotadas: las preguntas que esta guía dejó abiertas para usted"
+  ];
+
+  function render(){
+    var anio = val("anio"), ciu = val("ciu"), ssn = val("ssn"), abierta = val("abierta");
+    var cat, title, body, lista = BASE.slice(), q2big, q2list;
+
+    var incierto = (anio === "nosé" || ciu === "nosé" || ssn === "nosé");
+    var fueraFecha = (anio === "antes" || anio === "despues");
+    var noCiu = (ciu === "no");
+
+    if (fueraFecha || noCiu) {
+      cat = "no-elegible-por-fecha";
+      title = "Según los requisitos publicados, no parece calificar";
+      body = fueraFecha
+        ? "El depósito federal se dirige a criaturas nacidas dentro de una ventana de años " +
+          "específica. Por la fecha que indicó, quedaría fuera de esa ventana. Vale la pena " +
+          "confirmarlo con la fuente oficial antes de descartarlo — y también vale la pena " +
+          "revisar otras opciones de ahorro para menores, que no dependen de esa fecha."
+        : "Los requisitos publicados exigen ciudadanía estadounidense de la criatura. " +
+          "Antes de descartarlo: si nació en Estados Unidos, es ciudadana o ciudadano, sin " +
+          "importar el estatus migratorio de sus padres. Si esa es su situación, vuelva a " +
+          "revisar la respuesta anterior.";
+      lista = ["Confirmar la fecha y los requisitos con la fuente oficial, no con una página web",
+               "Anotar qué otras cuentas de ahorro para menores existen y cuáles no dependen de esa ventana",
+               "Si nació en EE. UU., verificar de nuevo el punto de ciudadanía"];
+      q2big = "Si esta cuenta no aplica, ¿cuál es la que sí sirve para lo que usted quiere lograr?";
+      q2list = ["Para qué es el dinero: estudios, primer carro, primera casa, retiro",
+                "Cuándo lo va a necesitar — esta cuenta queda bloqueada hasta los 18",
+                "Cuánto puede apartar de forma sostenida, sin apretar el mes"];
+    } else if (incierto || ssn === "no") {
+      cat = "verificar-requisitos";
+      title = "Falta confirmar un requisito antes de seguir";
+      body = (ssn === "no")
+        ? "El número de Seguro Social de la criatura es un requisito publicado. Si todavía no lo " +
+          "tiene, ese es el primer trámite, y es un trámite aparte de esta cuenta. No hay prisa " +
+          "artificial: no existe la fecha límite del 15 de octubre que está circulando."
+        : "Hay al menos un requisito que usted marcó como incierto. Antes de dar cualquier paso, " +
+          "confírmelo con la fuente oficial. Ninguna página web — incluida esta — debería ser su " +
+          "fuente final para un requisito.";
+      lista.unshift("Confirmar el requisito que quedó en duda, con la fuente oficial");
+      q2big = "Una vez confirmado el requisito, ¿esta cuenta es realmente el lugar correcto para ese dinero?";
+      q2list = ["El dinero queda bloqueado hasta el 1.º de enero del año en que cumpla 18",
+                "Las ganancias salen gravadas como ingreso ordinario, no como ganancia de capital",
+                "Casi ninguna familia elige una sola cuenta: la mayoría combina varias"];
+    } else {
+      cat = "elegible";
+      title = "Según los requisitos publicados, sí parece calificar";
+      body = "Lo cual no significa que le convenga. Significa que la puerta está abierta y que " +
+             "ahora sí vale la pena mirar los términos con calma. Recuerde: no existe la fecha " +
+             "límite del 15 de octubre. Tiene tiempo para decidir bien.";
+      if (abierta === "si") {
+        lista = ["Confirmar quién administra la cuenta y con qué costos",
+                 "Confirmar cuánto entró de aporte federal y cuánto de aportes propios",
+                 "Anotar el tope anual combinado y cuánto queda disponible este año",
+                 "Anotadas: las preguntas que esta guía dejó abiertas para usted"];
+      }
+      q2big = "La cuenta califica. La pregunta de verdad es dónde le rinde más su próximo dólar ahorrado.";
+      q2list = ["El aporte del empleador, si lo hay, cuenta <em>dentro</em> del tope combinado, no encima",
+                "Bloqueado hasta los 18; después aplican reglas de IRA tradicional",
+                "«Impuestos diferidos» no es «libre de impuestos»",
+                "Cómo se coordina esto con lo demás que ya tiene el hogar"];
+    }
+
+    var v = $("verdict");
+    v.className = "verdict " + (cat === "elegible" ? "v-si" : cat === "no-elegible-por-fecha" ? "v-no" : "v-check");
+    $("v-title").textContent = title;
+    $("v-body").textContent = body;
+    $("lista").innerHTML = lista.map(function(x){ return "<li>" + x + "</li>"; }).join("");
+    $("q2-big").textContent = q2big;
+    $("q2-list").innerHTML = q2list.map(function(x){ return "<li>" + x + "</li>"; }).join("");
+
+    out.classList.add("on");
+    TSA_EVENT("tool_complete", {result_category: cat});
+    if (!q2seen) { q2seen = true; TSA_EVENT("second_question_view", {question_id: cat}); }
+    out.scrollIntoView({behavior:"smooth", block:"start"});
+  }
+
+  f.addEventListener("submit", function(e){ e.preventDefault(); render(); });
+  $("again").addEventListener("click", function(){
+    out.classList.remove("on");
+    window.scrollTo({top:0, behavior:"smooth"});
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="description" content="Free tool. Your employer contributes to a Trump Account — how much can you still add yourself? See the arithmetic against the $5,000 combined annual cap, with every rule linked to its primary source.">
+<link rel="canonical" href="https://financiallysovereign.academy/tools/contribution-cap-planner">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Trump Account Contribution Cap Planner">
+<meta property="og:description" content="Your employer contributes. How much can you still add? See the arithmetic, sourced.">
+<meta property="og:url" content="https://financiallysovereign.academy/tools/contribution-cap-planner">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Financially Sovereign Academy">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Trump Account Contribution Cap Planner">
+<meta name="twitter:description" content="Your employer contributes. How much can you still add? See the arithmetic, sourced.">
+<meta name="theme-color" content="#121316">
+<title>Contribution Cap Planner — Financially Sovereign Academy</title>
+<style>
+:root{
+  --n-bg:#121316; --n-surface:#191B1F; --n-elevated:#212429; --n-deepest:#0C0D0F;
+  --n-border:#2C2F36; --n-border-strong:#3C4047;
+  --n-ink:#ECECE6; --n-ink-strong:#FBFBF7; --n-muted:#A7ABB3; --n-faint:#6E727A;
+  --fsa-teal:#0F766E; --fsa-emerald:#10B981; --fsa-mint:#6EE7B7; --fsa-aqua:#5EEAD4;
+  --brand:var(--fsa-emerald); --accent:var(--fsa-aqua);
+  --success:#34D399; --warning:#F4B740; --danger:#F87171;
+  --sans:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Inter,Helvetica,Arial,sans-serif;
+  --serif:"Crimson Pro",Georgia,"Times New Roman",serif;
+  --r:10px; --maxw:760px;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--n-bg);color:var(--n-ink);font-family:var(--sans);
+  font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:28px 20px 80px}
+a{color:var(--accent)}
+h1,h2,h3{font-family:var(--serif);color:var(--n-ink-strong);line-height:1.25;margin:0 0 .4em}
+h1{font-size:clamp(1.7rem,4.5vw,2.3rem)}
+h2{font-size:1.25rem;margin-top:2rem}
+h3{font-size:1.02rem;font-family:var(--sans);font-weight:650;letter-spacing:.01em}
+.kicker{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);
+  font-weight:700;margin-bottom:.5rem}
+.lede{color:var(--n-muted);font-size:1.02rem;margin:0 0 1.5rem}
+.banner{background:rgba(244,183,64,.09);border:1px solid rgba(244,183,64,.35);
+  border-left:3px solid var(--warning);border-radius:var(--r);padding:12px 14px;
+  font-size:.85rem;color:#F0D9A8;margin-bottom:1.4rem}
+.banner strong{color:var(--warning)}
+.card{background:var(--n-surface);border:1px solid var(--n-border);border-radius:var(--r);
+  padding:20px;margin-bottom:16px}
+fieldset{border:0;padding:0;margin:0 0 22px}
+legend{font-weight:650;color:var(--n-ink-strong);font-size:1rem;padding:0;margin-bottom:.25rem}
+.help{font-size:.83rem;color:var(--n-faint);margin:0 0 .7rem}
+label.q{display:block;font-weight:600;margin:18px 0 6px;font-size:.95rem}
+.money{position:relative;display:flex;align-items:center;max-width:280px}
+.money span{position:absolute;left:13px;color:var(--n-faint);font-size:1rem;pointer-events:none}
+input[type=number],select{width:100%;background:var(--n-elevated);color:var(--n-ink);
+  border:1px solid var(--n-border-strong);border-radius:8px;padding:11px 13px;font-size:1rem;
+  font-family:var(--sans)}
+input[type=number]{padding-left:28px;max-width:280px}
+select{max-width:340px}
+input:focus,select:focus,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.radios{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.radios label{display:inline-flex;align-items:center;gap:7px;background:var(--n-elevated);
+  border:1px solid var(--n-border-strong);border-radius:999px;padding:8px 15px;cursor:pointer;
+  font-size:.9rem}
+.radios label:has(input:checked){border-color:var(--brand);background:rgba(16,185,129,.13);
+  color:var(--n-ink-strong)}
+.radios input{accent-color:var(--brand);margin:0}
+button{font-family:var(--sans);font-size:.95rem;font-weight:650;cursor:pointer;border-radius:8px;
+  padding:13px 22px;border:1px solid transparent}
+.btn-primary{background:var(--brand);color:#06231A;border-color:var(--brand)}
+.btn-primary:hover{background:var(--fsa-mint)}
+.btn-ghost{background:transparent;color:var(--n-muted);border-color:var(--n-border-strong)}
+.btn-ghost:hover{color:var(--n-ink);border-color:var(--n-ink)}
+.result{display:none}
+.result.on{display:block;animation:fade .3s ease}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.headline{background:linear-gradient(135deg,#0F766E 0%,#10B981 55%,#5EEAD4 100%);
+  color:#04211A;border-radius:var(--r);padding:24px;text-align:center;margin-bottom:16px}
+.headline .n{font-family:var(--serif);font-size:clamp(2.3rem,9vw,3.4rem);font-weight:700;
+  line-height:1;display:block;letter-spacing:-.02em}
+.headline .lbl{font-size:.78rem;letter-spacing:.13em;text-transform:uppercase;font-weight:700;
+  opacity:.82}
+.headline.over{background:linear-gradient(135deg,#7F1D1D 0%,#B91C1C 55%,#F87171 100%);color:#FFF1F1}
+.bar{height:26px;border-radius:6px;overflow:hidden;display:flex;background:var(--n-elevated);
+  border:1px solid var(--n-border-strong);margin:14px 0 8px}
+.bar i{display:block;height:100%}
+.bar .emp{background:var(--fsa-teal)}
+.bar .you{background:var(--fsa-emerald)}
+.bar .free{background:transparent}
+.bar .over{background:var(--danger)}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:.8rem;color:var(--n-muted)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px}
+table{width:100%;border-collapse:collapse;font-size:.9rem;margin:10px 0}
+th,td{text-align:left;padding:9px 4px;border-bottom:1px solid var(--n-border)}
+th{color:var(--n-faint);font-weight:600;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase}
+td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tr.total td{border-bottom:0;border-top:1px solid var(--n-border-strong);font-weight:700;
+  color:var(--n-ink-strong);padding-top:12px}
+.q2{border:1px solid var(--brand);border-left:3px solid var(--brand);
+  background:rgba(16,185,129,.07);border-radius:var(--r);padding:20px;margin:22px 0}
+.q2 .kicker{color:var(--brand)}
+.q2 p.big{font-family:var(--serif);font-size:1.24rem;color:var(--n-ink-strong);margin:.3rem 0 .8rem;
+  line-height:1.4}
+.q2 ul{margin:.5rem 0 0;padding-left:1.1rem;color:var(--n-muted);font-size:.92rem}
+.q2 li{margin-bottom:.35rem}
+.gate{border:1px solid var(--warning);border-left:3px solid var(--warning);
+  background:rgba(244,183,64,.08);border-radius:var(--r);padding:18px;margin:18px 0;display:none}
+.gate.on{display:block}
+.gate h3{color:var(--warning)}
+.limits{background:var(--n-deepest);border:1px solid var(--n-border);border-radius:var(--r);
+  padding:18px;margin:22px 0;font-size:.9rem;color:var(--n-muted)}
+.limits h3{color:var(--n-ink-strong)}
+.limits ul{margin:.4rem 0 0;padding-left:1.1rem}
+.limits li{margin-bottom:.4rem}
+.srcs{font-size:.83rem;color:var(--n-faint);margin-top:26px;padding-top:18px;
+  border-top:1px solid var(--n-border)}
+.srcs code{background:var(--n-elevated);padding:1px 5px;border-radius:4px;font-size:.9em}
+.srcs ul{padding-left:1.1rem;margin:.5rem 0 0}
+.foot{margin-top:30px;padding-top:18px;border-top:1px solid var(--n-border);
+  font-size:.8rem;color:var(--n-faint);line-height:1.6}
+.foot strong{color:var(--n-muted)}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media(max-width:520px){.wrap{padding:20px 16px 60px}.card{padding:16px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<p class="kicker">Free tool · Financially Sovereign Academy</p>
+<h1>Contribution Cap Planner</h1>
+<p class="lede">Your employer says they'll contribute. Does that mean you can still add the full
+amount yourself? Put in your numbers and see the arithmetic.</p>
+
+<div class="banner">
+  <strong>Rules still settling &mdash; every figure on this page verified 24 August 2026.</strong>
+  Final &sect;530A regulations are <em>not yet published</em>. Two sets of proposed rules are open
+  for public comment right now: employer contributions and nondiscrimination
+  (<a href="https://www.federalregister.gov/documents/2026/08/11/2026-16314/employer-contributions-to-trump-accounts-and-nondiscrimination-rules-for-dependent-care-assistance">comments close 25 September 2026</a>) and eligible investments
+  (<a href="https://www.federalregister.gov/documents/2026/08/21/2026-17123/guidance-on-eligible-investments-for-trump-accounts">comments close 20 October 2026</a>). The caps below are not indexed for inflation
+  until after 2027, so they hold for this year. Every figure is linked to its primary source at the
+  foot of this page.
+</div>
+
+<form id="f" class="card" novalidate>
+  <fieldset>
+    <legend>The rules this tool applies</legend>
+    <p class="help">Editable, so the tool stays correct when the numbers change — and so you can
+      see exactly which rule produces your result.</p>
+
+    <label class="q" for="cap">Combined annual contribution cap, per child</label>
+    <div class="money"><span>$</span><input type="number" id="cap" value="5000" min="0" step="100"></div>
+
+    <label class="q" for="empmax">Maximum employer contribution, per employee, per year</label>
+    <div class="money"><span>$</span><input type="number" id="empmax" value="2500" min="0" step="100"></div>
+    <p class="help">This amount is excluded from your income — and it counts <em>inside</em> the
+      combined cap above, not on top of it. That is the single most misunderstood rule in this
+      program.</p>
+  </fieldset>
+
+  <fieldset>
+    <legend>Your situation</legend>
+    <p class="help">Nothing here leaves your browser. There is no account, no tracking, and
+      nothing is sent anywhere.</p>
+
+    <label class="q" for="emp">How much will your employer contribute this year?</label>
+    <div class="money"><span>$</span><input type="number" id="emp" value="0" min="0" step="100"
+      inputmode="numeric" placeholder="0"></div>
+
+    <label class="q" for="already">How much have you (or family) already contributed this year?</label>
+    <div class="money"><span>$</span><input type="number" id="already" value="0" min="0" step="100"
+      inputmode="numeric" placeholder="0"></div>
+
+    <label class="q" for="want">How much more were you planning to contribute this year, on top of what is already in?</label>
+    <div class="money"><span>$</span><input type="number" id="want" value="0" min="0" step="100"
+      inputmode="numeric" placeholder="0"></div>
+
+    <span class="q" id="seedlbl">Has the child received the $1,000 federal seed deposit?</span>
+    <div class="radios" role="radiogroup" aria-labelledby="seedlbl">
+      <label><input type="radio" name="seed" value="yes"> Yes</label>
+      <label><input type="radio" name="seed" value="no" checked> Not yet / not sure</label>
+      <label><input type="radio" name="seed" value="na"> Not eligible</label>
+    </div>
+    <p class="help">The seed sits <em>on top of</em> the contribution cap — it does not use up
+      any of your $5,000. It is not part of the calculation below.</p>
+  </fieldset>
+
+  <div class="actions">
+    <button type="submit" class="btn-primary">Show my headroom</button>
+    <button type="button" class="btn-ghost" id="reset">Reset</button>
+  </div>
+</form>
+
+<section id="out" class="result" aria-live="polite">
+
+  <div class="headline" id="hl">
+    <span class="lbl" id="hl-lbl">Contribution headroom left this year</span>
+    <span class="n" id="hl-n">$0</span>
+    <span class="lbl" id="hl-sub"></span>
+  </div>
+
+  <div class="card">
+    <h3>Where the cap goes</h3>
+    <div class="bar" id="bar" role="img" aria-label="Contribution cap breakdown"></div>
+    <div class="legend">
+      <span><i style="background:var(--fsa-teal)"></i>Employer</span>
+      <span><i style="background:var(--fsa-emerald)"></i>Already contributed</span>
+      <span><i style="background:var(--n-elevated);border:1px solid var(--n-border-strong)"></i>Headroom left</span>
+      <span id="lg-over" style="display:none"><i style="background:var(--danger)"></i>Over the cap</span>
+    </div>
+
+    <table>
+      <tbody id="tbl"></tbody>
+    </table>
+  </div>
+
+  <div class="gate" id="gate">
+    <h3>This one needs a professional, not a calculator</h3>
+    <p id="gate-txt"></p>
+    <p style="margin-bottom:0"><strong>What to bring:</strong> the numbers above, your filing
+      status, your state, and the specific question you want answered. Ten minutes of preparation
+      makes a paid hour worth far more.</p>
+  </div>
+
+  <div class="q2" id="q2">
+    <p class="kicker">The question this raises</p>
+    <p class="big" id="q2-big"></p>
+    <p style="color:var(--n-muted);font-size:.92rem;margin:0">
+      This tool does the arithmetic. It does not tell you where the next dollar belongs — that
+      depends on things it cannot see. What it can do is tell you exactly which questions now
+      matter:</p>
+    <ul id="q2-list"></ul>
+  </div>
+
+  <div class="card" style="margin-top:18px">
+    <p style="margin:0 0 6px;font-weight:700">This is one section of a longer session.</p>
+    <p style="margin:0">The cap arithmetic above is the part families get wrong most often, but it is not the
+    whole decision. <a href="/tools/trump-account-family-session">The family decision session</a> asks ten
+    connected questions once — eligibility, this cap, what the lock until eighteen buys, and five accounts
+    annotated against your own answers — and hands your numbers to the compound growth calculator. Free, in
+    English and Spanish.</p>
+  </div>
+
+  <div class="limits">
+    <h3>What this tool does not do</h3>
+    <ul>
+      <li><strong>It does not model state tax treatment.</strong> State conformity varies and is
+        unsettled. If your state's treatment matters to your decision, this tool cannot help.</li>
+      <li><strong>It does not compare accounts.</strong> It computes one number about one account.</li>
+      <li><strong>It does not model growth, returns, or outcomes.</strong> No projections.</li>
+      <li><strong>It does not know your income, filing status, or benefits.</strong> It never asks.</li>
+      <li><strong>It is not advice.</strong> It is arithmetic on figures you entered, plus the
+        questions your own result raises.</li>
+    </ul>
+    <p style="margin:.9rem 0 0">Silent incompleteness is worse than stated incompleteness. If
+      something matters to your decision and isn't in that list, assume this tool doesn't handle
+      it and ask someone who does.</p>
+  </div>
+
+  <div class="srcs">
+    <h3 style="font-family:var(--sans);font-size:.95rem;color:var(--n-ink-strong)">Where these figures come from</h3>
+    <p>Every default above is linked to the primary source it comes from, with the date that
+      source carries. Nothing here is asserted on our own authority.</p>
+    <ul>
+      <li><strong>$5,000 combined annual cap</strong>, indexed for inflation only after 2027 &mdash;
+        <a href="https://www.irs.gov/pub/irs-drop/n-25-68.pdf">IRS Notice 2025-68</a>: <em>&ldquo;subject to an aggregate annual limit of
+        $5,000&hellip; subject to cost-of-living adjustments after 2027.&rdquo;</em></li>
+      <li><strong>The $1,000 federal deposit does not use up any of your $5,000.</strong> Children
+        born 1 January 2025 through 31 December 2028, a U.S. citizen with a valid SSN &mdash;
+        <a href="https://www.irs.gov/trumpaccounts">IRS, Trump Accounts</a> and
+        <a href="https://www.irs.gov/instructions/i4547">Instructions for Form 4547</a>.</li>
+      <li><strong>$2,500 employer contribution limit</strong>, excludable from your income under
+        &sect;128, also indexed only after 2027 &mdash;
+        <a href="https://www.federalregister.gov/documents/2026/08/11/2026-16314/employer-contributions-to-trump-accounts-and-nondiscrimination-rules-for-dependent-care-assistance">proposed regulations REG-101355-26</a>, Federal Register 11 August 2026.
+        <em>Proposed, not final.</em></li>
+      <li><strong>Locked until 1 January of the year the child turns 18</strong>; after that,
+        traditional IRA rules apply, including the &sect;72(t) additional tax on distributions
+        before 59&frac12; unless an exception applies &mdash;
+        <a href="https://www.irs.gov/pub/irs-drop/n-25-68.pdf">IRS Notice 2025-68</a>.</li>
+      <li><strong>Tax-deferred is not tax-free.</strong> Earnings are included in gross income when
+        distributed, as ordinary income &mdash; not at capital-gains rates &mdash;
+        <a href="https://www.irs.gov/pub/irs-drop/n-25-68.pdf">IRS Notice 2025-68</a>.</li>
+      <li><strong>Generally not ERISA pension plans</strong>, subject to stated conditions &mdash;
+        <a href="https://www.dol.gov/sites/dolgov/files/ebsa/employers-and-advisers/guidance/technical-releases/26-02.pdf">DOL Technical Release 2026-02</a>, 17 June 2026. This can evolve.</li>
+      <li><strong>What the account may be invested in</strong> is still being written &mdash;
+        <a href="https://www.federalregister.gov/documents/2026/08/21/2026-17123/guidance-on-eligible-investments-for-trump-accounts">proposed regulations, eligible investments</a>, Federal Register
+        21 August 2026, comments close 20 October 2026.</li>
+      <li><strong>Gift tax safe harbor</strong> for certain contributions &mdash;
+        <a href="https://www.irs.gov/pub/irs-drop/rp-26-25.pdf">Rev. Proc. 2026-25</a>, 29 June 2026.</li>
+    </ul>
+    <p style="margin-top:.9rem"><strong>There is no October 15 deadline.</strong> That claim is
+      circulating widely and it is not in any official source. We are not going to invent an
+      urgency you don't have.</p>
+  </div>
+
+  <div class="actions" style="margin-top:22px">
+    <button type="button" class="btn-ghost" id="again">Change my numbers</button>
+  </div>
+</section>
+
+<p class="foot">
+  <strong>The Sovereign Academy is not affiliated with or endorsed by the U.S. government, the
+  Treasury, the IRS, or the Trump Accounts program.</strong><br>
+  This is general education, not personalized tax, legal, or financial advice. Rules are still
+  being finalized and vary by state — verify against primary sources before acting.
+  Nothing you type here is stored or transmitted.
+</p>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var ASSET_ID = "CRE-tool-ta-cap-planner";
+  var started = false, q2seen = false;
+
+  function TSA_EVENT(name, props){
+    var p = Object.assign({event:name, asset_id:ASSET_ID, ts:Date.now()}, props||{});
+    if (window.fsaAnalytics && typeof window.fsaAnalytics.track === "function") {
+      window.fsaAnalytics.track(name, p);
+    }
+    console.log("[TSA_EVENT] " + JSON.stringify(p));
+  }
+  TSA_EVENT("asset_view", {lane:"B", lang:"en"});
+
+  var $ = function(id){ return document.getElementById(id); };
+  var f = $("f"), out = $("out");
+  var usd = function(n){
+    return "$" + Math.round(n).toLocaleString("en-US");
+  };
+  var num = function(id){
+    var v = parseFloat($(id).value);
+    return (isNaN(v) || v < 0) ? 0 : v;
+  };
+
+  f.addEventListener("input", function(){
+    if (!started) { started = true; TSA_EVENT("tool_start"); }
+  });
+
+  function render(){
+    var cap = num("cap"), empmax = num("empmax");
+    var empRaw = num("emp"), already = num("already"), want = num("want");
+
+    // employer contribution is itself limited
+    var emp = Math.min(empRaw, empmax);
+    var empCapped = empRaw > empmax;
+
+    var used = emp + already;
+    var headroom = cap - used;
+    var over = headroom < 0 ? -headroom : 0;
+    if (headroom < 0) headroom = 0;
+
+    var category, sub = "";
+    if (over > 0) category = "over-cap";
+    else if (headroom === 0) category = "at-cap";
+    else if (emp === 0) category = "no-employer-contribution";
+    else category = "headroom-remaining";
+
+    // headline
+    var hl = $("hl");
+    hl.className = "headline" + (over > 0 ? " over" : "");
+    if (over > 0) {
+      $("hl-lbl").textContent = "You are over the annual cap by";
+      $("hl-n").textContent = usd(over);
+      sub = "Excess contributions have their own correction rules — see below";
+    } else {
+      $("hl-lbl").textContent = "Contribution headroom left this year";
+      $("hl-n").textContent = usd(headroom);
+      sub = headroom === 0 ? "The cap is fully used for this year"
+                           : "After counting the employer contribution inside the cap";
+    }
+    $("hl-sub").textContent = sub;
+
+    // bar
+    var total = Math.max(cap, used);
+    var seg = function(cls, val){
+      if (val <= 0) return "";
+      return '<i class="' + cls + '" style="width:' + (100*val/total) + '%"></i>';
+    };
+    $("bar").innerHTML = seg("emp", emp) + seg("you", already) +
+                         seg("free", headroom) + seg("over", over);
+    $("lg-over").style.display = over > 0 ? "" : "none";
+
+    // table
+    var rows = [];
+    rows.push(["Combined annual cap", cap, ""]);
+    rows.push(["Employer contribution (counts inside the cap)", -emp,
+      empCapped ? "Entered " + usd(empRaw) + " — capped at " + usd(empmax) : ""]);
+    rows.push(["Already contributed by you or family", -already, ""]);
+    var tb = rows.map(function(r){
+      var note = r[2] ? '<div style="color:var(--warning);font-size:.82rem;margin-top:2px">' + r[2] + '</div>' : '';
+      return '<tr><td>' + r[0] + note + '</td><td class="num">' +
+             (r[1] < 0 ? "− " + usd(-r[1]) : usd(r[1])) + '</td></tr>';
+    }).join("");
+    tb += '<tr class="total"><td>' + (over > 0 ? "Over the cap by" : "Headroom left this year") +
+          '</td><td class="num">' + usd(over > 0 ? over : headroom) + '</td></tr>';
+    if (want > 0) {
+      var canDo = Math.min(want, headroom);
+      var short = want - canDo;
+      tb += '<tr><td style="padding-top:14px;color:var(--n-muted)">You planned to contribute ' +
+            usd(want) + '. Of that, you can contribute</td><td class="num" style="padding-top:14px">' +
+            usd(canDo) + '</td></tr>';
+      if (short > 0) {
+        tb += '<tr><td style="color:var(--warning)">Which leaves this much with nowhere to go in this account</td>' +
+              '<td class="num" style="color:var(--warning)">' + usd(short) + '</td></tr>';
+      }
+    }
+    $("tbl").innerHTML = tb;
+
+    // G-2 gate
+    var gateOn = over > 0;
+    $("gate").className = "gate" + (gateOn ? " on" : "");
+    if (gateOn) {
+      $("gate-txt").textContent =
+        "Contributing above the annual cap has correction and reporting consequences that depend " +
+        "on your specific situation and timing. This is not something to resolve from a web page — " +
+        "and it is not something we will guess at. Talk to a tax professional.";
+      TSA_EVENT("high_intent_detected", {signal:"over-cap", route:"tax-professional"});
+      TSA_EVENT("boundary_gate_shown", {offer_id:"OFR-ta-family-decision-kit", signal:"over-cap"});
+    }
+
+    // second question
+    var big, list;
+    if (over > 0) {
+      big = "Before anything else: how do you correct " + usd(over) + " that shouldn't be in there?";
+      list = ["What the correction process is, and by when",
+              "Whether the employer portion changes who is responsible",
+              "What gets reported, and on whose return"];
+    } else if (headroom === 0) {
+      big = "The cap is full. So where does your next saved dollar actually go?";
+      list = ["Whether a 529 or a custodial account fits the same goal better",
+              "What the money is actually for — this account is locked until 18",
+              "Whether you'd rather have flexibility than the tax deferral"];
+    } else if (emp > 0) {
+      big = "Your employer's money used " + usd(emp) + " of the cap. Does the remaining " +
+            usd(headroom) + " belong here — or somewhere else?";
+      list = ["This account is locked until age 18, and gains come out as ordinary income rather than capital gains",
+              "A 529 is tax-free for education; a custodial Roth needs the child to have earned income",
+              "Most families coordinate several of these rather than pick one",
+              "Which of those tradeoffs actually matters for your household"];
+    } else {
+      big = "You have " + usd(headroom) + " of room. Is this account the right home for it?";
+      list = ["Locked until 18, then traditional-IRA rules apply",
+              "Gains are taxed as ordinary income, not at capital-gains rates",
+              "“Tax-deferred” is not “tax-free” — those are different promises",
+              "What you'd give up by putting the same dollar in a 529 or a taxable account instead"];
+    }
+    $("q2-big").textContent = big;
+    $("q2-list").innerHTML = list.map(function(x){ return "<li>" + x + "</li>"; }).join("");
+
+    out.classList.add("on");
+    TSA_EVENT("tool_complete", {result_category: category});
+
+    if (!q2seen) {
+      q2seen = true;
+      TSA_EVENT("second_question_view", {question_id: category});
+    }
+    out.scrollIntoView({behavior:"smooth", block:"start"});
+  }
+
+  f.addEventListener("submit", function(e){ e.preventDefault(); render(); });
+  $("reset").addEventListener("click", function(){
+    ["emp","already","want"].forEach(function(id){ $(id).value = 0; });
+    out.classList.remove("on");
+  });
+  $("again").addEventListener("click", function(){
+    out.classList.remove("on");
+    document.getElementById("emp").focus();
+    window.scrollTo({top:0, behavior:"smooth"});
+  });
+})();
+</script>
+</body>
+</html>

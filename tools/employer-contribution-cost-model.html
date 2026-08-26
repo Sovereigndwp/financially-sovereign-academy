@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="description" content="Free tool for HR, benefits leads, brokers and PEOs. Model what a Trump Account contribution costs at your headcount and participation rate, and see which questions belong to benefits counsel rather than a spreadsheet.">
+<link rel="canonical" href="https://financiallysovereign.academy/tools/employer-contribution-cost-model">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Employer Contribution Cost Model — Trump Accounts">
+<meta property="og:description" content="Model the cost at your headcount. See which questions belong to benefits counsel.">
+<meta property="og:url" content="https://financiallysovereign.academy/tools/employer-contribution-cost-model">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Financially Sovereign Academy">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Employer Contribution Cost Model — Trump Accounts">
+<meta name="twitter:description" content="Model the cost at your headcount. See which questions belong to benefits counsel.">
+<meta name="theme-color" content="#121316">
+<title>Employer Contribution Cost Model — Trump Accounts</title>
+<style>
+:root{
+  --n-bg:#121316; --n-surface:#191B1F; --n-elevated:#212429; --n-deepest:#0C0D0F;
+  --n-border:#2C2F36; --n-border-strong:#3C4047;
+  --n-ink:#ECECE6; --n-ink-strong:#FBFBF7; --n-muted:#A7ABB3; --n-faint:#6E727A;
+  --fsa-teal:#0F766E; --fsa-emerald:#10B981; --fsa-mint:#6EE7B7; --fsa-aqua:#5EEAD4;
+  --brand:var(--fsa-emerald); --accent:var(--fsa-aqua);
+  --success:#34D399; --warning:#F4B740; --danger:#F87171;
+  --sans:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Inter,Helvetica,Arial,sans-serif;
+  --serif:"Crimson Pro",Georgia,"Times New Roman",serif;
+  --r:10px; --maxw:820px;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--n-bg);color:var(--n-ink);font-family:var(--sans);
+  font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:28px 20px 80px}
+a{color:var(--accent)}
+h1,h2,h3{font-family:var(--serif);color:var(--n-ink-strong);line-height:1.25;margin:0 0 .4em}
+h1{font-size:clamp(1.7rem,4.5vw,2.3rem)}
+h2{font-size:1.28rem;margin-top:2rem}
+h3{font-size:1.02rem;font-family:var(--sans);font-weight:650}
+.kicker{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);
+  font-weight:700;margin-bottom:.5rem}
+.lede{color:var(--n-muted);font-size:1.02rem;margin:0 0 1.4rem}
+.banner{background:rgba(244,183,64,.09);border:1px solid rgba(244,183,64,.35);
+  border-left:3px solid var(--warning);border-radius:var(--r);padding:12px 14px;
+  font-size:.85rem;color:#F0D9A8;margin-bottom:1.4rem}
+.banner strong{color:var(--warning)}
+.card{background:var(--n-surface);border:1px solid var(--n-border);border-radius:var(--r);
+  padding:20px;margin-bottom:16px}
+fieldset{border:0;padding:0;margin:0 0 20px}
+legend{font-weight:650;color:var(--n-ink-strong);font-size:1rem;padding:0}
+.help{font-size:.84rem;color:var(--n-faint);margin:.3rem 0 .8rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px}
+label.q{display:block;font-weight:600;margin:0 0 6px;font-size:.92rem}
+.fld{position:relative;display:flex;align-items:center}
+.fld .pre,.fld .post{position:absolute;color:var(--n-faint);font-size:.95rem;pointer-events:none}
+.fld .pre{left:13px}
+.fld .post{right:13px}
+input[type=number]{width:100%;background:var(--n-elevated);color:var(--n-ink);
+  border:1px solid var(--n-border-strong);border-radius:8px;padding:11px 13px;font-size:1rem;
+  font-family:var(--sans)}
+input.money{padding-left:28px}
+input.pct{padding-right:30px}
+input:focus,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+button{font-family:var(--sans);font-size:.95rem;font-weight:650;cursor:pointer;border-radius:8px;
+  padding:13px 22px;border:1px solid transparent}
+.btn-primary{background:var(--brand);color:#06231A;border-color:var(--brand)}
+.btn-primary:hover{background:var(--fsa-mint)}
+.btn-ghost{background:transparent;color:var(--n-muted);border-color:var(--n-border-strong)}
+.btn-ghost:hover{color:var(--n-ink);border-color:var(--n-ink)}
+.actions{display:flex;flex-wrap:wrap;gap:10px}
+.result{display:none}
+.result.on{display:block;animation:fade .3s ease}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:16px}
+.tile{background:var(--n-deepest);border:1px solid var(--n-border-strong);border-radius:var(--r);
+  padding:18px;text-align:center}
+.tile.hero{background:linear-gradient(135deg,#0F766E 0%,#10B981 55%,#5EEAD4 100%);
+  border-color:transparent;color:#04211A}
+.tile .n{font-family:var(--serif);font-size:1.9rem;font-weight:700;line-height:1.05;display:block;
+  color:var(--n-ink-strong);letter-spacing:-.01em}
+.tile.hero .n{color:#04211A;font-size:2.1rem}
+.tile .lbl{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;
+  color:var(--n-faint);margin-top:7px;display:block;line-height:1.35}
+.tile.hero .lbl{color:#04211A;opacity:.8}
+table{width:100%;border-collapse:collapse;font-size:.9rem;margin:8px 0}
+th,td{text-align:left;padding:10px 6px;border-bottom:1px solid var(--n-border)}
+th{color:var(--n-faint);font-weight:600;font-size:.75rem;letter-spacing:.07em;text-transform:uppercase}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tr.hl td{background:rgba(16,185,129,.08);font-weight:650;color:var(--n-ink-strong)}
+.gate{border:1px solid var(--warning);border-left:3px solid var(--warning);
+  background:rgba(244,183,64,.08);border-radius:var(--r);padding:20px;margin:20px 0}
+.gate h3{color:var(--warning)}
+.gate ol{margin:.5rem 0 0;padding-left:1.2rem;color:var(--n-muted);font-size:.93rem}
+.gate li{margin-bottom:.5rem}
+.gate li strong{color:var(--n-ink)}
+.q2{border:1px solid var(--brand);border-left:3px solid var(--brand);
+  background:rgba(16,185,129,.07);border-radius:var(--r);padding:20px;margin:22px 0}
+.q2 p.big{font-family:var(--serif);font-size:1.22rem;color:var(--n-ink-strong);margin:.3rem 0 .8rem;
+  line-height:1.4}
+.q2 ul{margin:.5rem 0 0;padding-left:1.1rem;color:var(--n-muted);font-size:.92rem}
+.q2 li{margin-bottom:.35rem}
+.limits{background:var(--n-deepest);border:1px solid var(--n-border);border-radius:var(--r);
+  padding:18px;margin:22px 0;font-size:.91rem;color:var(--n-muted)}
+.limits h3{color:var(--n-ink-strong)}
+.limits ul{margin:.4rem 0 0;padding-left:1.1rem}
+.limits li{margin-bottom:.4rem}
+.srcs{font-size:.83rem;color:var(--n-faint);margin-top:24px;padding-top:18px;
+  border-top:1px solid var(--n-border)}
+.srcs ul{padding-left:1.1rem;margin:.5rem 0 0}
+.foot{margin-top:30px;padding-top:18px;border-top:1px solid var(--n-border);
+  font-size:.8rem;color:var(--n-faint);line-height:1.6}
+.foot strong{color:var(--n-muted)}
+@media(max-width:520px){.wrap{padding:20px 16px 60px}.card{padding:16px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<p class="kicker">Free tool · For HR, benefits leads, brokers and PEOs</p>
+<h1>Employer contribution cost model</h1>
+<p class="lede">Open enrollment is the window where this gets decided. Model what a Trump Account
+contribution would actually cost at your headcount and participation rate — and see which
+questions belong to benefits counsel rather than to a spreadsheet.</p>
+
+<div class="banner">
+  <strong>Proposed, not final &mdash; verified 24 August 2026.</strong> Employer-contribution and
+  nondiscrimination rules for this program were published as
+  <a href="https://www.federalregister.gov/documents/2026/08/11/2026-16314/employer-contributions-to-trump-accounts-and-nondiscrimination-rules-for-dependent-care-assistance">proposed regulations on 11 August 2026</a> and are open for comment until
+  <strong>25 September 2026</strong>. Final &sect;530A regulations are not published. Guidance stating
+  these generally are not ERISA pension plans exists and <em>can evolve</em>. Model with that in
+  mind: the arithmetic below is sound, the rules underneath it are not yet settled. Sources are
+  linked at the foot of this page.
+</div>
+
+<form id="f" class="card" novalidate>
+  <fieldset>
+    <legend>The rules this model applies</legend>
+    <p class="help">Editable, so the model stays correct as the rules settle.</p>
+    <div class="grid">
+      <div>
+        <label class="q" for="empmax">Max employer contribution, per employee, per year</label>
+        <div class="fld"><span class="pre">$</span>
+          <input class="money" type="number" id="empmax" value="2500" min="0" step="100"></div>
+      </div>
+      <div>
+        <label class="q" for="cap">Combined annual cap per child (context only)</label>
+        <div class="fld"><span class="pre">$</span>
+          <input class="money" type="number" id="cap" value="5000" min="0" step="100"></div>
+      </div>
+    </div>
+    <p class="help">The employer amount counts <em>inside</em> the combined cap, not on top of it.
+      That matters less for your budget than for what your employees will ask you — see the
+      communication line item below.</p>
+  </fieldset>
+
+  <fieldset>
+    <legend>Your workforce</legend>
+    <p class="help">Estimates are fine. Nothing here leaves your browser.</p>
+    <div class="grid">
+      <div>
+        <label class="q" for="head">Benefits-eligible headcount</label>
+        <div class="fld"><input type="number" id="head" value="250" min="1" step="1"></div>
+      </div>
+      <div>
+        <label class="q" for="elig">Share with an eligible child</label>
+        <div class="fld"><input class="pct" type="number" id="elig" value="18" min="0" max="100" step="1">
+          <span class="post">%</span></div>
+      </div>
+      <div>
+        <label class="q" for="part">Expected take-up among those</label>
+        <div class="fld"><input class="pct" type="number" id="part" value="45" min="0" max="100" step="1">
+          <span class="post">%</span></div>
+      </div>
+      <div>
+        <label class="q" for="amt">Contribution you're considering, per participating employee</label>
+        <div class="fld"><span class="pre">$</span>
+          <input class="money" type="number" id="amt" value="1000" min="0" step="100"></div>
+      </div>
+      <div>
+        <label class="q" for="admin">Estimated admin / payroll setup, one-time</label>
+        <div class="fld"><span class="pre">$</span>
+          <input class="money" type="number" id="admin" value="0" min="0" step="500"></div>
+      </div>
+      <div>
+        <label class="q" for="spanish">Share of workforce better served in Spanish</label>
+        <div class="fld"><input class="pct" type="number" id="spanish" value="0" min="0" max="100" step="1">
+          <span class="post">%</span></div>
+      </div>
+    </div>
+  </fieldset>
+
+  <div class="actions">
+    <button type="submit" class="btn-primary">Model the cost</button>
+    <button type="button" class="btn-ghost" id="reset">Reset</button>
+  </div>
+</form>
+
+<section id="out" class="result" aria-live="polite">
+
+  <div class="tiles">
+    <div class="tile hero"><span class="n" id="t-annual">$0</span>
+      <span class="lbl">Estimated annual contribution cost</span></div>
+    <div class="tile"><span class="n" id="t-part">0</span>
+      <span class="lbl">Employees expected to participate</span></div>
+    <div class="tile"><span class="n" id="t-pp">$0</span>
+      <span class="lbl">Cost per benefits-eligible employee</span></div>
+  </div>
+
+  <div class="card">
+    <h3>Participation sensitivity</h3>
+    <p class="help" style="margin-top:0">Take-up is the number nobody can predict, so it is the
+      number worth bracketing rather than guessing. Your entered rate is highlighted.</p>
+    <table>
+      <thead><tr><th>Take-up</th><th class="num">Participants</th><th class="num">Annual cost</th></tr></thead>
+      <tbody id="sens"></tbody>
+    </table>
+    <p class="help" id="capnote" style="margin-bottom:0"></p>
+  </div>
+
+  <div class="card">
+    <h3>The line item most employers forget</h3>
+    <p style="font-size:.94rem;color:var(--n-muted);margin-top:0" id="commnote"></p>
+  </div>
+
+  <div class="gate" id="gate">
+    <h3>What belongs to benefits counsel, not to this model</h3>
+    <p style="color:var(--n-muted);font-size:.93rem;margin:.2rem 0 0">This model does arithmetic
+      on your numbers. It cannot answer any of the following, and neither can any other web page —
+      these depend on your plan documents, your workforce composition, and rules that are still
+      being written. Take this list to your benefits counsel:</p>
+    <ol>
+      <li><strong>Nondiscrimination.</strong> Whether the design creates a testing issue given
+        who in your workforce actually has eligible children. Rules here are proposed, not final.</li>
+      <li><strong>Plan characterization.</strong> Whether the arrangement sits inside an existing
+        plan or stands alone, and what that means for your documents and filings.</li>
+      <li><strong>ERISA status for <em>your</em> arrangement.</strong> General guidance exists.
+        General guidance is not a determination about your plan, and it can evolve.</li>
+      <li><strong>Payroll and reporting mechanics.</strong> How the amount flows, what gets
+        reported, on which form, by whom.</li>
+      <li><strong>Interaction with your existing benefits</strong> and any cafeteria-plan treatment.</li>
+      <li><strong>Multi-state workforce.</strong> State treatment varies and is unsettled.</li>
+      <li><strong>What you commit to if the rules change mid-year</strong> — the one nobody asks
+        until it happens.</li>
+    </ol>
+  </div>
+
+  <div class="q2">
+    <p class="kicker">The question this raises</p>
+    <p class="big" id="q2-big"></p>
+    <p style="color:var(--n-muted);font-size:.92rem;margin:0">The budget number is the easy part.
+      The parts that actually determine whether this lands well:</p>
+    <ul id="q2-list"></ul>
+  </div>
+
+  <div class="limits">
+    <h3>What this model does not do</h3>
+    <ul>
+      <li><strong>It does not model payroll taxes or your specific tax treatment.</strong></li>
+      <li><strong>It does not model state treatment.</strong> It varies and is unsettled.</li>
+      <li><strong>It is not a compliance review</strong> and it is not benefits, tax, or legal advice.</li>
+      <li><strong>It does not know your plan documents</strong>, your workforce composition, or your carrier arrangements.</li>
+      <li><strong>Its take-up figure is your estimate</strong>, not a benchmark. We do not have
+        credible take-up data for a program this new, and we are not going to invent one.</li>
+    </ul>
+    <p style="margin:.9rem 0 0">If a number matters to your decision and isn't in this model,
+      assume the model doesn't handle it.</p>
+  </div>
+
+  <div class="srcs">
+    <h3 style="font-family:var(--sans);font-size:.95rem;color:var(--n-ink-strong)">Sources</h3>
+    <p>Each default is linked to the primary source it comes from, with that source's date.
+      Two of the four are <strong>proposed rules</strong> and are labelled as such.</p>
+    <ul>
+      <li><strong>$2,500 per employee per year, excludable from the employee's income</strong> under
+        &sect;128, indexed only after 2027 &mdash;
+        <a href="https://www.federalregister.gov/documents/2026/08/11/2026-16314/employer-contributions-to-trump-accounts-and-nondiscrimination-rules-for-dependent-care-assistance">REG-101355-26</a>, Federal Register 11 August 2026.
+        <em>Proposed. Comments close 25 September 2026.</em></li>
+      <li><strong>Nondiscrimination rules</strong> &mdash; same document, same status.
+        <em>Proposed.</em></li>
+      <li><strong>Generally not &ldquo;employee pension benefit plans&rdquo; under ERISA &sect;3(2)</strong>,
+        where participation is voluntary, the employer does not control investments, does not
+        endorse, and receives no compensation beyond reasonable fees &mdash;
+        <a href="https://www.dol.gov/sites/dolgov/files/ebsa/employers-and-advisers/guidance/technical-releases/26-02.pdf">DOL Technical Release 2026-02</a>, 17 June 2026.</li>
+      <li><strong>$5,000 combined annual cap per child</strong>, indexed after 2027; the $1,000
+        federal deposit sits on top of it &mdash;
+        <a href="https://www.irs.gov/pub/irs-drop/n-25-68.pdf">IRS Notice 2025-68</a> and <a href="https://www.irs.gov/trumpaccounts">IRS, Trump Accounts</a>.</li>
+      <li><strong>What accounts may be invested in</strong> &mdash;
+        <a href="https://www.federalregister.gov/documents/2026/08/21/2026-17123/guidance-on-eligible-investments-for-trump-accounts">proposed regulations, eligible investments</a>, 21 August 2026,
+        comments close 20 October 2026. <em>Proposed.</em></li>
+    </ul>
+  </div>
+
+  <div class="actions" style="margin-top:20px">
+    <button type="button" class="btn-ghost" id="again">Change my inputs</button>
+  </div>
+</section>
+
+<p class="foot">
+  <strong>The Sovereign Academy is not affiliated with or endorsed by the U.S. government, the
+  Treasury, the IRS, or the Trump Accounts program.</strong><br>
+  General education for benefits decision-makers. Not benefits, tax, legal, or compliance advice.
+  Employer rules for this program are proposed and not final. Nothing entered here is stored or
+  transmitted.
+</p>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var ASSET_ID = "CRE-tool-employer-cost-model";
+  var started = false, q2seen = false;
+
+  function TSA_EVENT(name, props){
+    var p = Object.assign({event:name, asset_id:ASSET_ID, ts:Date.now()}, props||{});
+    if (window.fsaAnalytics && typeof window.fsaAnalytics.track === "function") {
+      window.fsaAnalytics.track(name, p);
+    }
+    console.log("[TSA_EVENT] " + JSON.stringify(p));
+  }
+  TSA_EVENT("asset_view", {lane:"B", lang:"en"});
+
+  var $ = function(id){ return document.getElementById(id); };
+  var f = $("f"), out = $("out");
+  var usd = function(n){ return "$" + Math.round(n).toLocaleString("en-US"); };
+  var num = function(id){ var v = parseFloat($(id).value); return (isNaN(v)||v<0)?0:v; };
+
+  f.addEventListener("input", function(){
+    if (!started) { started = true; TSA_EVENT("tool_start"); }
+  });
+
+  function render(){
+    var empmax = num("empmax"), cap = num("cap");
+    var head = Math.max(1, num("head"));
+    var elig = Math.min(100, num("elig")) / 100;
+    var part = Math.min(100, num("part")) / 100;
+    var amtRaw = num("amt"), admin = num("admin");
+    var spanish = Math.min(100, num("spanish")) / 100;
+
+    var amt = Math.min(amtRaw, empmax);
+    var capped = amtRaw > empmax;
+
+    var eligible = head * elig;
+    var participants = Math.round(eligible * part);
+    var annual = participants * amt;
+    var perHead = annual / head;
+
+    $("t-annual").textContent = usd(annual);
+    $("t-part").textContent = participants.toLocaleString("en-US");
+    $("t-pp").textContent = usd(perHead);
+
+    // sensitivity
+    var rates = [10, 25, 45, 65, 85];
+    var entered = Math.round(part * 100);
+    if (rates.indexOf(entered) === -1) { rates.push(entered); rates.sort(function(a,b){return a-b;}); }
+    $("sens").innerHTML = rates.map(function(r){
+      var p2 = Math.round(eligible * r / 100);
+      var c = p2 * amt;
+      var hl = (r === entered) ? ' class="hl"' : '';
+      return '<tr' + hl + '><td>' + r + '%</td><td class="num">' + p2.toLocaleString("en-US") +
+             '</td><td class="num">' + usd(c) + '</td></tr>';
+    }).join("");
+
+    var capnote = "";
+    if (capped) {
+      capnote = "You entered " + usd(amtRaw) + " per employee; the model applied the " +
+                usd(empmax) + " maximum. Change the rule figure above if that limit has moved.";
+    } else if (admin > 0) {
+      capnote = "One-time admin and payroll setup of " + usd(admin) +
+                " is excluded from the annual figures above. First-year total at your entered rate: " +
+                usd(annual + admin) + ".";
+    }
+    $("capnote").textContent = capnote;
+    $("capnote").style.color = capped ? "var(--warning)" : "var(--n-faint)";
+
+    // communication line item
+    var comm = "Employees will believe your contribution is on top of the annual cap. It is not — " +
+      "it sits inside it. Every employee who contributes on their own will need that explained, " +
+      "or the benefit you paid for will land as a surprise reduction in their own room to contribute. " +
+      "That is a communication cost, and it is the one most likely to be missing from the budget.";
+    if (spanish > 0) {
+      var spCount = Math.round(participants * spanish);
+      comm += " Roughly " + spCount.toLocaleString("en-US") + " of your expected participants would " +
+              "be better served in Spanish, and there is very little published in Spanish about this " +
+              "program at all — including by the government. Assume you will have to supply that " +
+              "yourself.";
+    }
+    $("commnote").textContent = comm;
+
+    TSA_EVENT("high_intent_detected", {signal:"employer-model-complete", route:"benefits-counsel"});
+
+    var category = perHead < 100 ? "low-cost" : perHead < 400 ? "moderate-cost" : "needs-counsel-review";
+
+    var big, list;
+    if (participants === 0) {
+      big = "At these inputs nobody participates. Is the eligibility share right, or is the real question whether your workforce has eligible children at all?";
+      list = ["Whether you actually know your eligible-child share, or estimated it",
+              "Whether a smaller, better-communicated benefit beats a larger unused one",
+              "What you would do with the same budget in a benefit more of your workforce can use"];
+    } else {
+      big = "The budget is " + usd(annual) + ". What do you actually need to ask benefits counsel before committing to it?";
+      list = [
+        "Which of the seven questions above apply to your plan specifically",
+        "What you are committing to if the proposed rules change mid-year",
+        "Who explains the inside-the-cap rule to employees, and in which languages",
+        "Whether this competes with a benefit your workforce would use more",
+        "What the rollout actually takes in weeks of HR time, not just dollars"
+      ];
+    }
+    $("q2-big").textContent = big;
+    $("q2-list").innerHTML = list.map(function(x){ return "<li>" + x + "</li>"; }).join("");
+
+    out.classList.add("on");
+    TSA_EVENT("tool_complete", {result_category: category});
+    if (!q2seen) { q2seen = true; TSA_EVENT("second_question_view", {question_id: category}); }
+    out.scrollIntoView({behavior:"smooth", block:"start"});
+  }
+
+  f.addEventListener("submit", function(e){ e.preventDefault(); render(); });
+  $("reset").addEventListener("click", function(){
+    $("head").value = 250; $("elig").value = 18; $("part").value = 45;
+    $("amt").value = 1000; $("admin").value = 0; $("spanish").value = 0;
+    out.classList.remove("on");
+  });
+  $("again").addEventListener("click", function(){
+    out.classList.remove("on");
+    window.scrollTo({top:0, behavior:"smooth"});
+  });
+})();
+</script>
+</body>
+</html>
