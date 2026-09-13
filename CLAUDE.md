@@ -1,35 +1,71 @@
-# CLAUDE.md — FSA (Financially Sovereign Academy)
+# CLAUDE.md — Financially Sovereign Academy
 
-> **Canonical context — read first.** The brain of The Sovereign Academy lives in the **TSA** repo (`~/Documents/Claude/Projects/TSA`). Before working here, read `TSA/MEMORY.md` (canonical facts, incl. resolved conflicts) and `TSA/standards/content-operating-system.md` (operating rules), and follow that standard. This repo inherits from TSA; it does not redefine it. FSA already runs the canonical TSA design style.
+Financially Sovereign Academy (FSA) is a sibling academy under The Sovereign Academy (TSA). This repository owns FSA's live financial-education product and its domain-specific implementation.
 
-Live site for practical, LATAM-fluent financial education. Sister property to BSA; mostly mirrors BSA conventions.
+## Authority
 
-## Me
-Dalia — solo operator of **The Sovereign Academy** family. Email: dalia@thesovereign.academy.
+TSA-wide governance lives in the TSA Core repository. Read `TSA-CANONICAL.md` there first when institutional authority matters.
 
-## Identity
-- **What:** universal, practical financial education (paycheck, budgeting, debt, inflation, banking, saving) — LATAM / Colombia-fluent.
-- **Mission-driven, for the underbanked. Core education is never monetized.** The 10 modules, calculators, and assessment are free permanently. Do not add paywalls over them, and do not add Bitcoin-custody intake funnels here.
-- **One narrow exception, added 2026-07-25 under MVP-001:** `/kits/` sells printable application kits for a single household decision each. Rules that make it an exception rather than a paywall: the full explainer for every kit is published free on its own page before anything is for sale; no free material is withheld or degraded to sell one; 30-day no-questions refunds; independence and no-advice disclaimers on every surface. See `docs/kits-commerce-runbook.md`. The homepage "no upsell" promise and FAQ were rewritten in the same change rather than left contradicting the site.
-- **Boundary:** FSA teaches money foundations and can bridge to BSA, but is **not** a Bitcoin custody/inheritance/advice funnel and never replaces BSA or TBA.
-- **Domain:** financiallysovereign.academy. **Remote:** `github.com/Sovereigndwp/financially-sovereign-academy`.
+When instructions conflict, use this order:
 
-## Conventions (mirror BSA unless noted)
-- **Brand voice:** first-principles, inform-not-convince. Source every number (see `SOURCES.md`).
-- **Distinct visual:** green lab-guide theme; localStorage key `fsa_lab_completions` (BSA uses `bsa_lab_completions`).
-- **CSS tokens:** extend, never introduce new ones. TSA canonical tokens are the reference.
-- **Quality bar:** `programa-colombia` craft level.
-- **Live data:** static, dated baselines — never `new Date()`.
+1. Dalia's current explicit instruction.
+2. Product- or project-specific FSA rules.
+3. FSA-specific rules in this repository.
+4. TSA-wide rules.
+5. Historical or archive material.
 
-## Active context (from memory — canonical is TSA/MEMORY.md)
-- Module canonical order is contested in 3 places — verify before nav/order work.
-- Visual rollout: Banking + W1 + W2 merged; W3 on hold.
-- Eleventy templatization: PR #57 reverted (broke prod); sandbox POC complete, prod untouched.
-- Institutional projects: 6 Claude Project folders under `FSA-Institutional-Projects/`.
+FSA may specialize TSA-wide rules where financial education genuinely requires it. Overrides must be deliberate, narrow, and documented.
 
-## The brain
-Ontology, standards, and boundaries live in `~/Documents/Claude/Projects/TSA`. FSA inherits them; it does not redefine them.
+## What FSA is
 
-## Working with Claude here
-- Sandbox can read/create files but **cannot delete/move or run `git commit`** — Claude hands you git commands to run on your Mac.
-- Preferences: concise and direct; minimal formatting; wants pushback and efficient AI workflows.
+FSA teaches practical financial understanding and decision-making, including banking, credit, budgeting, emergency savings, debt, inflation, saving, investing concepts, and other household financial decisions.
+
+FSA is not a Bitcoin funnel. Bitcoin may appear when it is relevant to the financial decision being taught, but FSA does not inherit BSA's Bitcoin-first framing or Bitcoin-versus-crypto rules.
+
+Localization should fit the real audience and context. Colombia, LATAM, bilingual, paper-first, offline, or institution-specific adaptations are local product decisions when appropriate, not universal TSA requirements.
+
+## Free understanding and paid value
+
+Core understanding should remain freely accessible.
+
+FSA may charge for implementation, tools, kits, diagnostics, templates, workshops, specialized analysis, training, convenience, professional services, and other value beyond freely accessible core understanding.
+
+Paid kits are therefore not a constitutional exception. They are a legitimate FSA product form when they add implementation value rather than withholding basic understanding.
+
+Do not create paid offers by intentionally weakening, hiding, or confusing the free educational layer.
+
+## Professional boundary
+
+Do not present FSA education as personalized legal, tax, investment, estate, credit-repair, or other regulated professional advice.
+
+When a user's situation requires individualized professional judgment or implementation, make the boundary clear and direct them appropriately without hard-coding any particular external partner into FSA governance.
+
+## Product and repo behavior
+
+This repository is the live FSA development repository. Keep FSA-specific product rules, code, tests, content, deployment configuration, and active implementation context here.
+
+Do not assume FSA must share one engine, pedagogy, workflow, funnel, ontology, monetization model, or technology stack with BSA, ESA, or the TSA website.
+
+Use the simplest process capable of producing a trustworthy result at the appropriate level of risk. Quality controls should be proportional to risk, consequence, uncertainty, and audience.
+
+Important financial claims should be sourced appropriately. Collect and store only information genuinely necessary for the product or service.
+
+## Design
+
+FSA inherits TSA's shared design principles while retaining its established FSA visual identity and appropriate financial-domain imagery.
+
+Do not redesign FSA merely to make it visually identical to another academy.
+
+## Current technical orientation
+
+- Live site: `financiallysovereign.academy`
+- This repository is the canonical live FSA codebase
+- Tests, build commands, and deployment behavior should be taken from current repository configuration rather than old memory or archived plans
+
+Before claiming something is shipped, verify the remote production branch and the live result rather than relying on local state alone.
+
+## Active-work rule
+
+Do not treat old plans, historical module orders, previous monetization assumptions, retired rollout notes, or archived experiments as current merely because they remain in the repository.
+
+For current work, prefer the active product specification, current code, current branch state, and Dalia's latest instruction.
