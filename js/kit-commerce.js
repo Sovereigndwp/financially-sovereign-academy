@@ -51,9 +51,18 @@
     function renderPrices(kitId) {
         var kit = KITS[kitId];
         if (!kit) return;
+        // A price is only shown when a buyer could actually act on it. While the Payment
+        // Link is still a placeholder the checkout degrades to "not yet", and a headline
+        // price next to a button that cannot be pressed is an advertisement for nothing.
+        var live = isLive(kit.paymentLink);
         var nodes = document.querySelectorAll('[data-kit-price]');
         for (var i = 0; i < nodes.length; i++) {
-            nodes[i].textContent = kit.priceDisplay;
+            if (live) {
+                nodes[i].textContent = kit.priceDisplay;
+            } else {
+                // The page supplies its own wording so a Spanish page is not given English.
+                nodes[i].textContent = nodes[i].getAttribute('data-kit-price-pending') || 'Not yet on sale';
+            }
         }
     }
 
